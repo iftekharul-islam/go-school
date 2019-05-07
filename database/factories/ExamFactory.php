@@ -12,7 +12,7 @@ $factory->define(App\Exam::class, function (Faker $faker) {
             return $faker->randomElement(App\School::pluck('id')->toArray());
           }
         },
-        'term' => $faker->sentence,
+        'term' => $faker->words(1, true),
         'active' => $faker->randomElement([0,1]),
         'start_date' => $faker->dateTime()->format('Y-m-d H:i:s'),
         'end_date' => $faker->dateTime()->format('Y-m-d H:i:s'),

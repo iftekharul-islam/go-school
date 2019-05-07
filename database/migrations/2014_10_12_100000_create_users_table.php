@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role');
             $table->tinyInteger('active');
-            $table->integer('school_id');
-            $table->integer('code');//school code Auto generated
-            $table->integer('student_code')->unique();//Auto generated
+            $table->integer('school_id')->nullable();
+            $table->integer('code')->nullable();;//school code Auto generated
+            $table->integer('student_code')->unique()->nullable();//Auto generated
             $table->string('gender')->default('');
             $table->string('blood_group')->default('');
             $table->string('nationality')->default('');
@@ -30,8 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('address')->default('');
             $table->text('about')->default('');
             $table->string('pic_path')->default('');
-            $table->tinyInteger('verified');
-            $table->integer('section_id')->unsigned();
+            $table->tinyInteger('verified')->nullable();;
+            $table->integer('section_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

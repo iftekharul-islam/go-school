@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(App\StudentBoardExam::class, function (Faker $faker) {
@@ -14,5 +15,6 @@ $factory->define(App\StudentBoardExam::class, function (Faker $faker) {
       'passing_year' => 2011,
       'institution_name' => 'efnj school',
       'gpa' => 5.00,
+      'user_id'              => $faker->randomElement(User::pluck('id')->toArray())
     ];
 });
