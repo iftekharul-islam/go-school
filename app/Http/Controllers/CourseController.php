@@ -26,17 +26,17 @@ class CourseController extends Controller
       if($this->courseService->isCourseOfTeacher($teacher_id)) {
         $courses = $this->courseService->getCoursesByTeacher($teacher_id);
         $exams = $this->courseService->getExamsBySchoolId();
-        $view = 'course.teacher-course';
+        $view = 'course.new-teacher-course';
 
       } else if($this->courseService->isCourseOfStudentOfASection($section_id)) {
         $courses = $this->courseService->getCoursesBySection($section_id);
-        $view = 'course.class-course';
+        $view = 'course.student-class-course';
         $exams = [];
 
       } else if($this->courseService->isCourseOfASection($section_id)) {
         $courses = $this->courseService->getCoursesBySection($section_id);
         $exams = $this->courseService->getExamsBySchoolId();
-        $view = 'course.class-course';
+        $view = 'course.student-class-course';
       } else {
         return redirect('home');
       }

@@ -39,7 +39,8 @@ class AttendanceController extends Controller
           'section_id'=>$section_id,
           'exam_id'=>$exam_id
         ]);
-      } else {
+      }
+      else {
         // View attendance of a single student by student id
         if(\Auth::user()->role == 'student'){
           // From student view
@@ -58,7 +59,7 @@ class AttendanceController extends Controller
         else
           $exId = 0;
         $attendances = $this->attendanceService->getAttendanceByStudentAndExam($student_id, $exId);
-        return view('attendance.student-attendances',['attendances' => $attendances]);
+        return view('attendance.admin-student-attendances',['attendances' => $attendances]);
       }
     }
     /**

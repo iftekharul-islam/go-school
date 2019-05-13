@@ -50,9 +50,9 @@ class UserController extends Controller
         session()->forget('section-attendance');
         
         if($this->userService->isListOfStudents($school_code, $student_code))
-            return $this->userService->indexView('list.student-list', $this->userService->getStudents());
+            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents());
         else if($this->userService->isListOfTeachers($school_code, $teacher_code))
-            return $this->userService->indexView('list.teacher-list',$this->userService->getTeachers());
+            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers());
         else
             return view('home');
     }
@@ -133,7 +133,7 @@ class UserController extends Controller
      */
     public function changePasswordGet()
     {
-        return view('profile.change-password');
+        return view('profile.new-change-password');
     }
 
     /**
@@ -290,8 +290,7 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
-
-        return view('profile.user', compact('user'));
+        return view('profile.user-profile', compact('user'));
     }
 
     /**

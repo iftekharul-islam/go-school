@@ -136,6 +136,8 @@ Route::middleware(['auth','teacher'])->group(function (){
   Route::get('school/sections','SectionController@index');
 });
 
+Route::get('all-notice', 'NoticeController@index')->middleware(['auth','student']);
+
 Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
     Route::prefix('library')->name('library.')->group(function () {
         Route::resource('books', 'BookController',

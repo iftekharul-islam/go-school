@@ -25,7 +25,7 @@ class NotificationController extends Controller
           ];
       }
       \Batch::update('notifications',$msgs,'id');
-      return view('message.all',['messages'=>$msg]);
+      return view('message.all-message',['messages'=>$msg]);
     }
 
     /**
