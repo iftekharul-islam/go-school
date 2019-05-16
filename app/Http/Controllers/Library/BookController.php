@@ -13,11 +13,11 @@ class BookController extends Controller
     public function index() {
         $books = Book::bySchool(auth()->user()->school_id)->paginate();
 
-        return view('library.books.index', compact('books'));
+        return view('library.books.new-index', compact('books'));
     }
 
     public function show(Book $book) {
-        return view('library.books.show', compact('book'));
+        return view('library.books.new-show', compact('book'));
     }
 
     public function create() {
@@ -27,6 +27,7 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request) {
+//        return $request->all();
         $book = Book::create([
             'title'     => $request->title,
             'book_code' => $request->book_code,

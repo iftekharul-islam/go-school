@@ -14,7 +14,7 @@
     </div>
     <!-- Breadcubs Area End Here -->
     <!-- Add Expense Area Start Here -->
-    <div class="card height-auto">
+    <div class="card height-auto" style="min-height: 700px;">
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">

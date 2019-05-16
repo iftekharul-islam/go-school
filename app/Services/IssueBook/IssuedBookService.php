@@ -45,7 +45,7 @@ class IssuedBookService {
         \DB::transaction(function () {
           Issuedbook::insert($this->ib);
           Book::whereIn('id',$this->request->book_id)->update([
-            'quantity' => \DB::raw('MAX((quantity - 1), 0)')
+            'quantity' => \DB::raw('coalesce((quantity - 1), 0) ')
           ]);
         });
     }

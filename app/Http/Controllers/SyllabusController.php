@@ -44,7 +44,7 @@ class SyllabusController extends Controller
         return 'Something went wrong!!';
       }
       
-      return view('syllabus.course-syllabus',['files'=>$files,'class_id'=>$class_id]);
+      return view('syllabus.new-course-syllabus',['files'=>$files,'class_id'=>$class_id]);
     }
 
     /**

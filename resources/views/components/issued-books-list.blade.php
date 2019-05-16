@@ -1,6 +1,6 @@
 {{$books->links()}}
 <div class="table-responsive">
-  <table class="table table-bordered table-data-div table-hover">
+  <table class="table text-nowrap table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -30,7 +30,7 @@
             {{csrf_field()}}
             <input type="hidden" name="issue_id" value="{{$book->id}}">
             <input type="hidden" name="book_id" value="{{$book->book_id}}">
-            <button class="btn btn-xs btn-success">Save as Returned</button>
+            <button class="btn btn-success">Save as Returned</button>
           </form>
         </td>
       </tr>

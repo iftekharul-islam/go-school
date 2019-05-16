@@ -19,7 +19,7 @@ class IssuedbookController extends Controller
      */
     public function index(){
       $issuedBooks = $this->issuedBookService->getIssuedBooks();
-      return view('library.issued-books',['issued_books'=>$issuedBooks]);
+      return view('library.new-issued-books',['issued_books'=>$issuedBooks]);
     }
     /**
      * Show all available books list so that librarian can issue books to students.

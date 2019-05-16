@@ -26,7 +26,7 @@ class SectionController extends Controller
       $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
                   ->where('active', 1)
                   ->get()->groupBy('class_id');
-      return view('school.sections',[
+      return view('school.new-sections',[
         'classes'=>$classes,
         'sections'=>$sections,
         'exams'=>$exams

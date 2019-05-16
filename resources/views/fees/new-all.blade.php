@@ -51,7 +51,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            @component('components.fees-list',['fees'=>$fees])
+            @component('components.new-fees-list',['fees'=>$fees])
             @endcomponent
         </div>
     </div>

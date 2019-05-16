@@ -64,9 +64,9 @@ class UserController extends Controller
      */
     public function indexOther($school_code, $role){
         if($this->userService->isAccountant($role))
-            return $this->userService->indexOtherView('accounts.accountant-list', $this->userService->getAccountants());
+            return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants());
         else if($this->userService->isLibrarian($role))
-            return $this->userService->indexOtherView('library.librarian-list', $this->userService->getLibrarians());
+            return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians());
         else
             return view('home');
     }

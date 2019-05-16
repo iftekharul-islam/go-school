@@ -74,6 +74,42 @@ body {
   color: #646464;
   background-color: #f0f1f3;
 }
+
+.false-height {
+  min-height: 700px;
+}
+
+.paginate123 .pagination li {
+  border-top: 1px solid #ffaf3e;
+  border-left: 1px solid #ffaf3e;
+  border-bottom: 1px solid #ffaf3e;
+  display: block;
+  /*background-color:#ffaf3e;*/
+}
+
+.paginate123 .pagination li a {
+  display: block;
+  padding: 8px 16px;
+  color: black;
+}
+
+.paginate123 .pagination li span {
+  padding:  10px 18px;
+  display: block;
+  color: #fff;
+}
+
+.paginate123 .pagination li.active {
+  background-color:#ffaf3e;
+}
+
+.paginate123 .pagination li:hover {
+  background-color: #ffaf3e;
+}
+
+.paginate123 .pagination li:last-child {
+  border-right: 1px solid;
+}
 p {
   margin: 0 0 20px 0;
   color: #646464;

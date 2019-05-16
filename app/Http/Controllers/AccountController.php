@@ -29,7 +29,7 @@ class AccountController extends Controller
     $this->accountSectors->account_type = 'expense';
     $expenses = $this->accountSectors->getAccountsBySchoolId();
     $sector = [];
-    return view('accounts.sector',compact('sectors','sector','incomes','expenses'));
+    return view('accounts.new-sector',compact('sectors','sector','incomes','expenses'));
   }
 
   /**
@@ -51,7 +51,7 @@ class AccountController extends Controller
   */
   public function editSector($id){
     $sector = AccountSector::find($id);
-    return view('accounts.edit_sector',compact('sector'));
+    return view('accounts.new-edit_sector',compact('sector'));
   }
 
 
@@ -85,7 +85,7 @@ class AccountController extends Controller
                                 ->get();
     //$sections = $this->accountSectors->getSectionsIds();
     //$students = $this->accountSectors->getStudentsBySectionIds();
-    return view('accounts.income',[
+    return view('accounts.new-income',[
       'sectors'=>$sectors,
       //'sections'=>$sections,
       //'students'=>$students,
@@ -102,7 +102,7 @@ class AccountController extends Controller
 
   public function listIncome(){
     $incomes = [];
-    return view('accounts.income-list',['incomes'=>$incomes]);
+    return view('accounts.new-income-list',['incomes'=>$incomes]);
   }
 
   public function postIncome(Request $request){
@@ -110,7 +110,7 @@ class AccountController extends Controller
     $this->accountSectors->account_type = 'income';
     $incomes = $this->accountSectors->getAccountsByYear();
 
-    return view('accounts.income-list',compact('incomes'));
+    return view('accounts.new-income-list',compact('incomes'));
   }
 
   public function editIncome($id){
@@ -136,7 +136,7 @@ class AccountController extends Controller
     $sectors = AccountSector::where('school_id', \Auth::user()->school_id)
                                 ->where('type','expense')
                                 ->get();
-    return view('accounts.expense',['sectors'=>$sectors]);
+    return view('accounts.new-expense',['sectors'=>$sectors]);
 
   }
   public function storeExpense(StoreAccountRequest $request){
@@ -149,7 +149,7 @@ class AccountController extends Controller
 
   public function listExpense(){
     $expenses = [];
-    return view('accounts.expense-list',['expenses'=>$expenses]);
+    return view('accounts.new-expense-list',['expenses'=>$expenses]);
   }
 
   public function postExpense(Request $request){
@@ -157,7 +157,7 @@ class AccountController extends Controller
     $this->accountSectors->account_type = 'expense';
     $expenses = $this->accountSectors->getAccountsByYear();
 
-    return view('accounts.expense-list',compact('expenses'));
+    return view('accounts.new-expense-list',compact('expenses'));
   }
 
   public function editExpense($id){

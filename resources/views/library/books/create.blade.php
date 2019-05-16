@@ -1,37 +1,37 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Add New Book')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.leftside-menubar')
-            </div>
-            <div class="col-md-8" id="main-container">
-                <div class="panel panel-default">
-                    <div class="page-panel-title">Add New Book</div>
+    <div class="breadcrumbs-area">
+        <h3>Dashboard</h3>
+        <ul>
+            <li>
+                <a href="{{ url('/home') }}">Home</a>
+            </li>
+            <li>Issue books</li>
+        </ul>
+    </div>
 
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <form action="{{ route('library.books.store') }}" method="POST" class="form-horizontal">
-                            {{ csrf_field() }}
-                            @include('library.books.form')
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-4 col-sm-8">
-                                    <button type="submit" class="btn btn-danger">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <div class="card height-auto">
+        <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3>Add New Book</h3>
                 </div>
             </div>
+            <form class="new-added-form justify-content-md-center" action="{{ route('library.books.store') }}" method="POST">
+                {{ csrf_field() }}
+                @include('library.books.form')
+                <div class="col-12 form-group mg-t-8">
+                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 @endsection

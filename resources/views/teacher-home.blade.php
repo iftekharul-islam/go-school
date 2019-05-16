@@ -7,7 +7,7 @@
             <li>
                 <a href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Teachers</li>
+            <li>{{ \Auth::user()->role }}</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
