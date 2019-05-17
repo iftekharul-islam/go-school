@@ -44,7 +44,7 @@ class AttendanceService {
 
     public function getTodaysAttendanceBySectionId($section_id){
         return Attendance::where('section_id', $section_id)
-                      ->whereDate('created_at', \DB::raw('CURDATE()'))
+                      ->whereDate('created_at', \DB::raw('CURRENT_DATE'))
                       ->orderBy('created_at', 'desc')
                       ->get()
                       ->unique('student_id');

@@ -100,7 +100,7 @@ class UserController extends Controller
     {
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
 
-        return view('profile.section-students', compact('students'));
+        return view('profile.new-section-students', compact('students'));
     }
 
     /**

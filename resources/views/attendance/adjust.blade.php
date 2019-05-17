@@ -1,27 +1,31 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Attendance')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2" id="side-navbar">
-            @include('layouts.leftside-menubar')
-        </div>
-        <div class="col-md-10" id="main-container">
-            @if(count($attendances) > 0)
-                @if(Auth::user()->role != 'student')
-                <ol class="breadcrumb" style="margin-top: 3%;">
-                    <li><a href="{{url('school/sections?att=1')}}" style="color:#3b80ef;">Classes &amp; Sections</a></li>
-                    <li><a href="{{url()->previous()}}" style="color:#3b80ef;">List of Students</a></li>
+    <div class="breadcrumbs-area">
+        <h3>Dashboard</h3>
+        <ul>
+            <li>
+                <a href="{{ url('/home') }}">Home</a>
+            </li>
+            @if(Auth::user()->role != 'student')
+                    <li><a href="{{url('school/sections?att=1')}}">Classes &amp; Sections</a></li>
+                    <li><a href="{{url()->previous()}}">List of Students</a></li>
                     <li class="active">View Attendance</li>
-                </ol>
-                @endif
-                <h2>Adjust Attendance of Student -  {{$attendances[0]->student->name}}</h2>
             @endif
-            <div class="panel panel-default">
-                @if(count($attendances) > 0)
-                <div class="panel-body">
+        </ul>
+    </div>
+
+    <div class="card height-auto false-height">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3>Adjust Attendance</h3>
+                </div>
+            </div>
+            @if(count($attendances) > 0)
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -29,16 +33,12 @@
                     @endif
 
                     @component('components.adjust-attendance',['attendances'=>$attendances,'student_id'=>$student_id])
-                        
+
                     @endcomponent
                 </div>
-                @else
-                <div class="panel-body">
-                    No Related Data Found.
-                </div>
-                @endif
-            </div>
+            @else
+                No Related Data Found.
+            @endif
         </div>
     </div>
-</div>
 @endsection

@@ -30,6 +30,7 @@ class AttendanceController extends Controller
         // View attendances of students of a section
         $students = $this->attendanceService->getStudentsBySection($section_id);
         $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
+//        return $attendances;
         $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$exam_id);
 
         return view('attendance.attendance', [
@@ -119,7 +120,7 @@ class AttendanceController extends Controller
 
       $request->session()->put('section-attendance', true);
 
-      return view('list.student-list',[
+      return view('list.new-student-list',[
         'users' =>$users,
         'current_page'=>$users->currentPage(),
         'per_page'=>$users->perPage()

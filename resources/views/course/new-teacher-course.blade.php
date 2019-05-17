@@ -28,7 +28,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <div class="card height-auto" style="min-height: 700px;">
+                        <div class="card height-auto false-height">
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">

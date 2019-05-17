@@ -1,6 +1,6 @@
-@extends('layouts.student-app')
+@extends('layouts.app')
 
-@section('title', 'Add Syllabus')
+@section('title', 'Add Routine')
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -9,7 +9,7 @@
             <li>
                 <a href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Syllabus</li>
+            <li>Routine</li>
         </ul>
     </div>
     <div class="card height-auto false-height">
@@ -19,9 +19,9 @@
                     {{ session('status') }}
                 </div>
             @endif
-            @component('components.file-uploader',['upload_type'=>'syllabus'])
+            @component('components.file-uploader',['upload_type'=>'routine'])
             @endcomponent
-            @component('components.uploaded-files-list',['files'=>$files,'parent'=>($class_id !== 0)?'class':'','upload_type'=>'syllabus'])
+            @component('components.uploaded-files-list',['files'=>$files,'parent'=>($section_id !== 0)?'section':'','upload_type'=>'routine'])
             @endcomponent
         </div>
     </div>

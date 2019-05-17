@@ -20,12 +20,16 @@
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Teacher Attendance</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('school/sections?course=1') }}" class="nav-link"><i class="fas fa-angle-right"></i>Students Attendance</a>
+                                <a href="{{ url('school/sections?att=1') }}" class="nav-link"><i class="fas fa-angle-right"></i>Students Attendance</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Staff Attendance</a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('school/sections?course=1') }}" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Classes & Section</span></a>
                     </li>
                 @endif
 
@@ -71,6 +75,28 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}">
                             <i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
+                    </li>
+                @endif
+                @if(Auth::user()-> role == 'admin')
+                    <li class="nav-item">
+                        <a href="{{ url('academic/routine') }}" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Class Routine</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('grades/all-exams-grade') }}" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Grades</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('academic/syllabus') }}" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Syllabus</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('academic/notice') }}" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Notice</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('academic/event') }}" class="nav-link"><i
+                                    class="flaticon-checklist"></i><span>Events</span></a>
                     </li>
                 @endif
                 @if(Auth::user()->role == 'teacher')

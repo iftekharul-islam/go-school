@@ -1,12 +1,16 @@
 <div id="my_upload">
+
     @if($upload_type != 'profile')
         <h3>{{ucfirst($upload_type)}}</h3>
-        <label for="upload-title">File Title: </label>
-        <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="File title here..." required>
-        <br/>
+        <label>File Title: </label>
+        <div class="form-group">
+            <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">
+        </div>
     @endif
-  <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">
-  <br/>
+
+    <div class="form-group mg-t-30 mb-5">
+        <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}" class="form-control-file">
+    </div>
   <div class="progress">
     <div class="progress-bar progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
       <div class="text-xs-center" id="up-prog-info">0% uploaded</div>

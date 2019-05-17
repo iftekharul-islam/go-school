@@ -79,7 +79,7 @@ class GradeController extends Controller
       $classes = $this->gradeService->getClassesBySchoolId();
       $classIds = $classes->pluck('id')->toArray();
       $sections = $this->gradeService->getSectionsByClassIds($classIds);
-      return view('grade.all-exams-grade',compact('classes',
+      return view('grade.new-all-exams-grade',compact('classes',
         'sections'));
     }
 

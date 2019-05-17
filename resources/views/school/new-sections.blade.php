@@ -69,27 +69,31 @@
                                             <a href="{{url('courses/0/'.$section->id)}}">{{$section->section_number}}</a>
                                         </td>
                                         @if(isset($_GET['att']) && $_GET['att'] == 1)
-                                            @foreach ($exams as $ex)
-                                                @if ($ex->class_id == $class->id)
-                                                    <td>
-                                                        <a role="button" class="btn-fill-md text-light bg-dodger-blue" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">visibility</i> View Today's Attendance</a>
-                                                    </td>
-                                                @endif
+                                            @foreach ($exams as $exam)
+                                                @foreach($exam as $ex)
+                                                    @if ($ex->class_id == $class->id)
+                                                        <td>
+                                                            <a role="button" class="btn btn-success btn-lg" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">View Today's Attendance</a>
+                                                        </td>
+                                                    @endif
+                                                @endforeach
                                             @endforeach
                                             <td>
-                                                <a role="button" class="btn btn-danger btn-xs" href="{{url('attendances/'.$section->id)}}"><i class="material-icons">visibility</i> View Each Student's Attendance</a>
+                                                <a role="button" class="btn btn-primary btn-lg" href="{{url('attendances/'.$section->id)}}">View Each Student's Attendance</a>
                                             </td>
                                             <td>
                                                 <?php
                                                 $ce = 0;
                                                 ?>
-                                                @foreach ($exams as $ex)
-                                                    @if ($ex->class_id == $class->id)
-                                                        <?php
-                                                        $ce = 1;
-                                                        ?>
-                                                        <a role="button" class="btn btn-info btn-xs" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}"><i class="material-icons">spellcheck</i> Take Attendance</a>
-                                                    @endif
+                                                @foreach ($exams as $exam)
+                                                    @foreach($exam as $ex)
+                                                        @if ($ex->class_id == $class->id)
+                                                            <?php
+                                                            $ce = 1;
+                                                            ?>
+                                                            <a role="button" class="btn btn-info btn-lg" href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">Take Attendance</a>
+                                                        @endif
+                                                    @endforeach
                                                 @endforeach
                                                 @if($ce == 0)
                                                     Assign Class Under Exam

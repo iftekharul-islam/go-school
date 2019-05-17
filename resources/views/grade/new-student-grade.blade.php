@@ -6,25 +6,23 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Student Grade</h3>
+            <h3>Dashboard</h3>
             <ul>
                 <li>
                     <a href="{{ url('home') }}">Home</a>
                 </li>
                 <li>Grade</li>
+                @if(Auth::user()->role != 'student')
+                    <li><a href="{{url('grades/all-exams-grade')}}">Grades</a></li>
+                    <li><a href="{{url()->previous()}}">Section Students</a></li>
+                    <li class="active">History</li>
+                @endif
             </ul>
         </div>
         <!-- Breadcubs Area End Here -->
         <div class="row">
             <!-- Student Attendence Area Start Here -->
             <div class="col-12" style="min-height: 700px;">
-                @if(Auth::user()->role != 'student')
-                    <ol class="breadcrumb" style="margin-top: 3%;">
-                        <li><a href="{{url('grades/all-exams-grade')}}" style="color:#3b80ef;">Grades</a></li>
-                        <li><a href="{{url()->previous()}}" style="color:#3b80ef;">Section Students</a></li>
-                        <li class="active">History</li>
-                    </ol>
-                @endif
                 <div class="card">
                     <div class="card-body">
                         <div class="heading-layout1">
