@@ -34,6 +34,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
+        || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
+        'librarian'))?Auth::user()->school->name:'Laravel' }}</title>
+
     <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript">
         $.ajaxSetup({

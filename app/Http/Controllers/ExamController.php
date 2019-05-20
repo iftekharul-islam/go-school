@@ -41,7 +41,8 @@ class ExamController extends Controller
     {
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
-        return view('exams.add',compact('classes','already_assigned_classes'));
+        $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
+        return view('exams.add',compact('classes','already_assigned_classes', 'exams'));
     }
 
     /**

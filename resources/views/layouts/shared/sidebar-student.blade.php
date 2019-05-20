@@ -99,6 +99,40 @@
                                     class="flaticon-checklist"></i><span>Events</span></a>
                     </li>
                 @endif
+
+                @if(Auth::user()->role == 'admin')
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Exams</span></a>
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('exams/create') }}"><span>Add Examination</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('exams/active') }}"><span>Active Exams</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('exams') }}"><span>Manage Examinations</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Manage GPA</span></a>
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('gpa/all-gpa') }}"><span>All GPA</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('gpa/create-gpa') }}"><span>Add New GPA</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('create-school') }}" class="nav-link"><i
+                                    class="flaticon-settings"></i><span>Academic Settings</span></a>
+                    </li>
+
+                @endif
+
                 @if(Auth::user()->role == 'teacher')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i

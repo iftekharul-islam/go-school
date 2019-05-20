@@ -1,27 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 @section('title', 'All Active Examinations')
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2" id="side-navbar">
-            @include('layouts.leftside-menubar')
-        </div>
-        <div class="col-md-10" id="main-container">
-            <div class="panel panel-default">
-                <div class="page-panel-title">All Active Examinations</div>
+    <div class="breadcrumbs-area">
+        <h3>Dashboard</h3>
+        <ul>
+            <li>
+                <a href="{{ url('/home') }}">Home</a>
+            </li>
+            <li>All Examinations</li>
+        </ul>
+    </div>
 
-                <div class="panel-body">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    @if(count($exams) > 0)
-                        @foreach($exams as $exam)
-                            @component('components.active-exams',['exam'=>$exam,'courses'=>$courses])
-                            @endcomponent
-                        @endforeach
-                    @endif
-                    </div>
-                </div>
-            </div>
+    <div class="card height-auto false-height">
+        <div class="card-body">
+            @if(count($exams) > 0)
+                @foreach($exams as $exam)
+                    @component('components.active-exams',['exam'=>$exam,'courses'=>$courses])
+                    @endcomponent
+                @endforeach
+            @endif
         </div>
     </div>
-</div>
 @endsection
