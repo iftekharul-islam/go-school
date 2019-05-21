@@ -15,7 +15,7 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="card height-auto">
+                    <div class="card height-auto false-height">
                         <div class="card-header">
                             <h1>Login</h1>
                         </div>

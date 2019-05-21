@@ -316,7 +316,7 @@ class UserController extends Controller
             ->where('school_id', Auth::user()->school_id)
             ->get();
 
-        return view('profile.edit', [
+        return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,

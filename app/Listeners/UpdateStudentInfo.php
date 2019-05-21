@@ -6,6 +6,7 @@ use App\Events\StudentInfoUpdateRequested;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Services\User\UserService;
+use Log;
 
 class UpdateStudentInfo
 {

@@ -1,47 +1,45 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css"
-    rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <div class="table-responsive">
-    <form action="{{url('school/promote-students')}}" method="post">
+    <form action="{{url('school/promote-students')}}" method="post" class="new-added-form">
         {{ csrf_field() }}
         <input type="hidden" name="section_id" value="{{$section_id}}">
-        <table class="table table-bordered table-condensed table-striped table-hover">
+        <table class="table display text-nowrap">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Code</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Left School</th>
-                    <th scope="col">From Session</th>
-                    <th scope="col">To Session</th>
-                    <th scope="col">From Section</th>
-                    <th scope="col">To Section</th>
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Left School</th>
+                    <th>From Session</th>
+                    <th>To Session</th>
+                    <th>From Section</th>
+                    <th>To Section</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($students as $key=>$student)
                 <tr>
-                    <th scope="row">{{ ($loop->index + 1) }}</th>
-                    <td><small>{{$student->student_code}}</small></td>
+                    <th>{{ ($loop->index + 1) }}</th>
+                    <td>{{$student->student_code}}</td>
                     <td>
-                        <small><a href="{{url('student/'.$student->student_code)}}">{{$student->name}}</a></small>
+                        <a href="{{url('student/'.$student->student_code)}}">{{$student->name}}</a>
                     </td>
                     <td>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="left_school{{$loop->index}}"> Left
-                            </label>
+                        <div class="form-check">
+                            <input type="checkbox" name="left_school{{$loop->index}}">
+                            <label class="form-check-label">Left</label>
                         </div>
                     </td>
                     <td>
-                        <small>{{$student->studentInfo['session']}}</small>
+                        {{$student->studentInfo['session']}}
                     </td>
                     <td>
                         <input class="form-control datepicker" name="to_session[]"
                             value="{{date('Y', strtotime('+1 year'))}}">
                     </td>
                     <td style="text-align: center;">
-                        <small>Class: {{$student->section->class->class_number}} - Section:
-                            {{$student->section->section_number}}</small>
+                        Class: {{$student->section->class->class_number}} - Section:
+                            {{$student->section->section_number}}
                     </td>
                     <td>
                         <select id="to_section" class="form-control" name="to_section[]">
@@ -59,8 +57,8 @@
                 @endforeach
             </tbody>
         </table>
-        <div style="text-align:center;">
-            <input type="submit" class="btn btn-primary" value="Submit">
+        <div style="text-align:center;" class="mt-5">
+            <input type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" value="Submit">
         </div>
     </form>
 </div>

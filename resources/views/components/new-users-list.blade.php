@@ -112,7 +112,7 @@
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
                                 <td>
-                                    <a class="btn btn-xs btn-danger" href="{{url('edit/user/'.$user->id)}}">Edit</a>
+                                    <a class="btn btn-lg btn-warning" href="{{url('edit/user/'.$user->id)}}">Edit</a>
                                 </td>
                             @endif
                         @endif
@@ -137,7 +137,7 @@
                         </td>
                         @if($user->role == 'student')
                             @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                                <td><a class="btn btn-xs btn-info" role="button"
+                                <td><a class="btn btn-lg btn-info" role="button"
                                        href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></td>
                             @endif
                             @if (!Session::has('section-attendance'))
