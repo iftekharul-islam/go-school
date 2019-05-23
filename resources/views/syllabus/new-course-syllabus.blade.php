@@ -21,6 +21,7 @@
             @endif
             @component('components.file-uploader',['upload_type'=>'syllabus'])
             @endcomponent
+                <br>
             @component('components.uploaded-files-list',['files'=>$files,'parent'=>($class_id !== 0)?'class':'','upload_type'=>'syllabus'])
             @endcomponent
         </div>

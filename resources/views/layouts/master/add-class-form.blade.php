@@ -1,7 +1,7 @@
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addClassModal{{$school->id}}">+Add New Class</button>
 
 <!-- Modal -->
-<div class="modal" id="addClassModal{{$school->id}}" tabindex="-1" role="dialog" aria-labelledby="addClassModal{{$school->id}}Label">
+<div class="modal fade" id="addClassModal{{$school->id}}" tabindex="-1" role="dialog" aria-labelledby="addClassModal{{$school->id}}Label">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

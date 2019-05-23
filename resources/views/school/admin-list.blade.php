@@ -3,57 +3,56 @@
 @section('title', 'Admins')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2" id="side-navbar">
-            @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
+    <div class="breadcrumbs-area">
+        <h3>Dashboard</h3>
+        <ul>
+            <li>
+                <a href="{{ url('/home') }}">Home</a>
+            </li>
+            <li>All Admin</li>
+        </ul>
+    </div>
+
+    <div class="card height-auto false-height">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <a class="btn btn-success btn-lg" href="{{url('create-school')}}">Manage School</a>
+                </div>
             </div>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
             @endif
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('create-school')}}"><i class="material-icons">gamepad</i> Manage
-                        School</a>
-                </li>
-            </ul>
         </div>
-        <div class="col-md-10" id="main-container">
-            <h2>Admins</h2>
-            <div class="panel panel-default">
-                @if(count($admins) > 0)
-                <div class="panel-body">
-                    <table class="table">
-                        <tr>
-                            <th>Action</th>
-                            <th>Action</th>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                            <th>About</th>
-                        </tr>
-                        @foreach ($admins as $admin)
+        @if(count($admins) > 0)
+            <div class="table-responsive">
+                <table class="table display data-table text-wrap">
+                    <tr>
+                        <th>Action</th>
+                        <th>Action</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>About</th>
+                    </tr>
+                    @foreach ($admins as $admin)
                         <tr>
                             <td>
                                 @if($admin->active == 0)
-                                <a href="{{url('master/activate-admin/'.$admin->id)}}" class="btn btn-xs btn-success"
-                                    role="button"><i class="material-icons">
-                                        done
-                                    </i>Activate</a>
+                                    <a href="{{url('master/activate-admin/'.$admin->id)}}" class="btn btn-lg btn-success"
+                                       role="button"></i>Activate</a>
                                 @else
-                                <a href="{{url('master/deactivate-admin/'.$admin->id)}}" class="btn btn-xs btn-danger"
-                                    role="button"><i class="material-icons">
-                                        clear
-                                    </i>Deactivate</a>
+                                    <a href="{{url('master/deactivate-admin/'.$admin->id)}}" class="btn btn-lg btn-danger"
+                                       role="button">Deactivate</a>
                                 @endif
                             </td>
                             <td>
-                                <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-xs btn-info"
-                                    role="button"><i class="material-icons">
-                                        edit
-                                    </i> Edit</a>
+                                <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
+                                   role="button">Edit</a>
                             </td>
                             <td>
                                 {{$admin->name}}
@@ -64,16 +63,13 @@
                             <td>{{$admin->address}}</td>
                             <td>{{$admin->about}}</td>
                         </tr>
-                        @endforeach
-                    </table>
-                </div>
-                @else
-                <div class="panel-body">
-                    No Related Data Found.
-                </div>
-                @endif
+                    @endforeach
+                </table>
             </div>
-        </div>
+        @else
+            <div class="card-body">
+                No Related Data Found.
+            </div>
+        @endif
     </div>
-</div>
 @endsection

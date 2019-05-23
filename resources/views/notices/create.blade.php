@@ -21,6 +21,7 @@
             @endif
                 @component('components.file-uploader',['upload_type'=>'notice'])--}}
                 @endcomponent
+                <br>
                 @component('components.uploaded-files-list',['files'=>$files,'upload_type'=>'notice'])
                 @endcomponent
         </div>

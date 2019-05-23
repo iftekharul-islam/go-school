@@ -346,16 +346,7 @@ class UserController extends Controller
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    // $request->validate([
-                    //   'session' => 'required',
-                    //   'version' => 'required',
-                    //   'birthday' => 'required',
-                    //   'religion' => 'required',
-                    //   'father_name' => 'required',
-                    //   'mother_name' => 'required',
-                    // ]);
                     try{
-                        // Fire event to store Student information
                         event(new StudentInfoUpdateRequested($request,$tb->id));
                     } catch(\Exception $ex) {
                         Log::info('Failed to update Student information, Id: '.$tb->id. 'err:'.$ex->getMessage());
@@ -395,14 +386,9 @@ class UserController extends Controller
     public function deactivateAdmin($id)
     {
        $admin = $this->user->find($id);
+       $admin->active = !$admin->active;
 
-        if ($admin->active !== 1) {
-            $admin->active = 1;
-        } else {
-            $admin->active = 0;
-        }
-
-        $admin->save();
+       $admin->save();
 
         return back()->with('status', 'Saved');
     }

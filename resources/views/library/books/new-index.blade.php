@@ -32,29 +32,29 @@
                     </div>
                 </div>
             </div>
-            <form class="mg-b-20">
-                <div class="row gutters-8">
-                    <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                        <input type="text" placeholder="Search by Roll ..." class="form-control">
-                    </div>
-                    <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">
-                        <input type="text" placeholder="Search by Name ..." class="form-control">
-                    </div>
-                    <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">
-                        <input type="text" placeholder="Search by Class ..." class="form-control">
-                    </div>
-                    <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">
-                        <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                    </div>
-                </div>
-            </form>
+{{--            <form class="mg-b-20">--}}
+{{--                <div class="row gutters-8">--}}
+{{--                    <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">--}}
+{{--                        <input type="text" placeholder="Search by Roll ..." class="form-control">--}}
+{{--                    </div>--}}
+{{--                    <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">--}}
+{{--                        <input type="text" placeholder="Search by Name ..." class="form-control">--}}
+{{--                    </div>--}}
+{{--                    <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">--}}
+{{--                        <input type="text" placeholder="Search by Class ..." class="form-control">--}}
+{{--                    </div>--}}
+{{--                    <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">--}}
+{{--                        <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </form>--}}
             <div class="table-responsive">
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
                 @endif
-                <table class="table display data-table text-nowrap">
+                <table class="table display table-data-div text-wrap">
                     <thead>
                     <tr>
                         <th>#</th>

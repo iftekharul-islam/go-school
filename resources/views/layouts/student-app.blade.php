@@ -31,6 +31,7 @@
     <!-- Modernize js -->
     <script src="{{ asset('/template/js/modernizr-3.6.0.min.js') }}"></script>
 
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -74,11 +75,20 @@
         <!-- Page Area End Here -->
 </div>
 
-    <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>
+{{--    <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>--}}
     <script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
     <script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
-
+    <script>
+        $(document).ready(function () {
+            var myTable = $('.table-data-div').DataTable({
+                paging: false,
+                language: {
+                    searchPlaceholder: "Search here"
+                }
+            });
+        });
+    </script>
 
     <script src="{{ asset('/template/js/plugins.js') }}"></script>
     <!-- Popper js -->

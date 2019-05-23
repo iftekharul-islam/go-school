@@ -51,23 +51,6 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="mg-b-20">
-                            <div class="row gutters-8">
-                                <div class="col-lg-4 col-12 form-group">
-                                    <input type="text" placeholder="Search by Exam ..." class="form-control">
-                                </div>
-                                <div class="col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="Search by Subject ..." class="form-control">
-                                </div>
-                                <div class="col-lg-3 col-12 form-group">
-                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control">
-                                </div>
-                                <div class="col-lg-2 col-12 form-group">
-                                    <button type="submit"
-                                            class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                </div>
-                            </div>
-                        </form>
                         <div class="table-responsive">
                             @if(count($courses) > 0)
                                 <div>

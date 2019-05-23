@@ -28,7 +28,7 @@
             <form class="new-added-form justify-content-md-center" action="{{ route('library.books.store') }}" method="POST">
                 {{ csrf_field() }}
                 @include('library.books.form')
-                <div class="col-12 form-group mg-t-8">
+                <div class="col-12 form-group mt-5">
                     <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
                 </div>
             </form>

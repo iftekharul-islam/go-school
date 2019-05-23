@@ -23,6 +23,7 @@
             @endif
             @component('components.file-uploader',['upload_type'=>'event'])
             @endcomponent
+                <br>
             @component('components.uploaded-files-list',['files'=>$files,'upload_type'=>'event'])
             @endcomponent
         </div>

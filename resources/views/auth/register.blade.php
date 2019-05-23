@@ -21,17 +21,13 @@
                     <h3>Register {{ucfirst(session('register_role'))}}</h3>
                 </div>
             </div>
-            <div class="container{{ (\Auth::user()->role == 'master')? '' : '-fluid' }}">
+            <div class="container{{ (\Auth::user()->role == 'master')? '-fluid' : '-fluid' }}">
                 {{--            <div class="row">--}}
-                @if(\Auth::user()->role != 'master')
-                    {{--        <div class="col-md-2" id="side-navbar">--}}
-                    {{--            @include('layouts.leftside-menubar')--}}
-                    {{--        </div>--}}
-                @else
+                @if(\Auth::user()->role == 'master')
                     <div class="col-md-3" id="side-navbar">
-                        <ul class="nav flex-column">
+                        <ul class="nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('create-school') }}"><span class="nav-link-text">Back to Manage School</span></a>
+                                <a class="btn btn-success btn-lg" href="{{ url('create-school') }}">Back to Manage School</a>
                             </li>
                         </ul>
                     </div>
