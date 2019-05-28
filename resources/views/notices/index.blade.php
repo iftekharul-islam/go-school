@@ -31,19 +31,6 @@
                             </div>
                         </div>
                     </div>
-                    <form class="mg-b-20">
-                        <div class="row gutters-8">
-                            <div class="col-lg-5 col-12 form-group">
-                                <input type="text" placeholder="Search by Date ..." class="form-control">
-                            </div>
-                            <div class="col-lg-5 col-12 form-group">
-                                <input type="text" placeholder="Search by Title ..." class="form-control">
-                            </div>
-                            <div class="col-lg-2 col-12 form-group">
-                                <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                            </div>
-                        </div>
-                    </form>
                     <div class="notice-board-wrap">
                         @foreach($notices as $notice)
                             <div class="notice-list">

@@ -25,25 +25,25 @@ class GradeController extends Controller
      */
     public function index($student_id)
     {
-      if($this->gradeService->isLoggedInUserStudent()){
-        $grades = $this->gradeService->getStudentGradesWithInfoCourseTeacherExam(auth()->user()->id);
-      } else {
-        $grades = $this->gradeService->getStudentGradesWithInfoCourseTeacherExam($student_id);
-      }
-      if(count($grades) > 0){
-        $exams = $this->gradeService->getExamByIdsFromGrades($grades);
-        $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);
-      } else {
-        $grades = [];
-        $gradesystems = [];
-        $exams = [];
-      }
+        if($this->gradeService->isLoggedInUserStudent()){
+            $grades = $this->gradeService->getStudentGradesWithInfoCourseTeacherExam(auth()->user()->id);
+        } else {
+            $grades = $this->gradeService->getStudentGradesWithInfoCourseTeacherExam($student_id);
+        }
+        if(count($grades) > 0){
+            $exams = $this->gradeService->getExamByIdsFromGrades($grades);
+            $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);
+        } else {
+            $grades = [];
+            $gradesystems = [];
+            $exams = [];
+        }
 
-      $this->gradeService->grades = $grades;
-      $this->gradeService->gradesystems = $gradesystems;
-      $this->gradeService->exams = $exams;
+        $this->gradeService->grades = $grades;
+        $this->gradeService->gradesystems = $gradesystems;
+        $this->gradeService->exams = $exams;
 
-      return $this->gradeService->gradeIndexView('grade.new-student-grade');
+        return $this->gradeService->gradeIndexView('grade.new-student-grade');
     }
 
     public function tindex($teacher_id,$course_id,$exam_id,$section_id)

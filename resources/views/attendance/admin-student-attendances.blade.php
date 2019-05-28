@@ -39,7 +39,7 @@
                                 <table class="table bs-table table-striped table-bordered text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th class="text-left">Students</th>
+{{--                                        <th class="text-left">Students</th>--}}
                                         <th>Status</th>
                                         <th>Date</th>
                                     </tr>
@@ -66,6 +66,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @include('layouts.student.attendances-table')
                         @else
                             No Related Data Found.
                         @endif

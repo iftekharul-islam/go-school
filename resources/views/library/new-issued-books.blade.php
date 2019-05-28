@@ -11,7 +11,7 @@
             <li>All Books</li>
         </ul>
     </div>
-    <div class="card height-auto">
+    <div class="card height-auto false-height">
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">

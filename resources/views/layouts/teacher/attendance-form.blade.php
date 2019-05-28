@@ -9,7 +9,7 @@
 @endif
 <form action="{{url('attendance/take-attendance')}}" method="post">
     {{ csrf_field() }}
-    <input type="hidden" name="section_id" value="{{$section_id}}">
+    <input type="text" name="section_id" value="{{$section_id}}" style="display: none;">
     <input type="hidden" name="exam_id" value="{{$exam_id}}">
     <div class="table-responsive">
         <table class="table display data-table text-nowrap">
@@ -61,9 +61,9 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->student_id == $attendance->student->id)
-                                    <td>{{$at->totalPresent}}</td>
-                                    <td>{{$at->totalAbsent}}</td>
-                                    <td>{{$at->totalEscaped}}</td>
+                                    <td>{{$at->totalpresent}}</td>
+                                    <td>{{$at->totalabsent}}</td>
+                                    <td>{{$at->totalescaped}}</td>
                                 @else
                                     @continue
                                 @endif
@@ -73,14 +73,14 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="btn btn-danger btn-sm">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="btn btn-danger btn-lg">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else
-                <input type="hidden" name="update" value="0">
-                <input type="hidden" name="attendances[]" value="0">
+                <input type="number" name="update" value="0" style="display: none;">
+                <input type="text" name="attendances[]" value="0" style="display: none;">
                 @foreach ($students as $student)
-                    <input type="hidden" name="students[]" value="{{$student->id}}">
+                    <input type="text" name="students[]" value="{{$student->id}}" style="display: none;">
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
@@ -94,9 +94,9 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->student_id == $student->id)
-                                    <td>{{$at->totalPresent}}</td>
-                                    <td>{{$at->totalAbsent}}</td>
-                                    <td>{{$at->totalEscaped}}</td>
+                                    <td>{{$at->totalpresent}}</td>
+                                    <td>{{$at->totalabsent}}</td>
+                                    <td>{{$at->totalescaped}}</td>
                                 @else
                                     @continue
                                 @endif

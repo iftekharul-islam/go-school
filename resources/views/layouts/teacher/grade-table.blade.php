@@ -2,35 +2,35 @@
   <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Student Code</th>
-      <th scope="col">Student Name</th>
-      <th scope="col">Attendance</th>
+      <th>#</th>
+      <th>Student Code</th>
+      <th>Student Name</th>
+      <th>Attendance</th>
         @for($i=1;$i<=5;$i++)
-          <th scope="col">Quiz {{$i}}</th>
+          <th>Quiz {{$i}}</th>
         @endfor
         @for($i=1;$i<=3;$i++)
-          <th scope="col">Assignment {{$i}}</th>
+          <th>Assignment {{$i}}</th>
         @endfor
         @for($i=1;$i<=5;$i++)
-          <th scope="col">CT {{$i}}</th>
+          <th>CT {{$i}}</th>
         @endfor
         @if($grade->course->final_exam_percent > 0)
-          <th scope="col">Written</th>
-          <th scope="col">Mcq</th>
+          <th>Written</th>
+          <th>Mcq</th>
         @endif
         @if($grade->course->practical_percent > 0)
-          <th scope="col">Practical</th>
+          <th>Practical</th>
         @endif
-      <th scope="col">Total Marks</th>
-      <th scope="col">GPA</th>
-      <th scope="col">Grade</th>
+      <th>Total Marks</th>
+      <th>GPA</th>
+      <th>Grade</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($grades as $grade)
     <tr>
-      <th scope="row">{{($loop->index + 1)}}</th>
+      <th>{{($loop->index + 1)}}</th>
       <td>{{$grade->student->student_code}}</td>
       <td><a href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
       <td>{{$grade->attendance}}</td>
@@ -54,9 +54,11 @@
       <td>{{$grade->gpa}}</td>
       <td>
         @foreach($gradesystems as $gs)
-          @if($gs->point == $grade->gpa)
-            {{$gs->grade}}
-            @break
+          @if(isset($gs->point))
+            @if($gs->point == $grade->gpa)
+              {{$gs->grade}}
+              @break
+            @endif
           @endif
         @endforeach
       </td>

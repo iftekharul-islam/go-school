@@ -21,7 +21,7 @@
                 </div>
             @endif
             <div class="table-responsive">
-                <table class="table text-nowrap">
+                <table class="table text-wrap">
                     <thead>
                     <tr>
                         <th>Book Code</th>

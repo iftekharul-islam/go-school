@@ -73,7 +73,7 @@
                 <div class="col-md-12">
                     @isset($expenses)
                         <div class="table-responsive">
-                            <table class="table display data-table text-nowrap">
+                            <table class="table display text-wrap">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -97,11 +97,12 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <br>
                             <div id="printDiv"  class="visible-print">
                                 <h2 style="text-align:center;">{{Auth::user()->school->name}}</h2>
                                 <h4 style="text-align:center;">Expense List</h4>
                                 <div class="table-responsive">
-                                    <table class="table display data-table text-nowrap" style="width: 100%;">
+                                    <table class="table display text-wrap" style="width: 100%;">
                                         <thead>
                                         <tr>
                                             <th>#</th>

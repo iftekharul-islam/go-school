@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    @if(!empty($student_info))
+{{--                    @if(!empty($student_info))--}}
                         <div class="student-info">
                             <div class="media media-none--xs">
                                 <div class="item-img">
@@ -55,55 +55,73 @@
                                     </tr>
                                     <tr>
                                         <td>Gender:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student->gender }}</td>
+                                        <td class="font-medium text-dark-medium">{{ ucfirst($student->gender) }}</td>
                                     </tr>
                                     <tr>
                                         <td>Blood Group:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student->blood_group }}</td>
+                                        <td class="font-medium text-dark-medium">{{ ucfirst($student->blood_group) }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Father Name:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->father_name }}</td>
+                                        @if(isset($student_info->father_name))
+                                            <td>Father Name:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->father_name }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <td>Father Occupation:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->father_occupation }}</td>
+                                        @if(isset($student_info->father_occupation))
+                                            <td>Father Occupation:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->father_occupation }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <td>Mother Name:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->mother_name }}</td>
+                                        @if(isset($student_info->mother_name))
+                                            <td>Mother Name:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->mother_name }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <td>Mother Occupation:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->mother_occupation }}</td>
+                                        @if(isset($student_info->mother_occupation))
+                                            <td>Mother Occupation:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->mother_occupation }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <td>Date Of Birth:</td>
-                                        <td class="font-medium text-dark-medium">{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
+                                        @if(isset($student_info->birthday))
+                                            <td>Date Of Birth:</td>
+                                            <td class="font-medium text-dark-medium">{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <td>Religion:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
+                                        @if(isset($student_info->religion))
+                                            <td>Religion:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>E-Mail:</td>
                                         <td class="font-medium text-dark-medium">{{ $student->email }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Admission Date:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
+                                        @if(isset($student_info->religion))
+                                            <td>Admission Date:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
-                                        <td>Group:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->group }}</td>
+                                        @if(isset($student_info->group))
+                                            <td>Group:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->group }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>Section:</td>
                                         <td class="font-medium text-dark-medium">{{ $student->section_id }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Roll:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student_info->student_id }}</td>
+                                        @if(isset($student_info->student_id))
+                                            <td>Roll:</td>
+                                            <td class="font-medium text-dark-medium">{{ $student_info->student_id }}</td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>Address:</td>
@@ -117,7 +135,7 @@
                                 </table>
                             </div>
                         </div>
-                    @endif
+{{--                    @endif--}}
                 </div>
             </div>
         </div>
@@ -136,7 +154,9 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Notices</div>
-                                    <div class="item-number"><span class="counter" data-num="{{ $notices->count() }}">{{ $notices->count() }}</span></div>
+                                    <div class="item-number"><span class="counter"
+                                                                   data-num="{{ $notices->count() }}">{{ $notices->count() }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +173,9 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Events</div>
-                                    <div class="item-number"><span class="counter" data-num="{{ $events->count() }}">{{ $events->count() }}</span></div>
+                                    <div class="item-number"><span class="counter"
+                                                                   data-num="{{ $events->count() }}">{{ $events->count() }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +192,8 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Attendance</div>
-                                    <div class="item-number"><span class="counter" data-num="94">94</span><span>%</span></div>
+                                    <div class="item-number"><span class="counter" data-num="94">94</span><span>%</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -200,28 +223,8 @@
                                 </div>
                             </div>
                             <div class="table-box-wrap">
-                                <form class="search-form-box">
-                                    <div class="row gutters-8">
-                                        <div class="col-lg-4 col-12 form-group">
-                                            <input type="text" placeholder="Search by Exam ..."
-                                                   class="form-control">
-                                        </div>
-                                        <div class="col-lg-3 col-12 form-group">
-                                            <input type="text" placeholder="Search by Subject ..."
-                                                   class="form-control">
-                                        </div>
-                                        <div class="col-lg-3 col-12 form-group">
-                                            <input type="text" placeholder="dd/mm/yyyy"
-                                                   class="form-control">
-                                        </div>
-                                        <div class="col-lg-2 col-12 form-group">
-                                            <button type="submit"
-                                                    class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
-                                        </div>
-                                    </div>
-                                </form>
                                 <div class="table-responsive result-table-box">
-                                    <table class="table display data-table text-nowrap">
+                                    <table class="table display text-nowrap">
                                         <thead>
                                         <tr>
                                             <th>
@@ -231,7 +234,7 @@
                                                     <label class="form-check-label">ID</label>
                                                 </div>
                                             </th>
-{{--                                            <th>ID</th>--}}
+                                            {{--                                            <th>ID</th>--}}
                                             <th>Exam Name</th>
                                             <th>Term</th>
                                             <th>Start Date</th>
@@ -254,295 +257,8 @@
                                                 <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
                                                 <td>{{ date('d-m-Y',strtotime($exam->end_date)) }}</td>
                                                 <td>{{($exam->result_published === 1)?'Yes':'No'}}</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <a href="#" class="dropdown-toggle"
-                                                           data-toggle="dropdown" aria-expanded="false">
-                                                                        <span
-                                                                                class="flaticon-more-button-of-three-dots"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#"><i
-                                                                        class="fas fa-times text-orange-red"></i>Close</a>
-                                                            <a class="dropdown-item" href="#"><i
-                                                                        class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i
-                                                                        class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
                                             </tr>
                                         @endforeach
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0021</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>English</td>--}}
-{{--                                            <td>A</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0022</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>English</td>--}}
-{{--                                            <td>A</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0023</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>Chemistry</td>--}}
-{{--                                            <td>A</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0024</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>English</td>--}}
-{{--                                            <td>A</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0025</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>Chemistry</td>--}}
-{{--                                            <td>A</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0025</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>Chemistry</td>--}}
-{{--                                            <td>D</td>--}}
-{{--                                            <td>70.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0025</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>English</td>--}}
-{{--                                            <td>C</td>--}}
-{{--                                            <td>80.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0025</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>Class Test</td>--}}
-{{--                                            <td>English</td>--}}
-{{--                                            <td>B</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#0025</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td>First Semister</td>--}}
-{{--                                            <td>English</td>--}}
-{{--                                            <td>A</td>--}}
-{{--                                            <td>99.00 > 100</td>--}}
-{{--                                            <td>22/02/2019</td>--}}
-{{--                                            <td>--}}
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -560,7 +276,7 @@
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>Attendence</h3>
+                            <h3>Attendance</h3>
                         </div>
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
@@ -644,7 +360,8 @@
                         @foreach($notices as $notice)
                             <div class="notice-list">
                                 <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
-                                <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
+                                <h6 class="notice-title"><a
+                                            href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
                             </div>
                         @endforeach
                     </div>
@@ -652,4 +369,8 @@
             </div>
         </div>
     </div>
+    <script>
+        var male = @json($male);
+        var female = @json($female);
+    </script>
 @endsection

@@ -1,81 +1,83 @@
 @if(count($exams) > 0)
 @foreach($exams as $exam)
-<h3>{{$exam->exam_name}}<span class="pull-right"><button class="btn btn-xs btn-success" role="button" id="btnPrint{{$exam->id}}"><i class="material-icons">print</i> Print Result</button></span></h3>
-<div class="visible-print-block" id="table-content{{$exam->id}}">
-  <table class="table table-bordered" style="font-size: 10px;">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Course</th>
-        <th scope="col">Attendance</th>
-        @for($i=1;$i<=5;$i++)
-          <th scope="col">Quiz {{$i}}</th>
-        @endfor
-        @for($i=1;$i<=3;$i++)
-          <th scope="col">Assignment {{$i}}</th>
-        @endfor
-        @for($i=1;$i<=5;$i++)
-          <th scope="col">CT {{$i}}</th>
-        @endfor
-        @if($grade->course->final_exam_percent > 0)
-          <th scope="col">Written</th>
-          <th scope="col">Mcq</th>
-        @endif
-        @if($grade->course->practical_percent > 0)
-          <th scope="col">Practical</th>
-        @endif
-        <th scope="col">Total Marks</th>
-        <th scope="col">Grade</th>
-        <th scope="col">Course Teacher</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($grades as $grade)
-        <tr>
-          <th scope="row">{{($loop->index + 1)}}</th>
-          <td>{{$grade->course->course_name}}</td>
-          <td>{{$grade->attendance}}</td>
-          @for($i=1;$i<=5;$i++)
-            <td>{{$grade['quiz'.$i]}}</td>
-          @endfor
-          @for($i=1;$i<=3;$i++)
-            <td>{{$grade['assignment'.$i]}}</td>
-          @endfor
-          @for($i=1;$i<=5;$i++)
-            <td>{{$grade['ct'.$i]}}</td>
-          @endfor
-          @if($grade->course->final_exam_percent > 0)
-            <td>{{$grade->written}}</td>
-            <td>{{$grade->mcq}}</td>
-          @endif
-          @if($grade->course->practical_percent > 0)
-            <td>{{$grade->practical}}</td>
-          @endif
-          <td>{{$grade->marks}}</td>
-          <td>
-            @foreach($gradesystems as $gs)
-              @if($grade->marks >= $gs->from_mark && $grade->marks <= $gs->to_mark)
-                <b>{{$gs->grade}}</b>
-                @break
-              @endif
-            @endforeach
-          </td>
-          <td>{{$grade->teacher->name}}</td>
-        </tr>
-      @endforeach
-    </tbody>
-  </table>
-</div>
+<h3>{{$exam->exam_name}}<span class="float-right ml-2"><button class="btn btn-lg btn-success" role="button" id="btnPrint{{$exam->id}}">Print Result</button></span></h3>
+{{--<div class="visible-print-block" id="table-content{{$exam->id}}">--}}
+{{--  <div class="table-responsive">--}}
+{{--    <table class="table display  text-nowrap">--}}
+{{--      <thead>--}}
+{{--      <tr>--}}
+{{--        <th>#</th>--}}
+{{--        <th>Course</th>--}}
+{{--        <th>Attendance</th>--}}
+{{--        @for($i=1;$i<=5;$i++)--}}
+{{--          <th>Quiz {{$i}}</th>--}}
+{{--        @endfor--}}
+{{--        @for($i=1;$i<=3;$i++)--}}
+{{--          <th>Assignment {{$i}}</th>--}}
+{{--        @endfor--}}
+{{--        @for($i=1;$i<=5;$i++)--}}
+{{--          <th>CT {{$i}}</th>--}}
+{{--        @endfor--}}
+{{--        @if($grade->course->final_exam_percent > 0)--}}
+{{--          <th>Written</th>--}}
+{{--          <th>Mcq</th>--}}
+{{--        @endif--}}
+{{--        @if($grade->course->practical_percent > 0)--}}
+{{--          <th>Practical</th>--}}
+{{--        @endif--}}
+{{--        <th>Total Marks</th>--}}
+{{--        <th>Grade</th>--}}
+{{--        <th>Course Teacher</th>--}}
+{{--      </tr>--}}
+{{--      </thead>--}}
+{{--      <tbody>--}}
+{{--      @foreach ($grades as $grade)--}}
+{{--        <tr>--}}
+{{--          <th scope="row">{{($loop->index + 1)}}</th>--}}
+{{--          <td>{{$grade->course->course_name}}</td>--}}
+{{--          <td>{{$grade->attendance}}</td>--}}
+{{--          @for($i=1;$i<=5;$i++)--}}
+{{--            <td>{{$grade['quiz'.$i]}}</td>--}}
+{{--          @endfor--}}
+{{--          @for($i=1;$i<=3;$i++)--}}
+{{--            <td>{{$grade['assignment'.$i]}}</td>--}}
+{{--          @endfor--}}
+{{--          @for($i=1;$i<=5;$i++)--}}
+{{--            <td>{{$grade['ct'.$i]}}</td>--}}
+{{--          @endfor--}}
+{{--          @if($grade->course->final_exam_percent > 0)--}}
+{{--            <td>{{$grade->written}}</td>--}}
+{{--            <td>{{$grade->mcq}}</td>--}}
+{{--          @endif--}}
+{{--          @if($grade->course->practical_percent > 0)--}}
+{{--            <td>{{$grade->practical}}</td>--}}
+{{--          @endif--}}
+{{--          <td>{{$grade->marks}}</td>--}}
+{{--          <td>--}}
+{{--            @foreach($gradesystems as $gs)--}}
+{{--              @if($grade->marks >= $gs->from_mark && $grade->marks <= $gs->to_mark)--}}
+{{--                <b>{{$gs->grade}}</b>--}}
+{{--                @break--}}
+{{--              @endif--}}
+{{--            @endforeach--}}
+{{--          </td>--}}
+{{--          <td>{{$grade->teacher->name}}</td>--}}
+{{--        </tr>--}}
+{{--      @endforeach--}}
+{{--      </tbody>--}}
+{{--    </table>--}}
+{{--  </div>--}}
+{{--</div>--}}
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Course</th>
-      <th scope="col">Total Marks</th>
-      <th scope="col">Grade</th>
-      <!--<th scope="col">GPA</th>-->
-      <th scope="col">Course Teacher</th>
+      <th>#</th>
+      <th>Course</th>
+      <th>Total Marks</th>
+      <th>Grade</th>
+      <!--<th>GPA</th>-->
+      <th>Course Teacher</th>
     </tr>
   </thead>
   <tbody>
@@ -85,7 +87,7 @@
       <th scope="row">{{($loop->index + 1)}}</th>
       <td>{{$grade->course->course_name}}</td>
       <td><b>{{$grade->marks}}</b>
-        <a class="btn btn-xs btn-danger pull-right" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
+        <a class="btn btn-lg btn-danger float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
       </td>
       <td>
         @foreach($gradesystems as $gs)
@@ -105,22 +107,22 @@
         <table class="table table-bordered table-condensed table-hover">
           <thead>
             <tr>
-              <th scope="col">Attendance</th>
+              <th>Attendance</th>
               @for($i=1;$i<=5;$i++)
-                <th scope="col">Quiz {{$i}}</th>
+                <th>Quiz {{$i}}</th>
               @endfor
               @for($i=1;$i<=3;$i++)
-                <th scope="col">Assignment {{$i}}</th>
+                <th>Assignment {{$i}}</th>
               @endfor
               @for($i=1;$i<=5;$i++)
-                <th scope="col">CT {{$i}}</th>
+                <th>CT {{$i}}</th>
               @endfor
               @if($grade->course->final_exam_percent > 0)
-                <th scope="col">Written</th>
-                <th scope="col">Mcq</th>
+                <th>Written</th>
+                <th>Mcq</th>
               @endif
               @if($grade->course->practical_percent > 0)
-                <th scope="col">Practical</th>
+                <th>Practical</th>
               @endif
             </tr>
           </thead>
@@ -153,6 +155,8 @@
     @endforeach
   </tbody>
 </table>
+    <br>
+    <br>
 </div>
 <script>
     $("#btnPrint{{$exam->id}}").on("click", function () {

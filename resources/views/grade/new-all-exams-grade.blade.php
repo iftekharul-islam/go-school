@@ -30,12 +30,12 @@
                 @foreach ($classes as $class)
                     <div class="card-header" style="background-color: #fff">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-1">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <a class="" role="button" data-toggle="collapse" href="#collapse{{$class->id}}" aria-controls="collapse{{$class->id}}">
                                     <h5>
-                                        {{$class->class_number}} {{$class->group}} <span class="pull-right"><b>Sections under this Class+</b></span>
+                                        {{$class->class_number}} {{$class->group}} <span class="float-right"><b>Sections under this Class+</b></span>
                                     </h5>
                                 </a>
                             </div>

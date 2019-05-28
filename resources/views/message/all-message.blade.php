@@ -3,8 +3,7 @@
 @section('title', 'Messages')
 @section('content')
     <div class="dashboard-content-one">
-        <!-- Breadcubs Area Start Here -->
-        <div class="breadcrumbs-area">
+        <!-- Breadcubs Area Start Here --><div class="breadcrumbs-area">
             <h3>Student Messages</h3>
             <ul>
                 <li>
@@ -13,6 +12,7 @@
                 <li>Messages</li>
             </ul>
         </div>
+
         <!-- Breadcubs Area End Here -->
         <div class="row">
             <!-- Student Attendence Area Start Here -->
@@ -57,18 +57,19 @@
                                                 <div class="media-left">
                                                     <div class="media-object">
                                                         @if(!empty($message->teacher->pic_path))
-                                                            <img src="{{asset('01-progress.gif')}}" data-src="{{url($message->teacher->pic_path)}}" style="border-radius: 50%;" width="50px" height="50px">
+                                                            <img src="{{url($message->teacher->pic_path)}}" data-src="{{url($message->teacher->pic_path)}}" style="border-radius: 50%;" width="50px" height="50px">
                                                         @else
                                                             @if(strtolower($message->teacher->gender) == 'male')
-                                                                <img src="{{asset('01-progress.gif')}}" data-src="https://png.icons8.com/dusk/50/000000/user.png" style="border-radius: 50%;" width="50px" height="50px">
+                                                                <img src="{{asset('template/img/user-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
                                                             @else
-                                                                <img src="{{asset('01-progress.gif')}}" data-src="https://png.icons8.com/dusk/50/000000/user-female.png" style="border-radius: 50%;" width="50px" height="50px">
+                                                                <img src="{{asset('template/img/female-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
                                                             @endif
                                                         @endif
                                                     </div>
                                                 </div>
                                                 <div class="media-body">
-                                                    <strong class="notification-title"><a href="#">{{$message->teacher->name}}</a> . {{$message->teacher->department->department_name ?? null}}
+                                                    <strong class="notification-title"><a href="{{url('user/'.$message->teacher->student_code)}}">
+                                                            {{$message->teacher->name}}</a> . {{$message->teacher->department->department_name ?? null}}
                                                         @if($message->active == 1)
                                                             <span class="label label-danger">New</span></strong>
                                                     @else

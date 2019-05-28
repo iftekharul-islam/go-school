@@ -12,7 +12,7 @@
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
         <label for="name" class="col-md-4">Student Code</label>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
             <input id="student_code" type="text" class="form-control" name="student_code" value="{{ old('student_code') }}" placeholder="Student Code" required>
 
             @if ($errors->has('name'))
@@ -25,26 +25,19 @@
     <div class="form-group{{ $errors->has('book_code') ? ' has-error' : '' }}">
         <label class="col-md-4">Book Title &amp; Code (Maximum 10 books)</label>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
             <select id="book_code" class="col-12 form-group" multiple name="book_id[]">
                 @foreach($books as $book)
                     <option value="{{$book->id}}">{{$book->title}} - {{$book->book_code}}</option>
                 @endforeach
             </select>
         </div>
-{{--        <div class="col-xl-6 col-lg-6 col-12 form-group">--}}
-{{--            <select class="select2" id="book_code" multiple name="book_id[]">--}}
-{{--                @foreach($books as $book)--}}
-{{--                    <option value="{{$book->id}}">{{$book->title}} - {{$book->book_code}}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-{{--        </div>--}}
     </div>
 
     <div class="form-group{{ $errors->has('issue_date') ? ' has-error' : '' }}">
         <label class="col-md-4 control-label">Issue Date</label>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
             <input data-date-format="yyyy-mm-dd" id="issue_date" class="form-control date" name="issue_date" value="{{ old('issue_date') }}" placeholder="Issue Date" required>
 
             @if ($errors->has('issue_date'))
@@ -58,7 +51,7 @@
     <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
         <label class="col-md-4 control-label">Return Date</label>
 
-        <div class="col-md-6">
+        <div class="col-md-12">
             <input data-date-format="yyyy-mm-dd" id="return_date" class="form-control date" name="return_date" value="{{ old('return_date') }}"
                    placeholder="Return Date" required>
 

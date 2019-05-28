@@ -94,7 +94,6 @@ class HomeController extends Controller
         }
         elseif (\Auth::user()->role == 'teacher' || \Auth::user()->role == 'accountant' || \Auth::user()->role == 'librarian' || \Auth::user()->role == 'admin' ) {
             $allStudents = $this->userService->getStudents();
-//            return $allStudents;
             return view('teacher-home', [
                 'totalStudents' => $totalStudents,
                 'allStudents' => $allStudents,
@@ -120,7 +119,9 @@ class HomeController extends Controller
                 'syllabuses' => $syllabuses,
                 'exams' => $exams,
                 'student_info' => $student_info,
-                'student' => $student
+                'student' => $student,
+                'male' => $male,
+                'female' => $female
                 //'messageCount'=>$messageCount,
             ]);
         }

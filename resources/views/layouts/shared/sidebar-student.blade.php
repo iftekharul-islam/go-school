@@ -14,7 +14,7 @@
 
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="flaticon-checklist"></i><span>Attendance</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>Attendance</span></a>
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Teacher Attendance</a>
@@ -28,43 +28,41 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('school/sections?course=1') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Classes & Section</span></a>
+                        <a href="{{ url('school/sections?course=1') }}" class="nav-link">
+                            <i class="fas fa-school"></i><span>Classes & Section</span></a>
                     </li>
                 @endif
 
                 @if(Auth::user()->role == 'student')
                     <li class="nav-item">
-                        <a href="{{ url('attendances/0/' . Auth::user()->id . '/0') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>My Attendance</span></a>
+                        <a href="{{ url('attendances/0/' . Auth::user()->id . '/0') }}" class="nav-link">
+                            <i class="fas fa-user-plus"></i><span>My Attendance</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('courses/0/'.Auth::user()->section_id) }}" class="nav-link"><i
-                                    class="flaticon-open-book"></i><span>My Courses</span></a>
+                        <a href="{{ url('courses/0/'.Auth::user()->section_id) }}" class="nav-link">
+                            <i class="fas fa-book-open"></i><span>My Courses</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('grades/'.Auth::user()->id) }}" class="nav-link"><i
-                                    class="flaticon-technological"></i><span>My Grade</span></a>
+                        <a href="{{ url('grades/'.Auth::user()->id) }}" class="nav-link">
+                            <i class="fas fa-poll"></i><span>My Grade</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i
-                                    class="flaticon-technological"></i><span>Payment History</span></a>
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-file-invoice"></i><span>Payment History</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i
-                                    class="flaticon-bus-side-view"></i><span>Transport</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/all-notice') }}" class="nav-link"><i
-                                    class="flaticon-script"></i><span>Notice</span></a>
+                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Notice</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" class="nav-link"><i
-                                    class="flaticon-chat"></i><span>Messages</span></a>
+                        <a href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">
+                            <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link"><i
-                                    class="flaticon-settings"></i><span>Account</span></a>
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user"></i><span>Account</span></a>
                     </li>
                 @endif
                 @if(Auth::user()->role != 'student' && Auth::user()->role != 'master')
@@ -79,106 +77,105 @@
                 @endif
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item">
-                        <a href="{{ url('academic/routine') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Class Routine</span></a>
+                        <a href="{{ url('academic/routine') }}" class="nav-link">
+                            <i class="fab fa-accessible-icon"></i><span>Class Routine</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('grades/all-exams-grade') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Grades</span></a>
+                        <a href="{{ url('grades/all-exams-grade') }}" class="nav-link">
+                            <i class="fas fa-poll-h"></i><span>Grades</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('academic/syllabus') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Syllabus</span></a>
+                        <a href="{{ url('academic/syllabus') }}" class="nav-link">
+                            <i class="fab fa-readme"></i><span>Syllabus</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('academic/notice') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Notice</span></a>
+                        <a href="{{ url('academic/notice') }}" class="nav-link">
+                            <i class="fas fa-exclamation-circle"></i><span>Notice</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('academic/event') }}" class="nav-link"><i
-                                    class="flaticon-checklist"></i><span>Events</span></a>
+                        <a href="{{ url('academic/event') }}" class="nav-link">
+                            <i class="fas fa-calendar-week"></i><span>Events</span></a>
                     </li>
                 @endif
 
                 @if(Auth::user()->role == 'admin')
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Exams</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-file-alt"></i><span>Exams</span></a>
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('exams/create') }}"><span>Add Examination</span></a>
+                                <a class="nav-link" href="{{ url('exams/create') }}"><i class="fas fa-angle-right"></i><span>Add Examination</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('exams/active') }}"><span>Active Exams</span></a>
+                                <a class="nav-link" href="{{ url('exams/active') }}"><i class="fas fa-angle-right"></i><span>Active Exams</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('exams') }}"><span>Manage Examinations</span></a>
+                                <a class="nav-link" href="{{ url('exams') }}"><i class="fas fa-angle-right"></i><span>Manage Examinations</span></a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Manage GPA</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-poll-h"></i><span>Manage GPA</span></a>
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('gpa/all-gpa') }}"><span>All GPA</span></a>
+                                <a class="nav-link" href="{{ url('gpa/all-gpa') }}"><i class="fas fa-angle-right"></i><span>All GPA</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('gpa/create-gpa') }}"><span>Add New GPA</span></a>
+                                <a class="nav-link" href="{{ url('gpa/create-gpa') }}"><i class="fas fa-angle-right"></i><span>Add New GPA</span></a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('create-school') }}" class="nav-link"><i
-                                    class="flaticon-settings"></i><span>Academic Settings</span></a>
+                        <a href="{{ url('create-school') }}" class="nav-link">
+                            <i class="fas fa-sliders-h"></i><span>Academic Settings</span></a>
                     </li>
 
                 @endif
 
                 @if(Auth::user()->role == 'teacher')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}"><i
-                                    class="flaticon-open-book"></i>
-                            <span>My Courses</span></a>
+                        <a class="nav-link" href="{{ url('courses/'.Auth::user()->id.'/0') }}">
+                            <i class="fas fa-book-medical"></i><span>My Courses</span></a>
                     </li>
                 @endif
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Fees Generators</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/all') }}"><span>Generate Form</span></a>
+                                <a class="nav-link" href="{{ url('fees/all') }}"><i class="fas fa-angle-right"></i><span>Generate Form</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/create') }}"><span>Add Fee Field</span></a>
+                                <a class="nav-link" href="{{ url('fees/create') }}"><i class="fas fa-angle-right"></i><span>Add Fee Field</span></a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="flaticon-dashboard"></i><span>Manage Accounts</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-user-circle"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/accountant')}}">
-                                    <span>Accountant List</span></a>
+                                    <i class="fas fa-angle-right"></i><span>Accountant List</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('accounts/sectors') }}">
-                                    <span>Add Account Sector</span></a>
+                                    <i class="fas fa-angle-right"></i><span>Add Account Sector</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('accounts/expense') }}">
-                                    <span>Add New Expense</span></a>
+                                    <i class="fas fa-angle-right"></i><span>Add New Expense</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('accounts/expense-list') }}">
-                                    <span>Expense List</span></a>
+                                    <i class="fas fa-angle-right"></i><span>Expense List</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('accounts/income') }}">
-                                    <span>Add New Income</span></a>
+                                    <i class="fas fa-angle-right"></i><span>Add New Income</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('accounts/income-list') }}">
-                                    <span>Income List</span></a>
+                                    <i class="fas fa-angle-right"></i><span>Income List</span></a>
                             </li>
                         </ul>
                     </li>
@@ -186,7 +183,7 @@
 
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'librarian')
                     <li class="nav-item sidebar-nav-item active">
-                        <a href="#" class="nav-link"><i class="flaticon-books"></i><span>Manage Library</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-book-open"></i><span>Manage Library</span></a>
                         <ul class="nav sub-group-menu menu-open" style="display: block;">
                             <li class="nav-item">
                                 <a href="{{url('users/'.Auth::user()->school->code.'/librarian')}}" class="nav-link"><i

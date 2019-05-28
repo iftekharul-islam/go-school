@@ -73,7 +73,7 @@
                     @isset($incomes)
                         <div class="table-responsive">
                             <div class="table-responsive">
-                                <table class="table display data-table text-nowrap">
+                                <table class="table display text-wrap">
                                     <thead>
                                     <tr>
                                         <th>#</th>
@@ -102,7 +102,7 @@
                                 <h2 style="text-align:center;">{{Auth::user()->school->name}}</h2>
                                 <h4 style="text-align:center;">Expense List</h4>
                                 <div class="table-responsive">
-                                    <table class="table display data-table text-nowrap" style="width: 100%;">
+                                    <table class="table display text-wrap">
                                         <thead>
                                         <tr>
                                             <th>#</th>

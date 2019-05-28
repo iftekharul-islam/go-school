@@ -7,7 +7,7 @@
       $events = array();
       foreach ($attendances as $attendance){
         if($attendance->present == 1){
-          $events[] = \Calendar::event("Present",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'green']);
+          $events[] = \Calendar::event("Present",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'blue']);
         } else if($attendance->present == 2){
           $events[] = \Calendar::event("Escaped",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'orange']);
         } else {
@@ -17,7 +17,7 @@
       if(sizeof($events) > 0){
         $calendar = \Calendar::addEvents($events);
   ?>
-  <div class="col-md-8">
+  <div class="col-md-12">
     <h5>Attendance List of Full Semester</h5>
     {!! $calendar->calendar() !!}
   </div>
