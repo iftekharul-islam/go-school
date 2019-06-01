@@ -27,10 +27,10 @@
             </thead>
             <tbody>
             @if (count($attendances) > 0)
-                <input type="hidden" name="update" value="1">
+                <input type="text" name="update" value="1" style="display: none;">
 
                 @foreach ($students as $student)
-                    <input type="hidden" name="students[]" value="{{$student->id}}">
+                    <input type="text" name="students[]" value="{{$student->id}}" style="display: none;">
                 @endforeach
                 @foreach ($attendances as $attendance)
                     <tr>
@@ -47,7 +47,7 @@
                             <a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
                         </td>
                         <td>
-                            <input type="hidden" name="attendances[]" value="{{$attendance->id}}">
+                            <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
                             @if($attendance->present === 1)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" aria-label="Present" name="isPresent{{$loop->index}}" checked>

@@ -116,6 +116,8 @@
     <!-- Main js -->
     <script src=" {{ asset('/template/js/main.js') }}"></script>
 
+    @yield('customjs')
+
 </body>
 
 </html>

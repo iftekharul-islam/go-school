@@ -19,33 +19,17 @@
                     <h3>All Fees Collection</h3>
                     <button class="fw-btn-fill btn-gradient-yellow btn-xs" role="button" id="btnPrint" >Print Fees Form</button>
                 </div>
-                <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" role="button"
-                       data-toggle="dropdown" aria-expanded="false">...</a>
+{{--                <div class="dropdown">--}}
+{{--                    <a class="dropdown-toggle" href="#" role="button"--}}
+{{--                       data-toggle="dropdown" aria-expanded="false">...</a>--}}
 
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                    </div>
-                </div>
-            </div>
-{{--            <form class="mg-b-20">--}}
-{{--                <div class="row gutters-8">--}}
-{{--                    <div class="col-3-xxxl col-xl-3 col-lg-3 col-12 form-group">--}}
-{{--                        <input type="text" placeholder="Search by ID ..." class="form-control">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-4-xxxl col-xl-4 col-lg-3 col-12 form-group">--}}
-{{--                        <input type="text" placeholder="Search by Name ..." class="form-control">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-4-xxxl col-xl-3 col-lg-3 col-12 form-group">--}}
-{{--                        <input type="text" placeholder="Search by Phone" class="form-control">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-1-xxxl col-xl-2 col-lg-3 col-12 form-group">--}}
-{{--                        <button type="submit" class="fw-btn-fill btn-gradient-yellow">SEARCH</button>--}}
+{{--                    <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                        <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>--}}
+{{--                        <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
+{{--                        <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
-{{--            </form>--}}
+            </div>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}

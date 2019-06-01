@@ -5,15 +5,23 @@
 
 <!-- JS -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
-
-
-<form class="new-added-form justify-content-md-center false-height" action="{{url('library/issue-books')}}" method="post">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form class="new-added-form justify-content-md-center" action="{{url('library/issue-books')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
         <label for="name" class="col-md-4">Student Code</label>
 
         <div class="col-md-12">
-            <input id="student_code" type="text" class="form-control" name="student_code" value="{{ old('student_code') }}" placeholder="Student Code" required>
+            <input id="show-user" type="text" class="typeahead form-control" name="student_code" value="{{ old('student_code') }}" placeholder="Student Code" required>
 
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -77,6 +85,15 @@
         });
         $('.date').datepicker({
             format: 'yyyy-mm-dd',
+        });
+        var path = "{{ url('library/issue-books/autocomplete/') }}";
+        $('input.typeahead').typeahead({
+            source:  function (query, process) {
+                return $.get(path, { query: query }, function (data) {
+                    console.log(process(data));
+                    return process(data);
+                });
+            }
         });
     })
 </script>

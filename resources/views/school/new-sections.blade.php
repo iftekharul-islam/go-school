@@ -28,11 +28,11 @@
                             <div class="col-md-4">
                                 <a class="collapsed" role="button" data-toggle="collapse"
                                    href="#collapse{{$class->id}}" aria-controls="collapse{{$class->id}}">
-                                    {{$class->class_number}} {{ucfirst($class->group)}}
+                                    Class : {{$class->class_number}} {{ucfirst($class->group)}}
                                 </a>
                             </div>
                             <div class="col-md-4">
-                                <a class="btn-fill-lg bg-blue-dark btn-hover-yellow" role="button" data-toggle="collapse" href="#collapse{{$class->id}}" aria-controls="collapse{{$class->id}}"><small><b>Sections under this Class <i class="fas fa-angle-down"></i></b></small></a>
+                                <a class="btn-fill-lg bg-blue-dark btn-hover-yellow" role="button" data-toggle="collapse" href="#collapse{{$class->id}}" aria-controls="collapse{{$class->id}}"><b>Sections under this Class <i class="fas fa-angle-down"></i></b></a>
                             </div>
                             @if(isset($_GET['course']) && $_GET['course'] == 1)
                                 <div class="col-md-4">

@@ -28,28 +28,34 @@
                     @endif
                     Data</h3>
             </div>
-            <div class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                   aria-expanded="false">...</a>
+{{--            <div class="dropdown">--}}
+{{--                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"--}}
+{{--                   aria-expanded="false">...</a>--}}
 
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i
-                                class="fas fa-times text-orange-red"></i>Close</a>
-                    <a class="dropdown-item" href="#"><i
-                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                    <a class="dropdown-item" href="#"><i
-                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                </div>
-            </div>
+{{--                <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                    <a class="dropdown-item" href="#"><i--}}
+{{--                                class="fas fa-times text-orange-red"></i>Close</a>--}}
+{{--                    <a class="dropdown-item" href="#"><i--}}
+{{--                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
+{{--                    <a class="dropdown-item" href="#"><i--}}
+{{--                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
         <div class="table-responsive">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <table class="table table-data-div display text-wrap">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     @if(Auth::user()->role == 'admin')
                         @if (!Session::has('section-attendance'))
-                            <th scope="col">Action</th>
+                            <th>Action</th>
+                            <th>Remove</th>
                         @endif
                     @endif
                     <th>Code</th>
@@ -97,6 +103,9 @@
                             @if (!Session::has('section-attendance'))
                                 <td>
                                     <a class="btn btn-lg btn-warning" href="{{url('edit/user/'.$user->id)}}">Edit</a>
+                                </td>
+                                <td>
+                                    <a href="{{url('user/deactivate/'.$user->id)}}" class="btn btn-lg btn-danger" role="button"></i>Remove</a>
                                 </td>
                             @endif
                         @endif
@@ -155,7 +164,7 @@
                         @endif
                         @if (!Session::has('section-attendance'))
                             <td>{{ucfirst($user->gender)}}</td>
-                            <td>{{$user->blood_group}}</td>
+                            <td>{{ucfirst($user->blood_group)}}</td>
                             <td>{{$user->phone_number}}</td>
                             <td>{{$user->address}}</td>
                         @endif

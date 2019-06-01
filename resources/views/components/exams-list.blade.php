@@ -20,6 +20,7 @@
       <th>Result Published</th>
       <th>Created At</th>
       <th>Set Active</th>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -78,6 +79,15 @@
           <input type="submit" class="btn btn-info btn-lg float-right" style="margin-left: 1%;" value="Save" form="form{{$exam->id}}"/>
         </span>
           @endif
+        </td>
+        <td>
+          <a href="{{ url('exams/remove', ['id' => $exam->id]) }}">
+            <button class="btn btn-danger btn-lg">Delete</button>
+          </a>
+          <a href="{{ url('exams/edit', ['id' => $exam->id]) }}">
+            <button class="btn btn-info btn-lg ml-3">Edit</button>
+          </a>
+
         </td>
       </tr>
     @endforeach

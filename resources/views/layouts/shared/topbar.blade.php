@@ -171,7 +171,7 @@
         </ul>
         <ul class="navbar-nav">
             @guest
-                <li><a class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" href="{{ route('login') }}" style="color: #000;">Login</a></li>
+{{--                <li><a class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" href="{{ route('login') }}" style="color: #000;">Login</a></li>--}}
             @else
                 <li class="navbar-item dropdown header-admin">
                     <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"

@@ -1,4 +1,4 @@
-<form class="new-added-form" action="{{url('exams/create')}}" method="post">
+<form class="new-added-form" action="{{url('exams/edit',['id' => $exam->id])}}" method="post">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
@@ -14,11 +14,9 @@
                 </span>
             @endif
         </div>
-
-
         <div class="col-md-8 form-group{{ $errors->has('exam_name') ? ' has-error' : '' }}">
             <label>Examination Name</label>
-            <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ old('exam_name') }}" placeholder="Semester 1 Exam 2018, Final Exam 2019, ..." required>
+            <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ $exam->exam_name }}" required>
 
             @if ($errors->has('exam_name'))
                 <span class="help-block">
@@ -30,7 +28,7 @@
 
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
             <label>Start Date</label>
-            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" placeholder="5th April..." required>
+            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ $exam->start_date }}" required>
             @if ($errors->has('start_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('start_date') }}</strong>
@@ -40,7 +38,7 @@
 
         <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>End Date</label>
-            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" placeholder="20th April..." required>
+            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ $exam->end_date }}" required>
             @if ($errors->has('end_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('end_date') }}</strong>

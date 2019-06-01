@@ -1,29 +1,25 @@
-<div class="card height-auto">
-  <div class="card-body">
-    <div class="heading-layout1">
+ <div class="heading-layout1">
       <div class="item-title">
-        <h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary">{{ucfirst($user->gender)}}</span>
+        <h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>
           @if ($user->role == 'teacher' && $user->section_id > 0)
-            <small>Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>
+            <small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>
           @endif
         </h3>
-      </div>
-      <div class="dropdown">
-        <a class="dropdown-toggle" href="#" role="button"
-           data-toggle="dropdown" aria-expanded="false">...</a>
-
-        <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-          <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-          <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-        </div>
       </div>
     </div>
     <div class="single-info-details">
       <div class="row">
         <div class="col-md-3">
           <div class="item-img">
-            <img src="{{ $user->pic_path  }}" alt="student">
+            @if(!empty($user->pic_path))
+              <img src="{{asset('01-progress.gif')}}" data-src="{{url($user->pic_path)}}" class="img-thumbnail" id="my-profile" alt="Profile Picture" width="100%">
+            @else
+              @if(strtolower($user->gender) == 'male')
+                <img src="{{asset('01-progress.gif')}}" data-src="https://png.icons8.com/dusk/200/000000/user.png" class="img-thumbnail" width="100%">
+              @else
+                <img src="{{asset('01-progress.gif')}}" data-src="https://png.icons8.com/dusk/200/000000/user-female.png" class="img-thumbnail" width="100%">
+              @endif
+            @endif
           </div>
         </div>
         <div class="col-md-9">
@@ -39,7 +35,7 @@
             </div>
 
             @if($user->role == "student")
-              <div class="info-table table-responsive">
+              <div class="table-responsive">
                 <table class="table text-nowrap">
                   <tr>
                     <td>Student ID:</td>
@@ -133,8 +129,8 @@
             @endif
 
             @if($user->role == "teacher" || $user->role == "accountant" || $user->role == "librarian" )
-              <div class="info-table table-responsive">
-                <table class="table text-nowrap">
+              <div class="table-responsive">
+                <table class="table text-wrap">
                   <tr>
                     <td><b>Code:</b></td>
                     <td>{{$user->student_code}}</td>
@@ -161,6 +157,4 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </div>

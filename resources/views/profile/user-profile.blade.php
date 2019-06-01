@@ -25,9 +25,12 @@
                         {{ session('status') }}
                     </div>
                 @endif
-
-                @component('components.new-user-profile',['user'=>$user])
-                @endcomponent
+                <div class="card height-auto false-height">
+                    <div class="card-body">
+                        @component('components.new-user-profile',['user'=>$user])
+                        @endcomponent
+                    </div>
+                </div>
             </div>
         @else
             <div class="">

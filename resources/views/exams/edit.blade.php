@@ -1,5 +1,5 @@
 @extends('layouts.student-app')
-@section('title', 'Issue Book')
+@section('title', 'Add Examination')
 @section('content')
     <div class="breadcrumbs-area">
         <h3>Dashboard</h3>
@@ -7,14 +7,14 @@
             <li>
                 <a href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Issue books</li>
+            <li>Add Examinations</li>
         </ul>
     </div>
-    <div class="card height-auto false-height">
+    <div class="card height-auto">
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Issue book</h3>
+                    <h3>Add Exam</h3>
                 </div>
             </div>
             @if (session('status'))
@@ -22,13 +22,19 @@
                     {{ session('status') }}
                 </div>
             @endif
-            @component('components.book-issue-form',['books'=>$books])
+
+            @component('components.edit-exam-form',['classes'=>$classes,'assigned_classes'=>$already_assigned_classes, 'exam' => $exam])
             @endcomponent
         </div>
+    </div>
+{{--<div class="container-fluid">--}}
 {{--    <div class="row">--}}
+{{--        <div class="col-md-2" id="side-navbar">--}}
+{{--            @include('layouts.leftside-menubar')--}}
+{{--        </div>--}}
 {{--        <div class="col-md-8" id="main-container">--}}
 {{--            <div class="panel panel-default">--}}
-{{--                <div class="page-panel-title">Issue books</div>--}}
+{{--                <div class="page-panel-title">Add Examination</div>--}}
 
 {{--                <div class="panel-body">--}}
 {{--                    @if (session('status'))--}}
@@ -37,11 +43,11 @@
 {{--                        </div>--}}
 {{--                    @endif--}}
 
-{{--                    @component('components.book-issue-form',['books'=>$books])--}}
+{{--                    @component('components.add-exam-form',['classes'=>$classes,'assigned_classes'=>$already_assigned_classes,])--}}
 {{--                    @endcomponent--}}
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
-</div>
+{{--</div>--}}
 @endsection

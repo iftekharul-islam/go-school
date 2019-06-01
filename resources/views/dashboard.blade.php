@@ -63,38 +63,38 @@
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->father_name))
-                                            <td>Father Name:</td>
+                                            <td>Father's Name:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->father_name }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->father_occupation))
-                                            <td>Father Occupation:</td>
+                                            <td>Father's Occupation:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->father_occupation }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->mother_name))
-                                            <td>Mother Name:</td>
+                                            <td>Mother's Name:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->mother_name }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->mother_occupation))
-                                            <td>Mother Occupation:</td>
+                                            <td>Mother's Occupation:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->mother_occupation }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->birthday))
-                                            <td>Date Of Birth:</td>
+                                            <td>Date of Birth:</td>
                                             <td class="font-medium text-dark-medium">{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->religion))
                                             <td>Religion:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
+                                            <td class="font-medium text-dark-medium">{{ ucfirst($student_info->religion) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -110,7 +110,7 @@
                                     <tr>
                                         @if(isset($student_info->group))
                                             <td>Group:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->group }}</td>
+                                            <td class="font-medium text-dark-medium">{{ ucfirst($student_info->group) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -231,7 +231,7 @@
                                                 <div class="form-check">
                                                     <input type="checkbox"
                                                            class="form-check-input checkAll">
-                                                    <label class="form-check-label">ID</label>
+                                                    <label class="form-check-label">#</label>
                                                 </div>
                                             </th>
                                             {{--                                            <th>ID</th>--}}

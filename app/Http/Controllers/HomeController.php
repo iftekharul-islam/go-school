@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
+use App\Http\Traits\GradeTrait;
+use App\Section;
 use App\Services\Attendance\AttendanceService;
+use App\Services\Course\CourseService;
 use App\StudentInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +20,14 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(UserService $userService, User $user)
+    use GradeTrait;
+    protected $courseService;
+    public function __construct(UserService $userService, User $user, CourseService $courseService)
     {
         $this->userService = $userService;
         $this->user = $user;
         $this->middleware('auth');
+        $this->courseService = $courseService;
     }
 
     /**
@@ -31,6 +38,10 @@ class HomeController extends Controller
     public function index()
     {
         $student = Auth::user();
+        if ($student->role == 'teacher')
+        {
+            $courses = $this->courseService->getCoursesByTeacher($student->id);
+        }
         $minutes = 1440;// 24 hours = 1440 minutes
         if (@isset($student->school->id)) {
             $school_id = \Auth::user()->school->id;
@@ -87,12 +98,14 @@ class HomeController extends Controller
                     ->where('active', 1)
                     ->get();
             });
+//
+//            return $books;
         }
 
         if (\Auth::user()->role == 'master') {
             return view('master-home');
         }
-        elseif (\Auth::user()->role == 'teacher' || \Auth::user()->role == 'accountant' || \Auth::user()->role == 'librarian' || \Auth::user()->role == 'admin' ) {
+        elseif (\Auth::user()->role == 'teacher' || \Auth::user()->role == 'admin' ) {
             $allStudents = $this->userService->getStudents();
             return view('teacher-home', [
                 'totalStudents' => $totalStudents,
@@ -103,6 +116,32 @@ class HomeController extends Controller
                 'totalSections' => $totalSections,
                 'male' => $male,
                 'female' => $female
+            ]);
+        }
+        elseif (\Auth::user()->role == 'accountant') {
+            $fees = \App\Fee::where('school_id', \Auth::user()->school_id)->get();
+            return view('teacher-home', [
+                'totalStudents' => $totalStudents,
+                'notices' => $notices,
+                'exams' => $exams,
+                'totalClasses' => $totalClasses,
+                'totalSections' => $totalSections,
+                'male' => $male,
+                'female' => $female,
+                'fees'   => $fees
+            ]);
+        }
+        elseif (\Auth::user()->role == 'librarian') {
+            $books = Book::bySchool(auth()->user()->school_id)->paginate();
+            return view('teacher-home', [
+                'totalStudents' => $totalStudents,
+                'notices' => $notices,
+                'exams' => $exams,
+                'totalClasses' => $totalClasses,
+                'totalSections' => $totalSections,
+                'male' => $male,
+                'female' => $female,
+                'books' => $books
             ]);
         }
         else {

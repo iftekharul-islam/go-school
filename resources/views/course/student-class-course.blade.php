@@ -7,7 +7,7 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>All Subjects</h3>
+            <h3>Dashboard</h3>
             <ul>
                 <li>
                     <a href="{{ url('home') }}">Home</a>
@@ -29,7 +29,7 @@
                                 </ol>
                             @endif
                             <div class="item-title">
-                                <h3>Courses Related to Section</h3>
+                                <h3>My Courses</h3>
                                 @if(count($courses) > 0)
                                     @foreach ($courses as $course)
                                         <div class="page-panel-title"><b>Section</b> -   {{$course->section->section_number}} &nbsp;<b>Class</b> -  {{$course->section->class->class_number}}</div>

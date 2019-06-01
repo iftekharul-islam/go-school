@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
+use App\User;
 use Illuminate\Http\Request;
 use App\Services\IssueBook\IssuedBookService;
 
@@ -32,6 +34,11 @@ class IssuedbookController extends Controller
                         ->get();
       return view('library.issuebooks',['books'=>$books]);
     }
+
+    public function autocomplete(Request $request) {
+        $data = User::where("name","LIKE","%{$request->input('query')}%")->get();
+        return response()->json($data);
+    }
     
     /**
      * Issue books to a student.
@@ -40,6 +47,13 @@ class IssuedbookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+//      return $request;
+        $request->validate([
+            'student_code' => 'integer',
+            'issue_date'   => 'required',
+            'return_date'  => 'required',
+            'book_code'    => 'required',
+        ]);
       $studentExists = \App\User::where('student_code',$request->student_code)->first();
       if($studentExists){
         $this->issuedBookService->request = $request;

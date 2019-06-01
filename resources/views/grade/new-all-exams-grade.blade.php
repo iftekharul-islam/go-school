@@ -19,7 +19,7 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3>Marks and Grades of All Classes</h3>
+                        <h3>Marks and Grades</h3>
                     </div>
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -35,7 +35,7 @@
                             <div class="col-md-7">
                                 <a class="" role="button" data-toggle="collapse" href="#collapse{{$class->id}}" aria-controls="collapse{{$class->id}}">
                                     <h5>
-                                        {{$class->class_number}} {{$class->group}} <span class="float-right"><b>Sections under this Class+</b></span>
+                                        Class: {{$class->class_number}} {{$class->group}} <span class="float-right btn-fill-lg bg-blue-dark btn-hover-yellow"><b>Sections under this Class+</b></span>
                                     </h5>
                                 </a>
                             </div>

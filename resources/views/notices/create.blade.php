@@ -19,7 +19,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-                @component('components.file-uploader',['upload_type'=>'notice'])--}}
+                @component('components.file-uploader',['upload_type'=>'notice', 'section_id' => ''])
                 @endcomponent
                 <br>
                 @component('components.uploaded-files-list',['files'=>$files,'upload_type'=>'notice'])

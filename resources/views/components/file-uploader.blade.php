@@ -27,7 +27,7 @@
 $(function () {
     var jqXHR = null;
     var uploadButton = $('<button/>')
-            .addClass('btn btn-primary btn-sm')
+            .addClass('btn btn-primary ml-5 btn-lg')
             .text('Upload')
             .on('click', function () {
                 @if($upload_type != 'profile')
@@ -65,7 +65,7 @@ $(function () {
                             data.context.text('File Upload has been canceled');
                         });
                         @if($upload_type != 'profile')
-                            data.formData = {upload_type: '{{$upload_type}}',title: $('#upload-title').val()};
+                            data.formData = {upload_type: '{{$upload_type}}',section_id : '{{ $section_id }}',title: $('#upload-title').val()};
                         @else
                             data.formData = {upload_type: '{{$upload_type}}',user_id: $('#userIdPic').val()};
                         @endif

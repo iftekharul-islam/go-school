@@ -366,7 +366,7 @@
         labels: ["Female Students", "Male Students"],
         datasets: [{
           backgroundColor: ["#304ffe", "#ffa601"],
-          data: [male, female],
+          data: [female, male],
           label: "Total Students"
         }, ]
       };

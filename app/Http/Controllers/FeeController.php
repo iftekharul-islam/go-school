@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fee;
 use Illuminate\Http\Request;
 
 class FeeController extends Controller
@@ -88,6 +89,8 @@ class FeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fee = Fee::findOrFail($id);
+        $fee->delete();
+        return redirect()->back()->with('Status', 'Removed');
     }
 }

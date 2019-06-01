@@ -43,7 +43,7 @@
                             <i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler text-green"></i>
                         </div>
                         <div class="item-content">
-                            <div class="item-number"><span class="counter" data-num="{{ $totalClasses }}">23,890</span></div>
+                            <div class="item-number"><span class="counter" data-num="{{ $totalClasses }}"></span></div>
                             <div class="item-title">Total Classes</div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <i class="flaticon-books text-blue"></i>
                         </div>
                         <div class="item-content">
-                            <div class="item-number"><span class="counter" data-num="{{ $totalSections }}">21,02,050</span></div>
+                            <div class="item-number"><span class="counter" data-num="{{ $totalSections }}"></span></div>
                             <div class="item-title">Total Sections</div>
                         </div>
                     </div>
@@ -131,56 +131,57 @@
         <!-- Notice Board End Here -->
     </div>
     <!-- Student Table Area Start Here -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card dashboard-card-eleven">
-                <div class="card-body">
-                    <div class="heading-layout1">
-                        <div class="item-title">
-                            <h3>All Students</h3>
-                        </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-expanded="false">...</a>
+    @if(\Auth::user()->role == 'admin' || \Auth::user()->role == 'teacher')
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card dashboard-card-eleven">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Students</h3>
+                            </div>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-expanded="false">...</a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-box-wrap">
-                        <div class="table-responsive student-table-box">
-                            <table class="table display data-table text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input checkAll">
-                                            <label class="form-check-label">Code</label>
-                                        </div>
-                                    </th>
-                                    <th>Photo</th>
-                                    <th>Name</th>
-                                    <th>Gender</th>
-                                    <th>Attendance</th>
-                                    <th>Version</th>
-                                    <th>Section</th>
-                                    <th>Class</th>
-                                    <th>Father</th>
-                                    <th>Mother</th>
-                                    <th>Blood</th>
-                                    <th>Phone</th>
-                                    <th>E-mail</th>
-                                    <th>Address</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($allStudents as $key => $student)
+                        <div class="table-box-wrap">
+                            <div class="table-responsive student-table-box">
+                                <table class="table display data-table text-nowrap">
+                                    <thead>
                                     <tr>
-{{--                                        @if($key < 10)--}}
+                                        <th>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">Code</label>
+                                            </div>
+                                        </th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Attendance</th>
+                                        <th>Version</th>
+                                        <th>Section</th>
+                                        <th>Class</th>
+                                        <th>Father</th>
+                                        <th>Mother</th>
+                                        <th>Blood</th>
+                                        <th>Phone</th>
+                                        <th>E-mail</th>
+                                        <th>Address</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($allStudents as $key => $student)
+                                        <tr>
+                                            {{--                                        @if($key < 10)--}}
                                             <td>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input">
@@ -189,17 +190,17 @@
                                             </td>
                                             <td class="text-center"><img style="max-width: 50px;" src="{{ $student->pic_path }}" alt="student"></td>
                                             <td>{{ $student->name }}</td>
-                                            <td>{{ $student->gender }}</td>
+                                            <td>{{ ucfirst($student->gender) }}</td>
                                             <td><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a></small></td>
-                                            <td>{{ $student['school']['medium'] }}</td>
-                                            <td>{{ $student['section']['section_number'] }} </td>
-                                            <td>{{ $student['section']['class_id'] }}</td>
-                                            <td>{{ isset($student->studentInfo) ? $student->studentInfo['father_name'] : null }}</td>
-                                            <td>{{ isset($student->studentInfo) ? $student->studentInfo['mother_name'] : null }}</td>
-                                            <td>{{ $student->blood_group }}</td>
-                                            <td>{{ $student->phone_number }}</td>
-                                            <td>{{ $student->email }}</td>
-                                            <td>{{ $student->address }}</td>
+                                            <td>{{ ucfirst($student['school']['medium']) }}</td>
+                                            <td>{{ ucfirst($student['section']['section_number']) }} </td>
+                                            <td>{{ ucfirst($student['section']['class_id']) }}</td>
+                                            <td>{{ isset($student->studentInfo) ? ucfirst($student->studentInfo['father_name']) : null }}</td>
+                                            <td>{{ isset($student->studentInfo) ? ucfirst($student->studentInfo['mother_name']) : null }}</td>
+                                            <td>{{ ucfirst($student->blood_group) }}</td>
+                                            <td>{{ ucfirst($student->phone_number) }}</td>
+                                            <td>{{ ucfirst($student->email) }}</td>
+                                            <td>{{ ucfirst($student->address) }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <a href="#" class="dropdown-toggle"
@@ -217,17 +218,74 @@
                                                     </div>
                                                 </div>
                                             </td>
-{{--                                        @endif--}}
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                            {{--                                        @endif--}}
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+    @if(\Auth::user()->role == 'librarian')
+        <div class="table-responsive">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <table class="table display dataTable text-wrap" style="border: 0px;">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Code</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+                </thead>
+                @foreach($books as $book)
+                    <tr>
+                        <td>{{ ($loop->index + 1) }}</td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->book_code }}</td>
+                        <td>{{ $book->author }}</td>
+                        <td>{{ $book->type }}</td>
+                        <td>{{ $book->quantity }}</td>
+                        <td>
+                            <div class="form-group">
+                                <a href="{{ route('library.books.show', $book->id) }}" class="btn-fill-lg bg-blue-dark btn-hover-yellow">
+                                    details
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </table>
+            <div class="paginate123 mt-5 float-right">
+                {{ $books->links() }}
+            </div>
+        </div>
+    @endif
+    @if(\Auth::user()->role == 'accountant')
+        <div class="card height-auto">
+            <div class="card-body">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @component('components.new-fees-list',['fees'=>$fees])
+                @endcomponent
+            </div>
+        </div>
+    @endif
     <script>
         var male = @json($male);
         var female = @json($female);

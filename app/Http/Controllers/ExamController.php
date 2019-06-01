@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exam;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Http\Requests\Exam\CreateExamRequest;
@@ -53,7 +54,7 @@ class ExamController extends Controller
      */
     public function store(CreateExamRequest $request)
     {
-        
+
         $this->examService->request = $request;
         try{
             $this->examService->storeExam();
@@ -84,7 +85,23 @@ class ExamController extends Controller
      */
     public function edit($id)
     {
-        //
+        $exam = Exam::findOrFail($id);
+//        return $exam->exam_name;
+        $classes = $this->examService->getClassesBySchoolId();
+        $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
+        $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
+        return view('exams.edit',compact('classes','already_assigned_classes', 'exams', 'exam'));
+//        return view('exams.add', compact('exam'));
+    }
+
+    public function updateExam(CreateExamRequest $request, $id) {
+        $exam = Exam::findOrFail($id);
+        $exam->term = $request->get('term');
+        $exam->exam_name = $request->get('exam_name');
+        $exam->start_date = $request->get('start_date');
+        $exam->end_date = $request->get('end_date');
+        $exam->save();
+        return redirect()->back()->with('status', 'Exam Edited');
     }
 
     /**
@@ -136,6 +153,12 @@ class ExamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $exam = Exam::findOrFail($id);
+        if (!$exam) {
+            return redirect()->back();
+        }
+        $exam->delete();
+        return redirect()->back()->with('status', 'Exam Deleted');
+//        return redirect()->back();
     }
 }

@@ -29,7 +29,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('school/sections?course=1') }}" class="nav-link">
-                            <i class="fas fa-school"></i><span>Classes & Section</span></a>
+                            <i class="fas fa-school"></i><span>Classes & Sections</span></a>
                     </li>
                 @endif
 
@@ -54,7 +54,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Notice</span></a>
+                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Notices</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">
@@ -120,7 +120,7 @@
                                 <a class="nav-link" href="{{ url('gpa/all-gpa') }}"><i class="fas fa-angle-right"></i><span>All GPA</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('gpa/create-gpa') }}"><i class="fas fa-angle-right"></i><span>Add New GPA</span></a>
+                                <a class="nav-link" href="{{ url('gpa/create-gpa') }}"><i class="fas fa-angle-right"></i><span>Add New Grade System</span></a>
                             </li>
                         </ul>
                     </li>

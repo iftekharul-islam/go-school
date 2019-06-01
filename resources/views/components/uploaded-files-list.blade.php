@@ -2,15 +2,15 @@
   <table class="table table-bordered table-data-div table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">File Name</th>
+        <th>#</th>
+        <th>File Name</th>
         @if($upload_type == 'syllabus' && $parent == 'class')
-          <th scope="col">Class</th>
+          <th>Class</th>
         @elseif($upload_type == 'routine' && $parent == 'section')
-          <th scope="col">section</th>
+          <th>section</th>
         @endif
-        <th scope="col">Is Active</th>
-        <th scope="col">Action</th>
+        <th>Is Active</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>

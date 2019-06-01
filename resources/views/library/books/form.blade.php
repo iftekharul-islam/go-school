@@ -153,7 +153,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
-            <label for="img_path" class="col-md-4 control-label">Book Image Url</label>
+            <label for="img_path" class="col-md-4 control-label">Book Image URL</label>
 
             <div class="col-md-12">
                 <input id="img_path" type="text" class="form-control" name="img_path" value="{{ old('img_path') }}" placeholder="Book Image Url" required>

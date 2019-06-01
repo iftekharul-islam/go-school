@@ -35,7 +35,7 @@
               {{$course->course_name}}
             </td>
 
-            <td><small>{{$course->course_time}}</small></td>
+            <td>{{$course->course_time}}</td>
 
             <td>{{$course->section->room_number}}</td>
 
@@ -54,7 +54,7 @@
                   <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
                 </td>
               @else
-                <td><small>Save under Exam to Add Student</small></td>
+                <td>Save under Exam to Add Student</td>
               @endif
 
               @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
@@ -62,7 +62,7 @@
                   <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-lg">Take Attendance</a>
                 </td>
               @else
-                <td><small>Save under Exam to Take Attendance</small></td>
+                <td>Save under Exam to Take Attendance</td>
               @endif
 
             @endif
@@ -78,7 +78,7 @@
 
             @if(Auth::user()->role == 'admin')
               <td>
-                <a href="{{url('edit/course/'.$course->id)}}" class="btn btn-xs btn-danger"><i class="material-icons">edit</i> Edit</a>
+                <a href="{{url('edit/course/'.$course->id)}}" class="btn btn-lg btn-danger">Edit</a>
               </td>
             @endif
           </tr>

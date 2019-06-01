@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55b7dd90dffe9b1cb1c749fad9774486",
+    "content-hash": "8f9f036c5bbc231dbe273003c1647a29",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -4264,6 +4264,64 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "jn-jairo/laravel-ngrok",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jn-jairo/laravel-ngrok.git",
+                "reference": "7efc8c79b8ccb0e9330c97024f884c18eec68ccb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jn-jairo/laravel-ngrok/zipball/7efc8c79b8ccb0e9330c97024f884c18eec68ccb",
+                "reference": "7efc8c79b8ccb0e9330c97024f884c18eec68ccb",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "illuminate/console": "~5.5.28|5.6.*|5.7.*|5.8.*",
+                "illuminate/http": "~5.5.28|5.6.*|5.7.*|5.8.*",
+                "illuminate/pagination": "~5.5.28|5.6.*|5.7.*|5.8.*",
+                "illuminate/routing": "~5.5.28|5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "~5.5.28|5.6.*|5.7.*|5.8.*",
+                "php": "^7.1",
+                "symfony/process": "^3.3|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JnJairo\\Laravel\\Ngrok\\NgrokServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JnJairo\\Laravel\\Ngrok\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jairo Correa",
+                    "email": "jn.j41r0@gmail.com"
+                }
+            ],
+            "description": "Share Laravel application with ngrok.",
+            "homepage": "https://github.com/jn-jairo/laravel-ngrok",
+            "keywords": [
+                "jn-jairo",
+                "laravel-ngrok"
+            ],
+            "time": "2019-03-02T19:06:15+00:00"
         },
         {
             "name": "laravel/dusk",

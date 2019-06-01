@@ -1,6 +1,6 @@
 @if(count($exams) > 0)
 @foreach($exams as $exam)
-<h3>{{$exam->exam_name}}<span class="float-right ml-2"><button class="btn btn-lg btn-success" role="button" id="btnPrint{{$exam->id}}">Print Result</button></span></h3>
+<h3>Exam Name: {{$exam->exam_name}}<span class="float-right ml-2"><button class="btn btn-lg btn-success" role="button" id="btnPrint{{$exam->id}}">Print Result</button></span></h3>
 {{--<div class="visible-print-block" id="table-content{{$exam->id}}">--}}
 {{--  <div class="table-responsive">--}}
 {{--    <table class="table display  text-nowrap">--}}
@@ -124,6 +124,7 @@
               @if($grade->course->practical_percent > 0)
                 <th>Practical</th>
               @endif
+                <th>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -145,6 +146,7 @@
               @if($grade->course->practical_percent > 0)
                 <td>{{$grade->practical}}</td>
               @endif
+                <td>{{$grade->marks}}</td>
             </tr>
           </tbody>
         </table>

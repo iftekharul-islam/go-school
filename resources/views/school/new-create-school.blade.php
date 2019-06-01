@@ -84,12 +84,12 @@
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
+                                                                    <h4 class="modal-title" id="departmentModalLabel">
+                                                                        Create Department</h4>
                                                                     <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
-                                                                    <h4 class="modal-title" id="departmentModalLabel">
-                                                                        Create Department</h4>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <form class="form-horizontal"
@@ -98,8 +98,8 @@
                                                                         {{csrf_field()}}
                                                                         <div class="form-group">
                                                                             <label for="department_name"
-                                                                                   class="col-sm-2 control-label">Department Name</label>
-                                                                            <div class="col-sm-10">
+                                                                                   class="col-sm-12 control-label">Department Name</label>
+                                                                            <div class="col-sm-12">
                                                                                 <input type="text" class="form-control"
                                                                                        id="department_name"
                                                                                        name="department_name"
@@ -159,7 +159,7 @@
                                                                             data-toggle="modal"
                                                                             data-target="#myModal{{$class->id}}"
                                                                             style="margin-top: 5%;">
-                                                                        Manage {{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
+                                                                        Manage Class :  {{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
                                                                     <!-- Modal -->
                                                                     <div class="modal fade" id="myModal{{$class->id}}"
                                                                          tabindex="-1" role="dialog"
@@ -168,15 +168,12 @@
                                                                              role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
+                                                                                    <h4 class="modal-title" id="myModalLabel">All Sections of Class {{$class->class_number}}</h4>
                                                                                     <button type="button" class="close"
                                                                                             data-dismiss="modal"
                                                                                             aria-label="Close">
                                                                                         <span aria-hidden="true">&times;</span>
                                                                                     </button>
-                                                                                    <h4 class="modal-title"
-                                                                                        id="myModalLabel">All Sections
-                                                                                        of
-                                                                                        Class {{$class->class_number}}</h4>
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <ul class="list-group">
@@ -186,9 +183,7 @@
                                                                                                     Section {{$section->section_number}}
                                                                                                     &nbsp;
                                                                                                     <a class="btn btn-lg btn-warning"
-                                                                                                       href="{{url('courses/0/'.$section->id)}}">View
-                                                                                                        All Assigned
-                                                                                                        Courses</a>
+                                                                                                       href="{{url('courses/0/'.$section->id)}}">View All Assigned Courses</a>
                                                                                                     <span class="pull-right"> &nbsp;&nbsp;
                                                                                                                 <a class="btn btn-lg btn-success mr-2"
                                                                                                                    href="{{url('school/promote-students/'.$section->id)}}">+ Promote Students</a>
@@ -229,10 +224,10 @@
                                 <table class="table display text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>+Student</th>
-                                        <th>+Teacher</th>
-                                        <th>+Accountant</th>
-                                        <th>+Librarian</th>
+                                        <th>Student</th>
+                                        <th>Teacher</th>
+                                        <th>Accountant</th>
+                                        <th>Librarian</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -261,8 +256,8 @@
                                 <table class="table display text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>+Notice</th>
-                                        <th>+Event</th>
+                                        <th>Notice</th>
+                                        <th>Event</th>
                                     </tr>
                                     </thead>
                                     <tbody>
