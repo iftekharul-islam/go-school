@@ -14,27 +14,18 @@
     </div>
     <!-- Breadcubs Area End Here -->
     <!-- Add Expense Area Start Here -->
-    <div class="card height-auto" style="min-height: 700px;">
+    <div class="card height-auto false-height">
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                     <h3>Add Form Field</h3>
-                </div>
-                <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" role="button"
-                       data-toggle="dropdown" aria-expanded="false">...</a>
-
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                    </div>
                 </div>
             </div>
             <form class="new-added-form" action="{{url('fees/create')}}" method="post">
                 {{ csrf_field() }}
                 <div class="row">
-                    <div class="col-md-10 form-group{{ $errors->has('fee_name') ? ' has-error' : '' }}">
+                    <div class="col-md-12 form-group{{ $errors->has('fee_name') ? ' has-error' : '' }}">
                         <label>Field Name</label>
                         <input type="text" placeholder="Form Field Name" name="fee_name" value="{{ old('fee_name') }}" class="form-control" required>
                         @if ($errors->has('fee_name'))

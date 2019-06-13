@@ -52,9 +52,9 @@ class IssuedbookController extends Controller
             'student_code' => 'integer',
             'issue_date'   => 'required',
             'return_date'  => 'required',
-            'book_code'    => 'required',
+            'book_id'      => 'required',
         ]);
-      $studentExists = \App\User::where('student_code',$request->student_code)->first();
+      $studentExists = \App\User::where('name',$request->student_code)->first();
       if($studentExists){
         $this->issuedBookService->request = $request;
         $this->issuedBookService->storeIssuedBooks();

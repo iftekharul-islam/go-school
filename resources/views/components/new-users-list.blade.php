@@ -19,6 +19,7 @@
     <div class="card-body">
         <div class="heading-layout1">
             <div class="item-title">
+                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                 <h3>All
                     @if(count($users) > 0)
                         @foreach ($users as $user)
@@ -28,19 +29,6 @@
                     @endif
                     Data</h3>
             </div>
-{{--            <div class="dropdown">--}}
-{{--                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"--}}
-{{--                   aria-expanded="false">...</a>--}}
-
-{{--                <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                    <a class="dropdown-item" href="#"><i--}}
-{{--                                class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                    <a class="dropdown-item" href="#"><i--}}
-{{--                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                    <a class="dropdown-item" href="#"><i--}}
-{{--                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
         <div class="table-responsive">
             @if (session('status'))
@@ -105,7 +93,8 @@
                                     <a class="btn btn-lg btn-warning" href="{{url('edit/user/'.$user->id)}}">Edit</a>
                                 </td>
                                 <td>
-                                    <a href="{{url('user/deactivate/'.$user->id)}}" class="btn btn-lg btn-danger" role="button"></i>Remove</a>
+                                    <button class="btn-danger btn btn-lg" onclick="removeUser()">Remove</button>
+                                    <a id="delete-form" href="{{url('user/deactivate/'.$user->id)}}"role=""></a>
                                 </td>
                             @endif
                         @endif
@@ -176,3 +165,24 @@
     </div>
 
 </div>
+
+@push('customjs')
+    <script type="text/javascript">
+        function removeUser() {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form').click();
+                    } else {
+                        swal("Your Delete Operation has been canceled");
+                    }
+                });
+        }
+    </script>
+@endpush

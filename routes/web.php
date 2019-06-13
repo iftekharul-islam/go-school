@@ -149,13 +149,13 @@ Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function (
         Route::resource('books', 'BookController',
             ['only' => ['index', 'show', 'create', 'store']]
         );
-//        Route::any('/books/{key?}', 'BookController@index');
+        Route::delete('/books/{id}', 'BookController@destroy');
     });
 });
 
 Route::middleware(['auth','librarian'])->prefix('library')->name('library.')->group(function () {
   Route::get('issue-books', 'IssuedbookController@create');
-  Route::get('issue-books/autocomplete', 'IssuedbookController@autocomplete');
+  Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
   Route::post('issue-books', 'IssuedbookController@store');
   Route::get('issued-books', 'IssuedbookController@index');
   Route::post('save_as_returned', 'IssuedbookController@update');

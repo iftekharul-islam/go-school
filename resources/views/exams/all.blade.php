@@ -15,7 +15,8 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Add Exam</h3>
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
+                    <h3>Manage Exams</h3>
                 </div>
             </div>
             @if (session('status'))
@@ -28,28 +29,4 @@
             @endcomponent
         </div>
     </div>
-
-{{--<div class="container-fluid">--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-md-2" id="side-navbar">--}}
-{{--            @include('layouts.leftside-menubar')--}}
-{{--        </div>--}}
-{{--        <div class="col-md-10" id="main-container">--}}
-{{--            <div class="panel panel-default">--}}
-{{--                <div class="page-panel-title">All Examinations</div>--}}
-
-{{--                <div class="panel-body">--}}
-{{--                    @if (session('status'))--}}
-{{--                        <div class="alert alert-success">--}}
-{{--                            {{ session('status') }}--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-
-{{--                    @component('components.exams-list',['exams'=>$exams])--}}
-{{--                    @endcomponent--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 @endsection

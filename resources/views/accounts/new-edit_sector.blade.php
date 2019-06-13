@@ -14,6 +14,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
                     <h3>Edit Sector</h3>
                 </div>
             </div>
@@ -27,9 +28,9 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{$sector->id}}">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="name" class="col-md-4 control-label">Sector Name</label>
+                        <label for="name" class="col-md-4 control-label mt-5">Sector Name</label>
 
-                        <div class="col-md-8">
+                        <div class="col-md 12">
                             <input id="name" type="text" class="form-control" name="name" value="{{$sector->name}}" placeholder="Sector Name" required>
 
                             @if ($errors->has('name'))
@@ -42,7 +43,7 @@
                     <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                         <label for="type" class="col-md-4 control-label">Sector Type: {{ucfirst($sector->type)}} (Current)</label>
 
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <select class="form-control" name="type">
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>

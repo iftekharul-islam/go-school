@@ -21,19 +21,19 @@
                         <div class="item-title">
                             <h3>About Me</h3>
                         </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-expanded="false">...</a>
+{{--                        <div class="dropdown">--}}
+{{--                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"--}}
+{{--                               aria-expanded="false">...</a>--}}
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                            </div>
-                        </div>
+{{--                            <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                                <a class="dropdown-item" href="#"><i--}}
+{{--                                            class="fas fa-times text-orange-red"></i>Close</a>--}}
+{{--                                <a class="dropdown-item" href="#"><i--}}
+{{--                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
+{{--                                <a class="dropdown-item" href="#"><i--}}
+{{--                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
 {{--                    @if(!empty($student_info))--}}
                         <div class="student-info">
@@ -173,8 +173,7 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Events</div>
-                                    <div class="item-number"><span class="counter"
-                                                                   data-num="{{ $events->count() }}">{{ $events->count() }}</span>
+                                    <div class="item-number"><span class="counter" data-num="{{ $events->count() }}">{{ $events->count() }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -207,19 +206,6 @@
                             <div class="heading-layout1">
                                 <div class="item-title">
                                     <h3>All Exam Schedule</h3>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                                       aria-expanded="false">...</a>
-
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i
-                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="table-box-wrap">
@@ -308,52 +294,55 @@
                 </div>
             </div>
         </div>
-        <div class="col-4-xxxl col-xl-6 col-12">
-            <div class="card dashboard-card-thirteen">
+{{--        <div class="col-4-xxxl col-xl-6 col-12">--}}
+{{--            <div class="card dashboard-card-thirteen">--}}
+{{--                <div class="card-body">--}}
+{{--                    <div class="heading-layout1">--}}
+{{--                        <div class="item-title">--}}
+{{--                            <h3>Event Calender</h3>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="notice-box-wrap">--}}
+{{--                        @foreach($events as $event)--}}
+{{--                            <div class="notice-list">--}}
+{{--                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>--}}
+{{--                                <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>--}}
+{{--                            </div>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                    <div class="calender-wrap">--}}
+{{--                        <div id="fc-calender" class="fc-calender"></div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+        <div class="col-4-xxxl col-12">
+            <div class="card dashboard-card-six">
                 <div class="card-body">
-                    <div class="heading-layout1">
+                    <div class="heading-layout1 mg-b-17">
                         <div class="item-title">
-                            <h3>Event Calender</h3>
-                        </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-expanded="false">...</a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                            </div>
+                            <h3>Events</h3>
                         </div>
                     </div>
-                    <div class="calender-wrap">
-                        <div id="fc-calender" class="fc-calender"></div>
+                    <div class="notice-box-wrap">
+                        @foreach($events as $event)
+                            <div class="notice-list">
+                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
+                                <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
+
+
         <div class="col-4-xxxl col-12">
             <div class="card dashboard-card-six">
                 <div class="card-body">
                     <div class="heading-layout1 mg-b-17">
                         <div class="item-title">
                             <h3>Notices</h3>
-                        </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-expanded="false">...</a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                            </div>
                         </div>
                     </div>
                     <div class="notice-box-wrap">

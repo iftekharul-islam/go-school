@@ -22,20 +22,8 @@
         @endif
         <div class="heading-layout1">
             <div class="item-title">
+                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
                 <h3>View List of Income</h3>
-            </div>
-            <div class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                   aria-expanded="false">...</a>
-
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i
-                                class="fas fa-times text-orange-red"></i>Close</a>
-                    <a class="dropdown-item" href="#"><i
-                                class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                    <a class="dropdown-item" href="#"><i
-                                class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                </div>
             </div>
         </div>
         <div class="row">

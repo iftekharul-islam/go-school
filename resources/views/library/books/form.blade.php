@@ -1,4 +1,4 @@
-<div class="row mb-2">
+<div class="row mb-2 mt-5">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
             <label for="about" class="col-md-4 control-label">About Book</label>

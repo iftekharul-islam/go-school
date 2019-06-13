@@ -14,6 +14,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
                     <h3>Issue book</h3>
                 </div>
             </div>
@@ -25,23 +26,5 @@
             @component('components.book-issue-form',['books'=>$books])
             @endcomponent
         </div>
-{{--    <div class="row">--}}
-{{--        <div class="col-md-8" id="main-container">--}}
-{{--            <div class="panel panel-default">--}}
-{{--                <div class="page-panel-title">Issue books</div>--}}
-
-{{--                <div class="panel-body">--}}
-{{--                    @if (session('status'))--}}
-{{--                        <div class="alert alert-success">--}}
-{{--                            {{ session('status') }}--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-
-{{--                    @component('components.book-issue-form',['books'=>$books])--}}
-{{--                    @endcomponent--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-</div>
+    </div>
 @endsection

@@ -10,15 +10,16 @@
     <form id="form{{$exam->id}}" action="{{url('exams/activate-exam')}}" method="POST">
       {{csrf_field()}}
     </form>
-  @endforeach
+  @endforeach'
   <table class="table display data-table text-nowrap">
     <thead>
     <tr>
       <th>#</th>
       <th>Examination Name</th>
       <th>Notice Published</th>
+      <th>Start Date</th>
+      <th>End Date</th>
       <th>Result Published</th>
-      <th>Created At</th>
       <th>Set Active</th>
       <th>Action</th>
     </tr>
@@ -43,6 +44,8 @@
             @endif
           @endif
         </td>
+        <td>{{Carbon\Carbon::parse($exam->start_date)->format('d/m/Y')}}</td>
+        <td>{{Carbon\Carbon::parse($exam->end_date)->format('d/m/Y')}}</td>
         <td>
           @if($exam->result_published === 1)
             Yes
@@ -54,7 +57,6 @@
             </label>
           @endif
         </td>
-        <td>{{Carbon\Carbon::parse($exam->created_at)->format('d/m/Y')}}</td>
         <td>
           <input type="hidden" name="exam_id" value="{{$exam->id}}" form="form{{$exam->id}}"/>
           @if($exam->active === 1)
@@ -81,9 +83,8 @@
           @endif
         </td>
         <td>
-          <a href="{{ url('exams/remove', ['id' => $exam->id]) }}">
-            <button class="btn btn-danger btn-lg">Delete</button>
-          </a>
+          <button class="btn btn-danger btn-lg" onclick="removeExam()">Delete</button>
+          <a id="delete-form" href="{{ url('exams/remove', ['id' => $exam->id]) }}"></a>
           <a href="{{ url('exams/edit', ['id' => $exam->id]) }}">
             <button class="btn btn-info btn-lg ml-3">Edit</button>
           </a>
@@ -94,6 +95,28 @@
     </tbody>
   </table>
 </div>
+
+@push('customjs')
+  <script type="text/javascript">
+    function removeExam() {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+              .then((willDelete) => {
+                if (willDelete) {
+                  document.getElementById('delete-form').click();
+                } else {
+                  swal("Your Delete Operation has been canceled");
+                }
+              });
+    }
+  </script>
+@endpush
+
 {{--<div class="table-responsive">--}}
 {{--  @foreach ($exams as $exam)--}}
 {{--    <form id="form{{$exam->id}}" action="{{url('exams/activate-exam')}}" method="POST">--}}

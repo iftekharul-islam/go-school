@@ -14,6 +14,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                     <h3>Add Exam</h3>
                 </div>
             </div>
@@ -27,27 +28,4 @@
             @endcomponent
         </div>
     </div>
-{{--<div class="container-fluid">--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-md-2" id="side-navbar">--}}
-{{--            @include('layouts.leftside-menubar')--}}
-{{--        </div>--}}
-{{--        <div class="col-md-8" id="main-container">--}}
-{{--            <div class="panel panel-default">--}}
-{{--                <div class="page-panel-title">Add Examination</div>--}}
-
-{{--                <div class="panel-body">--}}
-{{--                    @if (session('status'))--}}
-{{--                        <div class="alert alert-success">--}}
-{{--                            {{ session('status') }}--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-
-{{--                    @component('components.add-exam-form',['classes'=>$classes,'assigned_classes'=>$already_assigned_classes,])--}}
-{{--                    @endcomponent--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 @endsection

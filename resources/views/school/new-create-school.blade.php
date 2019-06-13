@@ -15,6 +15,12 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
+                    <h3>Manage Departments, Classs, Sections, Student Promotion, Course</h3>
+                </div>
+            </div>
             <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 12 }}" id="main-container">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -36,7 +42,6 @@
                             @include('layouts.master.create-school-form')
                             <h2>School List</h2>
                         @endif
-                        <h4>Manage Departments, Classs, Sections, Student Promotion, Course</h4>
                         <div class="table-responsive">
                             <table class="table display text-wrap" style="border: 0px solid;">
                                 <thead>

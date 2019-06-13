@@ -1,8 +1,13 @@
 <div id="my_upload">
 
     @if($upload_type != 'profile')
-        <h3>{{ucfirst($upload_type)}}</h3>
-        <label>File Title: </label>
+        <div class="heading-layout1">
+            <div class="item-title">
+                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
+                <h3>{{ucfirst($upload_type)}}</h3>
+            </div>
+        </div>
+        <label style="margin-left: -53px;">File Title: </label>
         <div class="form-group">
             <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">
         </div>
@@ -27,7 +32,7 @@
 $(function () {
     var jqXHR = null;
     var uploadButton = $('<button/>')
-            .addClass('btn btn-primary ml-5 btn-lg')
+            .addClass('btn btn-primary ml-5 mt-2 btn-lg')
             .text('Upload')
             .on('click', function () {
                 @if($upload_type != 'profile')
@@ -95,7 +100,7 @@ $(function () {
                 $('.progress-bar').attr(
                     'aria-valuenow',
                     progress
-                ).css('width', progress + '%');
+                ).css('width', progress + '%', 'height', 20);
                 $('#up-prog-info').text(progress + "% uploaded");
         }
     })
@@ -107,6 +112,7 @@ $(function () {
             $('#errorAlert').text(error);
         } else {
             data.context.html('<div>Upload finished.</div>');
+            window.location.reload();
             $('button.cancelBtn').hide();
             $('#errorAlert').empty();
             @if($upload_type == 'profile')

@@ -25,10 +25,32 @@
         @endif
         <td>{{($file->active === 1)?'Yes':'No'}}</td>
         <td>
-          <a href="{{url('academic/remove/'.$upload_type.'/'.$file->id)}}" class="btn btn-danger btn-lg" role="button">Remove</a>
+          <button class="btn-danger btn" onclick="removeFile()">Remove</button>
+          <a id="delete-form" href="{{url('academic/remove/'.$upload_type.'/'.$file->id)}}" role=""></a>
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 </div>
+
+@push('customjs')
+  <script type="text/javascript">
+    function removeFile() {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+              .then((willDelete) => {
+                if (willDelete) {
+                  document.getElementById('delete-form').click();
+                } else {
+                  swal("Your Delete Operation has been canceled");
+                }
+              });
+    }
+  </script>
+@endpush

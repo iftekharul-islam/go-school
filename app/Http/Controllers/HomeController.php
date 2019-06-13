@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Attendance;
 use App\Book;
 use App\Http\Traits\GradeTrait;
 use App\Section;
@@ -12,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Services\User\UserService;
-
+use Alert;
 class HomeController extends Controller
 {
     /**
@@ -40,7 +41,7 @@ class HomeController extends Controller
         $student = Auth::user();
         if ($student->role == 'teacher')
         {
-            $courses = $this->courseService->getCoursesByTeacher($student->id);
+            $courses_student = $this->courseService->getCoursesByTeacher($student->id);
         }
         $minutes = 1440;// 24 hours = 1440 minutes
         if (@isset($student->school->id)) {
@@ -105,7 +106,7 @@ class HomeController extends Controller
         if (\Auth::user()->role == 'master') {
             return view('master-home');
         }
-        elseif (\Auth::user()->role == 'teacher' || \Auth::user()->role == 'admin' ) {
+        elseif (\Auth::user()->role == 'admin' ) {
             $allStudents = $this->userService->getStudents();
             return view('teacher-home', [
                 'totalStudents' => $totalStudents,
@@ -116,6 +117,20 @@ class HomeController extends Controller
                 'totalSections' => $totalSections,
                 'male' => $male,
                 'female' => $female
+            ]);
+        }
+        elseif (\Auth::user()->role == 'teacher') {
+            $allStudents = $this->userService->getStudents();
+            return view('teacher-home', [
+                'totalStudents' => $totalStudents,
+                'allStudents' => $allStudents,
+                'notices' => $notices,
+                'exams' => $exams,
+                'totalClasses' => $totalClasses,
+                'totalSections' => $totalSections,
+                'male' => $male,
+                'female' => $female,
+                'courses_student' => $courses_student
             ]);
         }
         elseif (\Auth::user()->role == 'accountant') {

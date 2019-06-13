@@ -22,7 +22,12 @@ class NoticeController extends Controller
                  ->where('active', 1)
                  ->get();
          });
-         return view('notices.index', compact('notices'));
+         $events = \Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
+             return \App\Event::where('school_id', $school_id)
+                 ->where('active', 1)
+                 ->get();
+         });
+         return view('notices.index', compact('notices', 'events'));
        //Notice::where('school_id', \Auth::user()->school_id)->get();
      }
 

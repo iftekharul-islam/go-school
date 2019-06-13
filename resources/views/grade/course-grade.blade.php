@@ -15,6 +15,12 @@
   </div>
   <div class="card height-auto false-height">
     <div class="card-body">
+      <div class="heading-layout1">
+        <div class="item-title">
+          <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
+          <h3>Submit Grade</h3>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12" id="main-container">
           @if (session('status'))
@@ -45,7 +51,7 @@
                   @break($loop->first)
                 @endforeach
                 <div class="panel-body" style="padding-top: 0px;">
-                  <div class="alert alert-info alert-dismissible" style="font-size:13px;">
+                  <div class="alert alert-info alert-dismissible" style="font-size:13px; margin-top: 10px;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <ul>
                       <li>

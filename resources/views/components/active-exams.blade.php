@@ -42,7 +42,7 @@
     <a class="collapsed" role="button" data-toggle="collapse" href="#collapse{{$exam->id}}"
        aria-controls="collapse{{$exam->id}}">
         <h5>
-            {{$exam->exam_name}} <span class="float-right"><small>View all courses under this Exam<i class="fas fa-angle-down"></i></small></span>
+            <span class="float-right btn-fill-lg bg-blue-dark btn-hover-yellow" style="min-width: 30%">{{$exam->exam_name}}</span><span class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">View all courses under this Exam</span>
         </h5>
     </a>
 </div>

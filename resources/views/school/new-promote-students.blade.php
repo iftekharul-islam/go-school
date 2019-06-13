@@ -17,6 +17,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                     <h3>All Class Schedules</h3>
                 </div>
             </div>

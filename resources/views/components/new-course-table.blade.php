@@ -10,14 +10,14 @@
             <th>Course Teacher</th>
           @endif
           @if(!$student)
-            <th>Class Number</th>
-            <th>Section Number</th>
+            <th>Class</th>
+            <th>Section</th>
             <th>All Students</th>
             <th>Action</th>
           @endif
           @foreach ($courses as $course)
             @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
-              <th>Give Marks</th>
+              <th>Marks Submission</th>
               <th>View Marks</th>
             @endif
             @break

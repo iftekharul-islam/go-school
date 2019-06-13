@@ -410,7 +410,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'User has been removed!!');
     }
 
     /**

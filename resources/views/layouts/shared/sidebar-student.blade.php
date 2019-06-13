@@ -54,7 +54,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Notices</span></a>
+                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events && Notices</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">

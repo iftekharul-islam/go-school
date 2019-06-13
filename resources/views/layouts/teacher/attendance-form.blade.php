@@ -12,7 +12,7 @@
     <input type="text" name="section_id" value="{{$section_id}}" style="display: none;">
     <input type="hidden" name="exam_id" value="{{$exam_id}}">
     <div class="table-responsive">
-        <table class="table display data-table text-nowrap">
+        <table class="table display table-data-div text-nowrap">
             <thead>
             <tr>
                 <th>#</th>
@@ -84,7 +84,7 @@
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
-                        <td><span class="badge badge-success attdState">Present</span> {{$student->name}}</td>
+                        <td><span class="badge badge-success attdState">Present</span>{{$student->name}}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>
@@ -114,9 +114,9 @@
         </table>
     </div>
     <div style="text-align:center;">
-        <a href="javascript:history.back()" class="btn btn-danger btn-lg mr-3" role="button">Cancel</a>
+{{--        <a href="javascript:history.back()" class="btn btn-danger btn-lg mr-3" role="button">Cancel</a>--}}
         @if (count($attendances) > 0)
-            <button type="submit" class="btn btn-primary mr-3 btn-lg">Update</button>
+{{--            <button type="submit" class="btn btn-primary mr-3 btn-lg">Update</button>--}}
         @else
             <button type="submit" class="btn btn-primary mr-3 btn-lg">Submit</button>
         @endif

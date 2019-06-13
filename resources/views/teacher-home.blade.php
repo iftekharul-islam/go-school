@@ -131,7 +131,7 @@
         <!-- Notice Board End Here -->
     </div>
     <!-- Student Table Area Start Here -->
-    @if(\Auth::user()->role == 'admin' || \Auth::user()->role == 'teacher')
+    @if(\Auth::user()->role == 'admin')
         <div class="row">
             <div class="col-lg-12">
                 <div class="card dashboard-card-eleven">
@@ -220,6 +220,108 @@
                                             </td>
                                             {{--                                        @endif--}}
                                         </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(\Auth::user()->role == 'teacher')
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card dashboard-card-eleven">
+                    <div class="card-body">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>All Students Under My Classes</h3>
+                            </div>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-expanded="false">...</a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-box-wrap">
+                            <div class="table-responsive student-table-box">
+                                <table class="table display data-table text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">Code</label>
+                                            </div>
+                                        </th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Attendance</th>
+                                        <th>Version</th>
+                                        <th>Section</th>
+                                        <th>Class</th>
+                                        <th>Father</th>
+                                        <th>Mother</th>
+                                        <th>Blood</th>
+                                        <th>Phone</th>
+                                        <th>E-mail</th>
+                                        <th>Address</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($courses_student as $c)
+                                        @foreach($c['section']['users'] as $user)
+                                            <tr>
+                                                {{--                                        @if($key < 10)--}}
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input">
+                                                        <label class="form-check-label">#{{ $user->code }}</label>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center"><img style="max-width: 50px;" src="{{ $user->pic_path }}" alt="student"></td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ ucfirst($user->gender) }}</td>
+                                                <td><small><a class="btn btn-xs btn-info" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
+                                                <td>{{ ucfirst($user['school']['medium']) }}</td>
+                                                <td>{{ ucfirst($user['section']['section_number']) }} </td>
+                                                <td>{{ ucfirst($user['section']['class_id']) }}</td>
+                                                <td>{{ isset($user->studentInfo) ? ucfirst($user->studentInfo['father_name']) : null }}</td>
+                                                <td>{{ isset($user->studentInfo) ? ucfirst($user->studentInfo['mother_name']) : null }}</td>
+                                                <td>{{ ucfirst($user->blood_group) }}</td>
+                                                <td>{{ ucfirst($user->phone_number) }}</td>
+                                                <td>{{ ucfirst($user->email) }}</td>
+                                                <td>{{ ucfirst($user->address) }}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-toggle"
+                                                           data-toggle="dropdown" aria-expanded="false">
+                                                                        <span
+                                                                                class="flaticon-more-button-of-three-dots"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#"><i
+                                                                        class="fas fa-times text-orange-red"></i>Close</a>
+                                                            <a class="dropdown-item" href="#"><i
+                                                                        class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                                            <a class="dropdown-item" href="#"><i
+                                                                        class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                {{--                                        @endif--}}
+                                            </tr>
+                                        @endforeach
                                     @endforeach
                                     </tbody>
                                 </table>

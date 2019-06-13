@@ -78,7 +78,13 @@ body {
 .false-height {
   min-height: 700px;
 }
+.select2-container--default .select2-selection--multiple {
+  background-color: #F0F1F3 !important;
+  height: 50px;
+  border: none;
+}
 #DataTables_Table_0_filter input {
+  margin-top: 10px;
   height: 45px;
   background-color: #f8f8f8;
   font-size: 14px;
@@ -1063,7 +1069,7 @@ h6 {
 }
 .select2-container .select2-selection--single .select2-selection__rendered {
   line-height: 50px;
-  color: #b4b4b4;
+  color: black;
   padding-left: 20px;
   padding-right: 30px;
   font-size: 15px;
@@ -1365,7 +1371,7 @@ h6 {
   animation: blinker 10s infinite;
 }
 .heading-layout1 {
-  display: flex;
+  /*display: flex;*/
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
@@ -1376,6 +1382,7 @@ h6 {
   color: #111111;
   font-weight: 500;
   margin-bottom: 0;
+  text-align: center;
 }
 .heading-layout1 .dropdown .dropdown-toggle {
   color: #bcbcbc;
