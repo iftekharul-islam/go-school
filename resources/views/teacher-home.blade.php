@@ -70,16 +70,6 @@
                         <div class="item-title">
                             <h3>Students</h3>
                         </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-expanded="false">...</a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="doughnut-chart-wrap">
                         <canvas id="student-doughnut-chart" width="100" height="270"></canvas>
@@ -106,16 +96,6 @@
                         <div class="item-title">
                             <h3>Notices</h3>
                         </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-expanded="false">...</a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="notice-box-wrap">
                         @foreach($notices as $notice)
@@ -132,6 +112,7 @@
     </div>
     <!-- Student Table Area Start Here -->
     @if(\Auth::user()->role == 'admin')
+        {{ $present }}
         <div class="row">
             <div class="col-lg-12">
                 <div class="card dashboard-card-eleven">
@@ -140,28 +121,18 @@
                             <div class="item-title">
                                 <h3>All Students</h3>
                             </div>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button"
-                                   data-toggle="dropdown" aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
-                            </div>
                         </div>
                         <div class="table-box-wrap">
                             <div class="table-responsive student-table-box">
-                                <table class="table display data-table text-nowrap">
+                                <table class="table display data-table text-wrap">
                                     <thead>
                                     <tr>
-                                        <th>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">Code</label>
-                                            </div>
-                                        </th>
+{{--                                        <th>--}}
+{{--                                            <div class="form-check">--}}
+{{--                                                <input type="checkbox" class="form-check-input checkAll">--}}
+{{--                                                <label class="form-check-label">Code</label>--}}
+{{--                                            </div>--}}
+{{--                                        </th>--}}
                                         <th>Photo</th>
                                         <th>Name</th>
                                         <th>Gender</th>
@@ -182,12 +153,12 @@
                                     @foreach($allStudents as $key => $student)
                                         <tr>
                                             {{--                                        @if($key < 10)--}}
-                                            <td>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input">
-                                                    <label class="form-check-label">#{{ $student->code }}</label>
-                                                </div>
-                                            </td>
+{{--                                            <td>--}}
+{{--                                                <div class="form-check">--}}
+{{--                                                    <input type="checkbox" class="form-check-input">--}}
+{{--                                                    <label class="form-check-label">#{{ $student->code }}</label>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
                                             <td class="text-center"><img style="max-width: 50px;" src="{{ $student->pic_path }}" alt="student"></td>
                                             <td>{{ $student->name }}</td>
                                             <td>{{ ucfirst($student->gender) }}</td>
@@ -202,21 +173,21 @@
                                             <td>{{ ucfirst($student->email) }}</td>
                                             <td>{{ ucfirst($student->address) }}</td>
                                             <td>
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-toggle"
-                                                       data-toggle="dropdown" aria-expanded="false">
-                                                                        <span
-                                                                                class="flaticon-more-button-of-three-dots"></span>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#"><i
-                                                                    class="fas fa-times text-orange-red"></i>Close</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                    </div>
-                                                </div>
+{{--                                                <div class="dropdown">--}}
+{{--                                                    <a href="#" class="dropdown-toggle"--}}
+{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
+{{--                                                                        <span--}}
+{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
+{{--                                                    </a>--}}
+{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                                                        <a class="dropdown-item" href="#"><i--}}
+{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
+{{--                                                        <a class="dropdown-item" href="#"><i--}}
+{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
+{{--                                                        <a class="dropdown-item" href="#"><i--}}
+{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </td>
                                             {{--                                        @endif--}}
                                         </tr>
@@ -239,16 +210,6 @@
                         <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>All Students Under My Classes</h3>
-                            </div>
-                            <div class="dropdown">
-                                <a class="dropdown-toggle" href="#" role="button"
-                                   data-toggle="dropdown" aria-expanded="false">...</a>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                </div>
                             </div>
                         </div>
                         <div class="table-box-wrap">
@@ -303,21 +264,7 @@
                                                 <td>{{ ucfirst($user->email) }}</td>
                                                 <td>{{ ucfirst($user->address) }}</td>
                                                 <td>
-                                                    <div class="dropdown">
-                                                        <a href="#" class="dropdown-toggle"
-                                                           data-toggle="dropdown" aria-expanded="false">
-                                                                        <span
-                                                                                class="flaticon-more-button-of-three-dots"></span>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                            <a class="dropdown-item" href="#"><i
-                                                                        class="fas fa-times text-orange-red"></i>Close</a>
-                                                            <a class="dropdown-item" href="#"><i
-                                                                        class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                            <a class="dropdown-item" href="#"><i
-                                                                        class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                        </div>
-                                                    </div>
+
                                                 </td>
                                                 {{--                                        @endif--}}
                                             </tr>
@@ -378,6 +325,12 @@
     @if(\Auth::user()->role == 'accountant')
         <div class="card height-auto">
             <div class="card-body">
+                <div class="heading-layout1">
+                    <div class="item-title">
+                        <h3>All Fees Collectiont</h3>
+                        {{--                    <a class="btn btn-success btn-lg" href="{{url('create-school')}}">Manage School</a>--}}
+                    </div>
+                </div>
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -391,5 +344,8 @@
     <script>
         var male = @json($male);
         var female = @json($female);
+
+        var present = @json($present);
+        var absent = @json($absent);
     </script>
 @endsection

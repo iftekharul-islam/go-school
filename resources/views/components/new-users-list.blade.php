@@ -161,6 +161,9 @@
                 @endforeach
                 </tbody>
             </table>
+                <div class="paginate123 mt-5 float-right">
+                    {{ $users->links() }}
+                </div>
         </div>
     </div>
 

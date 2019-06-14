@@ -17,7 +17,9 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <a class="btn btn-success btn-lg" href="{{url('create-school')}}">Manage School</a>
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
+                    <h3>All Admin List</h3>
+{{--                    <a class="btn btn-success btn-lg" href="{{url('create-school')}}">Manage School</a>--}}
                 </div>
             </div>
             @if (session('status'))

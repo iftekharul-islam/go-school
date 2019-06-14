@@ -1,5 +1,5 @@
- <div class="table-responsive">
-      <table class="table display table-data-div text-nowrap">
+<div class="table-responsive">
+    <table class="table display data-table text-nowrap">
         <thead>
         <tr>
           <th>#</th>

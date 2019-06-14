@@ -21,13 +21,13 @@
                     <h3>Register Admin</h3>
                 </div>
             </div>
-            <div class="col-md-3" id="side-navbar">
-                <ul class="nav">
-                    <li class="nav-item active" style="margin-left: -13px !important;">
-                        <a class="btn btn-success btn-lg" href="{{ url('create-school') }}">Back to Manage School</a>
-                    </li>
-                </ul>
-            </div>
+{{--            <div class="col-md-3" id="side-navbar">--}}
+{{--                <ul class="nav">--}}
+{{--                    <li class="nav-item active" style="margin-left: -13px !important;">--}}
+{{--                        <a class="btn btn-success btn-lg" href="{{ url('create-school') }}">Back to Manage School</a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </div>--}}
             <div class="col-md-12" id="main-container">
                 @if (session('status'))
                     <div class="alert alert-success">

@@ -393,6 +393,39 @@
       });
     }
 
+    if ($("#student-doughnut-chart1").length) {
+
+      var doughnutChartData1 = {
+        labels: ["Present", "Absent"],
+        datasets: [{
+          backgroundColor: ["#ffa601","#304ffe"],
+          data: [present, absent],
+          label: "Attandaance"
+        }, ]
+      };
+      var doughnutChartOptions1 = {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutoutPercentage: 65,
+        rotation: -9.4,
+        animation: {
+          duration: 2000
+        },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        },
+      };
+      var studentCanvas1 = $("#student-doughnut-chart1").get(0).getContext("2d");
+      var studentChart1 = new Chart(studentCanvas1, {
+        type: 'doughnut',
+        data: doughnutChartData1,
+        options: doughnutChartOptions1
+      });
+    }
+
     /*-------------------------------------
           Calender initiate 
       -------------------------------------*/

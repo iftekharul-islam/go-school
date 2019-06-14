@@ -21,7 +21,6 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-
                                 <h3>Attendance Sheet Of This Term</h3>
                             </div>
                         </div>

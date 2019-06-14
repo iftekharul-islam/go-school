@@ -17,31 +17,19 @@
         <div class="col-4-xxxl col-12">
             <div class="card dashboard-card-ten">
                 <div class="card-body">
-                    <div class="heading-layout1">
+                    <div class="heading-layout1 mb-5">
                         <div class="item-title">
-                            <h3>About Me</h3>
+                            <h3 class="float-left">About Me</h3>
+{{--                            <a class="btn btn-lg btn-info float-right" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a>--}}
                         </div>
-{{--                        <div class="dropdown">--}}
-{{--                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"--}}
-{{--                               aria-expanded="false">...</a>--}}
-
-{{--                            <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                <a class="dropdown-item" href="#"><i--}}
-{{--                                            class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                <a class="dropdown-item" href="#"><i--}}
-{{--                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                <a class="dropdown-item" href="#"><i--}}
-{{--                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
 {{--                    @if(!empty($student_info))--}}
                         <div class="student-info">
                             <div class="media media-none--xs">
-                                <div class="item-img">
+                                <div class="item-img mt-5">
                                     <img src="{{url($student->pic_path)}}" class="media-img-auto" alt="student">
                                 </div>
-                                <div class="media-body">
+                                <div class="media-body mt-5">
                                     <h3 class="item-title">{{ Auth::user()->name }}</h3>
                                     <p>{{ $student->about }}</p>
                                 </div>
@@ -154,8 +142,7 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Notices</div>
-                                    <div class="item-number"><span class="counter"
-                                                                   data-num="{{ $notices->count() }}">{{ $notices->count() }}</span>
+                                    <div class="item-number"><span class="counter" data-num="{{ $notices->count() }}">{{ $notices->count() }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -191,8 +178,11 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Attendance</div>
-                                    <div class="item-number"><span class="counter" data-num="94">94</span><span>%</span>
-                                    </div>
+                                    @if(!empty($present))
+                                        <div class="item-number"><span class="counter" data-num="{{ $present }}">94</span><span>%</span></div>
+                                    @else
+                                        No Record
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -264,33 +254,26 @@
                         <div class="item-title">
                             <h3>Attendance</h3>
                         </div>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                               aria-expanded="false">...</a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                <a class="dropdown-item" href="#"><i
-                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                    </div>
+                    @if(!empty($present))
+                        <div class="doughnut-chart-wrap">
+                            <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
+                        </div>
+                        <div class="student-report">
+                            <div class="student-count pseudo-bg-blue">
+                                <h4 class="item-title">Absent</h4>
+                                <div class="item-number">{{ $absent }}%</div>
+                            </div>
+                            <div class="student-count pseudo-bg-yellow">
+                                <h4 class="item-title">Present</h4>
+                                <div class="item-number">{{ $present }}%</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="doughnut-chart-wrap">
-                        <canvas id="student-doughnut-chart" width="100" height="270"></canvas>
-                    </div>
-                    <div class="student-report">
-                        <div class="student-count pseudo-bg-blue">
-                            <h4 class="item-title">Absent</h4>
-                            <div class="item-number">28.2%</div>
+                    @else
+                        <div style="text-align: center">
+                            No Attendance record found
                         </div>
-                        <div class="student-count pseudo-bg-yellow">
-                            <h4 class="item-title">Present</h4>
-                            <div class="item-number">65.8%</div>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -361,5 +344,8 @@
     <script>
         var male = @json($male);
         var female = @json($female);
+
+        var present = @json($present);
+        var absent = @json($absent);
     </script>
 @endsection

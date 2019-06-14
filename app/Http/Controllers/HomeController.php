@@ -23,12 +23,13 @@ class HomeController extends Controller
      */
     use GradeTrait;
     protected $courseService;
-    public function __construct(UserService $userService, User $user, CourseService $courseService)
+    public function __construct(UserService $userService, User $user, CourseService $courseService, AttendanceService $attendanceService)
     {
         $this->userService = $userService;
         $this->user = $user;
         $this->middleware('auth');
         $this->courseService = $courseService;
+        $this->attendanceService = $attendanceService;
     }
 
     /**
@@ -99,6 +100,18 @@ class HomeController extends Controller
                     ->where('active', 1)
                     ->get();
             });
+            $student_info = \Auth::user()->studentInfo;
+            $present="";
+            $absent="";
+            if (!empty($student_info)) {
+                $student_id = $student_info->student_id;
+                $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
+                foreach ($attCount as $att) {
+                    $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
+                    $present = ($att->totalpresent * 100) / $total;
+                    $absent = ($att->totalabsent * 100) / $total;
+                }
+            }
 //
 //            return $books;
         }
@@ -116,7 +129,9 @@ class HomeController extends Controller
                 'totalClasses' => $totalClasses,
                 'totalSections' => $totalSections,
                 'male' => $male,
-                'female' => $female
+                'female' => $female,
+                'present' => $present,
+                'absent' => $absent
             ]);
         }
         elseif (\Auth::user()->role == 'teacher') {
@@ -130,7 +145,9 @@ class HomeController extends Controller
                 'totalSections' => $totalSections,
                 'male' => $male,
                 'female' => $female,
-                'courses_student' => $courses_student
+                'courses_student' => $courses_student,
+                'present' => $present,
+                'absent' => $absent
             ]);
         }
         elseif (\Auth::user()->role == 'accountant') {
@@ -143,7 +160,9 @@ class HomeController extends Controller
                 'totalSections' => $totalSections,
                 'male' => $male,
                 'female' => $female,
-                'fees'   => $fees
+                'fees'   => $fees,
+                'present' => $present,
+                'absent' => $absent
             ]);
         }
         elseif (\Auth::user()->role == 'librarian') {
@@ -156,11 +175,12 @@ class HomeController extends Controller
                 'totalSections' => $totalSections,
                 'male' => $male,
                 'female' => $female,
-                'books' => $books
+                'books' => $books,
+                'present' => $present,
+                'absent' => $absent
             ]);
         }
         else {
-            $student_info = \Auth::user()->studentInfo;
             return view('dashboard', [
                 'totalStudents' => $totalStudents,
                 'totalTeachers' => $totalTeachers,
@@ -175,7 +195,9 @@ class HomeController extends Controller
                 'student_info' => $student_info,
                 'student' => $student,
                 'male' => $male,
-                'female' => $female
+                'female' => $female,
+                'present' => $present,
+                'absent' => $absent
                 //'messageCount'=>$messageCount,
             ]);
         }
