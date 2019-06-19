@@ -28,7 +28,7 @@ class SchoolController extends Controller
                             ->where('active', 1)
                             ->get();
       $departments = Department::where('school_id',\Auth::user()->school_id)->get();
-      return view('school.create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments'));
+      return view('school.new-create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments'));
     }
 
     /**

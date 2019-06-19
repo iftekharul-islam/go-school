@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-block" id="create-section-btn-class-{{$class->id}}">+ Create a New Section</button>
+<button class="btn btn-primary btn-lg btn-block" id="create-section-btn-class-{{$class->id}}">+ Create a New Section</button>
 <br/>
 <div class="panel panel-default" id="create-section-btn-panel-class-{{$class->id}}" style="display:none;">
   <div class="panel-body">

@@ -91,8 +91,8 @@ class GradeService {
     $grade_system_name = isset($grades[0]->course->grade_system_name) ? $grades[0]->course->grade_system_name : false;
     return ($grade_system_name)?Gradesystem::where('school_id', auth()->user()->school_id)
                         ->where('grade_system_name', $grade_system_name)
-                        ->groupBy('grade_system_name')
-                        ->get() : [];
+                        ->get()
+                        ->groupBy('grade_system_name') : [];
   }
 
   public function gradeTeacherIndexView($view){

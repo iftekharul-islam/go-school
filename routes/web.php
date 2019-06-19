@@ -71,6 +71,7 @@ Route::middleware(['auth','accountant'])->prefix('fees')->name('fees.')->group(f
   Route::get('all', 'FeeController@index');
   Route::get('create', 'FeeController@create');
   Route::post('create', 'FeeController@store');
+  Route::get('remove/{id}', 'FeeController@destroy');
 });
 
 Route::middleware(['auth','admin'])->group(function (){
@@ -97,6 +98,8 @@ Route::middleware(['auth'])->group(function (){
   Route::get('section/students/{section_id}', 'UserController@sectionStudents');
   
   Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+  Route::get('user/deactivate/{id}','UserController@deactivateUser');
+
 });
 
 Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth','student']);
@@ -129,6 +132,9 @@ Route::middleware(['auth','admin'])->prefix('exams')->name('exams.')->group(func
   Route::get('create', 'ExamController@create');
   Route::post('create', 'ExamController@store');
   Route::post('activate-exam', 'ExamController@update');
+  Route::get('remove/{id}', 'ExamController@destroy');
+  Route::get('edit/{id}', 'ExamController@edit');
+  Route::post('edit/{id}', 'ExamController@updateExam');
 });
 
 Route::middleware(['auth','teacher'])->group(function (){
@@ -136,16 +142,20 @@ Route::middleware(['auth','teacher'])->group(function (){
   Route::get('school/sections','SectionController@index');
 });
 
+Route::get('all-notice', 'NoticeController@index')->middleware(['auth','student']);
+
 Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
     Route::prefix('library')->name('library.')->group(function () {
         Route::resource('books', 'BookController',
             ['only' => ['index', 'show', 'create', 'store']]
         );
+        Route::delete('/books/{id}', 'BookController@destroy');
     });
 });
 
 Route::middleware(['auth','librarian'])->prefix('library')->name('library.')->group(function () {
   Route::get('issue-books', 'IssuedbookController@create');
+  Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
   Route::post('issue-books', 'IssuedbookController@store');
   Route::get('issued-books', 'IssuedbookController@index');
   Route::post('save_as_returned', 'IssuedbookController@update');
@@ -178,17 +188,9 @@ Route::middleware(['auth','accountant'])->prefix('accounts')->name('accounts.')-
 Route::get('create-school', 'SchoolController@index')->middleware('master.admin');
 
 Route::middleware(['auth','master'])->group(function (){
-  Route::get('register/admin/{id}/{code}', function($id, $code){
-      session([
-        'register_role' => 'admin',
-        'register_school_id' => $id,
-        'register_school_code' => $code,
-        ]);
-      return redirect()->route('register');
-  });
+  Route::get('/register/admin/{id}/{code}', 'UserController@createAdmin');
   Route::post('register/admin', 'UserController@storeAdmin');
   Route::get('master/activate-admin/{id}','UserController@activateAdmin');
-  Route::get('master/deactivate-admin/{id}','UserController@deactivateAdmin');
   Route::post('create-school', 'SchoolController@store');
   Route::get('school/admin-list/{school_id}','SchoolController@show');
 });
@@ -214,15 +216,23 @@ Route::middleware(['auth','admin'])->group(function (){
         'departments' => $departments,
         'register_sections' => $sections
       ]);
-      return redirect()->route('register');
+      return view('auth.teacher', [
+          session([
+              'register_role' => 'teacher',
+              'departments' => $departments,
+              'register_sections' => $sections
+          ])
+      ]);
     });
     Route::get('accountant', function(){
-      session(['register_role' => 'accountant']);
-      return redirect()->route('register');
+      return view('auth.accountant',[
+          session(['register_role' => 'accountant'])
+      ]);
     });
     Route::get('librarian', function(){
-      session(['register_role' => 'librarian']);
-      return redirect()->route('register');
+        return view('auth.library', [
+            session(['register_role' => 'librarian'])
+        ]);
     });
     Route::post('student', 'UserController@store');
     Route::post('teacher',  'UserController@storeTeacher');

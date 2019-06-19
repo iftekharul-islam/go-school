@@ -7,17 +7,22 @@ use App\Myclass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Library\BookRequest;
+use Illuminate\Support\Facades\Input;
 
 class BookController extends Controller
 {
     public function index() {
-        $books = Book::bySchool(auth()->user()->school_id)->paginate();
-
-        return view('library.books.index', compact('books'));
+        $search = Input::get('search');
+        if ($search) {
+            $books = Book::bySchool(auth()->user()->school_id)->where('title','LIKE','%'.$search.'%')->paginate();
+        } else {
+            $books = Book::bySchool(auth()->user()->school_id)->paginate();
+        }
+        return view('library.books.new-index', compact('books'));
     }
 
     public function show(Book $book) {
-        return view('library.books.show', compact('book'));
+        return view('library.books.new-show', compact('book'));
     }
 
     public function create() {
@@ -27,6 +32,12 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request) {
+//        return $request->all();
+        if ($request->class_id) {
+            $class_id = $request->class_id;
+        } else {
+            $class_id = " 12";
+        }
         $book = Book::create([
             'title'     => $request->title,
             'book_code' => $request->book_code,
@@ -38,11 +49,18 @@ class BookController extends Controller
             'about'     => $request->about,
             'price'     => $request->price,
             'img_path'  => $request->img_path,
-            'class_id'  => $request->class_id,
+            'class_id'  => $class_id,
             'school_id' => auth()->user()->school_id,
             'user_id'   => auth()->user()->id
         ]);
 
         return redirect()->route('library.books.show', $book->id);
+    }
+
+    public function destroy($id)
+    {
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return redirect()->back()->with('status', 'Book has been deleted!');
     }
 }

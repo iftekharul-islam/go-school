@@ -23,7 +23,7 @@ class CourseService {
     }
 
     public function getCoursesByTeacher($teacher_id){
-        return Course::with(['section', 'teacher','exam'])
+        return Course::with(['section', 'teacher','exam', 'section.users'])
                         ->where('teacher_id', $teacher_id)
                         ->get();
     }
@@ -34,7 +34,7 @@ class CourseService {
                         ->get();
     }
 
-    public function updateCourseInfo($id){
+    public function updateCourseInfo($id, $request){
         $tb = Course::find($id);
         $tb->course_name = $request->course_name;
         $tb->course_time = $request->course_time;

@@ -34,7 +34,7 @@ class BookRequest extends FormRequest
             'about'     => 'required',
             'price'     => 'required',
             'img_path'  => 'required',
-            'class_id'  => 'required',
+//            'class_id'  => 'required',
         ];
     }
 }

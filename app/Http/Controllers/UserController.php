@@ -50,9 +50,9 @@ class UserController extends Controller
         session()->forget('section-attendance');
         
         if($this->userService->isListOfStudents($school_code, $student_code))
-            return $this->userService->indexView('list.student-list', $this->userService->getStudents());
+            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents());
         else if($this->userService->isListOfTeachers($school_code, $teacher_code))
-            return $this->userService->indexView('list.teacher-list',$this->userService->getTeachers());
+            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers());
         else
             return view('home');
     }
@@ -64,9 +64,9 @@ class UserController extends Controller
      */
     public function indexOther($school_code, $role){
         if($this->userService->isAccountant($role))
-            return $this->userService->indexOtherView('accounts.accountant-list', $this->userService->getAccountants());
+            return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants());
         else if($this->userService->isLibrarian($role))
-            return $this->userService->indexOtherView('library.librarian-list', $this->userService->getLibrarians());
+            return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians());
         else
             return view('home');
     }
@@ -89,7 +89,12 @@ class UserController extends Controller
             'register_sections' => $sections,
         ]);
 
-        return redirect()->route('register');
+        return view('auth.student',[
+           'classes' => $classes,
+            'register_sections' => $sections,
+            session(['register_role' => 'student'])
+            ]);
+//        return redirect()->route('register');
     }
 
     /**
@@ -100,7 +105,7 @@ class UserController extends Controller
     {
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
 
-        return view('profile.section-students', compact('students'));
+        return view('profile.new-section-students', compact('students'));
     }
 
     /**
@@ -133,7 +138,7 @@ class UserController extends Controller
      */
     public function changePasswordGet()
     {
-        return view('profile.change-password');
+        return view('profile.new-change-password');
     }
 
     /**
@@ -188,7 +193,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        DB::transaction(function () use ($request) {
+//        DB::transaction(function () use ($request) {
             $password = $request->password;
             $tb = $this->userService->storeStudent($request);
             try {
@@ -202,7 +207,7 @@ class UserController extends Controller
             } catch(\Exception $ex) {
                 Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
             }
-        });
+//        });
 
         return back()->with('status', 'Saved');
     }
@@ -211,6 +216,12 @@ class UserController extends Controller
      * @param CreateAdminRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
+
+    public function createAdmin()
+    {
+        return view('auth.admin');
+    }
+
     public function storeAdmin(CreateAdminRequest $request)
     {
         $password = $request->password;
@@ -290,8 +301,7 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
-
-        return view('profile.user', compact('user'));
+        return view('profile.user-profile', compact('user'));
     }
 
     /**
@@ -317,7 +327,7 @@ class UserController extends Controller
             ->where('school_id', Auth::user()->school_id)
             ->get();
 
-        return view('profile.edit', [
+        return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,
@@ -347,16 +357,7 @@ class UserController extends Controller
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    // $request->validate([
-                    //   'session' => 'required',
-                    //   'version' => 'required',
-                    //   'birthday' => 'required',
-                    //   'religion' => 'required',
-                    //   'father_name' => 'required',
-                    //   'mother_name' => 'required',
-                    // ]);
                     try{
-                        // Fire event to store Student information
                         event(new StudentInfoUpdateRequested($request,$tb->id));
                     } catch(\Exception $ex) {
                         Log::info('Failed to update Student information, Id: '.$tb->id. 'err:'.$ex->getMessage());
@@ -396,16 +397,20 @@ class UserController extends Controller
     public function deactivateAdmin($id)
     {
        $admin = $this->user->find($id);
+       $admin->active = !$admin->active;
 
-        if ($admin->active !== 1) {
-            $admin->active = 1;
-        } else {
-            $admin->active = 0;
-        }
-
-        $admin->save();
+       $admin->save();
 
         return back()->with('status', 'Saved');
+    }
+    public function deactivateUser($id)
+    {
+       $user = $this->user->find($id);
+        $user->active = !$user->active;
+
+        $user->save();
+
+        return back()->with('status', 'User has been removed!!');
     }
 
     /**

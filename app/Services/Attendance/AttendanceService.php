@@ -44,7 +44,7 @@ class AttendanceService {
 
     public function getTodaysAttendanceBySectionId($section_id){
         return Attendance::where('section_id', $section_id)
-                      ->whereDate('created_at', \DB::raw('CURDATE()'))
+                      ->whereDate('created_at', \DB::raw('CURRENT_DATE'))
                       ->orderBy('created_at', 'desc')
                       ->get()
                       ->unique('student_id');
@@ -61,6 +61,17 @@ class AttendanceService {
                     ->where('exam_id', $exam_id)
                     ->groupBy('student_id')
                     ->get();
+    }
+
+    public function getAllAttendanceByStudentId( $student_id ){
+        return \DB::table('attendances')
+            ->select('student_id', \DB::raw('
+                      COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
+                      COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent,
+                      COUNT(CASE WHEN present=2 THEN present END) AS totalEscaped'
+            ))
+            ->groupBy('student_id')->where('student_id', $student_id)
+            ->get();
     }
 
     public function getStudent($student_id){

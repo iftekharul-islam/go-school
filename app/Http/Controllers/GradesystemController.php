@@ -22,7 +22,7 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-      return view('gpa.create');
+      return view('gpa.new-create');
     }
     /**
      * Store a newly created resource in storage.

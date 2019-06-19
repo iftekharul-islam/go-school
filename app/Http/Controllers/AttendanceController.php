@@ -30,6 +30,7 @@ class AttendanceController extends Controller
         // View attendances of students of a section
         $students = $this->attendanceService->getStudentsBySection($section_id);
         $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
+//        return $attendances;
         $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$exam_id);
 
         return view('attendance.attendance', [
@@ -39,7 +40,8 @@ class AttendanceController extends Controller
           'section_id'=>$section_id,
           'exam_id'=>$exam_id
         ]);
-      } else {
+      }
+      else {
         // View attendance of a single student by student id
         if(\Auth::user()->role == 'student'){
           // From student view
@@ -58,7 +60,7 @@ class AttendanceController extends Controller
         else
           $exId = 0;
         $attendances = $this->attendanceService->getAttendanceByStudentAndExam($student_id, $exId);
-        return view('attendance.student-attendances',['attendances' => $attendances]);
+        return view('attendance.admin-student-attendances',['attendances' => $attendances]);
       }
     }
     /**
@@ -118,7 +120,7 @@ class AttendanceController extends Controller
 
       $request->session()->put('section-attendance', true);
 
-      return view('list.student-list',[
+      return view('list.new-student-list',[
         'users' =>$users,
         'current_page'=>$users->currentPage(),
         'per_page'=>$users->perPage()

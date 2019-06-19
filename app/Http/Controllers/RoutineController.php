@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Routine as Routine;
 use App\Http\Resources\RoutineResource;
+use App\Syllabus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -20,7 +21,7 @@ class RoutineController extends Controller
                         ->where('school_id',\Auth::user()->school_id)
                         ->where('active',1)
                         ->get();
-        return view('routines.create',['files'=>$files,'section_id' => 0]);
+        return view('routines.new-create',['files'=>$files,'section_id' => 0]);
      }
 
     /**
@@ -30,6 +31,7 @@ class RoutineController extends Controller
      */
     public function create(int $section_id)
     {
+//      return Syllabus::all();
       try{
         if(Schema::hasColumn('routines','section_id')){
           $files = Routine::with('section')
@@ -43,7 +45,8 @@ class RoutineController extends Controller
       } catch(Exception $ex){
         return 'Something went wrong!!';
       }
-      return view('routines.create',['files'=>$files,'section_id'=>$section_id]);
+//      return $files;
+      return view('routines.new-create',['files'=>$files,'section_id'=>$section_id]);
     }
 
     /**
@@ -54,6 +57,7 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
+      return $request;
       $request->validate([
         'file_path' => 'required|string|max:255',
         'title' => 'required|string|max:255',

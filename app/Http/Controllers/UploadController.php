@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller {
   public function upload(Request $request){
+//    return $request;
     $request->validate([
       'upload_type' => 'required',
       'file' => 'required|max:10000|mimes:doc,docx,png,jpeg,pdf,xlsx,xls,ppt,pptx,txt'
@@ -59,6 +60,7 @@ class UploadController extends Controller {
       $tb->active = 1;
       $tb->school_id = \Auth::user()->school_id;
       $tb->user_id = \Auth::user()->id;
+      $tb->section_id = $request->section_id;
       $tb->save();
     } else if($request->upload_type == 'syllabus'){
       $request->validate([
@@ -70,6 +72,7 @@ class UploadController extends Controller {
       $tb->active = 1;
       $tb->school_id = \Auth::user()->school_id;
       $tb->user_id = \Auth::user()->id;
+      $tb->class_id = $request->section_id;
       $tb->save();
     } else if($request->upload_type == 'profile' && $request->user_id > 0){
       $tb = \App\User::find($request->user_id);

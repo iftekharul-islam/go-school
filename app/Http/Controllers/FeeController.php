@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fee;
 use Illuminate\Http\Request;
 
 class FeeController extends Controller
@@ -14,7 +15,7 @@ class FeeController extends Controller
     public function index()
     {
       $fees = \App\Fee::where('school_id', \Auth::user()->school_id)->get();
-      return view('fees.all',['fees'=>$fees]);
+      return view('fees.new-all',['fees'=>$fees]);
     }
 
     /**
@@ -24,7 +25,7 @@ class FeeController extends Controller
      */
     public function create()
     {
-        return view('fees.create');
+        return view('fees.new-create');
     }
 
     /**
@@ -88,6 +89,8 @@ class FeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fee = Fee::findOrFail($id);
+        $fee->delete();
+        return redirect()->back()->with('Status', 'Removed');
     }
 }

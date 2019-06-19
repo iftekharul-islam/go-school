@@ -1,81 +1,93 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
-
 <!-- JS -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
-<form class="form-horizontal" action="{{url('library/issue-books')}}" method="post">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form autocomplete="off" class="new-added-form justify-content-md-center" action="{{url('library/issue-books')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
-        <label for="student_code" class="col-md-4 control-label">Student Code</label>
+        <label for="name" class="col-md-4">Student Code</label>
 
-        <div class="col-md-6">
-            <input id="student_code" type="text" class="form-control" name="student_code" value="{{ old('student_code') }}"
-                placeholder="Student Code" required>
+        <div class="col-md-12">
+            <input id="show-user" type="text" class="typeahead form-control" name="student_code" value="{{ old('student_code') }}" placeholder="Student Code" required>
 
-            @if ($errors->has('student_code'))
-            <span class="help-block">
-                <strong>{{ $errors->first('student_code') }}</strong>
-            </span>
+            @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('student_code') }}</strong>
+                </span>
             @endif
         </div>
     </div>
     <div class="form-group{{ $errors->has('book_code') ? ' has-error' : '' }}">
-        <label for="book_code" class="col-md-4 control-label">Book Title &amp; Code (<small>Type & Search by Name/Code.
-                You can Select Multiple Books (<i>Maximum 10 books</i>)</small>)</label>
+        <label class="col-md-4">Book Title &amp; Code (Maximum 10 books)</label>
 
-        <div class="col-md-6">
-            <select id="book_code" class="form-control" multiple name="book_id[]">
+        <div class="col-md-12">
+            <select id="book_code" class="form-control select2" multiple name="book_id[]">
                 @foreach($books as $book)
-                <option value="{{$book->id}}">{{$book->title}} - {{$book->book_code}}</option>
+                    <option value="{{$book->id}}">{{$book->title}} - {{$book->book_code}}</option>
                 @endforeach
             </select>
         </div>
     </div>
-    <div class="form-group{{ $errors->has('issue_date') ? ' has-error' : '' }}">
-        <label for="issue_date" class="col-md-4 control-label">Issue Date</label>
 
-        <div class="col-md-6">
-            <input id="issue_date" class="form-control datepicker" name="issue_date" value="{{ old('issue_date') }}"
-                placeholder="Issue Date" required>
+    <div class="form-group{{ $errors->has('issue_date') ? ' has-error' : '' }}">
+        <label class="col-md-4 control-label">Issue Date</label>
+
+        <div class="col-md-12">
+            <input data-date-format="yyyy-mm-dd" id="issue_date" class="form-control date" name="issue_date" value="{{ old('issue_date') }}" placeholder="Issue Date" required>
 
             @if ($errors->has('issue_date'))
-            <span class="help-block">
+                <span class="help-block">
                 <strong>{{ $errors->first('issue_date') }}</strong>
             </span>
             @endif
         </div>
     </div>
-    <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
-        <label for="return_date" class="col-md-4 control-label">Return Date</label>
 
-        <div class="col-md-6">
-            <input id="return_date" class="form-control datepicker" name="return_date" value="{{ old('return_date') }}"
-                placeholder="Return Date" required>
+    <div class="form-group{{ $errors->has('return_date') ? ' has-error' : '' }}">
+        <label class="col-md-4 control-label">Return Date</label>
+
+        <div class="col-md-12">
+            <input data-date-format="yyyy-mm-dd" id="return_date" class="form-control date" name="return_date" value="{{ old('return_date') }}"
+                   placeholder="Return Date" required>
 
             @if ($errors->has('return_date'))
-            <span class="help-block">
+                <span class="help-block">
                 <strong>{{ $errors->first('return_date') }}</strong>
             </span>
             @endif
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-8">
-            <button type="submit" class="btn btn-danger">Save</button>
-        </div>
+
+    <div class="col-12 form-group mg-t-8">
+        <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
     </div>
 </form>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(function () {
-        $('#book_code').chosen({
-            max_selected_options: 10,
-            display_selected_options: true,
+        $('.date').datepicker({
+            format: 'yyyy-mm-dd',
         });
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd'
+        var path = "{{ url('/library/issue-books/autocomplete/{$query}') }}";
+        $('input.typeahead').typeahead({
+            source:  function (query, process) {
+                return $.get(path + $('#show-user').val(), {}, function (data) {
+                    // console.log(process);
+                    return process(data);
+                });
+            }
         });
     })
 </script>

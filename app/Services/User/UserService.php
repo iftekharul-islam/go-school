@@ -64,7 +64,7 @@ class UserService {
     }
 
     public function promoteSectionStudentsView($students, $classes, $section_id){
-        return view('school.promote-students', compact('students','classes','section_id'));
+        return view('school.new-promote-students', compact('students','classes','section_id'));
     }
     
     public function promoteSectionStudentsPost($request)

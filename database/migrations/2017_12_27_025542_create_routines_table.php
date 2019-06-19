@@ -17,7 +17,7 @@ class CreateRoutinesTable extends Migration
             $table->increments('id');
             $table->string('file_path');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable()->default('');
             $table->tinyInteger('active');
             $table->integer('school_id')->unsigned();
             $table->integer('user_id')->unsigned();

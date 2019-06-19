@@ -15,6 +15,19 @@ class NoticeController extends Controller
      */
      public function index()
      {
+         $school_id = \Auth::user()->school->id;
+         $minutes = 1440;
+         $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+             return \App\Notice::where('school_id', $school_id)
+                 ->where('active', 1)
+                 ->get();
+         });
+         $events = \Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
+             return \App\Event::where('school_id', $school_id)
+                 ->where('active', 1)
+                 ->get();
+         });
+         return view('notices.index', compact('notices', 'events'));
        //Notice::where('school_id', \Auth::user()->school_id)->get();
      }
 

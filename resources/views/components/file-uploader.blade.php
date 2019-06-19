@@ -1,12 +1,21 @@
 <div id="my_upload">
+
     @if($upload_type != 'profile')
-        <h3>{{ucfirst($upload_type)}}</h3>
-        <label for="upload-title">File Title: </label>
-        <input type="text" class="form-control" name="upload-title" id="upload-title" placeholder="File title here..." required>
-        <br/>
+        <div class="heading-layout1">
+            <div class="item-title">
+                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
+                <h3>{{ucfirst($upload_type)}}</h3>
+            </div>
+        </div>
+        <label style="margin-left: -53px;">File Title: </label>
+        <div class="form-group">
+            <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">
+        </div>
     @endif
-  <input class="form-control-sm" id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}">
-  <br/>
+
+    <div class="form-group mg-t-30 mb-5">
+        <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}" class="form-control-file">
+    </div>
   <div class="progress">
     <div class="progress-bar progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
       <div class="text-xs-center" id="up-prog-info">0% uploaded</div>
@@ -23,7 +32,7 @@
 $(function () {
     var jqXHR = null;
     var uploadButton = $('<button/>')
-            .addClass('btn btn-primary btn-sm')
+            .addClass('btn btn-primary ml-5 mt-2 btn-lg')
             .text('Upload')
             .on('click', function () {
                 @if($upload_type != 'profile')
@@ -61,7 +70,7 @@ $(function () {
                             data.context.text('File Upload has been canceled');
                         });
                         @if($upload_type != 'profile')
-                            data.formData = {upload_type: '{{$upload_type}}',title: $('#upload-title').val()};
+                            data.formData = {upload_type: '{{$upload_type}}',section_id : '{{ $section_id }}',title: $('#upload-title').val()};
                         @else
                             data.formData = {upload_type: '{{$upload_type}}',user_id: $('#userIdPic').val()};
                         @endif
@@ -91,7 +100,7 @@ $(function () {
                 $('.progress-bar').attr(
                     'aria-valuenow',
                     progress
-                ).css('width', progress + '%');
+                ).css('width', progress + '%', 'height', 20);
                 $('#up-prog-info').text(progress + "% uploaded");
         }
     })
@@ -103,6 +112,7 @@ $(function () {
             $('#errorAlert').text(error);
         } else {
             data.context.html('<div>Upload finished.</div>');
+            window.location.reload();
             $('button.cancelBtn').hide();
             $('#errorAlert').empty();
             @if($upload_type == 'profile')
