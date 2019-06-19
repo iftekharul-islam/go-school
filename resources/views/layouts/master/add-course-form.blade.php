@@ -7,13 +7,13 @@
           <input type="hidden" name="class_id" value="{{$class->id}}"/>
           <input type="hidden" name="section_id" value="{{$section->id}}"/>
           <div class="form-group">
-            <label for="courseName{{$section->id}}" class="col-sm-2 control-label">Course Name</label>
+            <label for="courseName{{$section->id}}" class="col-sm-12 control-label">Course Name</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name" placeholder="Course Name">
             </div>
           </div>
           <div class="form-group">
-            <label for="teacherDepartment{{$section->id}}" class="col-sm-2 control-label">Teacher Department</label>
+            <label for="teacherDepartment{{$section->id}}" class="col-sm-12 control-label">Teacher Department</label>
             <div class="col-sm-10">
               <select class="form-control" id="teacherDepartment{{$section->id}}" name="teacher_department">
                 <option value="0" selected disabled>Select Department</option>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="assignTeacher{{$section->id}}" class="col-sm-2 control-label">Assign Course Teacher</label>
+            <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label">Assign Course Teacher</label>
             <div class="col-sm-10">
               <select class="form-control" id="assignTeacher{{$section->id}}" name="teacher_id">
                 <option value="0" selected disabled>Select Department First</option>
@@ -45,7 +45,7 @@
             </div>
           </div>
         <div class="form-group">
-          <label for="course_type{{$section->id}}" class="col-sm-2 control-label">Course Type</label>
+          <label for="course_type{{$section->id}}" class="col-sm-12 control-label">Course Type</label>
           <div class="col-sm-10">
             <select class="form-control" id="course_type{{$section->id}}" name="course_type">
               <option value="core">Core</option>

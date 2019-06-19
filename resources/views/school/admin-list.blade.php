@@ -27,48 +27,48 @@
                     {{ session('status') }}
                 </div>
             @endif
-        </div>
-        @if(count($admins) > 0)
-            <div class="table-responsive">
-                <table class="table display data-table text-wrap">
-                    <tr>
-                        <th>Action</th>
-                        <th>Action</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
-                        <th>About</th>
-                    </tr>
-                    @foreach ($admins as $admin)
+            @if(count($admins) > 0)
+                <div class="table-responsive">
+                    <table class="table display data-table text-wrap">
                         <tr>
-                            <td>
-                                @if($admin->active == 0)
-                                    <a href="{{url('master/activate-admin/'.$admin->id)}}" class="btn btn-lg btn-success"
-                                       role="button"></i>Activate</a>
-                                @else
-                                    <a href="{{url('master/deactivate-admin/'.$admin->id)}}" class="btn btn-lg btn-danger"
-                                       role="button">Deactivate</a>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
-                                   role="button">Edit</a>
-                            </td>
-                            <td>
-                                {{$admin->name}}
-                            </td>
-                            <td>{{$admin->student_code}}</td>
-                            <td>{{$admin->email}}</td>
-                            <td>{{$admin->phone_number}}</td>
-                            <td>{{$admin->address}}</td>
-                            <td>{{$admin->about}}</td>
+                            <th>Action</th>
+                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>About</th>
                         </tr>
-                    @endforeach
-                </table>
-            </div>
-        @else
+                        @foreach ($admins as $admin)
+                            <tr>
+                                <td>
+                                    @if($admin->active == 0)
+                                        <a href="{{url('master/activate-admin/'.$admin->id)}}" class="btn btn-lg btn-success"
+                                           role="button"></i>Activate</a>
+                                    @else
+                                        <a href="{{url('master/deactivate-admin/'.$admin->id)}}" class="btn btn-lg btn-danger"
+                                           role="button">Deactivate</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
+                                       role="button">Edit</a>
+                                </td>
+                                <td>
+                                    {{$admin->name}}
+                                </td>
+                                <td>{{$admin->student_code}}</td>
+                                <td>{{$admin->email}}</td>
+                                <td>{{$admin->phone_number}}</td>
+                                <td>{{$admin->address}}</td>
+                                <td>{{$admin->about}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            @else
+        </div>
             <div class="card-body">
                 No Related Data Found.
             </div>

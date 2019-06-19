@@ -4,7 +4,11 @@
         <div class="heading-layout1">
             <div class="item-title">
                 <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                <h3>{{ucfirst($upload_type)}}</h3>
+                <h3>@if($upload_type === 'routine')
+                        Class {{ucfirst($upload_type)}}
+                    @else
+                        {{ucfirst($upload_type)}}
+                    @endif</h3>
             </div>
         </div>
         <label style="margin-left: -53px;">File Title: </label>

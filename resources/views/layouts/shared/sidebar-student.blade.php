@@ -12,6 +12,21 @@
                                 class="flaticon-dashboard"></i><span>Dashboard</span></a>
                 </li>
 
+                @if(Auth::user()-> role == 'master')
+                    <?php
+                        $schools = \App\School::all();
+                    ?>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="fas fa-school"></i><span>Schools</span></a>
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a href="{{url('new/create-school')}}" class="nav-link"><i class="fas fa-angle-right"></i>Create School</a>
+                                <a href="{{url('/home')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Schools</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>Attendance</span></a>

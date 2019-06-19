@@ -396,10 +396,10 @@
     if ($("#student-doughnut-chart1").length) {
 
       var doughnutChartData1 = {
-        labels: ["Present", "Absent"],
+        labels: ["Present", "Absent", "Escaped"],
         datasets: [{
-          backgroundColor: ["#ffa601","#304ffe"],
-          data: [present, absent],
+          backgroundColor: ["#ffa601","#304ffe","#FC413E"],
+          data: [present, absent, escaped],
           label: "Attandaance"
         }, ]
       };

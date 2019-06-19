@@ -203,14 +203,6 @@
                                     <table class="table display text-nowrap">
                                         <thead>
                                         <tr>
-                                            <th>
-                                                <div class="form-check">
-                                                    <input type="checkbox"
-                                                           class="form-check-input checkAll">
-                                                    <label class="form-check-label">#</label>
-                                                </div>
-                                            </th>
-                                            {{--                                            <th>ID</th>--}}
                                             <th>Exam Name</th>
                                             <th>Term</th>
                                             <th>Start Date</th>
@@ -222,12 +214,6 @@
                                         <tbody>
                                         @foreach($exams as $key => $exam)
                                             <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input">
-                                                        <label class="form-check-label">{{ $key++}}</label>
-                                                    </div>
-                                                </td>
                                                 <td>{{ $exam->exam_name }}</td>
                                                 <td>{{ $exam->term }}</td>
                                                 <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
@@ -347,5 +333,6 @@
 
         var present = @json($present);
         var absent = @json($absent);
+        var escaped = @json($escaped);
     </script>
 @endsection

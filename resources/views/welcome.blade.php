@@ -1,94 +1,91 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en-US">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+{{--    <link rel="stylesheet" href="css/icon-font.css">--}}
+    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
 
-            .full-height {
-                height: 100vh;
-            }
+</head>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+<body>
+<header class="header">
+    <div class="header__logo-box">
+        <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+    </div>
+    <div class="inner-body effect5">
+        <div class="header__text-box effect5">
 
-            .position-ref {
-                position: relative;
-            }
+            <h1 class="heading">
+                <span class="heading--main">Shoroborno</span>
+                <span class="heading--sub"></span>
+            </h1>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+            <section class="section-book">
+                <div class="row">
+                    <div class="book">
+                        <div class="book__form">
+                            @auth()
+                                <a href="{{ url('/home') }}" class="button button--white button--animation">Home</a>
+                            @else
+                                <form method="POST" action="{{ route('login') }}" class="form">
+                                    {{ csrf_field() }}
+                                    <div class="form__group">
+                                        <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                                            <input type="email" class="form__input" placeholder="Email address" id="email" name="email" value="{{ old('email') }}" required>
+                                            <label for="email" class="form__label">Email Address</label>
+                                            @if ($errors->has('email'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
 
-            .content {
-                text-align: center;
-            }
+                                    <div class="form__group">
+                                        <div class="col-lg-12 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <input type="password" name="password" class="form__input" placeholder="Password" required>
+                                            <label for="name" class="form__label">Password</label>
+                                            @if ($errors->has('password'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
 
-            .title {
-                font-size: 84px;
-            }
+                                    <div class="form__group">
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                    @endauth
+                                        <div class="form__radio-group">
+                                            <input type="checkbox" checked="checked" type="radio"
+                                                   class="form__radio-input" id="small" name="size">
+                                            <label for="small" class="form__radio-label">
+                                                <span class="form__radio-button"></span>
+                                                Remember Me
+                                            </label>
+                                        </div>
+                                        <div class="form__radio-group float-left">
+                                            <label for="large" class="form__radio-label">
+                                                <a href="{{ route('password.request') }}">Forgot Password?</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="button button--white button--animation">LOGIN</button>
+                                </form>
+                            @endauth
+                        </div>
+                    </div>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+            </section>
         </div>
-    </body>
+    </div>
+</header>
+</body>
+
 </html>

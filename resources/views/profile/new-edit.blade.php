@@ -16,6 +16,12 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
+            <div class="heading-layout1 mb-5">
+                <div class="item-title">
+                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
+                    <h3>Edit {{ ucfirst($user->role) }}</h3>
+                </div>
+            </div>
             <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 12 }}" id="main-container">
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -93,7 +99,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                        <label for="address" class="col-md-4 control-label">address</label>
+                                        <label for="address" class="col-md-4 control-label">Address</label>
 
                                         <div class="col-md-12">
                                             <input id="address" type="text" class="form-control" name="address"
@@ -180,7 +186,7 @@
                                             <label for="birthday" class="col-md-4 control-label">Birthday</label>
 
                                             <div class="col-md-12">
-                                                <input id="birthday" type="text" class="form-control" name="birthday" required>
+                                                <input id="birthday" type="text" class="form-control" name="birthday" value="{{ $user->studentInfo['birthday'] }}"  required>
 
                                                 @if ($errors->has('birthday'))
                                                     <span class="help-block">
@@ -195,7 +201,7 @@
                                             <label for="session" class="col-md-4 control-label">Session</label>
 
                                             <div class="col-md-12">
-                                                <input id="session" type="text" class="form-control" name="session" required>
+                                                <input id="session" type="text" class="form-control" name="session" value="{{ $user->studentInfo['session'] }}" required>
 
                                                 @if ($errors->has('session'))
                                                     <span class="help-block">
@@ -473,15 +479,15 @@
             $('#birthday').datepicker({
                 format: "yyyy-mm-dd",
             });
-            $('#birthday').datepicker('setDate',
-                "{{ Carbon\Carbon::parse($user->studentInfo['birthday'])->format('Y-d-m') }}");
+            var myDate = {{ Carbon\Carbon::parse($user->studentInfo['birthday'])->format('Y-m-d') }}
+            $('#birthday').datepicker('setDate',myDate);
             $('#session').datepicker({
                 format: "yyyy",
                 viewMode: "years",
                 minViewMode: "years"
             });
-            $('#session').datepicker('setDate',
-                "{{ Carbon\Carbon::parse($user->studentInfo['session'])->format('Y') }}");
+            var session = {{ Carbon\Carbon::parse($user->studentInfo['session'])->format('Y') }}
+            $('#session').datepicker('setDate',session);
         });
     </script>
 @endsection

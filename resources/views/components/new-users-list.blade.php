@@ -58,8 +58,6 @@
                                 <th>Version</th>
                                 <th>Class</th>
                                 <th>Section</th>
-                                <th>Father</th>
-                                <th>Mother</th>
                             @endif
                         @elseif($user->role == 'teacher')
                             @if (!Session::has('section-attendance'))
@@ -128,8 +126,6 @@
                                 <td>{{$user->section->class->class_number}} {{!empty($user->group)? '- '.$user->group:''}}</td>
                                 <td style="white-space: nowrap;">{{$user->section->section_number}}
                                 </td>
-                                <td>{{$user->studentInfo['father_name']}}</td>
-                                <td>{{$user->studentInfo['mother_name']}}</td>
                             @endif
                         @elseif($user->role == 'teacher')
                             @if (!Session::has('section-attendance'))
@@ -153,7 +149,7 @@
                         @endif
                         @if (!Session::has('section-attendance'))
                             <td>{{ucfirst($user->gender)}}</td>
-                            <td>{{ucfirst($user->blood_group)}}</td>
+                            <td>{{strtoupper($user->blood_group)}}</td>
                             <td>{{$user->phone_number}}</td>
                             <td>{{$user->address}}</td>
                         @endif

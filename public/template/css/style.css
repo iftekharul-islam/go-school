@@ -1739,7 +1739,7 @@ ul {
 }
 .header-main-menu .navbar-nav .header-message .navbar-nav-link {
   position: relative;
-  color: #828282;
+  color: red;
   font-size: 20px;
   display: block;
 }

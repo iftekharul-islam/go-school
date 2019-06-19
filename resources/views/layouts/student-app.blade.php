@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+{{--    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('/template/css/normalize.css') }}">
     <!-- Main CSS -->
@@ -33,7 +35,6 @@
     <!-- Modernize js -->
     <script src="{{ asset('/template/js/modernizr-3.6.0.min.js') }}"></script>
 
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.0.0/sweetalert.min.js"></script>--}}
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -78,8 +79,6 @@
     </div>
     <!-- Page Area End Here -->
 </div>
-
-{{--    <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>--}}
 <script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
 <script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
@@ -117,8 +116,6 @@
 <script src="{{ asset('/template/js/select2.min.js') }}"></script>
 <!-- Date Picker Js -->
 <script src="{{ asset('/template/js/datepicker.min.js') }}"></script>
-
-{{--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--}}
 <!-- Main js -->
 
 <script src=" {{ asset('/template/js/main.js') }}"></script>

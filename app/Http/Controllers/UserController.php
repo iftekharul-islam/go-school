@@ -91,8 +91,8 @@ class UserController extends Controller
 
         return view('auth.student',[
            'classes' => $classes,
-            'register_sections' => $sections,
-            session(['register_role' => 'student'])
+//            'register_sections' => $sections,
+            session(['register_role' => 'student', 'register_sections' => $sections,])
             ]);
 //        return redirect()->route('register');
     }
@@ -193,7 +193,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-//        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) {
             $password = $request->password;
             $tb = $this->userService->storeStudent($request);
             try {
@@ -207,8 +207,8 @@ class UserController extends Controller
             } catch(\Exception $ex) {
                 Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
             }
-//        });
 
+        });
         return back()->with('status', 'Saved');
     }
 
@@ -410,7 +410,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()->with('status', 'User has been removed!!');
+        return back()->with('status', $user->name .' has been removed!!');
     }
 
     /**
