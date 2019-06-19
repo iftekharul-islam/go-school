@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
+        <h3>All Schools</h3>
         <ul>
             <li>
                 <a href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Dashboard</li>
+{{--            <li>Dashboard</li>--}}
         </ul>
     </div>
 
@@ -15,12 +15,85 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Create New School</h3>
+{{--                    <h3>All School</h3>--}}
                 </div>
             </div>
-            <a class="btn-fill-lg bg-blue-dark btn-hover-yellow btn-block mt-5" href="{{url('create-school')}}" role="button" style="text-align: center">Manage Schools</a>
+            <div class="row">
+                @foreach($schools as $school)
+                    <div class="col-12 col-xl-4 col-4-xxxl">
+                        <div class="card dashboard-card-four pd-b-20">
+                            <div class="card-body" style="min-height: 300px">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3 class="mb-4">{{ $school->name }}</h3>
+                                        <p class="mb-4">{{ $school->about }}</p>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table display text-wrap">
+                                        <thead>
+                                        <tr>
+                                            <th>Medium</th>
+                                            <th>Code</th>
+                                            <th>Total Student</th>
+                                            <th>Total Departments</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ $school->medium }}</td>
+                                                <td>{{ $school->code }}</td>
+                                                <td>{{count($school->users)}}</td>
+                                                <td>{{count($school->departments)}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a href="{{url('school/'.$school->id)}}" class="button1 button1--white button1--animation">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
+@endsection
+
+{{--    <div class="card height-auto false-height">--}}
+{{--        <div class="card-body">--}}
+{{--            <div class="heading-layout1">--}}
+{{--                <div class="item-title">--}}
+{{--                    <h3>All School Data</h3>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="table-responsive">--}}
+{{--                <table class="table display data-table text-wrap">--}}
+{{--                    <thead>--}}
+{{--                    <tr>--}}
+{{--                        <th>Name</th>--}}
+{{--                        <th>Medium</th>--}}
+{{--                        <th>Code</th>--}}
+{{--                        <th>Total Student</th>--}}
+{{--                        <th>Total Departments</th>--}}
+{{--                        <th>About</th>--}}
+{{--                    </tr>--}}
+{{--                    </thead>--}}
+{{--                    <tbody>--}}
+{{--                    @foreach($schools as $school)--}}
+{{--                        <tr>--}}
+{{--                            <td>{{ $school->name }}</td>--}}
+{{--                            <td>{{ $school->medium }}</td>--}}
+{{--                            <td>{{ $school->code }}</td>--}}
+{{--                            <td>{{count($school->users)}}</td>--}}
+{{--                            <td>{{count($school->departments)}}</td>--}}
+{{--                            <td>{{ $school->about }}</td>--}}
+{{--                        </tr>--}}
+{{--                    @endforeach--}}
+{{--                    </tbody>--}}
+{{--                </table>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 {{--<div class="container">--}}
 {{--    <div class="row">--}}
 {{--        <div class="col-md-12">--}}
@@ -34,4 +107,3 @@
 {{--        </div>--}}
 {{--    </div>--}}
 {{--</div>--}}
-@endsection

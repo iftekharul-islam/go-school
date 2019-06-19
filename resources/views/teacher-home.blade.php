@@ -127,12 +127,6 @@
                                 <table class="table display data-table text-wrap">
                                     <thead>
                                     <tr>
-{{--                                        <th>--}}
-{{--                                            <div class="form-check">--}}
-{{--                                                <input type="checkbox" class="form-check-input checkAll">--}}
-{{--                                                <label class="form-check-label">Code</label>--}}
-{{--                                            </div>--}}
-{{--                                        </th>--}}
                                         <th>Photo</th>
                                         <th>Name</th>
                                         <th>Gender</th>
@@ -152,13 +146,6 @@
                                     <tbody>
                                     @foreach($allStudents as $key => $student)
                                         <tr>
-                                            {{--                                        @if($key < 10)--}}
-{{--                                            <td>--}}
-{{--                                                <div class="form-check">--}}
-{{--                                                    <input type="checkbox" class="form-check-input">--}}
-{{--                                                    <label class="form-check-label">#{{ $student->code }}</label>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
                                             <td class="text-center"><img style="max-width: 50px;" src="{{ $student->pic_path }}" alt="student"></td>
                                             <td>{{ $student->name }}</td>
                                             <td>{{ ucfirst($student->gender) }}</td>
@@ -172,24 +159,6 @@
                                             <td>{{ ucfirst($student->phone_number) }}</td>
                                             <td>{{ ucfirst($student->email) }}</td>
                                             <td>{{ ucfirst($student->address) }}</td>
-                                            <td>
-{{--                                                <div class="dropdown">--}}
-{{--                                                    <a href="#" class="dropdown-toggle"--}}
-{{--                                                       data-toggle="dropdown" aria-expanded="false">--}}
-{{--                                                                        <span--}}
-{{--                                                                                class="flaticon-more-button-of-three-dots"></span>--}}
-{{--                                                    </a>--}}
-{{--                                                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-times text-orange-red"></i>Close</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>--}}
-{{--                                                        <a class="dropdown-item" href="#"><i--}}
-{{--                                                                    class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-                                            </td>
-                                            {{--                                        @endif--}}
                                         </tr>
                                     @endforeach
                                     </tbody>

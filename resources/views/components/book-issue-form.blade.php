@@ -16,14 +16,14 @@
 <form autocomplete="off" class="new-added-form justify-content-md-center" action="{{url('library/issue-books')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
-        <label for="name" class="col-md-4">Student Code</label>
+        <label for="name" class="col-md-4 mt-5">Student Code</label>
 
         <div class="col-md-12">
-            <input id="show-user" type="text" class="typeahead form-control" name="student_code" value="{{ old('student_code') }}" placeholder="Student Code" required>
+            <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Name" required>
 
             @if ($errors->has('name'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('student_code') }}</strong>
+                    <strong>{{ $errors->first('name') }}</strong>
                 </span>
             @endif
         </div>
@@ -39,7 +39,6 @@
             </select>
         </div>
     </div>
-
     <div class="form-group{{ $errors->has('issue_date') ? ' has-error' : '' }}">
         <label class="col-md-4 control-label">Issue Date</label>
 
@@ -84,7 +83,6 @@
         $('input.typeahead').typeahead({
             source:  function (query, process) {
                 return $.get(path + $('#show-user').val(), {}, function (data) {
-                    // console.log(process);
                     return process(data);
                 });
             }

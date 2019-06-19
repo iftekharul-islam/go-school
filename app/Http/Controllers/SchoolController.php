@@ -38,7 +38,7 @@ class SchoolController extends Controller
      */
     public function create()
     {
-        //
+        return view('school.new-school');
     }
 
     /**
@@ -63,7 +63,7 @@ class SchoolController extends Controller
       $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
       $tb->theme = 'flatly';
       $tb->save();
-      return back()->with('status', 'Created');
+      return redirect('/home')->with('status', 'Created');
     }
 
     /**
@@ -76,6 +76,22 @@ class SchoolController extends Controller
     {
       $admins = User::where('school_id',$school_id)->where('role','admin')->get();
       return view('school.admin-list',compact('admins'));
+    }
+
+    public function showSchool($school_id) {
+        $total_students = \App\User::where('school_id',$school_id)->where('role','student')->where('active', 1)->count();
+        $total_classes =  \App\Myclass::where('school_id', $school_id)->count();
+        $total_teacher = \App\User::where('school_id', $school_id)->where('role', 'teacher')->where('active', 1)->count();
+        $total_exams = \App\Exam::where('school_id', $school_id)->where('active', 1)->count();
+        $school = School::where('id',$school_id)->first();
+
+        return view('school.new-school-master',[
+            'school' => $school,
+            'total_students' => $total_students,
+            'total_classes' => $total_classes,
+            'total_teacher' => $total_teacher,
+            'total_exams' => $total_exams,
+        ]);
     }
 
     /**

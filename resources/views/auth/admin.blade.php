@@ -38,6 +38,15 @@
                         @endif
                     </div>
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
             <div class="panel panel-default mt-5">
                 <div class="panel-body">
@@ -115,7 +124,7 @@
 
                                     <div class="col-md-12">
                                         <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                               value="{{ old('phone_number') }}">
+                                               value="{{ old('phone_number') }}" required>
 
                                         @if ($errors->has('phone_number'))
                                             <span class="help-block">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Attendance;
 use App\Book;
 use App\Http\Traits\GradeTrait;
+use App\Myclass;
+use App\School;
 use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
@@ -103,6 +105,7 @@ class HomeController extends Controller
             $student_info = \Auth::user()->studentInfo;
             $present="";
             $absent="";
+            $escaped="";
             if (!empty($student_info)) {
                 $student_id = $student_info->student_id;
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
@@ -110,14 +113,18 @@ class HomeController extends Controller
                     $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
                     $present = ($att->totalpresent * 100) / $total;
                     $absent = ($att->totalabsent * 100) / $total;
+                    $escaped = ($att->totalescaped * 100) / $total;
                 }
             }
-//
-//            return $books;
         }
 
         if (\Auth::user()->role == 'master') {
-            return view('master-home');
+            $schools = School::all();
+            $classes = Myclass::all();
+            $sections = Section::all();
+            return view('master-home',[
+                'schools' => $schools
+            ]);
         }
         elseif (\Auth::user()->role == 'admin' ) {
             $allStudents = $this->userService->getStudents();
@@ -147,6 +154,7 @@ class HomeController extends Controller
                 'female' => $female,
                 'courses_student' => $courses_student,
                 'present' => $present,
+                'absent' => $absent,
                 'absent' => $absent
             ]);
         }
@@ -197,7 +205,8 @@ class HomeController extends Controller
                 'male' => $male,
                 'female' => $female,
                 'present' => $present,
-                'absent' => $absent
+                'absent' => $absent,
+                'escaped' => $escaped,
                 //'messageCount'=>$messageCount,
             ]);
         }

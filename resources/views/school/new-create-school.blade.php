@@ -18,7 +18,7 @@
             <div class="heading-layout1">
                 <div class="item-title">
                     <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                    <h3>Manage Departments, Classs, Sections, Student Promotion, Course</h3>
+                    <h3>Manage Departments, Classes, Sections, Student Promotion, Courses</h3>
                 </div>
             </div>
             <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 12 }}" id="main-container">
@@ -38,20 +38,20 @@
                 @endif
                 <div class="">
                     <div class="table-responsive">
-                        @if(\Auth::user()->role == 'master')
-                            @include('layouts.master.create-school-form')
-                            <h2>School List</h2>
-                        @endif
+{{--                        @if(\Auth::user()->role == 'master')--}}
+{{--                            @include('layouts.master.create-school-form')--}}
+{{--                            <h2>School List</h2>--}}
+{{--                        @endif--}}
                         <div class="table-responsive">
                             <table class="table display text-wrap" style="border: 0px solid;">
                                 <thead>
                                 <tr>
-                                    @if(\Auth::user()->role == 'master')
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
-                                        <th>About</th>
-                                    @endif
+{{--                                    @if(\Auth::user()->role == 'master')--}}
+{{--                                        <th>#</th>--}}
+{{--                                        <th>Name</th>--}}
+{{--                                        <th>Code</th>--}}
+{{--                                        <th>About</th>--}}
+{{--                                    @endif--}}
                                     @if(\Auth::user()->role == 'admin')
                                         <th>Department</th>
                                         <th>Classes</th>
@@ -66,18 +66,18 @@
                                 @foreach($schools as $school)
                                     @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
                                         <tr>
-                                            @if(\Auth::user()->role == 'master')
-                                                <td>{{($loop->index + 1)}}</td>
-                                                <td>
-                                                    {{$school->name}}
-                                                </td>
-                                                <td>
-                                                    {{$school->code}}
-                                                </td>
-                                                <td>
-                                                    {{$school->about}}
-                                                </td>
-                                            @endif
+{{--                                            @if(\Auth::user()->role == 'master')--}}
+{{--                                                <td>{{($loop->index + 1)}}</td>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$school->name}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$school->code}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$school->about}}--}}
+{{--                                                </td>--}}
+{{--                                            @endif--}}
                                             @if(\Auth::user()->school_id == $school->id)
                                                 <td>
                                                     <a href="#" class="btn btn-primary btn-lg"
@@ -133,20 +133,20 @@
                                                     </a>
                                                 </td>
                                             @endif
-                                            @if(\Auth::user()->role == 'master')
-                                                <td>
-                                                    <a class="btn btn-danger btn-lg" role="button"
-                                                       href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">
-                                                        <small>+ Create Admin</small>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-success btn-lg" role="button"
-                                                       href="{{url('school/admin-list/'.$school->id)}}">
-                                                        <small>View Admins</small>
-                                                    </a>
-                                                </td>
-                                            @endif
+{{--                                            @if(\Auth::user()->role == 'master')--}}
+{{--                                                <td>--}}
+{{--                                                    <a class="btn btn-danger btn-lg" role="button"--}}
+{{--                                                       href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">--}}
+{{--                                                        <small>+ Create Admin</small>--}}
+{{--                                                    </a>--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    <a class="btn btn-success btn-lg" role="button"--}}
+{{--                                                       href="{{url('school/admin-list/'.$school->id)}}">--}}
+{{--                                                        <small>View Admins</small>--}}
+{{--                                                    </a>--}}
+{{--                                                </td>--}}
+{{--                                            @endif--}}
                                         </tr>
                                         @if(\Auth::user()->school_id == $school->id)
                                             <tr class="collapse" id="collapse{{($loop->index + 1)}}"

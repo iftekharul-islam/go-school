@@ -186,13 +186,32 @@ Route::middleware(['auth','accountant'])->prefix('accounts')->name('accounts.')-
 });
 
 Route::get('create-school', 'SchoolController@index')->middleware('master.admin');
+Route::get('new/create-school', 'SchoolController@create')->middleware('master.admin');
 
 Route::middleware(['auth','master'])->group(function (){
-  Route::get('/register/admin/{id}/{code}', 'UserController@createAdmin');
+//  Route::get('/register/admin/{id}/{code}', 'UserController@createAdmin');
+
+    Route::get('register/admin/{id}/{code}', function($id, $code){
+        session([
+            'register_role' => 'admin',
+            'register_school_id' => $id,
+            'register_school_code' => $code,
+        ]);
+        return view('auth.admin', [
+            session([
+                'register_role' => 'admin',
+                'register_school_id' => $id,
+                'register_school_code' => $code,
+            ])
+        ]);
+    });
+
+
   Route::post('register/admin', 'UserController@storeAdmin');
   Route::get('master/activate-admin/{id}','UserController@activateAdmin');
   Route::post('create-school', 'SchoolController@store');
   Route::get('school/admin-list/{school_id}','SchoolController@show');
+  Route::get('school/{school_id}', 'SchoolController@showSchool');
 });
 
 Route::middleware(['auth','admin'])->group(function (){
