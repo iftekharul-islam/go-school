@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Services\User\UserService;
 use Alert;
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     /**
@@ -106,6 +108,8 @@ class HomeController extends Controller
             $present="";
             $absent="";
             $escaped="";
+            $total_expense="";
+            $total_income="";
             if (!empty($student_info)) {
                 $student_id = $student_info->student_id;
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
@@ -159,8 +163,21 @@ class HomeController extends Controller
             ]);
         }
         elseif (\Auth::user()->role == 'accountant') {
+            $total_expense = DB::table('accounts')->where('type', 'expense')
+                ->selectRaw('sum(amount)')
+                ->get();
+            foreach ($total_expense as $te)
+                $total_expense = $te->sum;
+
+            $total_income = DB::table('accounts')->where('type', 'income')
+                ->selectRaw('sum(amount)')
+                ->get();
+
+            foreach ($total_income as $ti)
+                $total_income = $ti->sum;
+
             $fees = \App\Fee::where('school_id', \Auth::user()->school_id)->get();
-            return view('teacher-home', [
+            return view('accountant-home', [
                 'totalStudents' => $totalStudents,
                 'notices' => $notices,
                 'exams' => $exams,
@@ -170,7 +187,9 @@ class HomeController extends Controller
                 'female' => $female,
                 'fees'   => $fees,
                 'present' => $present,
-                'absent' => $absent
+                'absent' => $absent,
+                'total_income' => $total_income,
+                'total_expense' => $total_expense,
             ]);
         }
         elseif (\Auth::user()->role == 'librarian') {

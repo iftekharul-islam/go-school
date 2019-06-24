@@ -28,9 +28,10 @@
         </div>
 
 
-        <div class="col-md-12 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
+        <div class="col-md-12 form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
             <label>Start Date</label>
-            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" placeholder="5th April..." required>
+            <input data-date-format="yyyy-mm-dd" id="start_date" class="form-control date" name="start_date" value="{{ old('start_date') }}" placeholder="Start Date" required autocomplete="off">
+{{--            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" placeholder="5th April..." required>--}}
             @if ($errors->has('start_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('start_date') }}</strong>
@@ -40,7 +41,8 @@
 
         <div class="col-md-12 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>End Date</label>
-            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" placeholder="20th April..." required>
+            <input data-date-format="yyyy-mm-dd" id="end_date" class="form-control date" name="end_date" value="{{ old('end_date') }}" placeholder="End Date" required autocomplete="off">
+{{--            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" placeholder="20th April..." required>--}}
             @if ($errors->has('end_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('end_date') }}</strong>
@@ -88,3 +90,12 @@
         </div>
     </div>
 </form>
+
+<script>
+    $(function () {
+        $('.date').datepicker({
+            format: 'yyyy-mm-dd',
+            language: 'en'
+        });
+    })
+</script>

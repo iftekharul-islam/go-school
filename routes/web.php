@@ -55,6 +55,8 @@ Route::middleware(['auth'])->group(function (){
   Route::post('attendance/adjust','AttendanceController@adjustPost')->middleware(['teacher']);
 });
 
+Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
+
 Route::middleware(['auth','teacher'])->prefix('grades')->group(function (){
   Route::get('all-exams-grade', 'GradeController@allExamsGrade');
   Route::get('section/{section_id}', 'GradeController@gradesOfSection');
@@ -96,7 +98,7 @@ Route::middleware(['auth'])->group(function (){
   Route::get('user/config/change_password', 'UserController@changePasswordGet');
   Route::post('user/config/change_password', 'UserController@changePasswordPost');
   Route::get('section/students/{section_id}', 'UserController@sectionStudents');
-  
+
   Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
   Route::get('user/deactivate/{id}','UserController@deactivateUser');
 
@@ -129,6 +131,7 @@ Route::middleware(['auth','admin'])->prefix('academic')->name('academic.')->grou
 
 Route::middleware(['auth','admin'])->prefix('exams')->name('exams.')->group(function (){
   Route::get('/', 'ExamController@index');
+  Route::get('/details/{exam_id}', 'ExamController@details');
   Route::get('create', 'ExamController@create');
   Route::post('create', 'ExamController@store');
   Route::post('activate-exam', 'ExamController@update');
@@ -140,6 +143,7 @@ Route::middleware(['auth','admin'])->prefix('exams')->name('exams.')->group(func
 Route::middleware(['auth','teacher'])->group(function (){
   Route::get('exams/active', 'ExamController@indexActive');
   Route::get('school/sections','SectionController@index');
+  Route::get('school/sections/details/{class_id}','SectionController@details');
 });
 
 Route::get('all-notice', 'NoticeController@index')->middleware(['auth','student']);
@@ -166,7 +170,7 @@ Route::middleware(['auth','accountant'])->prefix('accounts')->name('accounts.')-
   Route::post('create-sector','AccountController@storeSector');
   Route::get('edit-sector/{id}','AccountController@editSector');
   Route::post('update-sector','AccountController@updateSector');
-  //Route::get('delete-sector/{id}','AccountController@deleteSector');
+  Route::get('delete-sector/{id}','AccountController@deleteSector');
 
   Route::get('income','AccountController@income');
   Route::post('create-income','AccountController@storeIncome');

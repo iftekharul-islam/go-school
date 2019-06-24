@@ -1,9 +1,9 @@
 @if(count($attendances) > 0)
-<div class="col-md-6">
-    <h5>Attendance List of This Term</h5>
+<div class="col-md-12">
+{{--    <h5>Attendance List of This Term</h5>--}}
     <form action="{{url('attendance/adjust')}}" method="POST">
         {{ csrf_field() }}
-        <table class="table table-striped table-hover table-condensed">
+        <table class="table display data-table text-nowrap">
             <tr>
                 <th>#</th>
                 <th>Status</th>
@@ -14,20 +14,23 @@
                 <tr>
                     <td>
                         <div class="form-check">
-                            <input class="form-check-input position-static" type="checkbox" aria-label="Present" name="isPresent[]">
-                        </div>
+                            <input class="form-check-input" type="checkbox" name="isPresent[]" aria-label="Present" checked="">
+                            <label for="">&nbsp;</label></div>
+{{--                        <div class="form-check">--}}
+{{--                            <input class="form-check-input position-static" type="checkbox" aria-label="Present" name="isPresent[]">--}}
+{{--                        </div>--}}
                     </td>
                     <td>
                         @if($att->present === 0)
                             <span class="label label-danger attdState">Absent</span>
                         @endif
                     </td>
-                    <td>{{$att->created_at}}</td>
+                    <td>{{$att->created_at->format('m/d/Y')}}</td>
                 </tr>
             @endforeach
         </table>
-        <a href="javascript:history.back()" class="btn btn-sm btn-primary" style="margin-right: 2%;" role="button">Cancel</a>
-        <input type="submit" class="btn btn-sm btn-danger" value="Submit"/>
+        <a href="javascript:history.back()" class="btn btn-lg btn-primary" style="margin-right: 2%;" role="button">Cancel</a>
+        <input type="submit" class="btn btn-lg btn-danger" value="Submit"/>
     </form>
 </div>
 <script>

@@ -4,12 +4,12 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Create Admin</h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Register Admin</li>
+            <li>Create Admin</li>
         </ul>
     </div>
 
@@ -17,17 +17,9 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                    <h3>Register Admin</h3>
+                    <h3></h3>
                 </div>
             </div>
-{{--            <div class="col-md-3" id="side-navbar">--}}
-{{--                <ul class="nav">--}}
-{{--                    <li class="nav-item active" style="margin-left: -13px !important;">--}}
-{{--                        <a class="btn btn-success btn-lg" href="{{ url('create-school') }}">Back to Manage School</a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
             <div class="col-md-12" id="main-container">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -48,24 +40,20 @@
                     </div>
                 @endif
             </div>
-            <div class="panel panel-default mt-5">
-                <div class="panel-body">
+            <div class="">
+                <div class="">
                     <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/'.session('register_role')) }}">
                         {{ csrf_field() }}
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="name" class="col-md-4 control-label">Full Name</label>
 
                                     <div class="col-md-12">
-                                        <input id="name" type="text" class="form-control" name="name"
-                                               value="{{ old('name') }}"
-                                               required>
+                                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
                                         @if ($errors->has('name'))
-                                            <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
+                                            <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
                                         @endif
                                     </div>
                                 </div>
@@ -87,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label for="password" class="col-md-4 control-label">Password</label>
@@ -117,7 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                     <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
@@ -159,7 +147,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
                                     <label for="nationality" class="col-md-4 control-label">Nationality</label>
@@ -190,6 +178,42 @@
                                         @if ($errors->has('gender'))
                                             <span class="help-block">
                                     <strong>{{ $errors->first('gender') }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                    <label for="address" class="col-md-6 control-label">Address</label>
+
+                                    <div class="col-md-12">
+                                        <input id="address" type="text" class="form-control" name="address"
+                                               value="{{ old('address') }}"
+                                               required>
+
+                                        @if ($errors->has('address'))
+                                            <span class="help-block">
+                                    <strong>{{ $errors->first('address') }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+                                    <label for="about" class="col-md-6 control-label">About</label>
+
+                                    <div class="col-md-12">
+                                        <textarea id="about" class="form-control" name="about"
+                                               value="{{ old('about') }}"
+                                                  required></textarea>
+
+                                        @if ($errors->has('about'))
+                                            <span class="help-block">
+                                    <strong>{{ $errors->first('about') }}</strong>
                                 </span>
                                         @endif
                                     </div>

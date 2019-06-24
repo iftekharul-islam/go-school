@@ -2471,8 +2471,8 @@ ul {
   margin-bottom: 0;
 }
 .new-added-form .form-group label {
-  margin-bottom: 12px;
-  display: block;
+  /*margin-bottom: 12px;*/
+  /*display: block;*/
 }
 .new-added-form .form-group .form-control {
   background-color: #f0f1f3;

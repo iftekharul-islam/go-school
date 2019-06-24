@@ -22,6 +22,7 @@ class ExamController extends Controller
     public function index()
     {
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
+//        return $exams;
         return view('exams.all',compact('exams'));
     }
 
@@ -29,8 +30,15 @@ class ExamController extends Controller
         $exams = $this->examService->getActiveExamsBySchoolId();
         $this->examService->examIds = $exams->pluck('id')->toArray();
         $courses = $this->examService->getCoursesByExamIds();
-
+//        return $courses;
         return view('exams.active',compact('exams','courses'));
+    }
+
+    public function details($exam_id) {
+        $exams = $this->examService->getActiveExamsBySchoolId();
+        $this->examService->examIds = $exams->pluck('id')->toArray();
+        $courses = $this->examService->getCoursesByExamIds();
+        return view('exams.details',compact('exam_id','courses'));
     }
 
     /**
@@ -54,7 +62,6 @@ class ExamController extends Controller
      */
     public function store(CreateExamRequest $request)
     {
-
         $this->examService->request = $request;
         try{
             $this->examService->storeExam();

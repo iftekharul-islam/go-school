@@ -7,6 +7,7 @@
         @if($upload_type == 'syllabus' && $parent == 'class')
           <th>Class</th>
         @elseif($upload_type == 'routine' && $parent == 'section')
+          <th>Class</th>
           <th>section</th>
         @endif
         <th>Is Active</th>
@@ -19,9 +20,10 @@
         <td>{{($loop->index + 1)}}</td>
         <td><a href="{{url($file->file_path)}}" target="_blank">{{$file->title}}</a></td>
         @if($upload_type == 'syllabus' && $parent == 'class')
-          <td>{{$file->myclass->class_number}}</td>
+          <td>{{$file->myclass['class_number']}}</td>
         @elseif($upload_type == 'routine' && $parent == 'section')
-          <td>{{$file->section->section_number}}</td>
+          <td>{{$file->section['class_id']}}</td>
+          <td>{{$file->section['section_number']}}</td>
         @endif
         <td>{{($file->active === 1)?'Yes':'No'}}</td>
         <td>

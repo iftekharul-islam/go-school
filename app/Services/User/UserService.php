@@ -124,7 +124,7 @@ class UserService {
                 ->student()
                 ->where('active', 1)
                 ->orderBy('name', 'asc')
-                ->paginate(50);
+                ->paginate(100);
     }
 
     public function getTeachers(){
@@ -199,6 +199,8 @@ class UserService {
         $tb->phone_number = $request->phone_number;
         $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
         $tb->verified = 1;
+        $tb->address = $request->address;
+        $tb->about = $request->about;
         $tb->save();
         return $tb;
     }

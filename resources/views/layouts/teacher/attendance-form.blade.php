@@ -114,9 +114,9 @@
         </table>
     </div>
     <div style="text-align:center;">
-{{--        <a href="javascript:history.back()" class="btn btn-danger btn-lg mr-3" role="button">Cancel</a>--}}
+        <a href="javascript:history.back()" class="btn btn-danger btn-lg mr-3" role="button">Cancel</a>
         @if (count($attendances) > 0)
-{{--            <button type="submit" class="btn btn-primary mr-3 btn-lg">Update</button>--}}
+            <button type="submit" class="btn btn-primary mr-3 btn-lg">Update</button>
         @else
             <button type="submit" class="btn btn-primary mr-3 btn-lg">Submit</button>
         @endif

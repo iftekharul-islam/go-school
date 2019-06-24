@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-md header-menu-one bg-light">
     <div class="nav-bar-header-one">
         <div class="header-logo">
-            <a href="{{ url('home') }}">
+            <a href="{{ url('/') }}">
                 <img src="{{ asset('/template/img/logo.png') }}" alt="logo">
             </a>
         </div>

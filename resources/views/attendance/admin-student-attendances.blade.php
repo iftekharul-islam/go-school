@@ -2,15 +2,16 @@
 
 @section('title', 'Attendance')
 @section('content')
-    <div class="dashboard-content-one">
+{{--    <div class="dashboard-content-one">--}}
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Student Attendence</h3>
-            <ul>
+            <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Student Attendance
+            </h3>
+            <ul style="margin-left: -100px !important;">
                 <li>
-                    <a href="{{ url('home') }}">Home</a>
+                    <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
                 </li>
-                <li>Attendence</li>
+                <li>Student Attendance</li>
             </ul>
         </div>
         <!-- Breadcubs Area End Here -->
@@ -30,29 +31,37 @@
                                     <thead>
                                     <tr>
 {{--                                        <th class="text-left">Students</th>--}}
-                                        <th>Status</th>
-                                        <th>Date</th>
+                                        <th>Total Class</th>
+                                        <th>Total Present</th>
+                                        <th>Total Absent</th>
+                                        <th>Total Escaped</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($attendances as $attendance)
-                                        @if($attendance->present == 1)
-                                            <tr class="success">
-                                                <td>Present</td>
-                                                <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>
-                                            </tr>
-                                        @elseif($attendance->present == 2)
-                                            <tr class="warning">
-                                                <td>Escaped</td>
-                                                <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>
-                                            </tr>
-                                        @else
-                                            <tr class="danger">
-                                                <td>Absent</td>
-                                                <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
+                                    <tr>
+                                        <td>{{ $total }}</td>
+                                        <td>{{ $present }}</td>
+                                        <td>{{ $absent }}</td>
+                                        <td>{{ $escaped }}</td>
+                                    </tr>
+{{--                                    @foreach ($attendances as $attendance)--}}
+{{--                                        @if($attendance->present == 1)--}}
+{{--                                            <tr class="success">--}}
+{{--                                                <td>Present</td>--}}
+{{--                                                <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>--}}
+{{--                                            </tr>--}}
+{{--                                        @elseif($attendance->present == 2)--}}
+{{--                                            <tr class="warning">--}}
+{{--                                                <td>Escaped</td>--}}
+{{--                                                <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>--}}
+{{--                                            </tr>--}}
+{{--                                        @else--}}
+{{--                                            <tr class="danger">--}}
+{{--                                                <td>Absent</td>--}}
+{{--                                                <td>{{$attendance->created_at->format('M d Y h:i:sa')}}</td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
                                     </tbody>
                                 </table>
                             </div>
@@ -65,5 +74,5 @@
             </div>
         </div>
         <!-- Student Attendence Area End Here -->
-    </div>
+{{--    </div>--}}
 @endsection

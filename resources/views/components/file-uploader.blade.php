@@ -3,7 +3,6 @@
     @if($upload_type != 'profile')
         <div class="heading-layout1">
             <div class="item-title">
-                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                 <h3>@if($upload_type === 'routine')
                         Class {{ucfirst($upload_type)}}
                     @else
@@ -11,7 +10,7 @@
                     @endif</h3>
             </div>
         </div>
-        <label style="margin-left: -53px;">File Title: </label>
+        <label>File Title: </label>
         <div class="form-group">
             <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">
         </div>
@@ -20,11 +19,17 @@
     <div class="form-group mg-t-30 mb-5">
         <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}" class="form-control-file">
     </div>
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-      <div class="text-xs-center" id="up-prog-info">0% uploaded</div>
+
+    <div class="basic-progress-bar" id="progress">
+        <div class="progress">
+            <div class="progress-bar bg-yellow" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
     </div>
-  </div>
+{{--  <div class="progress">--}}
+{{--    <div class="progress-bar progress-bar-striped active" id="up-prog-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">--}}
+{{--      <div class="text-xs-center" id="up-prog-info">0% uploaded</div>--}}
+{{--    </div>--}}
+{{--  </div>--}}
   <div id="errorAlert"></div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.28.4/sweetalert2.min.css">
@@ -100,7 +105,6 @@ $(function () {
         progress: function (e, data) {
             var progress = 0;
             progress = parseInt(data.loaded / data.total * 100, 10);
-            console.log('progress'+progress);
                 $('.progress-bar').attr(
                     'aria-valuenow',
                     progress

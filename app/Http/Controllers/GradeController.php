@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\Http\Resources\GradeResource;
+use App\Section;
 use Illuminate\Http\Request;
 use App\Http\Requests\Grade\CalculateMarksRequest;
 use App\Http\Traits\GradeTrait;
@@ -81,6 +82,15 @@ class GradeController extends Controller
       $sections = $this->gradeService->getSectionsByClassIds($classIds);
       return view('grade.new-all-exams-grade',compact('classes',
         'sections'));
+    }
+
+    public function allExamsGradeDetails($class_id){
+        $sections = Section::where('class_id', $class_id)->get();
+//        return $sections;
+//        $classes = $this->gradeService->getClassesBySchoolId();
+//        $classIds = $classes->pluck('id')->toArray();
+//        $sections = $this->gradeService->getSectionsByClassIds($classIds);
+        return view('grade.new-all-exams-grade-details',compact('sections'));
     }
 
     public function gradesOfSection($section_id){
