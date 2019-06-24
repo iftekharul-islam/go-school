@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;All Grades</h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
             <li>All Grades</li>
         </ul>
@@ -19,8 +19,6 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                        <h3>Marks and Grades</h3>
                     </div>
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -28,49 +26,30 @@
                         </div>
                     @endif
                 </div>
-                @foreach ($classes as $class)
-                    <div class="card-header" style="background-color: #fff">
-                        <div class="row">
-                            <div class="col-md-1">
-                            </div>
-                            <div class="col-md-7">
-                                <a class="" role="button" data-toggle="collapse" href="#collapse{{$class->id}}" aria-controls="collapse{{$class->id}}">
-                                    <h5>
-                                        Class: {{$class->class_number}} {{$class->group}} <span class="float-right btn-fill-lg bg-blue-dark btn-hover-yellow"><b>Sections under this Class+</b></span>
-                                    </h5>
-                                </a>
+                <div class="row">
+                    @foreach ($classes as $class)
+                        <?php $total_student = 0 ?>
+                        <div class="col-md-4">
+                            <div class="card mb-5">
+                                <h5 class="card-header bg-dark text-white" style="text-align: center">Class
+                                    : {{$class->class_number}} @if($class->group)
+                                        group:{{ucfirst($class->group)}} @endif</h5>
+                                <div class="card-body">
+                                    @foreach($class->sections as $sec)
+                                        @php
+                                            $total_student = $total_student + $sec->users->count();
+                                        @endphp
+                                    @endforeach
+                                    <h5 class="card-title">Total Section : <b>{{ $class->sections->count() }}</b></h5>
+                                    <h5 class="card-title float-right" style="margin-top: -35px;">Total Student
+                                        : {{ $total_student }}</h5>
+                                        <a class="btn-secondary btn btn-lg float-right"
+                                           href="{{ url('all-exams-grade/details/'.$class->id) }}">All Sections</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="collapse{{$class->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$class->id}}">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>Section Name</th>
-                                <th>View Each Student's Grade History</th>
-                                <th>View all Students Marks under this Section</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($sections as $section)
-                                @if($class->id == $section->class_id)
-                                    <tr>
-                                        <td>
-                                            <a href="{{url('grades/section/'.$section->id)}}">{{$section->section_number}}</a>
-                                        </td>
-                                        <td>
-                                            <a href="{{url('section/students/'.$section->id)}}" class="btn btn-info btn-lg">View Each Student's Grade History</a>
-                                        </td>
-                                        <td>
-                                            <a href="{{url('grades/section/'.$section->id)}}" role="button" class="btn btn-lg btn-warning">View all Students Marks under this Section</a>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         @else
             <div class="card-body">

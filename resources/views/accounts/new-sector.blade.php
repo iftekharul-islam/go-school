@@ -2,24 +2,20 @@
 @section('title', 'Account Sectors')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Students</h3>
-        <ul>
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
-            </li>
-            <li>Add New Sector</li>
-        </ul>
+        <div class="breadcrumbs-area">
+            <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Add New Sector</h3>
+            <ul style="margin-left: -100px !important;">
+                <li>
+                    <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+                </li>
+                <li>Add New Sector</li>
+            </ul>
+        </div>
     </div>
     <!-- Breadcubs Area End Here -->
     <!-- Admit Form Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
-                    <h3>Account Sectors</h3>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-6">
                     <form class="new-added-form" action="{{url('/accounts/create-sector')}}" method="post">
@@ -64,23 +60,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-md-12">
                     <div class="card height-auto">
                         <div class="card-body">
                             <div class="heading-layout1">
                                 <div class="item-title">
                                     <h3>All Created Sectors</h3>
-                                </div>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="#" role="button"
-                                       data-toggle="dropdown" aria-expanded="false">...</a>
-
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                    </div>
                                 </div>
                             </div>
                             <table class="table table-striped table-data-div">
@@ -95,9 +81,11 @@
                                 @foreach ($sectors as $sector)
                                     <tr>
                                         <td>{{$sector->name}}</td>
-                                        <td>{{$sector->type}}</td>
+                                        <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="btn btn-danger btn-lg" role="button">Edit</a>
+                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="btn btn-warning btn-lg mr-3" role="button">Edit</a>
+                                            <button class="btn btn-danger btn-lg" onclick="book()">Delete</button>
+                                            <a id="delete-form" href="{{url('accounts/delete-sector/'.$sector->id)}}" role="button"></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -193,3 +181,27 @@
 		};
 	    </script>
 @endsection
+@push('customjs')
+    <script type="text/javascript">
+        function book(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                        setTimeout(5000);
+                        swal("Done! Your Selected file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Your Delete Operation has been canceled");
+                    }
+                });
+        }
+    </script>
+@endpush

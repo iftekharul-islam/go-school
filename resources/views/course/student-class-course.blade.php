@@ -4,17 +4,19 @@
 
 @section('content')
 
-    <div class="dashboard-content-one">
+{{--    <div class="dashboard-content-one">--}}
         <!-- Breadcubs Area Start Here -->
-        <div class="breadcrumbs-area">
-            <h3>Dashboard</h3>
-            <ul>
-                <li>
-                    <a href="{{ url('home') }}">Home</a>
-                </li>
-                <li>Subjects</li>
-            </ul>
-        </div>
+    <div class="breadcrumbs-area">
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
+            </a>&nbsp;&nbsp;Subjects
+        </h3>
+        <ul style="margin-left: -100px !important;">
+            <li>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+            </li>
+            <li>Subjects</li>
+        </ul>
+    </div>
         <!-- Breadcubs Area End Here -->
         <!-- All Subjects Area Start Here -->
         <div class="row">
@@ -32,7 +34,6 @@
 {{--                                </ol>--}}
 {{--                            @endif--}}
                             <div class="item-title">
-                                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                                 <h3>My Courses</h3>
                                 @if(count($courses) > 0)
                                     @foreach ($courses as $course)
@@ -64,6 +65,6 @@
             </div>
         </div>
         <!-- All Subjects Area End Here -->
-    </div>
+{{--    </div>--}}
 
 @endsection

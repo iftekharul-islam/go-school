@@ -1,5 +1,5 @@
-<div class="card bg-warning mb-3">
-    <div class="card-header">Information</div>
+<div class="card mb-3">
+    <div class="card-header" style="background-color: #28978B; color: white">Information</div>
     <div class="card-body">
       An Examination represents a Semester. All Courses of a Semester belong to an Examination. So, all Quiz, Class Test, Assignment, Attendance, Written, Practical, etc. in a Course are subjected to that specific Examination.
     </div>
@@ -11,7 +11,7 @@
       {{csrf_field()}}
     </form>
   @endforeach'
-  <table class="table display data-table text-nowrap">
+  <table class="table display text-nowrap">
     <thead>
     <tr>
       <th>#</th>
@@ -78,15 +78,15 @@
           @endif
           @if($exam->result_published != 1)
             <span>
-          <input type="submit" class="btn btn-info btn-lg float-right" style="margin-left: 1%;" value="Save" form="form{{$exam->id}}"/>
+          <input type="submit" class="button2 button2--white button2--animation float-right" style="margin-left: 1%;" value="Save" form="form{{$exam->id}}"/>
         </span>
           @endif
         </td>
         <td>
-          <button class="btn btn-danger btn-lg" onclick="removeExam()">Delete</button>
+          <button class="btn btn-danger btn-lg" onclick="removeExam()"><i class="fas fa-trash-alt"></i></button>
           <a id="delete-form" href="{{ url('exams/remove', ['id' => $exam->id]) }}"></a>
           <a href="{{ url('exams/edit', ['id' => $exam->id]) }}">
-            <button class="btn btn-info btn-lg ml-3">Edit</button>
+            <button class="btn btn-info btn-lg ml-3"><i class="far fa-edit"></i></button>
           </a>
 
         </td>

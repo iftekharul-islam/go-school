@@ -44,7 +44,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('school/sections?course=1') }}" class="nav-link">
-                            <i class="fas fa-school"></i><span>Classes & Sections</span></a>
+                            <i class="fas fa-school"></i><span>Class Details</span></a>
                     </li>
                 @endif
 

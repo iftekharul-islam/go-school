@@ -4,10 +4,12 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
+            </a>&nbsp;&nbsp;Manage Academy
+        </h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
             <li>Manage Academy</li>
         </ul>
@@ -15,12 +17,12 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                    <h3>Manage Departments, Classes, Sections, Student Promotion, Courses</h3>
-                </div>
-            </div>
+{{--            <div class="heading-layout1">--}}
+{{--                <div class="item-title">--}}
+{{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>--}}
+{{--                    <h3>Manage Departments, Classes, Sections, Student Promotion, Courses</h3>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 12 }}" id="main-container">
                 @if (session('status'))
                     <div class="alert alert-success">

@@ -5,10 +5,10 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Edit</h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
             <li>Edit</li>
         </ul>
@@ -18,7 +18,6 @@
         <div class="card-body">
             <div class="heading-layout1 mb-5">
                 <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
                     <h3>Edit {{ ucfirst($user->role) }}</h3>
                 </div>
             </div>

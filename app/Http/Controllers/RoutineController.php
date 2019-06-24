@@ -21,7 +21,7 @@ class RoutineController extends Controller
                         ->where('school_id',\Auth::user()->school_id)
                         ->where('active',1)
                         ->get();
-        return view('routines.new-create',['files'=>$files,'section_id' => 0]);
+        return view('routines.index',['files'=>$files,'section_id' => 1]);
      }
 
     /**

@@ -31,6 +31,8 @@ class CreateAdminRequest extends FormRequest
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
+            'about' => 'required',
+            'address' => 'required',
             'blood_group' => 'required',
             'phone_number' => 'required|unique:users',
             'email' => 'email|max:255|unique:users',

@@ -1,3 +1,4 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <form class="new-added-form" action="{{url('exams/edit',['id' => $exam->id])}}" method="post">
     {{ csrf_field() }}
     <div class="row">
@@ -28,7 +29,8 @@
 
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
             <label>Start Date</label>
-            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ $exam->start_date }}" required>
+            <input data-date-format="yyyy-mm-dd" id="start_date" class="form-control date" name="start_date" value="{{ $exam->start_date }}" placeholder="Start Date" required autocomplete="off">
+{{--            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ $exam->start_date }}" required>--}}
             @if ($errors->has('start_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('start_date') }}</strong>
@@ -38,7 +40,8 @@
 
         <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>End Date</label>
-            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ $exam->end_date }}" required>
+{{--            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ $exam->end_date }}" required>--}}
+            <input data-date-format="yyyy-mm-dd" id="end_date" class="form-control date" name="end_date" value="{{ $exam->end_date }}" placeholder="End Date" required autocomplete="off">
             @if ($errors->has('end_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('end_date') }}</strong>
@@ -48,23 +51,27 @@
 
         <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>For Class</label>
-            <div style="margin-left: 100px;">
+            <div style="margin-left: 50px;">
                 @foreach ($classes as $class)
                     @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))
-                        <div class="checkbox">
-                            {{$class->class_number}} already assigned to Exam <b>
-                                @foreach($assigned_classes as $assigned_class)
-                                    @if($assigned_class->class_id == $class->id)
-                                        {{$assigned_class['exam']['exam_name']}}
-                                        @break
-                                    @endif
-                                @endforeach
-                            </b>
+                        <div class="card-header mt-2">
+                            <div class="checkbox">
+                                Class : {{$class->class_number}} &nbsp;Already has assigned to Exam <b>
+                                    @foreach($assigned_classes as $assigned_class)
+                                        @if($assigned_class->class_id == $class->id)
+                                            {{$assigned_class['exam']['exam_name']}}
+                                            @break
+                                        @endif
+                                    @endforeach
+                                </b>
+                            </div>
                         </div>
                     @else
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="classes[]" value="{{$class->id}}">
-                            <label class="form-check-label">{{$class->class_number}}</label>
+                        <div class="card-header mt-2">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="classes[]" value="{{$class->id}}">
+                                <label class="form-check-label"> Class: {{$class->class_number}}</label>
+                            </div>
                         </div>
                     @endif
                 @endforeach
@@ -82,3 +89,20 @@
         </div>
     </div>
 </form>
+
+<script>
+    $(function () {
+        $('.date').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+        {{--var myDate = {{ Carbon\Carbon::parse($user->studentInfo['birthday'])->format('Y-m-d') }}--}}
+        {{--$('#birthday').datepicker('setDate',myDate);--}}
+        {{--$('#session').datepicker({--}}
+        {{--    format: "yyyy",--}}
+        {{--    viewMode: "years",--}}
+        {{--    minViewMode: "years"--}}
+        {{--});--}}
+        {{--var session = {{ Carbon\Carbon::parse($user->studentInfo['session'])->format('Y') }}--}}
+        {{--$('#session').datepicker('setDate',session);--}}
+    })
+</script>

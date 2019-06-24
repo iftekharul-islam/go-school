@@ -1,28 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Impersonate')
 
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3>Teacher</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Impersonate
+        </h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
-            <li>User Rules</li>
+            <li>Impersonate</li>
         </ul>
     </div>
 
     <div class="card height-auto">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                    <h3>All Users Role</h3>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table display data-table text-nowrap">
+            <div class="table-responsive col-md-8">
+                <table class="table display text-nowrap">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -42,7 +38,7 @@
                                     <td>
                                         <input type="hidden" name="id" value="{{$other_user->id}}" />
                                         <div class="col-12 form-group">
-                                            <button type="submit" class="fw-btn-fill btn-gradient-yellow">Impersonate</button>
+                                            <button type="submit" class="btn-primary btn btn-lg">Impersonate</button>
                                         </div>
                                     </td>
                                 </form>

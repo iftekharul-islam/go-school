@@ -8,12 +8,14 @@
         <div class="col-md-12" id="main-container">
             <div class="panel panel-default">
                 <div class="breadcrumbs-area">
-                    <h3>Dashboard</h3>
-                    <ul>
+                    <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
+                        </a>&nbsp;&nbsp;Teacher All Sections
+                    </h3>
+                    <ul style="margin-left: -100px !important;">
                         <li>
-                            <a href="{{ url('/home') }}">Home</a>
+                            <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
                         </li>
-                        <li>Teacher all Classes</li>
+                        <li>Teacher All Sections</li>
                     </ul>
                 </div>
                 <div class="panel-body">
@@ -25,10 +27,6 @@
                         <div class="card height-auto false-height">
                             <div class="card-body">
                                 <div class="heading-layout1">
-                                    <div class="item-title">
-                                        <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                                        <h3>Courses Taken by Teacher</h3>
-                                    </div>
                                 </div>
                                 @if(count($courses) > 0)
                                     @if(count($courses) > 0)
