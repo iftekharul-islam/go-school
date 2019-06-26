@@ -17,8 +17,8 @@
 
     <div class="card height-auto">
         <div class="card-body">
-            <div class="table-responsive col-md-8">
-                <table class="table display text-nowrap">
+            <div class="table-responsive">
+                <table class="table display text-nowrap table-bordered">
                     <thead>
                     <tr>
                         <th>#</th>

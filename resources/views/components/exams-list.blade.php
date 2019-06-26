@@ -83,8 +83,13 @@
           @endif
         </td>
         <td>
-          <button class="btn btn-danger btn-lg" onclick="removeExam()"><i class="fas fa-trash-alt"></i></button>
-          <a id="delete-form" href="{{ url('exams/remove', ['id' => $exam->id]) }}"></a>
+          <button class="btn btn-danger btn-lg" type="button" onclick="removeExam({{ $exam->id }})"><i class="far fa-trash-alt"></i></button>
+          <form id="delete-form-{{ $exam->id }}" action="{{ url('exams/remove', ['id' => $exam->id]) }}" method="GET" style="display: none;">
+            @csrf
+            @method('GET')
+          </form>
+{{--          <button class="btn btn-danger btn-lg" onclick="removeExam()"><i class="fas fa-trash-alt"></i></button>--}}
+{{--          <a id="delete-form" href="{{ url('exams/remove', ['id' => $exam->id]) }}"></a>--}}
           <a href="{{ url('exams/edit', ['id' => $exam->id]) }}">
             <button class="btn btn-info btn-lg ml-3"><i class="far fa-edit"></i></button>
           </a>
@@ -98,7 +103,7 @@
 
 @push('customjs')
   <script type="text/javascript">
-    function removeExam() {
+    function removeExam(id) {
       swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this file!",
@@ -108,7 +113,7 @@
       })
               .then((willDelete) => {
                 if (willDelete) {
-                  document.getElementById('delete-form').click();
+                  document.getElementById('delete-form-'+id).submit();
                 } else {
                   swal("Your Delete Operation has been canceled");
                 }

@@ -20,7 +20,7 @@
         <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}" class="form-control-file">
     </div>
 
-    <div class="basic-progress-bar" id="progress">
+    <div class="basic-progress-bar" id="progress" style="display: none">
         <div class="progress">
             <div class="progress-bar bg-yellow" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -44,6 +44,7 @@ $(function () {
             .addClass('btn btn-primary ml-5 mt-2 btn-lg')
             .text('Upload')
             .on('click', function () {
+                $('#progress').css('display', 'block');
                 @if($upload_type != 'profile')
                     if(!$('#upload-title').val()){
                         swal({

@@ -24,8 +24,7 @@
             @if(count($students) > 0)
                 @foreach ($students as $student)
                     <div class="card-header-title mt-5 ml-2">
-                        <b>Section</b> - {{ $student->section->section_number}} <b>Class</b> - {{$student->section->class->class_number}}
-                        <span class="pull-right">Current Date Time: &nbsp;{{ Carbon\Carbon::now()->format('h:i A d/m/Y')}}</span>
+                        <b>Section</b> - {{ $student->section->section_number}}&nbsp;&nbsp; <b>Class</b> - {{$student->section->class->class_number}} &nbsp;&nbsp;
                     </div>
                     @break($loop->first)
                 @endforeach

@@ -15,6 +15,9 @@
     </div>
     <div class="card height-auto false-height">
         <div class="card-body">
+            @php
+                $count = 0;
+            @endphp
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -34,6 +37,7 @@
                 <tbody>
                 @foreach($sections as $section)
                     @if($class_id == $section->class_id)
+                        @php $count++ @endphp
                         <tr>
                             <td>
                                 <a href="{{url('courses/0/'.$section->id)}}">{{$section->section_number}}</a>
@@ -113,6 +117,9 @@
                 @endforeach
                 </tbody>
             </table>
+            @if($count === 0)
+                <h3 style="text-align: center">No Related Data Found</h3>
+            @endif
         </div>
     </div>
 

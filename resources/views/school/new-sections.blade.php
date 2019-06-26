@@ -10,7 +10,7 @@
             <li>
                 <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
-            <li>All Class</li>
+            <li>Student Attendance</li>
         </ul>
     </div>
     <div class="card height-auto false-height">
@@ -40,13 +40,13 @@
                                             : {{ $total_student }}</h5>
                                     </div>
                                     @if(isset($_GET['course']) && $_GET['course'] == 1)
-                                        <a class="btn-info btn btn-lg float-right" href="{{ url('school/sections/details/'.$class->id. '?course=1') }}"><b>Sections Details</b></a>
+                                        <a class="btn-info btn btn-lg float-right mt-5" href="{{ url('school/sections/details/'.$class->id. '?course=1') }}"><b>Class Details</b></a>
                                     @else
-                                       <a class="btn-info btn btn-lg float-right" href="{{ url('school/sections/details/'.$class->id. '?att=1') }}"><b>Sections Details</b></a>
+                                       <a class="btn-info btn btn-lg float-right mt-5" href="{{ url('school/sections/details/'.$class->id. '?att=1') }}"><b>Class Details</b></a>
                                     @endif
                                     @if(isset($_GET['course']) && $_GET['course'] == 1)
                                         <div class="col-md-3">
-                                            <a role="button" class="btn-info btn btn-lg"
+                                            <a role="button" class="btn-info btn btn-lg mt-5"
                                                href="{{url('academic/syllabus/'.$class->id)}}"><b>View Syllabus</b></a>
                                         </div>
                                     @endif
