@@ -12,6 +12,7 @@ use App\Http\Requests\Account\StoreSectorRequest;
 use App\Http\Requests\Account\StoreAccountRequest;
 use App\Http\Requests\Account\UpdateAccountRequest;
 use App\Services\Account\AccountService;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -102,15 +103,20 @@ class AccountController extends Controller
   }
 
   public function listIncome(){
-    $incomes = [];
+    $incomes = Account::where('school_id', \Auth::user()->school_id)
+        ->where('type','income')
+        ->get();
     return view('accounts.new-income-list',['incomes'=>$incomes]);
   }
 
   public function postIncome(Request $request){
     $this->accountSectors->request = $request;
     $this->accountSectors->account_type = 'income';
-    $incomes = $this->accountSectors->getAccountsByYear();
-
+    if ($request->month == '') {
+        $incomes = $this->accountSectors->getAccountsByYear();
+    } else {
+        $incomes = $this->accountSectors->getAccountsByMonth();
+    }
     return view('accounts.new-income-list',compact('incomes'));
   }
 
@@ -149,15 +155,21 @@ class AccountController extends Controller
   }
 
   public function listExpense(){
-    $expenses = [];
+    $expenses = Account::where('school_id', auth()->user()->school_id)
+        ->where('type', 'income')
+        ->get();
     return view('accounts.new-expense-list',['expenses'=>$expenses]);
   }
 
   public function postExpense(Request $request){
     $this->accountSectors->request = $request;
     $this->accountSectors->account_type = 'expense';
-    $expenses = $this->accountSectors->getAccountsByYear();
-
+    if ($request->month == '')
+    {
+        $expenses = $this->accountSectors->getAccountsByYear();
+    } else {
+        $expenses = $this->accountSectors->getAccountsByMonth();
+    }
     return view('accounts.new-expense-list',compact('expenses'));
   }
 

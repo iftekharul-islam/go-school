@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="form-group mg-t-8">
-                            <button type="submit" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Save</button>
+                            <button type="submit" class="button1 button1--white button1--animation float-left">Save</button>
                         </div>
                     </form>
                 </div>

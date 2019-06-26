@@ -27,7 +27,7 @@
                             <div class="heading-layout1">
                                 <div class="item-title">
                                     <h3 class="mb-4 mt-2 ml-2">{{ $school->name }}</h3>
-                                    <p class="mb-4 ml-2">{{ $school->about }}</p>
+                                    <p class="mb-4 ml-2">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
                                 </div>
                             </div>
                             <div class="table-responsive">

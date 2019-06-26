@@ -108,7 +108,8 @@ class AttendanceService {
       $at = [];
         foreach ($this->request->attendances as $key => $attendance) {
           $tb = Attendance::find($attendance);
-            if(count((array) $tb) === 1 && !isset($this->request["isPresent$i"]) && $tb->present == 1){
+//          dd(count((array) $tb));
+            if(isset($this->request["isPresent$i"]) && $tb->present == 1){
               // Attended today's class but escaped
               $tb->updated_at = date('Y-m-d H:i:s');
               $tb->save();

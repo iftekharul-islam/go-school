@@ -18,7 +18,11 @@
                 <th>#</th>
                 <th>Student_Code</th>
                 <th>Name</th>
-                <th>Present</th>
+                @if (count($attendances) > 0)
+                    <th>Escaped</th>
+                @else
+                    <th>Present</th>
+                @endif
                 <th>Total Attended</th>
                 <th>Total Missed</th>
                 <th>Total Escaped</th>
@@ -44,17 +48,19 @@
                             @else
                                 <span class="badge-danger badge">Absent</span>
                             @endif
-                            <a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
+                            &nbsp;&nbsp;<a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
                         </td>
                         <td>
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
                             @if($attendance->present === 1)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" aria-label="Present" name="isPresent{{$loop->index}}" checked>
+                                    <label for="">&nbsp;</label>
                                 </div>
                             @else
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent">
+                                    <label for="">&nbsp;</label>
                                 </div>
                             @endif
                         </td>
@@ -84,7 +90,7 @@
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
-                        <td><span class="badge badge-success attdState">Present</span>{{$student->name}}</td>
+                        <td><span class="badge badge-success attdState">Present</span>&nbsp;&nbsp;{{$student->name}}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>

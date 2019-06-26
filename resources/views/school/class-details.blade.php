@@ -18,10 +18,10 @@
             @php
                 $count = 0;
             @endphp
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Section Name</th>
+                    <th>Name</th>
                     @if(isset($_GET['att']) && $_GET['att'] == 1)
                         <th>View Today's Attendance</th>
                         <th>View Each Student's Attendance</th>
@@ -40,7 +40,7 @@
                         @php $count++ @endphp
                         <tr>
                             <td>
-                                <a href="{{url('courses/0/'.$section->id)}}">{{$section->section_number}}</a>
+                                <a class="text-muted" href="{{url('courses/0/'.$section->id)}}">Section {{$section->section_number}}</a>
                             </td>
 
                             @if(isset($_GET['att']) && $_GET['att'] == 1)
@@ -49,7 +49,7 @@
                                         @if ($ex->class_id == $class_id)
                                             <td>
                                                 <a role="button"
-                                                   class="btn-fill-md text-dodger-blue border-dodger-blue"
+                                                   class="button2 button2--white button2--animation float-left" style="font-size: 20px"
                                                    href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">View
                                                     Today's Attendance</a>
                                             </td>
@@ -61,7 +61,7 @@
                                 @endforeach
                                 <td>
                                     <a role="button"
-                                       class="btn-fill-md text-orange-peel border-orange-peel"
+                                       class="button2 button2--white button2--animation float-left"
                                        href="{{url('attendances/'.$section->id)}}">View Each
                                         Student's Attendance</a>
                                 </td>
@@ -76,7 +76,7 @@
                                                 $ce = 1;
                                                 ?>
                                                 <a role="button"
-                                                   class="btn-fill-md text-mauvelous border-mauvelous"
+                                                   class="button2 button2--white button2--animation float-left"
                                                    href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">Take
                                                     Attendance</a>
                                             @endif
@@ -95,21 +95,20 @@
                             @if(isset($_GET['course']) && $_GET['course'] == 1)
                                 <td>
                                     <a role="button"
-                                       class="btn-fill-md text-dodger-blue border-dodger-blue"
-                                       href="{{url('courses/0/'.$section->id)}}">View Courses
-                                        under this section</a>
+                                       class="button2 button2--white button2--animation float-left"
+                                       href="{{url('courses/0/'.$section->id)}}">View Courses</a>
                                 </td>
                                 <td>
                                     <a role="button"
-                                       class="btn-fill-md text-orange-peel border-orange-peel"
+                                       class="button2 button2--white button2--animation float-left"
                                        href="{{url('section/students/'.$section->id.'?section=1')}}">View
-                                        Students of this section</a>
+                                        Students</a>
                                 </td>
                                 <td>
                                     <a role="button"
-                                       class="btn-fill-md text-dark-pastel-green border-dark-pastel-green"
+                                       class="button2 button2--white button2--animation float-left"
                                        href="{{url('academic/routine/'.$section->id)}}">View
-                                        Routines for this section</a>
+                                        Routines</a>
                                 </td>
                             @endif
                         </tr>

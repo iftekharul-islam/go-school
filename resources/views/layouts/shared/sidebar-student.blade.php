@@ -157,7 +157,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
                         <ul class="nav sub-group-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/all') }}"><i class="fas fa-angle-right"></i><span>Generate Form</span></a>
+                                <a class="nav-link" href="{{ url('fees/all') }}"><i class="fas fa-angle-right"></i><span>All Fees</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('fees/create') }}"><i class="fas fa-angle-right"></i><span>Add Fee Field</span></a>
