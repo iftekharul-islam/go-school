@@ -157,7 +157,7 @@ h2 {
   font-size: 28px;
 }
 h3 {
-  font-size: 22px;
+  font-size: 28px;
 }
 @media only screen and (max-width: 991px) {
   h3 {
@@ -177,6 +177,15 @@ h6 {
 [02] BOOTSTRAP OVERWRITE
 =========================================================================*/
 /*=============== 2.1 Card ==================*/
+.card-body-entire {
+  padding: 15px 30px 30px;
+  background-color: #ffffff;
+  height: 100%;
+  min-height: 666px;
+  /* border-radius: 4px;
+  -webkit-box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75);
+  box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75); */
+}
 .card {
   padding-bottom: 30px;
   border: none;
@@ -188,9 +197,23 @@ h6 {
   padding: 15px 30px 30px;
   background-color: #ffffff;
   border-radius: 4px;
-  -webkit-box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75);
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
   box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75);
 }
+.library-table {
+ vertical-align: baseline;
+}
+.library-image img {
+  height: 300px;
+  width: 100%;  
+}
+/* .card-body-inner {
+  padding: 15px 30px 30px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75);
+  box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75);
+} */
 /*=============== 2.2 Dropdown ==================*/
 .dropdown .dropdown-menu {
   top: 58px;
@@ -801,6 +824,14 @@ h6 {
   text-align: center;
   padding: 10px;
 }
+.left-table table tr{
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+.right-table table tr {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
 /*=======================================================================
 3. VENDOR CUSTOM STYLE
 =========================================================================*/
@@ -913,7 +944,7 @@ h6 {
   margin-right: 10px;
 }
 .dataTables_wrapper .dataTables_paginate span a.paginate_button {
-  border: 1px solid #ffae01;
+  border: 1px solid #32998F;
   padding: 8px 18px;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -922,23 +953,23 @@ h6 {
   box-shadow: none;
 }
 .dataTables_wrapper .dataTables_paginate span a.paginate_button:hover {
-  background: -webkit-gradient(linear, left top, right top, from(#ff9d01), to(#ffae01));
-  background: -webkit-linear-gradient(left, #ff9d01, #ffae01);
-  background: -o-linear-gradient(left, #ff9d01, #ffae01);
-  background: linear-gradient(to right, #ff9d01, #ffae01);
-  border-color: #ffae01;
+  background: -webkit-gradient(linear, left top, right top, from(#0c9e8a), to(#32998F));
+  background: -webkit-linear-gradient(left, #0c9e8a, #32998F);
+  background: -o-linear-gradient(left, #0c9e8a, #32998F);
+  background: linear-gradient(to right, #0c9e8a, #32998F);
+  border-color: #32998F;
 }
 .dataTables_wrapper .dataTables_paginate span .paginate_button.current {
-  background: -webkit-gradient(linear, left top, right top, from(#ff9d01), to(#ffae01));
-  background: -webkit-linear-gradient(left, #ff9d01, #ffae01);
-  background: -o-linear-gradient(left, #ff9d01, #ffae01);
-  background: linear-gradient(to right, #ff9d01, #ffae01);
-  border: 1px solid #ffae01;
+  background: -webkit-gradient(linear, left top, right top, from(#0c9e8a), to(#32998F));
+  background: -webkit-linear-gradient(left, #0c9e8a, #32998F);
+  background: -o-linear-gradient(left, #0c9e8a, #32998F);
+  background: linear-gradient(to right, #0c9e8a, #32998F);
+  border: 1px solid #32998F;
   padding: 8px 18px;
 }
 .dataTables_wrapper .dataTables_paginate span .paginate_button.current:hover {
   background: transparent;
-  border-color: #ffae01;
+  border-color: #32998F;
 }
 /*=============== 3.2 Full Calender ==================*/
 .fc-calender .fc-header-toolbar .fc-left {
@@ -1269,7 +1300,7 @@ h6 {
   background: #042954;
 }
 .btn-hover-yellow:hover {
-  background: #ff9d01;
+  background: #0c9e8a;
 }
 /*=======================================================================
 5. PAGE LAYOUT STYLE
@@ -1288,7 +1319,7 @@ h6 {
 }
 .breadcrumbs-area ul li {
   display: inline-block;
-  color: #fea801;
+  color: #32998f;
   font-size: 16px;
   position: relative;
   margin-right: 15px;
@@ -1308,7 +1339,7 @@ h6 {
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
   z-index: 5;
-  color: #fea801;
+  color: #32998f;
 }
 .breadcrumbs-area ul li a {
   color: #646464;
@@ -1339,7 +1370,7 @@ h6 {
   z-index: 9999999;
 }
 #scrollUp {
-  background-color: #042954;
+  background-color: #32998f;
   bottom: 20px;
   color: #ffffff;
   display: block;
@@ -1352,7 +1383,7 @@ h6 {
   text-decoration: none;
   width: 44px;
   z-index: 99999;
-  border: 2px solid #111111;
+  border: 2px solid #199e91;
   border-radius: 50%;
   transition: all 0.3s ease-out;
 }
@@ -1361,11 +1392,11 @@ h6 {
 }
 #scrollUp:hover,
 #scrollUp:focus {
-  background-color: rgba(11, 11, 11, 0.3);
+  background-color: rgb(255, 254, 254);
 }
 #scrollUp:hover i,
 #scrollUp:focus i {
-  color: #ffffff;
+  color: #32998f;
 }
 #scrollUp {
   animation: blinker 10s infinite;
@@ -1379,10 +1410,43 @@ h6 {
   margin-bottom: 12px;
 }
 .heading-layout1 .item-title h3 {
-  color: #111111;
+  color: #32998f;
+  text-transform: capitalize;
   font-weight: 500;
   margin-bottom: 0;
   text-align: center;
+}
+.profile-name h3 {
+  color: #32998f;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-align: center;
+  
+}
+.left-profile {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 40px;
+  text-align: left;
+}
+.heading-logo {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 5%;
+  margin-right: -5%;
+  text-align: right;
+}
+.header-logo img{
+  color: #fff;
+  height: 55px;
+  width: 50px;
+}
+#elementID {
+  color: rgb(114, 21, 21);
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 1.5em;
 }
 .heading-layout1 .dropdown .dropdown-toggle {
   color: #bcbcbc;
@@ -1480,7 +1544,7 @@ ul {
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
 }
 .nav-bar-header-one {
-  background: linear-gradient(to right, #ff9d01, #ffaa01);
+  background: linear-gradient(to right, #32998f, #32998f);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1556,7 +1620,7 @@ ul {
   outline: none;
 }
 .nav-bar-header-two {
-  background: linear-gradient(to right, #ff9d01, #ffaa01);
+  background: linear-gradient(to right, #0c9e8a, #ffaa01);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1692,7 +1756,7 @@ ul {
 }
 .header-main-menu .navbar-nav .header-language .navbar-nav-link i {
   font-size: 18px;
-  color: #ffab01;
+  color: #32998f;
   margin-right: 10px;
 }
 .header-main-menu .navbar-nav .header-language .navbar-nav-link:after {
@@ -1859,6 +1923,10 @@ ul {
   font-size: 20px;
   display: block;
 }
+.item-img-round {
+  border-radius: 50%;
+  border: 1px solid #eee;
+}
 .header-main-menu .navbar-nav .header-notification .navbar-nav-link span {
   position: absolute;
   top: -14px;
@@ -2021,7 +2089,7 @@ ul {
 }
 .header-main-menu .navbar-nav .header-admin .dropdown-menu .item-header {
   text-align: center;
-  background-color: #ffa001;
+  background-color: #0c9e8a;
   padding: 20px 25px;
   border-radius: 4px 4px 0 0;
   position: relative;
@@ -2030,7 +2098,7 @@ ul {
   content: "";
   height: 0;
   width: 0;
-  border-bottom: 10px solid #ffa001;
+  border-bottom: 10px solid #0c9e8a;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   position: absolute;
@@ -2098,21 +2166,21 @@ ul {
   flex-direction: column;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item {
-  border-bottom: 1px solid #021933;
+  border-bottom: 1px solid #ffffff;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item > .nav-link {
   position: relative;
   padding: 12px 25px;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item > .nav-link i:before {
-  color: #ffa901;
+  color: #fff;
   font-size: 18px;
   margin-right: 15px;
   margin-left: 0;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item > .nav-link span {
   font-size: 15px;
-  color: #9ea8b5;
+  color: #fff;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -2120,19 +2188,19 @@ ul {
   transition: all 0.3s ease-out;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .nav-link.menu-active {
-  background-color: #051f3e;
+  background-color: #32998f;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .nav-link.menu-active span {
-  color: #ffa901;
+  color: #fff;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu {
   display: none;
-  background-color: #051f3e;
+  background-color: #10544d;
   padding: 10px 0;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu > .nav-item .nav-link {
   font-size: 14px;
-  color: #a3aab3;
+  color: #ffffff;
   padding: 8px 20px 8px 60px;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -2142,7 +2210,7 @@ ul {
   margin-right: 10px;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu > .nav-item .nav-link:hover {
-  background-color: #042954;
+  background-color: #32998f;
   color: #ffffff;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu > .nav-item .sub-group-menu > .nav-item .nav-link.menu-active {
@@ -2157,7 +2225,7 @@ ul {
   font-family: Flaticon;
   font-size: 10px;
   font-weight: 700;
-  color: #b0b8c2;
+  color: #fff;
   position: absolute;
   right: 22px;
   top: 50%;
@@ -2172,7 +2240,7 @@ ul {
   color: #ffffff;
 }
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu .nav-item.active .nav-link:after {
-  color: #ffab01;
+  color: #10544d;
   -webkit-transform: translateY(-50%) rotate(90deg);
   -ms-transform: translateY(-50%) rotate(90deg);
   transform: translateY(-50%) rotate(90deg);
@@ -2430,7 +2498,7 @@ ul {
   transition: all 0.3s ease-out;
 }
 .single-info-details .item-content .item-header .header-elements ul li a:hover {
-  background-color: #ff9d01;
+  background-color: #0c9e8a;
   color: #fff;
 }
 .single-info-details .item-content p {
@@ -3014,7 +3082,7 @@ ul {
 .dashboard-summery-one .item-content .item-number {
   font-size: 20px;
   font-weight: 500;
-  color: #111111;
+  color: #32998f;
 }
 @media only screen and (max-width: 991px) {
   .dashboard-summery-one .item-content .item-number {
@@ -3323,7 +3391,7 @@ ul {
 }
 .dashboard-card-six ::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background: #3751fe;
+  background: #32988d;
 }
 .dashboard-card-six .card-body .notice-box-wrap {
   max-height: 358px;
@@ -3594,7 +3662,13 @@ ul {
   background-color: #1cbbb4;
 }
 .bg-light-magenta {
-  background-color: #f3e5f5;
+  background-color: #712c91;
+}
+.bg-light-teal {
+  background-color: #32998f;
+}
+.bg-light-teal-transparent{
+  background-color: #32998fb8;
 }
 .bg-martini {
   background-color: #bcaaa4;
@@ -3618,7 +3692,7 @@ ul {
   background-color: #1565c0;
 }
 .sidebar-color {
-  background-color: #042954;
+  background-color: #32998f;
 }
 .bg-gradient-fb {
   background: -webkit-gradient(linear, left top, right top, from(#546ca9), to(#5c77bc));
@@ -3645,7 +3719,7 @@ ul {
   background: linear-gradient(to right, #1565c0, #314ce0);
 }
 .btn-gradient-yellow {
-  background-color: #ffae01;
+  background-color: #32998F;
 }
 .gradient-dodger-blue {
   background: -webkit-gradient(linear, left top, right top, from(#2196f3), to(#21bff3));
@@ -3826,6 +3900,9 @@ ul {
 .mg-t-30 {
   margin-top: 30px;
 }
+.mg-t-60 {
+  margin-top: 60px;
+}
 .mg-l-4 {
   margin-left: 4px;
 }
@@ -3996,10 +4073,10 @@ ul {
   background-color: #1de9b6;
 }
 .pseudo-bg-blue:after {
-  background-color: #417dfc;
+  background-color: #b3e2db;
 }
 .pseudo-bg-yellow:after {
-  background-color: #ffaa01;
+  background-color: #0c9e8a;
 }
 .pseudo-bg-red:after {
   background-color: #ff0000;
@@ -4388,6 +4465,7 @@ ul {
 }
 .text-light {
   color: #ffffff !important;
+  margin-top: 25%;
 }
 .text-mute-high {
   color: #9f9f9f;
@@ -4417,13 +4495,17 @@ ul {
   color: #3cb878;
 }
 .text-orange {
-  color: #ffa001;
+  color: #0c9e8a;
 }
 .text-red {
   color: #ff0000;
 }
+.text-teal {
+  color: #17a2b8;
+}
 .text-magenta {
-  color: #8e24aa;
+  margin-top: 23%;
+  color: #fff;
 }
 .text-dodger-blue {
   color: #2196f3;

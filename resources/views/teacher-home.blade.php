@@ -17,8 +17,8 @@
             <div class="row">
                 <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                     <div class="dashboard-summery-two">
-                        <div class="item-icon bg-light-magenta">
-                            <i class="flaticon-classmates text-magenta"></i>
+                        <div class="item-icon bg-light-teal-transparent">
+                            <i class="flaticon-classmates text-light"></i>
                         </div>
                         <div class="item-content">
                             <div class="item-number"><span class="counter" data-num="{{ $totalStudents }}"></span></div>
@@ -28,8 +28,8 @@
                 </div>
                 <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                     <div class="dashboard-summery-two">
-                        <div class="item-icon bg-light-blue">
-                            <i class="flaticon-shopping-list text-blue"></i>
+                        <div class="item-icon bg-light-teal-transparent">
+                            <i class="flaticon-shopping-list text-light"></i>
                         </div>
                         <div class="item-content">
                             <div class="item-number"><span class="counter" data-num="{{ $exams->count() }}"></span></div>
@@ -39,8 +39,8 @@
                 </div>
                 <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                     <div class="dashboard-summery-two">
-                        <div class="item-icon bg-light-yellow">
-                            <i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler text-green"></i>
+                        <div class="item-icon bg-light-teal-transparent">
+                            <i class="flaticon-maths-class-materials-cross-of-a-pencil-and-a-ruler text-light"></i>
                         </div>
                         <div class="item-content">
                             <div class="item-number"><span class="counter" data-num="{{ $totalClasses }}"></span></div>
@@ -50,8 +50,8 @@
                 </div>
                 <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                     <div class="dashboard-summery-two">
-                        <div class="item-icon bg-light-red">
-                            <i class="flaticon-books text-blue"></i>
+                        <div class="item-icon bg-light-teal-transparent">
+                            <i class="flaticon-books text-light"></i>
                         </div>
                         <div class="item-content">
                             <div class="item-number"><span class="counter" data-num="{{ $totalSections }}"></span></div>
@@ -100,7 +100,7 @@
                     <div class="notice-box-wrap">
                         @foreach($notices as $notice)
                             <div class="notice-list">
-                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
+                                <div class="post-date bg-light-teal-transparent">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
                                 <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
                             </div>
                         @endforeach

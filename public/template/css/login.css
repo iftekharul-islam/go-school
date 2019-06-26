@@ -33,7 +33,7 @@ body {
   width: 500px;
   top: 50%;
   left: 50%;
-  border-radius: 25px;
+  border-radius: 55px;
   transform: translate(-50%, -50%);
   text-align: center;
   box-shadow: 0 14px 18px 0 rgba(0, 0, 0, 0.2), 0 36px 20px 0 rgba(0, 0, 0, 0.19); }
@@ -50,18 +50,24 @@ body {
   backface-visibility: hidden;
   margin-bottom: 2rem;
   margin-top: 12px; }
+  .heading1 {
+    color: #279689;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+    margin-bottom: 4rem;
+    margin-top: 12px; }
 .heading--main {
   display: block;
   font-size: 4rem;
   font-weight: 600; }
 .heading--sub {
   display: block;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 400;
-  letter-spacing: 1.74rem;
-  animation-name: moveInRight;
-  animation-duration: 2s; }
-
+  /* letter-spacing: 1.74rem; */
+  /* animation-name: moveInRight; */
+  /* animation-duration: 2s;  */
+}
 
 .button1, .button1:link, .button1:visited {
   text-transform: uppercase;
@@ -84,12 +90,12 @@ body {
 .button1--white::after {
   background-color: rgba(217, 216, 238, 0.932); }
 .button1:hover {
-  transform: translateY(-0.3rem);
+  /* transform: translateY(-0.3rem); */
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
 .button1:hover::after {
-  transform: scale(1.5);
+  /* transform: scale(1.5); */
   opacity: 0; }
-.button1::after {
+/* .button1::after {
   content: "";
   display: inline-block;
   height: 100%;
@@ -99,7 +105,7 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  transition: all .6s; }
+  transition: all .6s; } */
 
 .button1-text:hover {
   background-color: rgba(38, 121, 111, 0.5);

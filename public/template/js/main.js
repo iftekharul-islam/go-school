@@ -365,7 +365,7 @@
       var doughnutChartData = {
         labels: ["Female Students", "Male Students"],
         datasets: [{
-          backgroundColor: ["#304ffe", "#ffa601"],
+          backgroundColor: ["#b3e2db", "#0c9e8a"],
           data: [female, male],
           label: "Total Students"
         }, ]

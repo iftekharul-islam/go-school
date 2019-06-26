@@ -11,7 +11,7 @@
                     @endif</h3>
             </div>
         </div>
-        <label style="margin-left: -53px;">File Title: </label>
+        <label>File Title: </label>
         <div class="form-group">
             <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">
         </div>

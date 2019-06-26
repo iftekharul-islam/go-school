@@ -2,7 +2,9 @@
     <div class="nav-bar-header-one">
         <div class="header-logo">
             <a href="{{ url('home') }}">
-                <img src="{{ asset('/template/img/logo.png') }}" alt="logo">
+            
+                <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
+                 <h4 class="heading-logo float-right">shoroborno</h4>             
             </a>
         </div>
         <div class="toggle-button sidebar-toggle">
