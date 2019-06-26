@@ -44,7 +44,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('school/sections?course=1') }}" class="nav-link">
-                            <i class="fas fa-school"></i><span>Classes & Sections</span></a>
+                            <i class="fas fa-school"></i><span>Class Details</span></a>
                     </li>
                 @endif
 
@@ -93,7 +93,7 @@
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item">
                         <a href="{{ url('academic/routine') }}" class="nav-link">
-                            <i class="fab fa-accessible-icon"></i><span>Class Routine</span></a>
+                            <i class="far fa-clock"></i><span>Class Routine</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('grades/all-exams-grade') }}" class="nav-link">

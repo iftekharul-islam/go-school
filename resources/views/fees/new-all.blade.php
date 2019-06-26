@@ -4,28 +4,22 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Accounts</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Fees Collection</h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="index.html">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
             <li>Fees Collection</li>
         </ul>
     </div>
     <div class="card height-auto">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
-                    <h3>All Fees Collection</h3>
-                    <button class="fw-btn-fill btn-gradient-yellow btn-xs" role="button" id="btnPrint" >Print Fees Form</button>
-                </div>
-            </div>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
             @endif
+{{--            <button class="fw-btn-fill btn-gradient-yellow btn-xs" role="button" id="btnPrint" >Print Fees Form</button>--}}
             @component('components.new-fees-list',['fees'=>$fees])
             @endcomponent
         </div>

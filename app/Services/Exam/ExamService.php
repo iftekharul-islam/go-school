@@ -72,8 +72,10 @@ class ExamService {
             $examForClass = new ExamForClass;
             $examForClass->exam_id = $this->exam->id;
             $examForClass->class_id = $this->request->classes[$i];
+            $examForClass->active = 1;
             $efc[] = $examForClass->attributesToArray();
             ++$i;
+            $examForClass->save();
         }
         return $efc;
     }

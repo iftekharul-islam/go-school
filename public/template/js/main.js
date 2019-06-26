@@ -426,6 +426,39 @@
       });
     }
 
+    if ($("#student-doughnut-chart2").length) {
+
+      var doughnutChartData2 = {
+        labels: ["Income", "Expence"],
+        datasets: [{
+          backgroundColor: ["#304ffe","#ffa601"],
+          data: [income, expense],
+          label: "Account"
+        }, ]
+      };
+      var doughnutChartOptions2 = {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutoutPercentage: 65,
+        rotation: -9.4,
+        animation: {
+          duration: 2000
+        },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        },
+      };
+      var studentCanvas2 = $("#student-doughnut-chart2").get(0).getContext("2d");
+      var studentChart2 = new Chart(studentCanvas2, {
+        type: 'doughnut',
+        data: doughnutChartData2,
+        options: doughnutChartOptions2
+      });
+    }
+
     /*-------------------------------------
           Calender initiate 
       -------------------------------------*/

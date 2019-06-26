@@ -7,6 +7,7 @@
         @if($upload_type == 'syllabus' && $parent == 'class')
           <th>Class</th>
         @elseif($upload_type == 'routine' && $parent == 'section')
+          <th>Class</th>
           <th>section</th>
         @endif
         <th>Is Active</th>
@@ -19,14 +20,19 @@
         <td>{{($loop->index + 1)}}</td>
         <td><a href="{{url($file->file_path)}}" target="_blank">{{$file->title}}</a></td>
         @if($upload_type == 'syllabus' && $parent == 'class')
-          <td>{{$file->myclass->class_number}}</td>
+          <td>{{$file->myclass['class_number']}}</td>
         @elseif($upload_type == 'routine' && $parent == 'section')
-          <td>{{$file->section->section_number}}</td>
+          <td>{{$file->section['class_id']}}</td>
+          <td>{{$file->section['section_number']}}</td>
         @endif
         <td>{{($file->active === 1)?'Yes':'No'}}</td>
         <td>
-          <button class="btn-danger btn" onclick="removeFile()">Remove</button>
-          <a id="delete-form" href="{{url('academic/remove/'.$upload_type.'/'.$file->id)}}" role=""></a>
+          <button class="btn btn-danger btn-lg" type="button" onclick="removeFile({{ $file->id }})">
+            Remove</button>
+          <form id="delete-form-{{ $file->id }}" action="{{ url('academic/remove/'.$upload_type.'/'.$file->id) }}" method="GET" style="display: none;">
+            @csrf
+            @method('GET')
+          </form>
         </td>
       </tr>
       @endforeach
@@ -36,7 +42,7 @@
 
 @push('customjs')
   <script type="text/javascript">
-    function removeFile() {
+    function removeFile(id) {
       swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this file!",
@@ -46,7 +52,7 @@
       })
               .then((willDelete) => {
                 if (willDelete) {
-                  document.getElementById('delete-form').click();
+                  document.getElementById('delete-form-'+id).submit();
                 } else {
                   swal("Your Delete Operation has been canceled");
                 }

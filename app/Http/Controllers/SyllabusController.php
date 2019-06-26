@@ -20,7 +20,7 @@ class SyllabusController extends Controller
                           ->where('school_id',\Auth::user()->school_id)
                           ->where('active',1)
                           ->get();
-        return view('syllabus.new-course-syllabus',['files'=>$files,'class_id' => 0]);
+        return view('syllabus.index',['files'=>$files,'class_id' => 1]);
      }
 
     /**

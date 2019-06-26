@@ -51,12 +51,12 @@
                     <tbody>
                     @foreach($grades as $grade)
                         <tr>
-                            <td>{{$grade->exam->exam_name}}</td>
-                            <td>{{$grade->course->course_name}}</td>
-                            <td>{{$grade->student->student_code}}</td>
+                            <td>@if(isset($grade->exam->exam_name)){{$grade->exam->exam_name}}@endif</td>
+                            <td>@if(isset($grade->course->course_name)){{$grade->course->course_name}}@endif</td>
+                            <td>@if(isset($grade->student->student_code)){{$grade->student->student_code}}@endif</td>
                             <td><a href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
-                            <td>{{$grade->marks}}</td>
-                            <td>{{$grade->gpa}}</td>
+                            <td>@if(isset($grade->marks)){{$grade->marks}}@endif</td>
+                            <td>@if(isset($grade->gpa)){{$grade->gpa}}@endif</td>
                         </tr>
                     @endforeach
                     </tbody>

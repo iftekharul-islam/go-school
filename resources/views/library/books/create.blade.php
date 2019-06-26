@@ -4,12 +4,14 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
+            </a>&nbsp;&nbsp;Add New Book
+        </h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Issue books</li>
+            <li>Add New Book</li>
         </ul>
     </div>
 
@@ -22,8 +24,8 @@
             @endif
             <div class="heading-layout1">
                 <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
-                    <h3>Add New Book</h3>
+{{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>--}}
+{{--                    <h3>Add New Book</h3>--}}
                 </div>
             </div>
             <form class="new-added-form justify-content-md-center" action="{{ route('library.books.store') }}" method="POST">

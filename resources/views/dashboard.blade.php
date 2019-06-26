@@ -38,20 +38,20 @@
                                 <table class="table text-nowrap">
                                     <tbody>
                                     <tr>
-                                        <td>Name:</td>
+                                        <td class="float-right">Name:</td>
                                         <td class="font-medium text-dark-medium">{{ Auth::user()->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Gender:</td>
+                                        <td class="float-right">Gender:</td>
                                         <td class="font-medium text-dark-medium">{{ ucfirst($student->gender) }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Blood Group:</td>
+                                        <td class="float-right">Blood Group:</td>
                                         <td class="font-medium text-dark-medium">{{ ucfirst($student->blood_group) }}</td>
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->father_name))
-                                            <td>Father's Name:</td>
+                                            <td class="float-right">Father's Name:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->father_name }}</td>
                                         @endif
                                     </tr>
@@ -63,7 +63,7 @@
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->mother_name))
-                                            <td>Mother's Name:</td>
+                                            <td class="float-right">Mother's Name:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->mother_name }}</td>
                                         @endif
                                     </tr>
@@ -75,48 +75,48 @@
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->birthday))
-                                            <td>Date of Birth:</td>
+                                            <td class="float-right">Date of Birth:</td>
                                             <td class="font-medium text-dark-medium">{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->religion))
-                                            <td>Religion:</td>
+                                            <td class="float-right">Religion:</td>
                                             <td class="font-medium text-dark-medium">{{ ucfirst($student_info->religion) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>E-Mail:</td>
+                                        <td class="float-right">E-Mail:</td>
                                         <td class="font-medium text-dark-medium">{{ $student->email }}</td>
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->religion))
-                                            <td>Admission Date:</td>
+                                            <td class="float-right">Admission Date:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->group))
-                                            <td>Group:</td>
+                                            <td class="float-right">Group:</td>
                                             <td class="font-medium text-dark-medium">{{ ucfirst($student_info->group) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>Section:</td>
+                                        <td class="float-right">Section:</td>
                                         <td class="font-medium text-dark-medium">{{ $student->section_id }}</td>
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->student_id))
-                                            <td>Roll:</td>
+                                            <td class="float-right">Roll:</td>
                                             <td class="font-medium text-dark-medium">{{ $student_info->student_id }}</td>
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>Address:</td>
+                                        <td class="float-right">Address:</td>
                                         <td class="font-medium text-dark-medium">{{ $student->address }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Phone:</td>
+                                        <td class="float-right">Phone:</td>
                                         <td class="font-medium text-dark-medium">{{ $student->phone_number }}</td>
                                     </tr>
                                     </tbody>

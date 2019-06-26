@@ -2,12 +2,15 @@
 
 @section('title', 'Messages')
 @section('content')
-    <div class="dashboard-content-one">
-        <!-- Breadcubs Area Start Here --><div class="breadcrumbs-area">
-            <h3>Student Messages</h3>
-            <ul>
+{{--    <div class="dashboard-content-one">--}}
+        <!-- Breadcubs Area Start Here -->
+        <div class="breadcrumbs-area">
+            <h3><a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
+                </a>&nbsp;&nbsp;Messages
+            </h3>
+            <ul style="margin-left: -100px !important;">
                 <li>
-                    <a href="{{ url('home') }}">Home</a>
+                    <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
                 </li>
                 <li>Messages</li>
             </ul>
@@ -21,8 +24,6 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                                <h3>Messages</h3>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -88,5 +89,5 @@
             </div>
         </div>
         <!-- Student Attendence Area End Here -->
-    </div>
+{{--    </div>--}}
 @endsection

@@ -33,6 +33,27 @@ class SectionController extends Controller
       ]);
      }
 
+    public function details($class_id)
+    {
+        $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)
+            ->get();
+        $classeIds = \App\Myclass::where('school_id',\Auth::user()->school->id)
+            ->pluck('id')
+            ->toArray();
+        $sections = \App\Section::whereIn('class_id',$classeIds)
+            ->orderBy('section_number')
+            ->get();
+        $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
+            ->where('active', 1)
+            ->get()->groupBy('class_id');
+        return view('school.class-details',[
+            'classes'=>$classes,
+            'sections'=>$sections,
+            'exams'=>$exams,
+            'class_id' => $class_id
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

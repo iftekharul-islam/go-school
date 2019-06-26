@@ -2,9 +2,9 @@
     <div class="nav-bar-header-one">
         <div class="header-logo">
             <a href="{{ url('home') }}">
-            
+
                 <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
-                 <h4 class="heading-logo float-right">shoroborno</h4>             
+                 <h4 class="heading-logo float-right">shoroborno</h4>
             </a>
         </div>
         <div class="toggle-button sidebar-toggle">
@@ -64,7 +64,9 @@
                         </div>
                         <div class="item-content">
                             <ul class="settings-list">
-                                <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                @if(Auth::user()->role != 'master')
+                                    <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                @endif
                                 <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>Change Password</a></li>
                                 @if(env('APP_ENV') != 'production')
                                     <li>

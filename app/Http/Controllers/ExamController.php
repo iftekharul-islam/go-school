@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\ExamForClass;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Http\Requests\Exam\CreateExamRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -22,6 +24,7 @@ class ExamController extends Controller
     public function index()
     {
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
+//        return $exams;
         return view('exams.all',compact('exams'));
     }
 
@@ -29,8 +32,15 @@ class ExamController extends Controller
         $exams = $this->examService->getActiveExamsBySchoolId();
         $this->examService->examIds = $exams->pluck('id')->toArray();
         $courses = $this->examService->getCoursesByExamIds();
-
+//        return $courses;
         return view('exams.active',compact('exams','courses'));
+    }
+
+    public function details($exam_id) {
+        $exams = $this->examService->getActiveExamsBySchoolId();
+        $this->examService->examIds = $exams->pluck('id')->toArray();
+        $courses = $this->examService->getCoursesByExamIds();
+        return view('exams.details',compact('exam_id','courses'));
     }
 
     /**
@@ -42,6 +52,7 @@ class ExamController extends Controller
     {
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
+//        return $already_assigned_classes;
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
         return view('exams.add',compact('classes','already_assigned_classes', 'exams'));
     }
@@ -54,7 +65,6 @@ class ExamController extends Controller
      */
     public function store(CreateExamRequest $request)
     {
-
         $this->examService->request = $request;
         try{
             $this->examService->storeExam();
@@ -158,6 +168,10 @@ class ExamController extends Controller
             return redirect()->back();
         }
         $exam->delete();
+        $examForClass = ExamForClass::where('exam_id', $id)->get();
+        foreach ($examForClass as $class) {
+            $class->delete();
+        }
         return redirect()->back()->with('status', 'Exam Deleted');
 //        return redirect()->back();
     }

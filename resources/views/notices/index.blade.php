@@ -2,12 +2,13 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Events && Notice
+        </h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
-            <li>Notices</li>
+            <li>Events && Notice</li>
         </ul>
     </div>
 

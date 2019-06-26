@@ -29,13 +29,19 @@ class AttendanceService {
     public function adjustPost($request){
       try{
         for($i=0; $i < count($request->isPresent); $i++){
-          $atts[] = [
-            'id' => $request->att_id[$i],
-            'present' => isset($request->isPresent[$i])?1:0,
-            'updated_at' => date('Y-m-d H:i:s'),
-          ];
+          $users = Attendance::find($request->att_id[$i]);
+          $users->id = $request->att_id[$i];
+          $users->present = isset($request->isPresent[$i])?1:0;
+          $users->updated_at = date('Y-m-d H:i:s');
+          $users->save();
+//          $atts[] = [
+//            'id' => $request->att_id[$i],
+//            'present' => isset($request->isPresent[$i])?1:0,
+//            'updated_at' => date('Y-m-d H:i:s'),
+//          ];
         }
-        \Batch::update('attendances',$atts,'id');
+//        \Batch::update('attendances',$atts,'id');
+//        return "fmgkldfmgmfd";
         return back()->with('status', 'Updated');
       }catch(\Exception $ex){
         return false;
@@ -86,7 +92,7 @@ class AttendanceService {
         return Attendance::with(['student', 'section'])
                       ->where('student_id', $student_id)
                       ->where('present',0)
-                      ->where('exam_id', $exId)
+                      ->orWhere('present',2)
                       ->get();
     }
 

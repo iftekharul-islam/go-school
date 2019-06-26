@@ -59,8 +59,25 @@ class AttendanceController extends Controller
           $exId = $exam->exam_id;
         else
           $exId = 0;
+        $student_info = \Auth::user()->studentInfo;
+        $present="";
+        $absent="";
+        $escaped="";
+        $total="";
+          if (!empty($student_info)) {
+              $student_id = $student_info->student_id;
+              $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
+              foreach ($attCount as $att) {
+                  $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
+                  $present = $att->totalpresent;
+                  $absent = $att->totalabsent;
+                  $escaped = $att->totalescaped;
+              }
+          }
+
         $attendances = $this->attendanceService->getAttendanceByStudentAndExam($student_id, $exId);
-        return view('attendance.admin-student-attendances',['attendances' => $attendances]);
+
+        return view('attendance.admin-student-attendances',['attendances' => $attendances, 'present' => $present, 'absent' => $absent, 'escaped' => $escaped, 'total' => $total]);
       }
     }
     /**
