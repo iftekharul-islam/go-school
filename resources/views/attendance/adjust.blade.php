@@ -4,16 +4,13 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Adjust Attendance
+        </h3>
+        <ul style="margin-left: -100px !important;">
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
             </li>
-            @if(Auth::user()->role != 'student')
-                    <li><a href="{{url('school/sections?att=1')}}">Classes &amp; Sections</a></li>
-                    <li><a href="{{url()->previous()}}">List of Students</a></li>
-                    <li class="active">View Attendance</li>
-            @endif
+            <li>Adjust Attendance</li>
         </ul>
     </div>
 

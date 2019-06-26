@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Admins')
 
@@ -17,13 +17,6 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1">
-{{--                <div class="item-title">--}}
-{{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>--}}
-{{--                    <h3>All Admin List</h3>--}}
-{{--                    <a class="btn btn-success btn-lg" href="{{url('create-school')}}">Manage School</a>--}}
-{{--                </div>--}}
-            </div>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
@@ -33,30 +26,17 @@
                 <div class="table-responsive">
                     <table class="table display data-table text-wrap">
                         <tr>
-                            <th>Action</th>
-                            <th>Action</th>
                             <th>Name</th>
                             <th>Code</th>
                             <th>Email</th>
                             <th>Phone Number</th>
                             <th>Address</th>
                             <th>About</th>
+                            <th>Action</th>
+                            <th>Action</th>
                         </tr>
                         @foreach ($admins as $admin)
                             <tr>
-                                <td>
-                                    @if($admin->active == 0)
-                                        <a href="{{url('master/activate-admin/'.$admin->id)}}" class="btn btn-lg btn-success"
-                                           role="button"></i>Activate</a>
-                                    @else
-                                        <a href="{{url('master/deactivate-admin/'.$admin->id)}}" class="btn btn-lg btn-danger"
-                                           role="button">Deactivate</a>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
-                                       role="button">Edit</a>
-                                </td>
                                 <td>
                                     {{$admin->name}}
                                 </td>
@@ -65,6 +45,25 @@
                                 <td>{{$admin->phone_number}}</td>
                                 <td>{{$admin->address}}</td>
                                 <td>{{$admin->about}}</td>
+                                <td>
+                                    @if($admin->active == 0)
+                                        <button class="btn btn-success btn-lg" type="button" onclick="removeUser({{ $admin->id }})">Active</button>
+                                        <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
+                                            @csrf
+                                            @method('GET')
+                                        </form>
+                                    @else
+                                        <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $admin->id }})">Deactivate</button>
+                                        <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
+                                            @csrf
+                                            @method('GET')
+                                        </form>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
+                                       role="button">Edit</a>
+                                </td>
                             </tr>
                         @endforeach
                     </table>
@@ -76,4 +75,24 @@
             </div>
         @endif
     </div>
+    @push('customjs')
+        <script type="text/javascript">
+            function removeUser(id) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            document.getElementById('delete-form-'+id).submit();
+                        } else {
+                            swal("Your Delete Operation has been canceled");
+                        }
+                    });
+            }
+        </script>
+    @endpush
 @endsection

@@ -93,7 +93,7 @@
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item">
                         <a href="{{ url('academic/routine') }}" class="nav-link">
-                            <i class="fab fa-accessible-icon"></i><span>Class Routine</span></a>
+                            <i class="far fa-clock"></i><span>Class Routine</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('grades/all-exams-grade') }}" class="nav-link">

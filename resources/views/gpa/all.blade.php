@@ -3,23 +3,19 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
-            </li>
-            <li>All GPA</li>
-        </ul>
+        <div class="breadcrumbs-area">
+            <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;All GPA</h3>
+            <ul style="margin-left: -100px !important;">
+                <li>
+                    <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+                </li>
+                <li>All GPA</li>
+            </ul>
+        </div>
     </div>
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>
-                    <h3>All GPA</h3>
-                </div>
-            </div>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
@@ -39,7 +35,7 @@
             <br>
                 <h4>{{$g->grade_system_name}}</h4>
                 <div class="table-responsive">
-                    <table class="table display text-nowrap">
+                    <table class="table display text-nowraps">
                         <thead>
                         <tr>
                             <th>#</th>

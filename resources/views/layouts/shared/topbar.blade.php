@@ -62,7 +62,9 @@
                         </div>
                         <div class="item-content">
                             <ul class="settings-list">
-                                <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                @if(Auth::user()->role != 'master')
+                                    <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                @endif
                                 <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>Change Password</a></li>
                                 @if(env('APP_ENV') != 'production')
                                     <li>

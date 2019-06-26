@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\ExamForClass;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Http\Requests\Exam\CreateExamRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -50,6 +52,7 @@ class ExamController extends Controller
     {
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
+//        return $already_assigned_classes;
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
         return view('exams.add',compact('classes','already_assigned_classes', 'exams'));
     }
@@ -165,6 +168,10 @@ class ExamController extends Controller
             return redirect()->back();
         }
         $exam->delete();
+        $examForClass = ExamForClass::where('exam_id', $id)->get();
+        foreach ($examForClass as $class) {
+            $class->delete();
+        }
         return redirect()->back()->with('status', 'Exam Deleted');
 //        return redirect()->back();
     }

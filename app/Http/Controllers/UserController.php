@@ -367,7 +367,7 @@ class UserController extends Controller
             }
         });
 
-        return back()->with('status', 'Saved');
+        return back()->with('status', $request->name. ' User Updated');
     }
 
     /**
@@ -387,7 +387,7 @@ class UserController extends Controller
 
         $admin->save();
 
-        return back()->with('status', 'Saved');
+        return back()->with('status', $admin->name.' active status changed');
     }
 
     /**
@@ -407,9 +407,9 @@ class UserController extends Controller
     public function deactivateUser($id)
     {
        $user = $this->user->find($id);
-        $user->active = !$user->active;
-
-        $user->save();
+       $user->active = 0;
+//       return $user;
+       $user->save();
 
         return back()->with('status', $user->name .' has been removed!!');
     }

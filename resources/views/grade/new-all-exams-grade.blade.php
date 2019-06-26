@@ -29,9 +29,9 @@
                 <div class="row">
                     @foreach ($classes as $class)
                         <?php $total_student = 0 ?>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card mb-5">
-                                <h5 class="card-header bg-dark text-white" style="text-align: center">Class
+                                <h5 class="card-header" style="text-align: center">Class
                                     : {{$class->class_number}} @if($class->group)
                                         group:{{ucfirst($class->group)}} @endif</h5>
                                 <div class="card-body">
@@ -43,8 +43,8 @@
                                     <h5 class="card-title">Total Section : <b>{{ $class->sections->count() }}</b></h5>
                                     <h5 class="card-title float-right" style="margin-top: -35px;">Total Student
                                         : {{ $total_student }}</h5>
-                                        <a class="btn-secondary btn btn-lg float-right"
-                                           href="{{ url('all-exams-grade/details/'.$class->id) }}">All Sections</a>
+                                        <a class="btn-secondary btn btn-lg float-right mt-5"
+                                           href="{{ url('all-exams-grade/details/'.$class->id) }}"><b>Derails</b></a>
                                 </div>
                             </div>
                         </div>
