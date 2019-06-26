@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;@if($user->role === 'teacher')Teacher @else Student @endif Details</h3>
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;{{ $user->role }} Details</h3>
         <ul style="margin-left: -100px !important;">
             <li>
                 <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>

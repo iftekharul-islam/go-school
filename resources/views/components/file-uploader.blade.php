@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <div class="form-group mg-t-30 mb-5">
+    <div class="form-group mg-t-30">
         <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}" class="form-control-file">
     </div>
 

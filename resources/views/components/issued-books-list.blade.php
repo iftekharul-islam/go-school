@@ -30,7 +30,7 @@
             {{csrf_field()}}
             <input type="hidden" name="issue_id" value="{{$book->id}}">
             <input type="hidden" name="book_id" value="{{$book->book_id}}">
-            <button class="btn btn-success btn-lg">Save as Returned</button>
+            <button class="button2 button2--white button2--animation float-left">Save as Returned</button>
           </form>
         </td>
       </tr>

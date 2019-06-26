@@ -5,11 +5,10 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Student Attendance
-        </h3>
-        <ul style="margin-left: -100px !important;">
+        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 28px;">Back</h4></a>&nbsp;&nbsp;Student Attendance</h3>
+        <ul class="float-left" style="margin-left: -60px !important;">
             <li>
-                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/home') }}">Home</a>
             </li>
             <li>Student Attendance</li>
         </ul>

@@ -87,7 +87,7 @@
 {{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
 {{--                                @endif--}}
                             @endif
-                            <a href="{{url('user/'.$user->student_code)}}">
+                            <a class="text-teal" href="{{url('user/'.$user->student_code)}}">
                                 {{$user->name}}</a>
                         </td>
                         @if($user->role == 'student')
@@ -106,7 +106,7 @@
                                 @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                                     <td style="white-space: nowrap;">
 
-                                        <a href="{{url('courses/'.$user->id.'/0')}}">All Courses</a>
+                                        <a class="text-teal" href="{{url('courses/'.$user->id.'/0')}}">All Courses</a>
 
                                     </td>
                                 @endif

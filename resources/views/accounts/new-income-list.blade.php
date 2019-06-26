@@ -34,8 +34,8 @@
                         <label for="year" class="col-md-4">Year</label>
 
                         <div class="col-md-12">
-                            <input id="date" type="text" class="form-control" name="year" value="{{ old('year') }}" placeholder="Year" required>
-
+{{--                            <input id="date" type="text" class="form-control" name="year" value="{{ old('year') }}" placeholder="Year" required>--}}
+                            <input data-date-format="yyyy" id="year" class="form-control date" name="year" value="{{ old('year') }}" placeholder="Year12" required autocomplete="off">
                             @if ($errors->has('year'))
                                 <span class="help-block">
                                       <strong>{{ $errors->first('year') }}</strong>
@@ -43,9 +43,22 @@
                             @endif
                         </div>
                     </div>
+                    <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
+                        <label for="year" class="col-md-4">Month</label>
+
+                        <div class="col-md-12">
+{{--                            <input id="date" type="text" class="form-control" name="month" value="{{ old('year') }}" placeholder="Month">--}}
+                            <input data-date-format="mm" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Month" autocomplete="off">
+                            @if ($errors->has('month'))
+                                <span class="help-block">
+                                      <strong>{{ $errors->first('month') }}</strong>
+                                  </span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="btn btn-primary btn">Get Income List</button>
+                            <button type="submit" class="button2 button2--white button2--animation float-left">Get Income List</button>
                         </div>
                     </div>
                 </form>
@@ -80,39 +93,11 @@
                                             <td>{{$income->amount}}</td>
                                             <td>{{$income->description}}</td>
                                             <td>{{ Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            <td><a title='Edit' class='btn btn-info btn-sm' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
+                                            <td><a title='Edit' class='button2 button2--white button2--animation float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                            <div id="printDiv"  class="visible-print">
-                                <h2 style="text-align:center;">{{Auth::user()->school->name}}</h2>
-                                <h4 style="text-align:center;">Expense List</h4>
-                                <div class="table-responsive">
-                                    <table class="table display text-wrap">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Sector Name</th>
-                                            <th>Amount</th>
-                                            <th>Description</th>
-                                            <th>Year</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($incomes as $income)
-                                            <tr>
-                                                <td>{{($loop->index + 1)}}</td>
-                                                <td>{{$income->name}}</td>
-                                                <td>{{$income->amount}}</td>
-                                                <td>{{$income->description}}</td>
-                                                <td>{{Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     @endisset
@@ -122,6 +107,15 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(function () {
+        $('.date').datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years"
+        });
+    })
+</script>
 <script>
 $('.datepicker').datepicker({
   format: 'yyyy',

@@ -24,7 +24,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Role</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,12 +34,10 @@
                                     {{ csrf_field() }}
                                     <td>{{ $other_user->id }}</td>
                                     <td>{{ $other_user->name }}</td>
-                                    <td>{{ $other_user->role }}</td>
+                                    <td>{{ ucfirst($other_user->role) }}</td>
                                     <td>
                                         <input type="hidden" name="id" value="{{$other_user->id}}" />
-                                        <div class="col-12 form-group">
-                                            <button type="submit" class="btn-primary btn btn-lg">Impersonate</button>
-                                        </div>
+                                        <button type="submit" class="button2 button2--white button2--animation float-left">Impersonate</button>
                                     </td>
                                 </form>
                             </tr>

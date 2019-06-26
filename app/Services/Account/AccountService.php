@@ -74,6 +74,13 @@ class AccountService {
                           ->whereYear('created_at',$this->request->year)
                           ->get();
     }
+    public function getAccountsByMonth(){
+        return Account::where('school_id', auth()->user()->school_id)
+            ->where('type', $this->account_type)
+            ->whereYear('created_at',$this->request->year)
+            ->whereMonth('created_at',$this->request->month)
+            ->get();
+    }
 
     public function updateAccount(){
         $account = Account::find($this->request->id);
