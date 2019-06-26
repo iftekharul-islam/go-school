@@ -16,11 +16,11 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1 mb-5">
+            <!-- <div class="heading-layout1 mb-5">
                 <div class="item-title">
                     <h3>School Information</h3>
                 </div>
-            </div>
+            </div> -->
 
             {{--            <div class="col-12-xxxl col-lg-12">--}}
             <div class="row">
@@ -29,8 +29,8 @@
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
-                                <div class="item-icon bg-light-magenta">
-                                    <i class="fas fa-user text-magenta"></i>
+                                <div class="item-icon bg-light-teal">
+                                    <i class="fas fa-user-graduate text-light"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -48,8 +48,8 @@
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
-                                <div class="item-icon bg-light-blue">
-                                    <i class="flaticon-calendar text-blue"></i>
+                                <div class="item-icon bg-light-teal">
+                                    <i class="fas fa-school text-light"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -67,8 +67,8 @@
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
-                                <div class="item-icon bg-light-yellow">
-                                    <i class="fas fa-user text-orange"></i>
+                                <div class="item-icon bg-light-teal">
+                                    <i class="fas fa-chalkboard-teacher	 text-light"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -86,8 +86,8 @@
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
-                                <div class="item-icon bg-light-yellow">
-                                    <i class="flaticon-calendar text-orange"></i>
+                                <div class="item-icon bg-light-teal">
+                                    <i class="fas fa-door-open text-light"></i>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -103,10 +103,12 @@
                 </div>
 
                 <div class="card text-center" style="width: 100%">
-                    <div class="card-header">
-                        School Details
-                    </div>
-                    <div class="card-body">
+                <div class="heading-layout1 mb-5">
+                <div class="item-title">
+                    <h3>School Information</h3>
+                </div>
+            </div>
+                    <div class="card-body border">
                         <table class="table text-wrap">
                             <thead>
                             <tr>
@@ -139,13 +141,13 @@
                                     @endif
                                     @if(\Auth::user()->role == 'master')
                                         <td>
-                                            <a class="btn btn-danger btn-lg" role="button"
+                                            <a class="btn btn-success btn-lg" role="button"
                                                href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">
                                                 <small>+ Create Admin</small>
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-success btn-lg" role="button"
+                                            <a class="btn btn-info btn-lg" role="button"
                                                href="{{url('school/admin-list/'.$school->id)}}">
                                                 <small>View Admins</small>
                                             </a>

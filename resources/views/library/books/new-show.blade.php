@@ -3,82 +3,102 @@
 @section('title', 'All Books')
 
 @section('content')
-    <div class="breadcrumbs-area">
-        <h3>Library</h3>
-        <ul>
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
-            </li>
-            <li>{{ $book->title }}</li>
-        </ul>
-    </div>
+<div class="breadcrumbs-area">
+       <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Book Details</h3>
+       <ul style="margin-left: -100px !important;">
+           <li>
+               <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+           </li>
+           <li>{{ $book->title }}</li>
+       </ul>
+   </div>
 
-    <div class="card height-auto false-height">
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
+<div class="card height-auto false-height">
+    <div class="card-body">
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
+        <h3 class="text-center"> Book Details </h3>
+
+        <div class="row">
+            <div class="col-md-3 library-image"><img src="{{ $book->img_path }}" alt="{{ $book->title }}" /></div>
+            <div class="col-md-9">
+                <div class="account-settings-box">
+                    <div class="">
+                        <div class="user-details-box">
+                            <div class="item-content">
+                                <div class="info-table table-responsive">
+                                    <table class="table text-wrap">
+                                        <tbody>
+                                            <tr>
+                                                <td>Book Code</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->book_code }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Book Title</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->title }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Autdor</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->autdor }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>row No</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->rowNo }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>About</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->about }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Quantity</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->quantity }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rack No</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->rackNo }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->type }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Class</td>
+                                                <td class="font-medium text-dark-medium">
+                                                    {{ $book->class->class_number }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>School</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->school->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Created At</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->created_at }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Updated At</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->updated_at }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Registered By</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->user->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Price</td>
+                                                <td class="font-medium text-dark-medium">{{ $book->price }}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            @endif
-            <div class="table-responsive">
-                <table class="table text-wrap">
-                    <thead>
-                    <tr>
-                        <th>Book Code</th>
-                        <td>{{ $book->book_code }}</td>
-                        <th>Book Title</th>
-                        <td>{{ $book->title }}</td>
-                    </tr>
-                    <tr>
-                        <th>Author</th>
-                        <td>{{ $book->author }}</td>
-                        <th>row No</th>
-                        <td>{{ $book->rowNo }}</td>
-                    </tr>
-                    <tr>
-                        <th>About</th>
-                        <td>{{ $book->about }}</td>
-                        <th>Quantity</th>
-                        <td>{{ $book->quantity }}</td>
-                    </tr>
-                    <tr>
-                        <th>Rack No</th>
-                        <td>{{ $book->rackNo }}</td>
-                        <th>Type</th>
-                        <td>{{ $book->type }}</td>
-                    </tr>
-                    <tr>
-                        <th>Class</th>
-                        <td>{{ $book->class->class_number }}</td>
-                        <th>School</th>
-                        <td>{{ $book->school->name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Image</th>
-                        <td>
-                            <img src="{{ $book->img_path }}" alt="{{ $book->title }}" />
-                        </td>
-                        <th>Price</th>
-                        <td>{{ $book->price }}</td>
-                    </tr>
-                    <tr>
-                        <th>Created At</th>
-                        <td>{{ $book->created_at }}</td>
-                        <th>Updated At</th>
-                        <td>{{ $book->updated_at }}</td>
-                    </tr>
-                    <tr>
-                        <th>Registered By</th>
-                        <td>{{ $book->user->name }}</td>
-                    </tr>
-                    </thead>
-                </table>
             </div>
         </div>
     </div>
-    <div class="row ml-2">
-        <div class="com-md-6">
-            <a href="{{ route('library.books.index') }}" class="fw-btn-fill btn-gradient-yellow">all books</a>
-        </div>
-    </div>
+</div>
 @endsection
