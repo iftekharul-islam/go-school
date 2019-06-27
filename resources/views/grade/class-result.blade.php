@@ -4,10 +4,13 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Classes</h3>
+        <h3>
+            Marks and Grades
+        </h3>
         <ul>
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>Marks and Grades</li>
             @if(Auth::user()->role != 'student')
@@ -16,6 +19,7 @@
             @endif
         </ul>
     </div>
+
     <div class="card height-auto false-height">
         <div class="card-body">
             <div class="heading-layout1">

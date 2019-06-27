@@ -1,13 +1,16 @@
 @extends('layouts.student-app')
 
-@section('title', 'Register Admin')
+@section('title', 'Register Librarian')
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Create Librarian</h3>
-        <ul style="margin-left: -100px !important;">
-            <li>
-                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+        <h3>
+            </a>Create Librarian
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>Create Librarian</li>
         </ul>
@@ -15,12 +18,6 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-{{--            <div class="heading-layout1">--}}
-{{--                <div class="item-title">--}}
-{{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>--}}
-{{--                    <h3>Register Librarian</h3>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="panel panel-default mt-5">
                 <div class="panel-body">
                     <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/'.session('register_role')) }}">

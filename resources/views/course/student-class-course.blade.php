@@ -7,14 +7,15 @@
 {{--    <div class="dashboard-content-one">--}}
         <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
-            </a>&nbsp;&nbsp;Subjects
+        <h3>
+            </a>Student Courses
         </h3>
-        <ul style="margin-left: -100px !important;">
-            <li>
-                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Subjects</li>
+            <li>Student Courses</li>
         </ul>
     </div>
         <!-- Breadcubs Area End Here -->
@@ -24,15 +25,6 @@
                 <div class="card height-auto false-height">
                     <div class="card-body">
                         <div class="heading-layout1">
-{{--                            @if(Auth::user()->role != 'student')--}}
-{{--                                <ol class="breadcrumb" style="margin-top: 3%;">--}}
-{{--                                    <li>--}}
-{{--                                        <a href="{{url('school/sections?course=1')}}" style="color:#3b80ef;">All Classes &amp; Sections</a>--}}
-{{--                                    </li>--}}
-{{--                                    &nbsp;&nbsp;--}}
-{{--                                    <li class="active">Courses</li>--}}
-{{--                                </ol>--}}
-{{--                            @endif--}}
                             <div class="item-title">
                                 <h3>My Courses</h3>
                                 @if(count($courses) > 0)

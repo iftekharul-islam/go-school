@@ -41,7 +41,7 @@
 
             @if($student)
               <td>
-                <a href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a>
+                <a class="text-teal" href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a>
               </td>
             @endif
 

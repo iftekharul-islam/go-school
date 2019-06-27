@@ -3,12 +3,14 @@
 @section('title', 'Attendance')
 
 @section('content')
-
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 28px;">Back</h4></a>&nbsp;&nbsp;Student Attendance</h3>
-        <ul class="float-left" style="margin-left: -60px !important;">
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
+        <h3>
+            Student Attendance
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>Student Attendance</li>
         </ul>
@@ -23,7 +25,7 @@
             @if(count($students) > 0)
                 @foreach ($students as $student)
                     <div class="card-header-title mt-5 ml-2">
-                        <b>Section</b> - {{ $student->section->section_number}}&nbsp;&nbsp; <b>Class</b> - {{$student->section->class->class_number}} &nbsp;&nbsp;
+                        <b>Section</b> - {{ $student->section->section_number}}&nbsp;&nbsp; <b>Class</b> - {{$student->section->class->class_number}} &nbsp;&nbsp;<b>Date</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
                     </div>
                     @break($loop->first)
                 @endforeach

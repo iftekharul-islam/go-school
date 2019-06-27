@@ -2,22 +2,20 @@
 @section('title', 'Edit Sector')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
+        <h3>
+            </a>Add New Income
+        </h3>
         <ul>
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>Add New Income</li>
         </ul>
     </div>
+
     <div class="card false-height">
         <div class="card-body">
-{{--            <div class="heading-layout1">--}}
-{{--                <div class="item-title">--}}
-{{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>--}}
-{{--                    <h3>Add Income</h3>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}

@@ -30,7 +30,7 @@
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>Attendance</span></a>
-                        <ul class="nav sub-group-menu">
+                        <ul class="nav sub-group-menu {{ (request()->is('school*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Teacher Attendance</a>
                             </li>
@@ -92,6 +92,10 @@
                 @endif
                 @if(Auth::user()-> role == 'admin')
                     <li class="nav-item">
+                        <a href="{{ url('all-department') }}" class="nav-link">
+                            <i class="far fa-building"></i><span>All Departments</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ url('academic/routine') }}" class="nav-link">
                             <i class="far fa-clock"></i><span>Class Routine</span></a>
                     </li>
@@ -116,7 +120,7 @@
                 @if(Auth::user()->role == 'admin')
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-file-alt"></i><span>Exams</span></a>
-                        <ul class="nav sub-group-menu">
+                        <ul class="nav sub-group-menu {{ (request()->is('exams*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('exams/create') }}"><i class="fas fa-angle-right"></i><span>Add Examination</span></a>
                             </li>
@@ -130,7 +134,7 @@
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-poll-h"></i><span>Manage GPA</span></a>
-                        <ul class="nav sub-group-menu">
+                        <ul class="nav sub-group-menu {{ (request()->is('gpa*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('gpa/all-gpa') }}"><i class="fas fa-angle-right"></i><span>All GPA</span></a>
                             </li>
@@ -155,7 +159,7 @@
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
-                        <ul class="nav sub-group-menu">
+                        <ul class="nav sub-group-menu {{ (request()->is('fees*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('fees/all') }}"><i class="fas fa-angle-right"></i><span>All Fees</span></a>
                             </li>
@@ -167,7 +171,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-user-circle"></i><span>Manage Accounts</span></a>
-                        <ul class="nav sub-group-menu">
+                        <ul class="nav sub-group-menu {{ (request()->is('accounts*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/accountant')}}">
                                     <i class="fas fa-angle-right"></i><span>Accountant List</span></a>
@@ -197,9 +201,9 @@
                 @endif
 
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'librarian')
-                    <li class="nav-item sidebar-nav-item active">
+                    <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-book-open"></i><span>Manage Library</span></a>
-                        <ul class="nav sub-group-menu menu-open" style="display: block;">
+                        <ul class="nav sub-group-menu menu-open {{ (request()->is('library*')) ? 'sub-group-active' : '' }}" style="display: block;">
                             <li class="nav-item">
                                 <a href="{{url('users/'.Auth::user()->school->code.'/librarian')}}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Librarian List</a>

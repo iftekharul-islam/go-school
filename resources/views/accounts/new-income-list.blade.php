@@ -4,12 +4,15 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
 <div class="breadcrumbs-area">
-    <h3>Dashboard</h3>
+    <h3>
+        </a>List of Income
+    </h3>
     <ul>
-        <li>
-            <a href="{{ url('/home') }}">Home</a>
+        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                Back &nbsp;&nbsp;|</a>
+            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
-        <li>View List of Income</li>
+        <li>List of Income</li>
     </ul>
 </div>
 
@@ -20,12 +23,6 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="heading-layout1">
-            <div class="item-title">
-                <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>
-                <h3>View List of Income</h3>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-6">
                 <form class="form-horizontal" action="{{url('/accounts/list-income')}}" method="post">
