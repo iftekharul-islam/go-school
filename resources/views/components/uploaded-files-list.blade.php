@@ -8,7 +8,7 @@
           <th>Class</th>
         @elseif($upload_type == 'routine' && $parent == 'section')
           <th>Class</th>
-          <th>section</th>
+          <th>Section</th>
         @endif
         <th>Is Active</th>
         <th>Action</th>

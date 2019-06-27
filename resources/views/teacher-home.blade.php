@@ -112,51 +112,51 @@
             <!-- Notice Board End Here -->
         </div>
         <!-- Student Table Area Start Here -->
-        @if(\Auth::user()->role == 'admin')
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card dashboard-card-eleven">
-                        <div class="card-body">
-                            <div class="heading-layout1">
-                                <div class="item-title">
-                                    <h3>All Students</h3>
-                                </div>
-                            </div>
-                            <div class="table-box-wrap">
-                                <div class="table-responsive">
-                                    <table class="table display data-table text-nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Version</th>
-                                            <th>Section</th>
-                                            <th>Class</th>
-                                            <th>Phone</th>
-                                            <th>E-mail</th>
-                                            <th>Attendance</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($allStudents as $key => $student)
-                                            <tr>
-                                                <td>{{ $student->name }}</td>
-                                                <td>{{ ucfirst($student['school']['medium']) }}</td>
-                                                <td>{{ ucfirst($student['section']['section_number']) }} </td>
-                                                <td>{{ ucfirst($student['section']['class_id']) }}</td>
-                                                <td>{{ ucfirst($student->phone_number) }}</td>
-                                                <td>{{ ucfirst($student->email) }}</td>
-                                                <td><small><a class="button2 button2--white button2--animation float-left" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a></small></td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
+{{--        @if(\Auth::user()->role == 'admin')--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-12">--}}
+{{--                    <div class="card dashboard-card-eleven">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <div class="heading-layout1">--}}
+{{--                                <div class="item-title">--}}
+{{--                                    <h3>All Students</h3>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="table-box-wrap">--}}
+{{--                                <div class="table-responsive">--}}
+{{--                                    <table class="table display data-table text-nowrap">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr>--}}
+{{--                                            <th>Name</th>--}}
+{{--                                            <th>Version</th>--}}
+{{--                                            <th>Section</th>--}}
+{{--                                            <th>Class</th>--}}
+{{--                                            <th>Phone</th>--}}
+{{--                                            <th>E-mail</th>--}}
+{{--                                            <th>Attendance</th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody>--}}
+{{--                                        @foreach($allStudents as $key => $student)--}}
+{{--                                            <tr>--}}
+{{--                                                <td>{{ $student->name }}</td>--}}
+{{--                                                <td>{{ ucfirst($student['school']['medium']) }}</td>--}}
+{{--                                                <td>{{ ucfirst($student['section']['section_number']) }} </td>--}}
+{{--                                                <td>{{ ucfirst($student['section']['class_id']) }}</td>--}}
+{{--                                                <td>{{ ucfirst($student->phone_number) }}</td>--}}
+{{--                                                <td>{{ ucfirst($student->email) }}</td>--}}
+{{--                                                <td><small><a class="button2 button2--white button2--animation float-left" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a></small></td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        @endif--}}
 
         @if(\Auth::user()->role == 'teacher')
             <div class="row">

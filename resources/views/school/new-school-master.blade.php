@@ -16,13 +16,6 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <!-- <div class="heading-layout1 mb-5">
-                <div class="item-title">
-                    <h3>School Information</h3>
-                </div>
-            </div> -->
-
-            {{--            <div class="col-12-xxxl col-lg-12">--}}
             <div class="row">
                 <!-- Summery Area Start Here -->
                 <div class="col-lg-3">
@@ -101,7 +94,11 @@
                         </div>
                     </div>
                 </div>
-
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="card text-center" style="width: 100%">
                 <div class="heading-layout1 mb-5">
                 <div class="item-title">
@@ -118,7 +115,7 @@
                                 <th>Established</th>
                                 <th>Add Admin</th>
                                 <th>View Admins</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -152,6 +149,13 @@
                                                 <small>View Admins</small>
                                             </a>
                                         </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-lg" type="button" onclick="removeSchool({{ $school->id }})">Delete</button>
+                                            <form id="delete-form-{{ $school->id }}" action="{{ url('school/delete/'.$school->id) }}" method="GET" style="display: none;">
+                                                @csrf
+                                                @method('GET')
+                                            </form>
+                                        </td>
                                     @endif
                                 </tr>
                                 @endif
@@ -160,110 +164,27 @@
                         </table>
                     </div>
                 </div>
-
-
-{{--                <div class="table-responsive">--}}
-{{--                    <h3 style="text-align: center">School Details</h3>--}}
-{{--                    <table class="table display data-table text-wrap">--}}
-{{--                        <thead>--}}
-{{--                        <tr>--}}
-{{--                            <th>Name</th>--}}
-{{--                            <th>Code</th>--}}
-{{--                            <th>About</th>--}}
-{{--                            <th>Action</th>--}}
-{{--                            <th></th>--}}
-{{--                        </tr>--}}
-{{--                        </thead>--}}
-{{--                        <tbody>--}}
-{{--                        <tr>--}}
-{{--                        @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)--}}
-{{--                            <tr>--}}
-{{--                                @if(\Auth::user()->role == 'master')--}}
-{{--                                    <td>--}}
-{{--                                        {{$school->name}}--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        {{$school->code}}--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        {{$school->about}}--}}
-{{--                                    </td>--}}
-{{--                                @endif--}}
-{{--                                @if(\Auth::user()->role == 'master')--}}
-{{--                                    <td>--}}
-{{--                                        <a class="btn btn-danger btn-lg" role="button"--}}
-{{--                                           href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">--}}
-{{--                                            <small>+ Create Admin</small>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <a class="btn btn-success btn-lg" role="button"--}}
-{{--                                           href="{{url('school/admin-list/'.$school->id)}}">--}}
-{{--                                            <small>View Admins</small>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                @endif--}}
-{{--                            </tr>--}}
-{{--                            @endif--}}
-{{--                            </tr>--}}
-{{--                        </tbody>--}}
-{{--                    </table>--}}
-{{--                </div>--}}
             </div>
         </div>
     </div>
-
-
-    {{--    <div class="card height-auto false-height">--}}
-    {{--        <div class="card-body">--}}
-    {{--            <div class="heading-layout1">--}}
-    {{--                <div class="item-title">--}}
-    {{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>--}}
-    {{--                    <h3>Manage Departments, Classes, Sections, Student Promotion, Courses</h3>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--            <div class="">--}}
-    {{--                <div class="table-responsive">--}}
-    {{--                    <div class="table">--}}
-    {{--                        <tr>--}}
-    {{--                            @if(\Auth::user()->role == 'master')--}}
-    {{--                                --}}{{--                        <th>#</th>--}}
-    {{--                                <th>Name</th>--}}
-    {{--                                <th>Code</th>--}}
-    {{--                                <th>About</th>--}}
-    {{--                            @endif--}}
-    {{--                        </tr>--}}
-    {{--                        @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)--}}
-    {{--                            <tr>--}}
-    {{--                                @if(\Auth::user()->role == 'master')--}}
-    {{--                                    <td>--}}
-    {{--                                        {{$school->name}}--}}
-    {{--                                    </td>--}}
-    {{--                                    <td>--}}
-    {{--                                        {{$school->code}}--}}
-    {{--                                    </td>--}}
-    {{--                                    <td>--}}
-    {{--                                        {{$school->about}}--}}
-    {{--                                    </td>--}}
-    {{--                                @endif--}}
-    {{--                                @if(\Auth::user()->role == 'master')--}}
-    {{--                                    <td>--}}
-    {{--                                        <a class="btn btn-danger btn-lg" role="button"--}}
-    {{--                                           href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">--}}
-    {{--                                            <small>+ Create Admin</small>--}}
-    {{--                                        </a>--}}
-    {{--                                    </td>--}}
-    {{--                                    <td>--}}
-    {{--                                        <a class="btn btn-success btn-lg" role="button"--}}
-    {{--                                           href="{{url('school/admin-list/'.$school->id)}}">--}}
-    {{--                                            <small>View Admins</small>--}}
-    {{--                                        </a>--}}
-    {{--                                    </td>--}}
-    {{--                            </tr>--}}
-    {{--                        @endif--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
+    @push('customjs')
+        <script type="text/javascript">
+            function removeSchool(id) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            document.getElementById('delete-form-'+id).submit();
+                        } else {
+                            swal("Your Delete Operation has been canceled");
+                        }
+                    });
+            }
+        </script>
+    @endpush
 @endsection
