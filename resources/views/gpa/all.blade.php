@@ -1,17 +1,17 @@
 @extends('layouts.student-app')
 @section('title', 'All GPA Systems')
 @section('content')
-
     <div class="breadcrumbs-area">
-        <div class="breadcrumbs-area">
-            <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;All GPA</h3>
-            <ul style="margin-left: -100px !important;">
-                <li>
-                    <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
-                </li>
-                <li>All GPA</li>
-            </ul>
-        </div>
+        <h3>
+            All GPA
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
+            </li>
+            <li>All GPA</li>
+        </ul>
     </div>
 
     <div class="card height-auto false-height">

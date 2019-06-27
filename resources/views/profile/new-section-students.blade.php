@@ -4,8 +4,14 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
+        <h3>
+            Section Students
+        </h3>
         <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
+            </li>
             @if(isset($_GET['grade']) && $_GET['grade'] == 1)
                 <li><a href="{{url('grades/all-exams-grade')}}">Grades</a></li>
             @else
@@ -19,7 +25,7 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3>All Section Student</h3>
+{{--                        <h3>All Section Student</h3>--}}
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -37,8 +43,8 @@
                             <tr>
                                 <td>{{($loop->index+1)}}</td>
                                 <td>{{$student->student_code}}</td>
-                                <td><a href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
-                                <td><a class="btn btn-lg btn-success" role="button" href="{{url('grades/'.$student->id)}}">View Grade History</a></td>
+                                <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
+                                <td><a class="button2 button2--white button2--animation" role="button" href="{{url('grades/'.$student->id)}}">View Grade History</a></td>
                             </tr>
                         @endforeach
                         </tbody>

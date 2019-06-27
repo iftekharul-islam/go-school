@@ -21,7 +21,7 @@
         <div class="row">
             @foreach($schools as $school)
             <div class="col-12 col-xl-4 col-4-xxxl">
-                <div class="card dashboard-card-four pd-b-20">
+                <div class="card dashboard-card-four pd-b-0">
                     <div class="card-body border" style="min-height: 300px">
                         <div class="card-body-inner">
                             <div class="heading-layout1">
@@ -42,7 +42,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{ $school->medium }}</td>
+                                            <td>{{ ucfirst($school->medium) }}</td>
                                             <td>{{ $school->code }}</td>
                                             <td>{{count($school->users)}}</td>
                                             <td>{{count($school->departments)}}</td>

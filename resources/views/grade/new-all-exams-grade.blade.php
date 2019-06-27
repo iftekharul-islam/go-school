@@ -4,10 +4,13 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3><a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;All Grades</h3>
-        <ul style="margin-left: -100px !important;">
-            <li>
-                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+        <h3>
+            All Grades
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>All Grades</li>
         </ul>
@@ -33,8 +36,8 @@
                             <div class="card mb-4">
                                 <h5 class="card-header text-teal text-center">CLASS
                                     <b> {{$class->class_number}} @if($class->group) </b>
-                                        GROUP <b> {{ucfirst($class->group)}} @endif </b></h5>
-                                <div class="card-body">
+                                    &nbsp; | &nbsp;GROUP <b> {{ucfirst($class->group)}} @endif </b></h5>
+                                <div class="card-body-customized">
                                     @foreach($class->sections as $sec)
                                         @php
                                             $total_student = $total_student + $sec->users->count();

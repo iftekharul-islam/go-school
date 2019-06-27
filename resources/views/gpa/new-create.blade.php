@@ -2,12 +2,15 @@
 @section('title', 'Add GPA System')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 class="mt-2" style="color: #269589; font-size: 18px;">Back</h4></a>&nbsp;&nbsp;All Exams</h3>
-        <ul class="float-left" style="margin-left: -40px !important;">
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
+        <h3>
+            Create new Grade System
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>All Exams</li>
+            <li>Create new Grade System</li>
         </ul>
     </div>
     <div class="card height-auto false-height">

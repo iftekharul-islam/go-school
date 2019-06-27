@@ -3,11 +3,13 @@
 @section('content')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <div class="breadcrumbs-area">
-    <a href="javascript:history.back()">Back</a>
-    <h3>List of Expense</h3>
-    <ul class="float-left">
-        <li>
-            <a href="{{ url('/home') }}">Home</a>
+    <h3>
+        </a>List of Expense
+    </h3>
+    <ul>
+        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                Back &nbsp;&nbsp;|</a>
+            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
         <li>List of Expense</li>
     </ul>

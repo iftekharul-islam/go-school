@@ -116,6 +116,12 @@ class SchoolController extends Controller
       return back()->with('status', 'Created');
     }
 
+    public function allDepartment()
+    {
+        $dpts = Department::where('school_id', \Auth::user()->school_id)->get();
+        return view('school.departments', compact('dpts'));
+    }
+
     public function changeTheme(Request $request){
       $tb = School::find($request->s);
       $tb->theme = $request->school_theme;

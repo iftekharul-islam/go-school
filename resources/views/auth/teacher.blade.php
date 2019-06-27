@@ -1,13 +1,16 @@
 @extends('layouts.student-app')
 
-@section('title', 'Register Admin')
+@section('title', 'Register Teacher')
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Create Teacher</h3>
-        <ul style="margin-left: -100px !important;">
-            <li>
-                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+        <h3>
+            </a>Create Teacher
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>Create Teacher</li>
         </ul>
@@ -15,13 +18,6 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-{{--            <div class="col-md-3" id="side-navbar">--}}
-{{--                <ul class="nav">--}}
-{{--                    <li class="nav-item active" style="margin-left: -13px !important;">--}}
-{{--                        <a class="btn btn-success btn-lg" href="{{ url('create-school') }}">Back to Manage School</a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
             <div class="col-md-12" id="main-container">
                 @if (session('status'))
                     <div class="alert alert-success">

@@ -431,7 +431,7 @@
       var doughnutChartData2 = {
         labels: ["Income", "Expence"],
         datasets: [{
-          backgroundColor: ["#304ffe","#ffa601"],
+          backgroundColor: ["#b3e2db","#0c9e8a"],
           data: [income, expense],
           label: "Account"
         }, ]

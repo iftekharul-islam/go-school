@@ -1,6 +1,7 @@
 @if(count($exams) > 0)
 @foreach($exams as $exam)
-<h3>Exam Name: {{$exam->exam_name}}<span class="float-right ml-2"><button class="btn btn-lg btn-success" role="button" id="btnPrint{{$exam->id}}">Print Result</button></span></h3>
+<h3 class="text-muted">Exam Name - {{$exam->exam_name}}</h3>
+{{--<span class="float-right ml-2"><button class="btn btn-lg btn-success" role="button" id="btnPrint{{$exam->id}}">Print Result</button></span>--}}
 {{--<div class="visible-print-block" id="table-content{{$exam->id}}">--}}
 {{--  <div class="table-responsive">--}}
 {{--    <table class="table display  text-nowrap">--}}
@@ -87,7 +88,7 @@
       <th scope="row">{{($loop->index + 1)}}</th>
       <td>{{$grade->course->course_name}}</td>
       <td><b>{{$grade->marks}}</b>
-        <a class="btn btn-lg btn-danger float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
+        <a class="button2 button2--white button2--animation float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
       </td>
       <td>
         @foreach($gradesystems as $gs)
@@ -98,7 +99,7 @@
         @endforeach
       </td>
       <td>
-        <a href="{{url('user/'.$grade->teacher->student_code)}}">{{$grade->teacher->name}}</a>
+        <a class="text-teal" href="{{url('user/'.$grade->teacher->student_code)}}">{{$grade->teacher->name}}</a>
       </td>
     </tr>
     <tr class="collapse" id="collapse{{($loop->index + 1)}}" aria-labelledby="heading{{($loop->index + 1)}}" aria-expanded="false">

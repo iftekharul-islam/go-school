@@ -1,19 +1,20 @@
 <div class="breadcrumbs-area">
-    <h3><a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
-        </a>&nbsp;&nbsp;All @foreach($users as $user)
+    <h3>All @foreach($users as $user)
             {{ $user->role }}
             @break
         @endforeach
     </h3>
-    <ul style="margin-left: -100px !important;">
-        <li>
-            <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+    <ul>
+        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                Back &nbsp;&nbsp;|</a>
+            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
         <li>All
             @foreach($users as $user)
                 {{ $user->role }}
                 @break
             @endforeach</li>
+        </li>
     </ul>
 </div>
 
@@ -126,7 +127,7 @@
 {{--                            <td>{{$user->address}}</td>--}}
 {{--                        @endif--}}
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role == 'student')<td><a class="btn btn-lg btn-info" role="button"
+                            @if($user->role == 'student')<td><a class="button2 button2--white button2--animation" role="button"
                                                                 href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')

@@ -32,7 +32,8 @@
                     <div class="book">
                         <div class="book__form">
                             @auth()
-                                <a href="{{ url('/home') }}" class="button button--white button--animation">Home</a>
+                                <script>window.location = "/home";</script>
+{{--                                <a href="{{ url('/home') }}" class="button button--white button--animation">Home</a>--}}
                             @else
                                 <form method="POST" action="{{ route('login') }}" class="form">
                                     {{ csrf_field() }}

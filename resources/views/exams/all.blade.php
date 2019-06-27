@@ -2,10 +2,13 @@
 @section('title', 'All Examinations')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 28px;">Back</h4></a>&nbsp;&nbsp;All Exams</h3>
-        <ul class="float-left" style="margin-left: -60px !important;">
-            <li>
-                <a href="{{ url('/home') }}">Home</a>
+        <h3>
+            </a>All Exams
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>All Exams</li>
         </ul>

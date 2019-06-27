@@ -80,6 +80,8 @@ Route::middleware(['auth','admin'])->group(function (){
   Route::get('gpa/create-gpa', 'GradesystemController@create');
   Route::post('create-gpa', 'GradesystemController@store');
   Route::post('gpa/delete', 'GradesystemController@destroy');
+  Route::get('all-department','SchoolController@allDepartment');
+
 });
 
 Route::middleware(['auth','teacher'])->group(function (){

@@ -186,7 +186,7 @@
                 </div>
                 <!-- Summery Area End Here -->
                 <!-- Exam Result Area Start Here -->
-                <div class="col-lg-12">
+                <div class="col-lg-12 mb-5">
                     <div class="card dashboard-card-eleven">
                         <div class="card-body">
                             <div class="heading-layout1">

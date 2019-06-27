@@ -100,9 +100,9 @@ body {
 }
 
 .paginate123 .pagination li {
-  border-top: 1px solid #ffaf3e;
-  border-left: 1px solid #ffaf3e;
-  border-bottom: 1px solid #ffaf3e;
+  border-top: 1px solid #32998f;
+  border-left: 1px solid #32998f;
+  border-bottom: 1px solid #32998f;
   display: block;
   /*background-color:#ffaf3e;*/
 }
@@ -120,11 +120,11 @@ body {
 }
 
 .paginate123 .pagination li.active {
-  background-color: #ffaf3e;
+  background-color: #32998f;
 }
 
 .paginate123 .pagination li:hover {
-  background-color: #ffaf3e;
+  background-color: #32998f;
 }
 
 .paginate123 .pagination li:last-child {
@@ -209,10 +209,10 @@ h6 {
 
 .card {
   padding-bottom: 30px;
-  height: 87%;
+  height: auto;
   border: none !important;
   -webkit-box-shadow: 0px 10px 20px 0px rgba(199, 194, 194, 0.48);
-  box-shadow: 0px 10px 20px 0px rgba(199, 194, 194, 0.48);
+  box-shadow: 0px 10px 15px 0px rgba(199, 194, 194, 0.32);
 }
 
 .card-header {
@@ -225,7 +225,15 @@ h6 {
 
 .card-body {
   height: 100%;
-  padding: 15px 30px 30px;
+  padding: 15px 30px 34px;
+  background-color: #ffffff56;
+  border-radius: 4px;
+  /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
+  box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75); */
+}
+.card-body-customized{
+  height: 100%;
+  padding: 15px 30px 0px;
   background-color: #ffffff56;
   border-radius: 4px;
   /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
@@ -2295,7 +2303,7 @@ ul {
   line-height: 28px;
   color: #ffffff;
   font-size: 14px;
-  background-color: #ff3131;
+  background-color: #32998f;
   border: 2px solid #ffffff;
   border-radius: 50%;
   display: block;
@@ -2333,7 +2341,7 @@ ul {
 
 .header-main-menu .navbar-nav .header-notification .dropdown-menu .item-header {
   text-align: center;
-  background-color: #ff3131;
+  background-color: #32998f;
   padding: 20px 25px;
   border-radius: 4px 4px 0 0;
   position: relative;
@@ -2343,7 +2351,7 @@ ul {
   content: "";
   height: 0;
   width: 0;
-  border-bottom: 10px solid #ff3131;
+  border-bottom: 10px solid #32998f;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   position: absolute;
@@ -4300,7 +4308,7 @@ ul {
 }
 
 .bg-orange {
-  background-color: #fbd540;
+  background-color: #1fa99bf2;
 }
 
 .bg-orange-peel {
@@ -4308,7 +4316,7 @@ ul {
 }
 
 .bg-skyblue {
-  background-color: #40dfcd;
+  background-color: #289286;
 }
 
 .bg-pink {
@@ -4336,7 +4344,7 @@ ul {
 }
 
 .bg-violet-blue {
-  background-color: #a864a8;
+  background-color: #0abba6de;
 }
 
 .bg-light-green {
@@ -4486,7 +4494,7 @@ ul {
 }
 
 .border-yellow {
-  border: 1px solid #fbd540;
+  border: 1px solid #1fa99bf2;
 }
 
 .border-orange-red {

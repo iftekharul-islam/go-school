@@ -8,12 +8,13 @@
         <div class="col-md-12" id="main-container">
             <div class="panel panel-default">
                 <div class="breadcrumbs-area">
-                    <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4>
-                        </a>&nbsp;&nbsp;Teacher All Sections
+                    <h3>
+                        </a>Teacher All Sections
                     </h3>
-                    <ul style="margin-left: -100px !important;">
-                        <li>
-                            <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+                    <ul>
+                        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                                Back &nbsp;&nbsp;|</a>
+                            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
                         </li>
                         <li>Teacher All Sections</li>
                     </ul>

@@ -79,7 +79,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="btn btn-danger btn-lg">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="button2 button2--white button2--animation float-left">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else
@@ -112,7 +112,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="btn btn-primary btn-lg">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="button2 button2--white button2--animation float-left">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @endif
