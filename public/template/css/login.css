@@ -81,13 +81,17 @@ body {
   font-weight: bold;
   border: none;
   cursor: pointer;
-  float: right;
+  /* float: right; */
 }
 .button2--white {
   background-color: #279689;
   color: #fdfdfd; }
 .button2--white::after {
   background-color: rgba(217, 216, 238, 0.932); }
+.button2:hover {
+background-color: #287c72;
+color: #fff;
+}
 
 
 .button1, .button1:link, .button1:visited {

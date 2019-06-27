@@ -30,21 +30,21 @@
                     @foreach ($classes as $class)
                         <?php $total_student = 0 ?>
                         <div class="col-md-3">
-                            <div class="card mb-5">
-                                <h5 class="card-header" style="text-align: center">Class
-                                    : {{$class->class_number}} @if($class->group)
-                                        group:{{ucfirst($class->group)}} @endif</h5>
+                            <div class="card mb-4">
+                                <h5 class="card-header text-teal text-center">CLASS
+                                    <b> {{$class->class_number}} @if($class->group) </b>
+                                        GROUP <b> {{ucfirst($class->group)}} @endif </b></h5>
                                 <div class="card-body">
                                     @foreach($class->sections as $sec)
                                         @php
                                             $total_student = $total_student + $sec->users->count();
                                         @endphp
                                     @endforeach
-                                    <h5 class="card-title">Total Section : <b>{{ $class->sections->count() }}</b></h5>
-                                    <h5 class="card-title float-right" style="margin-top: -35px;">Total Student
+                                    <h5 class="card-title float-left text-muted">Total Section : <b>{{ $class->sections->count() }}</b></h5>
+                                    <h5 class="card-title float-right text-muted">Total Student
                                         : {{ $total_student }}</h5>
-                                        <a class="btn-secondary btn btn-lg float-right mt-5"
-                                           href="{{ url('all-exams-grade/details/'.$class->id) }}"><b>Derails</b></a>
+                                        <a class="button2 button2--white button2--animation float-right mt-5"
+                                           href="{{ url('all-exams-grade/details/'.$class->id) }}"><b>Details</b></a>
                                 </div>
                             </div>
                         </div>
