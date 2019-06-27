@@ -19,7 +19,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Section Name</th>
+                    <th>Name</th>
                     <th>Each Student's Grade</th>
                     <th>All Students Marks</th>
                 </tr>
@@ -28,13 +28,13 @@
                 @foreach($sections as $section)
                     <tr>
                         <td>
-                            <a href="{{url('grades/section/'.$section->id)}}">{{$section->section_number}}</a>
+                            <a class="text-muted" href="{{url('grades/section/'.$section->id)}}">Section {{$section->section_number}}</a>
                         </td>
                         <td>
-                            <a href="{{url('section/students/'.$section->id)}}" class="btn btn-info btn-lg">Each Student's Grade</a>
+                            <a href="{{url('section/students/'.$section->id)}}" class="button2 button2--white button2--animation float-left">Each Student's Grade</a>
                         </td>
                         <td>
-                            <a href="{{url('grades/section/'.$section->id)}}" role="button" class="btn btn-lg btn-warning">All Students Marks</a>
+                            <a href="{{url('grades/section/'.$section->id)}}" role="button" class="button2 button2--white button2--animation float-left">All Students Marks</a>
                         </td>
                     </tr>
                 @endforeach

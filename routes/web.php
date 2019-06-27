@@ -216,6 +216,7 @@ Route::middleware(['auth','master'])->group(function (){
   Route::post('create-school', 'SchoolController@store');
   Route::get('school/admin-list/{school_id}','SchoolController@show');
   Route::get('school/{school_id}', 'SchoolController@showSchool');
+  Route::get('school/delete/{school_id}', 'SchoolController@destroy');
 });
 
 Route::middleware(['auth','admin'])->group(function (){

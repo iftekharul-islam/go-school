@@ -150,10 +150,8 @@ class SchoolController extends Controller
      */
     public function destroy($id)
     {
-      // return (School::destroy($id))?response()->json([
-      //   'status' => 'success'
-      // ]):response()->json([
-      //   'status' => 'error'
-      // ]);
+        $school = School::find($id);
+        $school->delete();
+        return redirect('/home')->with('status', 'School deleted');
     }
 }
