@@ -15,6 +15,15 @@
                         </ul>
                     </div>
                 @endif
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                        @elseif (session('error-status'))
+                            <div class="alert alert-danger">
+                                {{ session('error-status') }}
+                            </div>
+                    @endif
                 <div class="breadcrumbs-area">
                     <h3>
                         Change Password
@@ -35,33 +44,45 @@
                         <form class="new-added-form" method="POST" action="{{url('user/config/change_password')}}">
                             {{ csrf_field() }}
                             <div class="row">
-                                <div class="col-lg-6 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label>Old Password</label>
-                                    <input id="old_password" type="password" class="form-control" name="old_password"
-                                           value="{{ old('old_password') }}" required>
-                                    {{--                                    <input type="text" placeholder="" class="form-control" name="email" value="{{ old('email') }}">--}}
-                                    @if ($errors->has('old_password'))
+                                <div class="col-lg-6 form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                    <label>Current Password</label>
+                                    <input id="current-password" type="password" class="form-control" name="current-password" value="{{ old('current-password') }}" required>
+                                    @if ($errors->has('current-password'))
                                         <span class="help-block">
-                                    <strong>{{ $errors->first('old_password') }}</strong>
+                                    <strong>{{ $errors->first('current-password') }}</strong>
                                 </span>
                                     @endif
                                 </div>
-                                <div class="col-lg-12 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <label>New Password</label>
-                                    {{--                                    <input type="password" placeholder="" class="form-control" name="password" required>--}}
-                                    <input id="new_password" type="password" class="form-control" name="new_password"
-                                           value="{{ old('new_password') }}" required>
-                                    @if ($errors->has('new_password'))
+                                    <input id="password" type="password" class="form-control" name="password"
+                                           value="{{ old('password') }}" required>
+                                    @if ($errors->has('password'))
                                         <span class="help-block">
-                                    <strong>{{ $errors->first('new_password') }}</strong>
+                                    <strong>{{ $errors->first('password') }}</strong>
                                 </span>
                                     @endif
                                 </div>
-                                <div class="col-12 form-group mg-t-8">
-                                    <button type="submit" class="button1 button1--white button1--animation float-left"
-                                            style="margin-right: 2rem;">Submit
-                                    </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 form-group">
+                                    <label>Confirm New Password</label>
+                                    <input id="password_confirm" type="password" class="form-control" name="password_confirm"
+                                           value="{{ old('password_confirm') }}" required>
+                                    @if ($errors->has('password_confirm'))
+                                        <span class="help-block">
+                                    <strong>{{ $errors->first('password_confirm') }}</strong>
+                                </span>
+                                    @endif
                                 </div>
+                            </div>
+
+                            <div class="col-6 form-group mg-t-8">
+                                <button type="submit" class="button1 ml-5 button1--white button1--animation">Change Password
+                                </button>
                             </div>
                         </form>
                     </div>
