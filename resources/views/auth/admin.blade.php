@@ -29,7 +29,7 @@
                         {{ session('status') }}
                         @if (session('register_school_id'))
                             <a href="{{ url('school/admin-list/' . session('register_school_id')) }}"
-                               target="_blank" class="text-white pull-right">View Admins</a>
+                               target="_blank" class="text-primary pull-right ml-5">View Admins</a>
                         @endif
                     </div>
                 @endif

@@ -1,12 +1,12 @@
-<!-- <div class="heading-layout1">
-      <div class="item-title">
-        <h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>
-          @if ($user->role == 'teacher' && $user->section_id > 0)
-    <small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>
-          @endif
-        </h3>
-      </div>
-    </div> -->
+{{--<!-- <div class="heading-layout1">--}}
+      {{--<div class="item-title">--}}
+        {{--<h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>--}}
+          {{--@if ($user->role == 'teacher' && $user->section_id > 0)--}}
+    {{--<small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>--}}
+          {{--@endif--}}
+        {{--</h3>--}}
+      {{--</div>--}}
+    {{--</div> -->--}}
 <div class="single-info-details">
     <div class="row">
         <div class="col-md-3">
@@ -205,47 +205,40 @@
                         <table class="table text-wrap">
                           <tbody>
                           <tr>
-                            <td>Name:</td>
-                            <td class="font-medium text-dark-medium">{{$user->name}}</td>
+                            <td class="font-medium text-dark-medium">Name:</td>
+                            <td >{{$user->name}}</td>
                           </tr>
                           <tr>
-                            <td>User Type:</td>
-                            <td class="font-medium text-dark-medium">{{$user->role}}</td>
+                            <td class="font-medium text-dark-medium">User Type:</td>
+                            <td class="text-capitalize">{{$user->role}}</td>
                           </tr>
                           <tr>
-                            <td>Gender:</td>
-                            <td class="font-medium text-dark-medium">{{ $user->gender }}</td>
+                            <td class="font-medium text-dark-medium">Gender:</td>
+                            <td class="text-capitalize">{{ $user->gender }}</td>
                           </tr>
                           <tr>
-                            <td>Religion:</td>
-                            <td class="font-medium text-dark-medium">{{$user->studentInfo['religion']}}</td>
+                            <td class="font-medium text-dark-medium">Religion:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['religion']}}</td>
                           </tr>
                           <tr>
-                            <td>E-mail:</td>
-                            <td class="font-medium text-dark-medium">{{ $user->email }}</td>
-                          </tr>
-                            <td>Class Teacher:</td>
-                            <td class="font-medium text-dark-medium">{{ ucfirst( $user->section->class_id ) }}</td>
+                            <td class="font-medium text-dark-medium">E-mail:</td>
+                            <td>{{ $user->email }}</td>
                           </tr>
                           <tr>
-                            <td>Section:</td>
-                            <td class="font-medium text-dark-medium">{{ ucfirst($user->section->section_number)}}</td>
+                            <td class="font-medium text-dark-medium">Code:</td>
+                            <td>{{$user->student_code}}</td>
                           </tr>
                           <tr>
-                            <td>Code:</td>
-                            <td class="font-medium text-dark-medium">{{$user->student_code}}</td>
+                            <td class="font-medium text-dark-medium">Address:</td>
+                            <td>{{$user->address}}</td>
                           </tr>
                           <tr>
-                            <td>Address:</td>
-                            <td class="font-medium text-dark-medium">{{$user->address}}</td>
+                            <td class="font-medium text-dark-medium">Phone:</td>
+                            <td>{{$user->phone_number}}</td>
                           </tr>
                           <tr>
-                            <td>Phone:</td>
-                            <td class="font-medium text-dark-medium">{{$user->phone_number}}</td>
-                          </tr>
-                          <tr>
-                            <td>About: </td>
-                            <td class="font-medium text-dark-medium">{{$user->about}}</td>
+                            <td class="font-medium text-dark-medium">About: </td>
+                            <td>{{$user->about}}</td>
                           </tr>
                           </tbody>
                         </table>

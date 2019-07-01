@@ -101,8 +101,14 @@
                         <div class="notice-box-wrap">
                             @foreach($notices as $notice)
                                 <div class="notice-list">
-                                    <div class="post-date bg-light-teal-transparent">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
-                                    <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a> </h6>
+                                        </div>
+                                        <div class="col-4">
+                                            <small class="post-date bg-light-teal-transparent float-right">{{ date('d-m-y', strtotime($notice->created_at)) }}</small>
+                                        </div>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>

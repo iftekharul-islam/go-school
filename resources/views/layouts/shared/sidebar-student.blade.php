@@ -144,7 +144,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('create-school') }}" class="nav-link">
+                        <a href="{{ url('academic-settings') }}" class="nav-link">
                             <i class="fas fa-sliders-h"></i><span>Academic Settings</span></a>
                     </li>
 
