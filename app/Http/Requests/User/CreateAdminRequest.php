@@ -34,7 +34,7 @@ class CreateAdminRequest extends FormRequest
             'about' => 'required',
             'address' => 'required',
             'blood_group' => 'required',
-            'phone_number' => 'required|unique:users',
+            'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'email' => 'email|max:255|unique:users',
         ];
     }

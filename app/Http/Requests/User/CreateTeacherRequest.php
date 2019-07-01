@@ -34,7 +34,7 @@ class CreateTeacherRequest extends FormRequest
             'gender' => 'required',
             'blood_group' => 'required',
             'department_id' => 'required|numeric',
-            'phone_number' => 'required|unique:users',
+            'phone_number' =>  'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
         ];
     }
 }

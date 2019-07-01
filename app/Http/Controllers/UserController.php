@@ -101,7 +101,7 @@ class UserController extends Controller
      * @param $section_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function sectionStudents($section_id)
+    public function sectionStusectionStudents($section_id)
     {
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
 
@@ -214,7 +214,7 @@ class UserController extends Controller
             }
 
         });
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'Account created');
     }
 
     /**
@@ -239,7 +239,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'Admin Created');
     }
 
     /**

@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-bordered table-data-div table-hover">
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>#</th>
@@ -26,14 +26,25 @@
           <td>{{$file->section['section_number']}}</td>
         @endif
         <td>{{($file->active === 1)?'Yes':'No'}}</td>
+        @if($file->active ===1)
         <td>
           <button class="btn btn-danger btn-lg" type="button" onclick="removeFile({{ $file->id }})">
-            Remove</button>
+            Deactivate</button>
           <form id="delete-form-{{ $file->id }}" action="{{ url('academic/remove/'.$upload_type.'/'.$file->id) }}" method="GET" style="display: none;">
             @csrf
             @method('GET')
           </form>
         </td>
+          @else
+          <td>
+            <button class="btn btn-success btn-lg" type="button" onclick="activeFile({{ $file->id }})">
+              Activate</button>
+            <form id="active-file-form-{{ $file->id }}" action="{{ url('academic/activate/'.$upload_type.'/'.$file->id) }}" method="GET" style="display: none;">
+              @csrf
+              @method('GET')
+            </form>
+          </td>
+          @endif
       </tr>
       @endforeach
     </tbody>
@@ -55,6 +66,23 @@
                   document.getElementById('delete-form-'+id).submit();
                 } else {
                   swal("Your Delete Operation has been canceled");
+                }
+              });
+    };
+
+    function activeFile(id) {
+      swal({
+        title: "Are you sure?",
+        text: "You are about to activated this syllabus",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+              .then((willDelete) => {
+                if (willDelete) {
+                  document.getElementById('active-file-form-'+id).submit();
+                } else {
+                  swal("Syllabus activate Operation has been canceled");
                 }
               });
     }

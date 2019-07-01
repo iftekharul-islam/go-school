@@ -30,7 +30,7 @@ class ResultOutput()
 }
 */
 
-\Debugbar::disable();
+\Debugbar::enable();
 
 Route::get('/', function () {
     return view('welcome');
@@ -129,6 +129,11 @@ Route::middleware(['auth','admin'])->prefix('academic')->name('academic.')->grou
     Route::get('event/{id}', 'EventController@update');
     Route::get('routine/{id}', 'RoutineController@update');
   });
+
+  Route::prefix('activate')->name('activate')->group(function() {
+      Route::get('syllabus/{id}', 'SyllabusController@activate');
+  });
+
 });
 
 Route::middleware(['auth','admin'])->prefix('exams')->name('exams.')->group(function (){
@@ -146,6 +151,7 @@ Route::middleware(['auth','teacher'])->group(function (){
   Route::get('exams/active', 'ExamController@indexActive');
   Route::get('school/sections','SectionController@index');
   Route::get('school/sections/details/{class_id}','SectionController@details');
+  Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
 });
 
 Route::get('all-notice', 'NoticeController@index')->middleware(['auth','student']);
@@ -191,7 +197,7 @@ Route::middleware(['auth','accountant'])->prefix('accounts')->name('accounts.')-
   Route::get('delete-expense/{id}','AccountController@deleteExpense');
 });
 
-Route::get('create-school', 'SchoolController@index')->middleware('master.admin');
+Route::get('academic-settings', 'SchoolController@index')->middleware('master.admin');
 Route::get('new/create-school', 'SchoolController@create')->middleware('master.admin');
 
 Route::middleware(['auth','master'])->group(function (){

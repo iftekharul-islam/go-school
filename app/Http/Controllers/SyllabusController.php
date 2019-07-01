@@ -18,7 +18,7 @@ class SyllabusController extends Controller
      {
         $files = Syllabus::with('myclass')
                           ->where('school_id',\Auth::user()->school_id)
-                          ->where('active',1)
+//                          ->where('active',1)
                           ->get();
         return view('syllabus.index',['files'=>$files,'class_id' => 1]);
      }
@@ -96,10 +96,19 @@ class SyllabusController extends Controller
      */
     public function update($id)
     {
-      $tb = Syllabus::find($id);
+      $tb = Syllabus::findOrFail($id);
       $tb->active = 0;
       $tb->save();
-      return back()->with('status','File removed');
+      return back()->with('status','Syllabus');
+    }
+
+    public function activate($id)
+    {
+        $file = Syllabus::findOrFail($id);
+        $file->activate = 1;
+        $file->save();
+
+        return back()->with('status', 'Syllabus Activated');
     }
 
     /**
