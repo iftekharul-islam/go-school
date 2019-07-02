@@ -23,48 +23,69 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-6">
-                <form class="form-horizontal" action="{{url('/accounts/list-income')}}" method="post">
+                <form class="new-added-form" action="{{url('/accounts/list-income')}}" method="post">
                     {{ csrf_field() }}
-                    <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
-                        <label for="year" class="col-md-4">Year</label>
-
-                        <div class="col-md-12">
-{{--                            <input id="date" type="text" class="form-control" name="year" value="{{ old('year') }}" placeholder="Year" required>--}}
-                            <input data-date-format="yyyy" id="year" class="form-control date" name="year" value="{{ old('year') }}" placeholder="Year12" required autocomplete="off">
-                            @if ($errors->has('year'))
-                                <span class="help-block">
+                    <div class="row">
+                        <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
+                            <label for="year" class="col-md-12">Year</label>
+                            <div class="col-md-12">
+                                <select class="select2 select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true" name="year">
+                                    <option value="">Please Select Year</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                                {{--                            <input data-date-format="yyyy" id="year" class="form-control date" name="year" value="{{ old('year') }}" placeholder="Year12" required autocomplete="off">--}}
+                                @if ($errors->has('year'))
+                                    <span class="help-block">
                                       <strong>{{ $errors->first('year') }}</strong>
                                   </span>
-                            @endif
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
-                        <label for="year" class="col-md-4">Month</label>
-
-                        <div class="col-md-12">
-{{--                            <input id="date" type="text" class="form-control" name="month" value="{{ old('year') }}" placeholder="Month">--}}
-                            <input data-date-format="mm" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Month" autocomplete="off">
-                            @if ($errors->has('month'))
-                                <span class="help-block">
+                        <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
+                            <label for="year" class="col-md-12">Month</label>
+                            <div class="col-md-12">
+                                <select class="select2 select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true" name="month">
+                                    <option value="">Please Select Month</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                {{--                            <input data-date-format="mm" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Month" autocomplete="off">--}}
+                                @if ($errors->has('month'))
+                                    <span class="help-block">
                                       <strong>{{ $errors->first('month') }}</strong>
                                   </span>
-                            @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
+                        <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
                             <button type="submit" class="button2 button2--white button2--animation float-left">Get Income List</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-md-6">
-                <div style="width:100%; height: 300px;">
-                    <canvas id="canvas"></canvas>
-                </div>
-            </div>
+{{--            <div class="col-md-6">--}}
+{{--                <div style="width:100%; height: 300px;">--}}
+{{--                    <canvas id="canvas"></canvas>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
             <div class="row">
                 <div class="col-md-12">

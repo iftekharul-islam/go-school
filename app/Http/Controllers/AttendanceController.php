@@ -51,9 +51,12 @@ class AttendanceController extends Controller
         } else {
           // From other users view
           $student = $this->attendanceService->getStudent($student_id);
-          $exam = \App\ExamForClass::where('class_id',$student->section->class->id)
+          $exam = '';
+          if (isset($student)){
+              $exam = \App\ExamForClass::where('class_id',$student->section->class->id)
                   ->where('active', 1)
                   ->first();
+          }
         }
         if($exam)
           $exId = $exam->exam_id;

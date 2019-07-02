@@ -217,19 +217,20 @@
                             <td class="font-medium text-dark-medium">{{ $user->gender }}</td>
                           </tr>
                           <tr>
-                            <td>Religion:</td>
-                            <td class="font-medium text-dark-medium">{{$user->studentInfo['religion']}}</td>
-                          </tr>
-                          <tr>
                             <td>E-mail:</td>
                             <td class="font-medium text-dark-medium">{{ $user->email }}</td>
                           </tr>
-                            <td>Class Teacher:</td>
-                            <td class="font-medium text-dark-medium">{{ ucfirst( $user->section->class_id ) }}</td>
+                          <tr>
+                              @if($user->role === 'teacher')
+                                  <td>Class Teacher:</td>
+                                  <td class="font-medium text-dark-medium">{{ ucfirst( $user->section->class_id ) }}</td>
+                              @endif
                           </tr>
                           <tr>
-                            <td>Section:</td>
-                            <td class="font-medium text-dark-medium">{{ ucfirst($user->section->section_number)}}</td>
+                              @if($user->role === 'teacher')
+                                  <td>Section:</td>
+                                  <td class="font-medium text-dark-medium">{{ ucfirst($user->section->section_number)}}</td>
+                              @endif
                           </tr>
                           <tr>
                             <td>Code:</td>

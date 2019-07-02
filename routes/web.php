@@ -242,7 +242,7 @@ Route::middleware(['auth','admin'])->group(function (){
         'departments' => $departments,
         'register_sections' => $sections
       ]);
-      return view('auth.teacher', [
+      return view('school.new-create-school', [
           session([
               'register_role' => 'teacher',
               'departments' => $departments,

@@ -88,12 +88,20 @@ class AttendanceService {
                     ->first();
     }
 
+//    public function getAbsentAttendanceByStudentAndExam($student_id, $exId){
+//        return Attendance::with(['student', 'section'])
+//                      ->where('student_id', $student_id)
+//                      ->where('present',0)
+//                      ->orWhere('present',2)
+//                      ->get();
+//    }
+
     public function getAbsentAttendanceByStudentAndExam($student_id, $exId){
         return Attendance::with(['student', 'section'])
-                      ->where('student_id', $student_id)
-                      ->where('present',0)
-                      ->orWhere('present',2)
-                      ->get();
+            ->where('student_id', $student_id)
+            ->where('present',0)
+            ->where('exam_id', $exId)
+            ->get();
     }
 
     public function getAttendanceByStudentAndExam($student_id, $exId){

@@ -8,7 +8,7 @@
             Manage Academy
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li><a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -101,71 +101,80 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <div class="card text-center" style="width: 100%">
-                <div class="heading-layout1 mb-5">
-                <div class="item-title">
-                    <h3>School Information</h3>
-                </div>
-            </div>
-                    <div class="card-body border">
-                        <table class="table text-wrap">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th>Theme</th>
-                                <th>Established</th>
-                                <th>Add Admin</th>
-                                <th>View Admins</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                            @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
-                                <tr>
-                                    @if(\Auth::user()->role == 'master')
-                                        <td>
-                                            {{$school->name}}
-                                        </td>
-                                        <td>
-                                            {{$school->code}}
-                                        </td>
-                                        <td>
-                                            {{$school->theme}}
-                                        </td>
-                                        <td>
-                                            {{$school->established}}
-                                        </td>
-                                    @endif
-                                    @if(\Auth::user()->role == 'master')
-                                        <td>
+                @if(\Auth::user()->role == 'master')
+                    <div class="card" style="width: 100%">
+                        <div class="col-12-xxxl col-xl-12">
+                            <div class="account-settings-box">
+                                <div class="card-body">
+                                    <div class="heading-layout1 mg-b-20">
+                                        <div class="item-title">
+                                            <h3>School Details</h3>
+                                        </div>
+                                    </div>
+                                    <div class="user-details-box">
+                                        <div class="item-content">
+                                            <div class="info-table table-responsive">
+                                                <table class="table text-wrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="">Name:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->name }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="">Code:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->code }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="">Theme:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->theme }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="">Established:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->established }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="">Details:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->about }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="">Total Admin:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $admins->count() }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2 mt-5">
                                             <a class="btn btn-success btn-lg" role="button"
                                                href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">
                                                 <small>+ Create Admin</small>
                                             </a>
-                                        </td>
-                                        <td>
+                                        </div>
+                                        <div class="col-md-2 mt-5">
                                             <a class="btn btn-info btn-lg" role="button"
                                                href="{{url('school/admin-list/'.$school->id)}}">
                                                 <small>View Admins</small>
                                             </a>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger btn-lg" type="button" onclick="removeSchool({{ $school->id }})">Delete</button>
-                                            <form id="delete-form-{{ $school->id }}" action="{{ url('school/delete/'.$school->id) }}" method="GET" style="display: none;">
+                                        </div>
+                                        <div class="col-md-2 mt-5">
+                                            <button class="btn btn-danger btn-lg" type="button"
+                                                    onclick="removeSchool({{ $school->id }})">Delete
+                                            </button>
+                                            <form id="delete-form-{{ $school->id }}"
+                                                  action="{{ url('school/delete/'.$school->id) }}" method="GET"
+                                                  style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
-                                        </td>
-                                    @endif
-                                </tr>
-                                @endif
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -179,13 +188,12 @@
                     buttons: true,
                     dangerMode: true,
                 })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            document.getElementById('delete-form-'+id).submit();
-                        } else {
-                            swal("Your Delete Operation has been canceled");
-                        }
-                    });
+                .then((willDelete) => {
+                    if (willDelete) {
+                        icon: "success";
+                        document.getElementById('delete-form-'+id).submit();
+                    }
+                });
             }
         </script>
     @endpush

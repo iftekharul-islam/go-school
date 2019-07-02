@@ -13,6 +13,7 @@
             <th>Class</th>
             <th>Section</th>
             <th>All Students</th>
+            <th>Section Students</th>
             <th>Action</th>
           @endif
           @foreach ($courses as $course)
@@ -52,6 +53,12 @@
               @if($course->exam_id != 0)
                 <td>
                   <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
+                </td>
+                <td>
+                  <a role="button"
+                     class="button2 button2--white button2--animation float-left"
+                     href="{{url('section/students/'.$course->section->id.'?section=1')}}">View
+                    Students</a>
                 </td>
               @else
                 <td>Save under Exam to Add Student</td>
