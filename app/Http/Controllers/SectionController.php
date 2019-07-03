@@ -48,6 +48,25 @@ class SectionController extends Controller
         ]);
     }
 
+    public function attendanceList(){
+        $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)
+            ->get();
+        $classeIds = \App\Myclass::where('school_id',\Auth::user()->school->id)
+            ->pluck('id')
+            ->toArray();
+        $sections = \App\Section::whereIn('class_id',$classeIds)
+            ->orderBy('section_number')
+            ->get();
+        $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
+            ->where('active', 1)
+            ->get()->groupBy('class_id');
+        return view('school.attendance',[
+            'classes'=>$classes,
+            'sections'=>$sections,
+            'exams'=>$exams
+        ]);
+    }
+
     public function details($class_id)
     {
         $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)
@@ -72,6 +91,7 @@ class SectionController extends Controller
 
     public function sectionDetails($section_id)
     {
+
         $courses = Course::where('section_id', $section_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
         $files = Routine::with('section')

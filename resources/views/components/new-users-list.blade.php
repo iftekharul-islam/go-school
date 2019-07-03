@@ -1,31 +1,12 @@
-<div class="breadcrumbs-area">
-    <h3>All @foreach($users as $user)
-            {{ $user->role }}
-            @break
-        @endforeach
-    </h3>
-    <ul>
-        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                Back &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
-        </li>
-        <li>All
-            @foreach($users as $user)
-                {{ $user->role }}
-                @break
-            @endforeach</li>
-        </li>
-    </ul>
-</div>
 
 <div class="card height-auto">
     <div class="card-body">
         <div class="table-responsive">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+            {{--@if (session('status'))--}}
+                {{--<div class="alert alert-success">--}}
+                    {{--{{ session('status') }}--}}
+                {{--</div>--}}
+            {{--@endif--}}
             <table class="table table-data-div display text-wrap">
                 <thead>
                 <tr>

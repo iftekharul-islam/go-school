@@ -101,7 +101,7 @@ class UserController extends Controller
      * @param $section_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function sectionStusectionStudents($section_id)
+    public function sectionStudents($section_id)
     {
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
 

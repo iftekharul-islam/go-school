@@ -1,5 +1,5 @@
 @extends('layouts.student-app')
-
+@section('title','Dashboard')
 @section('content')
     <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
@@ -31,89 +31,88 @@
                                 </div>
                             </div>
                             <div class="media-body mt-5">
-                                <h3 class="item-title ml-5">{{ Auth::user()->name }}</h3>
+                                <h3 class="item-title ml-5 text-capitalize">{{ Auth::user()->name }}</h3>
                             </div>
                             <p>{{ $student->about }}</p>
                             <div class="table-responsive info-table">
                                 <table class="table text-nowrap">
                                     <tbody>
                                     <tr>
-                                        <td>Gender:</td>
-                                        <td class="font-medium text-dark-medium">{{ ucfirst($student->gender) }}</td>
+                                        <td class="font-medium text-dark-medium">Gender:</td>
+                                        <td class="text-capitalize">{{ ucfirst($student->gender) }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Blood Group:</td>
-                                        <td class="font-medium text-dark-medium">{{ ucfirst($student->blood_group) }}</td>
+                                        <td class="font-medium text-dark-medium">Blood Group:</td>
+                                        <td class="text-capitalize">{{ ucfirst($student->blood_group) }}</td>
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->father_name))
-                                            <td>Father's Name:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->father_name }}</td>
+                                            <td class="font-medium text-dark-medium">Father's Name:</td>
+                                            <td class="text-capitalize">{{ $student_info->father_name }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->father_occupation))
-                                            <td>Father's Occupation:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->father_occupation }}</td>
+                                            <td class="font-medium text-dark-medium">Father's Occupation:</td>
+                                            <td class="text-capitalize">{{ $student_info->father_occupation }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->mother_name))
-                                            <td>Mother's Name:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->mother_name }}</td>
+                                            <td class="font-medium text-dark-medium">Mother's Name:</td>
+                                            <td class="text-capitalize">{{ $student_info->mother_name }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->mother_occupation))
-                                            <td>Mother's Occupation:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->mother_occupation }}</td>
+                                            <td class="font-medium text-dark-medium">Mother's Occupation:</td>
+                                            <td class="text-capitalize">{{ $student_info->mother_occupation }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->birthday))
-                                            <td>Date of Birth:</td>
-                                            <td class="font-medium text-dark-medium">{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
+                                            <td class="font-medium text-dark-medium">Date of Birth:</td>
+                                            <td>{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->religion))
-                                            <td>Religion:</td>
-                                            <td class="font-medium text-dark-medium">{{ ucfirst($student_info->religion) }}</td>
+                                            <td class="font-medium text-dark-medium">Religion:</td>
+                                            <td class="text-capitalize">{{ ucfirst($student_info->religion) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>E-Mail:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student->email }}</td>
+                                        <td class="font-medium text-dark-medium">E-Mail:</td>
+                                        <td>{{ $student->email }}</td>
                                     </tr>
                                     <tr>
-                                        @if(isset($student_info->religion))
-                                            <td>Admission Date:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->religion }}</td>
-                                        @endif
+                                            <td class="font-medium text-dark-medium">Admission Date:</td>
+                                            <td class="text-capitalize">{{ $student->created_at}}</td>
+
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->group))
-                                            <td>Group:</td>
-                                            <td class="font-medium text-dark-medium">{{ ucfirst($student_info->group) }}</td>
+                                            <td class="font-medium text-dark-medium">Group:</td>
+                                            <td class="text-capitalize">{{ ucfirst($student_info->group) }}</td>
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>Section:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student->section_id }}</td>
+                                        <td class="font-medium text-dark-medium">Section:</td>
+                                        <td class="text-capitalize">{{ $student->section_id }}</td>
                                     </tr>
                                     <tr>
                                         @if(isset($student_info->student_id))
-                                            <td>Roll:</td>
-                                            <td class="font-medium text-dark-medium">{{ $student_info->student_id }}</td>
+                                            <td class="font-medium text-dark-medium">Roll:</td>
+                                            <td>{{ $student_info->student_id }}</td>
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>Address:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student->address }}</td>
+                                        <td class="font-medium text-dark-medium">Address:</td>
+                                        <td class="text-capitalize">{{ $student->address }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Phone:</td>
-                                        <td class="font-medium text-dark-medium">{{ $student->phone_number }}</td>
+                                        <td class="font-medium text-dark-medium">Phone:</td>
+                                        <td>{{ $student->phone_number }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -292,8 +291,14 @@
                     <div class="notice-box-wrap">
                         @foreach($events as $event)
                             <div class="notice-list">
-                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
-                                <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -313,9 +318,14 @@
                     <div class="notice-box-wrap">
                         @foreach($notices as $notice)
                             <div class="notice-list">
-                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
-                                <h6 class="notice-title"><a
-                                            href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
