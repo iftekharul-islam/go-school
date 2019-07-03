@@ -51,7 +51,7 @@
                                         @if ($ex->class_id == $class_id)
                                             <td>
                                                 <a role="button"
-                                                   class="button2 button2--white button2--animation float-left" style="font-size: 20px"
+                                                   class="button button--text float-left font-weight-bold"
                                                    href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">View
                                                     Today's Attendance</a>
                                             </td>
@@ -63,7 +63,7 @@
                                 @endforeach
                                 <td>
                                     <a role="button"
-                                       class="button2 button2--white button2--animation float-left"
+                                       class="button button--text font-weight-bold float-left"
                                        href="{{url('attendances/'.$section->id)}}">View Each
                                         Student's Attendance</a>
                                 </td>
@@ -78,7 +78,7 @@
                                                 $ce = 1;
                                                 ?>
                                                 <a role="button"
-                                                   class="button2 button2--white button2--animation float-left"
+                                                   class="button button--text font-weight-bold float-left"
                                                    href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">Take
                                                     Attendance</a>
                                             @endif
@@ -97,18 +97,18 @@
                             @if(isset($_GET['course']) && $_GET['course'] == 1)
                                 <td>
                                     <a role="button"
-                                       class="button2 button2--white button2--animation float-left"
+                                       class="button button--text float-left font-weight-bold"
                                        href="{{url('courses/0/'.$section->id)}}">View Courses</a>
                                 </td>
                                 <td>
                                     <a role="button"
-                                       class="button2 button2--white button2--animation float-left"
+                                       class="button button--text float-left font-weight-bold"
                                        href="{{url('section/students/'.$section->id.'?section=1')}}">View
                                         Students</a>
                                 </td>
                                 <td>
                                     <a role="button"
-                                       class="button2 button2--white button2--animation float-left"
+                                       class="button button--text float-left font-weight-bold"
                                        href="{{url('academic/routine/'.$section->id)}}">View
                                         Routines</a>
                                 </td>
