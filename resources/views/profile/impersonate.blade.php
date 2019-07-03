@@ -38,7 +38,7 @@
                                     <td>{{ ucfirst($other_user->role) }}</td>
                                     <td>
                                         <input type="hidden" name="id" value="{{$other_user->id}}" />
-                                        <button type="submit" class="button2 button2--white button2--animation float-left">Impersonate</button>
+                                        <button type="submit" class="button button--text float-left font-weight-bold">Impersonate</button>
                                     </td>
                                 </form>
                             </tr>

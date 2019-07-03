@@ -82,8 +82,8 @@
                     </div>
 
                     <div class="col-12 form-group mg-t-8">
-                        <button type="submit" class="button1 button1--white button1--animation float-left">Save</button>
-                        <a href="javascript:history.back()" class="button1 button1--white button1--animation float-left" style="margin-left: 2%; background-color: white; color: #269589; border: 1px solid !important;" role="button">Cancel</a>
+                        <button type="submit" class="button button--text float-left"><b>Save</b></button>
+                        <a href="javascript:history.back()" class="button button--cancel float-left" style="margin-left: 1%" role="button"><b>Cancel</b></a>
                     </div>
                 </div>
             </form>
