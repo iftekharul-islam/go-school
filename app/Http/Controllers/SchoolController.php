@@ -79,6 +79,7 @@ class SchoolController extends Controller
     }
 
     public function showSchool($school_id) {
+        $admins = User::where('school_id',$school_id)->where('role','admin')->get();
         $total_students = \App\User::where('school_id',$school_id)->where('role','student')->where('active', 1)->count();
         $total_classes =  \App\Myclass::where('school_id', $school_id)->count();
         $total_teacher = \App\User::where('school_id', $school_id)->where('role', 'teacher')->where('active', 1)->count();
@@ -91,6 +92,7 @@ class SchoolController extends Controller
             'total_classes' => $total_classes,
             'total_teacher' => $total_teacher,
             'total_exams' => $total_exams,
+            'admins'     => $admins
         ]);
     }
 

@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form class="form-horizontal" action="{{url('school/add-class')}}" method="post">
+      <form class="new-added-form" action="{{url('school/add-class')}}" method="post">
           {{csrf_field()}}
           <div class="form-group">
             <label for="classNumber{{$school->id}}" class="col-sm-12 control-label">Class Number/Name</label>
@@ -28,7 +28,7 @@
           </div>
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-              <button type="submit" class="btn btn-danger btn-lg">Submit</button>
+              <button type="submit" class="button2 button2--white button2--animation float-left">Submit</button>
             </div>
           </div>
         </form>

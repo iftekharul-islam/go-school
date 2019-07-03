@@ -97,6 +97,11 @@ body {
   border: none;
   padding: 5px 15px;
   width: 400px;
+  margin-bottom: 13px;
+}
+
+#DataTables_Table_0_length {
+  margin-top: 15px;
 }
 
 .paginate123 .pagination li {
@@ -3480,17 +3485,15 @@ ul {
 }
 
 .ui-tab-card .card-body .border-nav-tab .nav-tabs .nav-item .nav-link:hover {
-  background-color: #f57c00;
-  border-color: #f57c00;
+  background-color: #32998F;
+  border-color: #32998F;
   color: #ffffff;
-  box-shadow: 0px 5px 13px 0px rgba(245, 124, 0, 0.4);
 }
 
 .ui-tab-card .card-body .border-nav-tab .nav-tabs .nav-item .nav-link.active {
-  background-color: #f57c00;
+  background-color: #32998F;
   color: #ffffff;
-  box-shadow: 0px 5px 13px 0px rgba(245, 124, 0, 0.4);
-  border-color: #f57c00;
+  border-color: #32998F;
 }
 
 .ui-tab-card .card-body .border-nav-tab .tab-content {

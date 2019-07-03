@@ -21,7 +21,7 @@
             <!-- Student Attendence Area Start Here -->
             <div class="col-12" style="min-height: 700px;">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body false-height">
                         @if(count($attendances) > 0)
                             <div class="table-responsive">
                                 <table class="table bs-table table-striped table-bordered text-nowrap">
