@@ -22,7 +22,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="row mb-5">
+        <div class="row">
             <div class="col-md-6">
                 <form class="form-horizontal" action="{{url('/accounts/list-expense')}}" method="post">
                     {{ csrf_field() }}
@@ -74,17 +74,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
-                            <button type="submit" class="button2 button2--white button2--animation float-left mt-5">Expense List</button>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="submit" class="button button--text float-left mt-5"><b>Expense List</b></button>
                         </div>
                     </div>
                 </form>
             </div>
-{{--            <div class="col-md-6">--}}
-{{--                <div style="width:100%; height: 300px;">--}}
-{{--                    <canvas id="canvas"></canvas>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="col-md-6">
+                <div style="width:100%; height: 300px;">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
         </div>
         <div class="row">
                 <div class="col-md-12">

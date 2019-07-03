@@ -151,7 +151,7 @@
 {{--                                                <td>{{ ucfirst($student['section']['class_id']) }}</td>--}}
 {{--                                                <td>{{ ucfirst($student->phone_number) }}</td>--}}
 {{--                                                <td>{{ ucfirst($student->email) }}</td>--}}
-{{--                                                <td><small><a class="button2 button2--white button2--animation float-left" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a></small></td>--}}
+{{--                                                <td><small><a class="button button--text float-left" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a></small></td>--}}
 {{--                                            </tr>--}}
 {{--                                        @endforeach--}}
 {{--                                        </tbody>--}}
@@ -200,7 +200,7 @@
                                                     <td>{{ ucfirst($user['section']['class_id']) }}</td>
                                                     <td>{{ ucfirst($user->phone_number) }}</td>
                                                     <td>{{ ucfirst($user->email) }}</td>
-                                                    <td><small><a class="button2 button2--white button2--animation float-left" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
+                                                    <td><small><a class="button button--text font-weight-bold float-left" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -240,8 +240,8 @@
                                 <td>{{ $book->quantity }}</td>
                                 <td>
                                     <div class="form-group">
-                                        <a href="{{ route('library.books.show', $book->id) }}" class="button2 button2--white button2--animation float-left">
-                                            <b>Details</b>
+                                        <a href="{{ route('library.books.show', $book->id) }}" class="button button--text font-weight-bold float-left">
+                                          Details
                                         </a>
                                     </div>
                                 </td>

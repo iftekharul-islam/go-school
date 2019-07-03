@@ -33,7 +33,7 @@
                 {{ csrf_field() }}
                 @include('library.books.form')
                 <div class="col-12 form-group mt-5">
-                    <button type="submit" class="button1 button1--white button1--animation float-left">Save</button>
+                    <button type="submit" class="button button--text float-left"><b>Save</b></button>
                 </div>
             </form>
         </div>
