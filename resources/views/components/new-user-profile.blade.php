@@ -1,13 +1,13 @@
-{{--<!-- <div class="heading-layout1">--}}
-      {{--<div class="item-title">--}}
-        {{--<h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>--}}
-          {{--@if ($user->role == 'teacher' && $user->section_id > 0)--}}
-    {{--<small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>--}}
-          {{--@endif--}}
-        {{--</h3>--}}
-      {{--</div>--}}
-    {{--</div> -->--}}
-<div class="">
+<!-- <div class="heading-layout1">
+      <div class="item-title">
+        <h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>
+          @if ($user->role == 'teacher' && $user->section_id > 0)
+    <small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>
+          @endif
+        </h3>
+      </div>
+    </div> -->
+<div class="single-info-details">
     <div class="row">
         <div class="col-md-3">
             <div class="item-img-round">
@@ -206,8 +206,10 @@
                             <td>{{ $user->email }}</td>
                           </tr>
                           <tr>
-                            <td class="font-medium text-dark-medium">Code:</td>
-                            <td>{{$user->student_code}}</td>
+                              @if($user->role === 'teacher')
+                                  <td>Section:</td>
+                                  <td class="font-medium text-dark-medium">{{ ucfirst($user->section->section_number)}}</td>
+                              @endif
                           </tr>
                           <tr>
                             <td class="font-medium text-dark-medium">Address:</td>

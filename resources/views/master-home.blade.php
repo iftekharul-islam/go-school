@@ -26,8 +26,8 @@
                         <div class="card-body-inner">
                             <div class="heading-layout1">
                                 <div class="item-title">
-                                    <h3 class="mb-4 mt-2 ml-2">{{ $school->name }}</h3>
-                                    <p class="mb-4 ml-2">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
+                                    <h3 class="mb-4 mt-2 ml-2 float-left"><i class="fas fa-school mr-4"></i><a style="color: #269589" href="{{url('school/'.$school->id)}}">{{ $school->name }}</a></h3>
+                                    <p class="mb-4 ml-2 float-right">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
                                 </div>
                             </div>
                             <div class="table-responsive">
