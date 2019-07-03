@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Attendance;
+use App\Course;
+use App\ExamForClass;
+use App\Section;
 use App\User;
 use App\Http\Resources\AttendanceResource;
 use Illuminate\Http\Request;
@@ -27,10 +30,8 @@ class AttendanceController extends Controller
     public function index($section_id, $student_id, $exam_id)
     {
       if($section_id > 0 && \Auth::user()->role != 'student'){
-        // View attendances of students of a section
         $students = $this->attendanceService->getStudentsBySection($section_id);
         $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
-//        return $attendances;
         $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$exam_id);
 
         return view('attendance.attendance', [
@@ -133,8 +134,8 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
     */
     public function sectionIndex(Request $request, $section_id){
-      $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
 
+      $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
       $request->session()->put('section-attendance', true);
 
       return view('list.new-student-list',[
@@ -142,6 +143,29 @@ class AttendanceController extends Controller
         'current_page'=>$users->currentPage(),
         'per_page'=>$users->perPage()
       ]);
+    }
+
+    public function attendanceDetails(Request $request, $section_id, $class_id)
+    {
+
+        $course =  Course::with('section')->where('section_id', $section_id)->first();
+        $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
+        $students = $this->attendanceService->getStudentsBySection($section_id);
+        $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$course->exam_id);
+        $request->session()->put('section-attendance', true);
+        if($section_id > 0 && \Auth::user()->role != 'student') {
+            $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
+            return view('attendance.sectionAttendance', [
+                'users' => $users,
+                'current_page' => $users->currentPage(),
+                'per_page' => $users->perPage(),
+                'attendances' => $attendances,
+                'section_id' => $section_id,
+                'students' => $students,
+                'attCount' => $attCount,
+                'exam_id'=>$course->exam_id
+            ]);
+        }
     }
     
     /**

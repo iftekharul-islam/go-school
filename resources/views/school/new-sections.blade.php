@@ -16,22 +16,20 @@
             <li>All Class</li>
         </ul>
     </div>
-
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                </div>
-            </div>
             <div class="row">
-                @if(count($classes) > 0)
-                    @foreach ($classes as $class)
+                @if(count($classes)> 0)
+                    @foreach($classes as $class)
                         <?php $total_student = 0 ?>
                         <div class="col-md-3">
                             <div class="card mb-4">
-                                <h5 class="card-header text-teal text-center">CLASS
-                                    <b>{{$class->class_number}}</b> @if($class->group)&nbsp; | &nbsp;
-                                    GROUP <b>{{ucfirst($class->group)}}</b> @endif</h5>
+                                <div>
+                                    <h5 class="card-header text-teal text-center">CLASS: <strong class="text-capitalize">{{$class->class_number}}</strong>
+                                        @if($class ->group) | GROUP: <strong class="text-capitalize">{{ucfirst($class->group)}}</strong>
+                                        @endif
+                                    </h5>
+                                </div>
                                 <div class="card-body-customized">
                                     @foreach($class->sections as $sec)
                                         @php
@@ -44,38 +42,57 @@
                                         <h5 class="card-title float-right text-muted">Total Student
                                             : {{ $total_student }}</h5>
                                     </div>
-                                    @if(isset($_GET['course']) && $_GET['course'] == 1)
-                                        <div class="dropdown">
-                                            <button class="button2 button2--white button2--animation float-right mt-5 dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Class Details
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                @foreach($class->sections as $section)
-                                                    <a class="dropdown-item" href="{{ url('school/section/details/'.$section->id. '?course=1') }}">Section: {{$section->section_number}}</a>
-                                                @endforeach
+                                    <div class="">
+                                        @if(isset($_GET['course']) && $_GET['course'] == 1)
+                                            <div class="">
+                                                <div class="dropdown">
+                                                    <button class="button2 button2--white button2--animation float-right mt-5 dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Class Details
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        @foreach($class->sections as $section)
+                                                            <a class="dropdown-item" href="{{ url('school/section/details/'.$section->id. '?course=1') }}">Section: {{$section->section_number}}</a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @else
-                                        <a class="button2 button2--white button2--animation float-right mt-5"
-                                           href="{{ url('school/section/details/'.$section->id. '?att=1') }}"><b>Class Details</b></a>
-                                </div>
-                                @endif
-                                @if(isset($_GET['course']) && $_GET['course'] == 1)
-                                    <div class="col-md">
-                                        <a role="button" class="button2 button2--white button2--animation float-left mt-5"
-                                           href="{{url('academic/syllabus/'.$class->id)}}"><b>View Syllabus</b></a>
+                                            <div class="">
+                                                <a role="button" class="button2 button2--white button2--animation float-left mt-5"
+                                                   href="{{url('academic/syllabus/'.$class->id)}}"><b>View Syllabus</b></a>
+                                            </div>
+                                            @else
+
+                                            @if(count($class->sections) > 0)
+                                            <div class="">
+                                                <div class="dropdown">
+                                                    <button class="button2 button2--white button2--animation offset-4 mt-5 dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Class Details
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        @foreach($class->sections as $section)
+                                                            <a class="dropdown-item" href="{{ url('section/details/attendance/'.$section->id.'/'.$class->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @else
+                                                <div class="">
+                                                    <div>
+                                                        <button disabled class="btn disabled text-dark font-bold offset-4 mt-5 " type="button"  aria-expanded="false">
+                                                            No Info Available
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @endif
                                     </div>
-                                @endif
+                                </div>
                             </div>
                         </div>
+                    @endforeach
+                @endif
             </div>
-            @endforeach
-            @else
-                <div class="panel-body">
-                    No Related Data Found.
-                </div>
-            @endif
         </div>
     </div>
-    </div>
+
 @endsection

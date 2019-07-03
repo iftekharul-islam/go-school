@@ -27,14 +27,14 @@
                 <div class="table-responsive">
                     <table class="table display data-table text-wrap">
                         <tr>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Address</th>
-                            <th>About</th>
-                            <th>Action</th>
-                            <th>Action</th>
+                            <th width="10%">Name</th>
+                            <th width="5%">Code</th>
+                            <th width="10%">Email</th>
+                            <th width="10%">Phone Number</th>
+                            <th width="15%">Address</th>
+                            <th width="30%">About</th>
+                            <th width="5%">Edit</th>
+                            <th width="5%">Activate/Deactivate</th>
                         </tr>
                         @foreach ($admins as $admin)
                             <tr>
@@ -47,6 +47,10 @@
                                 <td>{{$admin->address}}</td>
                                 <td>{{$admin->about}}</td>
                                 <td>
+                                    <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
+                                       role="button">Edit</a>
+                                </td>
+                                <td class="text-center">
                                     @if($admin->active == 0)
                                         <button class="btn btn-success btn-lg" type="button" onclick="removeUser({{ $admin->id }})">Active</button>
                                         <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
@@ -60,10 +64,6 @@
                                             @method('GET')
                                         </form>
                                     @endif
-                                </td>
-                                <td>
-                                    <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
-                                       role="button">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -1,5 +1,5 @@
 @extends('layouts.student-app')
-
+@section('title','Dashboard')
 @section('content')
 <div class="breadcrumbs-area">
     <h3>All Schools</h3>
