@@ -88,7 +88,7 @@
       <th scope="row">{{($loop->index + 1)}}</th>
       <td>{{$grade->course->course_name}}</td>
       <td><b>{{$grade->marks}}</b>
-        <a class="button2 button2--white button2--animation float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
+        <a class="button button--text float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
       </td>
       <td>
         @foreach($gradesystems as $gs)

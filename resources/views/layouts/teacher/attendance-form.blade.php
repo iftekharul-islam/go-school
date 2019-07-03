@@ -112,7 +112,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="button2 button2--white button2--animation float-left">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="button button--text float-left font-weight-bold">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @endif

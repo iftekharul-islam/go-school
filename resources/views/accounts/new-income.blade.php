@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="col-12 form-group mg-t-8">
-                    <button type="submit" class="button1 button1--white button1--animation float-left">Save</button>
+                    <button type="submit" class="button button--text float-left">Save</button>
                 </div>
             </form>
         </div>

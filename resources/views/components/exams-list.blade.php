@@ -78,7 +78,7 @@
           @endif
           @if($exam->result_published != 1)
             <span>
-          <input type="submit" class="button2 button2--white button2--animation float-right" style="margin-left: 1%;" value="Save" form="form{{$exam->id}}"/>
+          <input type="submit" class="button button--primary float-right" style="margin-left: 1%;" value="Save" form="form{{$exam->id}}"/>
         </span>
           @endif
         </td>

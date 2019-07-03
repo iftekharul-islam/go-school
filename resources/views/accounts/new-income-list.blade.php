@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="button2 button2--white button2--animation float-left">Get Income List</button>
+                            <button type="submit" class="button button--text float-left"><b>Get Income List</b></button>
                         </div>
                     </div>
                 </form>
@@ -90,7 +90,7 @@
                                             <td>{{$income->amount}}</td>
                                             <td>{{$income->description}}</td>
                                             <td>{{ Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            <td><a title='Edit' class='button2 button2--white button2--animation float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
+                                            <td><a title='Edit' class='button button--text float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'><b>Edit</b></a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

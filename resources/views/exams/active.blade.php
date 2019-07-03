@@ -20,8 +20,9 @@
         <div class="row">
             @foreach($exams as $exam)
             <div class="col-md-3">
-                <div class="card mb-4">
-                    <h5 class="card-header text-teal text-center" style="text-transform: uppercase;">
+                <div class="card mb-4 mt-4">
+                    <h5 class="card-header text-muted text-left" style="text-transform: capitalize;">
+                    <i style='font-size:24px;margin-left:-20px; color:#' class='flaticon-classmates'></i>
                         {{$exam->exam_name}}</h5>
                     <div class="card-body-customized">
                         <?php $total = 0 ?>
@@ -32,9 +33,9 @@
                         @endphp
                         @endif
                         @endforeach
-                        <p class="card-title float-left text-muted">Courses Under exam : {{ $total }}</p>
+                        <p class="card-title float-left text-muted">Courses Under exam: {{ $total }}</p>
                         <a href="{{ url('/exams/details/'.$exam->id) }}"
-                            class="button2 button2--white button2--animation float-right mt-5">Details</a>
+                            class="button button--primary float-right mt-5">Details</a>
 
                         {{--                                    @component('components.active-exams',['exam'=>$exam,'courses'=>$courses])--}}
                         {{--                                    @endcomponent--}}

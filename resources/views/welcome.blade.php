@@ -77,7 +77,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="button button--white button--animation">LOGIN</button>
+                                    <button type="submit" class="button button--login button--animation">LOGIN</button>
                                 </form>
                             @endauth
                         </div>

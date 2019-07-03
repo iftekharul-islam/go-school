@@ -127,8 +127,8 @@
 {{--                            <td>{{$user->address}}</td>--}}
 {{--                        @endif--}}
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role == 'student')<td><a class="button2 button2--white button2--animation" role="button"
-                                                                href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></td>@endif
+                            @if($user->role == 'student')<td><a class="button button--primary" role="button"
+                                                                href="{{url('attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
