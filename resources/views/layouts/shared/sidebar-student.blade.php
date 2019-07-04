@@ -100,7 +100,7 @@
                             <i class="far fa-clock"></i><span>Class Routine</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('grades/all-exams-grade') }}" class="nav-link">
+                        <a href="{{ url('grades/classes') }}" class="nav-link">
                             <i class="fas fa-poll-h"></i><span>Grades</span></a>
                     </li>
                     <li class="nav-item">

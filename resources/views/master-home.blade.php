@@ -22,7 +22,7 @@
             @foreach($schools as $school)
             <div class="col-12 col-xl-4 col-4-xxxl">
                 <div class="card dashboard-card-four pd-b-0">
-                    <div class="card-body border" style="min-height: 300px">
+                    <div class="card-body border pb-5">
                         <div class="card-body-inner">
                             <div class="heading-layout1">
                                 <div class="item-title">

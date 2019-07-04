@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function (){
 Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
 Route::middleware(['auth','teacher'])->prefix('grades')->group(function (){
-  Route::get('all-exams-grade', 'GradeController@allExamsGrade');
+  Route::get('classes', 'GradeController@allExamsGrade');
   Route::get('section/{section_id}', 'GradeController@gradesOfSection');
   Route::get('t/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@tindex')->name('teacher-grade');
   Route::get('c/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@cindex');
