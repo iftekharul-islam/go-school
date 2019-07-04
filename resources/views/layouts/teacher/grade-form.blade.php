@@ -5,56 +5,73 @@
   }
 </style>
 <div class="col-md-12" id="grade-labels">
-  <span class="label label-danger checkbox-inline">
-    <input type="checkbox" name="attendance" value="4" checked> Attendance
+  <input type="checkbox" name="attendance" value="4" checked>
+  <span class="badge badge-light checkbox-inline mr-1">
+    Attendance
   </span>
-  <span class="label label-primary checkbox-inline">
-    <input type="checkbox" name="quiz[]" value="5" checked> Quiz 1
+  <input type="checkbox" name="quiz[]" value="5" checked>
+  <span class="badge badge-primary checkbox-inline mr-1">
+    Quiz 1
   </span>
-  <span class="label label-primary checkbox-inline">
-    <input type="checkbox" name="quiz[]" value="6"> Quiz 2
+  <input type="checkbox" name="quiz[]" value="6">
+  <span class="badge badge-primary checkbox-inline mr-1">
+  Quiz 2
   </span>
-  <span class="label label-primary checkbox-inline">
-    <input type="checkbox" name="quiz[]" value="7"> Quiz 3
+  <input type="checkbox" name="quiz[]" value="7">
+  <span class="badge badge-primary mr-1 checkbox-inline">
+  Quiz 3
   </span>
-  <span class="label label-primary checkbox-inline">
-    <input type="checkbox" name="quiz[]" value="8"> Quiz 4
+  <input type="checkbox" name="quiz[]" value="8">
+  <span class="badge badge-primary mr-1 checkbox-inline">
+  Quiz 4
   </span>
-  <span class="label label-primary checkbox-inline">
-    <input type="checkbox" name="quiz[]" value="9"> Quiz 5
+  <input type="checkbox" name="quiz[]" value="9">
+  <span class="badge badge-primary mr-1 checkbox-inline">
+  Quiz 5
   </span>
-  <span class="label label-success checkbox-inline">
-    <input type="checkbox" name="assignment[]" value="10" checked> Assignment 1
+  <input type="checkbox" name="assignment[]" value="10" checked>
+  <span class="badge badge-success mr-1 checkbox-inline">
+  Assignment 1
   </span>
-  <span class="label label-success checkbox-inline">
-    <input type="checkbox" name="assignment[]" value="11"> Assignment 2
+  <input type="checkbox" name="assignment[]" value="11">
+  <span class="badge badge-success mr-1 checkbox-inline">
+  Assignment 2
   </span>
-  <span class="label label-success checkbox-inline">
-    <input type="checkbox" name="assignment[]" value="12"> Assignment 3
+  <input type="checkbox" name="assignment[]" value="12">
+  <span class="badge badge-success mr-1 checkbox-inline">
+  Assignment 3
   </span>
-  <span class="label label-info checkbox-inline">
-    <input type="checkbox" name="ct[]" value="13" checked> Class Test 1
+  <input type="checkbox" name="ct[]" value="13" checked>
+  <span class="badge badge-info mr-1 checkbox-inline">
+    Class Test 1
   </span>
-  <span class="label label-info checkbox-inline">
-    <input type="checkbox" name="ct[]" value="14"> Class Test 2
+  <input type="checkbox" name="ct[]" value="14">
+  <span class="badge badge-info mr-1 checkbox-inline">
+    Class Test 2
   </span>
-  <span class="label label-info checkbox-inline">
-    <input type="checkbox" name="ct[]" value="15"> Class Test 3
+  <input type="checkbox" name="ct[]" value="15">
+  <span class="badge badge-info mr-1 checkbox-inline">
+    Class Test 3
   </span>
-  <span class="label label-info checkbox-inline">
-    <input type="checkbox" name="ct[]" value="16"> Class Test 4
+  <input type="checkbox" name="ct[]" value="16">
+  <span class="badge badge-info mr-1 checkbox-inline">
+    Class Test 4
   </span>
-  <span class="label label-info checkbox-inline">
-    <input type="checkbox" name="ct[]" value="17"> Class Test 5
+  <input type="checkbox" name="ct[]" value="17">
+  <span class="badge badge-info mr-1 checkbox-inline">
+    Class Test 5
   </span>
-  <span class="label label-default checkbox-inline">
-    <input type="checkbox" name="few" value="18">Final Exam Written
+  <input type="checkbox" name="few" value="18">
+  <span class="badge badge-secondary mr-1 checkbox-inline">
+    Final Exam Written
   </span>
-  <span class="label label-default checkbox-inline">
-    <input type="checkbox" name="fem" value="19">Final Exam MCQ
+  <input type="checkbox" name="fem" value="19">
+  <span class="badge badge-secondary mr-1 checkbox-inline">
+    Final Exam MCQ
   </span>
-  <span class="label label-warning checkbox-inline">
-    <input type="checkbox" name="practical" value="20">Practical
+  <input type="checkbox" name="practical" value="20">
+  <span class="badge badge-warning mr-1 checkbox-inline">
+    Practical
   </span>
 </div>
 <br />

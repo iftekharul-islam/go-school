@@ -43,16 +43,37 @@ class AttendanceController extends Controller
         ]);
       }
       else {
+          $present="";
+          $absent="";
+          $escaped="";
+          $total="";
         // View attendance of a single student by student id
         if(\Auth::user()->role == 'student'){
           // From student view
+          $student_info = \Auth::user()->studentInfo;
+            if (!empty($student_info)) {
+                $student_id = $student_info->student_id;
+                $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
+                foreach ($attCount as $att) {
+                    $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
+                    $present = $att->totalpresent;
+                    $absent = $att->totalabsent;
+                    $escaped = $att->totalescaped;
+                }
+            }
           $exam = \App\ExamForClass::where('class_id',\Auth::user()->section->class->id)
                   ->where('active', 1)
                   ->first();
         } else {
           // From other users view
           $student = $this->attendanceService->getStudent($student_id);
-          $exam = '';
+          $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
+            foreach ($attCount as $att) {
+                $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
+                $present = $att->totalpresent;
+                $absent = $att->totalabsent;
+                $escaped = $att->totalescaped;
+            }
           if (isset($student)){
               $exam = \App\ExamForClass::where('class_id',$student->section->class->id)
                   ->where('active', 1)
@@ -63,22 +84,6 @@ class AttendanceController extends Controller
           $exId = $exam->exam_id;
         else
           $exId = 0;
-        $student_info = \Auth::user()->studentInfo;
-        $present="";
-        $absent="";
-        $escaped="";
-        $total="";
-          if (!empty($student_info)) {
-              $student_id = $student_info->student_id;
-              $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
-              foreach ($attCount as $att) {
-                  $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
-                  $present = $att->totalpresent;
-                  $absent = $att->totalabsent;
-                  $escaped = $att->totalescaped;
-              }
-          }
-
         $attendances = $this->attendanceService->getAttendanceByStudentAndExam($student_id, $exId);
 
         return view('attendance.admin-student-attendances',['attendances' => $attendances, 'present' => $present, 'absent' => $absent, 'escaped' => $escaped, 'total' => $total]);

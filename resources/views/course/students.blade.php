@@ -28,8 +28,8 @@
                 <div class="card-body">
                     @if(count($students) > 0)
                         @foreach ($students as $student)
-                            <h3>Course Students of Class: {{$student->student->section->class->class_number}} Section:
-                                {{$student->student->section->section_number}}</h3>
+                            <h3>Course Students of Class: {{$student->section->class->class_number}} Section:
+                                {{$student->section->section_number}}</h3>
                             @break
                         @endforeach
                         <h4>Select Students to send message</h4>
@@ -56,13 +56,13 @@
                                                         <div class="checkbox">
                                                             <label>
                                                                 <input type="checkbox" name="recipients[]" form="msgForm"
-                                                                       value="{{$student->student->id}}">
+                                                                       value="{{$student->id}}">
                                                             </label>
                                                         </div>
                                                     </td>
-                                                    <td>{{$student->student->student_code}}</td>
+                                                    <td>{{$student->student_code}}</td>
                                                     <td><a
-                                                                href="{{url('user/'.$student->student->student_code)}}">{{$student->student->name}}</a>
+                                                                href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
