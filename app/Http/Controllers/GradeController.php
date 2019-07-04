@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Grade;
 use App\Http\Resources\GradeResource;
 use App\Section;
+use App\Services\User\UserService;
 use Illuminate\Http\Request;
 use App\Http\Requests\Grade\CalculateMarksRequest;
 use App\Http\Traits\GradeTrait;
@@ -13,10 +15,12 @@ use App\Services\Grade\GradeService;
 class GradeController extends Controller
 {
     use GradeTrait;
-
+    protected $userService;
     protected $gradeService;
 
-    public function __construct(GradeService $gradeService){
+    public function __construct(GradeService $gradeService, UserService $userService){
+
+      $this->userService = $userService;
       $this->gradeService = $gradeService;
     }
     /**
@@ -94,25 +98,22 @@ class GradeController extends Controller
     }
 
     public function gradesOfSection($section_id){
+
+      $section = Section::with('users')->findOrFail($section_id);
       $examIds = $this->gradeService->getActiveExamIds()->toArray();
       $courses = $this->gradeService->getCourseBySectionIdExamIds($section_id, $examIds);
       $grades = $this->gradeService->getGradesByCourseId($courses);
-
-      return view('grade.class-result',compact('grades'));
+      $students = $this->userService->getSectionStudentsWithSchool($section_id);
+      return view('grade.class-result',compact('grades', 'students', 'section'));
     }
 
     public function calculateMarks(CalculateMarksRequest $request){
       $gradeSystem = $this->gradeService->getGradeSystemByname($request->grade_system_name);
-
       $this->gradeService->course_id = $request->course_id;
       $course = $this->gradeService->getCourseByCourseId();
-
       $grades = $this->gradeService->getGradesByCourseExam($request->course_id, $request->exam_id)->toArray();
-
       $tbc = $this->gradeService->calculateGpaFromTotalMarks($grades, $course, $gradeSystem);
-
       $this->gradeService->saveCalculatedGPAFromTotalMarks($tbc);
-
       $this->gradeService->course_id = $request->course_id;
       $this->gradeService->exam_id = $request->exam_id;
       $this->gradeService->teacher_id = $request->teacher_id;

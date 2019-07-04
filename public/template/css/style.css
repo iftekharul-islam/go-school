@@ -5513,3 +5513,8 @@ ul {
 .text-orange-red {
   color: #ff0000;
 }
+
+.section-students .card {
+  -webkit-box-shadow: none!important;
+  box-shadow: none;
+}
