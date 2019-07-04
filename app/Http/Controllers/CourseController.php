@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Http\Resources\CourseResource;
+use App\Services\User\UserService;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Course\SaveConfigurationRequest;
 use App\Http\Traits\GradeTrait;
@@ -14,8 +16,10 @@ class CourseController extends Controller
     use GradeTrait;
     protected $courseService;
 
-    public function __construct(CourseService $courseService){
+    public function __construct(CourseService $courseService, UserService $userService, User $user){
       $this->courseService = $courseService;
+      $this->userService = $userService;
+      $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -61,8 +65,9 @@ class CourseController extends Controller
     public function course($teacher_id,$course_id,$exam_id,$section_id)
     {
       $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
-      $students = $this->courseService->getStudentsFromGradeByCourseAndExam($course_id, $exam_id);
-
+//      $students = $this->courseService->getStudentsFromGradeByCourseAndExam($course_id, $exam_id);
+      $students = $this->userService->getSectionStudentsWithSchool($section_id);
+//      return $students;
       return view('course.students', compact('students','teacher_id','section_id'));
     }
 

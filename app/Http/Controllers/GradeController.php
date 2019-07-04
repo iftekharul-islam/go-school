@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Grade\CalculateMarksRequest;
 use App\Http\Traits\GradeTrait;
 use App\Services\Grade\GradeService;
+use Illuminate\Support\Facades\Auth;
 
 class GradeController extends Controller
 {
@@ -53,39 +54,39 @@ class GradeController extends Controller
 
     public function tindex($teacher_id,$course_id,$exam_id,$section_id)
     {
-      $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
-      
-      $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
-      $gradesystems = $this->gradeService->getGradeSystemBySchoolIdGroupByName($grades);
+        $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
 
-      $this->gradeService->grades = $grades;
-      $this->gradeService->gradesystems = $gradesystems;
+        $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
+        $gradesystems = $this->gradeService->getGradeSystemBySchoolIdGroupByName($grades);
 
-      return $this->gradeService->gradeTeacherIndexView('grade.teacher-grade');
+        $this->gradeService->grades = $grades;
+        $this->gradeService->gradesystems = $gradesystems;
+
+        return $this->gradeService->gradeTeacherIndexView('grade.teacher-grade');
     }
 
     public function cindex($teacher_id,$course_id,$exam_id,$section_id)
     {
-      $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
-      $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
-      $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);
+        $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
+        $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
+        $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);
 
-      $this->gradeService->grades = $grades;
-      $this->gradeService->gradesystems = $gradesystems;
-      $this->gradeService->course_id = $course_id;
-      $this->gradeService->exam_id = $exam_id;
-      $this->gradeService->teacher_id = $teacher_id;
-      $this->gradeService->section_id = $section_id;
+        $this->gradeService->grades = $grades;
+        $this->gradeService->gradesystems = $gradesystems;
+        $this->gradeService->course_id = $course_id;
+        $this->gradeService->exam_id = $exam_id;
+        $this->gradeService->teacher_id = $teacher_id;
+        $this->gradeService->section_id = $section_id;
 
-      return $this->gradeService->gradeCourseIndexView('grade.course-grade');
+        return $this->gradeService->gradeCourseIndexView('grade.course-grade');
     }
 
     public function allExamsGrade(){
-      $classes = $this->gradeService->getClassesBySchoolId();
-      $classIds = $classes->pluck('id')->toArray();
-      $sections = $this->gradeService->getSectionsByClassIds($classIds);
-      return view('grade.new-all-exams-grade',compact('classes',
-        'sections'));
+        $classes = $this->gradeService->getClassesBySchoolId();
+        $classIds = $classes->pluck('id')->toArray();
+        $sections = $this->gradeService->getSectionsByClassIds($classIds);
+        return view('grade.new-all-exams-grade',compact('classes',
+            'sections'));
     }
 
     public function allExamsGradeDetails($class_id){
@@ -174,15 +175,33 @@ class GradeController extends Controller
      */
     public function update(Request $request)
     {
-      $tbc = $this->gradeService->updateGrade($request);
-      try{
-          if(count($tbc) > 0)
-            \Batch::update('grades',$tbc,'id');
-        }catch(\Exception $e){
-            return "OOps, an error occured";
+        $i = 0;
+        foreach($request->grade_ids as $id) {
+            $tb = Grade::find($id);
+            $tb->attendance = $request->attendance[$i];
+            $tb->quiz1 = $request->quiz1[$i];
+            $tb->quiz2 = $request->quiz2[$i];
+            $tb->quiz3 = $request->quiz3[$i];
+            $tb->quiz4 = $request->quiz4[$i];
+            $tb->quiz5 = $request->quiz5[$i];
+            $tb->assignment1 = $request->assign1[$i];
+            $tb->assignment2 = $request->assign2[$i];
+            $tb->assignment3 = $request->assign3[$i];
+            $tb->ct1 = $request->ct1[$i];
+            $tb->ct2 = $request->ct2[$i];
+            $tb->ct3 = $request->ct3[$i];
+            $tb->ct4 = $request->ct4[$i];
+            $tb->ct5 = $request->ct5[$i];
+            $tb->written = $request->written[$i];
+            $tb->mcq = $request->mcq[$i];
+            $tb->practical = $request->practical[$i];
+            $tb->user_id = Auth::user()->id;
+            $tb->created_at = date('Y-m-d H:i:s');
+            $tb->updated_at = date('Y-m-d H:i:s');
+            $tb->save();
+            $i++;
         }
-
-      return back()->with('status', 'Saved');
+        return back()->with('status', 'Saved');
     }
 
     /**
@@ -193,10 +212,10 @@ class GradeController extends Controller
      */
     public function destroy($id)
     {
-      return (Grade::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Grade::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

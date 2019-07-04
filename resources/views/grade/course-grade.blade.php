@@ -40,6 +40,7 @@
               </ul>
             </div>
           @endif
+
           <form action="{{url('courses/save-configuration')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="id" value="{{$course_id}}">
@@ -171,12 +172,13 @@
               @endif
             </div>
           </form>
+
           <div class="panel panel-default mt-5">
             @if(count($grades) > 0)
               <div class="page-panel-title" style="font-size: 15px;">
-                <form action="{{url('grades/calculate-marks')}}" method="POST">
+                <form class="new-added-form mb-3" action="{{url('grades/calculate-marks')}}" method="POST">
                   {{csrf_field()}}
-                  Give Marks to Students
+                  <span style="font-size: 20px">Give Marks to Students</span>
                   <input type="hidden" name="course_id" value="{{$course_id}}">
                   <input type="hidden" name="section_id" value="{{$section_id}}">
 
@@ -186,7 +188,7 @@
                   <input type="hidden" name="exam_id" value="{{$exam_id}}">
                   <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
                   <button type="submit" class="btn btn-info btn-lg float-right">
-                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Get Total Marks
+                    Get Total Marks
                   </button>
                 </form>
               </div>
