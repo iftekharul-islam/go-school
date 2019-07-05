@@ -37,4 +37,5 @@ class Myclass extends Model
     {
         return $this->hasMany('App\Book','class_id');
     }
+
 }

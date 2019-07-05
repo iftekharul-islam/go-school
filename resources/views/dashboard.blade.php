@@ -12,120 +12,146 @@
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
+
     <div class="row">
-        <!-- Student Info Area Start Here -->
-        <div class="col-4-xxxl col-12">
-            <div class="card dashboard-card-ten">
+        <div class="col-4 col-4-xxxl">
+            <div class="card mb-4 dashboard-card-ten">
                 <div class="card-body">
                     <div class="heading-layout1 mb-5">
                         <div class="item-title">
                             <h3 class="float-left">About Me</h3>
-{{--                            <a class="btn btn-lg btn-info float-right" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a>--}}
+                            {{--                            <a class="btn btn-lg btn-info float-right" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a>--}}
                         </div>
                     </div>
-{{--                    @if(!empty($student_info))--}}
-                        <div class="student-info">
-                            <div class="media media-none--xs">
-                                <div class="item-img mt-5">
-                                    <img src="{{url($student->pic_path)}}" class="media-img-auto" alt="student">
-                                </div>
-                            </div>
-                            <div class="media-body mt-5">
-                                <h3 class="item-title ml-5 text-capitalize">{{ Auth::user()->name }}</h3>
-                            </div>
-                            <p>{{ $student->about }}</p>
-                            <div class="table-responsive info-table">
-                                <table class="table text-nowrap">
-                                    <tbody>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Gender:</td>
-                                        <td class="text-capitalize">{{ ucfirst($student->gender) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Blood Group:</td>
-                                        <td class="text-capitalize">{{ ucfirst($student->blood_group) }}</td>
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->father_name))
-                                            <td class="font-medium text-dark-medium">Father's Name:</td>
-                                            <td class="text-capitalize">{{ $student_info->father_name }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->father_occupation))
-                                            <td class="font-medium text-dark-medium">Father's Occupation:</td>
-                                            <td class="text-capitalize">{{ $student_info->father_occupation }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->mother_name))
-                                            <td class="font-medium text-dark-medium">Mother's Name:</td>
-                                            <td class="text-capitalize">{{ $student_info->mother_name }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->mother_occupation))
-                                            <td class="font-medium text-dark-medium">Mother's Occupation:</td>
-                                            <td class="text-capitalize">{{ $student_info->mother_occupation }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->birthday))
-                                            <td class="font-medium text-dark-medium">Date of Birth:</td>
-                                            <td>{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->religion))
-                                            <td class="font-medium text-dark-medium">Religion:</td>
-                                            <td class="text-capitalize">{{ ucfirst($student_info->religion) }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">E-Mail:</td>
-                                        <td>{{ $student->email }}</td>
-                                    </tr>
-                                    <tr>
-                                            <td class="font-medium text-dark-medium">Admission Date:</td>
-                                            <td class="text-capitalize">{{ $student->created_at}}</td>
-
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->group))
-                                            <td class="font-medium text-dark-medium">Group:</td>
-                                            <td class="text-capitalize">{{ ucfirst($student_info->group) }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Section:</td>
-                                        <td class="text-capitalize">{{ $student->section_id }}</td>
-                                    </tr>
-                                    <tr>
-                                        @if(isset($student_info->student_id))
-                                            <td class="font-medium text-dark-medium">Roll:</td>
-                                            <td>{{ $student_info->student_id }}</td>
-                                        @endif
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Address:</td>
-                                        <td class="text-capitalize">{{ $student->address }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Phone:</td>
-                                        <td>{{ $student->phone_number }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                    {{--                    @if(!empty($student_info))--}}
+                    <div class="student-info">
+                        <div class="media media-none--xs">
+                            <div class="item-img mt-5">
+                                <img src="{{url($student->pic_path)}}" class="media-img-auto" alt="student">
                             </div>
                         </div>
-{{--                    @endif--}}
+                        <div class="media-body mt-5">
+                            <h3 class="item-title ml-5 text-capitalize">{{ Auth::user()->name }}</h3>
+                        </div>
+                        <p>{{ $student->about }}</p>
+                        <div class="table-responsive info-table">
+                            <table class="table text-nowrap">
+                                <tbody>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Gender:</td>
+                                    <td class="text-capitalize">{{ ucfirst($student->gender) }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Blood Group:</td>
+                                    <td class="text-capitalize">{{ ucfirst($student->blood_group) }}</td>
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->father_name))
+                                        <td class="font-medium text-dark-medium">Father's Name:</td>
+                                        <td class="text-capitalize">{{ $student_info->father_name }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->father_occupation))
+                                        <td class="font-medium text-dark-medium">Father's Occupation:</td>
+                                        <td class="text-capitalize">{{ $student_info->father_occupation }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->mother_name))
+                                        <td class="font-medium text-dark-medium">Mother's Name:</td>
+                                        <td class="text-capitalize">{{ $student_info->mother_name }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->mother_occupation))
+                                        <td class="font-medium text-dark-medium">Mother's Occupation:</td>
+                                        <td class="text-capitalize">{{ $student_info->mother_occupation }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->birthday))
+                                        <td class="font-medium text-dark-medium">Date of Birth:</td>
+                                        <td>{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->religion))
+                                        <td class="font-medium text-dark-medium">Religion:</td>
+                                        <td class="text-capitalize">{{ ucfirst($student_info->religion) }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">E-Mail:</td>
+                                    <td>{{ $student->email }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Admission Date:</td>
+                                    <td class="text-capitalize">{{ $student->created_at}}</td>
+
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->group))
+                                        <td class="font-medium text-dark-medium">Group:</td>
+                                        <td class="text-capitalize">{{ ucfirst($student_info->group) }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Section:</td>
+                                    <td class="text-capitalize">{{ $student->section_id }}</td>
+                                </tr>
+                                <tr>
+                                    @if(isset($student_info->student_id))
+                                        <td class="font-medium text-dark-medium">Roll:</td>
+                                        <td>{{ $student_info->student_id }}</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Address:</td>
+                                    <td class="text-capitalize">{{ $student->address }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Phone:</td>
+                                    <td>{{ $student->phone_number }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {{--                    @endif--}}
+                </div>
+            </div>
+            <div class="card dashboard-card-three">
+                <div class="card-body">
+                    <div class="heading-layout1">
+                        <div class="item-title">
+                            <h3>Attendance</h3>
+                        </div>
+                    </div>
+                    @if(!empty($present))
+                        <div class="doughnut-chart-wrap">
+                            <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
+                        </div>
+                        <div class="student-report">
+                            <div class="student-count pseudo-bg-blue">
+                                <h4 class="item-title">Absent</h4>
+                                <div class="item-number">{{ $absent }}%</div>
+                            </div>
+                            <div class="student-count pseudo-bg-yellow">
+                                <h4 class="item-title">Present</h4>
+                                <div class="item-number">{{ $present }}%</div>
+                            </div>
+                        </div>
+                    @else
+                        <div style="text-align: center">
+                            No Attendance record found
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
-        <!-- Student Info Area End Here -->
-        <div class="col-8-xxxl col-12">
+        <div class="col-8 col-8-xxxl">
             <div class="row">
-                <!-- Summery Area Start Here -->
                 <div class="col-lg-4">
                     <div class="dashboard-summery-one">
                         <div class="row">
@@ -183,8 +209,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Summery Area End Here -->
-                <!-- Exam Result Area Start Here -->
+            </div>
+            <div class="row">
                 <div class="col-lg-12 mb-5">
                     <div class="card dashboard-card-eleven">
                         <div class="card-body">
@@ -223,122 +249,66 @@
                         </div>
                     </div>
                 </div>
-                <!-- Exam Result Area End Here -->
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4-xxxl col-xl-6 col-12">
-            <div class="card dashboard-card-three">
-                <div class="card-body">
-                    <div class="heading-layout1">
-                        <div class="item-title">
-                            <h3>Attendance</h3>
-                        </div>
-                    </div>
-                    @if(!empty($present))
-                        <div class="doughnut-chart-wrap">
-                            <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
-                        </div>
-                        <div class="student-report">
-                            <div class="student-count pseudo-bg-blue">
-                                <h4 class="item-title">Absent</h4>
-                                <div class="item-number">{{ $absent }}%</div>
-                            </div>
-                            <div class="student-count pseudo-bg-yellow">
-                                <h4 class="item-title">Present</h4>
-                                <div class="item-number">{{ $present }}%</div>
-                            </div>
-                        </div>
-                    @else
-                        <div style="text-align: center">
-                            No Attendance record found
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-{{--        <div class="col-4-xxxl col-xl-6 col-12">--}}
-{{--            <div class="card dashboard-card-thirteen">--}}
-{{--                <div class="card-body">--}}
-{{--                    <div class="heading-layout1">--}}
-{{--                        <div class="item-title">--}}
-{{--                            <h3>Event Calender</h3>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="notice-box-wrap">--}}
-{{--                        @foreach($events as $event)--}}
-{{--                            <div class="notice-list">--}}
-{{--                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>--}}
-{{--                                <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>--}}
-{{--                            </div>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-{{--                    <div class="calender-wrap">--}}
-{{--                        <div id="fc-calender" class="fc-calender"></div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-        <div class="col-4-xxxl col-12">
-            <div class="card dashboard-card-six">
-                <div class="card-body">
-                    <div class="heading-layout1 mg-b-17">
-                        <div class="item-title">
-                            <h3>Events</h3>
-                        </div>
-                    </div>
-                    <div class="notice-box-wrap">
-                        @foreach($events as $event)
-                            <div class="notice-list">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
-                                    </div>
+            <div class="row">
+                <div class="col-6-xxxl col-6">
+                    <div class="card dashboard-card-six">
+                        <div class="card-body">
+                            <div class="heading-layout1 mg-b-17">
+                                <div class="item-title">
+                                    <h3>Events</h3>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-4-xxxl col-12">
-            <div class="card dashboard-card-six">
-                <div class="card-body">
-                    <div class="heading-layout1 mg-b-17">
-                        <div class="item-title">
-                            <h3>Notices</h3>
+                            <div class="notice-box-wrap">
+                                @foreach($events as $event)
+                                    <div class="notice-list">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h6 class="notice-title"><a href="{{ url($event->file_path) }}">{{ $event->title }}</a></h6>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                    <div class="notice-box-wrap">
-                        @foreach($notices as $notice)
-                            <div class="notice-list">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
-                                    </div>
+                </div>
+                <div class="col-6-xxxl col-6">
+                    <div class="card dashboard-card-six">
+                        <div class="card-body">
+                            <div class="heading-layout1 mg-b-17">
+                                <div class="item-title">
+                                    <h3>Notices</h3>
                                 </div>
                             </div>
-                        @endforeach
+                            <div class="notice-box-wrap">
+                                @foreach($notices as $notice)
+                                    <div class="notice-list">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        var male = @json($male);
-        var female = @json($female);
+        <script>
+            var male = @json($male);
+            var female = @json($female);
 
-        var present = @json($present);
-        var absent = @json($absent);
-        var escaped = @json($escaped);
-    </script>
+            var present = @json($present);
+            var absent = @json($absent);
+            var escaped = @json($escaped);
+        </script>
 @endsection

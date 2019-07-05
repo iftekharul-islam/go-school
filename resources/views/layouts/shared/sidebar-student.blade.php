@@ -69,7 +69,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events && Notices</span></a>
+                        <a href="{{ url('/notices-and-events') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events && Notices</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">
@@ -157,17 +157,12 @@
                     </li>
                 @endif
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
-                    <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
-                        <ul class="nav sub-group-menu {{ (request()->is('fees*')) ? 'sub-group-active' : '' }}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/all') }}"><i class="fas fa-angle-right"></i><span>All Fees</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/create') }}"><i class="fas fa-angle-right"></i><span>Add Fee Field</span></a>
-                            </li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a href="{{ url('fees/all') }}" class="nav-link">
+                            <i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
                     </li>
+
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-user-circle"></i><span>Manage Accounts</span></a>

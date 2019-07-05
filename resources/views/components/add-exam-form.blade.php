@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
             <label>Terms</label>
-            <select id="term" class="select2" name="term">
+            <select id="term" class="select2 ml-2 " name="term">
                <option value="1">1st Term</option>
                <option value="2">2nd Term</option>
                <option value="3">3rd Term</option>
@@ -52,7 +52,7 @@
 
         <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>For Class</label>
-                <select id="book_code" class="form-control select2" multiple name="classes[]">
+                <select id="book_code" class="form-control select2 classes-exams" multiple name="classes[]">
                     @foreach($classes as $class)
 {{--                        <option value="{{$class->id}}">--}}
                             @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))

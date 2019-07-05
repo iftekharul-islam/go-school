@@ -15,6 +15,33 @@
             <li>Fees Collection</li>
         </ul>
     </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="heading-layout1 mg-b-25">
+                <div class="item-title">
+                    <h4 class="text-teal">Add new fee field</h4>
+                </div>
+            </div>
+            <form class="new-added-form" action="{{url('fees/create')}}" method="post">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-md-12 form-group{{ $errors->has('fee_name') ? ' has-error' : '' }}">
+                        <label>Field Name</label>
+                        <input type="text" placeholder="Fee Field Title" name="fee_name" value="{{ old('fee_name') }}" class="form-control" required>
+                        @if ($errors->has('fee_name'))
+                            <span class="help-block">
+                                      <strong>{{ $errors->first('fee_name') }}</strong>
+                                  </span>
+                        @endif
+                    </div>
+                    <div class="col-12 form-group mg-t-8">
+                        <button type="submit" class="button button--text float-left"><b>Save</b></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="card height-auto">
         <div class="card-body">
             @if (session('status'))

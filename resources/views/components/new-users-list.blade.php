@@ -1,4 +1,17 @@
 
+<div class="breadcrumbs-area">
+    <h3>
+        Class Details
+    </h3>
+    <ul>
+        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                Back &nbsp;&nbsp;|</a>
+            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
+        </li>
+        <li>Class Details</li>
+    </ul>
+</div>
+
 <div class="card height-auto">
     <div class="card-body">
         <div class="table-responsive">
@@ -145,7 +158,7 @@
         function removeUser(id) {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                text: "Once deleted, you will not be able to recover this user!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -153,8 +166,6 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById('delete-form-'+id).submit();
-                    } else {
-                        swal("Your Delete Operation has been canceled");
                     }
                 });
         }

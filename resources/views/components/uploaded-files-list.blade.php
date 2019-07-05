@@ -30,7 +30,7 @@
         <td>
           <button class="btn btn-danger btn-lg" type="button" onclick="removeFile({{ $file->id }})">
             Deactivate</button>
-          <form id="delete-form-{{ $file->id }}" action="{{ url('academic/remove/'.$upload_type.'/'.$file->id) }}" method="GET" style="display: none;">
+          <form id="delete-form-{{ $file->id }}" action="{{ url('academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
             @csrf
             @method('GET')
           </form>
@@ -39,7 +39,7 @@
           <td>
             <button class="btn btn-success btn-lg" type="button" onclick="activeFile({{ $file->id }})">
               Activate</button>
-            <form id="active-file-form-{{ $file->id }}" action="{{ url('academic/activate/'.$upload_type.'/'.$file->id) }}" method="GET" style="display: none;">
+            <form id="active-file-form-{{ $file->id }}" action="{{ url('academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
               @csrf
               @method('GET')
             </form>
@@ -64,8 +64,6 @@
               .then((willDelete) => {
                 if (willDelete) {
                   document.getElementById('delete-form-'+id).submit();
-                } else {
-                  swal("Your Delete Operation has been canceled");
                 }
               });
     };
@@ -81,8 +79,6 @@
               .then((willDelete) => {
                 if (willDelete) {
                   document.getElementById('active-file-form-'+id).submit();
-                } else {
-                  swal("Syllabus activate Operation has been canceled");
                 }
               });
     }

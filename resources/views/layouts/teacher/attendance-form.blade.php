@@ -99,13 +99,14 @@
                         </td>
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
-                                {{$at}}
                                 @if($at->student_id == $student->id)
                                     <td>{{$at->totalpresent}}</td>
                                     <td>{{$at->totalabsent}}</td>
                                     <td>{{$at->totalescaped}}</td>
                                 @else
-                                    @continue
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
                                 @endif
                             @endforeach
                         @else
