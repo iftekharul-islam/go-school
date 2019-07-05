@@ -16,11 +16,7 @@
             </ul>
         </div>
 
-        <!-- Breadcubs Area End Here -->
-        <div class="row">
-            <!-- Student Attendence Area Start Here -->
-            <div class="col-12" style="min-height: 700px;">
-                <div class="card">
+        <div class="card false-height">
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
@@ -86,7 +82,5 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
         <!-- Student Attendence Area End Here -->
 @endsection

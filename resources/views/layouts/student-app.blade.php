@@ -86,7 +86,7 @@
     $(document).ready(function () {
         var myTable = $('.table-data-div').DataTable({
             paging: false,
-            "bSort" : false,
+            bSort : false,
             language: {
                 searchPlaceholder: "Search here"
             }

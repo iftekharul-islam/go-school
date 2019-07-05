@@ -75,16 +75,16 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="button button--text float-left mt-5"><b>Expense List</b></button>
+                            <button type="submit" class="button button--text float-left mb-5 mt-5"><b>Expense List</b></button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-md-6">
-                <div style="width:100%; height: 300px;">
-                    <canvas id="canvas"></canvas>
-                </div>
-            </div>
+{{--            <div class="col-md-6">--}}
+{{--                <div style="width:100%; height: 300px;">--}}
+{{--                    <canvas id="canvas"></canvas>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
         <div class="row">
                 <div class="col-md-12">

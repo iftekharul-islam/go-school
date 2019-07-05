@@ -17,7 +17,7 @@
     </div>
 
     <div class="card height-auto false-height">
-        <div class="card ui-tab-card">
+        <div class="ui-tab-card">
             <div class="card-body">
                 <div class="heading-layout1 mg-b-25">
                     <div class="item-title">
@@ -33,7 +33,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="border-nav-tab">
+                <div class="border-nav-tab border-0">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="tab-0" data-toggle="tab" href="#tab7" role="tab" aria-selected="true">Users</a>
@@ -43,9 +43,9 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="tab7" role="tabpanel">
-                            <div class="card ui-tab-card">
-                                <div class="card-body">
+                        <div class="tab-pane fade show active border-0" id="tab7" role="tabpanel">
+                            <div class="ui-tab-card">
+                                <div class="">
                                     <div class="heading-layout1 mg-b-25">
                                         <div class="item-title">
                                             <h3>Users</h3>
@@ -67,7 +67,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="tab10" role="tabpanel">
+                                            <div class="tab-pane fade show active border-0" id="tab10" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/accountant') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -218,8 +218,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -232,7 +232,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="tab11" role="tabpanel">
+                                            <div class="tab-pane fade border-0" id="tab11" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/librarian') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -383,8 +383,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -398,7 +398,7 @@
                                                 </form>
                                             </div>
 
-                                            <div class="tab-pane fade" id="tab12" role="tabpanel">
+                                            <div class="tab-pane fade border-0" id="tab12" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/student') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -910,8 +910,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -925,7 +925,7 @@
                                                 </form>
                                             </div>
 
-                                            <div class="tab-pane fade" id="tab13" role="tabpanel">
+                                            <div class="tab-pane fade border-0" id="tab13" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/teacher') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -1001,8 +1001,8 @@
 
                                                                 <div class="col-md-12">
                                                                     <select id="department" class="form-control" name="department_id" required>
-                                                                        @if (count(session('departments')) > 0)
-                                                                            @foreach (session('departments') as $d)
+                                                                        @if (count($teacherDepartments) > 0)
+                                                                            @foreach ($teacherDepartments as $d)
                                                                                 <option value="{{$d->id}}">{{$d->department_name}}</option>
                                                                             @endforeach
                                                                         @endif
@@ -1024,7 +1024,7 @@
                                                                     <select id="class_teacher" class="form-control"
                                                                             name="class_teacher_section_id">
                                                                         <option selected="selected" value="0">Not Class Teacher</option>
-                                                                        @foreach (session('register_sections') as $section)
+                                                                        @foreach ($teacherSections as $section)
                                                                             <option value="{{$section->id}}">
                                                                                 Section: {{$section->section_number}} Class:
                                                                                 {{$section->class->class_number}}</option>
@@ -1041,7 +1041,7 @@
                                                         </div>
                                                     </div>
 {{--                                                                            @endif--}}
-                                                    <div class="row">use Illuminate\Support\Facades\Auth;
+                                                    <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                                                 <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
@@ -1124,8 +1124,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -1146,8 +1146,8 @@
                         <div class="tab-pane fade" id="tab8" role="tabpanel">
 
 
-                            <div class="card ui-tab-card">
-                                <div class="card-body">
+                            <div class="ui-tab-card">
+                                <div class="">
                                     <div class="heading-layout1 mg-b-25">
                                         <div class="item-title">
                                             <h3>Academic</h3>
@@ -1163,7 +1163,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                                            <div class="tab-pane fade show border-0" id="tab1" role="tabpanel">
                                                 <form class="new-added-form"
                                                       action="{{url('school/add-department')}}"
                                                       method="post">
@@ -1183,7 +1183,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="tab2" role="tabpanel">
+                                            <div class="tab-pane fade border-0" id="tab2" role="tabpanel">
                                                 @foreach($schools as $school)
                                                     @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
                                                         @if(\Auth::user()->school_id == $school->id)
