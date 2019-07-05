@@ -55,11 +55,11 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6">
-                    <div style="width:100%;">
-                        <canvas id="canvas"></canvas>
-                    </div>
-                </div>
+{{--                <div class="col-md-6">--}}
+{{--                    <div style="width:100%;">--}}
+{{--                        <canvas id="canvas"></canvas>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             <div class="row mt-5">
                 <div class="col-md-12">
@@ -86,8 +86,8 @@
                                         <td>{{$sector->name}}</td>
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="btn btn-warning btn-lg mr-3" role="button">Edit</a>
-                                            <button class="btn btn-danger btn-lg" onclick="book()">Delete</button>
+                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--primary mr-3" role="button"><b>Edit</b></a>
+                                            <button class="button button--cancel" onclick="book()">Delete</button>
                                             <a id="delete-form" href="{{url('accounts/delete-sector/'.$sector->id)}}" role="button"></a>
                                         </td>
                                     </tr>
@@ -201,8 +201,6 @@
                         swal("Done! Your Selected file has been deleted!", {
                             icon: "success",
                         });
-                    } else {
-                        swal("Your Delete Operation has been canceled");
                     }
                 });
         }
