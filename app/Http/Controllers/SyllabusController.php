@@ -14,14 +14,14 @@ class SyllabusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
-     {
+    public function index()
+    {
         $files = Syllabus::with('myclass')
-                          ->where('school_id',\Auth::user()->school_id)
-//                          ->where('active',1)
-                          ->get();
+            ->where('school_id',\Auth::user()->school_id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
         return view('syllabus.index',['files'=>$files,'class_id' => 1]);
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -30,21 +30,21 @@ class SyllabusController extends Controller
      */
     public function create(int $class_id)
     {
-      try{
-        if(Schema::hasColumn('syllabuses','class_id')){
-          $files = Syllabus::with('myclass')
-                          ->where('school_id',\Auth::user()->school_id)
-                          ->where('class_id', $class_id)
-                          ->where('active',1)
-                          ->get();
-        } else {
-          return '<code>class_id</code> column missing. Run <code>php artisan migrate</code>';
+        try{
+            if(Schema::hasColumn('syllabuses','class_id')){
+                $files = Syllabus::with('myclass')
+                    ->where('school_id',\Auth::user()->school_id)
+                    ->where('class_id', $class_id)
+                    ->orderBy('created_at', 'DESC')
+                    ->get();
+            } else {
+                return '<code>class_id</code> column missing. Run <code>php artisan migrate</code>';
+            }
+        } catch(Exception $ex){
+            return 'Something went wrong!!';
         }
-      } catch(Exception $ex){
-        return 'Something went wrong!!';
-      }
-      
-      return view('syllabus.new-course-syllabus',['files'=>$files,'class_id'=>$class_id]);
+
+        return view('syllabus.new-course-syllabus',['files'=>$files,'class_id'=>$class_id]);
     }
 
     /**
@@ -55,14 +55,14 @@ class SyllabusController extends Controller
      */
     public function store(Request $request)
     {
-      $tb = new Syllabus;
-      $tb->file_path = $request->file_path;
-      $tb->title = $request->title;
-      $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
-      $tb->save();
-      return back()->with('status', 'Uploaded');
+        $tb = new Syllabus;
+        $tb->file_path = $request->file_path;
+        $tb->title = $request->title;
+        $tb->active = 1;
+        $tb->school_id = \Auth::user()->school_id;
+        $tb->user_id = \Auth::user()->id;
+        $tb->save();
+        return back()->with('status', 'Uploaded');
     }
 
     /**
@@ -96,20 +96,13 @@ class SyllabusController extends Controller
      */
     public function update($id)
     {
-      $tb = Syllabus::findOrFail($id);
-      $tb->active = 0;
-      $tb->save();
-      return back()->with('status','Syllabus');
+        $tb = Syllabus::findOrFail($id);
+        $tb->active ==1 ? $tb->active = 0: $tb->active = 1;
+        $tb->save();
+        return back()->with('status','Syllabus Status Changed');
     }
 
-    public function activate($id)
-    {
-        $file = Syllabus::findOrFail($id);
-        $file->activate = 1;
-        $file->save();
 
-        return back()->with('status', 'Syllabus Activated');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -119,10 +112,10 @@ class SyllabusController extends Controller
      */
     public function destroy($id)
     {
-      return (Syllabus::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Syllabus::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

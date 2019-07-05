@@ -123,17 +123,17 @@ Route::middleware(['auth','admin'])->prefix('academic')->name('academic.')->grou
   Route::get('notice', 'NoticeController@create');
   Route::get('event', 'EventController@create');
   Route::get('routine', 'RoutineController@index');
+  Route::get('notice/update/{id}', 'NoticeController@update');
+  Route::get('syllabus/update/{id}', 'SyllabusController@update');
   Route::get('routine/{section_id}', 'RoutineController@create');
+  Route::get('routine/update/{id}' , 'RoutineController@update');
+  Route::get('event/update/{id}', 'EventController@update');
   Route::prefix('remove')->name('remove.')->group(function (){
-    Route::get('syllabus/{id}', 'SyllabusController@update');
+
     Route::get('notice/{id}', 'NoticeController@update');
-    Route::get('event/{id}', 'EventController@update');
-    Route::get('routine/{id}', 'RoutineController@update');
+
   });
 
-  Route::prefix('activate')->name('activate')->group(function() {
-      Route::get('syllabus/{id}', 'SyllabusController@activate');
-  });
 
 });
 
@@ -155,7 +155,7 @@ Route::middleware(['auth','teacher'])->group(function (){
   Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
 });
 
-Route::get('all-notice', 'NoticeController@index')->middleware(['auth','student']);
+Route::get('notices-and-events', 'NoticeController@index')->middleware(['auth','student']);
 
 Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
     Route::prefix('library')->name('library.')->group(function () {

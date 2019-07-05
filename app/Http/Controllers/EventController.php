@@ -25,7 +25,7 @@ class EventController extends Controller
      */
     public function create()
     {
-      $files = Event::where('school_id',\Auth::user()->school_id)->where('active',1)->get();
+      $files = Event::where('school_id',\Auth::user()->school_id)->orderBy('created_at','DESC')->get();
       return view('events.create',['files'=>$files]);
     }
 
@@ -79,9 +79,9 @@ class EventController extends Controller
     public function update($id)
     {
       $tb = Event::find($id);
-      $tb->active = 0;
+      $tb->active == 0 ? $tb->active = 1 : $tb->active = 0;
       $tb->save();
-      return back()->with('status','File removed');
+      return back()->with('status','Event Status changed');
     }
 
     /**

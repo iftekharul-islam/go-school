@@ -23,8 +23,8 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/animate.min.css') }}">
     <!-- Data Table CSS -->
-    <link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">
-    <!-- Select 2 CSS -->
+    {{--<link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">--}}
+    {{--<!-- Select 2 CSS -->--}}
     <link rel="stylesheet" href="{{ asset('template/css/select2.min.css') }}">
     <!-- Datepicker CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/datepicker.min.css') }}">
@@ -40,7 +40,7 @@
 
     <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
-        'librarian'))?Auth::user()->school->name:'Laravel' }}</title>
+        'librarian'))?Auth::user()->school->name: 'Laravel' }}</title>
 
     <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript">
@@ -121,6 +121,10 @@
 
 <script src=" {{ asset('/template/js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
 @stack('customjs')
 
 </body>

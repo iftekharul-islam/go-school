@@ -44,6 +44,11 @@
             </div>
             @endforeach
         </div>
+
+            @else
+            <div class="panel-body">
+                No Exam Active right now!
+            </div>
         @endif
     </div>
 </div>

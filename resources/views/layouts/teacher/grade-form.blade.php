@@ -178,20 +178,20 @@
 </form>
 
 <script>
-  $(function () {
-    for (var i = 6; i < 21; i++) {
-      if (i == 10 || i == 13)
-        continue;
-      $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").hide();
-    }
-    $(":checkbox").change(function () {
-      if ($(this).is(':checked')) {
-        $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
-          ")").show();
-      } else {
-        $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
-          ")").hide();
-      }
-    });
-  });
+  // $(function () {
+  //   for (var i = 6; i < 21; i++) {
+  //     if (i == 10 || i == 13)
+  //       continue;
+  //     $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").hide();
+  //   }
+  //   $(":checkbox").change(function () {
+  //     if ($(this).is(':checked')) {
+  //       $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
+  //         ")").show();
+  //     } else {
+  //       $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
+  //         ")").hide();
+  //     }
+  //   });
+  // });
 </script>
