@@ -1810,7 +1810,7 @@ ul {
 }
 
 .tooltip-inner {
-  font-size: 12px;
+  font-size: 16px;
   padding: 5px 10px;
 }
 
@@ -5520,4 +5520,30 @@ ul {
 }
 .classes-exams {
   height: 75px!important;
+}
+
+
+.popover-title {
+  font-size: 14px!important;
+}
+.data-content {
+  font-size: 14px!important;
+}
+.popover-content {
+  font-size: 18px!important;
+}
+
+.pop-div {
+  font-size: 13px;
+  margin-top: 100px;
+}
+.pop-title {
+  display: none;
+  color: blue;
+  font-size: 15px;
+}
+.pop-content {
+  display: none;
+  color: red;
+  font-size: 10px;
 }

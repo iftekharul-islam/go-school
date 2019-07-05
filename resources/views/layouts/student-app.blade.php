@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.css">
+
+
+@stack('customcss')
+
     <!-- Modernize js -->
     <script src="{{ asset('/template/js/modernizr-3.6.0.min.js') }}"></script>
 
@@ -85,11 +89,14 @@
 <script>
     $(document).ready(function () {
         var myTable = $('.table-data-div').DataTable({
-            paging: false,
+            paging: true,
             bSort : false,
             language: {
                 searchPlaceholder: "Search here"
             }
+        });
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
         });
     });
 </script>
