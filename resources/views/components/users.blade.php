@@ -2,12 +2,7 @@
 <div class="card height-auto">
     <div class="card-body">
         <div class="table-responsive">
-            {{--@if (session('status'))--}}
-            {{--<div class="alert alert-success">--}}
-            {{--{{ session('status') }}--}}
-            {{--</div>--}}
-            {{--@endif--}}
-            <table class="table table-data-div display text-wrap">
+            <table class="table display table-data-div text-nowrap">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
