@@ -53,7 +53,7 @@
             <div class="panel panel-default">
                 @if(count($users) > 0)
                     <div class="panel-body">
-                        @component('components.new-users-list',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])
+                        @component('components.users',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])
                         @endcomponent
                     </div>
                 @else
