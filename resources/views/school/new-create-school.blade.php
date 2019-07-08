@@ -24,6 +24,12 @@
                         <h3>Manage School</h3>
                     </div>
                 </div>
+
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -34,7 +40,7 @@
                     </div>
                 @endif
                 <div class="border-nav-tab border-0">
-                    <ul class="nav nav-tabs" role="tablist">
+                    <ul class="nav nav-tabs" role="tablist" id="tabMenu">
                         <li class="nav-item">
                             <a class="nav-link active" id="tab-0" data-toggle="tab" href="#tab7" role="tab" aria-selected="true">Users</a>
                         </li>
@@ -52,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="basic-tab">
-                                        <ul class="nav nav-tabs" role="tablist">
+                                        <ul class="nav nav-tabs" id="tabMenu" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active" id="tab-2" data-toggle="tab" href="#tab10" role="tab" aria-selected="true">Add Accountant</a>
                                             </li>
@@ -77,7 +83,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="name" type="text" class="form-control" name="name"
-                                                                           value="{{ old('name') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('name'))
@@ -94,7 +100,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="email" type="email" class="form-control" name="email"
-                                                                           value="{{ old('email') }}" required>
+                                                                           value="" required>
 
                                                                     @if ($errors->has('email'))
                                                                         <span class="help-block">
@@ -142,7 +148,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                                                           value="{{ old('phone_number') }}">
+                                                                           value="">
 
                                                                     @if ($errors->has('phone_number'))
                                                                         <span class="help-block">
@@ -184,7 +190,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="nationality" type="text" class="form-control" name="nationality"
-                                                                           value="{{ old('nationality') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('nationality'))
@@ -242,7 +248,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="name" type="text" class="form-control" name="name"
-                                                                           value="{{ old('name') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('name'))
@@ -259,7 +265,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="email" type="email" class="form-control" name="email"
-                                                                           value="{{ old('email') }}" required>
+                                                                           value="" required>
 
                                                                     @if ($errors->has('email'))
                                                                         <span class="help-block">
@@ -307,7 +313,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                                                           value="{{ old('phone_number') }}">
+                                                                           value="">
 
                                                                     @if ($errors->has('phone_number'))
                                                                         <span class="help-block">
@@ -349,7 +355,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="nationality" type="text" class="form-control" name="nationality"
-                                                                           value="{{ old('nationality') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('nationality'))
@@ -407,7 +413,7 @@
                                                                 <label for="name" class="col-md-4 control-label">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                                                    <input id="name" type="text" class="form-control" name="name" value="" required>
 
                                                                     @if ($errors->has('name'))
                                                                         <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
@@ -499,7 +505,7 @@
                                                                            value="{{ old('phone_number') }}">
 
                                                                     @if ($errors->has('phone_number'))
-                                                                        <span class="help-block"<strong>{{ $errors->first('phone_number') }}</strong></span>
+                                                                        <span class="help-block"><strong>{{ $errors->first('phone_number') }}</strong></span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -534,7 +540,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="nationality" type="text" class="form-control" name="nationality"
-                                                                           value="{{ old('nationality') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('nationality'))
@@ -590,7 +596,7 @@
 
                                                                     <div class="col-md-12">
                                                                         <input id="session" type="text" class="form-control" name="session"
-                                                                               value="{{ old('session') }}"
+                                                                               value=""
                                                                                required>
 
                                                                         @if ($errors->has('session'))
@@ -649,7 +655,7 @@
 
                                                                     <div class="col-md-12">
                                                                         <input id="address" type="text" class="form-control" name="address"
-                                                                               value="{{ old('address') }}"
+                                                                               value=""
                                                                                required>
 
                                                                         @if ($errors->has('address'))
@@ -685,7 +691,7 @@
 
                                                                     <div class="col-md-12">
                                                                         <input id="father_name" type="text" class="form-control" name="father_name"
-                                                                               value="{{ old('father_name') }}"
+                                                                               value=""
                                                                                required>
 
                                                                         @if ($errors->has('father_name'))
@@ -704,7 +710,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="father_phone_number" type="text" class="form-control"
                                                                                name="father_phone_number"
-                                                                               value="{{ old('father_phone_number') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('father_phone_number'))
                                                                             <span class="help-block">
@@ -742,7 +748,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="father_occupation" type="text" class="form-control"
                                                                                name="father_occupation"
-                                                                               value="{{ old('father_occupation') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('father_occupation'))
                                                                             <span class="help-block">
@@ -762,7 +768,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="father_annual_income" type="text" class="form-control"
                                                                                name="father_annual_income"
-                                                                               value="{{ old('father_annual_income') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('father_annual_income'))
                                                                             <span class="help-block">
@@ -780,7 +786,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="father_designation" type="text" class="form-control"
                                                                                name="father_designation"
-                                                                               value="{{ old('father_designation') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('father_designation'))
                                                                             <span class="help-block">
@@ -800,7 +806,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="mother_phone_number" type="text" class="form-control"
                                                                                name="mother_phone_number"
-                                                                               value="{{ old('mother_phone_number') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('mother_phone_number'))
                                                                             <span class="help-block">
@@ -816,7 +822,7 @@
 
                                                                     <div class="col-md-12">
                                                                         <input id="mother_name" type="text" class="form-control" name="mother_name"
-                                                                               value="{{ old('mother_name') }}"
+                                                                               value=""
                                                                                required>
 
                                                                         @if ($errors->has('mother_name'))
@@ -837,7 +843,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="mother_occupation" type="text" class="form-control"
                                                                                name="mother_occupation"
-                                                                               value="{{ old('mother_occupation') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('mother_occupation'))
                                                                             <span class="help-block">
@@ -855,7 +861,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="mother_national_id" type="text" class="form-control"
                                                                                name="mother_national_id"
-                                                                               value="{{ old('mother_national_id') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('mother_national_id'))
                                                                             <span class="help-block">
@@ -875,7 +881,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="mother_designation" type="text" class="form-control"
                                                                                name="mother_designation"
-                                                                               value="{{ old('mother_designation') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('mother_designation'))
                                                                             <span class="help-block">
@@ -893,7 +899,7 @@
                                                                     <div class="col-md-12">
                                                                         <input id="mother_annual_income" type="text" class="form-control"
                                                                                name="mother_annual_income"
-                                                                               value="{{ old('mother_annual_income') }}">
+                                                                               value="">
 
                                                                         @if ($errors->has('mother_annual_income'))
                                                                             <span class="help-block">
@@ -935,7 +941,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="name" type="text" class="form-control" name="name"
-                                                                           value="{{ old('name') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('name'))
@@ -952,7 +958,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="email" type="email" class="form-control" name="email"
-                                                                           value="{{ old('email') }}" required>
+                                                                           value="" required>
 
                                                                     @if ($errors->has('email'))
                                                                         <span class="help-block">
@@ -1048,7 +1054,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                                                           value="{{ old('phone_number') }}">
+                                                                           value="">
 
                                                                     @if ($errors->has('phone_number'))
                                                                         <span class="help-block">
@@ -1090,7 +1096,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <input id="nationality" type="text" class="form-control" name="nationality"
-                                                                           value="{{ old('nationality') }}"
+                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('nationality'))
@@ -1154,7 +1160,7 @@
                                         </div>
                                     </div>
                                     <div class="basic-tab">
-                                        <ul class="nav nav-tabs" role="tablist">
+                                        <ul class="nav nav-tabs" id="tabMenu" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active" id="tab-6" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">Create Department</a>
                                             </li>
@@ -1280,6 +1286,11 @@
         </div>
     </div>
     <script>
+
+        $(document).ready(function () {
+            $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
+        });
+
         $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
             var idx = $(this).index('a[data-toggle="tab"]');
             $('#tab-' + idx).addClass('active');

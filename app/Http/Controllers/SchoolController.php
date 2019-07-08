@@ -10,6 +10,7 @@ use App\Department;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SchoolController extends Controller
 {
@@ -118,7 +119,8 @@ class SchoolController extends Controller
      */
     public function edit($id)
     {
-        //
+        $school = School::find($id);
+        return view('school.new-edit-school', compact('school'));
     }
 
     public function addDepartment(Request $request){
@@ -129,7 +131,7 @@ class SchoolController extends Controller
       $s->school_id = \Auth::user()->school_id;
       $s->department_name = $request->department_name;
       $s->save();
-      return back()->with('status', 'Created');
+        return back()->withInput(['tab'=> 'tab8'] )->with('status', 'saved');
     }
 
     public function allDepartment()
@@ -153,15 +155,17 @@ class SchoolController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'school_name' => 'required',
+            'school_medium' => 'required',
+            'school_about' => 'required',
+        ]);
       $tb = School::find($id);
-      $tb->name = $request->name;
-      $tb->about = $request->about;
-      //$tb->code = $request->code;
-      return ($tb->save())?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+      $tb->name = $request->school_name;
+      $tb->about = $request->school_about;
+      $tb->medium = $request->school_medium;
+      $tb->save();
+      return redirect()->back()->with('status','School Information Updated');
     }
 
     /**

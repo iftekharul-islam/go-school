@@ -109,6 +109,7 @@
                                     <div class="heading-layout1 mg-b-20">
                                         <div class="item-title">
                                             <h3>School Details</h3>
+                                            <a href="{{ url('school/edit', $school->id) }}" class="button button--edit float-right"><i class="fas fa-edit"></i>&nbsp;Edit School</a>
                                         </div>
                                     </div>
                                     <div class="user-details-box">

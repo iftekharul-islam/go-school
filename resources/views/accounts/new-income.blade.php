@@ -56,6 +56,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
+                            <label for="month" class="col-md-4">Income For Month</label>
+
+                            <div class="col-md-12">
+                                <input data-date-format="yyyy-mm-dd" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
+                                @if ($errors->has('month'))
+                                    <span class="help-block">
+                                      <strong>{{ $errors->first('month') }}</strong>
+                                  </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-4">Description</label>
 
@@ -77,4 +90,11 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function () {
+            $('.date').datepicker({
+                format: 'yyyy-mm-dd',
+            });
+        })
+    </script>
 @endsection

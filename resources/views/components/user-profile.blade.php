@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-2">
     @if(!empty($user->pic_path))
-    <img src="{{asset('01-progress.gif')}}" data-src="{{url($user->pic_path)}}" class="img-thumbnail" id="my-profile" alt="Profile Picture" width="100%">
+    <img src="{{url($user->pic_path)}}" data-src="{{url($user->pic_path)}}" class="img-thumbnail" id="my-profile" alt="Profile Picture" width="100%">
     @else
       @if(strtolower($user->gender) == 'male')
         <img src="{{asset('01-progress.gif')}}" data-src="https://png.icons8.com/dusk/200/000000/user.png" class="img-thumbnail" width="100%">

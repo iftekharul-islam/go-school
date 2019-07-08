@@ -1,3 +1,13 @@
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
+<!-- JS -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+
+
 @extends('layouts.student-app')
 @section('title', 'Edit Sector')
 @section('content')
@@ -55,6 +65,21 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
+                            <label for="month" class="col-md-4">Expense For Month</label>
+
+                            <div class="col-md-12">
+                                <input data-date-format="yyyy-mm-dd" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
+                                @if ($errors->has('month'))
+                                    <span class="help-block">
+                                      <strong>{{ $errors->first('month') }}</strong>
+                                  </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-2">Description</label>
 
@@ -76,4 +101,12 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(function () {
+            $('.date').datepicker({
+                format: 'yyyy-mm-dd',
+            });
+        })
+    </script>
 @endsection

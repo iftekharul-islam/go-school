@@ -5,30 +5,45 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Create School
+            Edit School
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Create School</li>
+            <li>Edit School</li>
         </ul>
     </div>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card height-auto false-height">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" method="POST" action="{{ url('create-school') }}">
+                            <form class="form-horizontal" method="POST" action="{{ url('school/edit', $school->id) }}">
                                 {{ csrf_field() }}
+{{--                                {{ method_field('POST' }}--}}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
                                     <label for="school_name" class="control-label">School Name</label>
 
                                     <input id="school_name" type="text" class="form-control" name="school_name"
-                                           value="{{ old('school_name') }}" placeholder="School Name" required>
+                                           value="{{ $school->name }}" placeholder="School Name" required>
 
                                     @if ($errors->has('school_name'))
                                         <span class="help-block">
@@ -50,23 +65,11 @@
                       </span>
                                     @endif
                                 </div>
-                                <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
-                                    <label for="school_established" class="control-label">School Established</label>
-
-                                    <input id="school_established" type="text" class="form-control" name="school_established"
-                                           value="{{ old('school_established') }}" placeholder="School Established" required>
-
-                                    @if ($errors->has('school_established'))
-                                        <span class="help-block">
-                          <strong>{{ $errors->first('school_established') }}</strong>
-                      </span>
-                                    @endif
-                                </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_about') ? ' has-error' : '' }}">
                                     <label for="school_about" class="control-label">About</label>
 
                                     <textarea id="school_about" class="form-control" rows="3" name="school_about"
-                                              placeholder="About School" required>{{ old('school_about') }}</textarea>
+                                              placeholder="About School" required>{{ old('school_about') }}>{{ $school->about }}</textarea>
 
                                     @if ($errors->has('school_about'))
                                         <span class="help-block">
@@ -77,7 +80,7 @@
                         <div class="form-group">
                             <div class="col-md-offset-4 mt-5">
                                 <button type="submit" id="registerBtn"
-                                        class="button button--save float-left">
+                                        class="button button--save font-weight-bold float-left">
                                     Save
                                 </button>
                             </div>
