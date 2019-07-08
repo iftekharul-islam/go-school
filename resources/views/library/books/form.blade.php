@@ -37,7 +37,7 @@
             <label for="type" class="col-md-4 control-label">Book Type</label>
 
             <div class="col-md-12">
-                <select id="type" class="form-control" name="type">
+                <select id="type" class="select2" name="type">
                     <option value="Academic">Academic</option>
                     <option value="Magazine">Magazine</option>
                     <option value="Story">Story</option>

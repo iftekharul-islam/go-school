@@ -7,11 +7,11 @@
       $events = array();
       foreach ($attendances as $attendance){
         if($attendance->present == 1){
-          $events[] = \Calendar::event("Present",false,'','',0,['color'=>'LightSeaGreen']);
+          $events[] = \Calendar::event("Present",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'blue']);
         } else if($attendance->present == 2){
-          $events[] = \Calendar::event("Escaped",false,'','',0,['color'=>'LightSkyBlue']);
+          $events[] = \Calendar::event("Escaped",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'orange']);
         } else {
-          $events[] = \Calendar::event("Absent",false,'','',0,['color'=>'yellow']);
+          $events[] = \Calendar::event("Absent",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'red']);
         }
       }
       if(sizeof($events) > 0){

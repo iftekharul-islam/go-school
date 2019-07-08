@@ -28,7 +28,7 @@
                             <label for="name" class="col-md-2 mt-5">Sector Name</label>
 
                             <div class="col-md-12">
-                                <select  class="form-control" name="name">
+                                <select  class="select2" name="name">
                                     @foreach($sectors as $sector)
                                         <option>{{$sector->name}}</option>
                                     @endforeach

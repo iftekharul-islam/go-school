@@ -102,6 +102,7 @@ $(function () {
                             .append($('<span/>').text(file.name)).append(uploadButton.clone(true).data(data));
                         node.appendTo(data.context);
             }
+            console.log("Hello From File Upload");
         },
         progress: function (e, data) {
             var progress = 0;
@@ -137,31 +138,4 @@ $(function () {
             console.log(data['jqXHR']['responseJSON']);
     });
 });
-{{--
-
-function upload(file) {
-  var BYTES_PER_CHUNK = parseInt(2097152, 10),
-  size = file.size,
-  NUM_CHUNKS = Math.max(Math.ceil(SIZE / BYTES_PER_CHUNK), 1),
-  start = 0, end = BYTES_PER_CHUNK, num = 1;
-
-  var chunkUpload = function(blob) {
-    var fd = new FormData();
-    var xhr = new XMLHttpRequest();
-
-    fd.append('upload', blob, file.name);
-    fd.append('num', num);
-    fd.append('num_chunks', NUM_CHUNKS);
-    xhr.open('POST', '/somedir/upload.php', true);
-    xhr.send(fd);
-  }
-
-  while (start < size) {
-    chunkUpload(file.slice(start, end));
-    start = end;
-    end = start + BYTES_PER_CHUNK;
-    num++;
-  }
-}
---}}
 </script>

@@ -150,10 +150,8 @@
                     <a class="navbar-nav-link dropdown-toggle" href="#" role="button"
                        data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
                     <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#">Bangla</a>
                         <a class="dropdown-item" href="#">English</a>
-                        <a class="dropdown-item" href="#">Spanish</a>
-                        <a class="dropdown-item" href="#">Franchis</a>
-                        <a class="dropdown-item" href="#">Chiness</a>
                     </div>
                 </li>
             @endguest
