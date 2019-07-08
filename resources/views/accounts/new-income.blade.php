@@ -28,7 +28,7 @@
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 mt-5">Sector Name</label>
                             <div class="col-md-12">
-                                <select class="form-control" id="name" name="name">
+                                <select class="select2" id="name" name="name">
                                     @foreach($sectors as $sector)
                                         <option>{{$sector->name}}</option>
                                     @endforeach

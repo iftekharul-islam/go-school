@@ -197,18 +197,21 @@
                             <td class="font-medium text-dark-medium">Gender:</td>
                             <td class="text-capitalize">{{ $user->gender }}</td>
                           </tr>
-                          <tr>
-                            <td class="font-medium text-dark-medium">Religion:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['religion']}}</td>
-                          </tr>
+
                           <tr>
                             <td class="font-medium text-dark-medium">E-mail:</td>
                             <td>{{ $user->email }}</td>
                           </tr>
                           <tr>
                               @if($user->role === 'teacher')
-                                  <td>Section:</td>
-                                  <td class="font-medium text-dark-medium">{{ ucfirst($user->section->section_number)}}</td>
+                                  <tr>
+                                      <td class="font-medium text-dark-medium">Section:</td>
+                                      <td class="text-capitalize">{{ ucfirst($user->section->section_number)}}</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="font-medium text-dark-medium">Class Teacher:</td>
+                                      <td class="text-capitalize">{{ ucfirst( $user->section->class_id ) }}</td>
+                                  </tr>
                               @endif
                           </tr>
                           <tr>

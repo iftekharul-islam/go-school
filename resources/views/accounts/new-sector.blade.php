@@ -38,7 +38,7 @@
                             <label for="type">Sector Type</label>
 
                             <div class="">
-                                <select  class="form-control" name="type">
+                                <select  class="select2" name="type">
                                     <option value="income">Income</option>
                                     <option value="expense">Expense</option>
                                 </select>

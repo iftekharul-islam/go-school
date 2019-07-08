@@ -100,7 +100,7 @@ class AttendanceService {
         return Attendance::with(['student', 'section'])
             ->where('student_id', $student_id)
             ->where('present',0)
-            ->where('exam_id', $exId)
+//            ->where('exam_id', $exId)
             ->get();
     }
 

@@ -117,52 +117,6 @@
             </div>
             <!-- Notice Board End Here -->
         </div>
-        <!-- Student Table Area Start Here -->
-{{--        @if(\Auth::user()->role == 'admin')--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-12">--}}
-{{--                    <div class="card dashboard-card-eleven">--}}
-{{--                        <div class="card-body">--}}
-{{--                            <div class="heading-layout1">--}}
-{{--                                <div class="item-title">--}}
-{{--                                    <h3>All Students</h3>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="table-box-wrap">--}}
-{{--                                <div class="table-responsive">--}}
-{{--                                    <table class="table display data-table text-nowrap">--}}
-{{--                                        <thead>--}}
-{{--                                        <tr>--}}
-{{--                                            <th>Name</th>--}}
-{{--                                            <th>Version</th>--}}
-{{--                                            <th>Section</th>--}}
-{{--                                            <th>Class</th>--}}
-{{--                                            <th>Phone</th>--}}
-{{--                                            <th>E-mail</th>--}}
-{{--                                            <th>Attendance</th>--}}
-{{--                                        </tr>--}}
-{{--                                        </thead>--}}
-{{--                                        <tbody>--}}
-{{--                                        @foreach($allStudents as $key => $student)--}}
-{{--                                            <tr>--}}
-{{--                                                <td>{{ $student->name }}</td>--}}
-{{--                                                <td>{{ ucfirst($student['school']['medium']) }}</td>--}}
-{{--                                                <td>{{ ucfirst($student['section']['section_number']) }} </td>--}}
-{{--                                                <td>{{ ucfirst($student['section']['class_id']) }}</td>--}}
-{{--                                                <td>{{ ucfirst($student->phone_number) }}</td>--}}
-{{--                                                <td>{{ ucfirst($student->email) }}</td>--}}
-{{--                                                <td><small><a class="button button--text float-left" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a></small></td>--}}
-{{--                                            </tr>--}}
-{{--                                        @endforeach--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endif--}}
 
         @if(\Auth::user()->role == 'teacher')
             <div class="row">
@@ -214,40 +168,43 @@
             </div>
         @endif
         @if(\Auth::user()->role == 'librarian')
-            <div class="table-box-wrap">
-                <h3 style="text-align: center" class="mt-5">All Books</h3>
-                <div class="table-responsive student-table-box">
-                    <table class="table table-data-div text-wrap">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Code</th>
-                            <th>Author</th>
-                            <th>Type</th>
-                            <th>Quantity</th>
-                            <th>Action</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        @foreach($books as $book)
-                            <tr>
-                                <td>{{ ($loop->index + 1) }}</td>
-                                <td>{{ $book->title }}</td>
-                                <td>{{ $book->book_code }}</td>
-                                <td>{{ $book->author }}</td>
-                                <td>{{ $book->type }}</td>
-                                <td>{{ $book->quantity }}</td>
-                                <td>
-                                    <div class="form-group">
-                                        <a href="{{ route('library.books.show', $book->id) }}" class="button button--text font-weight-bold float-left">
-                                          Details
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
+            <div class="card false-height">
+                <div class="card-body">
+                    <div class="table-box-wrap">
+                        <h3 style="text-align: center" class="mt-5">All Books</h3>
+                        <div class="table-responsive student-table-box">
+                            <table class="table table-data-div text-wrap">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Code</th>
+                                    <th>Author</th>
+                                    <th>Type</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                @foreach($books as $book)
+                                    <tr>
+                                        <td>{{ ($loop->index + 1) }}</td>
+                                        <td>{{ $book->title }}</td>
+                                        <td>{{ $book->book_code }}</td>
+                                        <td>{{ $book->author }}</td>
+                                        <td>{{ $book->type }}</td>
+                                        <td>{{ $book->quantity }}</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <a href="{{ route('library.books.show', $book->id) }}" class="button button--text font-weight-bold float-left">
+                                                    Details
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endif

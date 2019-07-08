@@ -13,27 +13,30 @@
             <li>Add Exams</li>
         </ul>
     </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card height-auto false-height">
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-    <div class="card height-auto">
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @component('components.add-exam-form',['classes'=>$classes,'assigned_classes'=>$already_assigned_classes,])
+                    @endcomponent
                 </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            @component('components.add-exam-form',['classes'=>$classes,'assigned_classes'=>$already_assigned_classes,])
-            @endcomponent
+            </div>
         </div>
     </div>
 @endsection

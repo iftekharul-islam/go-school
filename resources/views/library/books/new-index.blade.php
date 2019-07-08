@@ -92,8 +92,6 @@
                     swal("Poof! Your Selected file has been deleted!", {
                         icon: "success",
                     });
-                } else {
-                    swal("Your Delete Operation has been canceled");
                 }
             });
         }
