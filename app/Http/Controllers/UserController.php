@@ -214,7 +214,7 @@ class UserController extends Controller
             }
 
 //        });
-        return back()->with('status', 'Saved');
+        return back()->withInput(['tab'=> 'tab12'] )->with('status', 'saved');
     }
 
     /**
@@ -257,7 +257,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'Saved');
+        return back()->withInput(['tab'=> 'tab13'] )->with('status', 'saved');
     }
 
     /**
@@ -275,7 +275,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'Saved');
+        return back()->withInput(['tab'=> 'tab10'] )->with('status', 'saved');
     }
 
     /**
@@ -293,7 +293,8 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'Saved');
+        return back()->withInput(['tab'=> 'tab11'] )->with('status', 'saved');
+//        return redirect()->to('/academic-settings#tab11')->with('status', 'Saved');
     }
 
     /**

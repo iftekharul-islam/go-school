@@ -16,12 +16,10 @@
                          alt="Profile Picture" width="100%">
                 @else
                     @if(strtolower($user->gender) == 'male')
-                        <img src="{{asset('01-progress.gif')}}"
-                             data-src="https://png.icons8.com/dusk/200/000000/user.png"
+                        <img src="{{asset('template/img/user-default.png')}}"
                              class="img-thumbnail" width="100%">
                     @else
-                        <img src="{{asset('01-progress.gif')}}"
-                             data-src="https://png.icons8.com/dusk/200/000000/user-female.png" class="img-thumbnail"
+                        <img src="{{asset('template/img/user-default.png')}}"
                              width="100%">
                     @endif
                 @endif

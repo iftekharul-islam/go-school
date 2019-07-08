@@ -27,49 +27,48 @@
                     <li>Change Password</li>
                 </ul>
             </div>
-            <div class="card height-auto false-height">
-                <!-- <div class="card-header">
-                        <h5>Change Password</h5>
-                    </div> -->
-                    <div class="card-body">
-                        <form class="new-added-form" method="POST" action="{{url('user/config/change_password')}}">
-                            {{ csrf_field() }}
-                            <div class="row">
-                                <div class="col-lg-6 form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
-                                    <label>Current Password</label>
-                                    <input id="current-password" type="password" class="form-control" name="current-password" value="{{ old('current-password') }}" required>
-                                    @if ($errors->has('current-password'))
-                                        <span class="help-block">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card height-auto false-height">
+                            <div class="card-body">
+                                <form class="new-added-form" method="POST" action="{{url('user/config/change_password')}}">
+                                    {{ csrf_field() }}
+                                    <div class="row">
+                                        <div class="col-lg-12 form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                            <label>Current Password</label>
+                                            <input id="current-password" type="password" class="form-control" name="current-password" value="{{ old('current-password') }}" required>
+                                            @if ($errors->has('current-password'))
+                                                <span class="help-block">
                                     <strong>{{ $errors->first('current-password') }}</strong>
                                 </span>
-                                    @endif
-                                </div>
-                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
 
-                            <div class="row">
-                                <div class="col-lg-6 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label>New Password</label>
-                                    <input id="password" type="password" class="form-control" name="password"
-                                           value="{{ old('password') }}" required>
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
+                                    <div class="row">
+                                        <div class="col-lg-12 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                            <label>New Password</label>
+                                            <input id="password" type="password" class="form-control" name="password"
+                                                   value="{{ old('password') }}" required>
+                                            @if ($errors->has('password'))
+                                                <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
                                 </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 form-group">
-                                    <label>Confirm New Password</label>
-                                    <input id="password_confirm" type="password" class="form-control" name="password_confirm"
-                                           value="{{ old('password_confirm') }}" required>
-                                    @if ($errors->has('password_confirm'))
-                                        <span class="help-block">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 form-group">
+                                            <label>Confirm New Password</label>
+                                            <input id="password_confirm" type="password" class="form-control" name="password_confirm"
+                                                   value="{{ old('password_confirm') }}" required>
+                                            @if ($errors->has('password_confirm'))
+                                                <span class="help-block">
                                     <strong>{{ $errors->first('password_confirm') }}</strong>
                                 </span>
-                                    @endif
-                                </div>
-                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
 
                             <div class="form-group mg-t-8">
                                 <button type="submit" class="button button--text mr-5 mt-4">Change Password

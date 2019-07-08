@@ -23,6 +23,8 @@
                     <td>
                         @if($att->present === 0)
                             <span class="label label-danger attdState">Absent</span>
+                         @else
+                            <span class="label label-warning attdState">Escaped</span>
                         @endif
                     </td>
                     <td>{{$att->created_at->format('m/d/Y')}}</td>

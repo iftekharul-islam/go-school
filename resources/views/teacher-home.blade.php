@@ -103,10 +103,10 @@
                                 <div class="notice-list">
                                     <div class="row">
                                         <div class="col-8">
-                                            <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a> </h6>
+                                            <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
                                         </div>
                                         <div class="col-4">
-                                            <small class="post-date bg-light-teal-transparent float-right">{{ date('d-m-y', strtotime($notice->created_at)) }}</small>
+                                            <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
                                         </div>
                                     </div>
                                 </div>

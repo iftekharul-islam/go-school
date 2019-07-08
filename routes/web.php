@@ -226,6 +226,8 @@ Route::middleware(['auth','master'])->group(function (){
   Route::get('school/admin-list/{school_id}','SchoolController@show');
   Route::get('school/{school_id}', 'SchoolController@showSchool');
   Route::get('school/delete/{school_id}', 'SchoolController@destroy');
+  Route::get('school/edit/{school_id}', 'SchoolController@edit');
+  Route::post('school/edit/{school_id}', 'SchoolController@update');
 });
 
 Route::middleware(['auth','admin'])->group(function (){

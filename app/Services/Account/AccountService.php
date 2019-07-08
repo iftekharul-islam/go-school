@@ -59,6 +59,7 @@ class AccountService {
 
     public function storeAccount(){
         $income = new Account();
+        $income->month = $this->request->month;
         $income->name = $this->request->name;
         $income->type = $this->account_type;
         $income->amount = $this->request->amount;

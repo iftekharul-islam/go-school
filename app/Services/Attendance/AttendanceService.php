@@ -103,7 +103,7 @@ class AttendanceService {
     public function getAbsentAttendanceByStudentAndExam($student_id, $exId){
         return Attendance::with(['student', 'section'])
             ->where('student_id', $student_id)
-            ->where('present',0)
+            ->whereIn('present',['0','2'])
 //            ->where('exam_id', $exId)
             ->get();
     }
