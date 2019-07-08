@@ -52,13 +52,13 @@
                                 </td>
                                 <td class="text-center">
                                     @if($admin->active == 0)
-                                        <button class="btn btn-success btn-lg" type="button" onclick="removeUser({{ $admin->id }})">Active</button>
+                                        <button class="button button--save" type="button" onclick="removeUser({{ $admin->id }})">Active</button>
                                         <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
                                             @csrf
                                             @method('GET')
                                         </form>
                                     @else
-                                        <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $admin->id }})">Deactivate</button>
+                                        <button class="button button--cancel" type="button" onclick="removeUser({{ $admin->id }})">Deactivate</button>
                                         <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
                                             @csrf
                                             @method('GET')

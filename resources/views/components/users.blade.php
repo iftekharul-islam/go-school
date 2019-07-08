@@ -105,7 +105,7 @@
                         {{--                            <td>{{$user->address}}</td>--}}
                         {{--                        @endif--}}
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role == 'student')<td><a class="button button--primary" role="button"
+                            @if($user->role == 'student')<td><a class="button button--text" role="button"
                                                                 href="{{url('attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')

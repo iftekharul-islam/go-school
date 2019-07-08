@@ -49,8 +49,8 @@
                             <td>{{ $book->quantity }}</td>
                             <td>
                                 <div class="">
-                                    <a href="{{ route('library.books.show', $book->id) }}" class="button button--primary float-left">
-                                        Detail
+                                    <a href="{{ route('library.books.show', $book->id) }}" class="button button--save float-left">
+                                        Details
                                     </a>
                                 </div>
                             </td>

@@ -123,9 +123,11 @@ body {
 .paginate123 .pagination li a {
   display: block;
   padding: 8px 16px;
-  color: black;
+  color: #32998f;
 }
-
+.paginate123 .pagination li a:hover {
+  color:#fdfdfd;
+}
 .paginate123 .pagination li span {
   padding: 10px 18px;
   display: block;
@@ -141,7 +143,7 @@ body {
 }
 
 .paginate123 .pagination li:last-child {
-  border-right: 1px solid;
+  border-right: 1px solid #32998f;
 }
 
 p {
@@ -1155,6 +1157,7 @@ h6 {
   padding: 8px 18px;
   margin-right: 10px;
   margin-bottom: 10px;
+  color: #32998F;
 }
 
 .dataTables_wrapper .dataTables_paginate span a.paginate_button:active {
@@ -1167,6 +1170,7 @@ h6 {
   background: -o-linear-gradient(left, #0c9e8a, #32998F);
   background: linear-gradient(to right, #0c9e8a, #32998F);
   border-color: #32998F;
+  color: #fdfdfd;
 }
 
 .dataTables_wrapper .dataTables_paginate span .paginate_button.current {
@@ -1176,11 +1180,13 @@ h6 {
   background: linear-gradient(to right, #0c9e8a, #32998F);
   border: 1px solid #32998F;
   padding: 8px 18px;
+  color: #fdfdfd;
 }
 
 .dataTables_wrapper .dataTables_paginate span .paginate_button.current:hover {
-  background: transparent;
+  background: #fdfdfd;
   border-color: #32998F;
+  color: #32998F;
 }
 
 /*=============== 3.2 Full Calender ==================*/

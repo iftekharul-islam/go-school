@@ -14,7 +14,7 @@
               <td>{{($loop->index + 1)}}</td>
               <td>{{$fee->fee_name}}</td>
               <td>
-                  <button class="button button--edit" onclick="book()">Delete</button>
+                  <button class="button button--cancel" onclick="book()">Delete</button>
                   <a id="delete-form" href="{{ url('fees/remove', ['id' => $fee->id]) }}"></a>
               </td>
 {{--              <td>--}}

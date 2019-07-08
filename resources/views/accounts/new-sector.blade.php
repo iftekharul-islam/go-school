@@ -86,7 +86,7 @@
                                         <td>{{$sector->name}}</td>
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--primary mr-3" role="button"><b>Edit</b></a>
+                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b>Edit</b></a>
                                             <button class="button button--cancel" onclick="book()">Delete</button>
                                             <a id="delete-form" href="{{url('accounts/delete-sector/'.$sector->id)}}" role="button"></a>
                                         </td>

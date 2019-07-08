@@ -38,7 +38,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                          <button type="submit" class="btn btn-danger">Get Income List</button>
+                          <button type="submit" class="button button--text">Get Income List</button>
                         </div>
                       </div>
                     </form>

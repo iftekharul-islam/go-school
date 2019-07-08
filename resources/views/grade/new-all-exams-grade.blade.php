@@ -8,7 +8,7 @@
             All Classes
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li><a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -35,8 +35,8 @@
                         <div class="col-md-3">
                             <div class="card mb-4 mt-4">
                                 <h5 class="card-header text-left">
-                                <i style='font-size:24px;margin-left:-20px;' class='flaticon-books text-teal'></i>
-                                &nbsp;Class:
+                                    <i style='font-size:24px;margin-left:-20px;' class='flaticon-books text-teal'></i>
+                                    &nbsp;Class:
                                     <b> {{$class->class_number}} @if($class->group) </b>
                                     &nbsp; | &nbsp;Group: <b> {{ucfirst($class->group)}} @endif </b></h5>
                                 <div class="card-body-customized">
@@ -45,29 +45,50 @@
                                             $total_student = $total_student + $sec->users->count();
                                         @endphp
                                     @endforeach
-                                    <h5 class="card-title text-muted">Total Section: {{ $class->sections->count() }}</h5>
+                                    <h5 class="card-title text-muted">Total
+                                        Section: {{ $class->sections->count() }}</h5>
                                     <h5 class="card-title text-muted">Total Student: {{ $total_student }}</h5>
-                                        @if(count($class->sections)>0)
-                                        <div class="">
+                                    @if(count($class->sections)>0)
+                                        <div class="float-right">
                                             <div class="dropdown">
-                                                <button class="button2 button2--white button2--animation float-right mt-5 dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="button button--primary"
+                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     Sections
                                                 </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                                                     @foreach($class->sections as $section)
-                                                        <a class="dropdown-item" href="{{ url('grades/section/'.$section->id) }}">Section: {{$section->section_number}}</a>
+                                                        <a class=""
+                                                           href="{{ url('grades/section/'.$section->id) }}">Section: {{$section->section_number}}</a>
                                                     @endforeach
                                                 </div>
                                             </div>
                                         </div>
-                                            @else
-                                            <div class="">
-                                                <div>
-                                                    <button disabled class="btn disabled text-dark font-bold offset-4 mt-5 " type="button"  aria-expanded="false">
+                                    @else
+                                        <div class="float-right">
+                                            <div class="dropdown">
+                                                <button
+                                                        class="button button--primary font-weight-bold"
+                                                        type="button" id="dropdownMenuButton"
+                                                        data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                    Sections
+                                                </button>
+
+                                                <div class="dropdown-content"
+                                                     aria-labelledby="dropdownMenuButton">
+                                                    <!-- <button disabled class="btn disabled text-dark font-weight-bold"
+                                                        type="button" aria-expanded="false">
                                                         No Info Available
-                                                    </button>
+                                                    </button>                                               -->
+                                                    <p class="text-center text-muted font-weight-bold">
+                                                        No Info Available
+                                                    </p>
                                                 </div>
                                             </div>
+                                            <div>
+                                            </div>
+                                        </div>
                                     @endif
                                 </div>
                             </div>

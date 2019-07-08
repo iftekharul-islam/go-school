@@ -173,7 +173,7 @@
     </table>
   </div>
   <div style="text-align:center;">
-    <input type="submit" name="save" class="btn btn-primary btn-lg" value="Submit">
+    <input type="submit" name="save" class="button button--save" value="Submit">
   </div>
 </form>
 

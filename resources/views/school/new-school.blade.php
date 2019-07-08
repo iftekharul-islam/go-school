@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <div class="col-md-offset-4 mt-5">
                                 <button type="submit" id="registerBtn"
-                                        class="button button--save font-weight-bold float-left">
+                                        class="button button--save float-left">
                                     Save
                                 </button>
                             </div>

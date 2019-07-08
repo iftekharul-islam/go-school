@@ -6,14 +6,14 @@
 
     <div class="breadcrumbs-area">
         <h3>
-            All Classes & Sections
+            All Class
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li><a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>All Classes & Sections</li>
+            <li>All Classes</li>
         </ul>
     </div>
     <div class="card height-auto false-height">
@@ -41,39 +41,51 @@
                                         @endphp
                                     @endforeach
                                     <div>
-                                        <h5 class="card-title text-muted">Total Section: {{ $class->sections->count() }}</h5>
+                                        <h5 class="card-title text-muted">Total
+                                            Section: {{ $class->sections->count() }}</h5>
                                         <h5 class="card-title text-muted">Total Student: {{ $total_student }}</h5>
                                     </div>
                                     <div class="">
                                         @if(isset($_GET['course']) && $_GET['course'] == 1)
+                                            @if(count($class->sections) > 0)
                                                 <div class="float-right">
                                                     <div class="dropdown">
                                                         <button
                                                                 class="button button--primary font-weight-bold"
-                                                                type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
                                                             Class Details
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
-                                                        <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-
-                                                            @if(count($class->sections) > 0)
+                                                        <div class="dropdown-content"
+                                                             aria-labelledby="dropdownMenuButton">
                                                             @foreach($class->sections as $section)
                                                                 <a
                                                                         href="{{ url('school/section/details/'.$section->id. '?course=1') }}">Section:
                                                                     {{$section->section_number}}</a>
                                                             @endforeach
-                                                                @else
-                                                                <p class="text-center text-muted font-weight-bold">
-                                                                    No Info Available
-                                                                </p>
-                                                                @endif
                                                         </div>
 
+                                                    </div>
+                                                </div>@else
+                                                <div class="">
+                                                    <div>
+                                                        <button disabled
+                                                                class="btn disabled text-dark float-right  mt-5 "
+                                                                type="button" aria-expanded="false">
+                                                            No Info Available
+                                                        </button>
                                                     </div>
                                                 </div>
 
 
+                                            <div class="float-right">
+                                                <a role="button" class="button button--primary mr-3 font-weight-bold"
+                                                   href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>
+                                            </div>
+                                        @else
+                                            @endif
                                             <div class="float-right">
                                                 <a role="button" class="button button--primary mr-3 font-weight-bold"
                                                    href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>

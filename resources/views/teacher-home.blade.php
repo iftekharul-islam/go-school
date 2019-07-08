@@ -154,7 +154,7 @@
                                                     <td>{{ ucfirst($user['section']['class_id']) }}</td>
                                                     <td>{{ ucfirst($user->phone_number) }}</td>
                                                     <td>{{ ucfirst($user->email) }}</td>
-                                                    <td><small><a class="button button--text font-weight-bold float-left" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
+                                                    <td><small><a class="button button--text float-left" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -195,7 +195,7 @@
                                         <td>{{ $book->quantity }}</td>
                                         <td>
                                             <div class="form-group">
-                                                <a href="{{ route('library.books.show', $book->id) }}" class="button button--text font-weight-bold float-left">
+                                                <a href="{{ route('library.books.show', $book->id) }}" class="button button--text float-left">
                                                     Details
                                                 </a>
                                             </div>

@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="form-group mg-t-8">
-                                <button type="submit" class="button button--text font-weight-bold mr-5 mt-4">Change Password
+                                <button type="submit" class="button button--text mr-5 mt-4">Change Password
                                 </button>
                             </div>
                         </form>

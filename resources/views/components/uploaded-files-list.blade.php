@@ -28,7 +28,7 @@
         <td>{{($file->active === 1)?'Yes':'No'}}</td>
         @if($file->active ===1)
         <td>
-          <button class="btn btn-danger btn-lg" type="button" onclick="removeFile({{ $file->id }})">
+          <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
             Deactivate</button>
           <form id="delete-form-{{ $file->id }}" action="{{ url('academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
             @csrf
@@ -37,7 +37,7 @@
         </td>
           @else
           <td>
-            <button class="btn btn-success btn-lg" type="button" onclick="activeFile({{ $file->id }})">
+            <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
               Activate</button>
             <form id="active-file-form-{{ $file->id }}" action="{{ url('academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
               @csrf
