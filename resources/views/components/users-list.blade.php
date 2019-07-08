@@ -15,9 +15,6 @@
         @if($user->role == 'student')
           @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
             <th scope="col">Attendance</th>
-            {{--@if (!Session::has('section-attendance'))
-            <th scope="col">Marks</th>
-            @endif --}}
           @endif
             @if (!Session::has('section-attendance'))
             <th scope="col">Session</th>

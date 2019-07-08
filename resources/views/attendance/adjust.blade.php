@@ -24,6 +24,10 @@
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
+                    @elseif(session('error-status'))
+                        <div class="alert alert-danger">
+                            {{ session('error-status') }}
+                        </div>
                     @endif
 
                     @component('components.adjust-attendance',['attendances'=>$attendances,'student_id'=>$student_id])

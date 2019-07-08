@@ -32,7 +32,7 @@
                                 @if(count($courses) > 0)
                                     @if(count($courses) > 0)
                                         @foreach ($courses as $course)
-                                            <div style="font-size: 20px;" class="mt-5"><b>Teacher Code</b> - {{$course->teacher->student_code}} &nbsp;<b>Name</b> - <a href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a></div>
+                                            <div style="font-size: 20px;" class="mt-5"><b><i class="far fa-address-card text-teal"></i>  Teacher Code</b> : {{$course->teacher->student_code}} &nbsp;<i class="fas fa-signature text-teal"></i><b>  Name</b>: <a href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a></div>
                                             @break($loop->first)
                                         @endforeach
                                     @endif

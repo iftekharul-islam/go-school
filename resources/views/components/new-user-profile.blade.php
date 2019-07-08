@@ -61,7 +61,7 @@
                 @if($user->role == "student")
                     <div class="row mg-t-60">
                         <div class="col-md-6">
-                            <div class="info-table table-responsive border-right">
+                            <div class=" table-responsive border-right">
                                 <table class="text-wrap table-borderless table ">
                                     <tr>
                                         <td class="text-nowrap font-medium text-dark-medium">Student ID:</td>
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="info-table table-responsive">
+                            <div class="table-responsive">
                                 <table class="text-wrap table-borderless table">
                                     <tr>
                                         <td class="font-medium text-dark-medium">Class:</td>
@@ -160,7 +160,7 @@
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium">Mother's National ID:</td>
-                                        <td class="font-medium text-dark-medium">{{$user->studentInfo['mother_national_id']}}</td>
+                                        <td class="">{{$user->studentInfo['mother_national_id']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium">Mother's Occupation:</td>

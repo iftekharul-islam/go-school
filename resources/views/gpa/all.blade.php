@@ -33,9 +33,9 @@
                 }
                 ?>
             <br>
-                <h4>{{$g->grade_system_name}}</h4>
+                <h4><i class="fas fa-poll text-teal"></i> Grade Title: <strong>{{$g->grade_system_name}}</strong></h4>
                 <div class="table-responsive">
-                    <table class="table display text-nowraps">
+                    <table class="table display table-bordered  text-nowraps">
                         <thead>
                         <tr>
                             <th>#</th>
