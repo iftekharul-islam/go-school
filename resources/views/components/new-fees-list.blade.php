@@ -34,7 +34,7 @@
          function book() {
              swal({
                  title: "Are you sure?",
-                 text: "Once deleted, you will not be able to recover this file!",
+                 text: "Once deleted, you will not be able to recover this data!",
                  icon: "warning",
                  buttons: true,
                  dangerMode: true,
@@ -43,7 +43,7 @@
                      if (willDelete) {
                          document.getElementById('delete-form').click();
                          setTimeout(5000);
-                         swal("Poof! Your Selected file has been deleted!", {
+                         swal("Poof! Your Selected data has been deleted!", {
                              icon: "success",
                          });
                      }

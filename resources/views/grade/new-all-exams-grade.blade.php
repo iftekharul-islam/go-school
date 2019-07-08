@@ -5,14 +5,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            All Grades
+            All Classes
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>All Grades</li>
+            <li>All Classes</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->

@@ -13,7 +13,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>All Class</li>
+            <li>All Classes</li>
         </ul>
     </div>
     <div class="card height-auto false-height">

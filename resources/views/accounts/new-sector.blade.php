@@ -3,14 +3,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Add New Sector
+            </a>Add New Account Sector
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Add New Sector</li>
+            <li>Add New Account Sector</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
@@ -67,7 +67,7 @@
                         <div class="card-body">
                             <div class="heading-layout1">
                                 <div class="item-title">
-                                    <h3>All Created Sectors</h3>
+                                    <h3>All Account Sectors</h3>
                                 </div>
                             </div>
                             <table class="table table-striped table-data-div">

@@ -5,14 +5,14 @@
 
 <div class="breadcrumbs-area">
     <h3>
-        </a>List of Income
+        Income List
     </h3>
     <ul>
         <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                 Back &nbsp;&nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
-        <li>List of Income</li>
+        <li>Income List</li>
     </ul>
 </div>
 

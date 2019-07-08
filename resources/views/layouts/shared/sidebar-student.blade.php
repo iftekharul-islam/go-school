@@ -165,7 +165,7 @@
 
 
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-user-circle"></i><span>Manage Accounts</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ (request()->is('accounts*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/accountant')}}">

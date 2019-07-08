@@ -10,6 +10,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
+            <li> <a style="margin-left: 8px;" href="{{ url('/exams/active') }}">All Active Exams</a></li>
             <li>Exams Details</li>
         </ul>
     </div>

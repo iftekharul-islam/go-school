@@ -18,6 +18,11 @@
 
     <div class="card mb-3">
         <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="heading-layout1 mg-b-25">
                 <div class="item-title">
                     <h4 class="text-teal">Add new fee field</h4>
@@ -44,11 +49,6 @@
     </div>
     <div class="card height-auto">
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
 {{--            <button class="fw-btn-fill btn-gradient-yellow btn-xs" role="button" id="btnPrint" >Print Fees Form</button>--}}
             @component('components.new-fees-list',['fees'=>$fees])
             @endcomponent
