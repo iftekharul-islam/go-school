@@ -34,3 +34,11 @@
   
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
 /* ================dropdown design-==================== */
+
+.button--disabled {
+    text-transform: capitalize;
+    font-size: 14px;
+    background-color: #919490;
+    color: #080808;
+    padding: 7px 14px;
+}
