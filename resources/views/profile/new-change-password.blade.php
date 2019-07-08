@@ -27,7 +27,7 @@
                     <li>Change Password</li>
                 </ul>
             </div>
-            <div class="card height-auto">
+            <div class="card height-auto false-height">
                 <!-- <div class="card-header">
                         <h5>Change Password</h5>
                     </div> -->
@@ -71,8 +71,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 form-group mg-t-8">
-                                <button type="submit" class="button1 ml-5 button1--white button1--animation">Change Password
+                            <div class="form-group mg-t-8">
+                                <button type="submit" class="button button--text font-weight-bold mr-5 mt-4">Change Password
                                 </button>
                             </div>
                         </form>

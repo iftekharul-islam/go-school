@@ -52,6 +52,6 @@
             @endif
         @endforeach
         <p class="float-left">Classes Under exam : {{ $total }}</p>
-        <a href="{{ url('/exams/details/'.$exam->id) }}" class="button2 button2--white button2--animation float-right">Classes Under Exam</a>
+        <a href="{{ url('/exams/details/'.$exam->id) }}" class="button button--text float-right">Classes Under Exam</a>
     </div>
 </div>

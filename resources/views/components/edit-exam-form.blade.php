@@ -101,9 +101,9 @@
             @endif
         </div>
         <div class="col-12 form-group mg-t-8">
-            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
-            <a href="javascript:history.back()" class="btn-fill-lg bg-blue-dark btn-hover-yellow"
-               style="margin-right: 2%;" role="button">Cancel</a>
+            <button type="submit" class="button button--edit">Save</button>
+            <a href="javascript:history.back()" class="button button--cancel"
+               style="margin-left: 1%;" role="button">Cancel</a>
         </div>
     </div>
 </form>

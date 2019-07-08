@@ -48,7 +48,7 @@
               @if(count($grades) > 0)
                 @foreach ($grades as $grade)
                   <div class="page-panel-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
-                    <button type="submit" class="btn btn-success btn-lg float-right">
+                    <button type="submit" class="button button--save float-right">
                       <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
                     </button>
                   </div>

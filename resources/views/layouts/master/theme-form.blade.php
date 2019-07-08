@@ -21,6 +21,6 @@
         <option value="united">united</option>
         <option value="yeti">yeti</option>
       </select>
-      <button type="submit" class="btn btn-success btn-sm">Submit</button>
+      <button type="submit" class="btn btn btn-info btn-sm">Submit</button>
   </div>
 </form>

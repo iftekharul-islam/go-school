@@ -111,7 +111,7 @@
                                             <td>{{$income->amount}}</td>
                                             <td>{{$income->description}}</td>
                                             <td>{{ Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            <td><a title='Edit' class='button2 button2--white button2--animation float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
+                                            <td><a title='Edit' class='button button--edit float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

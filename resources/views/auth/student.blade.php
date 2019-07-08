@@ -576,7 +576,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" id="registerBtn" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">
+                                <button type="submit" id="registerBtn" class="button button--login">
                                     Register
                                 </button>
                             </div>

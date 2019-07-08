@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-4 col-sm-8">
-                                <button type="submit" class="btn btn-danger">Save</button>
+                                <button type="submit" class="button button--save">Save</button>
                                 </div>
                             </div>
                             </form>
@@ -84,7 +84,7 @@
                                 <td>{{$sector->name}}</td>
                                 <td>{{$sector->type}}</td>
                                 <td>
-                                    <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="btn btn-danger btn-xs" role="button">Edit</a>
+                                    <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--edit" role="button">Edit</a>
                                 </td>
                             </tr>
                         @endforeach

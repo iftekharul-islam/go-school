@@ -52,7 +52,7 @@
                                 </table>
                             </div>
                             <a href="{{url('school/'.$school->id)}}"
-                                class="button button--text font-weight-bold">Details</a>
+                                class="button button--primary font-weight-bold">Details</a>
                         </div>
                     </div>
                 </div>

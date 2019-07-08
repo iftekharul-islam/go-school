@@ -36,10 +36,10 @@
                                 <td>{{ $dp->department_name }}</td>
                                 <td>{{ $dp->teachers->count() }}</td>
                                 <td>
-                                    <button class="btn-warning btn btn-lg">Edit</button>
+                                    <button class="button button--edit">Edit</button>
                                 </td>
                                 <td>
-                                    <button class="btn-danger btn btn-lg">Delete</button>
+                                    <button class="button button--cancel">Delete</button>
                                 </td>
                             </tr>
                         @endforeach

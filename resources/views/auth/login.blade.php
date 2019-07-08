@@ -42,7 +42,7 @@
                                         @endif
                                     </div>
                                     <div class="col-12 form-group mg-t-8">
-                                        <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" style="margin-right: 2rem;">Login</button>
+                                        <button type="submit" class="button button--login" style="margin-right: 2rem;">Login</button>
                                         <a class="btn-fill-lg bg-blue-dark btn-hover-yellow" style="text-decoration:none !important;" href="{{ route('password.request') }}">Forgot Your Password?</a>
                                     </div>
                                 </div>

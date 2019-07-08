@@ -37,7 +37,7 @@
 
             <div class="form-group justify-content-left">
                 <div class="col-md-10">
-                    <button type="submit" class="button button--text float-left text-uppercase mt-5">
+                    <button type="submit" class="button button--text float-left mt-5">
                        <b> Send Password Reset Link </b>
                     </button>
                 </div>

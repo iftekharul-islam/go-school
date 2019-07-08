@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="form-group mg-t-8">
-                            <button type="submit" class="button button--text float-left">Save</button>
+                            <button type="submit" class="button button--save float-left">Save</button>
                         </div>
                     </form>
                 </div>

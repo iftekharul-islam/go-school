@@ -225,7 +225,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col-md-6 col-md-offset-4">
-                                                            <button type="submit" id="registerBtn" class="button1 button1--white button1--animation float-left">
+                                                            <button type="submit" id="registerBtn" class="button button--text float-left">
                                                                 Register
                                                             </button>
                                                         </div>
@@ -390,7 +390,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col-md-6 col-md-offset-4">
-                                                            <button type="submit" id="registerBtn" class="button1 button1--white button1--animation float-left">
+                                                            <button type="submit" id="registerBtn" class="button button--text float-left">
                                                                 Register
                                                             </button>
                                                         </div>
@@ -917,7 +917,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col-md-6 col-md-offset-4">
-                                                            <button type="submit" id="registerBtn" class="button1 button1--white button1--animation float-left">
+                                                            <button type="submit" id="registerBtn" class="button button--text float-left">
                                                                 Register
                                                             </button>
                                                         </div>
@@ -1131,7 +1131,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col-md-6 col-md-offset-4">
-                                                            <button type="submit" id="registerBtn" class="button1 button1--white button1--animation float-left">
+                                                            <button type="submit" id="registerBtn" class="button button--text float-left">
                                                                 Register
                                                             </button>
                                                         </div>
@@ -1176,7 +1176,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="button1 button1--white button1--animation float-left">
+                                                            <button type="submit" class="button button--save float-left">
                                                                 Submit
                                                             </button>
                                                         </div>
@@ -1200,7 +1200,7 @@
                                                                             @if($class->school_id == $school->id)
                                                                                 <div class="col-sm-3">
                                                                                     <button type="button"
-                                                                                            class="button2 button2--white button2--animation float-left"
+                                                                                            class="button button--text float-left"
                                                                                             data-toggle="modal"
                                                                                             data-target="#myModal{{$class->id}}"
                                                                                             style="margin-top: 5%;">

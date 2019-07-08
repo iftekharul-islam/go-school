@@ -55,13 +55,13 @@
                                 </div>
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-lg" type="button" onclick="book({{ $book->id }})">
+                                <button class="button button--cancel" type="button" onclick="book({{ $book->id }})">
                                     Delete
                                 </button>
                                 <form id="delete-form-{{ $book->id }}" action="{{ url('library/books', ['id' => $book->id]) }}" method="POST">
                                     {!! method_field('delete') !!}
                                     {!! csrf_field() !!}
-{{--                                    <button type="submit" class="btn-lg btn btn-danger">Delete</button>--}}
+{{--                                    <button type="submit" class="button button--cancel">Delete</button>--}}
                                 </form>
                             </td>
                         </tr>
