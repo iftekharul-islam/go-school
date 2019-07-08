@@ -1,25 +1,46 @@
 
 <div class="breadcrumbs-area">
     <h3>
-        Class Details
+        @foreach($users as $user)
+            @if($user->role == 'teacher')
+                All Teachers
+            @elseif($user->role == 'student')
+                All Students
+            @elseif($user->role == 'accountant')
+                Accountants
+            @elseif($user->role == 'librarian')
+                All Librarians
+                @else
+                All Users
+            @endif
+            @break
+        @endforeach
     </h3>
     <ul>
         <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                 Back &nbsp;&nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
-        <li>Class Details</li>
+        <li>   @foreach($users as $user)
+                @if($user->role == 'teacher')
+                    All Teachers
+                @elseif($user->role == 'student')
+                    All Students
+                @elseif($user->role == 'accountant')
+                    Accountants
+                @elseif($user->role == 'librarian')
+                    All Librarians
+                @else
+                    All Users
+                @endif
+                @break
+            @endforeach</li>
     </ul>
 </div>
 
 <div class="card height-auto">
     <div class="card-body">
         <div class="table-responsive">
-            {{--@if (session('status'))--}}
-                {{--<div class="alert alert-success">--}}
-                    {{--{{ session('status') }}--}}
-                {{--</div>--}}
-            {{--@endif--}}
             <table class="table table-data-div display text-wrap">
                 <thead>
                 <tr>
@@ -71,17 +92,17 @@
                         <td>
 
                             @if(!empty($user->pic_path))
-{{--                                <img src="{{url($user->pic_path)}}" data-src="{{url($user->pic_path)}}" style="border-radius: 50%;" width="25px" height="25px">--}}
+                                {{--                                <img src="{{url($user->pic_path)}}" data-src="{{url($user->pic_path)}}" style="border-radius: 50%;" width="25px" height="25px">--}}
                             @else
-{{--                                @if(strtolower($user->gender) == 'male')--}}
-{{--                                    <img src="{{asset('01-progress.gif')}}"--}}
-{{--                                         data-src="https://png.icons8.com/dusk/50/000000/user.png"--}}
-{{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
-{{--                                @else--}}
-{{--                                    <img src="{{asset('01-progress.gif')}}"--}}
-{{--                                         data-src="https://png.icons8.com/dusk/50/000000/user-female.png"--}}
-{{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
-{{--                                @endif--}}
+                                {{--                                @if(strtolower($user->gender) == 'male')--}}
+                                {{--                                    <img src="{{asset('01-progress.gif')}}"--}}
+                                {{--                                         data-src="https://png.icons8.com/dusk/50/000000/user.png"--}}
+                                {{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
+                                {{--                                @else--}}
+                                {{--                                    <img src="{{asset('01-progress.gif')}}"--}}
+                                {{--                                         data-src="https://png.icons8.com/dusk/50/000000/user-female.png"--}}
+                                {{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
+                                {{--                                @endif--}}
                             @endif
                             <a class="text-teal" href="{{url('user/'.$user->student_code)}}">
                                 {{$user->name}}</a>
@@ -116,12 +137,12 @@
                                 </td>
                             @endif
                         @endif
-{{--                        @if (!Session::has('section-attendance'))--}}
-{{--                            <td>{{ucfirst($user->gender)}}</td>--}}
-{{--                            <td>{{strtoupper($user->blood_group)}}</td>--}}
-{{--                            <td>{{$user->phone_number}}</td>--}}
-{{--                            <td>{{$user->address}}</td>--}}
-{{--                        @endif--}}
+                        {{--                        @if (!Session::has('section-attendance'))--}}
+                        {{--                            <td>{{ucfirst($user->gender)}}</td>--}}
+                        {{--                            <td>{{strtoupper($user->blood_group)}}</td>--}}
+                        {{--                            <td>{{$user->phone_number}}</td>--}}
+                        {{--                            <td>{{$user->address}}</td>--}}
+                        {{--                        @endif--}}
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                             @if($user->role == 'student')<td><a class="button button--primary" role="button"
                                                                 href="{{url('attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
@@ -132,12 +153,12 @@
                                     <a class="btn btn-lg btn-primary mr-3" href="{{url('edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
                                     <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $user->id }})">
                                         <i class="far fa-trash-alt"></i>
-                                    <form id="delete-form-{{ $user->id }}" action="{{ url('/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
-                                        @csrf
-                                        @method('GET')
-                                    </form>
-{{--                                    <button class="btn-danger btn btn-lg" onclick="removeUser({{$user->id}})"><i class="far fa-trash-alt"></i></button>--}}
-{{--                                    <a id="delete-form" href="{{url('user/deactivate/'.$user->id)}}"role=""></a>--}}
+                                        <form id="delete-form-{{ $user->id }}" action="{{ url('/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
+                                            @csrf
+                                            @method('GET')
+                                        </form>
+                                    {{--                                    <button class="btn-danger btn btn-lg" onclick="removeUser({{$user->id}})"><i class="far fa-trash-alt"></i></button>--}}
+                                    {{--                                    <a id="delete-form" href="{{url('user/deactivate/'.$user->id)}}"role=""></a>--}}
                                 </td>
                             @endif
                         @endif
@@ -145,9 +166,9 @@
                 @endforeach
                 </tbody>
             </table>
-                <div class="paginate123 mt-5 float-right">
-                    {{ $users->links() }}
-                </div>
+            <div class="paginate123 mt-5 float-right">
+                {{ $users->links() }}
+            </div>
         </div>
     </div>
 

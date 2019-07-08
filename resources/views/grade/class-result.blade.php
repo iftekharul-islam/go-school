@@ -12,10 +12,9 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Marks and Grades</li>
+            <li><a href="{{url('/grades/classes')}}">Classes</a></li>
             @if(Auth::user()->role != 'student')
-                <li><a href="{{url('grades/all-exams-grade')}}">Grades</a></li> &nbsp;
-                <li class="active">Section Grade</li>
+                <li class="active">Section</li>
             @endif
         </ul>
     </div>
