@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
-                            <button type="submit" class="button2 button2--white button2--animation float-left">Get Income List</button>
+                            <button type="submit" class="button button--text float-left">Get Income List</button>
                         </div>
                     </div>
                 </form>

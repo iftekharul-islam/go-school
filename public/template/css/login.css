@@ -85,75 +85,6 @@ body {
     animation-duration: 2s;
 }
 
-.button2,
-.button2:link,
-.button2:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 7px 20px;
-    display: inline-block;
-    border-radius: 10rem;
-    transition: all .2s;
-    position: relative;
-    font-size: 10px;
-    margin-top: 1%;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    /* float: right; */
-}
-
-.button2--white {
-    background-color: #279689;
-    color: #fdfdfd;
-}
-
-.button2--white::after {
-    background-color: rgba(217, 216, 238, 0.932);
-}
-
-.button2:hover {
-    background-color: #287c72;
-    color: #fff;
-}
-
-
-.button1,
-.button1:link,
-.button1:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1rem 3rem;
-    display: inline-block;
-    border-radius: 10rem;
-    transition: all .2s;
-    position: relative;
-    font-size: 15px;
-    margin-top: 1%;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    float: right;
-}
-
-.button1--white {
-    background-color: #279689;
-    color: #fdfdfd;
-}
-
-.button1--white::after {
-    background-color: rgba(217, 216, 238, 0.932);
-}
-
-.button1:hover {
-    /* transform: translateY(-0.3rem); */
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
-
-.button1:hover::after {
-    /* transform: scale(1.5); */
-    opacity: 0;
-}
 
 .button,
 .button:link,
@@ -179,33 +110,34 @@ body {
 }
 
 .button--cancel {
-    background-color: #fdfdfd;
-    color: #279689;
-    border: 1px solid #279689 !important;
-    padding: 5px 16px;
-    font-size: 15px;
+    background-color: #ed5e68;
+    color: #fdfdfd;
+    border: 1px solid #ed5e68 !important;
+    padding: 8px 12px;
+    font-size: 14px;
     border-radius: 0px !important;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
 }
+
 .button--edit {
-    background-color: #279689;
+    background-color: #0c8fce;
     color: #fdfdfd;
-    border: 1px solid #279689 !important;
-    padding: 5px 16px;
-    font-size: 15px;
+    border: 1px solid #0c8fce !important;
+    padding: 8px 12px;
+    font-size: 14px;
     border-radius: 0px !important;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
 }
 .button--save {
-    background-color: #279689;
+    background-color: #32998f;
     color: #fdfdfd;
-    border: 1px solid #279689 !important;
-    padding: 5px 16px;
-    font-size: 15px;
+    border: 1px solid #32998f !important;
+    padding: 8px 12px;
+    font-size: 14px;
     border-radius: 0px !important;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
 }
 
@@ -221,67 +153,74 @@ body {
 
 .button--primary {
     text-transform: capitalize;
-    font-size: 15px;
+    font-size: 14px;
     background-color: #279689;
     color: #fdfdfd;
     padding: 7px 14px;
+    font-weight: bold;
 }
 
 .button--text {
+    font-weight: bold;
     text-transform: capitalize;
-    font-size: 15px;
+    font-size: 14px;
     background-color: #279689;
     color: #fdfdfd;
-    padding: 7px 16px;
+    padding: 8px 12px;
     border: 1px solid #279689 !important;
-
 }
 
-.btn-primary {
-color: #fff; 
-background-color: #32998f; 
-border-color: #32998f;
-}
 .btn-primary:hover {
-    background-color: #111; 
+    background-color: #111;
 
 }
+
 .button--text:hover,
-.button--cancel:hover,
 .button--save:hover {
     background-color: #287c72;
     color: #fff;
 }
+.button--edit:hover {
+    background-color: #2882ce;
+    color: #fff;
+}
+
+.button--cancel:hover {
+    background-color: #ed3e40;
+    color: #fdfdfd;
+}
+
 .button--primary:hover {
     background-color: #287c72;
     color: #fff;
 }
 
-.button--edit:hover {
-    background-color: #fdfdfd;
-    color: #287c72;
-}
 .button--login:hover {
     transform: translateY(-0.3rem);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
-.button-text:hover
- {
+
+.button-text:hover {
     background-color: rgba(38, 121, 111, 0.5);
     color: #fdfdfd;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
 }
+
 .button--login:hover::after {
     transform: scale(1.5);
     opacity: 0;
 }
-button:focus{outline:none !important;}
+
+button:focus {
+    outline: none !important;
+}
 
 
 .button--white::after {
     background-color: rgba(217, 216, 238, 0.932);
 }
+
 .button--login::after {
     background-color: rgba(217, 216, 238, 0.932);
 }
@@ -405,7 +344,7 @@ button:focus{outline:none !important;}
     text-align: left;
 }
 
-.form__input:placeholder-shown+.form__label {
+.form__input:placeholder-shown + .form__label {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4rem);
@@ -472,7 +411,7 @@ button:focus{outline:none !important;}
     transition: opacity .2s;
 }
 
-.form__radio-input:checked~.form__radio-label .form__radio-button::after {
+.form__radio-input:checked ~ .form__radio-label .form__radio-button::after {
     opacity: 1;
 }
 

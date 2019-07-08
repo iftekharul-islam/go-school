@@ -30,7 +30,7 @@
             @endforeach
         </table>
         <a href="javascript:history.back()" class="button button--cancel" style="margin-right: 2%;" role="button">Cancel</a>
-        <input type="submit" class="btn btn-lg btn-danger" value="Submit"/>
+        <input type="submit" class="button button--save" value="Submit"/>
     </form>
 </div>
 <script>

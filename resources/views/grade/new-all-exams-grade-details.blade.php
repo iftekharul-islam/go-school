@@ -34,10 +34,10 @@
                                 <a class="text-muted" href="{{url('grades/section/'.$section->id)}}">Section {{$section->section_number}}</a>
                             </td>
                             <td>
-                                <a href="{{url('section/students/'.$section->id)}}" class="button2 button2--white button2--animation float-left">Each Student's Grade</a>
+                                <a href="{{url('section/students/'.$section->id)}}" class="button button--text float-left">Each Student's Grade</a>
                             </td>
                             <td>
-                                <a href="{{url('grades/section/'.$section->id)}}" role="button" class="button2 button2--white button2--animation float-left">All Students Marks</a>
+                                <a href="{{url('grades/section/'.$section->id)}}" role="button" class="button button--text float-left">All Students Marks</a>
                             </td>
                         </tr>
                     @endforeach

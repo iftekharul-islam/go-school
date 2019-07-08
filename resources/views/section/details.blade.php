@@ -88,7 +88,7 @@
                                 <td>{{$student->student_code}}</td>
                                 <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
                                 <td>{{ $student->email }}</td>
-                                <td><a class="button button--text font-weight-bold" role="button" href="{{url('grades/'.$student->id)}}">View Grade History</a></td>
+                                <td><a class="button button--text" role="button" href="{{url('grades/'.$student->id)}}">View Grade History</a></td>
                             </tr>
                         @endforeach
                         </tbody>

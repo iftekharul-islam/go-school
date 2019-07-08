@@ -460,9 +460,9 @@
 
                             <div class="form-group mt-5">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="javascript:history.back()" class="btn-fill-lg bg-blue-dark btn-hover-yellow" style="margin-right: 2%;"
+                                    <a href="javascript:history.back()" class="button button--cancel" style="margin-right: 2%;"
                                        role="button">Cancel</a>
-                                    <input type="submit" role="button" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" value="Save">
+                                    <input type="submit" role="button" class="button button--save" value="Save">
                                 </div>
                             </div>
                         </form>

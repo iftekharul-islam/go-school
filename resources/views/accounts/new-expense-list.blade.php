@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="button button--text float-left mb-5 mt-5 font-weight-bold">Expense List</button>
+                            <button type="submit" class="button button--text float-left mb-5 mt-4">Expense List</button>
                         </div>
                     </div>
                 </form>

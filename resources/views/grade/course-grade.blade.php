@@ -55,7 +55,7 @@
                   @break($loop->first)
                 @endforeach
                 <div class="panel-body" style="padding-top: 0px;">
-                  <div class="alert alert-info alert-dismissible" style="font-size:13px; margin-top: 10px;">
+                  <div class="alert alert-info alert-dismissible mt-5" style="font-size:13px; margin-top: 10px;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <ul>
                       <li>
@@ -187,7 +187,7 @@
                   @endforeach
                   <input type="hidden" name="exam_id" value="{{$exam_id}}">
                   <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
-                  <button type="submit" class="btn btn-info btn-lg float-right">
+                  <button type="submit" class="button button--text ml-3">
                     Get Total Marks
                   </button>
                 </form>
