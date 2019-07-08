@@ -110,6 +110,7 @@ class GradeService {
         'exam_id' => $this->exam_id,
         'teacher_id' => $this->teacher_id,
         'section_id' => $this->section_id,
+//        'students'   => $this->students,
       ]);
   }
 
@@ -315,7 +316,7 @@ class GradeService {
             $tbc[] = $tb->attributesToArray();
             $i++;
         }
-        return $tbc;
+        return;
     }
 
     public function returnRouteWithParameters($route_name){

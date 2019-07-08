@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
-@section('title', 'Grade')
+@section('title', 'Grades of Students')
 
 @section('content')
 <div class="container-fluid">

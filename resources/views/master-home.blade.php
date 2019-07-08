@@ -22,12 +22,13 @@
             @foreach($schools as $school)
             <div class="col-12 col-xl-4 col-4-xxxl">
                 <div class="card dashboard-card-four pd-b-0">
-                    <div class="card-body border" style="min-height: 300px">
+                    <div class="card-body border pb-5">
                         <div class="card-body-inner">
                             <div class="heading-layout1">
                                 <div class="item-title">
                                     <h3 class="mb-4 mt-2 ml-2 float-left"><i class="fas fa-school mr-4"></i><a style="color: #269589" href="{{url('school/'.$school->id)}}">{{ $school->name }}</a></h3>
-                                    <p class="mb-4 ml-2 float-right">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
+                                    {{--<a href="#" title="Header" data-toggle="popover" data-trigger="hover" data-content="Some content">Hover over me</a>--}}
+                                    <p class="mb-4 ml-2 float-right" data-toggle="popover" data-trigger="hover" data-title="{{ $school->name }}" data-content="{{ $school->about }}">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -61,53 +62,3 @@
     </div>
 </div>
 @endsection
-
-{{--    <div class="card height-auto false-height">--}}
-{{--        <div class="card-body">--}}
-{{--            <div class="heading-layout1">--}}
-{{--                <div class="item-title">--}}
-{{--                    <h3>All School Data</h3>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="table-responsive">--}}
-{{--                <table class="table display data-table text-wrap">--}}
-{{--                    <thead>--}}
-{{--                    <tr>--}}
-{{--                        <th>Name</th>--}}
-{{--                        <th>Medium</th>--}}
-{{--                        <th>Code</th>--}}
-{{--                        <th>Total Student</th>--}}
-{{--                        <th>Total Departments</th>--}}
-{{--                        <th>About</th>--}}
-{{--                    </tr>--}}
-{{--                    </thead>--}}
-{{--                    <tbody>--}}
-{{--                    @foreach($schools as $school)--}}
-{{--                        <tr>--}}
-{{--                            <td>{{ $school->name }}</td>--}}
-{{--                            <td>{{ $school->medium }}</td>--}}
-{{--                            <td>{{ $school->code }}</td>--}}
-{{--                            <td>{{count($school->users)}}</td>--}}
-{{--                            <td>{{count($school->departments)}}</td>--}}
-{{--                            <td>{{ $school->about }}</td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--<div class="container">--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-md-12">--}}
-{{--            <div class="panel panel-default">--}}
-{{--                <div class="page-panel-title">Dashboard</div>--}}
-
-{{--                <div class="panel-body">--}}
-{{--                    <a class="btn btn-danger btn-lg btn-block" href="{{url('create-school')}}" role="button">Manage
-Schools</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}

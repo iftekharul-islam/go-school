@@ -9,6 +9,7 @@ use App\User;
 use App\Department;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolController extends Controller
 {
@@ -22,13 +23,26 @@ class SchoolController extends Controller
       $schools = School::all();
       $classes = Myclass::all();
       $sections = Section::all();
+
+        $studentClasses = Myclass::query()
+            ->where('school_id', Auth::user()->school->id)
+            ->pluck('id');
+
+        $studentSections = Section::with('class')
+            ->whereIn('class_id', $studentClasses)
+            ->get();
+
+        $teacherDepartments = \App\Department::where('school_id',\Auth::user()->school_id)->get();
+        $teacherClasses = \App\Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
+        $teacherSections = \App\Section::with('class')->whereIn('class_id',$teacherClasses)->get();
+
       $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
                             ->where('role', 'teacher')
                             ->orderBy('name','ASC')
                             ->where('active', 1)
                             ->get();
       $departments = Department::where('school_id',\Auth::user()->school_id)->get();
-      return view('school.new-create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments'));
+      return view('school.new-create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
     /**

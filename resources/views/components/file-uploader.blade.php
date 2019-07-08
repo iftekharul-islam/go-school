@@ -4,12 +4,17 @@
         <div class="heading-layout1">
             <div class="item-title">
                 <h3>@if($upload_type === 'routine')
-                        Class {{ucfirst($upload_type)}}
+                        Class {{ucfirst($upload_type)}}s
                     @else
-                        {{ucfirst($upload_type)}}
+                        {{ucfirst($upload_type)}}s
                     @endif</h3>
             </div>
         </div>
+    <div class="item-title">
+        <h4 class="text-teal">
+            Add New {{ucfirst($upload_type)}}
+        </h4>
+    </div>
         <label>File Title: </label>
         <div class="form-group">
             <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">

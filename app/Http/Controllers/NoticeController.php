@@ -13,23 +13,25 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
-     {
-         $school_id = \Auth::user()->school->id;
-         $minutes = 1440;
-         $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
-             return \App\Notice::where('school_id', $school_id)
-                 ->where('active', 1)
-                 ->get();
-         });
-         $events = \Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
-             return \App\Event::where('school_id', $school_id)
-                 ->where('active', 1)
-                 ->get();
-         });
-         return view('notices.index', compact('notices', 'events'));
-       //Notice::where('school_id', \Auth::user()->school_id)->get();
-     }
+    public function index()
+    {
+        $school_id = \Auth::user()->school->id;
+        $minutes = 1440;
+        $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            return \App\Notice::where('school_id', $school_id)
+                ->where('active', 1)
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        });
+        $events = \Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
+            return \App\Event::where('school_id', $school_id)
+                ->where('active', 1)
+                ->orderBy('created_at', 'DESC')
+                ->get();
+        });
+        return view('notices.index', compact('notices', 'events'));
+        //Notice::where('school_id', \Auth::user()->school_id)->get();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -38,8 +40,8 @@ class NoticeController extends Controller
      */
     public function create()
     {
-      $files = Notice::where('school_id',\Auth::user()->school_id)->where('active',1)->get();
-      return view('notices.create',['files'=>$files]);
+          $files = Notice::where('school_id',\Auth::user()->school_id)->orderBy('created_at', 'DESC')->get();
+        return view('notices.create',['files'=>$files]);
     }
 
     /**
@@ -50,14 +52,14 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-      $tb = new Notice;
-      $tb->file_path = $request->file_path;
-      $tb->title = $request->title;
-      $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
-      $tb->save();
-      return back()->with('status', 'Uploaded');
+        $tb = new Notice;
+        $tb->file_path = $request->file_path;
+        $tb->title = $request->title;
+        $tb->active = 1;
+        $tb->school_id = \Auth::user()->school_id;
+        $tb->user_id = \Auth::user()->id;
+        $tb->save();
+        return back()->with('status', 'Uploaded');
     }
 
     /**
@@ -91,10 +93,10 @@ class NoticeController extends Controller
      */
     public function update($id)
     {
-      $tb = Notice::find($id);
-      $tb->active = 0;
-      $tb->save();
-      return back()->with('status','File removed');
+        $tb = Notice::find($id);
+        $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
+        $tb->save();
+        return back()->with('status','Notice Updated');
     }
 
     /**
@@ -105,10 +107,10 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-      return (Notice::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Notice::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

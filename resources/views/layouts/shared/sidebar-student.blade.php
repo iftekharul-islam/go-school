@@ -69,7 +69,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('/all-notice') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events && Notices</span></a>
+                        <a href="{{ url('/notices-and-events') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events && Notices</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">
@@ -100,7 +100,7 @@
                             <i class="far fa-clock"></i><span>Class Routine</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('grades/all-exams-grade') }}" class="nav-link">
+                        <a href="{{ url('grades/classes') }}" class="nav-link">
                             <i class="fas fa-poll-h"></i><span>Grades</span></a>
                     </li>
                     <li class="nav-item">
@@ -157,20 +157,15 @@
                     </li>
                 @endif
                 @if(Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
-                    <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
-                        <ul class="nav sub-group-menu {{ (request()->is('fees*')) ? 'sub-group-active' : '' }}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/all') }}"><i class="fas fa-angle-right"></i><span>All Fees</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('fees/create') }}"><i class="fas fa-angle-right"></i><span>Add Fee Field</span></a>
-                            </li>
-                        </ul>
+
+                    <li class="nav-item">
+                        <a href="{{ url('fees/all') }}" class="nav-link">
+                            <i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
                     </li>
 
+
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-user-circle"></i><span>Manage Accounts</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ (request()->is('accounts*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/accountant')}}">

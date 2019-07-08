@@ -5,15 +5,17 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3><a href="javascript:history.back()" class="float-left"><h4 style="color: #fea801; font-size: 22px;">Back</h4></a>&nbsp;&nbsp;Events</h3>
-        <ul style="margin-left: -100px !important;">
-            <li>
-                <a style="margin-left: -43px;" href="{{ url('/home') }}">Home</a>
+        <h3>
+            All Events
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Events</li>
+            <li>All Events</li>
         </ul>
     </div>
-
     <div class="card height-auto false-height">
         <div class="card-body">
             @if (session('status'))

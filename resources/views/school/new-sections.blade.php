@@ -13,7 +13,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>All Class</li>
+            <li>All Classes</li>
         </ul>
     </div>
     <div class="card height-auto false-height">
@@ -44,6 +44,7 @@
                                     </div>
                                     <div class="">
                                         @if(isset($_GET['course']) && $_GET['course'] == 1)
+                                            @if(count($class->sections) > 0)
                                             <div class="">
                                                 <div class="dropdown">
                                                     <button class="button2 button2--white button2--animation float-right mt-5 dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,6 +57,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @else
+                                                <div class="">
+                                                    <div>
+                                                        <button disabled class="btn disabled text-dark float-right  mt-5 " type="button"  aria-expanded="false">
+                                                            No Info Available
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                @endif
                                             <div class="">
                                                 <a role="button" class="button2 button2--white button2--animation float-left mt-5"
                                                    href="{{url('academic/syllabus/'.$class->id)}}"><b>View Syllabus</b></a>

@@ -5,14 +5,14 @@
 
 <div class="breadcrumbs-area">
     <h3>
-        </a>List of Income
+        Income List
     </h3>
     <ul>
         <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                 Back &nbsp;&nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
-        <li>List of Income</li>
+        <li>Income List</li>
     </ul>
 </div>
 
@@ -75,17 +75,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="button button--text float-left"><b>Get Income List</b></button>
+                        <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
+                            <button type="submit" class="button2 button2--white button2--animation float-left">Get Income List</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-md-6">
-                <div style="width:100%; height: 300px;">
-                    <canvas id="canvas"></canvas>
-                </div>
-            </div>
+{{--            <div class="col-md-6">--}}
+{{--                <div style="width:100%; height: 300px;">--}}
+{{--                    <canvas id="canvas"></canvas>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
             <div class="row">
                 <div class="col-md-12">
@@ -111,7 +111,7 @@
                                             <td>{{$income->amount}}</td>
                                             <td>{{$income->description}}</td>
                                             <td>{{ Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            <td><a title='Edit' class='button button--text float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'><b>Edit</b></a></td>
+                                            <td><a title='Edit' class='button2 button2--white button2--animation float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

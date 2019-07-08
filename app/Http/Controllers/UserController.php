@@ -50,9 +50,9 @@ class UserController extends Controller
         session()->forget('section-attendance');
         
         if($this->userService->isListOfStudents($school_code, $student_code))
-            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents());
+            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents(), $type= "Students");
         else if($this->userService->isListOfTeachers($school_code, $teacher_code))
-            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers());
+            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers(), $type= "Teachers");
         else
             return view('home');
     }
@@ -198,7 +198,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        DB::transaction(function () use ($request) {
+//        DB::transaction(function () use ($request) {
             $password = $request->password;
             $tb = $this->userService->storeStudent($request);
             try {
@@ -213,8 +213,8 @@ class UserController extends Controller
                 Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
             }
 
-        });
-        return back()->with('status', 'Account created');
+//        });
+        return back()->with('status', 'Saved');
     }
 
     /**

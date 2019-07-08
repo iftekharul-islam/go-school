@@ -4,14 +4,14 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <div class="breadcrumbs-area">
     <h3>
-        </a>List of Expense
+        List of Expenses
     </h3>
     <ul>
         <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                 Back &nbsp;&nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
         </li>
-        <li>List of Expense</li>
+        <li>List of Expenses</li>
     </ul>
 </div>
 
@@ -75,16 +75,16 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="button button--text float-left mt-5"><b>Expense List</b></button>
+                            <button type="submit" class="button button--text float-left mb-5 mt-5"><b>Expense List</b></button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-md-6">
-                <div style="width:100%; height: 300px;">
-                    <canvas id="canvas"></canvas>
-                </div>
-            </div>
+{{--            <div class="col-md-6">--}}
+{{--                <div style="width:100%; height: 300px;">--}}
+{{--                    <canvas id="canvas"></canvas>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
         <div class="row">
                 <div class="col-md-12">

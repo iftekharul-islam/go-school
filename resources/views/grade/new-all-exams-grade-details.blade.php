@@ -18,30 +18,34 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Each Student's Grade</th>
-                    <th>All Students Marks</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($sections as $section)
+            @if(count($sections) > 0)
+                <table class="table table-bordered table-striped">
+                    <thead>
                     <tr>
-                        <td>
-                            <a class="text-muted" href="{{url('grades/section/'.$section->id)}}">Section {{$section->section_number}}</a>
-                        </td>
-                        <td>
-                            <a href="{{url('section/students/'.$section->id)}}" class="button button--text float-left"><b>Each Student's Grade</b></a>
-                        </td>
-                        <td>
-                            <a href="{{url('grades/section/'.$section->id)}}" role="button" class="button button--text float-left"><b>All Students Marks</b></a>
-                        </td>
+                        <th>Name</th>
+                        <th>Each Student's Grade</th>
+                        <th>All Students Marks</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($sections as $section)
+                        <tr>
+                            <td>
+                                <a class="text-muted" href="{{url('grades/section/'.$section->id)}}">Section {{$section->section_number}}</a>
+                            </td>
+                            <td>
+                                <a href="{{url('section/students/'.$section->id)}}" class="button2 button2--white button2--animation float-left">Each Student's Grade</a>
+                            </td>
+                            <td>
+                                <a href="{{url('grades/section/'.$section->id)}}" role="button" class="button2 button2--white button2--animation float-left">All Students Marks</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                No Related Data Found
+            @endif
         </div>
     </div>
 

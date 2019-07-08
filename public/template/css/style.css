@@ -231,7 +231,7 @@ h6 {
 
 .card-body {
   height: 100%;
-  padding: 15px 30px 0px;
+  padding: 30px 30px 0px;
   background-color: #ffffff56;
   border-radius: 4px;
   /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
@@ -1810,7 +1810,7 @@ ul {
 }
 
 .tooltip-inner {
-  font-size: 12px;
+  font-size: 16px;
   padding: 5px 10px;
 }
 
@@ -5512,4 +5512,70 @@ ul {
 
 .text-orange-red {
   color: #ff0000;
+}
+
+.section-students .card {
+  -webkit-box-shadow: none!important;
+  box-shadow: none;
+}
+.classes-exams {
+  height: 75px!important;
+}
+
+
+.popover-title {
+  font-size: 14px!important;
+}
+.data-content {
+  font-size: 14px!important;
+}
+.popover-content {
+  font-size: 18px!important;
+}
+
+.pop-div {
+  font-size: 13px;
+  margin-top: 100px;
+}
+.pop-title {
+  display: none;
+  color: blue;
+  font-size: 15px;
+}
+.pop-content {
+  display: none;
+  color: red;
+  font-size: 10px;
+}
+
+ .previous {
+  display: none!important;
+}
+ .next{
+  display: none!important;
+}
+
+.current {
+  color: #ffffff;
+}
+.dataTables_filter {
+  float: right;
+  margin-bottom: 2rem;
+
+}
+.dataTables_length {
+  display: none;
+}
+
+.dataTables_filter input {
+  margin-top: 10px;
+  height: 45px;
+  background-color: #f8f8f8;
+  font-size: 14px;
+  color: #111111;
+  border-radius: 4px;
+  border: none;
+  padding: 5px 15px;
+  width: 400px;
+  margin-bottom: 13px;
 }

@@ -3,14 +3,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Add New Sector
+            </a>Add New Account Sector
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Add New Sector</li>
+            <li>Add New Account Sector</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
@@ -55,11 +55,11 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-6">
-                    <div style="width:100%;">
-                        <canvas id="canvas"></canvas>
-                    </div>
-                </div>
+{{--                <div class="col-md-6">--}}
+{{--                    <div style="width:100%;">--}}
+{{--                        <canvas id="canvas"></canvas>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             <div class="row mt-5">
                 <div class="col-md-12">
@@ -67,7 +67,7 @@
                         <div class="card-body">
                             <div class="heading-layout1">
                                 <div class="item-title">
-                                    <h3>All Created Sectors</h3>
+                                    <h3>All Account Sectors</h3>
                                 </div>
                             </div>
                             <table class="table table-striped table-data-div">
@@ -86,8 +86,8 @@
                                         <td>{{$sector->name}}</td>
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="btn btn-warning btn-lg mr-3" role="button">Edit</a>
-                                            <button class="btn btn-danger btn-lg" onclick="book()">Delete</button>
+                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--primary mr-3" role="button"><b>Edit</b></a>
+                                            <button class="button button--cancel" onclick="book()">Delete</button>
                                             <a id="delete-form" href="{{url('accounts/delete-sector/'.$sector->id)}}" role="button"></a>
                                         </td>
                                     </tr>
@@ -201,8 +201,6 @@
                         swal("Done! Your Selected file has been deleted!", {
                             icon: "success",
                         });
-                    } else {
-                        swal("Your Delete Operation has been canceled");
                     }
                 });
         }

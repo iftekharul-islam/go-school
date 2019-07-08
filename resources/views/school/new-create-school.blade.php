@@ -5,19 +5,19 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Manage Academy
+            Academic Settings
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li><a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Manage Academy</li>
+            <li>Academic Settings</li>
         </ul>
     </div>
 
     <div class="card height-auto false-height">
-        <div class="card ui-tab-card">
+        <div class="ui-tab-card">
             <div class="card-body">
                 <div class="heading-layout1 mg-b-25">
                     <div class="item-title">
@@ -33,7 +33,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="border-nav-tab">
+                <div class="border-nav-tab border-0">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="tab-0" data-toggle="tab" href="#tab7" role="tab" aria-selected="true">Users</a>
@@ -43,9 +43,9 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="tab7" role="tabpanel">
-                            <div class="card ui-tab-card">
-                                <div class="card-body">
+                        <div class="tab-pane fade show active border-0" id="tab7" role="tabpanel">
+                            <div class="ui-tab-card">
+                                <div class="">
                                     <div class="heading-layout1 mg-b-25">
                                         <div class="item-title">
                                             <h3>Users</h3>
@@ -67,7 +67,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="tab10" role="tabpanel">
+                                            <div class="tab-pane fade show active border-0" id="tab10" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/accountant') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -218,8 +218,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -232,7 +232,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="tab11" role="tabpanel">
+                                            <div class="tab-pane fade border-0" id="tab11" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/librarian') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -383,8 +383,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -397,7 +397,8 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="tab12" role="tabpanel">
+
+                                            <div class="tab-pane fade border-0" id="tab12" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/student') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -406,18 +407,48 @@
                                                                 <label for="name" class="col-md-4 control-label">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="name" type="text" class="form-control" name="name"
-                                                                           value="{{ old('name') }}"
-                                                                           required>
+                                                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
 
                                                                     @if ($errors->has('name'))
-                                                                        <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
+                                                                        <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
                                                                     @endif
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                                                                <div class="col-md-12">
+                                                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                                                    @if ($errors->has('email'))
+                                                                        <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                                <label for="password" class="col-md-4 control-label">Password</label>
+
+                                                                <div class="col-md-12">
+                                                                    <input id="password" type="password" class="form-control" name="password" required>
+
+                                                                    @if ($errors->has('password'))
+                                                                        <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+
+                                                                <div class="col-md-12">
+                                                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -430,7 +461,7 @@
 
                                                                 <div class="col-md-12">
                                                                     <select id="section" class="form-control" name="section" required>
-                                                                        @foreach (session('register_sections') as $section)
+                                                                        @foreach ($studentSections as $section)
                                                                             <option value="{{$section->id}}">
                                                                                 Section: {{$section->section_number}} Class:
                                                                                 {{$section->class->class_number}}</option>
@@ -438,9 +469,7 @@
                                                                     </select>
 
                                                                     @if ($errors->has('section'))
-                                                                        <span class="help-block">
-                                    <strong>{{ $errors->first('section') }}</strong>
-                                </span>
+                                                                        <span class="help-block"><strong>{{ $errors->first('section') }}</strong></span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -450,14 +479,10 @@
                                                                 <label for="birthday" class="col-md-4 control-label">Birthday</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="birthday" type="text" class="form-control" name="birthday"
-                                                                           value="{{ old('birthday') }}"
-                                                                           required>
+                                                                    <input id="birthday" type="text" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
 
                                                                     @if ($errors->has('birthday'))
-                                                                        <span class="help-block">
-                                    <strong>{{ $errors->first('birthday') }}</strong>
-                                </span>
+                                                                        <span class="help-block"><strong>{{ $errors->first('birthday') }}</strong></span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -474,9 +499,7 @@
                                                                            value="{{ old('phone_number') }}">
 
                                                                     @if ($errors->has('phone_number'))
-                                                                        <span class="help-block">
-                                                        <strong>{{ $errors->first('phone_number') }}</strong>
-                                                    </span>
+                                                                        <span class="help-block"<strong>{{ $errors->first('phone_number') }}</strong></span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -498,9 +521,7 @@
                                                                     </select>
 
                                                                     @if ($errors->has('blood_group'))
-                                                                        <span class="help-block">
-                                    <strong>{{ $errors->first('blood_group') }}</strong>
-                                </span>
+                                                                        <span class="help-block"><strong>{{ $errors->first('blood_group') }}</strong></span>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -543,7 +564,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    @if(session('register_role', 'student') == 'student')
+{{--                                                    @if(session('register_role', 'student') == 'student')--}}
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group{{ $errors->has('version') ? ' has-error' : '' }}">
@@ -884,13 +905,13 @@
                                                             </div>
                                                         </div>
 
-                                                    @endif
+{{--                                                    @endif--}}
                                                     <div class="form-group">
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -903,7 +924,8 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="tab13" role="tabpanel">
+
+                                            <div class="tab-pane fade border-0" id="tab13" role="tabpanel">
                                                 <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/teacher') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -971,7 +993,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{--                        @if(session('register_role', 'teacher') == 'teacher')--}}
+{{--                                                                            @if(session('register_role', 'teacher') == 'teacher')--}}
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
@@ -979,8 +1001,8 @@
 
                                                                 <div class="col-md-12">
                                                                     <select id="department" class="form-control" name="department_id" required>
-                                                                        @if (count(session('departments')) > 0)
-                                                                            @foreach (session('departments') as $d)
+                                                                        @if (count($teacherDepartments) > 0)
+                                                                            @foreach ($teacherDepartments as $d)
                                                                                 <option value="{{$d->id}}">{{$d->department_name}}</option>
                                                                             @endforeach
                                                                         @endif
@@ -1002,7 +1024,7 @@
                                                                     <select id="class_teacher" class="form-control"
                                                                             name="class_teacher_section_id">
                                                                         <option selected="selected" value="0">Not Class Teacher</option>
-                                                                        @foreach (session('register_sections') as $section)
+                                                                        @foreach ($teacherSections as $section)
                                                                             <option value="{{$section->id}}">
                                                                                 Section: {{$section->section_number}} Class:
                                                                                 {{$section->class->class_number}}</option>
@@ -1018,7 +1040,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{--                        @endif--}}
+{{--                                                                            @endif--}}
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
@@ -1102,8 +1124,8 @@
                                                         <label class="col-md-4 control-label">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+{{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -1124,8 +1146,8 @@
                         <div class="tab-pane fade" id="tab8" role="tabpanel">
 
 
-                            <div class="card ui-tab-card">
-                                <div class="card-body">
+                            <div class="ui-tab-card">
+                                <div class="">
                                     <div class="heading-layout1 mg-b-25">
                                         <div class="item-title">
                                             <h3>Academic</h3>
@@ -1141,7 +1163,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                                            <div class="tab-pane fade show border-0" id="tab1" role="tabpanel">
                                                 <form class="new-added-form"
                                                       action="{{url('school/add-department')}}"
                                                       method="post">
@@ -1161,7 +1183,7 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="tab2" role="tabpanel">
+                                            <div class="tab-pane fade border-0" id="tab2" role="tabpanel">
                                                 @foreach($schools as $school)
                                                     @if(\Auth::user()->role == 'master' || \Auth::user()->school_id == $school->id)
                                                         @if(\Auth::user()->school_id == $school->id)

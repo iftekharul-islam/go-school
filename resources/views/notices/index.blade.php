@@ -10,7 +10,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Events && Notice</li>
+            <li>Events && Notices</li>
         </ul>
     </div>
 

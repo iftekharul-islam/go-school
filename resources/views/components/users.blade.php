@@ -1,47 +1,8 @@
 
-<div class="breadcrumbs-area">
-    <h3>
-        @foreach($users as $user)
-            @if($user->role == 'teacher')
-                All Teachers
-            @elseif($user->role == 'student')
-                All Students
-            @elseif($user->role == 'accountant')
-                Accountants
-            @elseif($user->role == 'librarian')
-                All Librarians
-                @else
-                All Users
-            @endif
-            @break
-        @endforeach
-    </h3>
-    <ul>
-        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                Back &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
-        </li>
-        <li>   @foreach($users as $user)
-                @if($user->role == 'teacher')
-                    All Teachers
-                @elseif($user->role == 'student')
-                    All Students
-                @elseif($user->role == 'accountant')
-                    Accountants
-                @elseif($user->role == 'librarian')
-                    All Librarians
-                @else
-                    All Users
-                @endif
-                @break
-            @endforeach</li>
-    </ul>
-</div>
-
 <div class="card height-auto">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-data-div display text-wrap">
+            <table class="table display table-data-div text-nowrap">
                 <thead>
                 <tr>
                     <th scope="col">#</th>

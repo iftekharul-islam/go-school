@@ -55,6 +55,7 @@ trait GradeTrait {
                     $tb->student_id = $student_id;
                     $tb->teacher_id = $teacher_id;
                     $tb->course_id = $course_id;
+                    $tb->user_id = auth()->user()->id;
                     $tb->created_at = date('Y-m-d H:i:s');
                     $tb->updated_at = date('Y-m-d H:i:s');
                     //$tb->user_id = \Auth::user()->id; // User id who is logged in while this command executes

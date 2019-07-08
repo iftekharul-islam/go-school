@@ -107,7 +107,7 @@ class AttendanceService {
     public function getAttendanceByStudentAndExam($student_id, $exId){
         return Attendance::with(['student', 'section'])
                       ->where('student_id', $student_id)
-                      ->where('exam_id', $exId)
+//                      ->where('exam_id', $exId)
                       ->get();
     }
 
