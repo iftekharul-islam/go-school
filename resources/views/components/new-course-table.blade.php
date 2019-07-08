@@ -56,7 +56,7 @@
                 </td>
                 <td>
                   <a role="button"
-                     class="button2 button2--white button2--animation float-left"
+                     class="btn btn-secondary btn-lg float-left"
                      href="{{url('section/students/'.$course->section->id.'?section=1')}}">View
                     Students</a>
                 </td>
@@ -66,7 +66,7 @@
 
               @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
                 <td>
-                  <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-primary btn-lg">Take Attendance</a>
+                  <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
                 </td>
               @else
                 <td>Save under Exam to Take Attendance</td>
@@ -76,10 +76,10 @@
 
             @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
               <td>
-                <a href="{{url('grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-danger btn-lg">Submit Grade</a>
+                <a href="{{url('grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-secondary btn-lg ">Submit Grade</a>
               </td>
               <td>
-                <a href="{{url('grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-success btn-lg">View Marks</a>
+                <a href="{{url('grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">View Marks</a>
               </td>
             @endif
 

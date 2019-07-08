@@ -147,19 +147,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2 mt-5">
-                                            <a class="btn btn-success btn-lg" role="button"
+                                            <a class="button button--save" role="button"
                                                href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">
                                                 <small>+ Create Admin</small>
                                             </a>
                                         </div>
                                         <div class="col-md-2 mt-5">
-                                            <a class="btn btn-info btn-lg" role="button"
+                                            <a class="button button--save" role="button"
                                                href="{{url('school/admin-list/'.$school->id)}}">
                                                 <small>View Admins</small>
                                             </a>
                                         </div>
-                                        <div class="col-md-2 mt-5">
-                                            <button class="btn btn-danger btn-lg" type="button"
+                                        <div class="col-md-1 mt-5">
+                                            <button class="button button--cancel" type="button"
                                                     onclick="removeSchool({{ $school->id }})">Delete
                                             </button>
                                             <form id="delete-form-{{ $school->id }}"

@@ -35,7 +35,7 @@
                         @endforeach
                         <p class="card-title float-left text-muted">Courses Under exam: {{ $total }}</p>
                         <a href="{{ url('/exams/details/'.$exam->id) }}"
-                            class="button button--primary float-right mt-5">Details</a>
+                            class="button button--primary float-right mt-5 font-weight-bold">Details</a>
 
                         {{--                                    @component('components.active-exams',['exam'=>$exam,'courses'=>$courses])--}}
                         {{--                                    @endcomponent--}}

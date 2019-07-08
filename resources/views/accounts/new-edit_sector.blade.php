@@ -10,7 +10,7 @@
             <li>Edit Sector</li>
         </ul>
     </div>
-    <div class="card height-auto" style="min-height: 700px;">
+    <div class="card height-auto" style="min-height: 700px; width: 60%;">
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
@@ -30,7 +30,7 @@
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label mt-5">Sector Name</label>
 
-                        <div class="col-md 12">
+                        <div class="col-md-8">
                             <input id="name" type="text" class="form-control" name="name" value="{{$sector->name}}" placeholder="Sector Name" required>
 
                             @if ($errors->has('name'))
@@ -43,7 +43,7 @@
                     <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
                         <label for="type" class="col-md-4 control-label">Sector Type: {{ucfirst($sector->type)}} (Current)</label>
 
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <select class="form-control" name="type">
                                 <option value="income">Income</option>
                                 <option value="expense">Expense</option>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="col-12 form-group mg-t-8">
-                        <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                        <button type="submit" class="button button--save">Save</button>
                     </div>
                 </form>
             @endisset

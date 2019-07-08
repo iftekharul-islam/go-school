@@ -38,7 +38,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                          <button type="submit" class="btn btn-danger">Get Expense List</button>
+                          <button type="submit" class="button button--text">Get Expense List</button>
                         </div>
                       </div>
                     </form>

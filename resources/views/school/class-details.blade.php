@@ -52,8 +52,8 @@
                                             <td>
                                                 <a role="button"
                                                    class="button button--text float-left font-weight-bold"
-                                                   href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">View
-                                                    Today's Attendance</a>
+                                                   href="{{url('attendances/'.$section->id.'/0/'.$ex->exam_id)}}">
+                                                   Viee Today's Attendance</a>
                                             </td>
                                             @if($key === 0)
                                                 @break 2;

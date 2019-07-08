@@ -28,13 +28,13 @@
           </div>
           <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-              <button type="submit" class="button2 button2--white button2--animation float-left">Submit</button>
+              <button type="submit" class="button button--save float-left">Submit</button>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Close</button>
+        <button type="button" class="button button--cancel" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

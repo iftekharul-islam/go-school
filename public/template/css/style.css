@@ -224,12 +224,15 @@ h6 {
   padding: .75rem 1.25rem;
   margin-bottom: 0;
   border-radius: 30px;
-  background-color: #F0F1F3;
-
+  background-color: #f9f9f9;
+  border-top: 1px solid #eae9e9;
+  border-left: 1px solid #eae9e9;
+  border-right: 1px solid #eae9e9;
   /* border: 1px solid rgba(185, 181, 181, 0.125); */
 }
 
 .card-body {
+  /* margin-top: 10px; */
   height: 100%;
   padding: 30px 30px 0px;
   background-color: #ffffff56;
@@ -368,6 +371,7 @@ h6 {
 .form-check input[type="checkbox"]:checked+label:after {
   color: #08b13c;
 }
+
 
 /*=============== 2.4 Grid ==================*/
 .col-12-xxxl,

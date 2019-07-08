@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-12 form-group mg-t-8">
-                        <button type="submit" class="button button--text float-left"><b>Save</b></button>
+                        <button type="submit" class="button button--save float-left"><b>Save</b></button>
                         <a href="javascript:history.back()" class="button button--cancel float-left" style="margin-left: 1%" role="button"><b>Cancel</b></a>
                     </div>
                 </div>

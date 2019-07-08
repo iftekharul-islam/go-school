@@ -91,7 +91,7 @@
                                                 <label for="msg">Write Message: </label>
                                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
                                             </div>
-                                            <button type="submit" class="btn btn-danger btn-lg">Message</button>
+                                            <button type="submit" class="button button--text">Message</button>
                                         </form>
                                     </div>
                                 </div>

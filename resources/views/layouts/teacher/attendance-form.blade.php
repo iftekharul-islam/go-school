@@ -79,7 +79,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="button2 button2--white button2--animation float-left">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="button button--text float-left">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else
@@ -122,9 +122,9 @@
     <div style="text-align:center;">
         <a href="javascript:history.back()" class="btn btn-danger btn-lg mr-3" role="button">Cancel</a>
         @if (count($attendances) > 0)
-            <button type="submit" class="btn btn-primary mr-3 btn-lg">Update</button>
+            <button type="submit" class="button button--edit">Update</button>
         @else
-            <button type="submit" class="btn btn-primary mr-3 btn-lg">Submit</button>
+            <button type="submit" class="button button--cancel">Submit</button>
         @endif
     </div>
 </form>
