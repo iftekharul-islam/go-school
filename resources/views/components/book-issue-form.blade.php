@@ -19,7 +19,7 @@
         <label for="name" class="col-md-4 mt-5">Student Code</label>
 
         <div class="col-md-12">
-            <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Name" required>
+            <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Student Code" required>
 
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -59,7 +59,6 @@
         <div class="col-md-12">
             <input data-date-format="yyyy-mm-dd" id="return_date" class="form-control date" name="return_date" value="{{ old('return_date') }}"
                    placeholder="Return Date" required>
-
             @if ($errors->has('return_date'))
                 <span class="help-block">
                 <strong>{{ $errors->first('return_date') }}</strong>

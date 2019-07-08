@@ -46,7 +46,6 @@
                                     </div>
                                     <div class="">
                                         @if(isset($_GET['course']) && $_GET['course'] == 1)
-                                            @if(count($class->sections) > 0)
                                                 <div class="float-right">
                                                     <div class="dropdown">
                                                         <button
@@ -57,20 +56,24 @@
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
                                                         <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
+
+                                                            @if(count($class->sections) > 0)
                                                             @foreach($class->sections as $section)
                                                                 <a
                                                                         href="{{ url('school/section/details/'.$section->id. '?course=1') }}">Section:
                                                                     {{$section->section_number}}</a>
                                                             @endforeach
+                                                                @else
+                                                                <p class="text-center text-muted font-weight-bold">
+                                                                    No Info Available
+                                                                </p>
+                                                                @endif
                                                         </div>
 
                                                     </div>
                                                 </div>
-                                            @else
-                                                <div class="float-right">
-                                                    <button disabled type="button" class="button btn-secondary button--disabled mr-3 font-weight-bold">No Information</button>
-                                                </div>
-                                            @endif
+
+
                                             <div class="float-right">
                                                 <a role="button" class="button button--primary mr-3 font-weight-bold"
                                                    href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>

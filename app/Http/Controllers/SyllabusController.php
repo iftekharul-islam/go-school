@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Syllabus as Syllabus;
 use App\Http\Resources\SyllabusResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class SyllabusController extends Controller

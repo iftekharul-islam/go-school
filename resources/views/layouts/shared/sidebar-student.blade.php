@@ -32,13 +32,13 @@
                         <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>Attendance</span></a>
                         <ul class="nav sub-group-menu {{ (request()->is('school*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Teacher Attendance</a>
+                                <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Teachers Attendance</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('school/sections?att=1') }}" class="nav-link"><i class="fas fa-angle-right"></i>Students Attendance</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Staff Attendance</a>
+                                <a href="#" class="nav-link"><i class="fas fa-angle-right"></i>Staffs Attendance</a>
                             </li>
                         </ul>
                     </li>

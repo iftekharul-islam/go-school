@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GradeSystemRequest;
 use Illuminate\Http\Request;
 use App\Gradesystem as Gradesystem;
 
@@ -30,14 +31,8 @@ class GradesystemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-      $request->validate([
-        'grade_system_name' => 'required|string|max:255',
-        'point' => 'required',
-        'grade' => 'required',
-        'from_mark' => 'required',
-        'to_mark' => 'required',
-      ]);
+    public function store(GradeSystemRequest $request){
+
       $gpa = new Gradesystem;
       $gpa->grade_system_name = $request->grade_system_name;
       $gpa->point = $request->point;

@@ -5,7 +5,7 @@
         {{ csrf_field() }}
         <table class="table display data-table text-nowrap">
             <tr>
-                <th>#</th>
+                <th>Present</th>
                 <th>Status</th>
                 <th>Date</th>
             </tr>

@@ -47,7 +47,6 @@
                     <th scope="col">#</th>
                     <th>Code</th>
                     <th>Full Name</th>
-                    <th>Email</th>
                     @foreach ($users as $user)
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
@@ -107,7 +106,6 @@
                             <a class="text-teal" href="{{url('user/'.$user->student_code)}}">
                                 {{$user->name}}</a>
                         </td>
-                        <td>{{$user->email}}</td>
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
                                 <td>{{$user->studentInfo['session']}}</td>
