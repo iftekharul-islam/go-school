@@ -34,9 +34,9 @@
                         <?php $total_student = 0 ?>
                         <div class="col-md-3">
                             <div class="card mb-4 mt-4">
-                                <h5 class="card-header text-left">
+                                <h5 class="card-header text-muted text-left">
                                     <i style='font-size:24px;margin-left:-20px;' class='flaticon-books text-teal'></i>
-                                    &nbsp;Class:
+                                    &nbspClass:
                                     <b> {{$class->class_number}} @if($class->group) </b>
                                     &nbsp; | &nbsp;Group: <b> {{ucfirst($class->group)}} @endif </b></h5>
                                 <div class="card-body-customized">

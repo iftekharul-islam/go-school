@@ -42,3 +42,6 @@
     color: #080808;
     padding: 7px 14px;
 }
+.hover-title a:hover {
+  color: #666464;
+}

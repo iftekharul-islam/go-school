@@ -6,7 +6,7 @@
                 <h3>@if($upload_type === 'routine')
                         Class {{ucfirst($upload_type)}}s
                     @else
-                        {{ucfirst($upload_type)}}s
+                        {{ucfirst($upload_type)}}
                     @endif</h3>
             </div>
         </div>
