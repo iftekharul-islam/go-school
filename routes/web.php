@@ -37,7 +37,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false, 'login' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -179,7 +179,7 @@ Route::middleware(['auth','accountant'])->prefix('accounts')->name('accounts.')-
   Route::post('create-sector','AccountController@storeSector');
   Route::get('edit-sector/{id}','AccountController@editSector');
   Route::post('update-sector','AccountController@updateSector');
-  Route::get('delete-sector/{id}','AccountController@deleteSector');
+  Route::delete('delete-sector/{id}','AccountController@deleteSector');
 
   Route::get('income','AccountController@income');
   Route::post('create-income','AccountController@storeIncome');

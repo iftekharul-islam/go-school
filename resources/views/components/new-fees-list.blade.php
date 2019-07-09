@@ -1,10 +1,9 @@
 <div class="table-responsive">
-    <table class="table display data-table text-nowrap">
+    <table class="table display table-data-div text-nowrap">
         <thead>
         <tr>
           <th>#</th>
           <th>Fee Name</th>
-{{--          <th>Select</th>--}}
           <th>Remove</th>
         </tr>
         </thead>
@@ -17,12 +16,6 @@
                   <button class="button button--cancel" onclick="book()">Delete</button>
                   <a id="delete-form" href="{{ url('fees/remove', ['id' => $fee->id]) }}"></a>
               </td>
-{{--              <td>--}}
-{{--                <div class="form-check">--}}
-{{--                  <input type="checkbox" class="form-check-input">--}}
-{{--                  <label class="form-check-label">&nbsp;</label>--}}
-{{--                </div>--}}
-{{--              </td>--}}
             </tr>
           @endforeach
         </tbody>

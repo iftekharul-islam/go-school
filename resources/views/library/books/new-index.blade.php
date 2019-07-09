@@ -43,7 +43,9 @@
                     @foreach($books as $book)
                         <tr>
                             <td>{{ ($loop->index + 1) }}</td>
-                            <td>{{ $book->title }}</td>
+                            <td><a href="{{ route('library.books.show', $book->id) }}" class="text-teal">
+                                    {{ $book->title }}
+                                </a></td>
                             <td>{{ $book->author }}</td>
                             <td>{{ $book->type }}</td>
                             <td>{{ $book->quantity }}</td>
@@ -61,7 +63,6 @@
                                 <form id="delete-form-{{ $book->id }}" action="{{ url('library/books', ['id' => $book->id]) }}" method="POST">
                                     {!! method_field('delete') !!}
                                     {!! csrf_field() !!}
-{{--                                    <button type="submit" class="button button--cancel">Delete</button>--}}
                                 </form>
                             </td>
                         </tr>

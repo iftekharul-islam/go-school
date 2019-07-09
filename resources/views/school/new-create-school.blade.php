@@ -1169,7 +1169,7 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show border-0" id="tab1" role="tabpanel">
+                                            <div class="tab-pane active fade show border-0" id="tab1" role="tabpanel">
                                                 <form class="new-added-form"
                                                       action="{{url('school/add-department')}}"
                                                       method="post">
@@ -1246,7 +1246,7 @@
                                                                                                                     <span class="pull-right"> &nbsp;&nbsp;
                                                                                                                 <a class="btn btn-lg btn-success mr-2"
                                                                                                                    href="{{url('school/promote-students/'.$section->id)}}">+ Promote Students</a>
-                                                   &nbsp;                                                              <a class="btn btn-lg btn-primary mr-3" href="{{url('register/student/'.$section->id)}}">+ Register Student</a>
+{{--                                                   &nbsp;                                                              <a class="btn btn-lg btn-primary mr-3" href="{{url('register/student/'.$section->id)}}">+ Register Student</a>--}}
                                                 </span>
                                                                                                                     @include('layouts.master.add-course-form')
                                                                                                                 </li>
@@ -1257,7 +1257,7 @@
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
                                                                                                     <button type="button"
-                                                                                                            class="btn btn-danger btn-lg"
+                                                                                                            class="button button--cancel"
                                                                                                             data-dismiss="modal">
                                                                                                         Close
                                                                                                     </button>

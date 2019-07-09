@@ -65,7 +65,7 @@
             <!-- Dashboard summery End Here -->
             <!-- Students Chart End Here -->
             <div class="col-lg-6 col-4-xxxl col-xl-6">
-                <div class="card dashboard-card-three">
+                <div class="card dashboard-card-three" style="min-height: 484px !important;">
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
@@ -91,7 +91,7 @@
             <!-- Students Chart End Here -->
             <!-- Notice Board Start Here -->
             <div class="col-lg-6 col-4-xxxl col-xl-6">
-                <div class="card dashboard-card-six">
+                <div class="card dashboard-card-six" style="min-height: 484px !important;">
                     <div class="card-body">
                         <div class="heading-layout1 mg-b-17">
                             <div class="item-title">
@@ -188,7 +188,9 @@
                                 @foreach($books as $book)
                                     <tr>
                                         <td>{{ ($loop->index + 1) }}</td>
-                                        <td>{{ $book->title }}</td>
+                                        <td>
+                                            <a href="{{ route('library.books.show', $book->id) }}" class="text-teal">{{ $book->title }}</a>
+                                        </td>
                                         <td>{{ $book->book_code }}</td>
                                         <td>{{ $book->author }}</td>
                                         <td>{{ $book->type }}</td>

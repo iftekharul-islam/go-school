@@ -17,54 +17,61 @@
     <!-- Admit Form Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <form class="new-added-form" action="{{url('/accounts/create-sector')}}" method="post">
+                    <form class="new-added-form mb-5" action="{{url('/accounts/create-sector')}}" method="post">
                         {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name">Sector Name</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <label for="name">Sector Name</label>
 
-                            <div class="">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ (!empty($sector->name))?$sector->name:old('name') }}" placeholder="Sector Name" required>
+                                    <div class="">
+                                        <input id="name" type="text" class="form-control" name="name" value="{{ (!empty($sector->name))?$sector->name:old('name') }}" placeholder="Sector Name" required>
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
+                                        @if ($errors->has('name'))
+                                            <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
                                         </span>
-                                @endif
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                            <label for="type">Sector Type</label>
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                    <label for="type">Sector Type</label>
 
-                            <div class="">
-                                <select  class="select2" name="type">
-                                    <option value="income">Income</option>
-                                    <option value="expense">Expense</option>
-                                </select>
+                                    <div class="">
+                                        <select  class="select2" name="type">
+                                            <option value="income">Income</option>
+                                            <option value="expense">Expense</option>
+                                        </select>
 
-                                @if ($errors->has('type'))
-                                    <span class="help-block">
+                                        @if ($errors->has('type'))
+                                            <span class="help-block">
                                             <strong>{{ $errors->first('type') }}</strong>
                                         </span>
-                                @endif
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mg-t-8">
+                                <button type="submit" class="button button--save ml-4 mt-4">Save</button>
                             </div>
                         </div>
-                        <div class="form-group mg-t-8">
-                            <button type="submit" class="button button--save float-left">Save</button>
-                        </div>
                     </form>
-                </div>
 {{--                <div class="col-md-6">--}}
 {{--                    <div style="width:100%;">--}}
 {{--                        <canvas id="canvas"></canvas>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
-            </div>
             <div class="row mt-5">
                 <div class="col-md-12">
                     <div class="card height-auto">
                         <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             <div class="heading-layout1">
                                 <div class="item-title">
                                     <h3>All Account Sectors</h3>
@@ -87,8 +94,11 @@
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
                                             <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b>Edit</b></a>
-                                            <button class="button button--cancel" onclick="book()">Delete</button>
-                                            <a id="delete-form" href="{{url('accounts/delete-sector/'.$sector->id)}}" role="button"></a>
+                                            <button class="button button--cancel" onclick="book({{ $sector->id }})">Delete</button>
+                                            <form id="delete-form-{{ $sector->id }}" action="{{url('accounts/delete-sector/'.$sector->id)}}" method="POST">
+                                                {!! method_field('delete') !!}
+                                                {!! csrf_field() !!}
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -122,16 +132,16 @@
             grey: 'rgb(201, 203, 207)'
         };
 
-		var color = Chart.helpers.color;
-		var config = {
-			type: 'bar',
-			data: {
-				datasets: [{
+        var color = Chart.helpers.color;
+        var config = {
+            type: 'bar',
+            data: {
+                datasets: [{
                     label: 'Income',
-					backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
-					borderColor: window.chartColors.green,
-					fill: false,
-					data: [@foreach($incomes as $s)
+                    backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.green,
+                    fill: false,
+                    data: [@foreach($incomes as $s)
                         {
                             t:"{{Carbon\Carbon::parse($s->created_at)->format('Y-d-m')}}",
                             y:{{$s->amount}}
@@ -139,10 +149,10 @@
                         @endforeach]
                 },{
                     label: 'Expense',
-					backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-					borderColor: window.chartColors.red,
-					fill: false,
-					data: [@foreach($expenses as $s)
+                    backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.red,
+                    fill: false,
+                    data: [@foreach($expenses as $s)
                         {
                             t:"{{Carbon\Carbon::parse($s->created_at)->format('Y-d-m')}}",
                             y:{{$s->amount}}
@@ -150,43 +160,44 @@
                         @endforeach]
                 }]
             },
-			options: {
-				title: {
+            options: {
+                title: {
                     display: true,
-					text: 'Income and Expense (In Dollar) in Time Scale'
-				},
-				scales: {
-					xAxes: [{
-						type: 'time',
-						time: {
-							parser: 'YYYY-DD-MM',
-							tooltipFormat: 'll HH:mm'
-						},
-						scaleLabel: {
-							display: true,
-							labelString: 'Date'
-						}
-					}],
-					yAxes: [{
-						scaleLabel: {
-							display: true,
-							labelString: 'Money'
-						}
-					}]
-				},
-			}
-		};
+                    text: 'Income and Expense (In Dollar) in Time Scale'
+                },
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            parser: 'YYYY-DD-MM',
+                            tooltipFormat: 'll HH:mm'
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Money'
+                        }
+                    }]
+                },
+            }
+        };
 
-		window.onload = function() {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = new Chart(ctx, config);
+        window.onload = function() {
+            var ctx = document.getElementById('canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
 
-		};
-	    </script>
+        };
+        </script>
 @endsection
 @push('customjs')
     <script type="text/javascript">
         function book(id) {
+            console.log(id);
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this file!",
@@ -194,15 +205,15 @@
                 buttons: true,
                 dangerMode: true,
             })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        document.getElementById('delete-form-'+id).submit();
-                        setTimeout(5000);
-                        swal("Done! Your Selected file has been deleted!", {
-                            icon: "success",
-                        });
-                    }
-                });
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.getElementById('delete-form-'+id).submit();
+                    setTimeout(5000);
+                    swal("Done! Your Selected file has been deleted!", {
+                        icon: "success",
+                    });
+                }
+            });
         }
     </script>
 @endpush
