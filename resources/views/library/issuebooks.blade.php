@@ -27,7 +27,12 @@
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
+                    @elseif (session('error-status'))
+                        <div class="alert alert-danger">
+                            {{ session('error-status') }}
+                        </div>
                     @endif
+
                     @component('components.book-issue-form',['books'=>$books])
                     @endcomponent
                 </div>

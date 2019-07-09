@@ -7,7 +7,7 @@
             <li>
                 <a href="{{ url('/home') }}">Home</a>
             </li>
-            <li>{{ \Auth::user()->role }}</li>
+            <li class="text-capitalize">{{ \Auth::user()->role }} Dashboard</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->

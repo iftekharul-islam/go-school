@@ -414,9 +414,7 @@ class UserController extends Controller
     {
        $user = $this->user->find($id);
        $user->active = 0;
-//       return $user;
        $user->save();
-
         return back()->with('status', $user->name .' has been removed!!');
     }
 

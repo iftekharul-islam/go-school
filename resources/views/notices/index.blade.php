@@ -3,14 +3,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Events && Notice
+            Events & Notices
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Events && Notices</li>
+            <li>Events & Notices</li>
         </ul>
     </div>
 

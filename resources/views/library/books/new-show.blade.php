@@ -36,61 +36,61 @@
                                     <table class="table text-wrap">
                                         <tbody>
                                             <tr>
-                                                <td>Book Code</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->book_code }}</td>
+                                                <td class="font-medium text-dark-medium">Book Code</td>
+                                                <td>{{ $book->book_code }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Book Title</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->title }}</td>
+                                                <td class="font-medium text-dark-medium">Book Title</td>
+                                                <td >{{ $book->title }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Autdor</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->autdor }}</td>
+                                                <td  class="font-medium text-dark-medium">Autdor</td>
+                                                <td>{{ $book->autdor }}</td>
                                             </tr>
                                             <tr>
-                                                <td>row No</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->rowNo }}</td>
+                                                <td class="font-medium text-dark-medium">Row No</td>
+                                                <td>{{ $book->rowNo }}</td>
                                             </tr>
                                             <tr>
-                                                <td>About</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->about }}</td>
+                                                <td class="font-medium text-dark-medium">About</td>
+                                                <td>{{ $book->about }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Quantity</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->quantity }}</td>
+                                                <td class="font-medium text-dark-medium">Quantity</td>
+                                                <td>{{ $book->quantity }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Rack No</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->rackNo }}</td>
+                                                <td class="font-medium text-dark-medium">Rack No</td>
+                                                <td>{{ $book->rackNo }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Type</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->type }}</td>
+                                                <td class="font-medium text-dark-medium">Type</td>
+                                                <td>{{ $book->type }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Class</td>
-                                                <td class="font-medium text-dark-medium">
+                                                <td class="font-medium text-dark-medium">Class</td>
+                                                <td>
                                                     {{ $book->class->class_number }}</td>
                                             </tr>
                                             <tr>
-                                                <td>School</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->school->name }}</td>
+                                                <td class="font-medium text-dark-medium">School</td>
+                                                <td>{{ $book->school->name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Created At</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->created_at }}</td>
+                                                <td class="font-medium text-dark-medium">Created At</td>
+                                                <td>{{ $book->created_at }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Updated At</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->updated_at }}</td>
+                                                <td class="font-medium text-dark-medium">Updated At</td>
+                                                <td>{{ $book->updated_at }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Registered By</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->user->name }}</td>
+                                                <td class="font-medium text-dark-medium">Registered By</td>
+                                                <td>{{ $book->user->name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Price</td>
-                                                <td class="font-medium text-dark-medium">{{ $book->price }}</td>
+                                                <td class="font-medium text-dark-medium">Price</td>
+                                                <td>{{ $book->price }}</td>
                                             </tr>
                                             
                                         </tbody>
