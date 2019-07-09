@@ -68,7 +68,8 @@
                                                         </div>
 
                                                     </div>
-                                                </div>@else
+                                                </div>
+                                            @else
                                                 <div class="">
                                                     <div>
                                                         <button disabled
@@ -78,64 +79,60 @@
                                                         </button>
                                                     </div>
                                                 </div>
-
-
-                                            <div class="float-right">
-                                                <a role="button" class="button button--primary mr-3 font-weight-bold"
-                                                   href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>
-                                            </div>
-                                        @else
                                             @endif
-                                            <div class="float-right">
-                                                <a role="button" class="button button--primary mr-3 font-weight-bold"
-                                                   href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>
-                                            </div>
-                                        @else
 
-                                            @if(count($class->sections) > 0)
                                                 <div class="float-right">
-                                                    <div class="dropdown">
-                                                        <button
-                                                                class="button button--primary font-weight-bold"
-                                                                type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false">
-                                                            Details
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </button>
-                                                        <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-                                                            @foreach($class->sections as $section)
-                                                                <a
-                                                                        href="{{ url('section/details/attendance/'.$section->id.'/'.$class->id.'?att=1') }}">Section: {{$section->section_number}}</a>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
+                                                    <a role="button" class="button button--primary mr-3 font-weight-bold"
+                                                       href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>
                                                 </div>
-                                            @else
-                                                <div class="float-right">
-                                                    <div class="dropdown">
-                                                        <button
-                                                                class="button button--primary font-weight-bold"
-                                                                type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false">
-                                                            Details
-                                                            <i class="fa fa-caret-down"></i>
-                                                        </button>
+{{--                                                @else--}}
 
-                                                        <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-                                                            <!-- <button disabled class="btn disabled text-dark font-weight-bold"
-                                                                type="button" aria-expanded="false">
-                                                                No Info Available
-                                                            </button>                                               -->
-                                                            <p class="text-center text-muted font-weight-bold">
-                                                                No Info Available
-                                                            </p>
+                                                @else
+
+                                                    @if(count($class->sections) > 0)
+                                                        <div class="float-right">
+                                                            <div class="dropdown">
+                                                                <button
+                                                                        class="button button--primary font-weight-bold"
+                                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                                        aria-haspopup="true" aria-expanded="false">
+                                                                    Details
+                                                                    <i class="fa fa-caret-down"></i>
+                                                                </button>
+                                                                <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
+                                                                    @foreach($class->sections as $section)
+                                                                        <a
+                                                                                href="{{ url('section/details/attendance/'.$section->id.'/'.$class->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endif
+                                                    @else
+                                                        <div class="float-right">
+                                                            <div class="dropdown">
+                                                                <button
+                                                                        class="button button--primary font-weight-bold"
+                                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                                        aria-haspopup="true" aria-expanded="false">
+                                                                    Details
+                                                                    <i class="fa fa-caret-down"></i>
+                                                                </button>
+
+                                                                <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
+                                                                    <!-- <button disabled class="btn disabled text-dark font-weight-bold"
+                                                                        type="button" aria-expanded="false">
+                                                                        No Info Available
+                                                                    </button>                                               -->
+                                                                    <p class="text-center text-muted font-weight-bold">
+                                                                        No Info Available
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                @endif
                                     </div>
                                 </div>
                             </div>
