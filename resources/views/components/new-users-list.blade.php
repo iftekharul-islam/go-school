@@ -57,6 +57,7 @@
                     <th scope="col">#</th>
                     <th>Code</th>
                     <th>Full Name</th>
+                    <th>Email</th>
                     @foreach ($users as $user)
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
@@ -65,10 +66,9 @@
                                 <th>Class</th>
                                 <th>Section</th>
                             @endif
-                        @elseif($user->role == 'teacher')
+                        @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                             @if (!Session::has('section-attendance'))
-                                <th>Email</th>
-                                @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                                @if($user->role == 'teacher')
                                     <th>Courses</th>
                                 @endif
                             @endif
@@ -81,7 +81,7 @@
                         @break($loop->first)
                     @endforeach
                     @foreach ($users as $user)
-                        @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                        @if(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                             @if($user->role === 'student')<th>Attendance</th>@endif
                         @endif
                         @break($loop->first)
@@ -99,22 +99,10 @@
                         <th scope="row">{{ ($current_page-1) * $per_page + $key + 1 }}</th>
                         <td>{{$user->student_code}}</td>
                         <td>
-
-                            @if(!empty($user->pic_path))
-                                {{--                                <img src="{{url($user->pic_path)}}" data-src="{{url($user->pic_path)}}" style="border-radius: 50%;" width="25px" height="25px">--}}
-                            @else
-                                {{--                                @if(strtolower($user->gender) == 'male')--}}
-                                {{--                                    <img src="{{asset('01-progress.gif')}}"--}}
-                                {{--                                         data-src="https://png.icons8.com/dusk/50/000000/user.png"--}}
-                                {{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
-                                {{--                                @else--}}
-                                {{--                                    <img src="{{asset('01-progress.gif')}}"--}}
-                                {{--                                         data-src="https://png.icons8.com/dusk/50/000000/user-female.png"--}}
-                                {{--                                         style="border-radius: 50%;" width="25px" height="25px">&nbsp;--}}
-                                {{--                                @endif--}}
-                            @endif
-                            <a class="text-teal" href="{{url('user/'.$user->student_code)}}">
-                                {{$user->name}}</a>
+                            <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
+                        </td>
+                        <td>
+                            {{$user->email}}
                         </td>
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
@@ -124,12 +112,9 @@
                                 <td style="white-space: nowrap;">{{$user->section->section_number}}
                                 </td>
                             @endif
-                        @elseif($user->role == 'teacher')
+                        @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                             @if (!Session::has('section-attendance'))
-                                <td>
-                                    {{$user->email}}
-                                </td>
-                                @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                                @if($user->role == 'teacher')
                                     <td style="white-space: nowrap;">
 
                                         <a class="text-teal" href="{{url('courses/'.$user->id.'/0')}}">All Courses</a>

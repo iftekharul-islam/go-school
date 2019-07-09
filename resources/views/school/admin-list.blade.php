@@ -25,18 +25,21 @@
             @endif
             @if(count($admins) > 0)
                 <div class="table-responsive">
-                    <table class="table display data-table text-wrap">
-                        <tr>
-                            <th width="10%">Name</th>
-                            <th width="5%">Code</th>
-                            <th width="10%">Email</th>
-                            <th width="10%">Phone Number</th>
-                            <th width="15%">Address</th>
-                            <th width="30%">About</th>
-                            <th width="5%">Edit</th>
-                            <th width="5%">Activate/Deactivate</th>
-                        </tr>
-                        @foreach ($admins as $admin)
+                    <table class="table table-data-div text-wrap">
+                        <thead>
+                            <tr>
+                                <th width="10%">Name</th>
+                                <th width="5%">Code</th>
+                                <th width="10%">Email</th>
+                                <th width="10%">Phone Number</th>
+                                <th width="15%">Address</th>
+                                <th width="30%">About</th>
+                                <th width="5%">Edit</th>
+                                <th width="5%">Activate/Deactivate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($admins as $admin)
                             <tr>
                                 <td>
                                     {{$admin->name}}
@@ -47,7 +50,7 @@
                                 <td>{{$admin->address}}</td>
                                 <td>{{$admin->about}}</td>
                                 <td>
-                                    <a href="{{url('edit/user/'.$admin->id)}}" class="btn btn-lg btn-info"
+                                    <a href="{{url('edit/user/'.$admin->id)}}" class="button button--edit"
                                        role="button">Edit</a>
                                 </td>
                                 <td class="text-center">
@@ -67,6 +70,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        </tbody>
                     </table>
                 </div>
             @else
@@ -89,8 +93,6 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             document.getElementById('delete-form-'+id).submit();
-                        } else {
-                            swal("Your Delete Operation has been canceled");
                         }
                     });
             }

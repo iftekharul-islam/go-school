@@ -12,7 +12,6 @@
           @if(!$student)
             <th>Class</th>
             <th>Section</th>
-            <th>All Students</th>
             <th>Section Students</th>
             <th>Action</th>
           @endif
@@ -20,6 +19,7 @@
             @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
               <th>Marks Submission</th>
               <th>View Marks</th>
+              <th>Message</th>
             @endif
             @break
           @endforeach
@@ -51,9 +51,9 @@
               <td>{{$course->section->section_number}}</td>
 
               @if($course->exam_id != 0)
-                <td>
-                  <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
-                </td>
+{{--                <td>--}}
+{{--                  <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>--}}
+{{--                </td>--}}
                 <td>
                   <a role="button"
                      class="btn btn-secondary btn-lg float-left"
@@ -75,6 +75,9 @@
             @endif
 
             @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
+              <td>
+                <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
+              </td>
               <td>
                 <a href="{{url('grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-secondary btn-lg ">Submit Grade</a>
               </td>

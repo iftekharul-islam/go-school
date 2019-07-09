@@ -76,7 +76,6 @@ class AccountController extends Controller
   */
   public function deleteSector($id){
     $sector = AccountSector::find($id);
-    return $sector;
     $sector->delete();
     return redirect('/accounts/sectors')->with("status","Account Sector Deleted Successfully.");
   }
