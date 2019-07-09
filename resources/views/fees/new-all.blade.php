@@ -5,14 +5,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Fees Collection
+            Fees List
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Fees Collection</li>
+            <li>Fees List</li>
         </ul>
     </div>
 

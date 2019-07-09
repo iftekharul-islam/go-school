@@ -40,6 +40,16 @@
 
 <div class="card height-auto">
     <div class="card-body">
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @elseif(session('error-status'))
+                <div class="alert alert-success">
+                    {{ session('error-status') }}
+                </div>
+            @endif
         <div class="table-responsive">
             <table class="table table-data-div display text-wrap">
                 <thead>

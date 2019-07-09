@@ -1,84 +1,15 @@
 @if(count($exams) > 0)
 @foreach($exams as $exam)
 <h3 class="text-muted">Exam Name - {{$exam->exam_name}}</h3>
-{{--<span class="float-right ml-2"><button class="btn btn-lg btn-success" role="button" id="btnPrint{{$exam->id}}">Print Result</button></span>--}}
-{{--<div class="visible-print-block" id="table-content{{$exam->id}}">--}}
-{{--  <div class="table-responsive">--}}
-{{--    <table class="table display  text-nowrap">--}}
-{{--      <thead>--}}
-{{--      <tr>--}}
-{{--        <th>#</th>--}}
-{{--        <th>Course</th>--}}
-{{--        <th>Attendance</th>--}}
-{{--        @for($i=1;$i<=5;$i++)--}}
-{{--          <th>Quiz {{$i}}</th>--}}
-{{--        @endfor--}}
-{{--        @for($i=1;$i<=3;$i++)--}}
-{{--          <th>Assignment {{$i}}</th>--}}
-{{--        @endfor--}}
-{{--        @for($i=1;$i<=5;$i++)--}}
-{{--          <th>CT {{$i}}</th>--}}
-{{--        @endfor--}}
-{{--        @if($grade->course->final_exam_percent > 0)--}}
-{{--          <th>Written</th>--}}
-{{--          <th>Mcq</th>--}}
-{{--        @endif--}}
-{{--        @if($grade->course->practical_percent > 0)--}}
-{{--          <th>Practical</th>--}}
-{{--        @endif--}}
-{{--        <th>Total Marks</th>--}}
-{{--        <th>Grade</th>--}}
-{{--        <th>Course Teacher</th>--}}
-{{--      </tr>--}}
-{{--      </thead>--}}
-{{--      <tbody>--}}
-{{--      @foreach ($grades as $grade)--}}
-{{--        <tr>--}}
-{{--          <th scope="row">{{($loop->index + 1)}}</th>--}}
-{{--          <td>{{$grade->course->course_name}}</td>--}}
-{{--          <td>{{$grade->attendance}}</td>--}}
-{{--          @for($i=1;$i<=5;$i++)--}}
-{{--            <td>{{$grade['quiz'.$i]}}</td>--}}
-{{--          @endfor--}}
-{{--          @for($i=1;$i<=3;$i++)--}}
-{{--            <td>{{$grade['assignment'.$i]}}</td>--}}
-{{--          @endfor--}}
-{{--          @for($i=1;$i<=5;$i++)--}}
-{{--            <td>{{$grade['ct'.$i]}}</td>--}}
-{{--          @endfor--}}
-{{--          @if($grade->course->final_exam_percent > 0)--}}
-{{--            <td>{{$grade->written}}</td>--}}
-{{--            <td>{{$grade->mcq}}</td>--}}
-{{--          @endif--}}
-{{--          @if($grade->course->practical_percent > 0)--}}
-{{--            <td>{{$grade->practical}}</td>--}}
-{{--          @endif--}}
-{{--          <td>{{$grade->marks}}</td>--}}
-{{--          <td>--}}
-{{--            @foreach($gradesystems as $gs)--}}
-{{--              @if($grade->marks >= $gs->from_mark && $grade->marks <= $gs->to_mark)--}}
-{{--                <b>{{$gs->grade}}</b>--}}
-{{--                @break--}}
-{{--              @endif--}}
-{{--            @endforeach--}}
-{{--          </td>--}}
-{{--          <td>{{$grade->teacher->name}}</td>--}}
-{{--        </tr>--}}
-{{--      @endforeach--}}
-{{--      </tbody>--}}
-{{--    </table>--}}
-{{--  </div>--}}
-{{--</div>--}}
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>#</th>
       <th>Course</th>
-      <th>Total Marks</th>
-      <th>Grade</th>
-      <!--<th>GPA</th>-->
       <th>Course Teacher</th>
+        <th>Grade</th>
+        <th>Total Marks</th>
     </tr>
   </thead>
   <tbody>
@@ -87,20 +18,20 @@
     <tr id="heading{{($loop->index + 1)}}">
       <th scope="row">{{($loop->index + 1)}}</th>
       <td>{{$grade->course->course_name}}</td>
-      <td><b>{{$grade->marks}}</b>
-        <a class="button button--primary float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
-      </td>
-      <td>
-        @foreach($gradesystems as $gs)
-         @if($grade->marks >= $gs->from_mark && $grade->marks <= $gs->to_mark)
-            <b>{{$gs->grade}}</b>
-            @break
-          @endif
-        @endforeach
-      </td>
       <td>
         <a class="text-teal" href="{{url('user/'.$grade->teacher->student_code)}}">{{$grade->teacher->name}}</a>
       </td>
+        <td>
+            @foreach($gradesystems as $gs)
+                @if($grade->marks >= $gs->from_mark && $grade->marks <= $gs->to_mark)
+                    <b>{{$gs->grade}}</b>
+                    @break
+                @endif
+            @endforeach
+        </td>
+        <td><b>{{$grade->marks}}</b>
+            <a class="button button--primary float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
+        </td>
     </tr>
     <tr class="collapse" id="collapse{{($loop->index + 1)}}" aria-labelledby="heading{{($loop->index + 1)}}" aria-expanded="false">
       <td colspan="7">

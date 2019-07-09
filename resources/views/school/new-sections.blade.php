@@ -70,13 +70,27 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <div class="">
-                                                    <div>
-                                                        <button disabled
-                                                                class="btn disabled text-dark float-right  mt-5 "
-                                                                type="button" aria-expanded="false">
-                                                            No Info Available
+                                                <div class="float-right">
+                                                    <div class="dropdown">
+                                                        <button
+                                                                class="button button--primary font-weight-bold"
+                                                                type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                            Class Details
+                                                            <i class="fa fa-caret-down"></i>
                                                         </button>
+
+                                                        <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
+                                                            <!-- <button disabled class="btn disabled text-dark font-weight-bold"
+                                                                type="button" aria-expanded="false">
+                                                                No Info Available
+                                                            </button>                                               -->
+                                                            <p class="text-center text-muted font-weight-bold">
+                                                                No Info Available
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div>
                                                     </div>
                                                 </div>
                                             @endif

@@ -8,7 +8,7 @@
             <li>
                 <a href="{{ url('home') }}">Home</a>
             </li>
-            <li>Student</li>
+            <li>Student Dashboard</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
