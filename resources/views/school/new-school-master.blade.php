@@ -150,13 +150,13 @@
                                         <div class="col-md-2 mt-5">
                                             <a class="button button--save" role="button"
                                                href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">
-                                                <small>+ Create Admin</small>
+                                                + Create Admin
                                             </a>
                                         </div>
                                         <div class="col-md-2 mt-5">
                                             <a class="button button--save" role="button"
                                                href="{{url('school/admin-list/'.$school->id)}}">
-                                                <small>View Admins</small>
+                                               View Admins
                                             </a>
                                         </div>
                                         <div class="col-md-1 mt-5">

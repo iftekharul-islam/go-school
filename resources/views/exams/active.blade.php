@@ -22,7 +22,7 @@
             <div class="col-md-3">
                 <div class="card mb-4 mt-4">
                     <h5 class="card-header text-muted text-left" style="text-transform: capitalize;">
-                    <i style='font-size:24px;margin-left:-20px; color:#' class='flaticon-classmates'></i>
+                    <i style='font-size:24px;margin-left:-20px; color:#' class='flaticon-classmates text-teal'></i>
                         {{$exam->exam_name}}</h5>
                     <div class="card-body-customized">
                         <?php $total = 0 ?>

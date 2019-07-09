@@ -25,8 +25,8 @@
                         <div class="col-md-3">
                             <div class="card mb-4">
                                 <div>
-                                    <h5 class="card-header text-teal text-left">
-                                        <i style="font-size:24px;margin-left:-20px;" class="flaticon-books"></i>
+                                    <h5 class="card-header text-muted text-left">
+                                        <i style="font-size:24px;margin-left:-20px;" class="flaticon-books text-teal"></i>
 
                                         Class <strong class="text-capitalize">{{$class->class_number}}</strong>
                                         @if($class ->group) | Group <strong
