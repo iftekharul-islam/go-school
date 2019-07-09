@@ -51,7 +51,7 @@
                 </div>
             @endif
         <div class="table-responsive">
-            <table class="table table-data-div display text-wrap">
+            <table class="table table-data-div table-bordered display text-wrap">
                 <thead>
                 <tr>
                     <th scope="col">#</th>

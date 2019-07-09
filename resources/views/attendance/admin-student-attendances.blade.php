@@ -20,7 +20,7 @@
             <div class="card-body false-height">
                 @if(count($attendances) > 0)
                     <div class="table-responsive">
-                        <table class="table bs-table table-striped table-bordered text-nowrap">
+                        <table class="table bs-table  table-bordered text-nowrap">
                             <thead>
                             <tr>
 {{--                                        <th class="text-left">Students</th>--}}

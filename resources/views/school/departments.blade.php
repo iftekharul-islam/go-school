@@ -19,7 +19,7 @@
         <div class="card-body">
             @if(count($dpts) > 0)
                 <div class="table-responsive">
-                    <table class="table display text-nowrap">
+                    <table class="table table-bordered display text-nowrap">
                         <thead>
                         <tr>
                             <th>#</th>

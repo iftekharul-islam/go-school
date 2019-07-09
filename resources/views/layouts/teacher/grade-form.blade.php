@@ -4,75 +4,83 @@
     margin-right: 1%;
   }
 </style>
-<div class="col-md-12" id="grade-labels">
-  <input type="checkbox" name="attendance" value="4" checked>
-  <span class="badge badge-light checkbox-inline mr-1">
+<div class="col-md-12 text-center" id="grade-labels">
+  <div class="row">
+    <div class="col-12">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="attendance" value="4" checked>
+      <span class="badge  badge-light checkbox-inline mr-1">
     Attendance
   </span>
-  <input type="checkbox" name="quiz[]" value="5" checked>
-  <span class="badge badge-primary checkbox-inline mr-1">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="quiz[]" value="5" checked>
+      <span class="badge badge-primary checkbox-inline mr-1">
     Quiz 1
   </span>
-  <input type="checkbox" name="quiz[]" value="6">
-  <span class="badge badge-primary checkbox-inline mr-1">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="quiz[]" value="6">
+      <span class="badge badge-primary checkbox-inline mr-1">
   Quiz 2
   </span>
-  <input type="checkbox" name="quiz[]" value="7">
-  <span class="badge badge-primary mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="quiz[]" value="7">
+      <span class="badge badge-primary mr-1 checkbox-inline">
   Quiz 3
   </span>
-  <input type="checkbox" name="quiz[]" value="8">
-  <span class="badge badge-primary mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="quiz[]" value="8">
+      <span class="badge badge-primary mr-1 checkbox-inline">
   Quiz 4
   </span>
-  <input type="checkbox" name="quiz[]" value="9">
-  <span class="badge badge-primary mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="quiz[]" value="9">
+      <span class="badge badge-primary mr-1 checkbox-inline">
   Quiz 5
   </span>
-  <input type="checkbox" name="assignment[]" value="10" checked>
-  <span class="badge badge-success mr-1 checkbox-inline">
+      <input type="checkbox"  class="form-group ml-5 mr-3" name="assignment[]" value="10" checked>
+      <span class="badge badge-success mr-1 checkbox-inline">
   Assignment 1
   </span>
-  <input type="checkbox" name="assignment[]" value="11">
-  <span class="badge badge-success mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="assignment[]" value="11">
+      <span class="badge badge-success mr-1 checkbox-inline">
   Assignment 2
   </span>
-  <input type="checkbox" name="assignment[]" value="12">
-  <span class="badge badge-success mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="assignment[]" value="12">
+      <span class="badge badge-success mr-1 checkbox-inline">
   Assignment 3
   </span>
-  <input type="checkbox" name="ct[]" value="13" checked>
-  <span class="badge badge-info mr-1 checkbox-inline">
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="ct[]" value="13" checked>
+      <span class="badge badge-info mr-1 checkbox-inline">
     Class Test 1
   </span>
-  <input type="checkbox" name="ct[]" value="14">
-  <span class="badge badge-info mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="ct[]" value="14">
+      <span class="badge badge-info mr-1 checkbox-inline">
     Class Test 2
   </span>
-  <input type="checkbox" name="ct[]" value="15">
-  <span class="badge badge-info mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="ct[]" value="15">
+      <span class="badge badge-info mr-1 checkbox-inline">
     Class Test 3
   </span>
-  <input type="checkbox" name="ct[]" value="16">
-  <span class="badge badge-info mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="ct[]" value="16">
+      <span class="badge badge-info mr-1 checkbox-inline">
     Class Test 4
   </span>
-  <input type="checkbox" name="ct[]" value="17">
-  <span class="badge badge-info mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="ct[]" value="17">
+      <span class="badge badge-info mr-1 checkbox-inline">
     Class Test 5
   </span>
-  <input type="checkbox" name="few" value="18">
-  <span class="badge badge-secondary mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="few" value="18">
+      <span class="badge badge-secondary mr-1 checkbox-inline">
     Final Exam Written
   </span>
-  <input type="checkbox" name="fem" value="19">
-  <span class="badge badge-secondary mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="fem" value="19">
+      <span class="badge badge-secondary mr-1 checkbox-inline">
     Final Exam MCQ
   </span>
-  <input type="checkbox" name="practical" value="20">
-  <span class="badge badge-warning mr-1 checkbox-inline">
+      <input type="checkbox" class="form-group ml-5 mr-3" name="practical" value="20">
+      <span class="badge badge-warning mr-1 checkbox-inline">
     Practical
   </span>
+    </div>
+  </div>
 </div>
 <br />
 <br />
@@ -85,31 +93,31 @@
   <div class="table-responsive">
     <table class="table table-condensed table-hover" id="marking-table">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Code</th>
-          <th scope="col">Name</th>
-          <th scope="col">Attendance</th>
-          <th scope="col">Quiz 1</th>
-          <th scope="col">Quiz 2</th>
-          <th scope="col">Quiz 3</th>
-          <th scope="col">Quiz 4</th>
-          <th scope="col">Quiz 5</th>
-          <th scope="col">Assignment 1</th>
-          <th scope="col">Assignment 2</th>
-          <th scope="col">Assignment 3</th>
-          <th scope="col">CT 1</th>
-          <th scope="col">CT 2</th>
-          <th scope="col">CT 3</th>
-          <th scope="col">CT 4</th>
-          <th scope="col">CT 5</th>
-          <th scope="col">Written</th>
-          <th scope="col">MCQ</th>
-          <th scope="col">Practical</th>
-        </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Code</th>
+        <th scope="col">Name</th>
+        <th scope="col">Attendance</th>
+        <th scope="col">Quiz 1</th>
+        <th scope="col">Quiz 2</th>
+        <th scope="col">Quiz 3</th>
+        <th scope="col">Quiz 4</th>
+        <th scope="col">Quiz 5</th>
+        <th scope="col">Assignment 1</th>
+        <th scope="col">Assignment 2</th>
+        <th scope="col">Assignment 3</th>
+        <th scope="col">CT 1</th>
+        <th scope="col">CT 2</th>
+        <th scope="col">CT 3</th>
+        <th scope="col">CT 4</th>
+        <th scope="col">CT 5</th>
+        <th scope="col">Written</th>
+        <th scope="col">MCQ</th>
+        <th scope="col">Practical</th>
+      </tr>
       </thead>
       <tbody>
-        @foreach ($grades as $grade)
+      @foreach ($grades as $grade)
         <input type="hidden" name="grade_ids[]" value="{{$grade->id}}">
         <tr>
           <th scope="row">{{($loop->index + 1)}}</th>
@@ -120,7 +128,7 @@
           </td>
           <td>
             <input type="number" name="quiz1[]" class="form-control input-sm input-sm" value="{{$grade->quiz1}}"
-              placeholder="Qz 1" max="20">
+                   placeholder="Qz 1" max="20">
           </td>
           <td>
             <input type="number" name="quiz2[]" class="form-control input-sm" value="{{$grade->quiz2}}" placeholder="Qz 2">
@@ -168,7 +176,7 @@
             <input type="number" name="practical[]" class="form-control input-sm" placeholder="Practical" value="{{$grade->practical}}">
           </td>
         </tr>
-        @endforeach
+      @endforeach
       </tbody>
     </table>
   </div>
@@ -178,20 +186,21 @@
 </form>
 
 <script>
-  // $(function () {
-  //   for (var i = 6; i < 21; i++) {
-  //     if (i == 10 || i == 13)
-  //       continue;
-  //     $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").hide();
-  //   }
-  //   $(":checkbox").change(function () {
-  //     if ($(this).is(':checked')) {
-  //       $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
-  //         ")").show();
-  //     } else {
-  //       $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
-  //         ")").hide();
-  //     }
-  //   });
-  // });
+  $(function () {
+    var i;
+    for ( i = 6; i < 21; i++) {
+      if (i == 10 || i == 13)
+        continue;
+      $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").hide();
+    }
+    $(":checkbox").change(function () {
+      if ($(this).is(':checked')) {
+        $("#marking-table td:nth-child(" + $(this).val() + "), #marking-table th:nth-child(" + $(this).val() +
+                ")").show();
+      } else {
+        $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
+                ")").hide();
+      }
+    });
+  });
 </script>

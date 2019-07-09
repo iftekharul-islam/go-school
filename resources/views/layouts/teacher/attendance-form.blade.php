@@ -12,7 +12,7 @@
     <input type="text" name="section_id" value="{{$section_id}}" style="display: none;">
     <input type="hidden" name="exam_id" value="{{$exam_id}}">
     <div class="table-responsive">
-        <table class="table display table-data-div text-nowrap">
+        <table class="table display table-bordered table-data-div text-nowrap">
             <thead>
             <tr>
                 <th>#</th>
