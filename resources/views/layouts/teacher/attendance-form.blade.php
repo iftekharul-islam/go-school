@@ -90,7 +90,7 @@
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
-                        <td><span class="badge badge-success attdState">Present</span>&nbsp;&nbsp;{{$student->name}}</td>
+                        <td><span class="badge badge-primary attdState">Present</span>&nbsp;&nbsp;{{$student->name}}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>
@@ -104,7 +104,7 @@
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
                                     <td>{{$at->totalescaped ? $at->totalescaped: 0 }}</td>
                                 @else
-                                  @continue
+                                    @continue
                                 @endif
                             @endforeach
                         @else
@@ -130,9 +130,9 @@
 </form>
 <script>
     $('input[type="checkbox"]').change(function () {
-        var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-success');
+        var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
         if ($(this).is(':checked')) {
-            attdState.addClass('badge-success').text('Present');
+            attdState.addClass('badge-primary').text('Present');
         } else {
             attdState.addClass('badge-danger').text('Absent');
         }

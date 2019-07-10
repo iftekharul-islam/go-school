@@ -14,7 +14,7 @@ class FeeController extends Controller
      */
     public function index()
     {
-      $fees = \App\Fee::where('school_id', \Auth::user()->school_id)->get();
+      $fees = Fee::where('school_id', \Auth::user()->school_id)->get();
       return view('fees.new-all',['fees'=>$fees]);
     }
 

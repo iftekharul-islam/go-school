@@ -17,9 +17,9 @@ class CourseController extends Controller
     protected $courseService;
 
     public function __construct(CourseService $courseService, UserService $userService, User $user){
-      $this->courseService = $courseService;
-      $this->userService = $userService;
-      $this->user = $user;
+        $this->courseService = $courseService;
+        $this->userService = $userService;
+        $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -27,24 +27,24 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($teacher_id, $section_id){
-      if($this->courseService->isCourseOfTeacher($teacher_id)) {
-        $courses = $this->courseService->getCoursesByTeacher($teacher_id);
-        $exams = $this->courseService->getExamsBySchoolId();
-        $view = 'course.new-teacher-course';
+        if($this->courseService->isCourseOfTeacher($teacher_id)) {
+            $courses = $this->courseService->getCoursesByTeacher($teacher_id);
+            $exams = $this->courseService->getExamsBySchoolId();
+            $view = 'course.new-teacher-course';
 
-      } else if($this->courseService->isCourseOfStudentOfASection($section_id)) {
-        $courses = $this->courseService->getCoursesBySection($section_id);
-        $view = 'course.student-class-course';
-        $exams = [];
+        } else if($this->courseService->isCourseOfStudentOfASection($section_id)) {
+            $courses = $this->courseService->getCoursesBySection($section_id);
+            $view = 'course.student-class-course';
+            $exams = [];
 
-      } else if($this->courseService->isCourseOfASection($section_id)) {
-        $courses = $this->courseService->getCoursesBySection($section_id);
-        $exams = $this->courseService->getExamsBySchoolId();
-        $view = 'course.student-class-course';
-      } else {
-        return redirect('home');
-      }
-      return view($view,compact('courses','exams'));
+        } else if($this->courseService->isCourseOfASection($section_id)) {
+            $courses = $this->courseService->getCoursesBySection($section_id);
+            $exams = $this->courseService->getExamsBySchoolId();
+            $view = 'course.student-class-course';
+        } else {
+            return redirect('home');
+        }
+        return view($view,compact('courses','exams'));
     }
 
     /**
@@ -64,11 +64,11 @@ class CourseController extends Controller
      */
     public function course($teacher_id,$course_id,$exam_id,$section_id)
     {
-      $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
+        $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
 //      $students = $this->courseService->getStudentsFromGradeByCourseAndExam($course_id, $exam_id);
-      $students = $this->userService->getSectionStudentsWithSchool($section_id);
+        $students = $this->userService->getSectionStudentsWithSchool($section_id);
 //      return $students;
-      return view('course.students', compact('students','teacher_id','section_id'));
+        return view('course.students', compact('students','teacher_id','section_id'));
     }
 
     /**
@@ -79,12 +79,12 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-      try{
-        $this->courseService->addCourse($request);
-      } catch (\Exception $ex){
-        return 'Could not add course.';
-      }
-      return back()->with('status', 'Created');
+        try{
+            $this->courseService->addCourse($request);
+        } catch (\Exception $ex){
+            return 'Could not add course.';
+        }
+        return back()->with('status', 'New Course Created');
     }
 
     /**
@@ -92,12 +92,12 @@ class CourseController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function saveConfiguration(SaveConfigurationRequest $request){
-      try{
-        $this->courseService->saveConfiguration($request);
-      } catch (\Exception $ex){
-        return 'Could not save configuration.';
-      }
-      return back()->with('status', 'Saved');
+        try{
+            $this->courseService->saveConfiguration($request);
+        } catch (\Exception $ex){
+            return 'Could not save configuration.';
+        }
+        return back()->with('status', 'Configuration Saved');
     }
 
     /**
@@ -108,7 +108,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-      return new CourseResource(Course::find($id));
+        return new CourseResource(Course::find($id));
     }
 
     /**
@@ -119,8 +119,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-      $course = Course::find($id);
-      return view('course.edit', ['course'=>$course]);
+        $course = Course::find($id);
+        return view('course.edit', ['course'=>$course]);
     }
 
     /**
@@ -132,12 +132,12 @@ class CourseController extends Controller
      */
     public function updateNameAndTime(Request $request, $id)
     {
-      $request->validate([
-        'course_name' => 'required|string',
-        'course_time' => 'required|string',
-      ]);
-      $this->courseService->updateCourseInfo($id, $request);
-      return back()->with('status', 'Saved');
+        $request->validate([
+            'course_name' => 'required|string',
+            'course_time' => 'required|string',
+        ]);
+        $this->courseService->updateCourseInfo($id, $request);
+        return back()->with('status', 'Saved');
     }
 
     /**
@@ -148,10 +148,10 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-      return (Course::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Course::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

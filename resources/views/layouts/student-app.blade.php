@@ -100,6 +100,20 @@
             container: 'body'
         });
     });
+
+
+    $(document).ready(function () {
+        var myTable = $('.section-student-data-table').DataTable({
+            paging: true,
+            bSort : false,
+            language: {
+                searchPlaceholder: "Search here"
+            }
+        });
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
+    });
 </script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>

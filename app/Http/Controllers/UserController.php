@@ -349,6 +349,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
+
         DB::transaction(function () use ($request) {
             $tb = $this->user->find($request->user_id);
             $tb->name = $request->name;
@@ -393,7 +394,7 @@ class UserController extends Controller
 
         $admin->save();
 
-        return back()->with('status', $admin->name.' active status changed');
+        return back()->with('status', $admin->name.' Admin active status changed');
     }
 
     /**

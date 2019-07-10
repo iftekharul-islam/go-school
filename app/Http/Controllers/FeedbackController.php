@@ -15,7 +15,7 @@ class FeedbackController extends Controller
      */
     public function index($student_id)
     {
-      return ($student_id > 0)? FeedbackResource::collection(Feedback::where('student_id', $student_id)->get()):response()->json(['Invalid Student id: '. $student_id, 404]);
+        return ($student_id > 0)? FeedbackResource::collection(Feedback::where('student_id', $student_id)->get()):response()->json(['Invalid Student id: '. $student_id, 404]);
     }
 
     /**
@@ -36,15 +36,15 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-      $tb = new Feedback;
-      $tb->description = $request->description;
-      $tb->teacher_id = $request->teacher_id;
-      $tb->student_id = $request->student_id;
+        $tb = new Feedback;
+        $tb->description = $request->description;
+        $tb->teacher_id = $request->teacher_id;
+        $tb->student_id = $request->student_id;
 
-      return($tb->save())?response()->json([
-        'status' => 'success'
+        return($tb->save())?response()->json([
+            'status' => 'success'
         ]):response()->json([
-          'status' => 'error'
+            'status' => 'error'
         ]);
     }
 
@@ -79,15 +79,15 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tb = Feedback::find($id);
-      $tb->description = $request->description;
-      $tb->student_id = $request->student_id;
-      $tb->teacher_id = $request->teacher_id;
-      return ($tb->save())?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        $tb = Feedback::find($id);
+        $tb->description = $request->description;
+        $tb->student_id = $request->student_id;
+        $tb->teacher_id = $request->teacher_id;
+        return ($tb->save())?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 
     /**
@@ -98,10 +98,10 @@ class FeedbackController extends Controller
      */
     public function destroy($id)
     {
-      return (Feedback::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Feedback::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

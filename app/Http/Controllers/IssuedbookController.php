@@ -30,7 +30,7 @@ class IssuedbookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        $books = \App\Book::where('school_id', auth()->user()->school_id)
+        $books = Book::where('school_id', auth()->user()->school_id)
             ->where('quantity','>',0)
             ->get();
         return view('library.issuebooks',['books'=>$books]);

@@ -116,7 +116,7 @@
                                                                 <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                                                                     @foreach($class->sections as $section)
                                                                         <a
-                                                                                href="{{ url('section/details/attendance/'.$section->id.'/'.$class->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                                                href="{{ url('section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
                                                                     @endforeach
                                                                 </div>
                                                             </div>
@@ -133,10 +133,7 @@
                                                                 </button>
 
                                                                 <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-                                                                    <!-- <button disabled class="btn disabled text-dark font-weight-bold"
-                                                                        type="button" aria-expanded="false">
-                                                                        No Info Available
-                                                                    </button>                                               -->
+                                                                    -->
                                                                     <p class="text-center text-muted font-weight-bold">
                                                                         No Info Available
                                                                     </p>

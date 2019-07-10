@@ -35,15 +35,12 @@ class SectionController extends Controller
         $classeIds = \App\Myclass::where('school_id',\Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
-        $sections = \App\Section::whereIn('class_id',$classeIds)
-            ->orderBy('section_number')
-            ->get();
+
         $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
             ->where('active', 1)
             ->get()->groupBy('class_id');
         return view('school.new-sections',[
             'classes'=>$classes,
-            'sections'=>$sections,
             'exams'=>$exams
         ]);
     }

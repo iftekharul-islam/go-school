@@ -151,7 +151,7 @@ Route::middleware(['auth','admin'])->prefix('exams')->name('exams.')->group(func
 Route::middleware(['auth','teacher'])->group(function (){
   Route::get('exams/active', 'ExamController@indexActive');
   Route::get('school/sections','SectionController@index');
-  Route::get('section/details/attendance/{section_id}/{class_id}','AttendanceController@attendanceDetails');
+  Route::get('section/details/attendance/{section_id}','AttendanceController@attendanceDetails');
   Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
 });
 

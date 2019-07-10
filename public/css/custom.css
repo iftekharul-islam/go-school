@@ -63,3 +63,7 @@
   border-radius: 50%;
   overflow: hidden;
 }
+.badge-primary {
+   color: #fff;
+   background-color: #287C71;
+ }
