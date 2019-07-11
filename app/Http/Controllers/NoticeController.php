@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Notice as Notice;
 use App\Http\Resources\NoticeResource;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 class NoticeController extends Controller
 {
     /**
@@ -15,15 +16,15 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        $school_id = \Auth::user()->school->id;
+        $school_id = Auth::user()->school->id;
         $minutes = 1440;
-        $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+        $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
             return \App\Notice::where('school_id', $school_id)
                 ->where('active', 1)
                 ->orderBy('created_at', 'DESC')
                 ->get();
         });
-        $events = \Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
+        $events = Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
             return \App\Event::where('school_id', $school_id)
                 ->where('active', 1)
                 ->orderBy('created_at', 'DESC')

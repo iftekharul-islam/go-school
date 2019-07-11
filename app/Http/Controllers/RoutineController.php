@@ -15,14 +15,14 @@ class RoutineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index()
-     {
-       $files = Routine::with('section')
-                        ->where('school_id',\Auth::user()->school_id)
-                        ->orderBy('created_at', 'DESC')
-                        ->get();
+    public function index()
+    {
+        $files = Routine::with('section')
+            ->where('school_id',\Auth::user()->school_id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
         return view('routines.index',['files'=>$files,'section_id' => 1]);
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -32,21 +32,21 @@ class RoutineController extends Controller
     public function create(int $section_id)
     {
 //      return Syllabus::all();
-      try{
-        if(Schema::hasColumn('routines','section_id')){
-          $files = Routine::with('section')
-                          ->where('school_id',\Auth::user()->school_id)
-                          ->where('section_id', $section_id)
-                          ->where('active',1)
-                          ->get();
-        } else {
-          return '<code>section_id</code> column missing. Run <code>php artisan migrate</code>';
+        try{
+            if(Schema::hasColumn('routines','section_id')){
+                $files = Routine::with('section')
+                    ->where('school_id',\Auth::user()->school_id)
+                    ->where('section_id', $section_id)
+                    ->where('active',1)
+                    ->get();
+            } else {
+                return '<code>section_id</code> column missing. Run <code>php artisan migrate</code>';
+            }
+        } catch(Exception $ex){
+            return 'Something went wrong!!';
         }
-      } catch(Exception $ex){
-        return 'Something went wrong!!';
-      }
 //      return $files;
-      return view('routines.new-create',['files'=>$files,'section_id'=>$section_id]);
+        return view('routines.new-create',['files'=>$files,'section_id'=>$section_id]);
     }
 
     /**
@@ -57,19 +57,19 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-      return $request;
-      $request->validate([
-        'file_path' => 'required|string|max:255',
-        'title' => 'required|string|max:255',
-      ]);
-      $tb = new Routine;
-      $tb->file_path = $request->file_path;
-      $tb->title = $request->title;
-      $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
-      $tb->save();
-      return back()->with('status', 'Uploaded');
+        return $request;
+        $request->validate([
+            'file_path' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+        ]);
+        $tb = new Routine;
+        $tb->file_path = $request->file_path;
+        $tb->title = $request->title;
+        $tb->active = 1;
+        $tb->school_id = \Auth::user()->school_id;
+        $tb->user_id = \Auth::user()->id;
+        $tb->save();
+        return back()->with('status', 'Uploaded');
     }
 
     /**
@@ -103,10 +103,10 @@ class RoutineController extends Controller
      */
     public function update($id)
     {
-      $tb = Routine::find($id);
-      $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
-      $tb->save();
-      return back()->with('status','Routine status changed');
+        $tb = Routine::find($id);
+        $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
+        $tb->save();
+        return back()->with('status','Routine status changed');
     }
 
     /**
@@ -117,10 +117,10 @@ class RoutineController extends Controller
      */
     public function destroy($id)
     {
-      return (Routine::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Routine::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

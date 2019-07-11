@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Syllabus as Syllabus;
 use App\Http\Resources\SyllabusResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
 
 class SyllabusController extends Controller
 {
@@ -18,7 +18,7 @@ class SyllabusController extends Controller
     public function index()
     {
         $files = Syllabus::with('myclass')
-            ->where('school_id',\Auth::user()->school_id)
+            ->where('school_id',Auth::user()->school_id)
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('syllabus.index',['files'=>$files,'class_id' => 1]);

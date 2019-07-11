@@ -13,13 +13,13 @@ class MyclassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index($school_id)
-     {
-       return ($school_id > 0)? ClassResource::collection(Myclass::where('school_id', $school_id)->get()):response()->json([
-         'Invalid School id: '. $school_id,
-         404
-       ]);
-     }
+    public function index($school_id)
+    {
+        return ($school_id > 0)? ClassResource::collection(Myclass::where('school_id', $school_id)->get()):response()->json([
+            'Invalid School id: '. $school_id,
+            404
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -39,15 +39,15 @@ class MyclassController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-        'class_number' => 'required'
-      ]);
-      $tb = new Myclass;
-      $tb->class_number = $request->class_number;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->group = (!empty($request->group))?$request->group:'';
-      $tb->save();
-      return back()->with('status', 'Created');
+        $request->validate([
+            'class_number' => 'required'
+        ]);
+        $tb = new Myclass;
+        $tb->class_number = $request->class_number;
+        $tb->school_id = \Auth::user()->school_id;
+        $tb->group = (!empty($request->group))?$request->group:'';
+        $tb->save();
+        return back()->with('status', 'Created');
     }
 
     /**
@@ -81,14 +81,14 @@ class MyclassController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tb = Myclass::find($id);
-      $tb->class_number = $request->class_number;
-      $tb->school_id = $request->school_id;
-      return ($tb->save())?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        $tb = Myclass::find($id);
+        $tb->class_number = $request->class_number;
+        $tb->school_id = $request->school_id;
+        return ($tb->save())?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 
     /**
@@ -99,10 +99,10 @@ class MyclassController extends Controller
      */
     public function destroy($id)
     {
-      return (Myclass::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Myclass::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }
