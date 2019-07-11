@@ -143,10 +143,10 @@
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
                                 <td>
-                                    <a class="btn btn-lg btn-primary mr-3" href="{{url('edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
+                                    <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
                                     <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $user->id }})">
                                         <i class="far fa-trash-alt"></i>
-                                        <form id="delete-form-{{ $user->id }}" action="{{ url('/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
+                                        <form id="delete-form-{{ $user->id }}" action="{{ url('admin/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
                                             @csrf
                                             @method('GET')
                                         </form>

@@ -32,7 +32,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form class="new-added-form justify-content-md-center" action="{{url('accounts/create-expense')}}" method="post">
+                    <form class="new-added-form justify-content-md-center" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-expense')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-2 mt-5">Sector Name</label>

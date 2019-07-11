@@ -154,7 +154,7 @@
                                                     <td>{{ ucfirst($user['section']['class_id']) }}</td>
                                                     <td>{{ ucfirst($user->phone_number) }}</td>
                                                     <td>{{ ucfirst($user->email) }}</td>
-                                                    <td><small><a class="button button--text float-left" role="button" href="{{url('attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
+                                                    <td><small><a class="button button--text float-left" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
@@ -189,7 +189,7 @@
                                     <tr>
                                         <td>{{ ($loop->index + 1) }}</td>
                                         <td>
-                                            <a href="{{ route('library.books.show', $book->id) }}" class="text-teal">{{ $book->title }}</a>
+                                            <a href="{{ url('/librarian/book/'.$book->id) }}" class="text-teal">{{ $book->title }}</a>
                                         </td>
                                         <td>{{ $book->book_code }}</td>
                                         <td>{{ $book->author }}</td>
@@ -197,7 +197,7 @@
                                         <td>{{ $book->quantity }}</td>
                                         <td>
                                             <div class="form-group">
-                                                <a href="{{ route('library.books.show', $book->id) }}" class="button button--text float-left">
+                                                <a href="{{ url('/librarian/book/'.$book->id) }}" class="button button--text float-left">
                                                     Details
                                                 </a>
                                             </div>
@@ -213,9 +213,6 @@
         <script>
             var male = @json($male);
             var female = @json($female);
-
-            var present = @json($present);
-            var absent = @json($absent);
         </script>
     </div>
 @endsection

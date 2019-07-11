@@ -2,7 +2,7 @@
   <div class="collapse" id="collapseForNewCourse{{$section->id}}" style="margin-top:1%;">
     <div class="panel panel-default">
       <div class="panel-body">
-      <form class="form-horizontal" action="{{url('courses/store')}}" method="post">
+      <form class="form-horizontal" action="{{url('admin/courses/store')}}" method="post">
           {{csrf_field()}}
           <input type="hidden" name="class_id" value="{{$class->id}}"/>
           <input type="hidden" name="section_id" value="{{$section->id}}"/>

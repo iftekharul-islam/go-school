@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckMaster
 {
@@ -18,6 +19,6 @@ class CheckMaster
       if (\Auth::user()->hasRole('master')) {
           return $next($request);
       }
-      return redirect('home');
+      return redirect(Auth::user()->role.'/home');
     }
 }

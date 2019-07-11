@@ -31,7 +31,7 @@
                                         <h3>Edit Expense</h3>
                                     </div>
                                 </div>
-                                <form class="new-added-form" action="{{url('/accounts/update-expense')}}" method="post">
+                                <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/update-expense')}}" method="post">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="id" value="{{$expense->id}}">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

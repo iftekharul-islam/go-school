@@ -18,12 +18,6 @@
   </div>
   <div class="card height-auto false-height">
     <div class="card-body">
-      <div class="heading-layout1">
-        <div class="item-title">
-{{--          <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 10px;">Back</h4></a>--}}
-{{--          <h3>Submit Grade</h3>--}}
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-12" id="main-container">
           @if (session('status'))
@@ -41,7 +35,7 @@
             </div>
           @endif
 
-          <form action="{{url('courses/save-configuration')}}" method="POST">
+          <form action="{{url('teacher/courses/save-configuration')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="id" value="{{$course_id}}">
             <div class="panel panel-default" id="main-container">
@@ -49,7 +43,7 @@
                 @foreach ($grades as $grade)
                   <div class="page-panel-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
                     <button type="submit" class="button button--save float-right">
-                      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                      <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save
                     </button>
                   </div>
                   @break($loop->first)
@@ -176,7 +170,7 @@
           <div class="panel panel-default mt-5">
             @if(count($grades) > 0)
               <div class="page-panel-title" style="font-size: 15px;">
-                <form class="new-added-form mb-3" action="{{url('grades/calculate-marks')}}" method="POST">
+                <form class="new-added-form mb-3" action="{{url('teacher/grades/calculate-marks')}}" method="POST">
                   {{csrf_field()}}
                   <span style="font-size: 20px">Give Marks to Students</span>
                   <input type="hidden" name="course_id" value="{{$course_id}}">

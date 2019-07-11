@@ -1,4 +1,4 @@
-<form class="new-added-form" action="{{url('exams/create')}}" method="post">
+<form class="new-added-form" action="{{url('admin/exams/create')}}" method="post">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-12 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
@@ -63,32 +63,7 @@
 {{--                        </option>--}}
                     @endforeach
                 </select>
-{{--            <div style="margin-left: 50px;">--}}
-{{--                @foreach ($classes as $class)--}}
-{{--                    @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))--}}
-{{--                        <div class="card-header mt-2">--}}
-{{--                            <div class="checkbox">--}}
-{{--                                Class : {{$class->class_number}} &nbsp;Already has assigned to Exam <b>--}}
-{{--                                    @foreach($assigned_classes as $assigned_class)--}}
-{{--                                        @if($assigned_class->class_id == $class->id)--}}
-{{--                                            {{$assigned_class['exam']['exam_name']}}--}}
-{{--                                            @break--}}
-{{--                                        @endif--}}
-{{--                                    @endforeach--}}
-{{--                                </b>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <div class="card-header mt-2">--}}
-{{--                            <div class="form-check">--}}
-{{--                                <input type="checkbox" class="form-check-input" name="classes[]" value="{{$class->id}}">--}}
-{{--                                <label class="form-check-label"> Class: {{$class->class_number}}</label>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-{{--                @endforeach--}}
 
-{{--            </div>--}}
             @if ($errors->has('classes'))
                 <span class="help-block">
                     <strong>{{ $errors->first('classes') }}</strong>

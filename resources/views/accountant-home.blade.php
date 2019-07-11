@@ -119,6 +119,11 @@
         </div>
         <div class="card">
             <div class="card-body">
+                <div class="heading-layout1">
+                    <div class="item-title">
+                        <h3>All Fees</h3>
+                    </div>
+                </div>
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}

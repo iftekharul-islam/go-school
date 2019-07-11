@@ -57,8 +57,7 @@
                 <td>
                   <a role="button"
                      class="btn btn-secondary btn-lg float-left"
-                     href="{{url('section/students/'.$course->section->id.'?section=1')}}">View
-                    Students</a>
+                     href="{{url('teacher/section/students/'.$course->section->id.'?section=1')}}">View Students</a>
                 </td>
               @else
                 <td>Save under Exam to Add Student</td>
@@ -66,7 +65,7 @@
 
               @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
                 <td>
-                  <a href="{{url('attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
+                  <a href="{{url('teacher/attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
                 </td>
               @else
                 <td>Save under Exam to Take Attendance</td>
@@ -76,13 +75,13 @@
 
             @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
               <td>
-                <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
+                <a href="{{url('teacher/course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
               </td>
               <td>
-                <a href="{{url('grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-secondary btn-lg ">Submit Grade</a>
+                <a href="{{url('teacher/grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-secondary btn-lg ">Submit Grade</a>
               </td>
               <td>
-                <a href="{{url('grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">View Marks</a>
+                <a href="{{url('teacher/grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">View Marks</a>
               </td>
             @endif
 

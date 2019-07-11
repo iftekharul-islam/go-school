@@ -83,7 +83,7 @@
                                                 </ul>
                                             </div>
                                         @endif
-                                        <form action="{{url('message/students')}}" method="POST" id="msgForm" class="new-added-form">
+                                        <form action="{{url('teacher/message/students')}}" method="POST" id="msgForm" class="new-added-form">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
                                             <input type="hidden" name="section_id" value="{{$section_id}}">

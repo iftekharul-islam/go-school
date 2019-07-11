@@ -66,15 +66,15 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){}
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request){
-        $gpa = Gradesystem::find($request->gpa_id);
-        $gpa->delete();
-        return back()->with('status', 'Deleted!');
+      /**
+       * Remove the specified resource from storage.
+       *
+       * @param  int  $id
+       * @return \Illuminate\Http\Response
+       */
+    public function destroy($id){
+      $gpa = Gradesystem::findOrFail($id);
+      $gpa->delete();
+      return back()->with('status', 'Deleted!');
     }
 }

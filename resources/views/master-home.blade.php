@@ -7,7 +7,6 @@
         <li>
             <a href="{{ url('/home') }}">Home</a>
         </li>
-        {{--            <li>Dashboard</li>--}}
     </ul>
 </div>
 
@@ -51,7 +50,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="{{url('school/'.$school->id)}}"
+                            <a href="{{url('master/school/'.$school->id)}}"
                                 class="button button--primary font-weight-bold">Details</a>
                         </div>
                     </div>

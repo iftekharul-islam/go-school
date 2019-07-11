@@ -50,7 +50,7 @@
                                 <td>{{$admin->address}}</td>
                                 <td>{{$admin->about}}</td>
                                 <td>
-                                    <a href="{{url('edit/user/'.$admin->id)}}" class="button button--edit"
+                                    <a href="{{url('master/edit/admin/'.$admin->id)}}" class="button button--edit"
                                        role="button">Edit</a>
                                 </td>
                                 <td class="text-center">

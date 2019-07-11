@@ -23,7 +23,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form class="form-horizontal" action="{{url('accounts/create-income')}}" method="post">
+                    <form class="form-horizontal" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-income')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 mt-5">Sector Name</label>

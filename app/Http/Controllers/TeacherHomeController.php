@@ -2,35 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Attendance;
-use App\Book;
 use App\Exam;
-use App\Http\Traits\GradeTrait;
 use App\Myclass;
 use App\Notice;
-use App\School;
-use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
-use App\StudentInfo;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use App\User;
 use App\Services\User\UserService;
-use Alert;
-use Illuminate\Support\Facades\DB;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class TeacherHomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    use GradeTrait;
-    protected $courseService;
     public function __construct(UserService $userService, User $user, CourseService $courseService, AttendanceService $attendanceService)
     {
         $this->userService = $userService;
@@ -40,20 +23,14 @@ class HomeController extends Controller
         $this->attendanceService = $attendanceService;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $student = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
-
         if (@isset($student->school->id)) {
             $school_id = \Auth::user()->school->id;
             $classes = \Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-                return \App\Myclass::where('school_id', $school_id)
+                return Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
             });
@@ -70,20 +47,21 @@ class HomeController extends Controller
                 return Myclass::where('school_id', $school_id)->count();
             });
             $totalSections = \Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
-                return Section::whereIn('class_id', $classes)->count();
+                return \App\Section::whereIn('class_id', $classes)->count();
             });
             $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });
+
             $exams = \Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
                 return Exam::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });
         }
-
+        $courses_student = $this->courseService->getCoursesByTeacher($student->id);
         $allStudents = $this->userService->getStudents();
         return view('teacher-home', [
             'totalStudents' => $totalStudents,
@@ -93,7 +71,8 @@ class HomeController extends Controller
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
             'male' => $male,
-            'female' => $female
+            'female' => $female,
+            'courses_student' => $courses_student
         ]);
     }
 }

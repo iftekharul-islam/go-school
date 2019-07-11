@@ -24,7 +24,7 @@
         @endif
         <div class="row">
             <div class="col-md-6">
-                <form class="form-horizontal" action="{{url('/accounts/list-expense')}}" method="post">
+                <form class="form-horizontal" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/list-expense')}}" method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
@@ -109,7 +109,7 @@
                                         <td>{{$expense->amount}}</td>
                                         <td>{{$expense->description}}</td>
                                         <td>{{Carbon\Carbon::parse($expense->created_at)->format('Y')}}</td>
-                                        <td><a title='Edit' class='button button--edit float-left' href='{{url("accounts/edit-expense")}}/{{$expense->id}}'>Edit</a></td>
+                                        <td><a title='Edit' class='button button--edit float-left' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-expense")}}/{{$expense->id}}'>Edit</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

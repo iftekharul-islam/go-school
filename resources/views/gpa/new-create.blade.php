@@ -23,7 +23,7 @@
                         </div>
                     @endif
 
-                    <form class="new-added-form" action="{{url('create-gpa')}}" method="post">
+                    <form class="new-added-form" action="{{url('admin/create-gpa')}}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('grade_system_name') ? ' has-error' : '' }}">

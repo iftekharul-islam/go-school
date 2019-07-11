@@ -40,7 +40,7 @@
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form class="new-added-form" method="POST" action="{{ url('edit/user') }}">
+                        <form class="new-added-form" method="POST" action="{{ url('admin/edit/user') }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <input type="hidden" name="user_role" value="{{$user->role}}">
@@ -166,17 +166,83 @@
                                 </div>
                             @endif
 
-                            <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                                <label for="about" class="col-md-4 control-label">About</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
+                                        <label for="nationality" class="col-md-4 control-label">Nationality</label>
 
-                                <div class="col-md-12">
-                                    <textarea id="about" class="form-control" name="about">{{ $user->about }}</textarea>
+                                        <div class="col-md-12">
+                                            <input id="nationality" type="text" class="form-control" name="nationality"
+                                                   value="{{ $user->nationality }}"
+                                                   required>
 
-                                    @if ($errors->has('about'))
-                                        <span class="help-block">
+                                            @if ($errors->has('nationality'))
+                                                <span class="help-block">
+                                    <strong>{{ $errors->first('nationality') }}</strong>
+                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                        <label for="gender" class="col-md-4 control-label">Gender</label>
+
+                                        <div class="col-md-12">
+                                            <select id="gender" class="form-control" name="gender">
+                                                <option selected="selected">Male</option>
+                                                <option>Female</option>
+                                            </select>
+
+                                            @if ($errors->has('gender'))
+                                                <span class="help-block">
+                                    <strong>{{ $errors->first('gender') }}</strong>
+                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
+                                        <label for="blood_group" class="col-md-4 control-label">Blood Group</label>
+
+                                        <div class="col-md-12">
+                                            <select id="blood_group" class="form-control" name="blood_group">
+                                                <option selected="selected">A+</option>
+                                                <option>A-</option>
+                                                <option>B+</option>
+                                                <option>B-</option>
+                                                <option>AB+</option>
+                                                <option>AB-</option>
+                                                <option>O+</option>
+                                                <option>O-</option>
+                                            </select>
+
+                                            @if ($errors->has('blood_group'))
+                                                <span class="help-block">
+                                    <strong>{{ $errors->first('blood_group') }}</strong>
+                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+                                        <label for="about" class="col-md-4 control-label">About</label>
+
+                                        <div class="col-md-12">
+                                            <textarea id="about" class="form-control" name="about">{{ $user->about }}</textarea>
+
+                                            @if ($errors->has('about'))
+                                                <span class="help-block">
                                     <strong>{{ $errors->first('about') }}</strong>
                                 </span>
-                                    @endif
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

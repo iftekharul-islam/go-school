@@ -26,7 +26,7 @@
         <td>{{Carbon\Carbon::parse($book->issue_date)->format('d/m/Y')}}</td>
         <td>{{Carbon\Carbon::parse($book->return_date)->format('d/m/Y')}}</td>
         <td>
-          <form action="{{url('library/save_as_returned')}}" method="post">
+          <form action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/save_as_returned')}}" method="post">
             {{csrf_field()}}
             <input type="hidden" name="issue_id" value="{{$book->id}}">
             <input type="hidden" name="book_id" value="{{$book->book_id}}">

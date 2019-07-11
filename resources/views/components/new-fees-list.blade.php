@@ -13,8 +13,11 @@
               <td>{{($loop->index + 1)}}</td>
               <td>{{$fee->fee_name}}</td>
               <td>
-                  <button class="button button--cancel" onclick="book()">Delete</button>
-                  <a id="delete-form" href="{{ url('fees/remove', ['id' => $fee->id]) }}"></a>
+                  <button class="button button--cancel" onclick="removeFees({{ $fee->id }})">Delete</button>
+                  <form id="delete-form-{{ $fee->id }}" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/fees/remove', ['id' => $fee->id]) }}" method="POST">
+                      {!! method_field('delete') !!}
+                      {!! csrf_field() !!}
+                  </form>
               </td>
             </tr>
           @endforeach
@@ -24,7 +27,7 @@
 
  @push('customjs')
      <script type="text/javascript">
-         function book() {
+         function removeFees(id) {
              swal({
                  title: "Are you sure?",
                  text: "Once deleted, you will not be able to recover this data!",
@@ -34,7 +37,7 @@
              })
                  .then((willDelete) => {
                      if (willDelete) {
-                         document.getElementById('delete-form').click();
+                         document.getElementById('delete-form-'+id).submit();
                          setTimeout(5000);
                          swal("Poof! Your Selected data has been deleted!", {
                              icon: "success",

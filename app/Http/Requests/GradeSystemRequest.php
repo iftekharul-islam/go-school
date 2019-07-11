@@ -25,7 +25,7 @@ class GradeSystemRequest extends FormRequest
     {
         return [
             'grade_system_name' => 'required|string|max:255',
-            'point' => 'required|double',
+            'point' => 'required|numeric',
             'grade' => 'required|string',
             'from_mark' => 'required|numeric',
             'to_mark' => 'required|numeric',

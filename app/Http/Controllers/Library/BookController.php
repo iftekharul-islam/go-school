@@ -7,6 +7,7 @@ use App\Myclass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Library\BookRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class BookController extends Controller
@@ -21,7 +22,8 @@ class BookController extends Controller
         return view('library.books.new-index', compact('books'));
     }
 
-    public function show(Book $book) {
+    public function show($id) {
+        $book = Book::find($id);
         return view('library.books.new-show', compact('book'));
     }
 
@@ -53,13 +55,13 @@ class BookController extends Controller
             'user_id'   => auth()->user()->id
         ]);
 
-        return redirect()->route('library.books.show', $book->id);
+        return redirect()->to(Auth::user()->role.'/book', $book->id);
     }
 
     public function destroy($id)
     {
         $book = Book::findOrFail($id);
         $book->delete();
-        return redirect()->back()->with('status', 'Book has been deleted!');
+        return redirect()->to(Auth::user()->role.'/all-books')->with('status', 'Book has been deleted!');
     }
 }

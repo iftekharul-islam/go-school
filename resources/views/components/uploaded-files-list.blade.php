@@ -30,7 +30,7 @@
         <td>
           <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
             Deactivate</button>
-          <form id="delete-form-{{ $file->id }}" action="{{ url('academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
+          <form id="delete-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
             @csrf
             @method('GET')
           </form>
@@ -39,7 +39,7 @@
           <td>
             <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
               Activate</button>
-            <form id="active-file-form-{{ $file->id }}" action="{{ url('academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
+            <form id="active-file-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
               @csrf
               @method('GET')
             </form>
