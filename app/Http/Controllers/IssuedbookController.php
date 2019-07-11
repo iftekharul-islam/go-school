@@ -48,15 +48,14 @@ class IssuedbookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-
         $request->validate([
-            'name' => 'numeric|required',
+            'name' => 'required',
             'issue_date'   => 'required',
             'return_date'  => 'required',
             'book_id'      => 'required',
         ]);
 
-        $studentExists = \App\User::where('student_code',$request->name)->first();
+        $studentExists = \App\User::where('name',$request->name)->first();
         if($studentExists){
             $request->request->add(['student_code' => $studentExists->student_code]);
             $this->issuedBookService->request = $request;

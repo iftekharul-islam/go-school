@@ -43,6 +43,7 @@
                             <th>Point</th>
                             <th>From Mark</th>
                             <th>To Mark</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -56,6 +57,13 @@
                                 <td>{{$gpa->point}}</td>
                                 <td>{{$gpa->from_mark}}</td>
                                 <td>{{$gpa->to_mark}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-lg" type="button" onclick="removeGrade({{ $gpa->id }})"><i class="far fa-trash-alt"></i>Delete</button>
+                                    <form id="delete-form-{{ $gpa->id }}" action="{{ url('admin/gpa/delete',$gpa->id) }}" method="GET" style="display: none;">
+                                        @csrf
+                                        @method('GET')
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -64,4 +72,20 @@
             @endforeach
         </div>
     </div>
+    <script type="text/javascript">
+        function removeGrade(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                    }
+                });
+        }
+    </script>
 @endsection

@@ -25,7 +25,7 @@
         @endif
         <div class="row mb-5">
             <div class="col-md-6">
-                <form class="new-added-form" action="{{url('/accounts/list-income')}}" method="post">
+                <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/list-income')}}" method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
@@ -111,7 +111,7 @@
                                             <td>{{$income->amount}}</td>
                                             <td>{{$income->description}}</td>
                                             <td>{{ Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            <td><a title='Edit' class='button button--edit float-left' href='{{url("accounts/edit-income")}}/{{$income->id}}'>Edit</a></td>
+                                            <td><a title='Edit' class='button button--edit float-left' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-income")}}/{{$income->id}}'>Edit</a></td>
                                         </tr>
                                     @endforeach
                                     </tbody>

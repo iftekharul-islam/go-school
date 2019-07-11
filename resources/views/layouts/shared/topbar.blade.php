@@ -1,7 +1,10 @@
 <div class="navbar navbar-expand-md header-menu-one bg-light">
     <div class="nav-bar-header-one">
         <div class="header-logo">
-            <a href="{{ url('home') }}">
+            @php
+                $x = \Illuminate\Support\Facades\Auth::user()->role;
+            @endphp
+            <a href="{{ url($x.'/home') }}">
 
                 <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
                  <h4 class="heading-logo float-right">shoroborno</h4>
@@ -91,7 +94,7 @@
                 </li>
                 @if(Auth::user()->role === 'student')
                     <li class="navbar-item header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('user/'.\Auth::user()->id.'/notifications') }}" role="button" aria-expanded="false">
+                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('student/user/'.\Auth::user()->id.'/notifications') }}" role="button" aria-expanded="false">
                             <i class="far fa-envelope"></i>
                             <div class="item-title d-md-none text-16 mg-l-10">Message</div>
                             <?php

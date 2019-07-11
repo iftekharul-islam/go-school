@@ -158,17 +158,13 @@ class AttendanceController extends Controller
 
     public function attendanceDetails(Request $request, $section_id)
     {
-        $examId = 0;
+
         $course =  Course::with('section')->where('section_id', $section_id)->first();
-        if ($course)
-        {
-            $examId = $course->exam_id;
-        }
-        $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);  //for list of users of a section
+        $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
         $students = $this->attendanceService->getStudentsBySection($section_id);
-        $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id);
+        $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$course->exam_id);
         $request->session()->put('section-attendance', true);
-        if($section_id > 0 && Auth::user()->role != 'student') {
+        if($section_id > 0 && \Auth::user()->role != 'student') {
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
             return view('attendance.sectionAttendance', [
                 'users' => $users,
@@ -178,13 +174,13 @@ class AttendanceController extends Controller
                 'section_id' => $section_id,
                 'students' => $students,
                 'attCount' => $attCount,
-                'exam_id' => $examId
+                'exam_id'=>$course->exam_id
             ]);
         }
     }
 
     /**
-     * Store attendance data in storage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

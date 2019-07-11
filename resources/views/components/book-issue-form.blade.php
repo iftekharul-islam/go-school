@@ -13,13 +13,13 @@
         </ul>
     </div>
 @endif
-<form autocomplete="off" class="new-added-form justify-content-md-center" action="{{url('library/issue-books')}}" method="post">
+<form autocomplete="off" class="new-added-form justify-content-md-center" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/issue-books')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
-        <label for="name" class="col-md-4 mt-5">Student Code</label>
+        <label for="name" class="col-md-4 mt-5">Student Name</label>
 
         <div class="col-md-12">
-            <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Student Code" required>
+            <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Student Name" required>
 
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -78,7 +78,7 @@
         $('.date').datepicker({
             format: 'yyyy-mm-dd',
         });
-        var path = "{{ url('/library/issue-books/autocomplete/{$query}') }}";
+        var path = "{{ url('/librarian/issue-books/autocomplete/{$query}') }}";
         $('input.typeahead').typeahead({
             source:  function (query, process) {
                 return $.get(path + $('#show-user').val(), {}, function (data) {

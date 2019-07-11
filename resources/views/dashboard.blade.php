@@ -203,7 +203,7 @@
                                 <div class="item-content">
                                     <div class="item-title">Attendance</div>
                                     @if(!empty($present))
-                                        <div class="item-number"><span class="counter" data-num="{{ $present }}">94</span><span>%</span></div>
+                                        <div class="item-number"><span class="counter" data-num="{{ $present }}"></span><span>%</span></div>
                                     @else
                                         No Record
                                     @endif
@@ -222,33 +222,37 @@
                                     <h3>All Exam Schedule</h3>
                                 </div>
                             </div>
-                            <div class="table-box-wrap">
-                                <div class="table-responsive result-table-box">
-                                    <table class="table display text-nowrap">
-                                        <thead>
-                                        <tr>
-                                            <th>Exam Name</th>
-                                            <th>Term</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th>Result Published</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($exams as $key => $exam)
+                            @if(count($exams) > 0)
+                                <div class="table-box-wrap">
+                                    <div class="table-responsive result-table-box">
+                                        <table class="table display text-nowrap">
+                                            <thead>
                                             <tr>
-                                                <td>{{ $exam->exam_name }}</td>
-                                                <td>{{ $exam->term }}</td>
-                                                <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
-                                                <td>{{ date('d-m-Y',strtotime($exam->end_date)) }}</td>
-                                                <td>{{($exam->result_published === 1)?'Yes':'No'}}</td>
+                                                <th>Exam Name</th>
+                                                <th>Term</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Result Published</th>
+                                                <th></th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($exams as $key => $exam)
+                                                <tr>
+                                                    <td>{{ $exam->exam_name }}</td>
+                                                    <td>{{ $exam->term }}</td>
+                                                    <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
+                                                    <td>{{ date('d-m-Y',strtotime($exam->end_date)) }}</td>
+                                                    <td>{{($exam->result_published === 1)?'Yes':'No'}}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <h4 class="text-center">No Exam Found</h4>
+                            @endif
                         </div>
                     </div>
                 </div>

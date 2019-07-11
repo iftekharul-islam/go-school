@@ -32,7 +32,7 @@
                     <div class="book">
                         <div class="book__form">
                             @auth()
-                                <script>window.location = "/home";</script>
+                                <script>window.location = "{{ \Illuminate\Support\Facades\Auth::user()->role }}/home";</script>
 {{--                                <a href="{{ url('/home') }}" class="button button--white button--animation">Home</a>--}}
                             @else
                                 <form method="POST" action="{{ route('login') }}" class="form">

@@ -10,26 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//in controller :- return (new ResultOutput())->output($data);
-/*
-class ResultOutput()
-{
-    private $type;
-    public __construct(Request $request) {
-        $this->output = 'view';
-        if ($request->wantsJson()) {
-            $this->output = 'json';
-        }
-    }
-    public method output($data) {
-        if ($this->type =='view') {
-            // return the view with data
-        } else {
-            // return the json output
-        }
-    }
-}
-*/
 
 \Debugbar::enable();
 
@@ -37,283 +17,260 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['register' => false, 'login' => false]);
+Auth::routes(['login' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::middleware(['auth'])->group(function (){
-  Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-  // Route::get('/view-attendance/section/{section_id}',function($section_id){
-  //   if($section_id > 0){
-  //     $attendances = App\Attendance::with(['student'])->where('section_id', $section_id)->get();
-  //   }
-  // });
-  Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt')->middleware(['teacher']);
-  Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
-  Route::get('attendances/{section_id}', 'AttendanceController@sectionIndex')->middleware(['teacher']);
-  Route::post('attendance/take-attendance','AttendanceController@store')->middleware(['teacher']);
-  Route::get('attendance/adjust/{student_id}','AttendanceController@adjust')->middleware(['teacher']);
-  Route::post('attendance/adjust','AttendanceController@adjustPost')->middleware(['teacher']);
-});
-
-Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
-
-Route::middleware(['auth','teacher'])->prefix('grades')->group(function (){
-  Route::get('classes', 'GradeController@allExamsGrade');
-  Route::get('section/{section_id}', 'GradeController@gradesOfSection');
-  Route::get('t/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@tindex')->name('teacher-grade');
-  Route::get('c/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@cindex');
-  Route::post('calculate-marks','GradeController@calculateMarks');
-  Route::post('save-grade','GradeController@update');
-});
-
-
-Route::get('grades/{student_id}', 'GradeController@index')->middleware(['auth','teacher.student']);
-
-Route::middleware(['auth','accountant'])->prefix('fees')->name('fees.')->group(function (){
-  Route::get('all', 'FeeController@index');
-  Route::get('create', 'FeeController@create');
-  Route::post('create', 'FeeController@store');
-  Route::get('remove/{id}', 'FeeController@destroy');
-});
-
-Route::middleware(['auth','admin'])->group(function (){
-  Route::get('gpa/create-gpa', 'GradesystemController@create');
-  Route::post('create-gpa', 'GradesystemController@store');
-  Route::post('gpa/delete', 'GradesystemController@destroy');
-  Route::get('all-department','SchoolController@allDepartment');
-
-});
-
-Route::middleware(['auth','teacher'])->group(function (){
-  Route::get('gpa/all-gpa', 'GradesystemController@index');
-});
+//Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
 Route::middleware(['auth'])->group(function (){
+
   if (config('app.env') != 'production') {
     Route::get('user/config/impersonate', 'UserController@impersonateGet');
     Route::post('user/config/impersonate', 'UserController@impersonate');
   }
 
   Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
-  Route::get('users/{school_code}/{role}', 'UserController@indexOther');
   Route::get('user/{user_code}', 'UserController@show');
   Route::get('user/config/change_password', 'UserController@changePasswordGet');
   Route::post('user/config/change_password', 'UserController@changePasswordPost');
-  Route::get('section/students/{section_id}', 'UserController@sectionStudents');
-
-  Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
-  Route::get('user/deactivate/{id}','UserController@deactivateUser');
-
-});
-
-Route::get('user/{id}/notifications', 'NotificationController@index')->middleware(['auth','student']);
-
-Route::middleware(['auth','teacher'])->group(function (){
-  Route::get('course/students/{teacher_id}/{course_id}/{exam_id}/{section_id}','CourseController@course');
-  Route::post('courses/create', 'CourseController@create');
-  // Route::post('courses/save-under-exam', 'CourseController@update');
-  Route::post('courses/store', 'CourseController@store');
-  Route::post('courses/save-configuration', 'CourseController@saveConfiguration');
-});
-
-Route::middleware(['auth','admin'])->prefix('academic')->name('academic.')->group(function (){
-  Route::get('syllabus', 'SyllabusController@index');
-  Route::get('syllabus/{class_id}', 'SyllabusController@create');
-  Route::get('notice', 'NoticeController@create');
-  Route::get('event', 'EventController@create');
-  Route::get('routine', 'RoutineController@index');
-  Route::get('notice/update/{id}', 'NoticeController@update');
-  Route::get('syllabus/update/{id}', 'SyllabusController@update');
-  Route::get('routine/{section_id}', 'RoutineController@create');
-  Route::get('routine/update/{id}' , 'RoutineController@update');
-  Route::get('event/update/{id}', 'EventController@update');
-  Route::prefix('remove')->name('remove.')->group(function (){
-
-    Route::get('notice/{id}', 'NoticeController@update');
-
-  });
 
 
-});
+    // Master role routes
+    Route::group(['prefix' => 'master', 'middleware' => 'master'], function() {
+        Route::get('/home', 'MasterHomeController@index')->name('master.home');
+        Route::get('register/admin/{id}', 'AdminController@create');
 
-Route::middleware(['auth','admin'])->prefix('exams')->name('exams.')->group(function (){
-  Route::get('/', 'ExamController@index');
-  Route::get('/details/{exam_id}', 'ExamController@details');
-  Route::get('create', 'ExamController@create');
-  Route::post('create', 'ExamController@store');
-  Route::post('activate-exam', 'ExamController@update');
-  Route::get('remove/{id}', 'ExamController@destroy');
-  Route::get('edit/{id}', 'ExamController@edit');
-  Route::post('edit/{id}', 'ExamController@updateExam');
-});
+        Route::post('register/admin', 'AdminController@store');
+        Route::get('activate-admin/{id}','AdminController@destroy');
+        Route::post('create-school', 'SchoolController@store');
+        Route::get('school/admin-list/{school_id}','SchoolController@show');
+        Route::get('school/{school_id}', 'SchoolController@showSchool');
+        Route::get('school/delete/{school_id}', 'SchoolController@destroy');
+        Route::get('school/edit/{school_id}', 'SchoolController@edit');
+        Route::post('school/edit/{school_id}', 'SchoolController@update');
+        Route::get('new/create-school', 'SchoolController@create');
+        Route::get('edit/admin/{id}','AdminController@edit');
+        Route::post('edit/admin','AdminController@update');
 
-Route::middleware(['auth','teacher'])->group(function (){
-  Route::get('exams/active', 'ExamController@indexActive');
-  Route::get('school/sections','SectionController@index');
-  Route::get('section/details/attendance/{section_id}','AttendanceController@attendanceDetails');
-  Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
-});
-
-Route::get('notices-and-events', 'NoticeController@index')->middleware(['auth','student']);
-
-Route::middleware(['auth', 'librarian'])->namespace('Library')->group(function () {
-    Route::prefix('library')->name('library.')->group(function () {
-        Route::resource('books', 'BookController',
-            ['only' => ['index', 'show', 'create', 'store']]
-        );
-        Route::delete('/books/{id}', 'BookController@destroy');
-    });
-});
-
-Route::middleware(['auth','librarian'])->prefix('library')->name('library.')->group(function () {
-  Route::get('issue-books', 'IssuedbookController@create');
-  Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
-  Route::post('issue-books', 'IssuedbookController@store');
-  Route::get('issued-books', 'IssuedbookController@index');
-  Route::post('save_as_returned', 'IssuedbookController@update');
-});
-
-Route::middleware(['auth','accountant'])->prefix('accounts')->name('accounts.')->group(function (){
-  Route::get('sectors','AccountController@sectors');
-  Route::post('create-sector','AccountController@storeSector');
-  Route::get('edit-sector/{id}','AccountController@editSector');
-  Route::post('update-sector','AccountController@updateSector');
-  Route::delete('delete-sector/{id}','AccountController@deleteSector');
-
-  Route::get('income','AccountController@income');
-  Route::post('create-income','AccountController@storeIncome');
-  Route::get('income-list','AccountController@listIncome');
-  Route::post('list-income','AccountController@postIncome');
-  Route::get('edit-income/{id}','AccountController@editIncome');
-  Route::post('update-income','AccountController@updateIncome');
-  Route::get('delete-income/{id}','AccountController@deleteIncome');
-  
-  Route::get('expense','AccountController@expense');
-  Route::post('create-expense','AccountController@storeExpense');
-  Route::get('expense-list','AccountController@listExpense');
-  Route::post('list-expense','AccountController@postExpense');
-  Route::get('edit-expense/{id}','AccountController@editExpense');
-  Route::post('update-expense','AccountController@updateExpense');
-  Route::get('delete-expense/{id}','AccountController@deleteExpense');
-});
-
-Route::get('academic-settings', 'SchoolController@index')->middleware('master.admin');
-Route::get('new/create-school', 'SchoolController@create')->middleware('master.admin');
-
-Route::middleware(['auth','master'])->group(function (){
-//  Route::get('/register/admin/{id}/{code}', 'UserController@createAdmin');
-
-    Route::get('register/admin/{id}/{code}', function($id, $code){
-        session([
-            'register_role' => 'admin',
-            'register_school_id' => $id,
-            'register_school_code' => $code,
-        ]);
-        return view('auth.admin', [
-            session([
-                'register_role' => 'admin',
-                'register_school_id' => $id,
-                'register_school_code' => $code,
-            ])
-        ]);
     });
 
-
-  Route::post('register/admin', 'UserController@storeAdmin');
-  Route::get('master/activate-admin/{id}','UserController@activateAdmin');
-  Route::post('create-school', 'SchoolController@store');
-  Route::get('school/admin-list/{school_id}','SchoolController@show');
-  Route::get('school/{school_id}', 'SchoolController@showSchool');
-  Route::get('school/delete/{school_id}', 'SchoolController@destroy');
-  Route::get('school/edit/{school_id}', 'SchoolController@edit');
-  Route::post('school/edit/{school_id}', 'SchoolController@update');
-});
-
-Route::middleware(['auth','admin'])->group(function (){
-  Route::prefix('school')->name('school.')->group(function (){
-    Route::post('add-class','MyclassController@store');
-    Route::post('add-section','SectionController@store');
-    Route::post('add-department','SchoolController@addDepartment');
-    Route::get('promote-students/{section_id}','UserController@promoteSectionStudents');
-    Route::post('promote-students','UserController@promoteSectionStudentsPost');
-    Route::post('theme','SchoolController@changeTheme');
-  });
-
-  Route::prefix('register')->name('register.')->group(function (){
-    Route::get('student', 'UserController@redirectToRegisterStudent');
-    Route::get('teacher', function(){
-      $departments = \App\Department::where('school_id',\Auth::user()->school_id)->get();
-      $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
-      $sections = \App\Section::with('class')->whereIn('class_id',$classes)->get();
-      session([
-        'register_role' => 'teacher',
-        'departments' => $departments,
-        'register_sections' => $sections
-      ]);
-      return view('school.new-create-school', [
-          session([
-              'register_role' => 'teacher',
-              'departments' => $departments,
-              'register_sections' => $sections
-          ])
-      ]);
+//Student role routes
+    Route::group(['prefix' => 'student', 'middleware' => 'student'], function() {
+        Route::get('/home', 'StudentHomeController@index')->name('student.home');
+        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
+        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+        Route::get('grades/{student_id}', 'GradeController@index');
+        Route::get('notices-and-events', 'NoticeController@index');
+        Route::get('user/{id}/notifications', 'NotificationController@index');
     });
-    Route::get('accountant', function(){
-      return view('auth.accountant',[
-          session(['register_role' => 'accountant'])
-      ]);
+
+//Librarian role routes
+    Route::group(['prefix' => 'librarian', 'middleware' => 'librarian'], function() {
+        Route::get('/home', 'LibrarianHomeController@index')->name('librarian.home');
+
+        Route::get('issue-books', 'IssuedbookController@create');
+        Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
+        Route::post('issue-books', 'IssuedbookController@store');
+        Route::get('issued-books', 'IssuedbookController@index');
+        Route::post('save_as_returned', 'IssuedbookController@update');
+        Route::get('all-books', 'Library\BookController@index');
+        Route::delete('/books/{id}', 'Library\BookController@destroy');
+        Route::get('book/{id}', 'Library\BookController@show');
+        Route::get('create/book', 'Library\BookController@create');
+        Route::post('book/store', 'Library\BookController@store');
+        Route::get('users/{school_code}/{role}', 'UserController@indexOther');
+
     });
-    Route::get('librarian', function(){
-        return view('auth.library', [
-            session(['register_role' => 'librarian'])
-        ]);
+
+//Accountant role routes
+    Route::group(['prefix' => 'accountant', 'middleware' => 'accountant' ], function() {
+        Route::get('/home', 'AccountantHomeController@index')->name('accountant.home');
+
+        Route::prefix('fees')->group(function (){
+            Route::get('all', 'FeeController@index');
+            Route::get('create', 'FeeController@create');
+            Route::post('create', 'FeeController@store');
+            Route::delete('remove/{id}', 'FeeController@destroy');
+        });
+        Route::get('users/{school_code}/{role}', 'UserController@indexOther');
+        Route::get('sectors','AccountController@sectors');
+        Route::post('create-sector','AccountController@storeSector');
+        Route::get('edit-sector/{id}','AccountController@editSector');
+        Route::post('update-sector','AccountController@updateSector');
+        Route::delete('delete-sector/{id}','AccountController@deleteSector');
+
+        Route::get('income','AccountController@income');
+        Route::post('create-income','AccountController@storeIncome');
+        Route::get('income-list','AccountController@listIncome');
+        Route::post('list-income','AccountController@postIncome');
+        Route::get('edit-income/{id}','AccountController@editIncome');
+        Route::post('update-income','AccountController@updateIncome');
+        Route::get('delete-income/{id}','AccountController@deleteIncome');
+
+        Route::get('expense','AccountController@expense');
+        Route::post('create-expense','AccountController@storeExpense');
+        Route::get('expense-list','AccountController@listExpense');
+        Route::post('list-expense','AccountController@postExpense');
+        Route::get('edit-expense/{id}','AccountController@editExpense');
+        Route::post('update-expense','AccountController@updateExpense');
+        Route::get('delete-expense/{id}','AccountController@deleteExpense');
     });
-    Route::post('student', 'UserController@store');
-    Route::post('teacher',  'UserController@storeTeacher');
-    Route::post('accountant',  'UserController@storeAccountant');
-    Route::post('librarian',  'UserController@storeLibrarian');
-  });
-  Route::get('edit/course/{id}','CourseController@edit');
-  Route::post('edit/course/{id}','CourseController@updateNameAndTime');
+
+// Teacher role routes
+    Route::group(['prefix' => 'teacher', 'middleware' => 'teacher'], function() {
+        Route::get('/home', 'TeacherHomeController@index')->name('teacher.home');
+        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+
+        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+        Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
+        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
+        Route::get('attendances/{section_id}', 'AttendanceController@sectionIndex');
+        Route::post('attendance/take-attendance','AttendanceController@store');
+        Route::get('attendance/adjust/{student_id}','AttendanceController@adjust');
+        Route::post('attendance/adjust','AttendanceController@adjustPost');
+        Route::get('grades/{student_id}', 'GradeController@index');
+        Route::get('section/students/{section_id}', 'UserController@sectionStudents');
+
+
+        Route::get('course/students/{teacher_id}/{course_id}/{exam_id}/{section_id}','CourseController@course');
+        Route::post('courses/create', 'CourseController@create');
+        // Route::post('courses/save-under-exam', 'CourseController@update');
+        Route::post('courses/save-configuration', 'CourseController@saveConfiguration');
+
+        Route::get('grades/t/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@tindex')->name('teacher-grade');
+        Route::get('grades/c/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@cindex');
+        Route::post('grades/calculate-marks','GradeController@calculateMarks');
+        Route::post('grades/save-grade','GradeController@update');
+        Route::get('grades/{student_id}', 'GradeController@index');
+        Route::post('message/students', 'NotificationController@store');
+    });
+
+// Admin role routes
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+        Route::get('/home', 'HomeController@index')->name('admin.home');
+
+        Route::get('gpa/create-gpa', 'GradesystemController@create');
+        Route::post('create-gpa', 'GradesystemController@store');
+        Route::get('gpa/delete/{id}', 'GradesystemController@destroy');
+        Route::get('gpa/all-gpa', 'GradesystemController@index');
+        Route::get('all-department','SchoolController@allDepartment');
+
+        Route::prefix('exams')->group(function () {
+            Route::get('/', 'ExamController@index');
+            Route::get('/details/{exam_id}', 'ExamController@details');
+            Route::get('create', 'ExamController@create');
+            Route::post('create', 'ExamController@store');
+            Route::post('activate-exam', 'ExamController@update');
+            Route::get('remove/{id}', 'ExamController@destroy');
+            Route::get('edit/{id}', 'ExamController@edit');
+            Route::post('edit/{id}', 'ExamController@updateExam');
+            Route::get('active', 'ExamController@indexActive');
+        });
+
+        //Accountant Routes
+        Route::prefix('fees')->group(function (){
+            Route::get('all', 'FeeController@index');
+            Route::get('create', 'FeeController@create');
+            Route::post('create', 'FeeController@store');
+            Route::delete('remove/{id}', 'FeeController@destroy');
+        });
+        Route::get('sectors','AccountController@sectors');
+        Route::post('create-sector','AccountController@storeSector');
+        Route::get('edit-sector/{id}','AccountController@editSector');
+        Route::post('update-sector','AccountController@updateSector');
+        Route::delete('delete-sector/{id}','AccountController@deleteSector');
+
+        Route::get('income','AccountController@income');
+        Route::post('create-income','AccountController@storeIncome');
+        Route::get('income-list','AccountController@listIncome');
+        Route::post('list-income','AccountController@postIncome');
+        Route::get('edit-income/{id}','AccountController@editIncome');
+        Route::post('update-income','AccountController@updateIncome');
+        Route::get('delete-income/{id}','AccountController@deleteIncome');
+
+        Route::get('expense','AccountController@expense');
+        Route::post('create-expense','AccountController@storeExpense');
+        Route::get('expense-list','AccountController@listExpense');
+        Route::post('list-expense','AccountController@postExpense');
+        Route::get('edit-expense/{id}','AccountController@editExpense');
+        Route::post('update-expense','AccountController@updateExpense');
+        Route::get('delete-expense/{id}','AccountController@deleteExpense');
+        //Accountant Routes End
+
+
+        //Librarian Route
+        Route::get('issue-books', 'IssuedbookController@create');
+        Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
+        Route::post('issue-books', 'IssuedbookController@store');
+        Route::get('issued-books', 'IssuedbookController@index');
+        Route::post('save_as_returned', 'IssuedbookController@update');
+        Route::get('all-books', 'Library\BookController@index');
+        Route::delete('/books/{id}', 'Library\BookController@destroy');
+        Route::get('book/{id}', 'Library\BookController@show');
+        Route::get('create/book', 'Library\BookController@create');
+        Route::post('book/store', 'Library\BookController@store');
+        //Librarian Route End
+
+        Route::prefix('academic')->group(function (){
+            Route::get('syllabus', 'SyllabusController@index');
+            Route::get('syllabus/{class_id}', 'SyllabusController@create');
+            Route::get('notice', 'NoticeController@create');
+            Route::get('event', 'EventController@create');
+            Route::get('routine', 'RoutineController@index');
+            Route::get('notice/update/{id}', 'NoticeController@update');
+            Route::get('syllabus/update/{id}', 'SyllabusController@update');
+            Route::get('routine/{section_id}', 'RoutineController@create');
+            Route::get('routine/update/{id}' , 'RoutineController@update');
+            Route::get('event/update/{id}', 'EventController@update');
+            Route::prefix('remove')->name('remove.')->group(function (){
+                Route::get('notice/{id}', 'NoticeController@update');
+            });
+        });
+
+        Route::get('school/sections','SectionController@index');
+        Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
+        Route::get('grades/{student_id}', 'GradeController@index');
+        Route::get('section/details/attendance/{section_id}','AttendanceController@attendanceDetails');
+
+        Route::get('attendance/adjust/{student_id}','AttendanceController@adjust');
+        Route::post('attendance/adjust','AttendanceController@adjustPost');
+        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
+        Route::get('grades/classes', 'GradeController@allExamsGrade');
+        Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
+
+        Route::get('academic-settings', 'SchoolController@index');
+
+        Route::prefix('school')->name('school.')->group(function (){
+            Route::post('add-class','MyclassController@store');
+            Route::post('add-section','SectionController@store');
+            Route::post('add-department','SchoolController@addDepartment');
+            Route::get('promote-students/{section_id}','UserController@promoteSectionStudents');
+            Route::post('promote-students','UserController@promoteSectionStudentsPost');
+            Route::post('theme','SchoolController@changeTheme');
+        });
+
+        Route::get('users/{school_code}/{role}', 'UserController@indexOther');
+
+        Route::prefix('register')->name('register.')->group(function (){
+            Route::post('student', 'UserController@store');
+            Route::post('teacher',  'UserController@storeTeacher');
+            Route::post('accountant',  'UserController@storeAccountant');
+            Route::post('librarian',  'UserController@storeLibrarian');
+        });
+        Route::get('edit/course/{id}','CourseController@edit');
+        Route::post('edit/course/{id}','CourseController@updateNameAndTime');
+
+        Route::get('edit/user/{id}','UserController@edit');
+        Route::post('edit/user','UserController@update');
+        Route::post('upload/file', 'UploadController@upload');
+        Route::get('user/deactivate/{id}','UserController@deactivateUser');
+        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+        Route::post('courses/store', 'CourseController@store');
+    });
+
 });
-
-
-
-//use PDF;
-Route::middleware(['auth','master.admin'])->group(function (){
-  Route::get('edit/user/{id}','UserController@edit');
-  Route::post('edit/user','UserController@update');
-  Route::post('upload/file', 'UploadController@upload');
-//   Route::get('pdf/profile/{user_id}',function($user_id){
-//     $data = App\User::find($user_id);
-//     PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true]);
-//     $pdf = PDF::loadView('pdf.profile-pdf', ['user' => $data]);
-// 		return $pdf->stream('profile.pdf');
-//   });
-//   Route::get('pdf/result/{user_id}/{exam_id}',function($user_id, $exam_id){
-//     $data = App\User::find($user_id);
-//     $grades = App\Grade::with('exam')->where('student_id', $user_id)->where('exam_id',$exam_id)->latest()->get();
-//     PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true]);
-//     $pdf = PDF::loadView('pdf.result-pdf', ['grades' => $grades, 'user'=>$data]);
-// 		return $pdf->stream('result.pdf');
-//   });
-});
-Route::middleware(['auth','teacher'])->group(function (){
-  Route::post('calculate-marks','GradeController@calculateMarks');
-  Route::post('message/students', 'NotificationController@store');
-});
-// Route::middleware(['auth'])->group(function (){
-//   Route::get('download/pdf', function(){
-//     $pathToFile = public_path('storage/Bano-EducationandAspiration.pdf');
-//     return response()->download($pathToFile);
-//   });
-// });
-
 
 // View Emails - in browser
 Route::prefix('emails')->group(function () {
-  // Welcome Email
   Route::get('/welcome', function () {
       $user = App\User::find(1);
       $password = "ABCXYZ";

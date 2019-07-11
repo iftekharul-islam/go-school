@@ -45,15 +45,17 @@
             </div>
             <div class="">
                 <div class="">
-                    <form class="new-added-form" method="POST" id="registerForm" action="{{ url('master/register/admin') }}">
+                    <form class="new-added-form" method="POST" id="registerForm" action="{{ url('master/edit/admin') }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="user_id" value="{{$user->id}}">
+                        <input type="hidden" name="user_role" value="{{$user->role}}">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="name" class="col-md-4 control-label">Full Name</label>
 
                                     <div class="col-md-12">
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                        <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}" required>
 
                                         @if ($errors->has('name'))
                                             <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
@@ -67,7 +69,7 @@
 
                                     <div class="col-md-12">
                                         <input id="email" type="email" class="form-control" name="email"
-                                               value="{{ old('email') }}" required>
+                                               value="{{ $user->email }}" required>
 
                                         @if ($errors->has('email'))
                                             <span class="help-block">
@@ -80,42 +82,12 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Password</label>
-
-                                    <div class="col-md-12">
-                                        <input id="password" type="password" class="form-control" name="password"
-                                               required>
-
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                        <strong>{{ $errors->first('password') }}</strong>
-                                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="password-confirm" class="col-md-4 control-label">Confirm
-                                        Password</label>
-
-                                    <div class="col-md-12">
-                                        <input id="password-confirm" type="password" class="form-control"
-                                               name="password_confirmation"
-                                               required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                     <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
 
                                     <div class="col-md-12">
                                         <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                               value="{{ old('phone_number') }}" required>
+                                               value="{{ $user->phone_number }}" required>
 
                                         @if ($errors->has('phone_number'))
                                             <span class="help-block">
@@ -157,7 +129,7 @@
 
                                     <div class="col-md-12">
                                         <input id="nationality" type="text" class="form-control" name="nationality"
-                                               value="{{ old('nationality') }}"
+                                               value="{{ $user->nationality }}"
                                                required>
 
                                         @if ($errors->has('nationality'))
@@ -194,7 +166,7 @@
 
                                     <div class="col-md-12">
                                         <input id="address" type="text" class="form-control" name="address"
-                                               value="{{ old('address') }}"
+                                               value="{{ $user->address }}"
                                                required>
 
                                         @if ($errors->has('address'))
@@ -211,8 +183,8 @@
 
                                     <div class="col-md-12">
                                         <textarea id="about" class="form-control" name="about"
-                                               value="{{ old('about') }}"
-                                                  required></textarea>
+                                                  value=""
+                                                  required>{{ $user->about }}</textarea>
 
                                         @if ($errors->has('about'))
                                             <span class="help-block">

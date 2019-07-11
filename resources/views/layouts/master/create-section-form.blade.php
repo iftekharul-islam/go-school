@@ -2,7 +2,7 @@
 <br/>
 <div class="panel panel-default" id="create-section-btn-panel-class-{{$class->id}}" style="display:none;">
   <div class="panel-body">
-  <form class="form-horizontal" action="{{url('school/add-section')}}" method="post">
+  <form class="form-horizontal" action="{{url('admin/school/add-section')}}" method="post">
       {{csrf_field()}}
       <input type="hidden" name="class_id" value="{{$class->id}}"/>
       <div class="form-group">

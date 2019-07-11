@@ -24,7 +24,7 @@
                 </div>
             @endif
             @isset($sector)
-                <form class="new-added-form justify-content-md-center" action="{{url('accounts/update-sector')}}" method="post">
+                <form class="new-added-form justify-content-md-center" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/update-sector')}}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{$sector->id}}">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

@@ -17,7 +17,7 @@
     <!-- Admit Form Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
-                    <form class="new-added-form mb-5" action="{{url('/accounts/create-sector')}}" method="post">
+                    <form class="new-added-form mb-5" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-sector')}}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-6">
@@ -93,9 +93,9 @@
                                         <td>{{$sector->name}}</td>
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <a href="{{url('accounts/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b>Edit</b></a>
+                                            <a href="{{url('accountant/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b>Edit</b></a>
                                             <button class="button button--cancel" onclick="book({{ $sector->id }})">Delete</button>
-                                            <form id="delete-form-{{ $sector->id }}" action="{{url('accounts/delete-sector/'.$sector->id)}}" method="POST">
+                                            <form id="delete-form-{{ $sector->id }}" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/delete-sector/'.$sector->id)}}" method="POST">
                                                 {!! method_field('delete') !!}
                                                 {!! csrf_field() !!}
                                             </form>

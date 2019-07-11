@@ -15,13 +15,9 @@
             <li>All Books</li>
         </ul>
     </div>
+    <?php $role = \Illuminate\Support\Facades\Auth::user()->role ?>
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1">
-                <div class="item-title">
-                </div>
-            </div>
-
             <div class="table-responsive">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -43,7 +39,7 @@
                     @foreach($books as $book)
                         <tr>
                             <td>{{ ($loop->index + 1) }}</td>
-                            <td><a href="{{ route('library.books.show', $book->id) }}" class="text-teal">
+                            <td><a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book', $book->id) }}" class="text-teal">
                                     {{ $book->title }}
                                 </a></td>
                             <td>{{ $book->author }}</td>
@@ -51,7 +47,7 @@
                             <td>{{ $book->quantity }}</td>
                             <td>
                                 <div class="">
-                                    <a href="{{ route('library.books.show', $book->id) }}" class="button button--save float-left">
+                                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book', $book->id) }}" class="button button--save float-left">
                                         Details
                                     </a>
                                 </div>
@@ -60,7 +56,7 @@
                                 <button class="button button--cancel" type="button" onclick="book({{ $book->id }})">
                                     Delete
                                 </button>
-                                <form id="delete-form-{{ $book->id }}" action="{{ url('library/books', ['id' => $book->id]) }}" method="POST">
+                                <form id="delete-form-{{ $book->id }}" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/books', $book->id) }}" method="POST">
                                     {!! method_field('delete') !!}
                                     {!! csrf_field() !!}
                                 </form>

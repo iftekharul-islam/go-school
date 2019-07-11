@@ -1,6 +1,6 @@
 @if(count($exams) > 0)
 @foreach($exams as $exam)
-<h3 class="text-muted">Exam Name - {{$exam->exam_name}}</h3>
+<h4 class="text-muted">Exam Name - {{$exam->exam_name}}</h4>
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
   <thead>

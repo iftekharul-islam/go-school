@@ -61,9 +61,8 @@
                                                         <div class="dropdown-content"
                                                              aria-labelledby="dropdownMenuButton">
                                                             @foreach($class->sections as $section)
-                                                                <a
-                                                                        href="{{ url('school/section/details/'.$section->id. '?course=1') }}">Section:
-                                                                    {{$section->section_number}}</a>
+                                                                <a href="{{ url('admin/school/section/details/'.$section->id. '?course=1') }}">
+                                                                    Section:{{$section->section_number}}</a>
                                                             @endforeach
                                                         </div>
 
@@ -97,9 +96,8 @@
 
                                                 <div class="float-right">
                                                     <a role="button" class="button button--primary mr-3 font-weight-bold"
-                                                       href="{{url('academic/syllabus/'.$class->id)}}">View Syllabus</a>
+                                                       href="{{url('admin/academic/syllabus/'.$class->id)}}">View Syllabus</a>
                                                 </div>
-{{--                                                @else--}}
 
                                                 @else
 
@@ -115,8 +113,7 @@
                                                                 </button>
                                                                 <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                                                                     @foreach($class->sections as $section)
-                                                                        <a
-                                                                                href="{{ url('section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                                        <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
                                                                     @endforeach
                                                                 </div>
                                                             </div>

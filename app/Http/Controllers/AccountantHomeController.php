@@ -2,35 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Attendance;
-use App\Book;
 use App\Exam;
-use App\Http\Traits\GradeTrait;
+use App\Fee;
 use App\Myclass;
 use App\Notice;
-use App\School;
 use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
-use App\StudentInfo;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use App\User;
 use App\Services\User\UserService;
-use Alert;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class AccountantHomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    use GradeTrait;
-    protected $courseService;
     public function __construct(UserService $userService, User $user, CourseService $courseService, AttendanceService $attendanceService)
     {
         $this->userService = $userService;
@@ -40,20 +26,15 @@ class HomeController extends Controller
         $this->attendanceService = $attendanceService;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $student = Auth::user();
-        $minutes = 1440;// 24 hours = 1440 minutes
+        $minutes = 1440;
 
         if (@isset($student->school->id)) {
             $school_id = \Auth::user()->school->id;
             $classes = \Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-                return \App\Myclass::where('school_id', $school_id)
+                return Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
             });
@@ -77,23 +58,39 @@ class HomeController extends Controller
                     ->where('active', 1)
                     ->get();
             });
+
             $exams = \Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
                 return Exam::where('school_id', $school_id)
-                    ->where('active', 1)
+                    ->where('active', 0)
                     ->get();
             });
         }
 
-        $allStudents = $this->userService->getStudents();
-        return view('teacher-home', [
+        $total_expense = DB::table('accounts')->where('type', 'expense')
+            ->selectRaw('sum(amount)')
+            ->get();
+        foreach ($total_expense as $te)
+            $total_expense = $te->sum;
+
+        $total_income = DB::table('accounts')->where('type', 'income')
+            ->selectRaw('sum(amount)')
+            ->get();
+
+        foreach ($total_income as $ti)
+            $total_income = $ti->sum;
+
+        $fees = Fee::where('school_id', \Auth::user()->school_id)->get();
+        return view('accountant-home', [
             'totalStudents' => $totalStudents,
-            'allStudents' => $allStudents,
             'notices' => $notices,
             'exams' => $exams,
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
             'male' => $male,
-            'female' => $female
+            'female' => $female,
+            'fees'   => $fees,
+            'total_income' => $total_income,
+            'total_expense' => $total_expense,
         ]);
     }
 }

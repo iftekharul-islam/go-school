@@ -28,7 +28,7 @@
                     <h4 class="text-teal">Add new fee field</h4>
                 </div>
             </div>
-            <form class="new-added-form" action="{{url('fees/create')}}" method="post">
+            <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/fees/create')}}" method="post">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-12 form-group{{ $errors->has('fee_name') ? ' has-error' : '' }}">

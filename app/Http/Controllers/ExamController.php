@@ -93,12 +93,10 @@ class ExamController extends Controller
     public function edit($id)
     {
         $exam = Exam::findOrFail($id);
-//        return $exam->exam_name;
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
         return view('exams.edit',compact('classes','already_assigned_classes', 'exams', 'exam'));
-//        return view('exams.add', compact('exam'));
     }
 
     public function updateExam(CreateExamRequest $request, $id) {
@@ -170,6 +168,5 @@ class ExamController extends Controller
             $class->delete();
         }
         return redirect()->back()->with('status', 'Exam Deleted');
-//        return redirect()->back();
     }
 }

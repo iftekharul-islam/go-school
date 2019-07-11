@@ -29,7 +29,7 @@
 {{--                    <h3>Add New Book</h3>--}}
                 </div>
             </div>
-            <form class="new-added-form justify-content-md-center" action="{{ route('library.books.store') }}" method="POST">
+            <form class="new-added-form justify-content-md-center" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book/store') }}" method="POST">
                 {{ csrf_field() }}
                 @include('library.books.form')
                 <div class="col-12 form-group mt-5">

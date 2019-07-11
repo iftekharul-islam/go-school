@@ -33,9 +33,9 @@ class SchoolController extends Controller
             ->whereIn('class_id', $studentClasses)
             ->get();
 
-        $teacherDepartments = \App\Department::where('school_id',\Auth::user()->school_id)->get();
-        $teacherClasses = \App\Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
-        $teacherSections = \App\Section::with('class')->whereIn('class_id',$teacherClasses)->get();
+        $teacherDepartments = Department::where('school_id',\Auth::user()->school_id)->get();
+        $teacherClasses = Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
+        $teacherSections = Section::with('class')->whereIn('class_id',$teacherClasses)->get();
 
         $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
             ->where('role', 'teacher')

@@ -22,7 +22,7 @@
             <div class="col-md-3">
                 <div class="card mb-4 mt-4">
                     <h5 class="card-header text-muted text-left" style="text-transform: capitalize;">
-                    <i style='font-size:24px;margin-left:-20px; color:#' class='flaticon-classmates text-teal'></i>
+                    <i style='font-size:24px;margin-left:-20px;' class='flaticon-classmates text-teal'></i>
                         {{$exam->exam_name}}</h5>
                     <div class="card-body-customized">
                         <?php $total = 0 ?>
@@ -34,7 +34,7 @@
                         @endif
                         @endforeach
                         <p class="card-title float-left text-muted">Courses Under exam: {{ $total }}</p>
-                        <a href="{{ url('/exams/details/'.$exam->id) }}"
+                        <a href="{{ url('admin/exams/details/'.$exam->id) }}"
                             class="button button--primary float-right mt-5 font-weight-bold">Details</a>
 
                         {{--                                    @component('components.active-exams',['exam'=>$exam,'courses'=>$courses])--}}

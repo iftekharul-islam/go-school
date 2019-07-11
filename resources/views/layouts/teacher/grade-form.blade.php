@@ -84,7 +84,7 @@
 </div>
 <br />
 <br />
-<form action="{{url('grades/save-grade')}}" method="POST">
+<form action="{{url('teacher/grades/save-grade')}}" method="POST">
   {{csrf_field()}}
   <input type="hidden" name="section_id" value="{{$section_id}}">
   <input type="hidden" name="course_id" value="{{$course_id}}">

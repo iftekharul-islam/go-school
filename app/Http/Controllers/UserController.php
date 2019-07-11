@@ -170,7 +170,7 @@ class UserController extends Controller
     {
         if (app('impersonate')->isImpersonating()) {
             Auth::user()->leaveImpersonation();
-            return redirect('/home');
+            return redirect('master/home');
         }
         else {
             return view('profile.impersonate', [
@@ -186,7 +186,7 @@ class UserController extends Controller
     {
         $user = $this->user->find($request->id);
         Auth::user()->impersonate($user);
-        return redirect('/home');
+        return redirect($user->role.'/home');
     }
 
     /**
@@ -377,40 +377,6 @@ class UserController extends Controller
         return back()->with('status', $request->name. ' User Updated');
     }
 
-    /**
-     * Activate admin
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function activateAdmin($id)
-    {
-        $admin = $this->user->find($id);
-
-        if ($admin->active !== 0) {
-            $admin->active = 0;
-        } else {
-            $admin->active = 1;
-        }
-
-        $admin->save();
-
-        return back()->with('status', $admin->name.' Admin active status changed');
-    }
-
-    /**
-     * Deactivate admin
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function deactivateAdmin($id)
-    {
-       $admin = $this->user->find($id);
-       $admin->active = !$admin->active;
-
-       $admin->save();
-
-        return back()->with('status', 'Saved');
-    }
     public function deactivateUser($id)
     {
        $user = $this->user->find($id);
@@ -428,10 +394,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // return ($this->user->destroy($id))?response()->json([
-      //   'status' => 'success'
-      // ]):response()->json([
-      //   'status' => 'error'
-      // ]);
+        //
     }
 }

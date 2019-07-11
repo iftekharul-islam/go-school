@@ -7,7 +7,7 @@
         </ul>
     </div>
 @endif
-<form action="{{url('attendance/take-attendance')}}" method="post">
+<form action="{{url('teacher/attendance/take-attendance')}}" method="post">
     {{ csrf_field() }}
     <input type="text" name="section_id" value="{{$section_id}}" style="display: none;">
     <input type="hidden" name="exam_id" value="{{$exam_id}}">
@@ -79,7 +79,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$attendance->student->id)}}" role="button" class="button button--text float-left">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('teacher/attendance/adjust/'.$attendance->student->id)}}" role="button" class="button button--text float-left">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else
@@ -112,7 +112,11 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('attendance/adjust/'.$student->id)}}" role="button" class="button button--text float-left">Adjust Missing Attendances</a></td>
+                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'teacher')
+                            <td><a href="{{url('teacher/attendance/adjust/'.$student->id)}}" role="button" class="button button--text float-left">Adjust Missing Attendances</a></td>
+                        @else
+                            <td><a href="{{url('admin/attendance/adjust/'.$student->id)}}" role="button" class="button button--text float-left">Adjust Missing Attendances</a></td>
+                        @endif
                     </tr>
                 @endforeach
             @endif

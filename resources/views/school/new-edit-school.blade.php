@@ -36,7 +36,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" method="POST" action="{{ url('school/edit', $school->id) }}">
+                            <form class="form-horizontal" method="POST" action="{{ url('master/school/edit', $school->id) }}">
                                 {{ csrf_field() }}
 {{--                                {{ method_field('POST' }}--}}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">

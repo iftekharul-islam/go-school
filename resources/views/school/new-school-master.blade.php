@@ -109,7 +109,7 @@
                                     <div class="heading-layout1 mg-b-20">
                                         <div class="item-title">
                                             <h3>School Details</h3>
-                                            <a href="{{ url('school/edit', $school->id) }}" class="button button--edit float-right"><i class="fas fa-edit"></i>&nbsp;Edit School</a>
+                                            <a href="{{ url('master/school/edit', $school->id) }}" class="button button--edit float-right"><i class="fas fa-edit"></i>&nbsp;Edit School</a>
                                         </div>
                                     </div>
                                     <div class="user-details-box">
@@ -149,13 +149,13 @@
                                     <div class="row">
                                         <div class="col-md-2 mt-5">
                                             <a class="button button--save" role="button"
-                                               href="{{url('register/admin/'.$school->id.'/'.$school->code)}}">
+                                               href="{{url('master/register/admin/'.$school->id)}}">
                                                 + Create Admin
                                             </a>
                                         </div>
                                         <div class="col-md-2 mt-5">
                                             <a class="button button--save" role="button"
-                                               href="{{url('school/admin-list/'.$school->id)}}">
+                                               href="{{url('master/school/admin-list/'.$school->id)}}">
                                                View Admins
                                             </a>
                                         </div>
@@ -164,7 +164,7 @@
                                                     onclick="removeSchool({{ $school->id }})">Delete
                                             </button>
                                             <form id="delete-form-{{ $school->id }}"
-                                                  action="{{ url('school/delete/'.$school->id) }}" method="GET"
+                                                  action="{{ url('master/school/delete/'.$school->id) }}" method="GET"
                                                   style="display: none;">
                                                 @csrf
                                                 @method('GET')

@@ -59,7 +59,7 @@
                                                 <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                                                     @foreach($class->sections as $section)
                                                         <a class=""
-                                                           href="{{ url('grades/section/'.$section->id) }}">Section: {{$section->section_number}}</a>
+                                                           href="{{ url('admin/grades/section/'.$section->id) }}">Section: {{$section->section_number}}</a>
                                                     @endforeach
                                                 </div>
                                             </div>

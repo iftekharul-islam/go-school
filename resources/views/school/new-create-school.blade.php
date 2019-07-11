@@ -74,7 +74,7 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active border-0" id="tab10" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/accountant') }}">
+                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('admin/register/accountant') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -239,7 +239,7 @@
                                                 </form>
                                             </div>
                                             <div class="tab-pane fade border-0" id="tab11" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/librarian') }}">
+                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('admin/register/librarian') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -405,7 +405,7 @@
                                             </div>
 
                                             <div class="tab-pane fade border-0" id="tab12" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/student') }}">
+                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('admin/register/student') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -932,7 +932,7 @@
                                             </div>
 
                                             <div class="tab-pane fade border-0" id="tab13" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('register/teacher') }}">
+                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('admin/register/teacher') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -1171,7 +1171,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active fade show border-0" id="tab1" role="tabpanel">
                                                 <form class="new-added-form"
-                                                      action="{{url('school/add-department')}}"
+                                                      action="{{url('admin/school/add-department')}}"
                                                       method="post">
                                                     {{csrf_field()}}
                                                     <div class="form-group">
@@ -1240,12 +1240,12 @@
                                                                                                                     Section {{$section->section_number}}
                                                                                                                     &nbsp;
                                                                                                                     <a class="btn btn-lg btn-warning"
-                                                                                                                       href="{{url('courses/0/'.$section->id)}}">View
+                                                                                                                       href="{{url('admin/courses/0/'.$section->id)}}">View
                                                                                                                         All Assigned
                                                                                                                         Courses</a>
                                                                                                                     <span class="pull-right"> &nbsp;&nbsp;
                                                                                                                 <a class="btn btn-lg btn-success mr-2"
-                                                                                                                   href="{{url('school/promote-students/'.$section->id)}}">+ Promote Students</a>
+                                                                                                                   href="{{url('admin/school/promote-students/'.$section->id)}}">+ Promote Students</a>
 {{--                                                   &nbsp;                                                              <a class="btn btn-lg btn-primary mr-3" href="{{url('register/student/'.$section->id)}}">+ Register Student</a>--}}
                                                 </span>
                                                                                                                     @include('layouts.master.add-course-form')

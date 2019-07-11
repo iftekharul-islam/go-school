@@ -31,7 +31,7 @@
                         $classNumber = $grade->student->section->class->class_number;
                         $sectionNumber = $grade->student->section->section_number;
                         ?>
-                        <div class="page-panel-title"><b>Student Code</b> - {{$grade->student->student_code}} &nbsp;<b>Name</b> -  {{$grade->student->name}} &nbsp;<b>Class</b> - {{$grade->student->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->student->section->section_number}}</div>
+                        <div class="page-panel-title mb-4"><b>Student Code</b> - {{$grade->student->student_code}} &nbsp;<b>Name</b> -  {{$grade->student->name}} &nbsp;<b>Class</b> - {{$grade->student->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->student->section->section_number}}</div>
                         @break($loop->first)
                     @endforeach
                     <div class="panel-body">

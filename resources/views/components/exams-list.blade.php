@@ -7,7 +7,7 @@
 {{$exams->links()}}
 <div class="table-responsive">
   @foreach ($exams as $exam)
-    <form id="form{{$exam->id}}" action="{{url('exams/activate-exam')}}" method="POST">
+    <form id="form{{$exam->id}}" action="{{url('admin/exams/activate-exam')}}" method="POST">
       {{csrf_field()}}
     </form>
   @endforeach'
@@ -84,11 +84,11 @@
         </td>
         <td>
           <button class="btn btn-danger btn-lg" type="button" onclick="removeExam({{ $exam->id }})"><i class="far fa-trash-alt"></i></button>
-          <form id="delete-form-{{ $exam->id }}" action="{{ url('exams/remove', ['id' => $exam->id]) }}" method="GET" style="display: none;">
+          <form id="delete-form-{{ $exam->id }}" action="{{ url('admin/exams/remove', ['id' => $exam->id]) }}" method="GET" style="display: none;">
             @csrf
             @method('GET')
           </form>
-          <a href="{{ url('exams/edit', ['id' => $exam->id]) }}">
+          <a href="{{ url('admin/exams/edit', ['id' => $exam->id]) }}">
             <button class="btn btn-info btn-lg ml-3"><i class="far fa-edit"></i></button>
           </a>
 

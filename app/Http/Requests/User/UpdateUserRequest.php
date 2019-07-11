@@ -30,9 +30,9 @@ class UpdateUserRequest extends FormRequest
     {
         $rules = [
             'user_id' => 'required|numeric',
-            'email' => 'required|email|max:255|' . Rule::unique('users')->ignore($this->get('user_id')),
+            'email' => 'required|',
             'name' => 'required|string|max:255',
-            'phone_number' =>  'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
+            'phone_number' =>  'required|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
         ];
 
         if ($this->get('user_role') == 'teacher') {
