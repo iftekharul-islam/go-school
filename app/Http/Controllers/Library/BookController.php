@@ -32,7 +32,6 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request) {
-//        return $request->all();
         if ($request->class_id) {
             $class_id = $request->class_id;
         } else {

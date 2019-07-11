@@ -77,7 +77,7 @@
                                     <h3>All Account Sectors</h3>
                                 </div>
                             </div>
-                            <table class="table table-striped table-data-div">
+                            <table class="table table-bordered table-striped table-data-div">
                                 <thead>
                                 <tr>
                                     <th>#</th>

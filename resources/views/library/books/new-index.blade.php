@@ -28,7 +28,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <table class="table display table-data-div text-wrap">
+                <table class="table display table-bordered table-data-div text-wrap">
                     <thead>
                     <tr>
                         <th>#</th>

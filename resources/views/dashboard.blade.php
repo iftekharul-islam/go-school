@@ -16,22 +16,25 @@
     <div class="row">
         <div class="col-4 col-4-xxxl">
             <div class="card mb-4 dashboard-card-ten">
-                <div class="card-body">
+                <div class="card-body profile-info">
                     <div class="heading-layout1 mb-5">
                         <div class="item-title">
-                            <h3 class="float-left">About Me</h3>
+                            <h3 class="">About Me</h3>
                             {{--                            <a class="btn btn-lg btn-info float-right" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a>--}}
                         </div>
                     </div>
-                    {{--                    @if(!empty($student_info))--}}
                     <div class="student-info">
-                        <div class="media media-none--xs">
-                            <div class="item-img mt-5">
-                                <img src="{{url($student->pic_path)}}" class="media-img-auto" alt="student">
+                        <div class="media  media-none--xs">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="item-img offset-6 mt-5">
+                                        <img src="{{url($student->pic_path)}}" class=" text-center" alt="student">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="media-body mt-5">
-                            <h3 class="item-title ml-5 text-capitalize">{{ Auth::user()->name }}</h3>
+                            <h3 class="item-title text-center text-capitalize">{{ Auth::user()->name }}</h3>
                         </div>
                         <p>{{ $student->about }}</p>
                         <div class="table-responsive info-table">

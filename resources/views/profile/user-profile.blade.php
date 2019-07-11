@@ -15,7 +15,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>{{ $user->role }} Details</li>
+            <li class="text-capitalize">{{ $user->role }} Details</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->

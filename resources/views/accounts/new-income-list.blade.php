@@ -92,7 +92,7 @@
                     @isset($incomes)
                         <div class="table-responsive">
                             <div class="table-responsive">
-                                <table class="table display text-wrap">
+                                <table class="table table-bordered display text-wrap">
                                     <thead>
                                     <tr>
                                         <th>#</th>

@@ -90,7 +90,7 @@
                 <div class="col-md-12">
                     @isset($expenses)
                         <div class="table-responsive">
-                            <table class="table display text-wrap">
+                            <table class="table table-bordered display text-wrap">
                                 <thead>
                                 <tr>
                                     <th>#</th>

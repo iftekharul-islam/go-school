@@ -21,9 +21,9 @@ class SchoolController extends Controller
      */
     public function index()
     {
-      $schools = School::all();
-      $classes = Myclass::all();
-      $sections = Section::all();
+        $schools = School::all();
+        $classes = Myclass::all();
+        $sections = Section::all();
 
         $studentClasses = Myclass::query()
             ->where('school_id', Auth::user()->school->id)
@@ -37,13 +37,13 @@ class SchoolController extends Controller
         $teacherClasses = \App\Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
         $teacherSections = \App\Section::with('class')->whereIn('class_id',$teacherClasses)->get();
 
-      $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
-                            ->where('role', 'teacher')
-                            ->orderBy('name','ASC')
-                            ->where('active', 1)
-                            ->get();
-      $departments = Department::where('school_id',\Auth::user()->school_id)->get();
-      return view('school.new-create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+        $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
+            ->where('role', 'teacher')
+            ->orderBy('name','ASC')
+            ->where('active', 1)
+            ->get();
+        $departments = Department::where('school_id',\Auth::user()->school_id)->get();
+        return view('school.new-create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
     /**
@@ -64,21 +64,21 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-        'school_name' => 'required|string|max:255',
-        'school_medium' => 'required',
-        'school_about' => 'required',
-        'school_established' => 'required',
-      ]);
-      $tb = new School;
-      $tb->name = $request->school_name;
-      $tb->established = $request->school_established;
-      $tb->about = $request->school_about;
-      $tb->medium = $request->school_medium;
-      $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
-      $tb->theme = 'flatly';
-      $tb->save();
-      return redirect('/home')->with('status', 'Created');
+        $request->validate([
+            'school_name' => 'required|string|max:255',
+            'school_medium' => 'required',
+            'school_about' => 'required',
+            'school_established' => 'required',
+        ]);
+        $tb = new School;
+        $tb->name = $request->school_name;
+        $tb->established = $request->school_established;
+        $tb->about = $request->school_about;
+        $tb->medium = $request->school_medium;
+        $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
+        $tb->theme = 'flatly';
+        $tb->save();
+        return redirect('/home')->with('status', 'Created');
     }
 
     /**
@@ -89,8 +89,8 @@ class SchoolController extends Controller
      */
     public function show($school_id)
     {
-      $admins = User::where('school_id',$school_id)->where('role','admin')->get();
-      return view('school.admin-list',compact('admins'));
+        $admins = User::where('school_id',$school_id)->where('role','admin')->get();
+        return view('school.admin-list',compact('admins'));
     }
 
     public function showSchool($school_id) {
@@ -124,13 +124,13 @@ class SchoolController extends Controller
     }
 
     public function addDepartment(Request $request){
-      $request->validate([
-        'department_name' => 'required|string|max:50',
-      ]);
-      $s = new Department;
-      $s->school_id = \Auth::user()->school_id;
-      $s->department_name = $request->department_name;
-      $s->save();
+        $request->validate([
+            'department_name' => 'required|string|max:50',
+        ]);
+        $s = new Department;
+        $s->school_id = \Auth::user()->school_id;
+        $s->department_name = $request->department_name;
+        $s->save();
         return back()->withInput(['tab'=> 'tab8'] )->with('status', 'saved');
     }
 
@@ -141,10 +141,10 @@ class SchoolController extends Controller
     }
 
     public function changeTheme(Request $request){
-      $tb = School::find($request->s);
-      $tb->theme = $request->school_theme;
-      $tb->save();
-      return back();
+        $tb = School::find($request->s);
+        $tb->theme = $request->school_theme;
+        $tb->save();
+        return back();
     }
     /**
      * Update the specified resource in storage.
@@ -160,12 +160,12 @@ class SchoolController extends Controller
             'school_medium' => 'required',
             'school_about' => 'required',
         ]);
-      $tb = School::find($id);
-      $tb->name = $request->school_name;
-      $tb->about = $request->school_about;
-      $tb->medium = $request->school_medium;
-      $tb->save();
-      return redirect()->back()->with('status','School Information Updated');
+        $tb = School::find($id);
+        $tb->name = $request->school_name;
+        $tb->about = $request->school_about;
+        $tb->medium = $request->school_medium;
+        $tb->save();
+        return redirect()->back()->with('status','School Information Updated');
     }
 
     /**

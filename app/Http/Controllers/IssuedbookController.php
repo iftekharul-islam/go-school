@@ -6,7 +6,7 @@ use App\Book;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\IssueBook\IssuedBookService;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class IssuedbookController extends Controller
 {
@@ -30,7 +30,7 @@ class IssuedbookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        $books = \App\Book::where('school_id', auth()->user()->school_id)
+        $books = Book::where('school_id', auth()->user()->school_id)
             ->where('quantity','>',0)
             ->get();
         return view('library.issuebooks',['books'=>$books]);
@@ -76,7 +76,7 @@ class IssuedbookController extends Controller
      */
     public function update(Request $request)
     {
-        \DB::transaction(function () use ($request) {
+            DB::transaction(function () use ($request) {
             $tb = \App\Issuedbook::find($request->issue_id);
             $tb->borrowed = 0;
             $tb->quantity = 0;

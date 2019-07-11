@@ -1,4 +1,4 @@
-<table class="table table-data-div display text-nowrap">
+<table class="table table-data-div table-bordered display text-nowrap">
   <thead>
   <tr>
     <th>#</th>
@@ -13,7 +13,7 @@
   @foreach($courses as $key=>$course)
     <tr>
       <td>
-        {{ $key++ }}
+        {{ $loop->index+1  }}
       </td>
       <td>{{ $course->course_name }}</td>
       <td>{{ $course->section->room_number }}</td>

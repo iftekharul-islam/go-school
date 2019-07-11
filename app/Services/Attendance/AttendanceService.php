@@ -60,7 +60,7 @@ class AttendanceService {
             ->unique('student_id');
     }
 
-    public function getAllAttendanceBySecAndExam($section_id,$exam_id){
+    public function getAllAttendanceBySecAndExam($section_id){
         return \DB::table('attendances')
             ->select('student_id', \DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
@@ -68,7 +68,7 @@ class AttendanceService {
                       COUNT(CASE WHEN present=2 THEN present END) AS totalEscaped'
             ))
             ->where('section_id', $section_id)
-            ->where('exam_id', $exam_id)
+//            ->where('exam_id', $exam_id)
             ->groupBy('student_id')
             ->get();
     }

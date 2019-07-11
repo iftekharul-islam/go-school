@@ -15,10 +15,10 @@ class MessageController extends Controller
      */
     public function index($school_id)
     {
-      return ($school_id > 0)? MessageResource::collection(Message::where('school_id', $school_id)->get()):response()->json([
-        'Invalid School id: '. $school_id,
-        404
-      ]);
+        return ($school_id > 0)? MessageResource::collection(Message::where('school_id', $school_id)->get()):response()->json([
+            'Invalid School id: '. $school_id,
+            404
+        ]);
     }
 
     /**
@@ -39,16 +39,16 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-      $tb = new Message;
-      $tb->phone_number = $request->phone_number;
-      $tb->email = $request->email;
-      $tb->message = $request->message;
-      $tb->school_id = $request->school_id;
+        $tb = new Message;
+        $tb->phone_number = $request->phone_number;
+        $tb->email = $request->email;
+        $tb->message = $request->message;
+        $tb->school_id = $request->school_id;
 
-      return($tb->save())?response()->json([
-        'status' => 'success'
+        return($tb->save())?response()->json([
+            'status' => 'success'
         ]):response()->json([
-          'status' => 'error'
+            'status' => 'error'
         ]);
     }
 
@@ -83,16 +83,16 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tb = Message::find($id);
-      $tb->phone_number = $request->phone_number;
-      $tb->email = $request->email;
-      $tb->message = $request->message;
-      $tb->school_id = $request->school_id;
-      return ($tb->save())?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        $tb = Message::find($id);
+        $tb->phone_number = $request->phone_number;
+        $tb->email = $request->email;
+        $tb->message = $request->message;
+        $tb->school_id = $request->school_id;
+        return ($tb->save())?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 
     /**
@@ -103,10 +103,10 @@ class MessageController extends Controller
      */
     public function destroy($id)
     {
-      return (Message::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Message::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

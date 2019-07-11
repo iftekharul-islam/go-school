@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Services\User\UserService;
 use App\User;
 use App\Routine;
+use App\Myclass;
+use App\ExamForClass;
 
 
 class SectionController extends Controller
@@ -30,34 +32,31 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)
+        $classes = Myclass::where('school_id',\Auth::user()->school->id)
             ->get();
-        $classeIds = \App\Myclass::where('school_id',\Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id',\Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
-        $sections = \App\Section::whereIn('class_id',$classeIds)
-            ->orderBy('section_number')
-            ->get();
-        $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
+
+        $exams = ExamForClass::whereIn('class_id',$classeIds)
             ->where('active', 1)
             ->get()->groupBy('class_id');
         return view('school.new-sections',[
             'classes'=>$classes,
-            'sections'=>$sections,
             'exams'=>$exams
         ]);
     }
 
     public function attendanceList(){
-        $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)
+        $classes = Myclass::where('school_id',\Auth::user()->school->id)
             ->get();
-        $classeIds = \App\Myclass::where('school_id',\Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id',\Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
-        $sections = \App\Section::whereIn('class_id',$classeIds)
+        $sections = Section::whereIn('class_id',$classeIds)
             ->orderBy('section_number')
             ->get();
-        $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
+        $exams = ExamForClass::whereIn('class_id',$classeIds)
             ->where('active', 1)
             ->get()->groupBy('class_id');
         return view('school.attendance',[
@@ -69,15 +68,15 @@ class SectionController extends Controller
 
     public function details($class_id)
     {
-        $classes = \App\Myclass::where('school_id',\Auth::user()->school->id)
+        $classes = Myclass::where('school_id',\Auth::user()->school->id)
             ->get();
-        $classeIds = \App\Myclass::where('school_id',\Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id',\Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
-        $sections = \App\Section::whereIn('class_id',$classeIds)
+        $sections = Section::whereIn('class_id',$classeIds)
             ->orderBy('section_number')
             ->get();
-        $exams = \App\ExamForClass::whereIn('class_id',$classeIds)
+        $exams = ExamForClass::whereIn('class_id',$classeIds)
             ->where('active', 1)
             ->get()->groupBy('class_id');
 

@@ -100,6 +100,20 @@
             container: 'body'
         });
     });
+
+
+    $(document).ready(function () {
+        var myTable = $('.section-student-data-table').DataTable({
+            paging: true,
+            bSort : false,
+            language: {
+                searchPlaceholder: "Search here"
+            }
+        });
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
+    });
 </script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
@@ -118,6 +132,7 @@
 <!-- Full Calender Js -->
 <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
 <!-- Chart Js -->
+
 <script src="{{ asset('template/js/Chart.min.js') }}"></script>
 <!-- Data Table Js -->
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
@@ -129,10 +144,8 @@
 
 <script src=" {{ asset('/template/js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 @stack('customjs')
 
 </body>

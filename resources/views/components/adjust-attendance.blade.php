@@ -3,7 +3,7 @@
 {{--    <h5>Attendance List of This Term</h5>--}}
     <form action="{{url('attendance/adjust')}}" method="POST">
         {{ csrf_field() }}
-        <table class="table display data-table text-nowrap">
+        <table class="table display table-bordered data-table text-nowrap">
             <tr>
                 <th>Present</th>
                 <th>Status</th>

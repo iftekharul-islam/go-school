@@ -29,14 +29,14 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tb = Book::find($id);
-      $tb->title = $request->title;
-      $tb->class_id = $request->class_id;
-      return ($tb->save())?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        $tb = Book::findOrFail($id);
+        $tb->title = $request->title;
+        $tb->class_id = $request->class_id;
+        return ($tb->save())?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 
     /**
@@ -47,10 +47,10 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-      return (Book::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Book::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

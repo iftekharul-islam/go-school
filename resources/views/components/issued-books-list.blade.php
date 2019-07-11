@@ -1,6 +1,6 @@
 {{$books->links()}}
 <div class="table-responsive">
-  <table class="table text-nowrap table-data-div table-hover">
+  <table class="table text-nowrap table-bordered table-data-div table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>

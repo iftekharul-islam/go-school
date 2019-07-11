@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 // ini_set('display_errors', 1);
 //use App\Http\Controllers\UploadHandler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Event;
+use App\Notice;
+use App\Syllabus;
+use App\Routine;
+use Illuminate\Support\Facades\Auth;
 /*
  * jQuery File Upload Plugin PHP Class
  * https://github.com/blueimp/jQuery-File-Upload
@@ -25,57 +31,57 @@ class UploadController extends Controller {
     ]);
 
     $upload_dir = 'school-'.\Auth::user()->school_id.'/'.date("Y").'/'.$request->upload_type;
-    $path = \Storage::disk('public')->putFile($upload_dir, $request->file('file'));//$request->file('file')->store($upload_dir);
+    $path = Storage::disk('public')->putFile($upload_dir, $request->file('file'));//$request->file('file')->store($upload_dir);
     
     if($request->upload_type == 'notice'){
       $request->validate([
         'title' => 'required|string',
       ]);
       
-      $tb = new \App\Notice;
+      $tb = new Notice;
       $tb->file_path = 'storage/'.$path;
       $tb->title = $request->title;
       $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
+      $tb->school_id = Auth::user()->school_id;
+      $tb->user_id = Auth::user()->id;
       $tb->save();
     }else if($request->upload_type == 'event'){
       $request->validate([
         'title' => 'required|string',
       ]);
-      $tb = new \App\Event;
+      $tb = new Event;
       $tb->file_path = 'storage/'.$path;
       $tb->title = $request->title;
       $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
+      $tb->school_id = Auth::user()->school_id;
+      $tb->user_id = Auth::user()->id;
       $tb->save();
     } else if($request->upload_type == 'routine'){
       $request->validate([
         'title' => 'required|string',
       ]);
-      $tb = new \App\Routine;
+      $tb = new Routine;
       $tb->file_path = 'storage/'.$path;
       $tb->title = $request->title;
       $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
+      $tb->school_id = Auth::user()->school_id;
+      $tb->user_id = Auth::user()->id;
       $tb->section_id = $request->section_id;
       $tb->save();
     } else if($request->upload_type == 'syllabus'){
       $request->validate([
         'title' => 'required|string',
       ]);
-      $tb = new \App\Syllabus;
+      $tb = new Syllabus;
       $tb->file_path = 'storage/'.$path;
       $tb->title = $request->title;
       $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
+      $tb->school_id = Auth::user()->school_id;
+      $tb->user_id = Auth::user()->id;
       $tb->class_id = $request->section_id;
       $tb->save();
     } else if($request->upload_type == 'profile' && $request->user_id > 0){
-      $tb = \App\User::find($request->user_id);
+      $tb = User::find($request->user_id);
       $tb->pic_path = 'storage/'.$path;
       $tb->save();
     }
