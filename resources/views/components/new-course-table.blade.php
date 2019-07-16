@@ -13,13 +13,13 @@
             <th>Class</th>
             <th>Section</th>
             <th>Section Students</th>
-            <th>Action</th>
+            <th>Take Attendance</th>
           @endif
           @foreach ($courses as $course)
             @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
-              <th>Marks Submission</th>
-              <th>View Marks</th>
               <th>Message</th>
+              <th>Submit Grade</th>
+              <th>View Marks</th>
             @endif
             @break
           @endforeach

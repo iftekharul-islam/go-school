@@ -1,9 +1,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <div class="table-responsive">
-    <form action="{{url('school/promote-students')}}" method="post" class="new-added-form">
+    <form action="{{url('admin/school/promote-students')}}" method="post" class="new-added-form">
         {{ csrf_field() }}
         <input type="hidden" name="section_id" value="{{$section_id}}">
-        <table class="table display text-nowrap">
+        <table class="table display text-nowrap border">
             <thead>
                 <tr>
                     <th>#</th>
@@ -22,7 +22,7 @@
                     <th>{{ ($loop->index + 1) }}</th>
                     <td>{{$student->student_code}}</td>
                     <td>
-                        <a href="{{url('student/'.$student->student_code)}}">{{$student->name}}</a>
+                        <a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a>
                     </td>
                     <td>
                         <div class="form-check">
@@ -34,7 +34,7 @@
                         {{$student->studentInfo['session']}}
                     </td>
                     <td>
-                        <input class="form-control datepicker" name="to_session[]"
+                        <input data-date-format="yyyy" class="form-control date" name="to_session[]" id="datepicker"
                             value="{{date('Y', strtotime('+1 year'))}}">
                     </td>
                     <td style="text-align: center;">
@@ -58,14 +58,14 @@
             </tbody>
         </table>
         <div style="text-align:center;" class="mt-5">
-            <input type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark" value="Submit">
+            <input type="submit" class="button button--save" value="Submit">
         </div>
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(function () {
-        $('.datepicker').datepicker({
+        $('.date').datepicker({
             format: "yyyy",
             viewMode: "years",
             minViewMode: "years"

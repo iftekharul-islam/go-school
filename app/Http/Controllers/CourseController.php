@@ -79,12 +79,19 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'course_name' => 'required|unique:courses|max:255',
+            'teacher_id' => 'required',
+            'grade_system' => 'required',
+            'course_type' => 'required',
+            'course_time' => 'required',
+        ]);
         try{
             $this->courseService->addCourse($request);
         } catch (\Exception $ex){
             return 'Could not add course.';
         }
-        return back()->with('status', 'New Course Created');
+        return back()->withInput(['tab'=> 'tab8'] )->with('status', 'New Course Created');
     }
 
     /**
