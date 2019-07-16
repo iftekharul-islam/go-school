@@ -136,13 +136,19 @@
                             <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
                         </div>
                         <div class="student-report">
-                            <div class="student-count pseudo-bg-blue">
-                                <h4 class="item-title">Absent</h4>
-                                <div class="item-number">{{ $absent }}%</div>
-                            </div>
-                            <div class="student-count pseudo-bg-yellow">
+
+                            <div class="student-count pseudo-bg-present">
                                 <h4 class="item-title">Present</h4>
                                 <div class="item-number">{{ $present }}%</div>
+                            </div>
+
+                            <div class="student-count pseudo-bg-escaped">
+                                <h4 class="item-title">Escaped</h4>
+                                <div class="item-number">{{ $escaped }}%</div>
+                            </div>
+                            <div class="student-count pseudo-bg-absent">
+                                <h4 class="item-title">Absent</h4>
+                                <div class="item-number">{{ $absent }}%</div>
                             </div>
                         </div>
                     @else

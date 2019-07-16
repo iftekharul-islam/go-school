@@ -67,9 +67,9 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->student_id == $attendance->student->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent : 0}}</td>
-                                    <td>{{$at->totalescaped ? $at->totalescaped: 0}}</td>
+                                    <td>{{$at->totalPresent ? $at->totalPresent : 0}}</td>
+                                    <td>{{$at->totalAbsent ? $at->totalAbsent : 0}}</td>
+                                    <td>{{$at->totalEscaped ? $at->totalEscaped: 0}}</td>
                                 @else
                                     @continue
                                 @endif
@@ -100,9 +100,9 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->student_id == $student->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
-                                    <td>{{$at->totalescaped ? $at->totalescaped: 0 }}</td>
+                                    <td>{{$at->totalPresent ? $at->totalPresent : 0}}</td>
+                                    <td>{{$at->totalAbsent ? $at->totalAbsent: 0 }}</td>
+                                    <td>{{$at->totalEscaped ? $at->totalEscaped: 0 }}</td>
                                 @else
                                     @continue
                                 @endif

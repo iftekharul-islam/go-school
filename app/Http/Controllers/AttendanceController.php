@@ -56,10 +56,10 @@ class AttendanceController extends Controller
             if(Auth::user()->role == 'student'){
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
                 foreach ($attCount as $att) {
-                    $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
-                    $present = $att->totalpresent;
-                    $absent = $att->totalabsent;
-                    $escaped = $att->totalescaped;
+                    $total =  $att->totalPresent + $att->totalAbsent + $att->totalEscaped;
+                    $present = $att->totalPresent;
+                    $absent = $att->totalAbsent;
+                    $escaped = $att->totalEscaped;
 
                 }
                 $exam = ExamForClass::where('class_id',\Auth::user()->section->class->id)
@@ -72,10 +72,10 @@ class AttendanceController extends Controller
                 $student = $this->attendanceService->getStudent($student_id);
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
                 foreach ($attCount as $att) {
-                    $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
-                    $present = $att->totalpresent;
-                    $absent = $att->totalabsent;
-                    $escaped = $att->totalescaped;
+                    $total =  $att->totalPresent + $att->totalAbsent + $att->totalEscaped;
+                    $present = $att->totalPresent;
+                    $absent = $att->totalAbsent;
+                    $escaped = $att->totalEscaped;
                 }
                 if ($student){
                     $exam = ExamForClass::where('class_id',$student->section->class->id)

@@ -4,7 +4,7 @@
         <div class="heading-layout1">
             <div class="item-title">
                 <h3>@if($upload_type === 'routine')
-                        Class {{ucfirst($upload_type)}}s
+                        <i class="far fa-file-alt mr-2"></i>     Class {{ucfirst($upload_type)}}s
                     @else
                         {{ucfirst($upload_type)}}
                     @endif</h3>

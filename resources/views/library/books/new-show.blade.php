@@ -23,7 +23,12 @@
             {{ session('status') }}
         </div>
         @endif
-        <h3 class="text-center"> Book Details </h3>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="float-left text-teal"><i class="fas fa-book mr-2 text-teal"></i> Book Details </h3>
+            </div>
+
+        </div>
 
         <div class="row">
             <div class="col-md-3 library-image"><img src="{{ $book->img_path }}" alt="{{ $book->title }}" /></div>
@@ -44,7 +49,7 @@
                                                 <td >{{ $book->title }}</td>
                                             </tr>
                                             <tr>
-                                                <td  class="font-medium text-dark-medium">Autdor</td>
+                                                <td  class="font-medium text-dark-medium">Author</td>
                                                 <td>{{ $book->autdor }}</td>
                                             </tr>
                                             <tr>

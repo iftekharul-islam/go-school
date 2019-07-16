@@ -3,15 +3,15 @@
     <h3>
         @foreach($users as $user)
             @if($user->role == 'teacher')
-                All Teachers
+                <i class="fas fa-users mr-2 "></i>  All Teachers
             @elseif($user->role == 'student')
-                All Students
+                <i class="fas fa-users mr-2 "></i>   All Students
             @elseif($user->role == 'accountant')
-                Accountants
+                <i class="fas fa-users mr-2 "></i>  Accountants
             @elseif($user->role == 'librarian')
-                All Librarians
+                <i class="fas fa-users mr-2 "></i>   All Librarians
                 @else
-                All Users
+                <i class="fas fa-users mr-2 "></i>    All Users
             @endif
             @break
         @endforeach

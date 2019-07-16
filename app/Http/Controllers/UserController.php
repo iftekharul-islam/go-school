@@ -198,9 +198,13 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+
+
 //        DB::transaction(function () use ($request) {
             $password = $request->password;
             $tb = $this->userService->storeStudent($request);
+            $this->userService->storeStudentInfo($request, $tb);
+
             try {
                 // Fire event to store Student information
                 if(event(new StudentInfoUpdateRequested($request,$tb->id))){
