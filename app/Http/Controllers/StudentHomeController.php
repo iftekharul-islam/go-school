@@ -96,12 +96,12 @@ class StudentHomeController extends Controller
             $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
             if (!empty($attCount)) {
                 foreach ($attCount as $att) {
-                    $total =  $att->totalpresent + $att->totalabsent + $att->totalescaped;
+                    $total =  $att->totalPresent + $att->totalAbsent + $att->totalEscaped;
                     if ($total > 0)
                     {
-                        $present = ($att->totalpresent * 100) / $total;
-                        $absent = ($att->totalabsent * 100) / $total;
-                        $escaped = ($att->totalescaped * 100) / $total;
+                        $present = ($att->totalPresent * 100) / $total;
+                        $absent = ($att->totalAbsent * 100) / $total;
+                        $escaped = ($att->totalEscaped * 100) / $total;
                     }
                 }
             }

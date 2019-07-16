@@ -1,14 +1,17 @@
 <div class="navbar navbar-expand-md header-menu-one bg-light">
     <div class="nav-bar-header-one">
         <div class="header-logo">
+            @if(\Auth::check())
             @php
                 $x = \Illuminate\Support\Facades\Auth::user()->role;
             @endphp
+
             <a href="{{ url($x.'/home') }}">
 
                 <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
                  <h4 class="heading-logo float-right">shoroborno</h4>
             </a>
+            @endif
         </div>
         <div class="toggle-button sidebar-toggle">
             <button type="button" class="item-link">

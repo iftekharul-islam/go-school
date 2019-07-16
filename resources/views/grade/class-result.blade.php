@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3>Students of Section: <strong> {{$section->section_number}}</strong></h3>
+                        <h3><i class="fas fa-users mr-2"></i>Students of Section: <strong> {{$section->section_number}}</strong></h3>
                     </div>
                 </div>
                 <div class="table-responsive">

@@ -20,7 +20,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h2 class="text-teal text-center">Attendance</h2>
+                    <h2 class="text-teal"><i class="far fa-chart-bar mr-2"></i>Attendance</h2>
                 </div>
             </div>
             @if(count($students) > 0)

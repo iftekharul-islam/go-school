@@ -228,6 +228,35 @@ class UserService {
         return $tb;
     }
 
+    public function  storeStudentInfo($request, $student)
+    {
+        $data = [
+          'student_id' => $student->student_code,
+            'session' => $request->get('session'),
+            'version' => $request->get('version'),
+            'group' => $request->get('group'),
+            'birthday' => $request->get('birthday'),
+            'religion' => $request->get('religion'),
+            'father_name' => $request->get('father_name'),
+            'father_phone_number' => $request->get('father_phone_number'),
+            'father_national_id' => $request->get('father_national_id'),
+            'father_occupation' => $request->get('father_occupation'),
+            'father_designation' => $request->get('father_designation'),
+            'father_annual_income' => $request->get('father_annual_income'),
+            'mother_name' => $request->get('mother_name'),
+            'mother_phone_number' => $request->get('mother_phone_number'),
+            'mother_national_id' => $request->get('mother_national_id'),
+            'mother_occupation' => $request->get('mother_occupation'),
+            'mother_designation' => $request->get('mother_designation'),
+            'mother_annual_income' => $request->get('mother_annual_income'),
+            'user_id' => $student->id
+        ];
+
+            $info =  StudentInfo::create($data);
+            return $info;
+
+    }
+
     public function storeStaff($request, $role){
         $tb = new $this->user;
         $tb->name = $request->name;

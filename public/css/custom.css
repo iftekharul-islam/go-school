@@ -67,3 +67,18 @@
    color: #fff;
    background-color: #287C71;
  }
+
+.pseudo-bg-present:after {
+    background-color: #289286;
+}
+.pseudo-bg-absent:after {
+    background-color: #ff0000;
+}
+.pseudo-bg-escaped:after {
+    background-color: #fc9717;
+}
+
+.dashboard-card-three .card-body .student-report:before {
+    background-color: #ffffff;
+
+}

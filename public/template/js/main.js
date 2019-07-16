@@ -398,7 +398,7 @@
       var doughnutChartData1 = {
         labels: ["Present", "Absent", "Escaped"],
         datasets: [{
-          backgroundColor: ["#ffa601","#304ffe","#FC413E"],
+          backgroundColor: ["#289286","#ff0000","#fc9717"],
           data: [present, absent, escaped],
           label: "Attandaance"
         }, ]

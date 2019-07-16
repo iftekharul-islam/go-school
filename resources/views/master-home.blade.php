@@ -44,7 +44,7 @@
                                         <tr>
                                             <td>{{ ucfirst($school->medium) }}</td>
                                             <td>{{ $school->code }}</td>
-                                            <td>{{count($school->users)}}</td>
+                                            <td>{{count($school->users->where('role', 'student'))}}</td>
                                             <td>{{count($school->departments)}}</td>
                                         </tr>
                                     </tbody>

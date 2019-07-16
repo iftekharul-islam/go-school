@@ -21,13 +21,17 @@
         </ul>
     </div>
     <div class="card">
-        <div class="card-body">
+        <div class="card-body section-details">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Courses</h3>
+                   <div class="row">
+                       <div class="col-12">
+                           <h3><i class="fas fa-book-open mr-2"></i>Courses</h3>
+                       </div>
+                   </div>
                     @if(count($courses) > 0)
                         @foreach ($courses as $course)
-                            <div class="page-panel-title" style="text-align: center"><b>Section</b> -   {{$course->section->section_number}} &nbsp;<b>Class</b> -  {{$course->section->class->class_number}}</div>
+                            <div class="page-panel-title"><b>Section</b> -   {{$course->section->section_number}} &nbsp;<b>Class</b> -  {{$course->section->class->class_number}}</div>
                             @break($loop->first)
                         @endforeach
                     @endif
@@ -67,7 +71,7 @@
             @if(count($students) > 0)
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3>Students</h3>
+                        <h3><i class="fas fa-users mr-2"></i>Students</h3>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -102,8 +106,6 @@
         <div class="card-body">
             <div id="main-container">
                 <div class="panel panel-default">
-                    <div class="page-panel-title">Add Routine
-                    </div>
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">

@@ -405,7 +405,7 @@
                                             </div>
 
                                             <div class="tab-pane fade border-0" id="tab12" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm" action="{{ url('admin/register/student') }}">
+                                                <form class="new-added-form" method="POST" id="registerForm" enctype="multipart/form-data" action="{{ url('admin/register/student') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -413,7 +413,7 @@
                                                                 <label for="name" class="col-md-4 control-label">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="name" type="text" class="form-control" name="name" value="" required>
+                                                                    <input id="na   me" type="text" class="form-control" name="name" value="" required>
 
                                                                     @if ($errors->has('name'))
                                                                         <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
