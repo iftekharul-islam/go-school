@@ -108,13 +108,7 @@ class GradeController extends Controller
       return view('grade.class-result',compact('grades', 'students', 'section'));
     }
 
-    public function calculateMarks(CalculateMarksRequest $request){
-      $gradeSystem = $this->gradeService->getGradeSystemByname($request->grade_system_name);
-      $this->gradeService->course_id = $request->course_id;
-      $course = $this->gradeService->getCourseByCourseId();
-      $grades = $this->gradeService->getGradesByCourseExam($request->course_id, $request->exam_id)->toArray();
-      $tbc = $this->gradeService->calculateGpaFromTotalMarks($grades, $course, $gradeSystem);
-      $this->gradeService->saveCalculatedGPAFromTotalMarks($tbc);
+    public function calculateMarks(Request $request){
       $this->gradeService->course_id = $request->course_id;
       $this->gradeService->exam_id = $request->exam_id;
       $this->gradeService->teacher_id = $request->teacher_id;
@@ -201,6 +195,13 @@ class GradeController extends Controller
             $tb->save();
             $i++;
         }
+        $gradeSystem = $this->gradeService->getGradeSystemByname($request->grade_system_name);
+        $this->gradeService->course_id = $request->course_id;
+        $course = $this->gradeService->getCourseByCourseId();
+        $grades = $this->gradeService->getGradesByCourseExam($request->course_id, $request->exam_id)->toArray();
+        $tbc = $this->gradeService->calculateGpaFromTotalMarks($grades, $course, $gradeSystem);
+        $this->gradeService->saveCalculatedGPAFromTotalMarks($tbc);
+
         return back()->with('status', 'Saved');
     }
 

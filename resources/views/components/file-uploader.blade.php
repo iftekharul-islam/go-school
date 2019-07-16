@@ -22,7 +22,7 @@
     @endif
 
     <div class="form-group mg-t-30">
-        <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('upload/file')}}" class="form-control-file">
+        <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('admin/upload/file')}}" class="form-control-file">
     </div>
 
     <div class="basic-progress-bar" id="progress" style="display: none">

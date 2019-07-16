@@ -33,8 +33,7 @@ Route::middleware(['auth'])->group(function (){
   Route::get('user/config/change_password', 'UserController@changePasswordGet');
   Route::post('user/config/change_password', 'UserController@changePasswordPost');
 
-
-    // Master role routes
+// Master role routes
     Route::group(['prefix' => 'master', 'middleware' => 'master'], function() {
         Route::get('/home', 'MasterHomeController@index')->name('master.home');
         Route::get('register/admin/{id}', 'AdminController@create');
@@ -78,7 +77,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('create/book', 'Library\BookController@create');
         Route::post('book/store', 'Library\BookController@store');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
-
+        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
     });
 
 //Accountant role routes
@@ -113,6 +112,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('edit-expense/{id}','AccountController@editExpense');
         Route::post('update-expense','AccountController@updateExpense');
         Route::get('delete-expense/{id}','AccountController@deleteExpense');
+        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
     });
 
 // Teacher role routes
@@ -138,10 +138,11 @@ Route::middleware(['auth'])->group(function (){
 
         Route::get('grades/t/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@tindex')->name('teacher-grade');
         Route::get('grades/c/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'GradeController@cindex');
-        Route::post('grades/calculate-marks','GradeController@calculateMarks');
+        Route::get('grades/calculate-marks','GradeController@calculateMarks');
         Route::post('grades/save-grade','GradeController@update');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::post('message/students', 'NotificationController@store');
+        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
     });
 
 // Admin role routes
@@ -150,7 +151,8 @@ Route::middleware(['auth'])->group(function (){
 
         Route::get('gpa/create-gpa', 'GradesystemController@create');
         Route::post('create-gpa', 'GradesystemController@store');
-        Route::get('gpa/delete/{id}', 'GradesystemController@destroy');
+        Route::post('update-gpa/{id}', 'GradesystemController@update');
+        Route::get('gpa/edit/{id}', 'GradesystemController@edit');
         Route::get('gpa/all-gpa', 'GradesystemController@index');
         Route::get('all-department','SchoolController@allDepartment');
 

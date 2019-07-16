@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gradesystem;
 use App\School;
 use App\Myclass;
 use App\Section;
@@ -36,14 +37,14 @@ class SchoolController extends Controller
         $teacherDepartments = Department::where('school_id',\Auth::user()->school_id)->get();
         $teacherClasses = Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
         $teacherSections = Section::with('class')->whereIn('class_id',$teacherClasses)->get();
+        $gradeSystems = Gradesystem::where('school_id', Auth::user()->school_id)->get();
 
-        $teachers = User::join('departments', 'departments.id', '=', 'users.department_id')
-            ->where('role', 'teacher')
+        $teachers = User::where('role', 'teacher')
             ->orderBy('name','ASC')
             ->where('active', 1)
             ->get();
         $departments = Department::where('school_id',\Auth::user()->school_id)->get();
-        return view('school.new-create-school', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+        return view('school.new-create-school', compact('schools',  'gradeSystems','classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
     /**

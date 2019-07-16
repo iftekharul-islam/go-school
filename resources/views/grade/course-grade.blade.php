@@ -170,7 +170,7 @@
           <div class="panel panel-default mt-5">
             @if(count($grades) > 0)
               <div class="page-panel-title" style="font-size: 15px;">
-                <form class="new-added-form mb-3" action="{{url('teacher/grades/calculate-marks')}}" method="POST">
+                <form class="new-added-form mb-3" action="{{url('teacher/grades/calculate-marks')}}" method="GET">
                   {{csrf_field()}}
                   <span style="font-size: 20px">Give Marks to Students</span>
                   <input type="hidden" name="course_id" value="{{$course_id}}">
@@ -181,7 +181,7 @@
                   @endforeach
                   <input type="hidden" name="exam_id" value="{{$exam_id}}">
                   <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
-                  <button type="submit" class="button button--text ml-3">
+                  <button type="submit" class="button button--text ml-3 float-right">
                     Get Total Marks
                   </button>
                 </form>

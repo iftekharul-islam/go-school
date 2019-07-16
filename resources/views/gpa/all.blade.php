@@ -58,11 +58,12 @@
                                 <td>{{$gpa->from_mark}}</td>
                                 <td>{{$gpa->to_mark}}</td>
                                 <td>
-                                    <button class="btn btn-danger btn-lg" type="button" onclick="removeGrade({{ $gpa->id }})"><i class="far fa-trash-alt"></i>Delete</button>
-                                    <form id="delete-form-{{ $gpa->id }}" action="{{ url('admin/gpa/delete',$gpa->id) }}" method="GET" style="display: none;">
-                                        @csrf
-                                        @method('GET')
-                                    </form>
+                                    <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpa->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
+{{--                                    <button class="btn btn-danger btn-lg" type="button" onclick="removeGrade({{ $gpa->id }})"><i class="far fa-trash-alt"></i>Delete</button>--}}
+{{--                                    <form id="delete-form-{{ $gpa->id }}" action="{{ url('admin/gpa/delete',$gpa->id) }}" method="GET" style="display: none;">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('GET')--}}
+{{--                                    </form>--}}
                                 </td>
                             </tr>
                         @endforeach

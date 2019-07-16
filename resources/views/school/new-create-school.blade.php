@@ -1295,8 +1295,5 @@
             var idx = $(this).index('a[data-toggle="tab"]');
             $('#tab-' + idx).addClass('active');
         });
-        $("#").click(function(){
-            alert("This paragraph was clicked.");
-        });
     </script>
 @endsection

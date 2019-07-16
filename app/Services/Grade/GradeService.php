@@ -168,12 +168,14 @@ class GradeService {
   }
 
   public function saveCalculatedGPAFromTotalMarks($tbc){
-    try{
-      if(count($tbc) > 0)
-        return \Batch::update('grades',$tbc,'id');
-    }catch(\Exception $e){
-      return "OOps, an error occured";
+    foreach ($tbc as $tb)
+    {
+        $grade = Grade::find($tb['id']);
+        $grade->marks = floatval($tb['marks']);
+        $grade->gpa = floatval($tb['gpa']);
+        $grade->save();
     }
+    return;
   }
 
     public function calculateMarks($course, $grade){

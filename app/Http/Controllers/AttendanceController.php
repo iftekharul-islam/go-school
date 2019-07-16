@@ -160,6 +160,11 @@ class AttendanceController extends Controller
     {
 
         $course =  Course::with('section')->where('section_id', $section_id)->first();
+        $examID = 0;
+        if ($course->exam_id)
+        {
+            $examID = $course->exam_id;
+        }
         $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
         $students = $this->attendanceService->getStudentsBySection($section_id);
         $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$course->exam_id);
@@ -174,7 +179,7 @@ class AttendanceController extends Controller
                 'section_id' => $section_id,
                 'students' => $students,
                 'attCount' => $attCount,
-                'exam_id'=>$course->exam_id
+                'exam_id'=>$examID
             ]);
         }
     }

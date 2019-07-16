@@ -65,8 +65,8 @@
 {{--                </div>--}}
             <div class="row mt-5">
                 <div class="col-md-12">
-                    <div class="card height-auto">
-                        <div class="card-body">
+                    <div class="height-auto">
+                        <div class="">
                             @if (session('status'))
                                 <div class="alert alert-success">
                                     {{ session('status') }}

@@ -12,27 +12,12 @@
               <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name" placeholder="Course Name">
             </div>
           </div>
-          <div class="form-group">
-            <label for="teacherDepartment{{$section->id}}" class="col-sm-12 control-label">Teacher Department</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="teacherDepartment{{$section->id}}" name="teacher_department">
-                <option value="0" selected disabled>Select Department</option>
-                @if(count($departments) > 0)
-                  {{$departments_of_this_school = $departments->filter(function ($department) use ($school){
-                    return $department->school_id == $school->id;
-                  })}}
-                  @foreach ($departments_of_this_school as $d)
-                    <option value="{{$d->department_name}}">{{$d->department_name}}</option>
-                  @endforeach
-                @endif
-              </select>
-            </div>
-          </div>
+
           <div class="form-group">
             <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label">Assign Course Teacher</label>
             <div class="col-sm-10">
               <select class="form-control" id="assignTeacher{{$section->id}}" name="teacher_id">
-                <option value="0" selected disabled>Select Department First</option>
+                <option value="0" selected disabled>Select Teacher</option>
                 @if(count($teachers) > 0)
                   {{$teachers_of_this_school = $teachers->filter(function ($teacher) use ($school){
                     return $teacher->school_id == $school->id;
@@ -44,6 +29,21 @@
               </select>
             </div>
           </div>
+
+        <div class="form-group">
+          <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label">Select Grade System</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="assignTeacher{{$section->id}}" name="grade_system">
+              <option value="0" selected disabled>Select Grade System</option>
+              @if(count($gradeSystems) > 0)
+                @foreach($gradeSystems as $gs)
+                  <option value="{{$gs->grade_system_name}}" data-department="{{$gs->grade_system_name}}">{{$gs->grade_system_name}}</option>
+                @endforeach
+              @endif
+            </select>
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="course_type{{$section->id}}" class="col-sm-12 control-label">Course Type</label>
           <div class="col-sm-10">
@@ -73,6 +73,6 @@
 <script>
   $('#teacherDepartment{{$section->id}}').click(function () {
     $("#assignTeacher{{$section->id}} option").hide();
-    $("#assignTeacher{{$section->id}} option[data-department="+$(this).val()+"]").show();
+    {{--$("#assignTeacher{{$section->id}} option[data-department="+$(this).val()+"]").show();--}}
   });
 </script>

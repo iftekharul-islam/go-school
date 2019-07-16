@@ -57,7 +57,10 @@ class GradesystemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){}
+    public function edit($id){
+        $grade = Gradesystem::findOrFail($id);
+        return view('gpa.edit', compact('grade'));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -65,7 +68,18 @@ class GradesystemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){}
+    public function update(Request $request, $id){
+        $gpa = Gradesystem::findOrFail($id);
+        $gpa->grade_system_name = $request->grade_system_name;
+        $gpa->point = $request->point;
+        $gpa->grade = $request->grade;
+        $gpa->from_mark = $request->from_mark;
+        $gpa->to_mark = $request->to_mark;
+        $gpa->school_id = \Auth::user()->school_id;
+        $gpa->user_id = \Auth::user()->id;
+        $gpa->save();
+        return redirect()->back()->with('status', 'Grade System Updated !!');
+    }
       /**
        * Remove the specified resource from storage.
        *

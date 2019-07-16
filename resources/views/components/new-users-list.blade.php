@@ -117,7 +117,7 @@
                                 @if($user->role == 'teacher')
                                     <td style="white-space: nowrap;">
 
-                                        <a class="text-teal" href="{{url('courses/'.$user->id.'/0')}}">All Courses</a>
+                                        <a class="text-teal" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/courses/'.$user->id.'/0')}}">All Courses</a>
 
                                     </td>
                                 @endif
@@ -138,7 +138,7 @@
                         {{--                        @endif--}}
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                             @if($user->role == 'student')<td><a class="button button--text" role="button"
-                                                                href="{{url('attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
+                                                                href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Mavinoo\LaravelBatch\Batch;
 
 class UserService {
-    
+
     protected $user;
     protected $db;
     protected $batch;
@@ -86,20 +86,22 @@ class UserService {
 
                 ++$i;
             }
-            
-            $this->promoteSectionStudentsPostDBTransaction();
-            
-            return back()->with('status', 'Saved');
-        }
-    }
 
-    public function promoteSectionStudentsPostDBTransaction(){
-        return $this->db::transaction(function () {
-            $table1 = 'users';
-            $this->batch->update($table1, $this->st, 'id');
-            $table2 = 'student_infos';
-            $this->batch->update($table2, $this->st2, 'student_id');
-        });
+            foreach ($this->st as $item) {
+                $stdnt = User::where('id', $item['id'])->first();
+                $stdnt->section_id = $item['section_id'];
+                $stdnt->active = $item['active'];
+                $stdnt->save();
+            }
+            foreach ($this->st2 as $value) {
+                $stdntInfo = StudentInfo::where('student_id', $value['student_id'])->first();
+                if(!empty($stdntInfo)) {
+                    $stdntInfo->session = $value['session'];
+                    $stdntInfo->save();
+                }
+            }
+            return back()->withInput(['tab'=> 'tab8'] )->with('status', 'All Student Promoted !');
+        }
     }
 
     public function isAccountant($role){
@@ -166,6 +168,7 @@ class UserService {
     public function getSectionStudentsWithStudentInfo($section_id){
         return $this->user->with('section', 'studentInfo')
                 ->where('section_id', $section_id)
+                ->where('role', 'student')
                 ->where('active', 1)
                 ->get();
     }
@@ -173,6 +176,7 @@ class UserService {
     public function getSectionStudents($section_id){
         return $this->user->where('section_id', $section_id)
                 ->where('active', 1)
+                ->where('role', 'student')
                 ->get();
     }
 

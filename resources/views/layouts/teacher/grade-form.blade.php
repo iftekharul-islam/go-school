@@ -90,6 +90,9 @@
   <input type="hidden" name="course_id" value="{{$course_id}}">
   <input type="hidden" name="exam_id" value="{{$exam_id}}">
   <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
+  @foreach($gradesystems as $gs)
+    <input type="hidden" name="grade_system_name" value="{{$gs->grade_system_name}}">
+  @endforeach
   <div class="table-responsive">
     <table class="table table-condensed table-hover" id="marking-table">
       <thead>
