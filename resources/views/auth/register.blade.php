@@ -9,7 +9,7 @@
         <h3>Dashboard</h3>
         <ul>
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
             </li>
             <li>Register</li>
         </ul>

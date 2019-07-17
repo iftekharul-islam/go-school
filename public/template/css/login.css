@@ -415,4 +415,47 @@ button:focus {
     opacity: 1;
 }
 
+.button--reset {
+    background-color: #279689;
+    color: #fdfdfd;
+    font-size: 14px;
+    margin-top: 4%;
+    font-weight: bold;
+    padding: 2rem 3rem;
+    text-transform: uppercase;
+}
+
+.reset-password {
+    color: #ff3524;
+    font-size: 16px;
+}
+
+.reset-alert {
+    color: #279689;
+    font-size: 19px;
+}
+
+.mb-12 {
+    margin-bottom: 12px!important;
+}
+
+
+.header-text-reset {
+    background-size: cover;
+    border: 7px solid rgba(32, 78, 74, 0);
+    background-color: #fdfdfd;
+    position: absolute;
+    height: 458px;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    border-radius: 55px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.11), 0 16px 27px 0 rgba(0, 0, 0, 0.05);
+}
+
+.panel-reset-title {
+    font-size: 22px;
+}
 /*# sourceMappingURL=style.css.map */

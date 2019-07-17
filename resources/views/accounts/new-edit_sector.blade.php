@@ -5,7 +5,7 @@
         <h3>Hostel List</h3>
         <ul>
             <li>
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
             </li>
             <li>Edit Sector</li>
         </ul>

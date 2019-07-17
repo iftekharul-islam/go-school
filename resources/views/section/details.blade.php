@@ -10,7 +10,7 @@
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url('/home') }}">&nbsp;&nbsp;Home</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             @if(isset($_GET['grade']) && $_GET['grade'] == 1)
                 <li><a href="{{url('grades/all-exams-grade')}}">Grades</a></li>
