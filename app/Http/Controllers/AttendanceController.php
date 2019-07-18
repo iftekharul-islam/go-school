@@ -56,10 +56,10 @@ class AttendanceController extends Controller
             if(Auth::user()->role == 'student'){
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
                 foreach ($attCount as $att) {
-                    $total =  $att->totalPresent + $att->totalAbsent + $att->totalEscaped;
-                    $present = $att->totalPresent;
-                    $absent = $att->totalAbsent;
-                    $escaped = $att->totalEscaped;
+                    $total =  $att->total_present + $att->total_absent + $att->total_escaped;
+                    $present = $att->total_present;
+                    $absent = $att->total_absent;
+                    $escaped = $att->total_escaped;
 
                 }
                 $exam = ExamForClass::where('class_id',\Auth::user()->section->class->id)
@@ -72,10 +72,10 @@ class AttendanceController extends Controller
                 $student = $this->attendanceService->getStudent($student_id);
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
                 foreach ($attCount as $att) {
-                    $total =  $att->totalPresent + $att->totalAbsent + $att->totalEscaped;
-                    $present = $att->totalPresent;
-                    $absent = $att->totalAbsent;
-                    $escaped = $att->totalEscaped;
+                    $total =  $att->total_present + $att->total_absent + $att->total_escaped;
+                    $present = $att->total_present;
+                    $absent = $att->total_absent;
+                    $escaped = $att->total_escaped;
                 }
                 if ($student){
                     $exam = ExamForClass::where('class_id',$student->section->class->id)
@@ -161,13 +161,13 @@ class AttendanceController extends Controller
 
         $course =  Course::with('section')->where('section_id', $section_id)->first();
         $examID = 0;
-        if ($course->exam_id)
+        if (!empty($course->exam_id))
         {
             $examID = $course->exam_id;
         }
         $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
         $students = $this->attendanceService->getStudentsBySection($section_id);
-        $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$course->exam_id);
+        $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id);
         $request->session()->put('section-attendance', true);
         if($section_id > 0 && \Auth::user()->role != 'student') {
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);

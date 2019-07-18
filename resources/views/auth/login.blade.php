@@ -1,8 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.student-app')
 
 @section('title', 'Login')
 
 @section('content')
+    @auth()
+        <script>window.location = "{{ \Illuminate\Support\Facades\Auth::user()->role }}/home";</script>
+    @else
+        <script>window.location = "/";</script>
+    @endauth
 <div class="container mt-5">
             <div class="row justify-content-md-center">
                 <div class="col-lg-12">

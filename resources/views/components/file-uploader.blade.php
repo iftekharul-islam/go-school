@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <div class="form-group mg-t-30">
+    <div class="form-group mg-t-10">
         <input id="fileupload" type="file"  accept=".xlsx,.xls,.doc,.docx,.ppt,.pptx,.txt,.pdf,image/png,image/jpeg" name="file" data-url="{{url('admin/upload/file')}}" class="form-control-file">
     </div>
 
@@ -39,6 +39,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
 <script>
 $(function () {
+    console.log("File Upload");
     var jqXHR = null;
     var uploadButton = $('<button/>')
             .addClass('btn btn-primary ml-5 mt-2 btn-lg')
@@ -61,7 +62,6 @@ $(function () {
                     var acceptFileTypes = /application\/(pdf|xlsx|xls|doc|docx|ppt|pptx|txt)|image\/(png|jpeg)$/i;
                     var filesSize = 50 * 1024 * 1024;
                     var file = data.originalFiles[0];
-                    console.log(file['type']);
 
                     if(file['type'].length && !acceptFileTypes.test(file['type'])) {
                         $('#fileupload').show();
@@ -134,7 +134,6 @@ $(function () {
             data.context.text('File Upload has been cancelled');
             var error = data['jqXHR']['responseJSON']['error'];
             $('#errorAlert').text(error);
-            console.log(data['jqXHR']['responseJSON']);
     });
 });
 </script>

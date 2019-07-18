@@ -20,11 +20,13 @@ use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
+use Illuminate\Support\Facades\Storage;
 use Mavinoo\LaravelBatch\Batch;
 use App\Events\UserRegistered;
 use App\Events\StudentInfoUpdateRequested;
 use Illuminate\Support\Facades\Log;
 use App\Services\User\UserService;
+use Illuminate\Http\File;
 /**
  * Class UserController
  * @package App\Http\Controllers
@@ -199,10 +201,10 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
 
-
+        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('student_pic'));
 //        DB::transaction(function () use ($request) {
             $password = $request->password;
-            $tb = $this->userService->storeStudent($request);
+            $tb = $this->userService->storeStudent($request, $path);
             $this->userService->storeStudentInfo($request, $tb);
 
             try {
@@ -252,8 +254,9 @@ class UserController extends Controller
      */
     public function storeTeacher(CreateTeacherRequest $request)
     {
+        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('teacher_pic'));
         $password = $request->password;
-        $tb = $this->userService->storeStaff($request, 'teacher');
+        $tb = $this->userService->storeStaff($request, 'teacher', $path);
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
@@ -270,8 +273,9 @@ class UserController extends Controller
      */
     public function storeAccountant(CreateAccountantRequest $request)
     {
+        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path'));
         $password = $request->password;
-        $tb = $this->userService->storeStaff($request, 'accountant');
+        $tb = $this->userService->storeStaff($request, 'accountant', $path);
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
@@ -288,8 +292,9 @@ class UserController extends Controller
      */
     public function storeLibrarian(CreateLibrarianRequest $request)
     {
+        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('librarian_pic'));
         $password = $request->password;
-        $tb = $this->userService->storeStaff($request, 'librarian');
+        $tb = $this->userService->storeStaff($request, 'librarian', $path);
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));

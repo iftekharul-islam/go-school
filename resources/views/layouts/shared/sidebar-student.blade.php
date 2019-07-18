@@ -86,7 +86,7 @@
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/notices-and-events') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events && Notices</span></a>
+                        <a href="{{ url('student/notices-and-events') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('student/user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">
