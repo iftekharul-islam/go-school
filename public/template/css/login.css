@@ -115,7 +115,7 @@ body {
     border: 1px solid #ed5e68 !important;
     padding: 8px 12px;
     font-size: 14px;
-    border-radius: 0px !important;
+    border-radius: 3px !important;
     text-transform: capitalize;
     font-weight: 600;
 }
@@ -126,7 +126,7 @@ body {
     border: 1px solid #0c8fce !important;
     padding: 8px 12px;
     font-size: 14px;
-    border-radius: 0px !important;
+    border-radius: 3px !important;
     text-transform: capitalize;
     font-weight: 600;
 }
@@ -136,7 +136,7 @@ body {
     border: 1px solid #32998f !important;
     padding: 8px 12px;
     font-size: 14px;
-    border-radius: 0px !important;
+    border-radius: 3px !important;
     text-transform: capitalize;
     font-weight: 600;
 }

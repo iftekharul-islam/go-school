@@ -9,7 +9,7 @@
     </div> -->
 <div class="single-info-details">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="item-img-round">
                 @if(!empty($user->pic_path))
                     <img src="{{url($user->pic_path)}}" data-src="{{url($user->pic_path)}}" class="" id="my-profile"
@@ -30,7 +30,7 @@
 
                 <!-- <td>Student's Name:</td> -->
                     <div class="profile-name">
-                        <h3 class="">{{$user->name}}</h3>
+                        <h3 class="mt-3">{{$user->name}}</h3>
                     </div>
                     <div class="info-table table-responsive">
                         <table class="text-nowrap table-borderless table ">
@@ -52,50 +52,84 @@
                     </div>
                 @endif
             </div>
-
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
+            <div class="heading-sub fancy4 ">Basic Details</div>
             <div class="item-content">
                 @if($user->role == "student")
-                    <div class="row mg-t-60">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class=" table-responsive border-right">
                                 <table class="text-wrap table-borderless table ">
                                     <tr>
                                         <td class="text-nowrap font-medium text-dark-medium">Student ID:</td>
                                         <td class="text-capitalize">{{$user->student_code}}</td>
-
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Version:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['version']}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Gender:</td>
-                                        <td class="text-capitalize">{{$user->gender}}</td>
-
+                                        <td class="font-medium text-dark-medium text-nowrap">Class:</td>
+                                        <td>{{$user->section->class->class_number}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Nationality:</td>
-                                        <td class="text-capitalize">{{$user->nationality}}</td>
-
+                                        <td class="font-medium text-dark-medium text-nowrap">Gender:</td>
+                                        <td class="text-capitalize">{{$user->gender}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Religion:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['religion']}}</td>
-
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Address:</td>
+                                        <td class="font-medium text-dark-medium text-nowrap">Address:</td>
                                         <td class="text-capitalize">{{$user->address}}</td>
                                     </tr>
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" table-responsive">
+                                <table class="text-wrap table-borderless table ">
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Section:</td>
+                                        <td class="text-capitalize">{{$user->section->section_number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Session:</td>
+                                        <td class="text-capitalize">{{$user->studentInfo['session']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Group:</td>
+                                        <td class="text-capitalize">{{$user->studentInfo['group']}}</td>
+                                        {{--                <td colspan="2"></td>--}}
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Nationality:</td>
+                                        <td class="text-capitalize">{{$user->nationality}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Blood Group:</td>
+                                        <td class="text-capitalize">{{$user->blood_group}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heading-sub fancy4 ">Parent's Information</div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table-responsive border-right">
+                                <table class="text-wrap table-borderless table">
                                     <tr>
                                         <td class="font-medium text-dark-medium">Father Name:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['father_name']}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Father's Phone Number:</td>
-                                        <td >{{$user->studentInfo['father_phone_number']}}</td>
+                                        <td class="font-medium text-nowrap text-dark-medium">Father's Phone Number:</td>
+                                        <td>{{$user->studentInfo['father_phone_number']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium">Father's National ID:</td>
@@ -120,44 +154,15 @@
                             <div class="table-responsive">
                                 <table class="text-wrap table-borderless table">
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Class:</td>
-                                        <td>{{$user->section->class->class_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Section:</td>
-                                        <td class="text-capitalize">{{$user->section->section_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Session:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['session']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Group:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['group']}}</td>
-                                        {{--                <td colspan="2"></td>--}}
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Email:</td>
-                                        <td >{{$user->email}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Contact Number</td>
-                                        <td>{{$user->phone_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Blood Group:</td>
-                                        <td class="text-capitalize">{{$user->blood_group}}</td>
-                                    </tr>
-                                    <tr>
                                         <td class="font-medium text-dark-medium">Mother Name:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['mother_name']}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Mother's Phone Number:</td>
+                                        <td class="font-medium text-nowrap text-dark-medium">Mother's Phone Number:</td>
                                         <td>{{$user->studentInfo['mother_phone_number']}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Mother's National ID:</td>
+                                        <td class="font-medium text-nowrap text-dark-medium">Mother's National ID:</td>
                                         <td class="">{{$user->studentInfo['mother_national_id']}}</td>
                                     </tr>
                                     <tr>
@@ -166,7 +171,8 @@
 
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Mother's Annual Income:</td>
+                                        <td class="font-medium text-nowrap text-dark-medium">Mother's Annual Income:
+                                        </td>
                                         <td>{{$user->studentInfo['mother_annual_income']}}</td>
                                     </tr>
                                     <tr>
@@ -175,85 +181,85 @@
                                     </tr>
                                 </table>
                             </div>
+                            </div>
                         </div>
-                    </div>
-                  @endif
-                    @if($user->role == "teacher" || $user->role == "accountant" || $user->role == "librarian" || $user->role == "admin" )
+                @endif
+                @if($user->role == "teacher" || $user->role == "accountant" || $user->role == "librarian" || $user->role == "admin" )
 
-                      <div class="info-table table-responsive">
+                    <div class="info-table table-responsive">
                         <table class="table text-wrap">
-                          <tbody>
-                          <tr>
-                            <td class="font-medium text-dark-medium">Name:</td>
-                            <td >{{$user->name}}</td>
-                          </tr>
-                          <tr>
-                            <td class="font-medium text-dark-medium">User Type:</td>
-                            <td class="text-capitalize">{{$user->role}}</td>
-                          </tr>
-                          <tr>
-                            <td class="font-medium text-dark-medium">Gender:</td>
-                            <td class="text-capitalize">{{ $user->gender }}</td>
-                          </tr>
+                            <tbody>
+                            <tr>
+                                <td class="font-medium text-dark-medium">Name:</td>
+                                <td>{{$user->name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium text-dark-medium">User Type:</td>
+                                <td class="text-capitalize">{{$user->role}}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium text-dark-medium">Gender:</td>
+                                <td class="text-capitalize">{{ $user->gender }}</td>
+                            </tr>
 
-                          <tr>
-                            <td class="font-medium text-dark-medium">E-mail:</td>
-                            <td>{{ $user->email }}</td>
-                          </tr>
-                          <tr>
-                              @if($user->role === 'teacher')
-                                  <tr>
-                                      <td class="font-medium text-dark-medium">Section:</td>
-                                      <td class="text-capitalize">{{ ucfirst($user->section->section_number)}}</td>
-                                  </tr>
-                                  <tr>
-                                      <td class="font-medium text-dark-medium">Class Teacher:</td>
-                                      <td class="text-capitalize">{{ ucfirst( $user->section->class_id ) }}</td>
-                                  </tr>
-                              @endif
-                          </tr>
-                          <tr>
-                            <td class="font-medium text-dark-medium">Address:</td>
-                            <td>{{$user->address}}</td>
-                          </tr>
-                          <tr>
-                            <td class="font-medium text-dark-medium">Phone:</td>
-                            <td>{{$user->phone_number}}</td>
-                          </tr>
-                          <tr>
-                            <td class="font-medium text-dark-medium">About: </td>
-                            <td>{{$user->about}}</td>
-                          </tr>
-                          </tbody>
+                            <tr>
+                                <td class="font-medium text-dark-medium">E-mail:</td>
+                                <td>{{ $user->email }}</td>
+                            </tr>
+                            <tr>
+                            @if($user->role === 'teacher')
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Section:</td>
+                                    <td class="text-capitalize">{{ ucfirst($user->section->section_number)}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Class Teacher:</td>
+                                    <td class="text-capitalize">{{ ucfirst( $user->section->class_id ) }}</td>
+                                </tr>
+                                @endif
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Address:</td>
+                                    <td>{{$user->address}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Phone:</td>
+                                    <td>{{$user->phone_number}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium">About:</td>
+                                    <td>{{$user->about}}</td>
+                                </tr>
+                            </tbody>
                         </table>
-                      </div>
+                    </div>
 
-{{--                      <div class="table-responsive">--}}
-{{--                        <table class="table text-wrap">--}}
-{{--                          <tr>--}}
-{{--                            <td><b>Code:</b></td>--}}
-{{--                            <td>{{$user->student_code}}</td>--}}
-{{--                            <td><b>About:</b></td>--}}
-{{--                            <td>{{$user->about}}</td>--}}
-{{--                          </tr>--}}
-{{--                          <tr>--}}
-{{--                            <td><b>Nationality:</b></td>--}}
-{{--                            <td>{{$user->nationality}}</td>--}}
-{{--                            <td><b>Religion:</b></td>--}}
-{{--                            <td>{{$user->studentInfo['religion']}}</td>--}}
-{{--                          </tr>--}}
+                    {{--                      <div class="table-responsive">--}}
+                    {{--                        <table class="table text-wrap">--}}
+                    {{--                          <tr>--}}
+                    {{--                            <td><b>Code:</b></td>--}}
+                    {{--                            <td>{{$user->student_code}}</td>--}}
+                    {{--                            <td><b>About:</b></td>--}}
+                    {{--                            <td>{{$user->about}}</td>--}}
+                    {{--                          </tr>--}}
+                    {{--                          <tr>--}}
+                    {{--                            <td><b>Nationality:</b></td>--}}
+                    {{--                            <td>{{$user->nationality}}</td>--}}
+                    {{--                            <td><b>Religion:</b></td>--}}
+                    {{--                            <td>{{$user->studentInfo['religion']}}</td>--}}
+                    {{--                          </tr>--}}
 
-{{--                          <tr>--}}
-{{--                            <td><b>Address:</b></td>--}}
-{{--                            <td>{{$user->address}}</td>--}}
-{{--                            <td><b>Phone Number:</b></td>--}}
-{{--                            <td>{{$user->phone_number}}</td>--}}
+                    {{--                          <tr>--}}
+                    {{--                            <td><b>Address:</b></td>--}}
+                    {{--                            <td>{{$user->address}}</td>--}}
+                    {{--                            <td><b>Phone Number:</b></td>--}}
+                    {{--                            <td>{{$user->phone_number}}</td>--}}
 
-{{--                          </tr>--}}
-{{--                        </table>--}}
-{{--                      </div>--}}
-                    @endif
-                </div>
-              </div>
+                    {{--                          </tr>--}}
+                    {{--                        </table>--}}
+                    {{--                      </div>--}}
+                @endif
             </div>
-          </div>
+        </div>
+    </div>
+</div>

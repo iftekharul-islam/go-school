@@ -3,7 +3,8 @@
 @section('content')
 <div class="breadcrumbs-area">
     <h3>
-        </a>All Active Exams
+        <i class="fas fa-file-alt"></i>
+        All Active Exams
     </h3>
     <ul>
         <li> <a href="javascript:history.back()" style="color: #32998f!important;">
@@ -20,8 +21,8 @@
         <div class="row">
             @foreach($exams as $exam)
             <div class="col-md-3">
-                <div class="card mb-4 mt-4">
-                    <h5 class="card-header text-muted text-left" style="text-transform: capitalize;">
+                <div class="card mb-5">
+                    <h5 class="card-sub-header text-muted text-left" style="text-transform: capitalize;">
                     <i style='font-size:24px;margin-left:-20px;' class='flaticon-classmates text-teal'></i>
                         {{$exam->exam_name}}</h5>
                     <div class="card-body-customized">

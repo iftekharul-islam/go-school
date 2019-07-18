@@ -2,7 +2,9 @@
 @section('title', 'Edit Sector')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Hostel List</h3>
+        <h3>
+            <i class="fas fa-file-invoice-dollar"></i>
+            Hostel List</h3>
         <ul>
             <li>
                 <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>

@@ -1,17 +1,17 @@
 <div id="my_upload">
 
     @if($upload_type != 'profile')
-        <div class="heading-layout1">
+        <div class="">
             <div class="item-title">
-                <h3>@if($upload_type === 'routine')
-                        <i class="far fa-file-alt mr-2"></i>     Class {{ucfirst($upload_type)}}s
-                    @else
-                        {{ucfirst($upload_type)}}
-                    @endif</h3>
+{{--                <h3>@if($upload_type === 'routine')--}}
+{{--                        <i class="far fa-file-alt mr-2"></i>     Class {{ucfirst($upload_type)}}s--}}
+{{--                    @else--}}
+{{--                        {{ucfirst($upload_type)}}--}}
+{{--                    @endif</h3>--}}
             </div>
         </div>
     <div class="item-title">
-        <h4 class="text-teal">
+        <h4 class="text-teal fancy4">
             Add New {{ucfirst($upload_type)}}
         </h4>
     </div>
@@ -27,7 +27,7 @@
 
     <div class="basic-progress-bar" id="progress" style="display: none">
         <div class="progress">
-            <div class="progress-bar bg-yellow" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-info" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
   <div id="errorAlert"></div>

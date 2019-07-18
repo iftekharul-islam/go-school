@@ -5,14 +5,15 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            All Classes
+            <i class="fas fa-poll-h"></i>
+            All Grades
         </h3>
         <ul>
             <li><a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>All Classes</li>
+            <li>All Grades</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
@@ -33,10 +34,10 @@
                     @foreach ($classes as $class)
                         <?php $total_student = 0 ?>
                         <div class="col-md-3">
-                            <div class="card mb-4 mt-4">
-                                <h5 class="card-header text-muted text-left">
+                            <div class="card-sub mb-5">
+                                <h5 class="card-sub-header text-muted text-left">
                                     <i style='font-size:24px;margin-left:-20px;' class='flaticon-books text-teal'></i>
-                                    &nbspClass:
+                                    &nbspClass
                                     <b> {{$class->class_number}} @if($class->group) </b>
                                     &nbsp; | &nbsp;Group: <b> {{ucfirst($class->group)}} @endif </b></h5>
                                 <div class="card-body-customized">
@@ -55,6 +56,7 @@
                                                         type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                                         aria-haspopup="true" aria-expanded="false">
                                                     Sections
+                                                    <i class="fa fa-caret-down"></i>
                                                 </button>
                                                 <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
                                                     @foreach($class->sections as $section)
@@ -73,6 +75,7 @@
                                                         data-toggle="dropdown"
                                                         aria-haspopup="true" aria-expanded="false">
                                                     Sections
+                                                    <i class="fa fa-caret-down"></i>
                                                 </button>
 
                                                 <div class="dropdown-content"

@@ -3,6 +3,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fas fa-poll-h"></i>
             Create new Grade System
         </h3>
         <ul>

@@ -3,7 +3,7 @@
     <h3>
         @foreach($users as $user)
             @if($user->role == 'teacher')
-                <i class="fas fa-users mr-2 "></i>  All Teachers
+                <i class='fas fa-chalkboard-teacher'></i>  All Teachers
             @elseif($user->role == 'student')
                 <i class="fas fa-users mr-2 "></i>   All Students
             @elseif($user->role == 'accountant')

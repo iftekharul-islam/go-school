@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3" style="border-radius: 0 !important;">
     <div class="card-header" style="background-color: #28978B; color: white">Information</div>
     <div class="card-body">
       An Examination represents a Semester. All Courses of a Semester belong to an Examination. So, all Quiz, Class Test, Assignment, Attendance, Written, Practical, etc. in a Course are subjected to that specific Examination.

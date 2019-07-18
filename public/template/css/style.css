@@ -236,6 +236,28 @@ h6 {
   border: none !important;
   -webkit-box-shadow: 0px 10px 20px 0px rgba(199, 194, 194, 0.48);
   box-shadow: 0px 10px 15px 0px rgba(199, 194, 194, 0.32);
+  border-radius: 14px;
+
+}
+.card-sub {
+  padding-bottom: 50px;
+  height: auto;
+  border: none !important;
+  border-radius: 16px;
+  -webkit-box-shadow:0px 10px 15px 1px rgba(199, 194, 194, 0.48);
+  box-shadow: 0px 10px 15px 1px rgba(199, 194, 194, 0.48);
+  border-radius: 14px;
+
+}
+.card-sub-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-radius: 10px 010px 0px 0px;
+  background-image: linear-gradient(to right top, #ffffff0f, #afafaf63);
+  /* border: 1px solid rgba(185, 181, 181, 0.125); */
+}
+card-sub-header:first-child {
+  border-radius: 16px 16px 0px 0px;
 }
 
 .card-header {
@@ -257,6 +279,8 @@ h6 {
   border-radius: 4px;
   /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
   box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75); */
+  border-radius: 14px;
+
 }
 .card-body-customized{
   height: 100%;
@@ -265,6 +289,8 @@ h6 {
   border-radius: 4px;
   /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
   box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75); */
+  border-radius: 14px;
+
 }
 
 .library-table {
@@ -1726,7 +1752,6 @@ h6 {
   color: #32998f;
   text-transform: capitalize;
   font-weight: 500;
-  margin-bottom: 30px;
   text-align: center;
 
 }
@@ -1875,7 +1900,7 @@ ul {
 }
 
 .nav-bar-header-one {
-  background: linear-gradient(to right, #3e4040, #35403f);
+  background: linear-gradient(to right, #17544de0, #0d4e47eb);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2646,6 +2671,7 @@ ul {
   font-size: 14px;
   color: #ffffff;
   padding: 8px 20px 8px 60px;
+  border-radius: 0 2rem 2rem 0;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -2656,8 +2682,9 @@ ul {
 }
 
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu>.nav-item .sub-group-menu>.nav-item .nav-link:hover {
-  background-color: #32998f;
+  background-color: #32998fc2;
   color: #ffffff;
+  border-radius: 0 2rem 2rem 0;
 }
 
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu>.nav-item .sub-group-menu>.nav-item .nav-link.menu-active {
@@ -4318,7 +4345,7 @@ ul {
 }
 
 .bg-ash {
-  background-color: #f0f1f3 !important;
+  background: linear-gradient(to right, #ecececa3, #ffffff94);
 }
 
 .bg-red {
@@ -5578,10 +5605,10 @@ ul {
   font-size: 10px;
 }
 
- .previous {
+.previous {
   display: none!important;
 }
- .next{
+.next{
   display: none!important;
 }
 
