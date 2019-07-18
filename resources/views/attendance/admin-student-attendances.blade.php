@@ -19,27 +19,54 @@
         <div class="card">
             <div class="card-body false-height">
                 @if(count($attendances) > 0)
-                    <div class="table-responsive">
-                        <table class="table bs-table  table-bordered text-nowrap">
-                            <thead>
-                            <tr>
-{{--                                        <th class="text-left">Students</th>--}}
-                                <th>Total Class</th>
-                                <th>Total Present</th>
-                                <th>Total Absent</th>
-                                <th>Total Escaped</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{ $total }}</td>
-                                <td>{{ $present }}</td>
-                                <td>{{ $absent }}</td>
-                                <td>{{ $escaped }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="row information">
+                        <div class="col-3">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-blue-transparent">
+                                    <i class="fas fa-building text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $total }}"></span></div>
+                                    <div class="item-title">Total Classes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-teal-transparent">
+                                   <i class="fas fa-clipboard-check text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $present }}"></span></div>
+                                    <div class="item-title">Total Attends</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-red-transparent">
+                                    <i class="far fa-times-circle text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $absent }}"></span></div>
+                                    <div class="item-title">Total Absent</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-yellow-transparent">
+                                    <i class="fas fa-sign-out-alt text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $escaped }}"></span></div>
+                                    <div class="item-title">Total Escaped</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
                     @include('layouts.student.attendances-table')
                 @else
                     No Related Data Found.

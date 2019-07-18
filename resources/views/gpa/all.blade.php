@@ -21,19 +21,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <?php
-            $gpaName = "";
-            ?>
-            @foreach($gpas as $g)
-                <?php
-                if($g->grade_system_name != $gpaName){
-                    $gpaName = $g->grade_system_name;
-                } else {
-                    continue;
-                }
-                ?>
-            <br>
-                <h4><i class="fas fa-poll text-teal"></i> Grade Title: <strong>{{$g->grade_system_name}}</strong></h4>
+                <h4><i class="fas fa-poll text-teal"></i> Grade Title: <strong>{{$gpa->grade_system_name   }}</strong></h4>
                 <div class="table-responsive">
                     <table class="table display table-bordered  text-nowraps">
                         <thead>
@@ -43,34 +31,36 @@
                             <th>Point</th>
                             <th>From Mark</th>
                             <th>To Mark</th>
-                            <th>Action</th>
+                            <th width="12%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($gpas as $gpa)
-                            @if($gpa->grade_system_name != $gpaName)
-                                @continue
-                            @endif
+                        @foreach($gpa->gradeSystemInfo as $gpainfo)
                             <tr>
                                 <td>{{($loop->index + 1)}}</td>
-                                <td>{{$gpa->grade}}</td>
-                                <td>{{$gpa->point}}</td>
-                                <td>{{$gpa->from_mark}}</td>
-                                <td>{{$gpa->to_mark}}</td>
+                                <td>{{$gpainfo->grade}}</td>
+                                <td>{{$gpainfo->grade_points}}</td>
+                                <td>{{$gpainfo->marks_from}}</td>
+                                <td>{{$gpainfo->marks_to}}</td>
                                 <td>
-                                    <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpa->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
-{{--                                    <button class="btn btn-danger btn-lg" type="button" onclick="removeGrade({{ $gpa->id }})"><i class="far fa-trash-alt"></i>Delete</button>--}}
-{{--                                    <form id="delete-form-{{ $gpa->id }}" action="{{ url('admin/gpa/delete',$gpa->id) }}" method="GET" style="display: none;">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('GET')--}}
-{{--                                    </form>--}}
+                                  <div class="row text-center">
+                                      <div class="col-6">
+                                          <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpainfo->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
+                                      </div>
+                                      <div class="col-6">
+                                          <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i>Delete</button>
+                                          <form id="delete-form-{{ $gpainfo->id }}" class="form-group" action="{{ url('admin/gpa/delete', $gpainfo->id) }}" method="post">
+                                              {{ method_field('DELETE') }}
+                                              {{ csrf_field() }}
+                                          </form>
+                                      </div>
+                                  </div>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
-            @endforeach
         </div>
     </div>
     <script type="text/javascript">
@@ -85,6 +75,10 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById('delete-form-'+id).submit();
+                        setTimeout(5000);
+                        swal("Poof! Your Selected data has been deleted!", {
+                            icon: "success",
+                        });
                     }
                 });
         }

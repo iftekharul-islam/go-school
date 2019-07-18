@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GradeSystemRequest extends FormRequest
+class GradeInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class GradeSystemRequest extends FormRequest
     public function rules()
     {
         return [
-            'grade_system_name' => 'required|string|max:255',
+            'grade' => 'required|string',
+            'point' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
+            'from_mark' => 'required|numeric',
+            'to_mark' => 'required|numeric',
         ];
     }
 }

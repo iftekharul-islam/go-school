@@ -196,6 +196,7 @@ class GradeController extends Controller
             $i++;
         }
         $gradeSystem = $this->gradeService->getGradeSystemByname($request->grade_system_name);
+
         $this->gradeService->course_id = $request->course_id;
         $course = $this->gradeService->getCourseByCourseId();
         $grades = $this->gradeService->getGradesByCourseExam($request->course_id, $request->exam_id)->toArray();

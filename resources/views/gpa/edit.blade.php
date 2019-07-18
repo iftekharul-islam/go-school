@@ -26,16 +26,6 @@
                     <form class="new-added-form" action="{{url('admin/update-gpa', $grade->id)}}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('grade_system_name') ? ' has-error' : '' }}">
-                                <label>Grade System Name</label>
-                                <input id="grade_system_name" type="text" class="form-control" name="grade_system_name" value="{{ $grade->grade_system_name }}" placeholder="Grade System Name" required>
-
-                                @if ($errors->has('grade_system_name'))
-                                    <span class="help-block">
-                                      <strong>{{ $errors->first('grade_system_name') }}</strong>
-                                  </span>
-                                @endif
-                            </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
                                 <label>Grade</label>
                                 <input id="grade" type="text" class="form-control" name="grade" value="{{ $grade->grade }}" required>
@@ -48,7 +38,7 @@
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('point') ? ' has-error' : '' }}">
                                 <label>Grade Point</label>
-                                <input id="point" type="text" class="form-control" name="point" value="{{ $grade->point }}" placeholder="5.00, 4.50, ..." required>
+                                <input id="point" type="text" class="form-control" name="point" value="{{ $grade->grade_points }}" placeholder="5.00, 4.50, ..." required>
 
                                 @if ($errors->has('point'))
                                     <span class="help-block">
@@ -58,7 +48,7 @@
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('from_mark') ? ' has-error' : '' }}">
                                 <label>From Mark</label>
-                                <input id="from_mark" type="text" class="form-control" name="from_mark" value="{{ $grade->from_mark }}" placeholder="Example: 80" required>
+                                <input id="from_mark" type="text" class="form-control" name="from_mark" value="{{ $grade->marks_from }}" placeholder="Example: 80" required>
 
                                 @if ($errors->has('from_mark'))
                                     <span class="help-block">
@@ -68,7 +58,7 @@
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('to_mark') ? ' has-error' : '' }}">
                                 <label>To Mark</label>
-                                <input id="to_mark" type="text" class="form-control" name="to_mark" value="{{ $grade->to_mark }}" placeholder="Example: 90" required>
+                                <input id="to_mark" type="text" class="form-control" name="to_mark" value="{{ $grade->marks_to }}" placeholder="Example: 90" required>
 
                                 @if ($errors->has('to_mark'))
                                     <span class="help-block">
@@ -78,8 +68,8 @@
                             </div>
 
                             <div class="col-12 form-group mg-t-8">
-                                <button type="submit" class="button button--save float-left"><b>Update</b></button>
-                                <a href="javascript:history.back()" class="button button--cancel float-left" style="margin-left: 1%" role="button"><b>Cancel</b></a>
+                                <button type="submit" class="button button--save float-right"><b>Update</b></button>
+                                <a href="javascript:history.back()" class="button button--cancel float-right mr-3"  role="button"><b>Cancel</b></a>
                             </div>
                         </div>
                     </form>
