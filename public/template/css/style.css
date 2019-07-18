@@ -112,6 +112,14 @@ body {
   color: white;
 }
 
+.false-padding-bottom {
+  padding-bottom: 4px;
+}
+
+.false-padding-bottom-form {
+  padding-bottom: 15px;
+}
+
 .paginate123 .pagination li {
   border-top: 1px solid #32998f;
   border-left: 1px solid #32998f;
@@ -3443,6 +3451,10 @@ ul {
   border: 1px solid #dee2e6;
   border-top: none;
   padding: 25px 30px 5px;
+}
+
+.academic-tab {
+  padding: 0px !important;
 }
 
 .ui-tab-card .card-body .custom-tab .nav-tabs {

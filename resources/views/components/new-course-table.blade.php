@@ -13,13 +13,13 @@
             <th>Class</th>
             <th>Section</th>
             <th>Section Students</th>
-            <th>Take Attendance</th>
           @endif
           @foreach ($courses as $course)
-            @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
+            @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
               <th>Message</th>
               <th>Submit Grade</th>
               <th>View Marks</th>
+              <th>Take Attendance</th>
             @endif
             @break
           @endforeach
@@ -63,7 +63,7 @@
                 <td>Save under Exam to Add Student</td>
               @endif
 
-              @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
+              @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
                 <td>
                   <a href="{{url('teacher/attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
                 </td>
@@ -73,7 +73,7 @@
 
             @endif
 
-            @if(!$student && ($course->teacher_id == Auth::user()->id || Auth::user()->role == 'admin') && $course->exam_id != 0)
+            @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
               <td>
                 <a href="{{url('teacher/course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
               </td>

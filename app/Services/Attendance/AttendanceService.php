@@ -76,9 +76,9 @@ class AttendanceService {
     public function getAllAttendanceByStudentId( $student_id ){
         return \DB::table('attendances')
             ->select('student_id', \DB::raw('
-                      COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
-                      COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent,
-                      COUNT(CASE WHEN present=2 THEN present END) AS totalEscaped'
+                      COUNT(CASE WHEN present=1 THEN present END) AS total_present,
+                      COUNT(CASE WHEN present=0 THEN present END) AS total_absent,
+                      COUNT(CASE WHEN present=2 THEN present END) AS total_escaped'
             ))
             ->groupBy('student_id')->where('student_id', $student_id)
             ->get();

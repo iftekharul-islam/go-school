@@ -4,6 +4,7 @@ namespace App\Services\User;
 use App\User;
 use App\StudentInfo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Mavinoo\LaravelBatch\Batch;
 
 class UserService {
@@ -209,7 +210,7 @@ class UserService {
         return $tb;
     }
 
-    public function storeStudent($request){
+    public function storeStudent($request, $file){
         $tb = new $this->user;
         $tb->name = $request->name;
         $tb->email = (!empty($request->email)) ? $request->email : '';
@@ -225,7 +226,7 @@ class UserService {
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
         $tb->about = (!empty($request->about)) ? $request->about : '';
-        $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+        $tb->pic_path = 'storage/'.$file;
         $tb->verified = 1;
         $tb->section_id = $request->section;
         $tb->save();
@@ -261,7 +262,7 @@ class UserService {
 
     }
 
-    public function storeStaff($request, $role){
+    public function storeStaff($request, $role, $file){
         $tb = new $this->user;
         $tb->name = $request->name;
         $tb->email = (!empty($request->email)) ? $request->email : '';
@@ -275,7 +276,7 @@ class UserService {
         $tb->blood_group = $request->blood_group;
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
-        $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+        $tb->pic_path = 'storage/'.$file;
         $tb->verified = 1;
         $tb->department_id = (!empty($request->department_id))?$request->department_id:0;
         

@@ -81,7 +81,7 @@
                         @break($loop->first)
                     @endforeach
                     @foreach ($users as $user)
-                        @if(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                        @if(Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                             @if($user->role === 'student')<th>Attendance</th>@endif
                         @endif
                         @break($loop->first)

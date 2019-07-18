@@ -93,6 +93,7 @@
             paging: false,
             bSort : false,
             language: {
+                search: '',
                 searchPlaceholder: "Search here"
             }
         });
