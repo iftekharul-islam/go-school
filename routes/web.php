@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes(['login' => false]);
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
@@ -150,10 +151,12 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/home', 'HomeController@index')->name('admin.home');
 
         Route::get('gpa/create-gpa', 'GradesystemController@create');
-        Route::post('create-gpa', 'GradesystemController@store');
+        Route::post('store-grade-system', 'GradesystemController@store');
+        Route::post('store-gpa-info', 'GradesystemController@storeGradeInfo');
         Route::post('update-gpa/{id}', 'GradesystemController@update');
         Route::get('gpa/edit/{id}', 'GradesystemController@edit');
         Route::get('gpa/all-gpa', 'GradesystemController@index');
+        Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department','SchoolController@allDepartment');
 
         Route::prefix('exams')->group(function () {

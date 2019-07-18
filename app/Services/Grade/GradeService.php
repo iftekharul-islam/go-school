@@ -5,6 +5,7 @@ use App\Grade;
 use App\Gradesystem;
 use App\Exam;
 use App\Course;
+use App\GradeSystemInfo;
 use App\Section;
 use App\Myclass;
 use Illuminate\Support\Facades\Auth;
@@ -74,8 +75,8 @@ class GradeService {
 
   public function getGradeSystemByname($grade_system_name){
     return Gradesystem::where('school_id', auth()->user()->school_id)
-                        ->where('grade_system_name', $grade_system_name)
-                        ->get();
+                        ->with('gradeSystemInfo')
+                        ->first();
     
   }
 
@@ -88,11 +89,9 @@ class GradeService {
   }
 
   public function getGradeSystemBySchoolIdGroupByName($grades){
-    $grade_system_name = isset($grades[0]->course->grade_system_name) ? $grades[0]->course->grade_system_name : false;
-    return ($grade_system_name)?Gradesystem::where('school_id', auth()->user()->school_id)
-                        ->where('grade_system_name', $grade_system_name)
-                        ->get()
-                        ->groupBy('grade_system_name') : [];
+         $gradeSystem = GradeSystem::where('school_id', Auth::user()->school_id)->first();
+
+         return $gradeSystemInfo = GradeSystemInfo::where('gradesystem_id', $gradeSystem->id)->get();
   }
 
   public function gradeTeacherIndexView($view){
@@ -283,9 +282,11 @@ class GradeService {
 
     public function calculateGpa($gradeSystem, $totalMarks){
       $totalMarks = round($totalMarks);
-      foreach($gradeSystem as $gs){
-        if($totalMarks > $gs->from_mark && $totalMarks <= $gs->to_mark){
-          return $gs->point;
+//      dd($gradeSystem);
+      foreach($gradeSystem->gradeSystemInfo as $gs){
+
+        if($totalMarks > $gs->marks_from && $totalMarks <= $gs->marks_to){
+          return $gs->grade_points;
         }
       }
       return 'Something went wrong.';

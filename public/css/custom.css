@@ -82,3 +82,28 @@
     background-color: #ffffff;
 
 }
+
+.bg-light-blue-transparent {
+    background-color: #066896b8;
+}
+.bg-light-red-transparent {
+    background-color: #ce180fb8;
+}
+
+.bg-light-yellow-transparent {
+    background-color: #bd7407b8;
+}
+
+.fc-button-group button {
+
+    text-transform: capitalize;
+}
+
+.information .dashboard-summery-two .item-content .item-title {
+    color: #333333;
+    margin-bottom: 2px;
+}
+
+.grade-form .col-12 {
+    padding-right: 1px!important;
+}

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\GradeSystemInfo;
+use App\Http\Requests\GradeInfoRequest;
 use App\Http\Requests\GradeSystemRequest;
 use Illuminate\Http\Request;
 use App\Gradesystem as Gradesystem;
+use Illuminate\Support\Facades\Auth;
 
 class GradesystemController extends Controller
 {
@@ -14,8 +17,10 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $gpas = Gradesystem::where('school_id', \Auth::user()->school_id)->get();
-        return view('gpa.all',['gpas'=>$gpas]);
+
+        $gpa = Gradesystem::with('gradeSystemInfo')->where('school_id', \Auth::user()->school_id)->first();
+
+        return view('gpa.all',compact('gpa'));
     }
     /**
      * Show the form for creating a new resource.
@@ -23,7 +28,9 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        return view('gpa.new-create');
+
+        $grade_systems = Gradesystem::where('school_id', Auth::user()->school_id)->first();
+        return view('gpa.new-create', compact('grade_systems'));
     }
     /**
      * Store a newly created resource in storage.
@@ -32,17 +39,25 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(GradeSystemRequest $request){
+        $data = [
+            'grade_system_name' => $request->get('grade_system_name'),
+            'school_id' => Auth::user()->school_id
+        ];
+        Gradesystem::create($data);
+        return back()->with('status', 'New Grade System Added');
+    }
 
-        $gpa = new Gradesystem;
-        $gpa->grade_system_name = $request->grade_system_name;
-        $gpa->point = $request->point;
-        $gpa->grade = $request->grade;
-        $gpa->from_mark = $request->from_mark;
-        $gpa->to_mark = $request->to_mark;
-        $gpa->school_id = \Auth::user()->school_id;
-        $gpa->user_id = \Auth::user()->id;
-        $gpa->save();
-        return back()->with('status', 'Saved');
+    public function storeGradeInfo(GradeInfoRequest $request)
+    {
+        $data = [
+            'grade' => $request->get('grade'),
+            'grade_points' => $request->get('point'),
+            'marks_from' => $request->get('from_mark'),
+            'marks_to' => $request->get('to_mark'),
+            'gradesystem_id' => $request->get('grade_system_id'),
+        ];
+        GradeSystemInfo::create($data);
+        return back()->with('status', 'New Grade Point Added');
     }
     /**
      * Display the specified resource.
@@ -58,7 +73,7 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
-        $grade = Gradesystem::findOrFail($id);
+        $grade = GradeSystemInfo::findOrFail($id);
         return view('gpa.edit', compact('grade'));
     }
     /**
@@ -69,26 +84,29 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-        $gpa = Gradesystem::findOrFail($id);
-        $gpa->grade_system_name = $request->grade_system_name;
-        $gpa->point = $request->point;
+        $gpa = GradeSystemInfo::findOrFail($id);
+        $gpa->grade_points = $request->point;
         $gpa->grade = $request->grade;
-        $gpa->from_mark = $request->from_mark;
-        $gpa->to_mark = $request->to_mark;
-        $gpa->school_id = \Auth::user()->school_id;
-        $gpa->user_id = \Auth::user()->id;
+        $gpa->marks_from = $request->from_mark;
+        $gpa->marks_to = $request->to_mark;
         $gpa->save();
-        return redirect()->back()->with('status', 'Grade System Updated !!');
+        return redirect()->back()->with('status', 'Grade Point info Updated !!');
     }
-      /**
-       * Remove the specified resource from storage.
-       *
-       * @param  int  $id
-       * @return \Illuminate\Http\Response
-       */
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id){
-      $gpa = Gradesystem::findOrFail($id);
-      $gpa->delete();
-      return back()->with('status', 'Deleted!');
+        $gpa = Gradesystem::findOrFail($id);
+        $gpa->delete();
+        return back()->with('status', 'Deleted!');
+    }
+    public  function  delete($id)
+    {
+        $gpainfo = GradeSystemInfo::findOrFail($id);
+        $gpainfo->delete();
+        return redirect()->back()->with('status', 'Grade Information Data Deleted');
     }
 }

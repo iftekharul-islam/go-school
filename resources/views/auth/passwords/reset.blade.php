@@ -1,70 +1,111 @@
-@extends('layouts.student-app')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="page-panel-title">Reset Password</div>
+<!DOCTYPE html>
+<html lang="en-US">
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
-                        {{ csrf_field() }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+    {{--    <link rel="stylesheet" href="css/icon-font.css">--}}
+    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
+</head>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
+<body>
+<header class="header">
+    <div class="header__logo-box">
+        <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+    </div>
+    <div class="inner-body effect5">
+        <div class="header-text-reset effect5">
+
+            <h1 class="heading">
+                <span class="heading--main">Shoroborno</span>
+                <span class="heading--sub"></span>
+            </h1>
+
+            <section class="section-book">
+                <div class="row">
+                    <div class="book">
+                        <div class="book__form">
+
+
+
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <div class="panel panel-default">
+                                        <div class="panel-reset-title">Reset Password</div>
+
+                                        <div class="panel-body">
+                                            <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
+                                                {{ csrf_field() }}
+
+                                                <input type="hidden" name="token" value="{{ $token }}">
+
+                                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                                    <label for="email" class="col-md-4  form__label">E-Mail Address</label>
+
+                                                    <div class="col-md-6">
+                                                        <input id="email" type="email" class="form__input" name="email" value="{{ $email or old('email') }}" required autofocus>
+
+                                                        @if ($errors->has('email'))
+                                                            <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+                                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                    <label for="password" class="col-md-4  form__label">Password</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                                    <div class="col-md-6">
+                                                        <input id="password" type="password" class="form__input" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
+                                                        @if ($errors->has('password'))
+                                                            <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
 
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                                    <label for="password-confirm" class="col-md-4  form__label">Confirm Password</label>
+                                                    <div class="col-md-6">
+                                                        <input id="password-confirm" type="password" class="form__input" name="password_confirmation" required>
 
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
+                                                        @if ($errors->has('password_confirmation'))
+                                                            <span class="help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="button button--text">
-                                    Reset Password
-                                </button>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-4">
+                                                        <button type="submit" class="button button--login">
+                                                            Reset Password
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
-</div>
-@endsection
+</header>
+</body>
+
+</html>

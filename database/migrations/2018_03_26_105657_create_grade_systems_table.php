@@ -16,12 +16,7 @@ class CreateGradeSystemsTable extends Migration
         Schema::create('grade_systems', function (Blueprint $table) {
           $table->increments('id');
           $table->string('grade_system_name');
-          $table->string('grade');
-          $table->float('point');
-          $table->integer('from_mark');
-          $table->integer('to_mark');
-          $table->integer('school_id');
-          $table->integer('user_id')->unsigned();
+          $table->integer('school_id')->unsigned();
           $table->timestamps();
         });
     }
