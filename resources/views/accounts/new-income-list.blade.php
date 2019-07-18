@@ -5,6 +5,7 @@
 
 <div class="breadcrumbs-area">
     <h3>
+        <i class="fas fa-file-invoice-dollar"></i>
         Income List
     </h3>
     <ul>

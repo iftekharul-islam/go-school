@@ -4,6 +4,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <div class="breadcrumbs-area">
     <h3>
+        <i class="fas fa-file-invoice-dollar"></i>
         List of Expenses
     </h3>
     <ul>

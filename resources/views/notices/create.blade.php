@@ -5,6 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fas fa-exclamation-circle"></i>
             Notices
         </h3>
         <ul>

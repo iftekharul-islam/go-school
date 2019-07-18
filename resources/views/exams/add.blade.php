@@ -3,7 +3,8 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Add Exam
+            <i class="fas fa-file-alt"></i>
+            Add Exam
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">

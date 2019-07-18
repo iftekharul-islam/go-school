@@ -6,6 +6,7 @@
 
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fa fa-bullhorn"></i>
             All Events
         </h3>
         <ul>

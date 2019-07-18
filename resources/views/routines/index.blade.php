@@ -5,6 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fa fa-calendar"></i>
             All Routines
         </h3>
         <ul>

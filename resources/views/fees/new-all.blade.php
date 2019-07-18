@@ -5,6 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class='fas fa-file-invoice-dollar'></i>
             Fees List
         </h3>
         <ul>
@@ -23,9 +24,9 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="heading-layout1 mg-b-25">
+            <div class="heading-layout1">
                 <div class="item-title">
-                    <h4 class="text-teal">Add new fee field</h4>
+                    <h4 class="text-teal fancy4">Add New Fee Field</h4>
                 </div>
             </div>
             <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/fees/create')}}" method="post">

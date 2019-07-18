@@ -13,7 +13,8 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Add New Expense
+            <i class="fas fa-file-invoice-dollar"></i>
+            Add New Expense
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">

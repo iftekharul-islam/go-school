@@ -5,6 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class='fas fa-book'></i>
             Add New Book
         </h3>
         <ul>

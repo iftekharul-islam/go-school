@@ -6,6 +6,7 @@
 
     <div class="breadcrumbs-area">
         <h3>
+            <i class='fas fa-chalkboard'></i>
             All Class
         </h3>
         <ul>
@@ -17,16 +18,17 @@
         </ul>
     </div>
     <div class="card height-auto false-height">
-        <div class="card-body mt-4">
+        <div class="card-body">
             <div class="row">
                 @if(count($classes)> 0)
                     @foreach($classes as $class)
                         <?php $total_student = 0 ?>
                         <div class="col-md-3">
-                            <div class="card mb-4">
+                            <div class="card-sub mb-5">
                                 <div>
-                                    <h5 class="card-header text-muted text-left">
-                                        <i style="font-size:24px;margin-left:-20px;" class="flaticon-books text-teal"></i>
+                                    <h5 class="card-sub-header text-muted text-left">
+                                        <i style="font-size:24px;margin-left:-20px;"
+                                           class="flaticon-books text-teal"></i>
 
                                         Class <strong class="text-capitalize">{{$class->class_number}}</strong>
                                         @if($class ->group) | Group <strong
@@ -73,13 +75,15 @@
                                                     <div class="dropdown">
                                                         <button
                                                                 class="button button--primary font-weight-bold"
-                                                                type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
                                                             Class Details
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
 
-                                                        <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
+                                                        <div class="dropdown-content"
+                                                             aria-labelledby="dropdownMenuButton">
                                                             <!-- <button disabled class="btn disabled text-dark font-weight-bold"
                                                                 type="button" aria-expanded="false">
                                                                 No Info Available
@@ -94,53 +98,57 @@
                                                 </div>
                                             @endif
 
+                                            <div class="float-right">
+                                                <a role="button" class="button button--primary mr-3 font-weight-bold"
+                                                   href="{{url('admin/academic/syllabus/'.$class->id)}}">View
+                                                    Syllabus</a>
+                                            </div>
+
+                                        @else
+
+                                            @if(count($class->sections) > 0)
                                                 <div class="float-right">
-                                                    <a role="button" class="button button--primary mr-3 font-weight-bold"
-                                                       href="{{url('admin/academic/syllabus/'.$class->id)}}">View Syllabus</a>
+                                                    <div class="dropdown">
+                                                        <button
+                                                                class="button button--primary font-weight-bold"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                            Details
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </button>
+                                                        <div class="dropdown-content"
+                                                             aria-labelledby="dropdownMenuButton">
+                                                            @foreach($class->sections as $section)
+                                                                <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            @else
+                                                <div class="float-right">
+                                                    <div class="dropdown">
+                                                        <button
+                                                                class="button button--primary font-weight-bold"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                            Details
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </button>
 
-                                                @else
-
-                                                    @if(count($class->sections) > 0)
-                                                        <div class="float-right">
-                                                            <div class="dropdown">
-                                                                <button
-                                                                        class="button button--primary font-weight-bold"
-                                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false">
-                                                                    Details
-                                                                    <i class="fa fa-caret-down"></i>
-                                                                </button>
-                                                                <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-                                                                    @foreach($class->sections as $section)
-                                                                        <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
+                                                        <div class="dropdown-content"
+                                                             aria-labelledby="dropdownMenuButton">
+                                                            <p class="text-center text-muted font-weight-bold">
+                                                                No Info Available
+                                                            </p>
                                                         </div>
-                                                    @else
-                                                        <div class="float-right">
-                                                            <div class="dropdown">
-                                                                <button
-                                                                        class="button button--primary font-weight-bold"
-                                                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                                        aria-haspopup="true" aria-expanded="false">
-                                                                    Details
-                                                                    <i class="fa fa-caret-down"></i>
-                                                                </button>
-
-                                                                <div class="dropdown-content" aria-labelledby="dropdownMenuButton">
-                                                                    -->
-                                                                    <p class="text-center text-muted font-weight-bold">
-                                                                        No Info Available
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                @endif
+                                                    </div>
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
                             </div>

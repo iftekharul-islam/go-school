@@ -5,6 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fas fa-cog fa-fw"></i>
             Academic Settings
         </h3>
         <ul>
@@ -42,10 +43,12 @@
                 <div class="border-nav-tab border-0">
                     <ul class="nav nav-tabs" role="tablist" id="tabMenu">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab-0" data-toggle="tab" href="#tab7" role="tab" aria-selected="true">Users</a>
+                            <a class="nav-link active" id="tab-0" data-toggle="tab" href="#tab7" role="tab"
+                               aria-selected="true">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab-1" data-toggle="tab" href="#tab8" role="tab" aria-selected="false">Academics</a>
+                            <a class="nav-link" id="tab-1" data-toggle="tab" href="#tab8" role="tab"
+                               aria-selected="false">Academics</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -60,21 +63,26 @@
                                     <div class="basic-tab">
                                         <ul class="nav nav-tabs" id="tabMenu" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="tab-2" data-toggle="tab" href="#tab10" role="tab" aria-selected="true">Add Accountant</a>
+                                                <a class="nav-link active" id="tab-2" data-toggle="tab" href="#tab10"
+                                                   role="tab" aria-selected="true">Add Accountant</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="tab-3" data-toggle="tab" href="#tab11" role="tab" aria-selected="false">Add Librarian</a>
+                                                <a class="nav-link" id="tab-3" data-toggle="tab" href="#tab11"
+                                                   role="tab" aria-selected="false">Add Librarian</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="tab-4" data-toggle="tab" href="#tab12" role="tab" aria-selected="false">Add Student</a>
+                                                <a class="nav-link" id="tab-4" data-toggle="tab" href="#tab12"
+                                                   role="tab" aria-selected="false">Add Student</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="tab-5" data-toggle="tab" href="#tab13" role="tab" aria-selected="false">Add Teacher</a>
+                                                <a class="nav-link" id="tab-5" data-toggle="tab" href="#tab13"
+                                                   role="tab" aria-selected="false">Add Teacher</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div class="tab-pane fade show active border-0 academic-tab" id="tab10" role="tabpanel">
-                                                <form class="new-added-form" method="POST" enctype="multipart/form-data" id="registerForm" action="{{ url('admin/register/accountant') }}">
+                                            <div class="tab-pane fade show active border-0" id="tab10" role="tabpanel">
+                                                <form class="new-added-form" method="POST" id="registerForm"
+                                                      action="{{ url('admin/register/accountant') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -82,7 +90,8 @@
                                                                 <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="name" type="text" class="form-control" name="name"
+                                                                    <input id="name" type="text" class="form-control"
+                                                                           name="name"
                                                                            value=""
                                                                            required>
 
@@ -99,7 +108,8 @@
                                                                 <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="email" type="email" class="form-control" name="email"
+                                                                    <input id="email" type="email" class="form-control"
+                                                                           name="email"
                                                                            value="" required>
 
                                                                     @if ($errors->has('email'))
@@ -117,7 +127,8 @@
                                                                 <label for="password" class="col-md-4 control-label false-padding-bottom">Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password" type="password" class="form-control" name="password"
+                                                                    <input id="password" type="password"
+                                                                           class="form-control" name="password"
                                                                            required>
 
                                                                     @if ($errors->has('password'))
@@ -134,7 +145,8 @@
                                                                     Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password-confirm" type="password" class="form-control"
+                                                                    <input id="password-confirm" type="password"
+                                                                           class="form-control"
                                                                            name="password_confirmation"
                                                                            required>
                                                                 </div>
@@ -147,7 +159,8 @@
                                                                 <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="phone_number" type="text" class="form-control" name="phone_number"
+                                                                    <input id="phone_number" type="text"
+                                                                           class="form-control" name="phone_number"
                                                                            value="">
 
                                                                     @if ($errors->has('phone_number'))
@@ -163,7 +176,8 @@
                                                                 <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="blood_group" class="form-control" name="blood_group">
+                                                                    <select id="blood_group" class="form-control"
+                                                                            name="blood_group">
                                                                         <option selected="selected">A+</option>
                                                                         <option>A-</option>
                                                                         <option>B+</option>
@@ -189,7 +203,8 @@
                                                                 <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="nationality" type="text" class="form-control" name="nationality"
+                                                                    <input id="nationality" type="text"
+                                                                           class="form-control" name="nationality"
                                                                            value=""
                                                                            required>
 
@@ -206,7 +221,8 @@
                                                                 <label for="gender" class="col-md-4 control-label">Gender</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="gender" class="form-control" name="gender">
+                                                                    <select id="gender" class="form-control"
+                                                                            name="gender">
                                                                         <option selected="selected">Male</option>
                                                                         <option>Female</option>
                                                                     </select>
@@ -247,7 +263,8 @@
                                                                 <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="name" type="text" class="form-control" name="name"
+                                                                    <input id="name" type="text" class="form-control"
+                                                                           name="name"
                                                                            value=""
                                                                            required>
 
@@ -264,7 +281,8 @@
                                                                 <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="email" type="email" class="form-control" name="email"
+                                                                    <input id="email" type="email" class="form-control"
+                                                                           name="email"
                                                                            value="" required>
 
                                                                     @if ($errors->has('email'))
@@ -282,7 +300,8 @@
                                                                 <label for="password" class="col-md-4 control-label false-padding-bottom">Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password" type="password" class="form-control" name="password"
+                                                                    <input id="password" type="password"
+                                                                           class="form-control" name="password"
                                                                            required>
 
                                                                     @if ($errors->has('password'))
@@ -299,7 +318,8 @@
                                                                     Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password-confirm" type="password" class="form-control"
+                                                                    <input id="password-confirm" type="password"
+                                                                           class="form-control"
                                                                            name="password_confirmation"
                                                                            required>
                                                                 </div>
@@ -312,7 +332,8 @@
                                                                 <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="phone_number" type="text" class="form-control" name="phone_number"
+                                                                    <input id="phone_number" type="text"
+                                                                           class="form-control" name="phone_number"
                                                                            value="">
 
                                                                     @if ($errors->has('phone_number'))
@@ -328,7 +349,8 @@
                                                                 <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="blood_group" class="form-control" name="blood_group">
+                                                                    <select id="blood_group" class="form-control"
+                                                                            name="blood_group">
                                                                         <option selected="selected">A+</option>
                                                                         <option>A-</option>
                                                                         <option>B+</option>
@@ -354,7 +376,8 @@
                                                                 <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="nationality" type="text" class="form-control" name="nationality"
+                                                                    <input id="nationality" type="text"
+                                                                           class="form-control" name="nationality"
                                                                            value=""
                                                                            required>
 
@@ -371,7 +394,8 @@
                                                                 <label for="gender" class="col-md-4 control-label false-padding-bottom">Gender</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="gender" class="form-control" name="gender">
+                                                                    <select id="gender" class="form-control"
+                                                                            name="gender">
                                                                         <option selected="selected">Male</option>
                                                                         <option>Female</option>
                                                                     </select>
@@ -386,11 +410,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label">Upload Profile Picture</label>
+                                                        <label class="col-md-4 control-label">Upload Profile
+                                                            Picture</label>
                                                         <div class="col-md-12">
-                                                            <input type="file" id="picPath" name="librarian_pic">
-{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
-{{--                                                            @endcomponent--}}
+                                                            <input type="hidden" id="picPath" name="pic_path">
+                                                            @component('components.file-uploader',['upload_type'=>'profile'])
+                                                            @endcomponent
                                                         </div>
                                                     </div>
 
@@ -405,7 +430,9 @@
                                             </div>
 
                                             <div class="tab-pane fade border-0" id="tab12" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm" enctype="multipart/form-data" action="{{ url('admin/register/student') }}">
+                                                <form class="new-added-form" method="POST" id="registerForm"
+                                                      enctype="multipart/form-data"
+                                                      action="{{ url('admin/register/student') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -413,7 +440,8 @@
                                                                 <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="na   me" type="text" class="form-control" name="name" value="" required>
+                                                                    <input id="na   me" type="text" class="form-control"
+                                                                           name="name" value="" required>
 
                                                                     @if ($errors->has('name'))
                                                                         <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
@@ -426,7 +454,9 @@
                                                                 <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                                                    <input id="email" type="email" class="form-control"
+                                                                           name="email" value="{{ old('email') }}"
+                                                                           required>
 
                                                                     @if ($errors->has('email'))
                                                                         <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
@@ -441,7 +471,9 @@
                                                                 <label for="password" class="col-md-4 control-label false-padding-bottom">Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password" type="password" class="form-control" name="password" required>
+                                                                    <input id="password" type="password"
+                                                                           class="form-control" name="password"
+                                                                           required>
 
                                                                     @if ($errors->has('password'))
                                                                         <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
@@ -454,7 +486,9 @@
                                                                 <label for="password-confirm" class="col-md-4 control-label false-padding-bottom">Confirm Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                                                    <input id="password-confirm" type="password"
+                                                                           class="form-control"
+                                                                           name="password_confirmation" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -465,10 +499,12 @@
                                                                 <label for="section" class="col-md-4 control-label false-padding-bottom">Class and Section</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="section" class="form-control" name="section" required>
+                                                                    <select id="section" class="form-control"
+                                                                            name="section" required>
                                                                         @foreach ($studentSections as $section)
                                                                             <option value="{{$section->id}}">
-                                                                                Section: {{$section->section_number}} Class:
+                                                                                Section: {{$section->section_number}}
+                                                                                Class:
                                                                                 {{$section->class->class_number}}</option>
                                                                         @endforeach
                                                                     </select>
@@ -484,7 +520,9 @@
                                                                 <label for="birthday" class="col-md-4 control-label false-padding-bottom">Birthday</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="birthday" type="text" class="form-control" name="birthday" value="{{ old('birthday') }}" required>
+                                                                    <input id="birthday" type="text"
+                                                                           class="form-control" name="birthday"
+                                                                           value="{{ old('birthday') }}" required>
 
                                                                     @if ($errors->has('birthday'))
                                                                         <span class="help-block"><strong>{{ $errors->first('birthday') }}</strong></span>
@@ -499,7 +537,8 @@
                                                                 <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="phone_number" type="text" class="form-control" name="phone_number"
+                                                                    <input id="phone_number" type="text"
+                                                                           class="form-control" name="phone_number"
                                                                            value="{{ old('phone_number') }}">
 
                                                                     @if ($errors->has('phone_number'))
@@ -513,7 +552,8 @@
                                                                 <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="blood_group" class="form-control" name="blood_group">
+                                                                    <select id="blood_group" class="form-control"
+                                                                            name="blood_group">
                                                                         <option selected="selected">A+</option>
                                                                         <option>A-</option>
                                                                         <option>B+</option>
@@ -537,7 +577,8 @@
                                                                 <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="nationality" type="text" class="form-control" name="nationality"
+                                                                    <input id="nationality" type="text"
+                                                                           class="form-control" name="nationality"
                                                                            value=""
                                                                            required>
 
@@ -554,7 +595,8 @@
                                                                 <label for="gender" class="col-md-4 control-label false-padding-bottom">Gender</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="gender" class="form-control" name="gender">
+                                                                    <select id="gender" class="form-control"
+                                                                            name="gender">
                                                                         <option selected="selected">Male</option>
                                                                         <option>Female</option>
                                                                     </select>
@@ -573,14 +615,15 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('version') ? ' has-error' : '' }}">
                                                                     <label for="version" class="col-md-4 control-label false-padding-bottom">Version</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <select id="version" class="form-control" name="version">
-                                                                            <option selected="selected">Bangla</option>
-                                                                            <option>English</option>
-                                                                        </select>
+                                                                <div class="col-md-12">
+                                                                    <select id="version" class="form-control"
+                                                                            name="version">
+                                                                        <option selected="selected">Bangla</option>
+                                                                        <option>English</option>
+                                                                    </select>
 
-                                                                        @if ($errors->has('version'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('version'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('version') }}</strong>
                                 </span>
                                                                         @endif
@@ -591,13 +634,14 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                                                                     <label for="session" class="col-md-4 control-label false-padding-bottom">Session</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="session" type="text" class="form-control" name="session"
-                                                                               value=""
-                                                                               required>
+                                                                <div class="col-md-12">
+                                                                    <input id="session" type="text" class="form-control"
+                                                                           name="session"
+                                                                           value=""
+                                                                           required>
 
-                                                                        @if ($errors->has('session'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('session'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('session') }}</strong>
                                 </span>
                                                                         @endif
@@ -610,13 +654,14 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
                                                                     <label for="group" class="col-md-4 control-label false-padding-bottom">Group (Optional)</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="group" type="text" class="form-control" name="group"
-                                                                               value="{{ old('group') }}"
-                                                                               placeholder="Science, Arts, Commerce,etc.">
+                                                                <div class="col-md-12">
+                                                                    <input id="group" type="text" class="form-control"
+                                                                           name="group"
+                                                                           value="{{ old('group') }}"
+                                                                           placeholder="Science, Arts, Commerce,etc.">
 
-                                                                        @if ($errors->has('group'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('group'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('group') }}</strong>
                                 </span>
                                                                         @endif
@@ -627,17 +672,18 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
                                                                     <label for="religion" class="col-md-4 control-label false-padding-bottom">Religion</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <select id="religion" class="form-control" name="religion">
-                                                                            <option selected="selected">Islam</option>
-                                                                            <option>Hinduism</option>
-                                                                            <option>Christianism</option>
-                                                                            <option>Buddhism</option>
-                                                                            <option>Other</option>
-                                                                        </select>
+                                                                <div class="col-md-12">
+                                                                    <select id="religion" class="form-control"
+                                                                            name="religion">
+                                                                        <option selected="selected">Islam</option>
+                                                                        <option>Hinduism</option>
+                                                                        <option>Christianism</option>
+                                                                        <option>Buddhism</option>
+                                                                        <option>Other</option>
+                                                                    </select>
 
-                                                                        @if ($errors->has('religion'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('religion'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('religion') }}</strong>
                                 </span>
                                                                         @endif
@@ -650,13 +696,14 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                                                     <label for="address" class="col-md-4 control-label false-padding-bottom">address</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="address" type="text" class="form-control" name="address"
-                                                                               value=""
-                                                                               required>
+                                                                <div class="col-md-12">
+                                                                    <input id="address" type="text" class="form-control"
+                                                                           name="address"
+                                                                           value=""
+                                                                           required>
 
-                                                                        @if ($errors->has('address'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('address'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('address') }}</strong>
                                 </span>
                                                                         @endif
@@ -667,32 +714,33 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
                                                                     <label for="about" class="col-md-4 control-label false-padding-bottom">About</label>
 
-                                                                    <div class="col-md-12">
+                                                                <div class="col-md-12">
                                             <textarea id="about" class="form-control"
                                                       name="about">{{ old('about') }}</textarea>
 
-                                                                        @if ($errors->has('about'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('about'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('about') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                                                     <label for="father_name" class="col-md-4 control-label false-padding-bottom">Father's Name</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="father_name" type="text" class="form-control" name="father_name"
-                                                                               value=""
-                                                                               required>
+                                                                <div class="col-md-12">
+                                                                    <input id="father_name" type="text"
+                                                                           class="form-control" name="father_name"
+                                                                           value=""
+                                                                           required>
 
-                                                                        @if ($errors->has('father_name'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('father_name'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('father_name') }}</strong>
                                 </span>
                                                                         @endif
@@ -704,13 +752,14 @@
                                                                     <label for="father_phone_number" class="col-md-4 control-label false-padding-bottom">Father's Phone
                                                                         Number</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="father_phone_number" type="text" class="form-control"
-                                                                               name="father_phone_number"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="father_phone_number" type="text"
+                                                                           class="form-control"
+                                                                           name="father_phone_number"
+                                                                           value="">
 
-                                                                        @if ($errors->has('father_phone_number'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('father_phone_number'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('father_phone_number') }}</strong>
                                 </span>
                                                                         @endif
@@ -724,13 +773,14 @@
                                                                     <label for="father_national_id" class="col-md-4 control-label false-padding-bottom">Father's National
                                                                         ID</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="father_national_id" type="text" class="form-control"
-                                                                               name="father_national_id"
-                                                                               value="{{ old('father_national_id') }}">
+                                                                <div class="col-md-12">
+                                                                    <input id="father_national_id" type="text"
+                                                                           class="form-control"
+                                                                           name="father_national_id"
+                                                                           value="{{ old('father_national_id') }}">
 
-                                                                        @if ($errors->has('father_national_id'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('father_national_id'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('father_national_id') }}</strong>
                                 </span>
                                                                         @endif
@@ -742,13 +792,14 @@
                                                                     <label for="father_occupation" class="col-md-4 control-label false-padding-bottom">Father's
                                                                         Occupation</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="father_occupation" type="text" class="form-control"
-                                                                               name="father_occupation"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="father_occupation" type="text"
+                                                                           class="form-control"
+                                                                           name="father_occupation"
+                                                                           value="">
 
-                                                                        @if ($errors->has('father_occupation'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('father_occupation'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('father_occupation') }}</strong>
                                 </span>
                                                                         @endif
@@ -762,13 +813,14 @@
                                                                     <label for="father_annual_income" class="col-md-4 control-label false-padding-bottom">Father's Annual
                                                                         Income</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="father_annual_income" type="text" class="form-control"
-                                                                               name="father_annual_income"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="father_annual_income" type="text"
+                                                                           class="form-control"
+                                                                           name="father_annual_income"
+                                                                           value="">
 
-                                                                        @if ($errors->has('father_annual_income'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('father_annual_income'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('father_annual_income') }}</strong>
                                 </span>
                                                                         @endif
@@ -780,13 +832,14 @@
                                                                     <label for="father_designation" class="col-md-4 control-label false-padding-bottom">Father's
                                                                         Designation</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="father_designation" type="text" class="form-control"
-                                                                               name="father_designation"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="father_designation" type="text"
+                                                                           class="form-control"
+                                                                           name="father_designation"
+                                                                           value="">
 
-                                                                        @if ($errors->has('father_designation'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('father_designation'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('father_designation') }}</strong>
                                 </span>
                                                                         @endif
@@ -800,13 +853,14 @@
                                                                     <label for="mother_phone_number" class="col-md-4 control-label false-padding-bottom">Mother's Phone
                                                                         Number</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="mother_phone_number" type="text" class="form-control"
-                                                                               name="mother_phone_number"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="mother_phone_number" type="text"
+                                                                           class="form-control"
+                                                                           name="mother_phone_number"
+                                                                           value="">
 
-                                                                        @if ($errors->has('mother_phone_number'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('mother_phone_number'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('mother_phone_number') }}</strong>
                                 </span>
                                                                         @endif
@@ -817,13 +871,14 @@
                                                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
                                                                     <label for="mother_name" class="col-md-4 control-label false-padding-bottom">Mother's Name</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="mother_name" type="text" class="form-control" name="mother_name"
-                                                                               value=""
-                                                                               required>
+                                                                <div class="col-md-12">
+                                                                    <input id="mother_name" type="text"
+                                                                           class="form-control" name="mother_name"
+                                                                           value=""
+                                                                           required>
 
-                                                                        @if ($errors->has('mother_name'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('mother_name'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('mother_name') }}</strong>
                                 </span>
                                                                         @endif
@@ -837,13 +892,14 @@
                                                                     <label for="mother_occupation" class="col-md-4 control-label false-padding-bottom">Mother's
                                                                         Occupation</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="mother_occupation" type="text" class="form-control"
-                                                                               name="mother_occupation"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="mother_occupation" type="text"
+                                                                           class="form-control"
+                                                                           name="mother_occupation"
+                                                                           value="">
 
-                                                                        @if ($errors->has('mother_occupation'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('mother_occupation'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('mother_occupation') }}</strong>
                                 </span>
                                                                         @endif
@@ -855,13 +911,14 @@
                                                                     <label for="mother_national_id" class="col-md-4 control-label false-padding-bottom">Mother's National
                                                                         ID</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="mother_national_id" type="text" class="form-control"
-                                                                               name="mother_national_id"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="mother_national_id" type="text"
+                                                                           class="form-control"
+                                                                           name="mother_national_id"
+                                                                           value="">
 
-                                                                        @if ($errors->has('mother_national_id'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('mother_national_id'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('mother_national_id') }}</strong>
                                 </span>
                                                                         @endif
@@ -875,13 +932,14 @@
                                                                     <label for="mother_designation" class="col-md-4 control-label false-padding-bottom">Mother's
                                                                         Designation</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="mother_designation" type="text" class="form-control"
-                                                                               name="mother_designation"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="mother_designation" type="text"
+                                                                           class="form-control"
+                                                                           name="mother_designation"
+                                                                           value="">
 
-                                                                        @if ($errors->has('mother_designation'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('mother_designation'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('mother_designation') }}</strong>
                                 </span>
                                                                         @endif
@@ -893,23 +951,25 @@
                                                                     <label for="mother_annual_income" class="col-md-4 control-label false-padding-bottom">Mother's Annual
                                                                         Income</label>
 
-                                                                    <div class="col-md-12">
-                                                                        <input id="mother_annual_income" type="text" class="form-control"
-                                                                               name="mother_annual_income"
-                                                                               value="">
+                                                                <div class="col-md-12">
+                                                                    <input id="mother_annual_income" type="text"
+                                                                           class="form-control"
+                                                                           name="mother_annual_income"
+                                                                           value="">
 
-                                                                        @if ($errors->has('mother_annual_income'))
-                                                                            <span class="help-block">
+                                                                    @if ($errors->has('mother_annual_income'))
+                                                                        <span class="help-block">
                                     <strong>{{ $errors->first('mother_annual_income') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label">Upload Profile Picture</label>
+                                                        <label class="col-md-4 control-label">Upload Profile
+                                                            Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="file" id="picPath" name="student_pic">
                                                         </div>
@@ -934,7 +994,8 @@
                                                                 <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="name" type="text" class="form-control" name="name"
+                                                                    <input id="name" type="text" class="form-control"
+                                                                           name="name"
                                                                            value=""
                                                                            required>
 
@@ -951,7 +1012,8 @@
                                                                 <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="email" type="email" class="form-control" name="email"
+                                                                    <input id="email" type="email" class="form-control"
+                                                                           name="email"
                                                                            value="" required>
 
                                                                     @if ($errors->has('email'))
@@ -969,7 +1031,8 @@
                                                                 <label for="password" class="col-md-4 control-label false-padding-bottom">Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password" type="password" class="form-control" name="password"
+                                                                    <input id="password" type="password"
+                                                                           class="form-control" name="password"
                                                                            required>
 
                                                                     @if ($errors->has('password'))
@@ -986,7 +1049,8 @@
                                                                     Password</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="password-confirm" type="password" class="form-control"
+                                                                    <input id="password-confirm" type="password"
+                                                                           class="form-control"
                                                                            name="password_confirmation"
                                                                            required>
                                                                 </div>
@@ -999,7 +1063,8 @@
                                                                 <label for="department" class="col-md-4 control-label false-padding-bottom">Department</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="department" class="form-control" name="department_id" required>
+                                                                    <select id="department" class="form-control"
+                                                                            name="department_id" required>
                                                                         @if (count($teacherDepartments) > 0)
                                                                             @foreach ($teacherDepartments as $d)
                                                                                 <option value="{{$d->id}}">{{$d->department_name}}</option>
@@ -1022,10 +1087,13 @@
                                                                 <div class="col-md-12">
                                                                     <select id="class_teacher" class="form-control"
                                                                             name="class_teacher_section_id">
-                                                                        <option selected="selected" value="0">Not Class Teacher</option>
+                                                                        <option selected="selected" value="0">Not Class
+                                                                            Teacher
+                                                                        </option>
                                                                         @foreach ($teacherSections as $section)
                                                                             <option value="{{$section->id}}">
-                                                                                Section: {{$section->section_number}} Class:
+                                                                                Section: {{$section->section_number}}
+                                                                                Class:
                                                                                 {{$section->class->class_number}}</option>
                                                                         @endforeach
                                                                     </select>
@@ -1045,7 +1113,8 @@
                                                                 <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="phone_number" type="text" class="form-control" name="phone_number"
+                                                                    <input id="phone_number" type="text"
+                                                                           class="form-control" name="phone_number"
                                                                            value="">
 
                                                                     @if ($errors->has('phone_number'))
@@ -1061,7 +1130,8 @@
                                                                 <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="blood_group" class="form-control" name="blood_group">
+                                                                    <select id="blood_group" class="form-control"
+                                                                            name="blood_group">
                                                                         <option selected="selected">A+</option>
                                                                         <option>A-</option>
                                                                         <option>B+</option>
@@ -1087,7 +1157,8 @@
                                                                 <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="nationality" type="text" class="form-control" name="nationality"
+                                                                    <input id="nationality" type="text"
+                                                                           class="form-control" name="nationality"
                                                                            value=""
                                                                            required>
 
@@ -1104,7 +1175,8 @@
                                                                 <label for="gender" class="col-md-4 control-label false-padding-bottom">Gender</label>
 
                                                                 <div class="col-md-12">
-                                                                    <select id="gender" class="form-control" name="gender">
+                                                                    <select id="gender" class="form-control"
+                                                                            name="gender">
                                                                         <option selected="selected">Male</option>
                                                                         <option>Female</option>
                                                                     </select>
@@ -1119,7 +1191,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label">Upload Profile Picture</label>
+                                                        <label class="col-md-4 control-label">Upload Profile
+                                                            Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="file" id="picPath" name="teacher_pic">
                                                         </div>
@@ -1150,10 +1223,12 @@
                                     <div class="basic-tab">
                                         <ul class="nav nav-tabs" id="tabMenu" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="tab-6" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">Create Department</a>
+                                                <a class="nav-link active" id="tab-6" data-toggle="tab" href="#tab1"
+                                                   role="tab" aria-selected="true">Create Department</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="tab-7" data-toggle="tab" href="#tab2" role="tab" aria-selected="false">Mange Classes</a>
+                                                <a class="nav-link" id="tab-7" data-toggle="tab" href="#tab2" role="tab"
+                                                   aria-selected="false">Mange Classes</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
@@ -1165,12 +1240,15 @@
                                                     <div class="false-padding-bottom-form form-group">
                                                         <label for="department_name" class="col-sm-12 control-label false-padding-bottom">Department Name</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="department_name" name="department_name" placeholder="English, Math,...">
+                                                            <input type="text" class="form-control" id="department_name"
+                                                                   name="department_name"
+                                                                   placeholder="English, Math,...">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="button button--save float-left">
+                                                            <button type="submit"
+                                                                    class="button button--save float-left">
                                                                 Submit
                                                             </button>
                                                         </div>
@@ -1210,7 +1288,8 @@
                                                                                             <div class="modal-content">
                                                                                                 <div class="modal-header">
                                                                                                     <h4 class="modal-title"
-                                                                                                        id="myModalLabel">All
+                                                                                                        id="myModalLabel">
+                                                                                                        All
                                                                                                         Sections of
                                                                                                         Class {{$class->class_number}}</h4>
                                                                                                     <button type="button"
@@ -1229,7 +1308,8 @@
                                                                                                                     &nbsp;
                                                                                                                     <a class="btn btn-lg btn-warning"
                                                                                                                        href="{{url('admin/courses/0/'.$section->id)}}">View
-                                                                                                                        All Assigned
+                                                                                                                        All
+                                                                                                                        Assigned
                                                                                                                         Courses</a>
                                                                                                                     <span class="pull-right"> &nbsp;&nbsp;
                                                                                                                 <a class="btn btn-lg btn-success mr-2"
@@ -1277,7 +1357,7 @@
             $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
         });
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var idx = $(this).index('a[data-toggle="tab"]');
             $('#tab-' + idx).addClass('active');
         });

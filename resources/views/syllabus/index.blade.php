@@ -5,6 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fab fa-readme"></i>
             All Syllabus
         </h3>
         <ul>

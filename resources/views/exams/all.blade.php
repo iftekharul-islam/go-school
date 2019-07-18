@@ -3,6 +3,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
+            <i class="fas fa-file-alt"></i>
             Manage Exams
         </h3>
         <ul>
