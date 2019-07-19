@@ -50,41 +50,37 @@
           <td>{{$course->section->class->class_number}}</td>
           <td>{{$course->section->section_number}}</td>
 
-          @if($course->exam_id != 0)
-            {{--                <td>--}}
-            {{--                  <a href="{{url('course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>--}}
-            {{--                </td>--}}
-            <td>
-              <a role="button"
-                 class="btn btn-secondary btn-lg float-left"
-                 href="{{url('teacher/section/students/'.$course->section->id.'?section=1')}}">View Students</a>
-            </td>
-          @else
-            <td>Save under Exam to Add Student</td>
-          @endif
+              @if($course->exam_id != 0)
+                <td>
+                  <a role="button"
+                     class="btn btn-secondary btn-lg float-left"
+                     href="{{url('teacher/section/students/'.$course->section->id.'?section=1')}}">View Students</a>
+                </td>
+              @else
+                <td>Save under Exam to Add Student</td>
+              @endif
 
-          @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
-            <td>
-              <a href="{{url('teacher/course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
+              @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
+                <td>
+                  <a href="{{url('teacher/course/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Message Students</a>
+                </td>
+                <td>
+                  <a href="{{url('teacher/grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-secondary btn-lg ">Submit Grade</a>
+                </td>
+                <td>
+                  <a href="{{url('teacher/grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">View Marks</a>
+                </td>
+              @endif
 
-            </td>
-          @else
-            <td>Save under Exam to Take Attendance</td>
-          @endif
+              @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
+                <td>
+                  <a href="{{url('teacher/attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
+                </td>
+              @else
+                <td>Save under Exam to Take Attendance</td>
+              @endif
 
-        @endif
-
-        @if(!$student && ($course->teacher_id == Auth::user()->id) && $course->exam_id != 0)
-          <td>
-            <a href="{{url('teacher/attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
-          </td>
-          <td>
-            <a href="{{url('teacher/grades/t/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">View Marks</a>
-          </td>
-          <td>
-            <a href="{{url('teacher/grades/c/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-secondary btn-lg ">Submit Grade</a>
-          </td>
-        @endif
+            @endif
 
         @if(Auth::user()->role == 'admin')
           <td>

@@ -32,7 +32,7 @@
                             <th>Point</th>
                             <th>From Mark</th>
                             <th>To Mark</th>
-                            <th width="12%">Action</th>
+                            <th width="15%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -73,15 +73,15 @@
                 buttons: true,
                 dangerMode: true,
             })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        document.getElementById('delete-form-'+id).submit();
-                        setTimeout(5000);
-                        swal("Poof! Your Selected data has been deleted!", {
-                            icon: "success",
-                        });
-                    }
-                });
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.getElementById('delete-form-'+id).submit();
+                    setTimeout(5000);
+                    swal("Poof! Your Selected data has been deleted!", {
+                        icon: "success",
+                    });
+                }
+            });
         }
     </script>
 @endsection

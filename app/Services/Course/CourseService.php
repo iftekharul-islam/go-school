@@ -54,7 +54,7 @@ class CourseService {
                   ->get();
     }
 
-    public function addCourse($request){
+    public function addCourse($request, $grade_system){
         $tb = new Course;
         $tb->course_name = $request->course_name;
         $tb->class_id = $request->class_id;
@@ -62,7 +62,7 @@ class CourseService {
         $tb->course_time = $request->course_time;
         $tb->section_id = $request->section_id;
         $tb->teacher_id = $request->teacher_id;
-        $tb->grade_system_name = $request->grade_system;
+        $tb->grade_system_name = $grade_system;
         $tb->quiz_count = 0;
         $tb->assignment_count = 0;
         $tb->ct_count = 0;

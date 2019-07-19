@@ -37,7 +37,7 @@
                         <input data-date-format="yyyy" class="form-control date" name="to_session[]" id="datepicker"
                             value="{{date('Y', strtotime('+1 year'))}}">
                     </td>
-                    <td style="text-align: center;">
+                    <td>
                         Class: {{$student->section->class->class_number}} - Section:
                             {{$student->section->section_number}}
                     </td>
@@ -45,10 +45,15 @@
                         <select id="to_section" class="form-control" name="to_section[]">
                             @foreach($classes as $class)
                             @foreach($class->sections as $section)
-                            <option value="{{$section->id}}">
-                                Class: {{$class->class_number}} -
-                                Section: {{$section->section_number}}
-                            </option>
+                                @if($student->section->class->class_number === $class->class_number && $student->section->section_number === $section->section_number)
+                                    <option value="{{$section->id}}" selected>
+                                        Class: {{$class->class_number}} - Section: {{$section->section_number}}
+                                    </option>
+                                @else
+                                    <option value="{{$section->id}}">
+                                        Class: {{$class->class_number}} - Section: {{$section->section_number}}
+                                    </option>
+                                @endif
                             @endforeach
                             @endforeach
                         </select>

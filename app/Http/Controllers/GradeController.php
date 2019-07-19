@@ -171,7 +171,7 @@ class GradeController extends Controller
      */
     public function update(Request $request)
     {
-      
+
         $i = 0;
         foreach($request->grade_ids as $id) {
             $tb = Grade::find($id);

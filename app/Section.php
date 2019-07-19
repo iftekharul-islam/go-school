@@ -26,4 +26,9 @@ class Section extends Model
     {
         return $this->hasMany('App\User');
     }
+
+    public function courses()
+    {
+        return $this->hasMany('App\Course');
+    }
 }

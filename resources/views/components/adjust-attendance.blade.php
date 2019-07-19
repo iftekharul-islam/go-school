@@ -1,7 +1,7 @@
 @if(count($attendances) > 0)
 <div class="col-md-12">
 {{--    <h5>Attendance List of This Term</h5>--}}
-    <form action="{{url('attendance/adjust')}}" method="POST">
+    <form action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendance/adjust')}}" method="POST">
         {{ csrf_field() }}
         <table class="table display table-bordered data-table text-nowrap">
             <tr>
