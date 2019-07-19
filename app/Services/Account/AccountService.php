@@ -12,14 +12,13 @@ class AccountService {
     public $request;
 
     public function getSectorsBySchoolId(){
-        return AccountSector::where('school_id', auth()->user()->school_id)->get();
+        return AccountSector::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'DESC')->get();
     }
 
     public function getAccountsBySchoolId(){
         return Account::where('school_id', auth()->user()->school_id)
                           ->where('type', $this->account_type)
                           ->orderBy('id', 'desc')
-                          ->take(50)
                           ->get();
     }
 

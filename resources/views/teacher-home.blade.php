@@ -130,7 +130,7 @@
                             </div>
                             <div class="table-box-wrap">
                                 <div class="table-responsive student-table-box">
-                                    <table class="table section-student-data-table text-wrap">
+                                    <table class="table table-data-div text-wrap">
                                         <thead>
                                         <tr>
                                             <th>Photo</th>

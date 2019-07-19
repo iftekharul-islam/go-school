@@ -88,7 +88,7 @@
   {{csrf_field()}}
   <input type="hidden" name="section_id" value="{{$section_id}}">
   <input type="hidden" name="course_id" value="{{$course_id}}">
-  <input type="hidden" name="exam_id" value="{{$exam_id}}">
+  <input type="hidden" name="exam_id" value="{{$exam->id}}">
   <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
   @foreach($gradesystems as $gs)
     <input type="hidden" name="grade_system_name" value="{{$gs->grade_system_name}}">
@@ -170,10 +170,10 @@
             <input type="number" name="ct5[]" class="form-control input-sm" placeholder="CT 5" value="{{$grade->ct5}}">
           </td>
           <td>
-            <input type="number" name="written[]" class="form-control input-sm" placeholder="Written" value="{{$grade->written}}">
+            <input type="number" name="written[]" class="form-control input-sm" placeholder="Final Written" value="{{$grade->written}}">
           </td>
           <td>
-            <input type="number" name="mcq[]" class="form-control input-sm" placeholder="Mcq" value="{{$grade->mcq}}">
+            <input type="number" name="mcq[]" class="form-control input-sm" placeholder="Final Mcq" value="{{$grade->mcq}}">
           </td>
           <td>
             <input type="number" name="practical[]" class="form-control input-sm" placeholder="Practical" value="{{$grade->practical}}">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Exam;
+use App\ExamForClass;
 use App\Grade;
 use App\Http\Resources\GradeResource;
 use App\Section;
@@ -67,17 +69,16 @@ class GradeController extends Controller
 
     public function cindex($teacher_id,$course_id,$exam_id,$section_id)
     {
+        $course = Course::with('exam')->where('id', $course_id)->first();
         $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
         $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
         $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);
-
         $this->gradeService->grades = $grades;
         $this->gradeService->gradesystems = $gradesystems;
         $this->gradeService->course_id = $course_id;
-        $this->gradeService->exam_id = $exam_id;
         $this->gradeService->teacher_id = $teacher_id;
         $this->gradeService->section_id = $section_id;
-
+        $this->gradeService->course_exam = $course->exam;
         return $this->gradeService->gradeCourseIndexView('grade.course-grade');
     }
 
@@ -169,6 +170,7 @@ class GradeController extends Controller
      */
     public function update(Request $request)
     {
+      
         $i = 0;
         foreach($request->grade_ids as $id) {
             $tb = Grade::find($id);
@@ -190,6 +192,7 @@ class GradeController extends Controller
             $tb->mcq = $request->mcq[$i];
             $tb->practical = $request->practical[$i];
             $tb->user_id = Auth::user()->id;
+            $tb->exam_id = $request->get('exam_id');
             $tb->created_at = date('Y-m-d H:i:s');
             $tb->updated_at = date('Y-m-d H:i:s');
             $tb->save();
