@@ -206,7 +206,7 @@ class UserController extends Controller
 //        DB::transaction(function () use ($request) {
             $password = $request->password;
             $tb = $this->userService->storeStudent($request, $path);
-            $this->userService->storeStudentInfo($request, $tb);
+           $this->userService->storeStudentInfo($request, $tb);
 
             try {
                 // Fire event to store Student information
@@ -317,6 +317,7 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
+//        return $user;
         return view('profile.user-profile', compact('user'));
     }
 

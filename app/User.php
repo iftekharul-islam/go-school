@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function studentInfo(){
-        return $this->hasOne('App\StudentInfo','student_id');
+        return $this->hasOne(StudentInfo::class);
     }
 
     public function studentBoardExam(){

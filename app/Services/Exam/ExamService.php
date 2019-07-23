@@ -103,7 +103,9 @@ class ExamService {
     }
 
     public function updateExamForClass(){
-        if(!isset($this->request->active)){
+        if(isset($this->request->active)){
+            ExamForClass::where('exam_id', $this->request->exam_id)->update(['active'=>1]);
+        } else {
             ExamForClass::where('exam_id', $this->request->exam_id)->update(['active'=>0]);
         }
     }

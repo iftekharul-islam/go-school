@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\StudentInfoUpdateRequested;
 use App\Events\UserRegistered;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\School;
 use App\Services\User\UserService;
 use App\User;
 use Illuminate\Http\Request;
@@ -37,9 +38,9 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('auth.admin');
+        return view('auth.admin', compact('id'));
     }
 
     /**
@@ -50,6 +51,8 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $school = School::where('id', $request->school_id)->first();
+        $request->request->add(['code' => $school->code]);
         $password = $request->password;
         $tb = $this->userService->storeAdmin($request);
         try {

@@ -223,8 +223,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">Male</option>
-                                                                        <option>Female</option>
+                                                                        <option selected="selected">male</option>
+                                                                        <option>female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -396,8 +396,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">Male</option>
-                                                                        <option>Female</option>
+                                                                        <option selected="selected">male</option>
+                                                                        <option>female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -520,9 +520,11 @@
                                                                 <label for="birthday" class="col-md-4 control-label false-padding-bottom">Birthday</label>
 
                                                                 <div class="col-md-12">
-                                                                    <input id="birthday" type="text"
-                                                                           class="form-control" name="birthday"
-                                                                           value="{{ old('birthday') }}" required>
+{{--                                                                    <input id="birthday" type="text"--}}
+{{--                                                                           class="form-control" name="birthday"--}}
+{{--                                                                           value="{{ old('birthday') }}" required>--}}
+
+                                                                    <input data-date-format="yyyy-mm-dd" id="birthday" class="form-control date" name="birthday" value="{{ old('birthday') }}" placeholder="Birthday" required autocomplete="off">
 
                                                                     @if ($errors->has('birthday'))
                                                                         <span class="help-block"><strong>{{ $errors->first('birthday') }}</strong></span>
@@ -597,8 +599,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">Male</option>
-                                                                        <option>Female</option>
+                                                                        <option selected="selected">male</option>
+                                                                        <option>female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -1177,8 +1179,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">Male</option>
-                                                                        <option>Female</option>
+                                                                        <option selected="selected">male</option>
+                                                                        <option>female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -1351,6 +1353,15 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function () {
+            $('.date').datepicker({
+                format: 'yyyy-mm-dd',
+                language: 'en'
+            });
+        })
+    </script>
+
     <script>
 
         $(document).ready(function () {

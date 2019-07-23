@@ -37,7 +37,7 @@
                         <ul class="nav sub-group-menu {{ (request()->is('master/new*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="{{url('master/new/create-school')}}" class="nav-link"><i class="fas fa-angle-right"></i>Create School</a>
-                                <a href="{{url('master/home')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Schools</a>
+                                <a href="{{url('master/new/all-school')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Schools</a>
                             </li>
                         </ul>
                     </li>

@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" method="POST" action="{{ url('create-school') }}">
+                            <form class="form-horizontal" method="POST" action="{{ url('master/create-school') }}">
                                 {{ csrf_field() }}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
                                     <label for="school_name" class="control-label">School Name</label>

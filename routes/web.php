@@ -20,6 +20,10 @@ Route::get('/', function () {
 
 Auth::routes(['login' => false]);
 
+Route::get('foo', function () {
+    return 'Success Message';
+});
+
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
 Route::middleware(['auth'])->group(function (){
@@ -50,7 +54,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('new/create-school', 'SchoolController@create');
         Route::get('edit/admin/{id}','AdminController@edit');
         Route::post('edit/admin','AdminController@update');
-
+        Route::get('new/all-school', 'MasterHomeController@allSchool');
     });
 
 //Student role routes
