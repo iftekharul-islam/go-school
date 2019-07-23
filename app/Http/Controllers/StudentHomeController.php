@@ -26,8 +26,8 @@ class StudentHomeController extends Controller
     {
         $student = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
-        if (@isset($student->school->id)) {
-            $school_id = \Auth::user()->school->id;
+        if (isset($student->school_id)) {
+            $school_id = \Auth::user()->school_id;
             $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)

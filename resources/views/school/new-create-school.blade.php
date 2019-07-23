@@ -81,7 +81,7 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active border-0" id="tab10" role="tabpanel">
-                                                <form class="new-added-form" method="POST" id="registerForm"
+                                                <form enctype="multipart/form-data" class="new-added-form" method="POST" id="registerForm"
                                                       action="{{ url('admin/register/accountant') }}">
                                                     {{ csrf_field() }}
                                                     <div class="row">
@@ -223,8 +223,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">male</option>
-                                                                        <option>female</option>
+                                                                        <option class="text-capitalize" selected="selected">male</option>
+                                                                        <option class="text-capitalize">female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -240,8 +240,8 @@
                                                         <label class="col-md-4 control-label false-padding-bottom">Upload Profile Picture</label>
                                                         <div class="col-md-12">
                                                             <input type="file" id="picPath" name="pic_path">
-{{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
-{{--                                                            @endcomponent--}}
+                                                            {{--                                                            @component('components.file-uploader',['upload_type'=>'profile'])--}}
+                                                            {{--                                                            @endcomponent--}}
                                                         </div>
                                                     </div>
 
@@ -396,8 +396,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">male</option>
-                                                                        <option>female</option>
+                                                                        <option class="text-capitalize" selected="selected">male</option>
+                                                                        <option class="text-capitalize">female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -413,9 +413,7 @@
                                                         <label class="col-md-4 control-label">Upload Profile
                                                             Picture</label>
                                                         <div class="col-md-12">
-                                                            <input type="hidden" id="picPath" name="pic_path">
-                                                            @component('components.file-uploader',['upload_type'=>'profile'])
-                                                            @endcomponent
+                                                            <input type="file" id="picPath" name="pic_path">
                                                         </div>
                                                     </div>
 
@@ -520,9 +518,9 @@
                                                                 <label for="birthday" class="col-md-4 control-label false-padding-bottom">Birthday</label>
 
                                                                 <div class="col-md-12">
-{{--                                                                    <input id="birthday" type="text"--}}
-{{--                                                                           class="form-control" name="birthday"--}}
-{{--                                                                           value="{{ old('birthday') }}" required>--}}
+                                                                    {{--                                                                    <input id="birthday" type="text"--}}
+                                                                    {{--                                                                           class="form-control" name="birthday"--}}
+                                                                    {{--                                                                           value="{{ old('birthday') }}" required>--}}
 
                                                                     <input data-date-format="yyyy-mm-dd" id="birthday" class="form-control date" name="birthday" value="{{ old('birthday') }}" placeholder="Birthday" required autocomplete="off">
 
@@ -599,8 +597,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">male</option>
-                                                                        <option>female</option>
+                                                                        <option class="text-capitalize" selected="selected">male</option>
+                                                                        <option class="text-capitalize">female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))
@@ -612,10 +610,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('version') ? ' has-error' : '' }}">
-                                                                    <label for="version" class="col-md-4 control-label false-padding-bottom">Version</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('version') ? ' has-error' : '' }}">
+                                                                <label for="version" class="col-md-4 control-label false-padding-bottom">Version</label>
 
                                                                 <div class="col-md-12">
                                                                     <select id="version" class="form-control"
@@ -628,13 +626,13 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('version') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-                                                                    <label for="session" class="col-md-4 control-label false-padding-bottom">Session</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
+                                                                <label for="session" class="col-md-4 control-label false-padding-bottom">Session</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="session" type="text" class="form-control"
@@ -646,15 +644,15 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('session') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                                                                    <label for="group" class="col-md-4 control-label false-padding-bottom">Group (Optional)</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
+                                                                <label for="group" class="col-md-4 control-label false-padding-bottom">Group (Optional)</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="group" type="text" class="form-control"
@@ -666,13 +664,13 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('group') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
-                                                                    <label for="religion" class="col-md-4 control-label false-padding-bottom">Religion</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
+                                                                <label for="religion" class="col-md-4 control-label false-padding-bottom">Religion</label>
 
                                                                 <div class="col-md-12">
                                                                     <select id="religion" class="form-control"
@@ -688,15 +686,15 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('religion') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                                                    <label for="address" class="col-md-4 control-label false-padding-bottom">address</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                                                <label for="address" class="col-md-4 control-label false-padding-bottom">address</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="address" type="text" class="form-control"
@@ -708,13 +706,13 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('address') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                                                                    <label for="about" class="col-md-4 control-label false-padding-bottom">About</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+                                                                <label for="about" class="col-md-4 control-label false-padding-bottom">About</label>
 
                                                                 <div class="col-md-12">
                                             <textarea id="about" class="form-control"
@@ -730,10 +728,10 @@
                                                         </div>
                                                     </div>
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
-                                                                    <label for="father_name" class="col-md-4 control-label false-padding-bottom">Father's Name</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
+                                                                <label for="father_name" class="col-md-4 control-label false-padding-bottom">Father's Name</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="father_name" type="text"
@@ -745,14 +743,14 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('father_name') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
-                                                                    <label for="father_phone_number" class="col-md-4 control-label false-padding-bottom">Father's Phone
-                                                                        Number</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
+                                                                <label for="father_phone_number" class="col-md-4 control-label false-padding-bottom">Father's Phone
+                                                                    Number</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="father_phone_number" type="text"
@@ -764,16 +762,16 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('father_phone_number') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
-                                                                    <label for="father_national_id" class="col-md-4 control-label false-padding-bottom">Father's National
-                                                                        ID</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
+                                                                <label for="father_national_id" class="col-md-4 control-label false-padding-bottom">Father's National
+                                                                    ID</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="father_national_id" type="text"
@@ -785,14 +783,14 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('father_national_id') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
-                                                                    <label for="father_occupation" class="col-md-4 control-label false-padding-bottom">Father's
-                                                                        Occupation</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
+                                                                <label for="father_occupation" class="col-md-4 control-label false-padding-bottom">Father's
+                                                                    Occupation</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="father_occupation" type="text"
@@ -804,16 +802,16 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('father_occupation') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
-                                                                    <label for="father_annual_income" class="col-md-4 control-label false-padding-bottom">Father's Annual
-                                                                        Income</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
+                                                                <label for="father_annual_income" class="col-md-4 control-label false-padding-bottom">Father's Annual
+                                                                    Income</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="father_annual_income" type="text"
@@ -825,14 +823,14 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('father_annual_income') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
-                                                                    <label for="father_designation" class="col-md-4 control-label false-padding-bottom">Father's
-                                                                        Designation</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
+                                                                <label for="father_designation" class="col-md-4 control-label false-padding-bottom">Father's
+                                                                    Designation</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="father_designation" type="text"
@@ -844,16 +842,16 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('father_designation') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
-                                                                    <label for="mother_phone_number" class="col-md-4 control-label false-padding-bottom">Mother's Phone
-                                                                        Number</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
+                                                                <label for="mother_phone_number" class="col-md-4 control-label false-padding-bottom">Mother's Phone
+                                                                    Number</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="mother_phone_number" type="text"
@@ -865,13 +863,13 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('mother_phone_number') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
-                                                                    <label for="mother_name" class="col-md-4 control-label false-padding-bottom">Mother's Name</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
+                                                                <label for="mother_name" class="col-md-4 control-label false-padding-bottom">Mother's Name</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="mother_name" type="text"
@@ -883,16 +881,16 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('mother_name') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
-                                                                    <label for="mother_occupation" class="col-md-4 control-label false-padding-bottom">Mother's
-                                                                        Occupation</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
+                                                                <label for="mother_occupation" class="col-md-4 control-label false-padding-bottom">Mother's
+                                                                    Occupation</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="mother_occupation" type="text"
@@ -904,14 +902,14 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('mother_occupation') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
-                                                                    <label for="mother_national_id" class="col-md-4 control-label false-padding-bottom">Mother's National
-                                                                        ID</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
+                                                                <label for="mother_national_id" class="col-md-4 control-label false-padding-bottom">Mother's National
+                                                                    ID</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="mother_national_id" type="text"
@@ -923,16 +921,16 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('mother_national_id') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
-                                                                    <label for="mother_designation" class="col-md-4 control-label false-padding-bottom">Mother's
-                                                                        Designation</label>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
+                                                                <label for="mother_designation" class="col-md-4 control-label false-padding-bottom">Mother's
+                                                                    Designation</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="mother_designation" type="text"
@@ -944,14 +942,14 @@
                                                                         <span class="help-block">
                                     <strong>{{ $errors->first('mother_designation') }}</strong>
                                 </span>
-                                                                        @endif
-                                                                    </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
-                                                                    <label for="mother_annual_income" class="col-md-4 control-label false-padding-bottom">Mother's Annual
-                                                                        Income</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
+                                                                <label for="mother_annual_income" class="col-md-4 control-label false-padding-bottom">Mother's Annual
+                                                                    Income</label>
 
                                                                 <div class="col-md-12">
                                                                     <input id="mother_annual_income" type="text"
@@ -1179,8 +1177,8 @@
                                                                 <div class="col-md-12">
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
-                                                                        <option selected="selected">male</option>
-                                                                        <option>female</option>
+                                                                        <option class="text-capitalize" selected="selected">male</option>
+                                                                        <option class="text-capitalize">female</option>
                                                                     </select>
 
                                                                     @if ($errors->has('gender'))

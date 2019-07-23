@@ -82,7 +82,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'course_name' => 'required|unique:courses|max:255',
+            'course_name' => 'required|max:255',
             'teacher_id' => 'required',
             'grade_system' => 'required',
             'course_type' => 'required',

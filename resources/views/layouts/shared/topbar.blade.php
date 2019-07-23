@@ -60,7 +60,7 @@
                             @if(\Auth::user()->role === 'admin' || \Auth::user()->role === 'master')
                                 <img src="{{asset('template/img/user-default.png')}}" alt="Admin" style="width: 40px; height: 40px;">
                             @else
-                                <img src="{{ \Auth::user()->pic_path }}" alt="{{ \Auth::user()->role  }}" style="width: 40px; height: 40px;">
+                                <img src="{{url(\Illuminate\Support\Facades\Auth::user()->pic_path)}}" alt="{{ \Auth::user()->role  }}" style="width: 40px; height: 40px;">
                             @endif
                         </div>
                     </a>

@@ -52,7 +52,7 @@
 
         <div class="col-md-12 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>For Class</label>
-                <select id="book_code" class="form-control select2 classes-exams" multiple name="classes[]">
+                <select id="book_code" required class="form-control select2 classes-exams" multiple name="classes[]">
                     @foreach($classes as $class)
 {{--                        <option value="{{$class->id}}">--}}
                             @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))
