@@ -22,8 +22,8 @@
         <a class="text-teal" href="{{url('user/'.$grade->teacher->student_code)}}">{{$grade->teacher->name}}</a>
       </td>
         <td>
-            @foreach($gradesystems as $gs)
-                @if($grade->marks >= $gs->from_mark && $grade->marks <= $gs->to_mark)
+            @foreach($gradesystems->gradeSystemInfo as $gs)
+                @if($grade->marks >= $gs->marks_from && $grade->marks <= $gs->marks_to)
                     <b>{{$gs->grade}}</b>
                     @break
                 @endif

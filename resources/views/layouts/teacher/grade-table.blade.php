@@ -54,8 +54,8 @@
       <td>{{$grade->gpa}}</td>
       <td>
         @foreach($gradesystems as $gs)
-          @if(isset($gs->point))
-            @if($gs->point == $grade->gpa)
+          @if(isset($gs->grade_points))
+            @if($gs->grade_points == $grade->gpa)
               {{$gs->grade}}
               @break
             @endif

@@ -201,6 +201,6 @@ class AttendanceController extends Controller
         } else {
             $this->attendanceService->storeAttendance();
         }
-        return back()->with('status','Saved');
+        return back()->with('status','Attendance record updated');
     }
 }

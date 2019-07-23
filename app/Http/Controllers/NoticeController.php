@@ -41,8 +41,8 @@ class NoticeController extends Controller
      */
     public function create()
     {
-          $files = Notice::where('school_id',\Auth::user()->school_id)->orderBy('created_at', 'DESC')->get();
-        return view('notices.create',['files'=>$files]);
+              $files = Notice::where('school_id',\Auth::user()->school_id)->where('active',1)->orderBy('created_at', 'DESC')->get();
+            return view('notices.create',['files'=>$files]);
     }
 
     /**

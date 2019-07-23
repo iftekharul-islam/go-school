@@ -70,7 +70,7 @@ class ExamController extends Controller
         }
         
         //return $this->cindex($course_id, $exam_id, $teacher_id);
-        return back()->with('status', 'Created');
+        return back()->with('status', 'New Exam Created');
     }
 
     /**

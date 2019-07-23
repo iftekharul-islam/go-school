@@ -395,6 +395,13 @@ class UserController extends Controller
         return back()->with('status', $user->name .' has been removed!!');
     }
 
+    public function activateUser($id)
+    {
+        $user = $this->user->find($id);
+        $user->active = 1;
+        $user->save();
+        return back()->with('status', $user->name .' has been Activated!!');
+    }
     /**
      * Remove the specified resource from storage.
      *

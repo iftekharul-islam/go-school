@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('notices-and-events', 'NoticeController@index');
-        Route::get('user/{id}/notifications', 'NotificationController@index');
+        Route::get('user/notifications/{id}', 'NotificationController@index');
     });
 
 //Librarian role routes
@@ -170,6 +170,17 @@ Route::middleware(['auth'])->group(function (){
             Route::post('edit/{id}', 'ExamController@updateExam');
             Route::get('active', 'ExamController@indexActive');
         });
+        Route::prefix('inactive')->group(function(){
+           Route::get('/notices','InactiveSettingsController@notices');
+            Route::get('/events','InactiveSettingsController@events');
+            Route::get('/syllabuses','InactiveSettingsController@syllabuses');
+            Route::get('/routines','InactiveSettingsController@routines');
+            Route::get('/students','InactiveSettingsController@students');
+            Route::get('/teachers','InactiveSettingsController@teachers');
+            Route::get('/admins','InactiveSettingsController@admins');
+            Route::get('/librarians','InactiveSettingsController@librarians');
+            Route::get('/accountants','InactiveSettingsController@accountants');
+        });
 
         //Accountant Routes
         Route::prefix('fees')->group(function (){
@@ -268,6 +279,7 @@ Route::middleware(['auth'])->group(function (){
         Route::post('edit/user','UserController@update');
         Route::post('upload/file', 'UploadController@upload');
         Route::get('user/deactivate/{id}','UserController@deactivateUser');
+        Route::get('user/activate/{id}','UserController@activateUser');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::post('courses/store', 'CourseController@store');
     });

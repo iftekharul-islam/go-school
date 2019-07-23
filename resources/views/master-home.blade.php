@@ -27,7 +27,7 @@
                                 <div class="item-title">
                                     <h3 class="mb-4 mt-2 ml-2 float-left hover-title"><i class="fas fa-school mr-4"></i><a style="color: #269589" href="{{url('school/'.$school->id)}}">{{ $school->name }}</a></h3>
                                     {{--<a href="#" title="Header" data-toggle="popover" data-trigger="hover" data-content="Some content">Hover over me</a>--}}
-                                    <p class="mb-4 ml-2 float-right" data-toggle="popover" data-trigger="hover" data-title="{{ $school->name }}" data-content="{{ $school->about }}">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
+                                    <p class="mb-4 ml-2 popover-text float-right"  >{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -61,3 +61,5 @@
     </div>
 </div>
 @endsection
+
+

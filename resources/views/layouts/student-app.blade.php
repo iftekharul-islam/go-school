@@ -91,15 +91,13 @@
     $(document).ready(function () {
         var myTable = $('.table-data-div').DataTable({
             paging: false,
-            bSort : false,
+            bSort : true,
             language: {
                 search: '',
                 searchPlaceholder: "Search here"
             }
         });
-        $('[data-toggle="popover"]').popover({
-            container: 'body'
-        });
+
     });
 
 

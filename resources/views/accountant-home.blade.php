@@ -144,41 +144,40 @@
                                     <td>{{($loop->index + 1)}}</td>
                                     <td>{{$fee->fee_name}}</td>
                                     <td>
-                                        <button class="button button--cancel" onclick="book()">Delete</button>
-                                        <a id="delete-form" href="{{ url('fees/remove', ['id' => $fee->id]) }}"></a>
+                                        <form class="form-group" id="delete-form-{{$fee->id}}" action="{{ url('accountant/fees/remove', ['id' => $fee->id]) }}" method="post">
+                                            {{ method_field('DELETE') }}
+                                            {{ csrf_field() }}
+                                        </form>
+                                        <button class="button button--cancel" onclick="book({{$fee->id}})">Delete</button>
+
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-
-                    @push('customjs')
-                        <script type="text/javascript">
-                            function book() {
-                                swal({
-                                    title: "Are you sure?",
-                                    text: "Once deleted, you will not be able to recover this data!",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true,
-                                })
-                                    .then((willDelete) => {
-                                        if (willDelete) {
-                                            document.getElementById('delete-form').click();
-                                            setTimeout(5000);
-                                            swal("Poof! Your Selected data has been deleted!", {
-                                                icon: "success",
-                                            });
-                                        }
-                                    });
-                            }
-                        </script>
-                    @endpush
             </div>
         </div>
     </div>
     <script>
+        function book(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                        setTimeout(5000);
+                        swal("Poof! Your Selected data has been deleted!", {
+                            icon: "success",
+                        });
+                    }
+                });
+        }
         var income = @json($total_income);
         var expense = @json($total_expense);
     </script>

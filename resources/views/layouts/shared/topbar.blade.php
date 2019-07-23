@@ -97,7 +97,7 @@
                 </li>
                 @if(Auth::user()->role === 'student')
                     <li class="navbar-item header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('student/user/'.\Auth::user()->id.'/notifications') }}" role="button" aria-expanded="false">
+                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" role="button" aria-expanded="false">
                             <i class="far fa-envelope"></i>
                             <div class="item-title d-md-none text-16 mg-l-10">Message</div>
                             <?php
