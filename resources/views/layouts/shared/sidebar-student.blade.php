@@ -34,10 +34,10 @@
                     ?>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-school"></i><span>Schools</span></a>
-                        <ul class="nav sub-group-menu">
+                        <ul class="nav sub-group-menu {{ (request()->is('master/new*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="{{url('master/new/create-school')}}" class="nav-link"><i class="fas fa-angle-right"></i>Create School</a>
-                                <a href="{{url('master/home')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Schools</a>
+                                <a href="{{url('master/new/all-school')}}" class="nav-link"><i class="fas fa-angle-right"></i>All Schools</a>
                             </li>
                         </ul>
                     </li>
@@ -60,7 +60,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/school/sections?course=1') }}" class="nav-link">
+                        <a href="{{ url('admin/school/sections?course=1') }}" class="nav-link {{ Request::get('course') == 1 ? 'menu-active' : '' }}">
                             <i class="fas fa-school"></i><span>Class Details</span></a>
                     </li>
                 @endif
@@ -71,11 +71,11 @@
                             <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/courses/0/'.Auth::user()->section_id) }}" class="nav-link">
+                        <a href="{{ url('student/courses/0/'.Auth::user()->section_id) }}" class="nav-link {{ (request()->is('student/courses/0/'.Auth::user()->section_id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-book-open"></i><span>My Courses</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/grades/'.Auth::user()->id) }}" class="nav-link">
+                        <a href="{{ url('student/grades/'.Auth::user()->id) }}" class="nav-link {{ (request()->is('student/grades/'.Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-poll"></i><span>My Grade</span></a>
                     </li>
                     <li class="nav-item">
@@ -86,10 +86,10 @@
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/notices-and-events') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
+                        <a href="{{ url('student/notices-and-events') }}" class="nav-link {{ (request()->is('student/notices-and-events')) ? 'menu-active' : '' }}"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" class="nav-link">
+                        <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" class="nav-linkclass="nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
                     <li class="nav-item">
@@ -99,37 +99,37 @@
                 @endif
                 @if($role != 'student' && $role != 'master')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}">
+                        <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}" href="{{url('users/'.Auth::user()->school->code.'/1/0?student=1')}}">
                             <i class="flaticon-classmates"></i> <span>Students</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}">
+                        <a class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' : '' }}" href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}">
                             <i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
                     </li>
                 @endif
                 @if($role == 'admin')
                     <li class="nav-item">
-                        <a href="{{ url('admin/all-department') }}" class="nav-link">
+                        <a href="{{ url('admin/all-department') }}" class="nav-link {{ (request()->is('admin/all-department')) ? 'menu-active' : '' }}">
                             <i class="far fa-building"></i><span>All Departments</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/academic/routine') }}" class="nav-link">
+                        <a href="{{ url('admin/academic/routine') }}" class="nav-link {{ (request()->is('admin/academic/routine')) ? 'menu-active' : '' }}">
                             <i class="far fa-clock"></i><span>Class Routine</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/grades/classes') }}" class="nav-link">
+                        <a href="{{ url('admin/grades/classes') }}" class="nav-link {{ (request()->is('admin/grades/classes')) ? 'menu-active' : '' }}">
                             <i class="fas fa-poll-h"></i><span>Grades</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/academic/syllabus') }}" class="nav-link">
+                        <a href="{{ url('admin/academic/syllabus') }}" class="nav-link {{ (request()->is('admin/academic/syllabus')) ? 'menu-active' : '' }}">
                             <i class="fab fa-readme"></i><span>Syllabus</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/academic/notice') }}" class="nav-link">
+                        <a href="{{ url('admin/academic/notice') }}" class="nav-link {{ (request()->is('admin/academic/notice')) ? 'menu-active' : '' }}">
                             <i class="fas fa-exclamation-circle"></i><span>Notice</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/academic/event') }}" class="nav-link">
+                        <a href="{{ url('admin/academic/event') }}" class="nav-link {{ (request()->is('admin/academic/event')) ? 'menu-active' : '' }}">
                             <i class="fas fa-calendar-week"></i><span>Events</span></a>
                     </li>
                 @endif
@@ -161,7 +161,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('admin/academic-settings') }}" class="nav-link">
+                        <a href="{{ url('admin/academic-settings') }}" class="nav-link {{ (request()->is('admin/academic-settings')) ? 'menu-active' : '' }}">
                             <i class="fas fa-sliders-h"></i><span>Academic Settings</span></a>
                     </li>
 
@@ -169,14 +169,14 @@
 
                 @if($role == 'teacher')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('teacher/courses/'.Auth::user()->id.'/0') }}">
+                        <a class="nav-link {{ (request()->is('teacher/courses/'.Auth::user()->id.'/0')) ? 'menu-active' : '' }}" href="{{ url('teacher/courses/'.Auth::user()->id.'/0') }}">
                             <i class="fas fa-book-medical"></i><span>My Courses</span></a>
                     </li>
                 @endif
                 @if($role == 'admin' || $role == 'accountant')
 
                     <li class="nav-item">
-                        <a href="{{ url($role.'/fees/all') }}" class="nav-link">
+                        <a href="{{ url($role.'/fees/all') }}" class="nav-link {{ (request()->is($role.'/fees/all')) ? 'menu-active' : '' }}">
                             <i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
                     </li>
 

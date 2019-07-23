@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Register Admin')
+@section('title', 'Edit Admin')
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -12,7 +12,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Create Admin</li>
+            <li>Edit Admin</li>
         </ul>
     </div>
 
@@ -206,8 +206,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" id="registerBtn" class="button button--text">
-                                    Register
+                                <button type="submit" id="registerBtn" class="button button--save">
+                                    Update
                                 </button>
                             </div>
                         </div>

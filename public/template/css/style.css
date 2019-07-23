@@ -100,6 +100,12 @@ body {
   margin-bottom: 13px;
 }
 
+.fc-time {
+  display : none;
+}
+.fc-title {
+  margin-left: 38%!important;
+}
 .dataTables_filter {
   float: right !important;
 }
@@ -2654,7 +2660,7 @@ ul {
 }
 
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu>.nav-item .nav-link.menu-active {
-  background-color: #32998f;
+  background-color: #10544D;
 }
 
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu>.nav-item .nav-link.menu-active span {

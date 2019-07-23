@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Gradesystem;
 use App\Http\Resources\CourseResource;
 use App\Services\User\UserService;
 use App\User;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Course\SaveConfigurationRequest;
 use App\Http\Traits\GradeTrait;
 use App\Services\Course\CourseService;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -86,8 +88,9 @@ class CourseController extends Controller
             'course_type' => 'required',
             'course_time' => 'required',
         ]);
+        $grade_system = Gradesystem::where('school_id', Auth::user()->school_id)->first()->grade_system_name;
         try{
-            $this->courseService->addCourse($request);
+            $this->courseService->addCourse($request, $grade_system);
         } catch (\Exception $ex){
             return 'Could not add course.';
         }

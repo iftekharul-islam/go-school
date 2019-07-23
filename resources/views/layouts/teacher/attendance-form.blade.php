@@ -59,7 +59,7 @@
                                 </div>
                             @else
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent">
+                                    <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent" disabled>
                                     <label for="">&nbsp;</label>
                                 </div>
                             @endif
@@ -104,6 +104,9 @@
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
                                     <td>{{$at->totalescaped ? $at->totalescaped: 0 }}</td>
                                 @else
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
                                     @break
                                 @endif
                             @endforeach

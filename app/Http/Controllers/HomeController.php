@@ -52,36 +52,36 @@ class HomeController extends Controller
 
         if (@isset($student->school->id)) {
             $school_id = \Auth::user()->school->id;
-            $classes = \Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-                return \App\Myclass::where('school_id', $school_id)
+//            $classes = \Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
+                $classes = Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
-            });
-            $totalStudents = \Cache::remember('totalStudents-'.$school_id, $minutes, function () use($school_id) {
-                return User::where('school_id',$school_id)
+//            });
+//            $totalStudents = \Cache::remember('totalStudents-'.$school_id, $minutes, function () use($school_id) {
+            $totalStudents = User::where('school_id',$school_id)
                     ->where('role','student')
                     ->where('active', 1)
                     ->count();
-            });
+//            });
             $male = User::where('gender','male')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
             $female = User::where('gender','female')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
 
-            $totalClasses = \Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
-                return Myclass::where('school_id', $school_id)->count();
-            });
-            $totalSections = \Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
-                return Section::whereIn('class_id', $classes)->count();
-            });
-            $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
-                return Notice::where('school_id', $school_id)
+//            $totalClasses = \Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
+                $totalClasses =  Myclass::where('school_id', $school_id)->count();
+//            });
+//            $totalSections = \Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
+                $totalSections = Section::whereIn('class_id', $classes)->count();
+//            });
+//            $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+                $notices = Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
-            });
-            $exams = \Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
-                return Exam::where('school_id', $school_id)
+//            });
+//            $exams = \Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
+                $exams = Exam::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
-            });
+//            });
         }
 
         $allStudents = $this->userService->getStudents();

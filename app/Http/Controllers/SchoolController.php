@@ -79,7 +79,7 @@ class SchoolController extends Controller
         $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
         $tb->theme = 'flatly';
         $tb->save();
-        return redirect('/home')->with('status', 'Created');
+        return redirect('master/home')->with('status', 'Created');
     }
 
     /**

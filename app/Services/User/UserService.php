@@ -182,7 +182,7 @@ class UserService {
     }
 
     public function getUserByUserCode($user_code){
-        return $this->user->with('section', 'studentInfo')
+        return User::with('section', 'studentInfo')
               ->where('student_code', $user_code)
               ->firstOrFail();
     }
@@ -194,8 +194,8 @@ class UserService {
         $tb->password = bcrypt($request->password);
         $tb->role = 'admin';
         $tb->active = 1;
-        $tb->school_id = session('register_school_id');
-        $tb->code = session('register_school_code');
+        $tb->school_id = $request->school_id;
+        $tb->code = $request->code;
         $tb->student_code = session('register_school_id').date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
         $tb->gender = $request->gender;
         $tb->blood_group = $request->blood_group;
@@ -235,10 +235,10 @@ class UserService {
     public function  storeStudentInfo($request, $student)
     {
         $data = [
-          'student_id' => $student->student_code,
+            'student_id' => $student->student_code,
             'session' => $request->get('session'),
             'version' => $request->get('version'),
-            'group' => $request->get('group'),
+            'group' => (!empty($request->get('group'))) ? $request->get('group') : '',
             'birthday' => $request->get('birthday'),
             'religion' => $request->get('religion'),
             'father_name' => $request->get('father_name'),

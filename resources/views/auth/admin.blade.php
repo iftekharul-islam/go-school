@@ -47,6 +47,7 @@
                 <div class="">
                     <form class="new-added-form" method="POST" id="registerForm" action="{{ url('master/register/admin') }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="school_id" value="{{ $id }}">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -234,7 +235,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" id="registerBtn" class="button button--text">
+                                <button type="submit" id="registerBtn" class="button button--save">
                                     Register
                                 </button>
                             </div>

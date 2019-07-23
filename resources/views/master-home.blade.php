@@ -2,61 +2,45 @@
 @section('title','Dashboard')
 @section('content')
 <div class="breadcrumbs-area">
-    <h3>All Schools</h3>
-    <ul>
-        <li>
-            <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
-        </li>
-    </ul>
+    <h3>Dashboard</h3>
 </div>
 
-<div class="card height-auto false-height">
-    <div class="card-body-entire">
-        <div class="heading-layout1">
-            <div class="item-title">
-                {{--                    <h3>All School</h3>--}}
-            </div>
-        </div>
-        <div class="row">
-            @foreach($schools as $school)
-            <div class="col-12 col-xl-4 col-4-xxxl">
-                <div class="card dashboard-card-four pd-b-0">
-                    <div class="card-body border pb-5">
-                        <div class="card-body-inner">
-                            <div class="heading-layout1">
-                                <div class="item-title">
-                                    <h3 class="mb-4 mt-2 ml-2 float-left hover-title"><i class="fas fa-school mr-4"></i><a style="color: #269589" href="{{url('school/'.$school->id)}}">{{ $school->name }}</a></h3>
-                                    {{--<a href="#" title="Header" data-toggle="popover" data-trigger="hover" data-content="Some content">Hover over me</a>--}}
-                                    <p class="mb-4 ml-2 popover-text float-right"  >{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered display text-wrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Medium</th>
-                                            <th>Code</th>
-                                            <th>Total Stds</th>
-                                            <th>Total Dpts</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ ucfirst($school->medium) }}</td>
-                                            <td>{{ $school->code }}</td>
-                                            <td>{{count($school->users->where('role', 'student'))}}</td>
-                                            <td>{{count($school->departments)}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="{{url('master/school/'.$school->id)}}"
-                                class="button button--primary font-weight-bold">Details</a>
-                        </div>
-                    </div>
+<div class="height-auto false-height">
+
+
+    <div class="row">
+        <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">
+            <div class="dashboard-summery-two">
+                <div class="item-icon bg-light-teal">
+                    <i class="fas fa-school text-light"></i>
+                </div>
+                <div class="item-content">
+                    <div class="item-number"><span class="counter" data-num="{{ $school }}">{{ $school }}</span></div>
+                    <div class="item-title">Total School</div>
                 </div>
             </div>
-            @endforeach
+        </div>
+        <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">
+            <div class="dashboard-summery-two">
+                <div class="item-icon bg-light-teal">
+                    <i class="fas fa-users text-light"></i>
+                </div>
+                <div class="item-content">
+                    <div class="item-number"><span class="counter" data-num="{{ $total_student }}">{{ $total_student }}</span></div>
+                    <div class="item-title">Total Student</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">
+            <div class="dashboard-summery-two">
+                <div class="item-icon bg-light-teal">
+                    <i class="fas fa-user-cog text-light"></i>
+                </div>
+                <div class="item-content">
+                    <div class="item-number"><span class="counter" data-num="{{ $total_admin }}">{{ $total_admin }}</span></div>
+                    <div class="item-title">Total Admin</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
