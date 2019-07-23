@@ -19,6 +19,7 @@ class SyllabusController extends Controller
     {
         $files = Syllabus::with('myclass')
             ->where('school_id',Auth::user()->school_id)
+            ->where('active',1)
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('syllabus.index',['files'=>$files,'class_id' => 1]);
@@ -36,6 +37,7 @@ class SyllabusController extends Controller
                 $files = Syllabus::with('myclass')
                     ->where('school_id',\Auth::user()->school_id)
                     ->where('class_id', $class_id)
+                    ->where('active',1)
                     ->orderBy('created_at', 'DESC')
                     ->get();
             } else {

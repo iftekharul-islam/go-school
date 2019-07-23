@@ -184,8 +184,7 @@ class UserService {
     public function getUserByUserCode($user_code){
         return $this->user->with('section', 'studentInfo')
               ->where('student_code', $user_code)
-              ->where('active', 1)
-              ->first();
+              ->firstOrFail();
     }
 
     public function storeAdmin($request){

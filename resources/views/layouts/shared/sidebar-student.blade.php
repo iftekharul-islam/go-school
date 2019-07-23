@@ -30,7 +30,7 @@
 
                 @if($role == 'master')
                     <?php
-                        $schools = \App\School::all();
+                    $schools = \App\School::all();
                     ?>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-school"></i><span>Schools</span></a>
@@ -68,7 +68,7 @@
                 @if($role == 'student')
                     <li class="nav-item">
                         <a href="{{ url('student/attendances/0/' . Auth::user()->id . '/0') }}" class="nav-link">
-                            <i class="fas fa-user-plus"></i><span>My Attendance</span></a>
+                            <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('student/courses/0/'.Auth::user()->section_id) }}" class="nav-link">
@@ -80,7 +80,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="fas fa-file-invoice"></i><span>Payment History</span></a>
+                            <i class="fas fa-money-check-alt"></i><span>Payment History</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
@@ -89,7 +89,7 @@
                         <a href="{{ url('student/notices-and-events') }}" class="nav-link"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/user/'.\Auth::user()->id.'/notifications') }}" class="nav-link">
+                        <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" class="nav-link">
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
                     <li class="nav-item">
@@ -235,6 +235,46 @@
                             <li class="nav-item">
                                 <a href="{{ url($role.'/create/book') }}" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Add Book</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+
+                @if($role == 'admin')
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="fas fa-tools"></i><span>Manage Inactive Items </span></a>
+                        <ul class="nav sub-group-menu menu-open {{ $lib==1 ? 'sub-group-active' : '' }}" style="display: block;">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/events') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/notices') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Notices</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/syllabuses') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Syllabuses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/routines') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Routines</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/students') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/teachers') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Teachers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/librarians') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Librarians</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/inactive/accountants') }}" class="nav-link"><i
+                                            class="fas fa-angle-right"></i>Inactive Accountants</a>
                             </li>
                         </ul>
                     </li>

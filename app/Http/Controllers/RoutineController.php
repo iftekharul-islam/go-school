@@ -19,6 +19,7 @@ class RoutineController extends Controller
     {
         $files = Routine::with('section')
             ->where('school_id',\Auth::user()->school_id)
+            ->where('active',1)
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('routines.index',['files'=>$files,'section_id' => 1]);

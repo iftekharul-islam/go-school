@@ -61,7 +61,7 @@ class GradeService {
     public function getStudentGradesWithInfoCourseTeacherExam($student_id){
         return Grade::with(['student','course','teacher','exam'])
             ->where('student_id', $student_id)
-            ->orderBy('exam_id')
+            ->orderBy('created_at','DESC')
             ->latest()
             ->get();
     }
@@ -70,12 +70,16 @@ class GradeService {
         $grade_system_name = isset($grades[0]->course->grade_system_name) ? $grades[0]->course->grade_system_name : false;
         return ($grade_system_name)?Gradesystem::where('school_id', auth()->user()->school_id)
             ->where('grade_system_name', $grade_system_name)
-            //->groupBy('grade_system_name')
             ->get() : [];
 
     }
 
-    public function getGradeSystemByname($grade_system_name){
+    public function getGradeSystemInfoBySchoolId()
+    {
+        return $gradeSystemInfo = Gradesystem::with('gradeSystemInfo')->where('school_id', Auth::user()->school_id)->first();
+    }
+
+    public function getGradeSystemByname(){
         return Gradesystem::where('school_id', auth()->user()->school_id)
             ->with('gradeSystemInfo')
             ->first();
@@ -90,7 +94,7 @@ class GradeService {
         ]);
     }
 
-    public function getGradeSystemBySchoolIdGroupByName($grades){
+    public function getGradeSystemBySchoolIdGroupByName(){
         $gradeSystem = GradeSystem::where('school_id', Auth::user()->school_id)->first();
 
         return $gradeSystemInfo = GradeSystemInfo::where('gradesystem_id', $gradeSystem->id)->get();

@@ -317,8 +317,6 @@
             </div>
         </div>
         <script>
-            var male = @json($male);
-            var female = @json($female);
 
             var present = @json($present);
             var absent = @json($absent);
