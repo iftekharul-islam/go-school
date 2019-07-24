@@ -6,7 +6,11 @@
 </div>
 
 <div class="height-auto false-height">
-
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <div class="row">
         <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">

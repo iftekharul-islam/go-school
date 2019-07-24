@@ -91,12 +91,12 @@
                                                             </td>
                                                             <td>{{ $book->type }}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="text-nowrap font-medium text-dark-medium">Class
-                                                            </td>
-                                                            <td>
-                                                                {{ $book->class->class_number }}</td>
-                                                        </tr>
+                                                        {{--<tr>--}}
+                                                            {{--<td class="text-nowrap font-medium text-dark-medium">Class--}}
+                                                            {{--</td>--}}
+                                                            {{--<td>--}}
+                                                                {{--{{ $book->class->class_number }}</td>--}}
+                                                        {{--</tr>--}}
                                                         <tr>
                                                             <td class="text-nowrap font-medium text-dark-medium">
                                                                 School

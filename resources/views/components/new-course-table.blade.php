@@ -73,7 +73,7 @@
                   <a href="{{url('teacher/attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
                 </td>
               @else
-                <td>Save under Exam to Take Attendance</td>
+
               @endif
 
             @endif

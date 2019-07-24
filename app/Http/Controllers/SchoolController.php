@@ -37,7 +37,7 @@ class SchoolController extends Controller
         $teacherDepartments = Department::where('school_id',\Auth::user()->school_id)->get();
         $teacherClasses = Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
         $teacherSections = Section::with('class')->whereIn('class_id',$teacherClasses)->get();
-        $gradeSystems = Gradesystem::where('school_id', Auth::user()->school_id)->get();
+        $gradeSystems = Gradesystem::where('school_id', Auth::user()->school_id)->first();
 
         $teachers = User::where('role', 'teacher')
             ->orderBy('name','ASC')
@@ -79,7 +79,7 @@ class SchoolController extends Controller
         $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
         $tb->theme = 'flatly';
         $tb->save();
-        return redirect('master/home')->with('status', 'Created');
+        return redirect()->back()->with('status', 'New School Added');
     }
 
     /**
@@ -140,6 +140,16 @@ class SchoolController extends Controller
         $dpts = Department::where('school_id', \Auth::user()->school_id)->get();
         return view('school.departments', compact('dpts'));
     }
+    public function departmentTeachers($id)
+    {
+        $users = User::where('role','teacher')
+            ->where('active',1)
+            ->where('school_id', Auth::user()->school_id)
+            ->where('department_id', $id)
+            ->orderBy('created_at','DESC')
+            ->get();
+        return view('school.department-teachers',compact('users'));
+    }
 
     public function changeTheme(Request $request){
         $tb = School::find($request->s);
@@ -178,7 +188,8 @@ class SchoolController extends Controller
     public function destroy($id)
     {
         $school = School::find($id);
+        $name = $school->name;
         $school->delete();
-        return redirect('/home')->with('status', 'School deleted');
+        return redirect('master/home')->with('status',$name.'   deleted');
     }
 }

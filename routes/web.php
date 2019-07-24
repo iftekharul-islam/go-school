@@ -162,6 +162,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('gpa/all-gpa', 'GradesystemController@index');
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department','SchoolController@allDepartment');
+        Route::get('department-teachers/{id}','SchoolController@departmentTeachers');
 
         Route::prefix('exams')->group(function () {
             Route::get('/', 'ExamController@index');

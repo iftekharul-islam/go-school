@@ -67,7 +67,7 @@ class GradeController extends Controller
 
     public function cindex($teacher_id,$course_id,$exam_id,$section_id)
     {
-        $course = Course::with('exam')->where('id', $course_id)->first();
+      return  $course = Course::with('exam')->where('id', $course_id)->first();
         $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
         $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
         $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);

@@ -4,9 +4,9 @@
         <div class="col-md-12 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
             <label>Terms</label>
             <select id="term" class="select2 ml-2 " name="term">
-               <option value="1">1st Term</option>
-               <option value="2">2nd Term</option>
-               <option value="3">3rd Term</option>
+               <option value="First Term">1st Term</option>
+               <option value="Second Term">2nd Term</option>
+               <option value="Third Term">3rd Term</option>
             </select>
             @if ($errors->has('term'))
                 <span class="help-block">

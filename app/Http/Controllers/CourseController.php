@@ -84,15 +84,14 @@ class CourseController extends Controller
         $request->validate([
             'course_name' => 'required|max:255',
             'teacher_id' => 'required',
-            'grade_system' => 'required',
             'course_type' => 'required',
             'course_time' => 'required',
         ]);
-        $grade_system = Gradesystem::where('school_id', Auth::user()->school_id)->first()->grade_system_name;
+        $grade_system = Gradesystem::where('school_id', Auth::user()->school_id)->first();
         try{
             $this->courseService->addCourse($request, $grade_system);
         } catch (\Exception $ex){
-            return 'Could not add course.';
+            return back()->withInput(['tab'=> 'tab8'] )->with('error', 'Unable to create Course. Define grade system first from Manage GPA menu');
         }
         return back()->withInput(['tab'=> 'tab8'] )->with('status', 'New Course Created');
     }

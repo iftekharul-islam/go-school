@@ -20,6 +20,11 @@
         <div class="col-md-8">
             <div class="card height-auto false-height">
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-12">
                             <form class="form-horizontal" method="POST" action="{{ url('master/create-school') }}">
