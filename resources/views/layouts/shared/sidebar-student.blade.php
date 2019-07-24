@@ -78,24 +78,24 @@
                         <a href="{{ url('student/grades/'.Auth::user()->id) }}" class="nav-link {{ (request()->is('student/grades/'.Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-poll"></i><span>My Grade</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-money-check-alt"></i><span>Payment History</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>
-                    </li>
+                    {{--<li class="nav-item">--}}
+                        {{--<a href="#" class="nav-link">--}}
+                            {{--<i class="fas fa-money-check-alt"></i><span>Payment History</span></a>--}}
+                    {{--</li>--}}
+                    {{--<li class="nav-item">--}}
+                        {{--<a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>--}}
+                    {{--</li>--}}
                     <li class="nav-item">
                         <a href="{{ url('student/notices-and-events') }}" class="nav-link {{ (request()->is('student/notices-and-events')) ? 'menu-active' : '' }}"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" class="nav-linkclass="nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
+                        <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" class="nav-linkclass nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-user"></i><span>Account</span></a>
-                    </li>
+                    {{--<li class="nav-item">--}}
+                        {{--<a href="#" class="nav-link">--}}
+                            {{--<i class="far fa-user"></i><span>Account</span></a>--}}
+                    {{--</li>--}}
                 @endif
                 @if($role != 'student' && $role != 'master')
                     <li class="nav-item">

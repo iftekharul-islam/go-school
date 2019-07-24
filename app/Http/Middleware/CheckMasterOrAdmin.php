@@ -19,6 +19,6 @@ class CheckMasterOrAdmin
         if ($user->hasRole('master') || $user->hasRole('admin')) {
             return $next($request);
         }
-        return redirect('home');
+        return redirect('/');
     }
 }

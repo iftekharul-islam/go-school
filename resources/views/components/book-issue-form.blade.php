@@ -13,7 +13,7 @@
         </ul>
     </div>
 @endif
-<form autocomplete="off" class="new-added-form justify-content-md-center" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/issue-books')}}" method="post">
+<form autocomplete="off" class="new-added-form justify-content-md-center book-issue" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/issue-books')}}" method="post">
     {{ csrf_field() }}
     <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
         <label for="name" class="col-md-4 mt-5">Student Name</label>

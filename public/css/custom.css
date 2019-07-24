@@ -135,3 +135,6 @@
 .font-size-20{
     font-size: 20px!important;
 }
+.book-issue .dropdown-menu {
+    font-size: 16px;
+}

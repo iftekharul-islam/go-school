@@ -90,7 +90,7 @@
                               <td>
                                 <select class="form-control input-sm" name="grade_system_name">
                                   @foreach($gradesystems as $gs)
-                                    <option {{($grade->course->grade_system_name == $gs->grade_system_name)?'selected=selected':''}}>{{$gs->grade_system_name}}</option>
+                                    <option selected>{{$gs->grade_system_name}}</option>
                                   @endforeach
                                 </select>
                               </td>

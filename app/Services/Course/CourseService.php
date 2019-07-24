@@ -62,7 +62,7 @@ class CourseService {
         $tb->course_time = $request->course_time;
         $tb->section_id = $request->section_id;
         $tb->teacher_id = $request->teacher_id;
-        $tb->grade_system_name = $grade_system;
+        $tb->grade_system_name = $grade_system->grade_system_name;
         $tb->quiz_count = 0;
         $tb->assignment_count = 0;
         $tb->ct_count = 0;

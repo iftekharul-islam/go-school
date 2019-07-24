@@ -130,12 +130,6 @@
                                 </td>
                             @endif
                         @endif
-                        {{--                        @if (!Session::has('section-attendance'))--}}
-                        {{--                            <td>{{ucfirst($user->gender)}}</td>--}}
-                        {{--                            <td>{{strtoupper($user->blood_group)}}</td>--}}
-                        {{--                            <td>{{$user->phone_number}}</td>--}}
-                        {{--                            <td>{{$user->address}}</td>--}}
-                        {{--                        @endif--}}
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                             @if($user->role == 'student')<td><a class="button button--text" role="button"
                                                                 href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
@@ -145,13 +139,11 @@
                                 <td>
                                     <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
                                     <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $user->id }})">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="far fa-trash-alt"></i></button>
                                         <form id="delete-form-{{ $user->id }}" action="{{ url('admin/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
                                             @csrf
                                             @method('GET')
                                         </form>
-                                    {{--                                    <button class="btn-danger btn btn-lg" onclick="removeUser({{$user->id}})"><i class="far fa-trash-alt"></i></button>--}}
-                                    {{--                                    <a id="delete-form" href="{{url('user/deactivate/'.$user->id)}}"role=""></a>--}}
                                 </td>
                             @endif
                         @endif
