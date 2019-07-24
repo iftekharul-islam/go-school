@@ -22,10 +22,10 @@ class UsersTableSeeder extends Seeder
             'verified' => 1,
         ]);
 
-//        factory(User::class, 10)->states('admin')->create();
-//        factory(User::class, 10)->states('accountant')->create();
-//        factory(User::class, 10)->states('librarian')->create();
-//        factory(User::class, 30)->states('teacher')->create();
-//        factory(User::class, 200)->states('student')->create();
+        factory(User::class, 10)->states('admin')->create();
+        factory(User::class, 10)->states('accountant')->create();
+        factory(User::class, 10)->states('librarian')->create();
+        factory(User::class, 30)->states('teacher')->create();
+        factory(User::class, 200)->states('student')->create();
     }
 }

@@ -290,7 +290,6 @@ class GradeService {
 
     public function calculateGpa($gradeSystem, $totalMarks){
         $totalMarks = round($totalMarks);
-//      dd($gradeSystem);
         foreach($gradeSystem->gradeSystemInfo as $gs){
 
             if($totalMarks > $gs->marks_from && $totalMarks <= $gs->marks_to){
@@ -319,7 +318,7 @@ class GradeService {
             $tb->ct4 = $request->ct4[$i];
             $tb->ct5 = $request->ct5[$i];
             $tb->written = $request->written[$i];
-            $tb->mcq = $request->mcq[$i];
+            $tb->mcq = 0;
             $tb->practical = $request->practical[$i];
             $tb->user_id = Auth::user()->id;
             $tb->created_at = date('Y-m-d H:i:s');
