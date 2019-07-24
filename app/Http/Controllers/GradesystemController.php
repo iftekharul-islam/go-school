@@ -101,7 +101,7 @@ class GradesystemController extends Controller
     public function destroy($id){
         $gpa = Gradesystem::findOrFail($id);
         $gpa->delete();
-        return back()->with('status', 'Deleted!');
+        return back()->with('status', 'Grade System Deleted!');
     }
     public  function  delete($id)
     {

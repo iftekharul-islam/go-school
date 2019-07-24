@@ -458,4 +458,9 @@ button:focus {
 .panel-reset-title {
     font-size: 22px;
 }
+
+.book__form .help-block strong {
+    font-size: 19px;
+    color: #ed143d;
+}
 /*# sourceMappingURL=style.css.map */

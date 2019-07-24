@@ -106,7 +106,7 @@ class ExamController extends Controller
         $exam->start_date = $request->get('start_date');
         $exam->end_date = $request->get('end_date');
         $exam->save();
-        return redirect()->back()->with('status', 'Exam Edited');
+        return redirect()->back()->with('status', 'Exam record updated');
     }
 
     /**
@@ -127,7 +127,7 @@ class ExamController extends Controller
         } catch (\Exception $e){
             return 'Error: '. $e->getMessage();
         }
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'Exam record updated');
     }
 
     /**

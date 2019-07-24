@@ -124,3 +124,14 @@
 .grade-form .col-12 {
     padding-right: 1px!important;
 }
+
+.panel-body li {
+    font-size: 15px!important;
+}
+.page-panel-title {
+    font-size: 19px!important;
+}
+
+.font-size-20{
+    font-size: 20px!important;
+}

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\Exam;
-use App\ExamForClass;
 use App\Grade;
 use App\Http\Resources\GradeResource;
 use App\Section;
 use App\Services\User\UserService;
 use Illuminate\Http\Request;
-use App\Http\Requests\Grade\CalculateMarksRequest;
 use App\Http\Traits\GradeTrait;
 use App\Services\Grade\GradeService;
 use Illuminate\Support\Facades\Auth;
@@ -207,7 +204,7 @@ class GradeController extends Controller
         $tbc = $this->gradeService->calculateGpaFromTotalMarks($grades, $course, $gradeSystem);
         $this->gradeService->saveCalculatedGPAFromTotalMarks($tbc);
 
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'Grade Info Updated');
     }
 
     /**
@@ -219,9 +216,9 @@ class GradeController extends Controller
     public function destroy($id)
     {
         return (Grade::destroy($id))?response()->json([
-            'status' => 'success'
+            'status' => 'Grade Deleted Successfully'
         ]):response()->json([
-            'status' => 'error'
+            'status' => 'Unable to delete Grade. Please Try again'
         ]);
     }
 }

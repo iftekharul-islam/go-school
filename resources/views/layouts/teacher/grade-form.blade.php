@@ -6,7 +6,7 @@
 </style>
 <div class="col-md-12 text-center" id="grade-labels">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 font-size-20">
       <input type="checkbox" class="form-group ml-5 mr-3" name="attendance" value="4" checked>
       <span class="badge  badge-light checkbox-inline mr-1">
     Attendance
@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-12">
+    <div class="col-12 font-size-20">
       <input type="checkbox" class="form-group ml-5 mr-3" name="ct[]" value="13" checked>
       <span class="badge badge-info mr-1 checkbox-inline">
     Class Test 1

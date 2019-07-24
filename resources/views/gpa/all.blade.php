@@ -16,6 +16,7 @@
     </div>
 
     <div class="card height-auto false-height">
+        @if($gpa)
         <div class="card-body">
             @if (session('status'))
                 <div class="alert alert-success">
@@ -63,6 +64,11 @@
                     </table>
                 </div>
         </div>
+        @else
+        <div class="card-body">
+           <h3> No Grade System Available!</h3>
+        </div>
+        @endif
     </div>
     <script type="text/javascript">
         function removeGrade(id) {

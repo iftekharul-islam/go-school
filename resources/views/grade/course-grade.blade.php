@@ -34,7 +34,7 @@
               </ul>
             </div>
           @endif
-         @if($exam->id >0)
+         @if($exam)
               <form action="{{url('teacher/courses/save-configuration')}}" method="POST">
                 {{csrf_field()}}
                 <input type="hidden" name="id" value="{{$course_id}}">
@@ -43,8 +43,8 @@
                     @foreach ($grades as $grade)
                       <div class="page-panel-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
                         <b>Examination</b> -  {{ $exam->exam_name }}     <b>Term</b>   -   {{ $exam->term }}
-                        <button type="submit" class="button button--save float-right">
-                          <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save
+                        <button type="submit" class="button button--text text-center float-right">
+                          <i class="far fa-save mr-2"></i>Save Mark Distribution
                         </button>
                       </div>
                       @break($loop->first)
@@ -173,7 +173,7 @@
                   <div class="page-panel-title" style="font-size: 15px;">
                     <form class="new-added-form mb-3" action="{{url('teacher/grades/calculate-marks')}}" method="GET">
                       {{csrf_field()}}
-                      <span style="font-size: 20px">Give Marks to Students</span>
+                      <span class="font-size-20">Give Marks to Students</span>
                       <input type="hidden" name="course_id" value="{{$course_id}}">
                       <input type="hidden" name="section_id" value="{{$section_id}}">
 

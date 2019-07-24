@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Myclass;
 use App\Section;
-use App\StudentInfo;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,13 +19,12 @@ use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
-use Illuminate\Support\Facades\Storage;
 use Mavinoo\LaravelBatch\Batch;
 use App\Events\UserRegistered;
 use App\Events\StudentInfoUpdateRequested;
 use Illuminate\Support\Facades\Log;
 use App\Services\User\UserService;
-use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 /**
  * Class UserController
  * @package App\Http\Controllers
@@ -265,7 +263,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab'=> 'tab13'] )->with('status', 'saved');
+        return back()->withInput(['tab'=> 'tab13'] )->with('status', 'Teacher Created');
     }
 
     /**
@@ -274,6 +272,7 @@ class UserController extends Controller
      */
     public function storeAccountant(CreateAccountantRequest $request)
     {
+
         $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path'));
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'accountant', $path);
@@ -284,7 +283,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab'=> 'tab10'] )->with('status', 'saved');
+        return back()->withInput(['tab'=> 'tab10'] )->with('status', 'Accountant created');
     }
 
     /**
@@ -293,7 +292,7 @@ class UserController extends Controller
      */
     public function storeLibrarian(CreateLibrarianRequest $request)
     {
-        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('librarian_pic'));
+        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path'));
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'librarian', $path);
         try {
@@ -303,7 +302,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab'=> 'tab11'] )->with('status', 'saved');
+        return back()->withInput(['tab'=> 'tab11'] )->with('status', 'Librarian Created');
 //        return redirect()->to('/academic-settings#tab11')->with('status', 'Saved');
     }
 

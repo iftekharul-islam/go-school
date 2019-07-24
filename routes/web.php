@@ -181,7 +181,6 @@ Route::middleware(['auth'])->group(function (){
             Route::get('/routines','InactiveSettingsController@routines');
             Route::get('/students','InactiveSettingsController@students');
             Route::get('/teachers','InactiveSettingsController@teachers');
-            Route::get('/admins','InactiveSettingsController@admins');
             Route::get('/librarians','InactiveSettingsController@librarians');
             Route::get('/accountants','InactiveSettingsController@accountants');
         });
