@@ -11,6 +11,7 @@ use App\Services\Course\CourseService;
 use App\Services\User\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class StudentHomeController extends Controller
 {
@@ -27,30 +28,30 @@ class StudentHomeController extends Controller
         $student = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
         if (isset($student->school_id)) {
-            $school_id = \Auth::user()->school_id;
-            $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            $school_id = Auth::user()->school_id;
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });
-            $events = \Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
+            $events = Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
                 return Event::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });
-            $routines = \Cache::remember('routines-' . $school_id, $minutes, function () use ($school_id) {
+            $routines = Cache::remember('routines-' . $school_id, $minutes, function () use ($school_id) {
                 return Routine::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });
 
-            $exams = \Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
+            $exams = Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
                 return Exam::where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });
 
-            $student_info = \Auth::user()->studentInfo;
+            $student_info = Auth::user()->studentInfo;
             $present=0;
             $absent=0;
             $escaped=0;

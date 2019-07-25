@@ -90,10 +90,8 @@ class UserController extends Controller
 
         return view('auth.student',[
            'classes' => $classes,
-//            'register_sections' => $sections,
             session(['register_role' => 'student', 'register_sections' => $sections,])
             ]);
-//        return redirect()->route('register');
     }
 
     /**
@@ -153,7 +151,6 @@ class UserController extends Controller
             return back()->with('status', 'Saved');
         }
         if(strcmp($request->get('current-password'), $request->get('password')) == 0){
-            //Current password and new password are same
             return redirect()->back()->with("error-status","New Password cannot be same as your current password. Please choose a different password.");
         }
         $user = Auth::user();
@@ -252,7 +249,7 @@ class UserController extends Controller
      */
     public function storeTeacher(CreateTeacherRequest $request)
     {
-        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('teacher_pic'));
+        $path = Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date("Y"), $request->file('teacher_pic'));
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
         try {
@@ -316,7 +313,6 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
-//        return $user;
         return view('profile.user-profile', compact('user'));
     }
 
@@ -330,7 +326,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->user->find($id);
+        $user = $this->user->findOrFail($id);
         $classes = Myclass::query()
             ->where('school_id', Auth::user()->school_id)
             ->pluck('id')
@@ -389,7 +385,7 @@ class UserController extends Controller
 
     public function deactivateUser($id)
     {
-       $user = $this->user->find($id);
+       $user = $this->user->findOrFail($id);
        $user->active = 0;
        $user->save();
         return back()->with('status', $user->name .' has been removed!!');
@@ -397,7 +393,7 @@ class UserController extends Controller
 
     public function activateUser($id)
     {
-        $user = $this->user->find($id);
+        $user = $this->user->findOrFail($id);
         $user->active = 1;
         $user->save();
         return back()->with('status', $user->name .' has been Activated!!');

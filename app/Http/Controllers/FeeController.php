@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fee;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class FeeController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class FeeController extends Controller
      */
     public function index()
     {
-      $fees = Fee::where('school_id', \Auth::user()->school_id)->get();
+      $fees = Fee::where('school_id', Auth::user()->school_id)->get();
       return view('fees.new-all',['fees'=>$fees]);
     }
 
@@ -39,10 +39,10 @@ class FeeController extends Controller
         $request->validate([
             'fee_name' => 'required|string|max:255',
         ]);
-        $fee = new \App\Fee;
+        $fee = new Fee;
         $fee->fee_name = $request->fee_name;
-        $fee->school_id = \Auth::user()->school_id;
-        $fee->user_id = \Auth::user()->id;
+        $fee->school_id = Auth::user()->school_id;
+        $fee->user_id = Auth::user()->id;
         $fee->save();
         return back()->with('status', 'Saved');
     }

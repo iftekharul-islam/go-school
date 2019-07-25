@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckTeacherOrStudent
 {
@@ -15,7 +16,7 @@ class CheckTeacherOrStudent
      */
     public function handle($request, Closure $next)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         if ($user->hasRole('teacher') || $user->hasRole('student') ||  $user->hasRole('admin')) {
             return $next($request);
         }

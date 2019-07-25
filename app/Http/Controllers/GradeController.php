@@ -145,7 +145,7 @@ class GradeController extends Controller
      */
     public function show($id)
     {
-        return new GradeResource(Grade::find($id));
+        return new GradeResource(Grade::findOrFail($id));
     }
 
     /**
@@ -171,7 +171,7 @@ class GradeController extends Controller
 
         $i = 0;
         foreach($request->grade_ids as $id) {
-            $tb = Grade::find($id);
+            $tb = Grade::findOrFail($id);
             $tb->attendance = $request->attendance[$i];
             $tb->quiz1 = $request->quiz1[$i];
             $tb->quiz2 = $request->quiz2[$i];

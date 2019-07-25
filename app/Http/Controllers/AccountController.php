@@ -169,7 +169,7 @@ class AccountController extends Controller
     }
 
     public function editExpense($id){
-        $expense = Account::find($id);
+        $expense = Account::findOrFail($id);
         return view('accounts.expense-edit',['expense'=>$expense]);
     }
 
@@ -181,7 +181,7 @@ class AccountController extends Controller
     }
 
     public function deleteExpense($id){
-        $expense = Account::find($id);
+        $expense = Account::findOrFail($id);
         $expense->delete();
         return back()->with("status","expense Deleted Successfully.");
     }

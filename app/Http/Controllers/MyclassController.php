@@ -58,7 +58,7 @@ class MyclassController extends Controller
      */
     public function show($id)
     {
-        return new ClassResource(Myclass::find($id));
+        return new ClassResource(Myclass::findOrFail($id));
     }
 
     /**
@@ -81,7 +81,7 @@ class MyclassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tb = Myclass::find($id);
+        $tb = Myclass::findOrFail($id);
         $tb->class_number = $request->class_number;
         $tb->school_id = $request->school_id;
         return ($tb->save())?response()->json([

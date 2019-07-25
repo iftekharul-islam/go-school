@@ -16,7 +16,7 @@ class CheckTeacher
      */
     public function handle($request, Closure $next)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         if ($user->hasRole('teacher') || $user->hasRole('admin')) {
             return $next($request);
         }

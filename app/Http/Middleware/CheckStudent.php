@@ -16,7 +16,7 @@ class CheckStudent
      */
     public function handle($request, Closure $next)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         if ($user->hasRole('student') || $user->hasRole('admin')) {
             return $next($request);
         }

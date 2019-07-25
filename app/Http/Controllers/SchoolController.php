@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exam;
 use App\Gradesystem;
 use App\School;
 use App\Myclass;
@@ -34,8 +35,8 @@ class SchoolController extends Controller
             ->whereIn('class_id', $studentClasses)
             ->get();
 
-        $teacherDepartments = Department::where('school_id',\Auth::user()->school_id)->get();
-        $teacherClasses = Myclass::where('school_id',\Auth::user()->school->id)->pluck('id');
+        $teacherDepartments = Department::where('school_id',Auth::user()->school_id)->get();
+        $teacherClasses = Myclass::where('school_id',Auth::user()->school->id)->pluck('id');
         $teacherSections = Section::with('class')->whereIn('class_id',$teacherClasses)->get();
         $gradeSystems = Gradesystem::where('school_id', Auth::user()->school_id)->first();
 
@@ -43,7 +44,7 @@ class SchoolController extends Controller
             ->orderBy('name','ASC')
             ->where('active', 1)
             ->get();
-        $departments = Department::where('school_id',\Auth::user()->school_id)->get();
+        $departments = Department::where('school_id',Auth::user()->school_id)->get();
         return view('school.new-create-school', compact('schools',  'gradeSystems','classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
@@ -96,10 +97,10 @@ class SchoolController extends Controller
 
     public function showSchool($school_id) {
         $admins = User::where('school_id',$school_id)->where('role','admin')->get();
-        $total_students = \App\User::where('school_id',$school_id)->where('role','student')->where('active', 1)->count();
-        $total_classes =  \App\Myclass::where('school_id', $school_id)->count();
-        $total_teacher = \App\User::where('school_id', $school_id)->where('role', 'teacher')->where('active', 1)->count();
-        $total_exams = \App\Exam::where('school_id', $school_id)->where('active', 1)->count();
+        $total_students = User::where('school_id',$school_id)->where('role','student')->where('active', 1)->count();
+        $total_classes =  Myclass::where('school_id', $school_id)->count();
+        $total_teacher = User::where('school_id', $school_id)->where('role', 'teacher')->where('active', 1)->count();
+        $total_exams = Exam::where('school_id', $school_id)->where('active', 1)->count();
         $school = School::where('id',$school_id)->first();
 
         return view('school.new-school-master',[
@@ -120,7 +121,7 @@ class SchoolController extends Controller
      */
     public function edit($id)
     {
-        $school = School::find($id);
+        $school = School::findOrFail($id);
         return view('school.new-edit-school', compact('school'));
     }
 
@@ -129,7 +130,7 @@ class SchoolController extends Controller
             'department_name' => 'required|string|max:50',
         ]);
         $s = new Department;
-        $s->school_id = \Auth::user()->school_id;
+        $s->school_id = Auth::user()->school_id;
         $s->department_name = $request->department_name;
         $s->save();
         return back()->withInput(['tab'=> 'tab8'] )->with('status', 'saved');
@@ -140,7 +141,7 @@ class SchoolController extends Controller
         $dpts = Department::with(['teachers' => function($q){
             $q->where('role', 'teacher');
         }])
-            ->where('school_id', \Auth::user()->school_id)->get();
+            ->where('school_id', Auth::user()->school_id)->get();
         return view('school.departments', compact('dpts'));
     }
     public function departmentTeachers($id)
@@ -155,7 +156,7 @@ class SchoolController extends Controller
     }
 
     public function changeTheme(Request $request){
-        $tb = School::find($request->s);
+        $tb = School::findOrFail($request->s);
         $tb->theme = $request->school_theme;
         $tb->save();
         return back();
@@ -174,7 +175,7 @@ class SchoolController extends Controller
             'school_medium' => 'required',
             'school_about' => 'required',
         ]);
-        $tb = School::find($id);
+        $tb = School::findOrFail($id);
         $tb->name = $request->school_name;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
@@ -190,7 +191,7 @@ class SchoolController extends Controller
      */
     public function destroy($id)
     {
-        $school = School::find($id);
+        $school = School::findOrFail($id);
         $name = $school->name;
         $school->delete();
         return redirect('master/home')->with('status',$name.'   deleted');

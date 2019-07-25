@@ -83,7 +83,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->user->find($id);
+        $user = $this->user->findOrFail($id);
         return view('auth.admin-edit', [
             'user' => $user
         ]);
@@ -98,7 +98,7 @@ class AdminController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $tb = $this->user->find($request->user_id);
+        $tb = $this->user->findOrFail($request->user_id);
         $tb->name = $request->name;
         $tb->email = (!empty($request->email)) ? $request->email : '';
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
@@ -119,7 +119,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $admin = $this->user->find($id);
+        $admin = $this->user->findOrFail($id);
         if ($admin->active !== 0) {
             $admin->active = 0;
         } else {

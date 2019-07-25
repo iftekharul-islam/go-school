@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Event as Event;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     /**
@@ -25,7 +25,7 @@ class EventController extends Controller
      */
     public function create()
     {
-      $files = Event::where('school_id',\Auth::user()->school_id)->where('active',1)->orderBy('created_at','DESC')->get();
+      $files = Event::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at','DESC')->get();
       return view('events.create',['files'=>$files]);
     }
 
@@ -41,8 +41,8 @@ class EventController extends Controller
       $tb->file_path = $request->file_path;
       $tb->title = $request->title;
       $tb->active = 1;
-      $tb->school_id = \Auth::user()->school_id;
-      $tb->user_id = \Auth::user()->id;
+      $tb->school_id = Auth::user()->school_id;
+      $tb->user_id = Auth::user()->id;
       $tb->save();
       return back()->with('status', 'Uploaded');
     }

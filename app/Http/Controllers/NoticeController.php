@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Notice as Notice;
+use App\Event;
+use App\Notice;
 use App\Http\Resources\NoticeResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,19 +20,18 @@ class NoticeController extends Controller
         $school_id = Auth::user()->school->id;
         $minutes = 1440;
         $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
-            return \App\Notice::where('school_id', $school_id)
+            return Notice::where('school_id', $school_id)
                 ->where('active', 1)
                 ->orderBy('created_at', 'DESC')
                 ->get();
         });
         $events = Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
-            return \App\Event::where('school_id', $school_id)
+            return Event::where('school_id', $school_id)
                 ->where('active', 1)
                 ->orderBy('created_at', 'DESC')
                 ->get();
         });
         return view('notices.index', compact('notices', 'events'));
-        //Notice::where('school_id', \Auth::user()->school_id)->get();
     }
 
     /**
@@ -41,8 +41,8 @@ class NoticeController extends Controller
      */
     public function create()
     {
-              $files = Notice::where('school_id',\Auth::user()->school_id)->where('active',1)->orderBy('created_at', 'DESC')->get();
-            return view('notices.create',['files'=>$files]);
+        $files = Notice::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at', 'DESC')->get();
+        return view('notices.create',['files'=>$files]);
     }
 
     /**
@@ -57,8 +57,8 @@ class NoticeController extends Controller
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;
         $tb->active = 1;
-        $tb->school_id = \Auth::user()->school_id;
-        $tb->user_id = \Auth::user()->id;
+        $tb->school_id = Auth::user()->school_id;
+        $tb->user_id = Auth::user()->id;
         $tb->save();
         return back()->with('status', 'Uploaded');
     }
@@ -71,7 +71,7 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        return new NoticeResource(Notice::find($id));
+        return new NoticeResource(Notice::findOrFail($id));
     }
 
     /**

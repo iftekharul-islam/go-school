@@ -11,6 +11,7 @@ use App\User;
 use App\Routine;
 use App\Myclass;
 use App\ExamForClass;
+use Illuminate\Support\Facades\Auth;
 
 
 class SectionController extends Controller
@@ -32,9 +33,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $classes = Myclass::where('school_id',\Auth::user()->school->id)
+        $classes = Myclass::where('school_id', Auth::user()->school->id)
             ->get();
-        $classeIds = Myclass::where('school_id',\Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id',Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
 
@@ -48,9 +49,9 @@ class SectionController extends Controller
     }
 
     public function attendanceList(){
-        $classes = Myclass::where('school_id',\Auth::user()->school->id)
+        $classes = Myclass::where('school_id',Auth::user()->school->id)
             ->get();
-        $classeIds = Myclass::where('school_id',\Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id',Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
         $sections = Section::whereIn('class_id',$classeIds)
@@ -68,9 +69,9 @@ class SectionController extends Controller
 
     public function details($class_id)
     {
-        $classes = Myclass::where('school_id',\Auth::user()->school->id)
+        $classes = Myclass::where('school_id', Auth::user()->school->id)
             ->get();
-        $classeIds = Myclass::where('school_id',\Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id', Auth::user()->school->id)
             ->pluck('id')
             ->toArray();
         $sections = Section::whereIn('class_id',$classeIds)
@@ -94,7 +95,7 @@ class SectionController extends Controller
         $courses = Course::where('section_id', $section_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
         $files = Routine::with('section')
-            ->where('school_id',\Auth::user()->school_id)
+            ->where('school_id',Auth::user()->school_id)
             ->where('section_id', $section_id)
             ->where('active',1)
             ->get();
@@ -164,7 +165,7 @@ class SectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tb = Section::find($id);
+        $tb = Section::findOrFail($id);
         $tb->section_number = $request->section_number;
         $tb->room_number = $request->room_number;
         $tb->class_id = $request->class_id;

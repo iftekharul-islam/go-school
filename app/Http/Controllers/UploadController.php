@@ -24,13 +24,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UploadController extends Controller {
   public function upload(Request $request){
-//    return $request;
     $request->validate([
       'upload_type' => 'required',
       'file' => 'required|max:10000|mimes:doc,docx,png,jpeg,pdf,xlsx,xls,ppt,pptx,txt'
     ]);
 
-    $upload_dir = 'school-'.\Auth::user()->school_id.'/'.date("Y").'/'.$request->upload_type;
+    $upload_dir = 'school-'.Auth::user()->school_id.'/'.date("Y").'/'.$request->upload_type;
     $path = Storage::disk('public')->putFile($upload_dir, $request->file('file'));//$request->file('file')->store($upload_dir);
     
     if($request->upload_type == 'notice'){

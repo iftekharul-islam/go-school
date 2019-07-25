@@ -6,6 +6,7 @@ use App\Routine as Routine;
 use App\Http\Resources\RoutineResource;
 use App\Syllabus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 class RoutineController extends Controller
@@ -18,7 +19,7 @@ class RoutineController extends Controller
     public function index()
     {
         $files = Routine::with('section')
-            ->where('school_id',\Auth::user()->school_id)
+            ->where('school_id',Auth::user()->school_id)
             ->where('active',1)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -67,8 +68,8 @@ class RoutineController extends Controller
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;
         $tb->active = 1;
-        $tb->school_id = \Auth::user()->school_id;
-        $tb->user_id = \Auth::user()->id;
+        $tb->school_id = Auth::user()->school_id;
+        $tb->user_id = Auth::user()->id;
         $tb->save();
         return back()->with('status', 'Uploaded');
     }
@@ -104,7 +105,7 @@ class RoutineController extends Controller
      */
     public function update($id)
     {
-        $tb = Routine::find($id);
+        $tb = Routine::findOrFail($id);
         $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
         $tb->save();
         return back()->with('status','Routine status changed');
