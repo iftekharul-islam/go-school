@@ -19,7 +19,7 @@
         </ul>
     </div>
     @if(count($students) > 0)
-        <div class="card height-auto false-height mb-5">
+        <div class="card height-auto mb-5">
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
@@ -44,7 +44,7 @@
                                 <td>{{$student->student_code}}</td>
                                 <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
                                 <td>{{ $student->email }}</td>
-                                <td><a class="button button--text" role="button" href="{{url('admin/grades/'.$student->id)}}">View Grade History</a></td>
+                                <td><a class="btn-link text-teal" role="button" href="{{url('admin/grades/'.$student->id)}}">View Grade History</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -91,7 +91,7 @@
                             <td>@if(isset($grade->exam->exam_name)){{$grade->exam->exam_name}}@endif</td>
                             <td>@if(isset($grade->course->course_name)){{$grade->course->course_name}}@endif</td>
                             <td>@if(isset($grade->student->student_code)){{$grade->student->student_code}}@endif</td>
-                            <td><a href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
+                            <td><a class="text-teal btn-link" href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
                             <td>@if(isset($grade->marks)){{$grade->marks}}@endif</td>
                             <td>@if(isset($grade->gpa)){{$grade->gpa}}@endif</td>
                         </tr>

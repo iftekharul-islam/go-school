@@ -120,23 +120,10 @@ class AttendanceService {
         $at = [];
         foreach ($this->request->attendances as $key => $attendance) {
             $tb = Attendance::find($attendance);
-//          dd(count((array) $tb));
             if(isset($this->request["isPresent$i"]) && $tb->present == 1){
-                // Attended today's class but escaped'
-
                 $tb->present =2;
                 $tb->updated_at = date('Y-m-d H:i:s');
                 $tb->save();
-                // Escape record
-//                $tb2 = new Attendance;
-//                $tb2->student_id = $this->request->students[$i];
-//                $tb2->section_id = $this->request->section_id;
-//                $tb2->exam_id = $this->request->exam_id;
-//                $tb2->present = 2;
-//                $tb2->user_id = auth()->user()->id;
-//                $tb2->created_at = date('Y-m-d H:i:s');
-//                $tb2->updated_at = date('Y-m-d H:i:s');
-//                $at[] = $tb2->attributesToArray();
             }
             ++$i;
         }

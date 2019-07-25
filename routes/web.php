@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function (){
 //Librarian role routes
     Route::group(['prefix' => 'librarian', 'middleware' => 'librarian'], function() {
         Route::get('/home', 'LibrarianHomeController@index')->name('librarian.home');
-
+        Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
         Route::get('issue-books', 'IssuedbookController@create');
         Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
         Route::post('issue-books', 'IssuedbookController@store');
@@ -95,6 +95,7 @@ Route::middleware(['auth'])->group(function (){
             Route::post('create', 'FeeController@store');
             Route::delete('remove/{id}', 'FeeController@destroy');
         });
+        Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
         Route::get('sectors','AccountController@sectors');
@@ -125,6 +126,7 @@ Route::middleware(['auth'])->group(function (){
     Route::group(['prefix' => 'teacher', 'middleware' => 'teacher'], function() {
         Route::get('/home', 'TeacherHomeController@index')->name('teacher.home');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+        Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
 
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
@@ -163,6 +165,20 @@ Route::middleware(['auth'])->group(function (){
         Route::get('gpa/all-gpa', 'GradesystemController@index');
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department','SchoolController@allDepartment');
+
+        Route::prefix('staff')->group(function () {
+            Route::get('teacher-attendance', 'StuffAttendanceController@index');
+            Route::post('teacher-attendance/store', 'StuffAttendanceController@store');
+            Route::get('teacher-attendance/adjust/{teacher_id}', 'StuffAttendanceController@adjustMissingAttendance');
+            Route::post('teacher-attendance/adjust/post', 'StuffAttendanceController@adjustMissingAttendancePost');
+            Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+
+            Route::get('attendance', 'StuffAttendanceController@stuffAttendance');
+            Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore');
+            Route::get('attendance/adjust/{staff_id}', 'StuffAttendanceController@adjustStaffMissingAttendance');
+            Route::post('attendance/adjust/post', 'StuffAttendanceController@adjustStaffMissingAttendancePost');
+        });
+
         Route::get('department-teachers/{id}','SchoolController@departmentTeachers');
         Route::get('section/students/{section_id}', 'UserController@sectionStudents');
         Route::prefix('exams')->group(function () {

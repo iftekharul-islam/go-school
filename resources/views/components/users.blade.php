@@ -109,7 +109,7 @@
                                 @php
                                     $role = \Illuminate\Support\Facades\Auth::user()->role;
                                 @endphp
-                                <a class="button button--text" role="button" href="{{url($role.'/attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
+                                <a class="btn-link text-teal" role="button" href="{{url($role.'/attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))

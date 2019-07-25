@@ -45,8 +45,6 @@ class AccountantHomeController extends Controller
                     ->where('active', 1)
                     ->count();
             });
-            $male = User::where('gender','male')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
-            $female = User::where('gender','female')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
 
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)->count();
@@ -87,8 +85,6 @@ class AccountantHomeController extends Controller
             'exams' => $exams,
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
-            'male' => $male,
-            'female' => $female,
             'fees'   => $fees,
             'total_income' => $total_income,
             'total_expense' => $total_expense,

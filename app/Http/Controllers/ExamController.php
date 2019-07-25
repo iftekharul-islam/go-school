@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Exam;
 use App\ExamForClass;
 use Illuminate\Http\Request;
@@ -137,18 +138,6 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    private function assignCoursesToExam()
-    {
-    //   $request->validate([
-    //     'course_id' => 'required|numeric',
-    //     'exam_id' => 'required|numeric',
-    //   ]);
-        
-        // $tb = Course::find($request->course_id);
-        // $tb->exam_id = $request->exam_id;
-        // $tb->save();
-        // return back()->with('status', 'Saved');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -159,11 +148,13 @@ class ExamController extends Controller
     public function destroy($id)
     {
         $exam = Exam::findOrFail($id);
-        if (!$exam) {
-            return redirect()->back();
-        }
         $exam->delete();
         $examForClass = ExamForClass::where('exam_id', $id)->get();
+        $courses = Course::where('exam_id', $id)->get();
+        foreach ($courses as $course) {
+            $course->exam_id = 0;
+            $course->save();
+        }
         foreach ($examForClass as $class) {
             $class->delete();
         }
