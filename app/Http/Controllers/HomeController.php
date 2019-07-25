@@ -58,14 +58,13 @@ class HomeController extends Controller
                 ->toArray();
 //            });
 //            $totalStudents = \Cache::remember('totalStudents-'.$school_id, $minutes, function () use($school_id) {
-            $totalStudents = User::where('school_id',$school_id)
-                ->where('role','student')
-                ->where('active', 1)
-                ->count();
+
 //            });
+            
+
             $male = User::where('gender','male')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
             $female = User::where('gender','female')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
-
+            $totalStudents = $male + $female;
 //            $totalClasses = \Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
             $totalClasses =  Myclass::where('school_id', $school_id)->count();
 //            });

@@ -25,7 +25,7 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-{{--                        <h3>All Section Student</h3>--}}
+                        {{--                        <h3>All Section Student</h3>--}}
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -44,7 +44,13 @@
                                 <td>{{($loop->index+1)}}</td>
                                 <td>{{$student->student_code}}</td>
                                 <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
-                                <td><a class="button button--text" role="button" href="{{url('teacher/grades/'.$student->id)}}">View Grade History</a></td>
+                                @if(\Illuminate\Support\Facades\Auth::user()->role == 'accountant')
+                                    <td><a class="button button--text" role="button" href="{{url('accountant/grades/'.$student->id)}}">View Grade History</a></td>
+                                @elseif(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                                    <td><a class="button button--text" role="button" href="{{url('admin/grades/'.$student->id)}}">View Grade History</a></td>
+                                @else
+                                    <td><a class="button button--text" role="button" href="{{url('teacher/grades/'.$student->id)}}">View Grade History</a></td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
