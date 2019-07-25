@@ -88,6 +88,9 @@
                     @endforeach
                     @if(Auth::user()->role == 'admin')
                         @if (!Session::has('section-attendance'))
+                            @if($user->role != 'student')
+                                <th>View Attendance</th>
+                            @endif
                             <th>Action</th>
                         @endif
                     @endif
@@ -131,11 +134,15 @@
                             @endif
                         @endif
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role == 'student')<td><a class="button button--text" role="button"
-                                                                href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
+                            @if($user->role == 'student')<td><a class="btn-link text-teal" role="button" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}">View Attendance</a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
+                                @if($user->role != 'student')
+                                    <td>
+                                        <a href="{{ url('admin/staff/attendance/'.$user->id) }}" class="btn-link text-teal">View Attendance</a>
+                                    </td>
+                                @endif
                                 <td>
                                     <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
                                     <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $user->id }})">
@@ -144,6 +151,7 @@
                                             @csrf
                                             @method('GET')
                                         </form>
+                                    </button>
                                 </td>
                             @endif
                         @endif

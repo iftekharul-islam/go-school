@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Attendance')
+@section('title', 'Teacher Attendance')
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -30,7 +30,7 @@
                         </div>
                     @endif
 
-                    @component('components.adjust-attendance',['attendances'=>$attendances,'student_id'=>$student_id])
+                    @component('components.adjust-staff-attendance',['attendances'=>$attendances,'student_id'=>$staff_id])
 
                     @endcomponent
                 </div>

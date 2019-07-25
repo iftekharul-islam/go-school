@@ -17,7 +17,7 @@
     <div class="row">
         <!-- All Notice Area Start Here -->
         <div class="col-6-xxxl col-6">
-            <div class="card height-auto">
+            <div class="card height-auto false-height">
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
@@ -37,9 +37,8 @@
                 </div>
             </div>
         </div>
-
         <div class="col-6-xxxl col-6">
-            <div class="card height-auto">
+            <div class="card height-auto false-height">
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">

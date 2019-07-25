@@ -17,7 +17,7 @@
         </ul>
     </div>
 
-    <div class="card height-auto">
+    <div class="card false-height">
         <div class="card-body">
 
             @if (session('status'))

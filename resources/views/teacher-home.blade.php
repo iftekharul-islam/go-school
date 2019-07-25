@@ -3,12 +3,6 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>Dashboard</h3>
-        <ul>
-            <li>
-                <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
-            </li>
-            <li class="text-capitalize">{{ \Auth::user()->role }} Dashboard</li>
-        </ul>
     </div>
     <!-- Breadcubs Area End Here -->
     <div class="false-height">
@@ -130,7 +124,7 @@
                             </div>
                             <div class="table-box-wrap">
                                 <div class="table-responsive student-table-box">
-                                    <table class="table table-data-div text-wrap">
+                                    <table class="table table-data-div text-wrap" id="myStudent">
                                         <thead>
                                         <tr>
                                             <th>Photo</th>
