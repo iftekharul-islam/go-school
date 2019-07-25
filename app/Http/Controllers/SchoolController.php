@@ -137,7 +137,10 @@ class SchoolController extends Controller
 
     public function allDepartment()
     {
-        $dpts = Department::where('school_id', \Auth::user()->school_id)->get();
+        $dpts = Department::with(['teachers' => function($q){
+            $q->where('role', 'teacher');
+        }])
+            ->where('school_id', \Auth::user()->school_id)->get();
         return view('school.departments', compact('dpts'));
     }
     public function departmentTeachers($id)
