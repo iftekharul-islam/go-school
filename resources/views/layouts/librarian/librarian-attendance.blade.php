@@ -14,7 +14,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Staff Code</th>
+                <th>Staff ID</th>
                 <th>Name</th>
                 <th>Role</th>
                 <th>Present</th>
@@ -42,7 +42,7 @@
                             @endif
                             &nbsp;&nbsp;<a href="{{url('user/'.$attendance->stuff->student_code)}}">{{$attendance->stuff->name}}</a>
                         </td>
-                        <td>{{ ucfirst($attendance->stuff->role) }}</td>
+                        <td>{{ ucfirst($attendance->role) }}</td>
                         <td>
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
                             @if($attendance->present === 1)
@@ -82,7 +82,7 @@
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$librarian->student_code}}</td>
                         <td><span class="badge badge-primary attdState">Present</span>&nbsp;&nbsp;{{ $librarian->name }}</td>
-                        <td>{{ ucfirst($librarian->stuff->role) }}</td>
+                        <td>{{ ucfirst($librarian->role) }}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>

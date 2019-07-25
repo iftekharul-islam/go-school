@@ -82,8 +82,8 @@
                         <div class="form-group">
                             <div class="col-md-offset-4 mt-5">
                                 <button type="submit" id="registerBtn"
-                                        class="button button--save float-left">
-                                    Save
+                                        class="button button--save float-right"><i class="fas fa-plus-square mr-2"></i>
+                                    Create School
                                 </button>
                             </div>
                         </div>
