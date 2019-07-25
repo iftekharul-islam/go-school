@@ -14,7 +14,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Teachers Code</th>
+                <th>Teachers ID</th>
                 <th>Teacher Name</th>
                 <th>Present</th>
                 <th>Total Attended</th>

@@ -18,7 +18,7 @@
         $calendar = \Calendar::addEvents($events);
   ?>
   <div class="col-md-12 text-capitalize">
-    <h5>Attendance List of Full Semester</h5>
+    <h4 class="text-teal" >Attendance Data</h4>
     {!! $calendar->calendar() !!}
   </div>
     {!! $calendar->script() !!}

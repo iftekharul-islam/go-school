@@ -234,10 +234,8 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" id="registerBtn" class="button button--save">
-                                    Register
-                                </button>
+                            <div class="col-md-12 col-md-offset-4">
+                                <button type="submit" id="registerBtn" class="button button--save float-right">Register</button>
                             </div>
                         </div>
                     </form>

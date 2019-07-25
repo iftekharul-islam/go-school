@@ -17,6 +17,27 @@
             </ul>
         </div>
         @if(count($attendances) > 0)
+            <div class="card height-auto mb-5">
+                <div class="card-body">
+                    @foreach($attendances as $att)
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="text-teal"><strong><i class="fas fa-id-card-alt mr-2"></i>Name: </strong>{{ $att->student->name }}</h5>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-teal"><strong><i class="fas fa-sliders-h mr-2"></i>Student ID: </strong>{{ $att->student->student_code }}</h5>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-teal"><strong><i class="fas fa-users mr-2"></i>Class: </strong>{{ $att->section->class->class_number }}</h5>
+                            </div>
+                            <div class="col">
+                                <h5 class="text-teal"><strong><i class="fas fa-border-style mr-2"></i>Section: </strong>{{ $att->section->section_number }}</h5>
+                            </div>
+                        </div>
+                        @break
+                    @endforeach
+                </div>
+            </div>
             <div class="row information">
                 <div class="col-3">
                     <div class="dashboard-summery-two">
