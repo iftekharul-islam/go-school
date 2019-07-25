@@ -19,7 +19,6 @@ use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
-use Mavinoo\LaravelBatch\Batch;
 use App\Events\UserRegistered;
 use App\Events\StudentInfoUpdateRequested;
 use Illuminate\Support\Facades\Log;
@@ -292,6 +291,7 @@ class UserController extends Controller
      */
     public function storeLibrarian(CreateLibrarianRequest $request)
     {
+
         $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path'));
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'librarian', $path);

@@ -88,13 +88,14 @@ Route::middleware(['auth'])->group(function (){
 //Accountant role routes
     Route::group(['prefix' => 'accountant', 'middleware' => 'accountant' ], function() {
         Route::get('/home', 'AccountantHomeController@index')->name('accountant.home');
-
+        Route::get('section/students/{section_id}', 'UserController@sectionStudents');
         Route::prefix('fees')->group(function (){
             Route::get('all', 'FeeController@index');
             Route::get('create', 'FeeController@create');
             Route::post('create', 'FeeController@store');
             Route::delete('remove/{id}', 'FeeController@destroy');
         });
+        Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
         Route::get('sectors','AccountController@sectors');
         Route::post('create-sector','AccountController@storeSector');
@@ -163,7 +164,7 @@ Route::middleware(['auth'])->group(function (){
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department','SchoolController@allDepartment');
         Route::get('department-teachers/{id}','SchoolController@departmentTeachers');
-
+        Route::get('section/students/{section_id}', 'UserController@sectionStudents');
         Route::prefix('exams')->group(function () {
             Route::get('/', 'ExamController@index');
             Route::get('/details/{exam_id}', 'ExamController@details');
