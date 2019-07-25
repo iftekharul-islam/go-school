@@ -83,6 +83,7 @@ class AccountController extends Controller
     public function income(){
         $sectors = AccountSector::where('school_id', \Auth::user()->school_id)
             ->where('type','income')
+            ->whereYear('created_at', date('Y'))
             ->get();
         return view('accounts.new-income',[
             'sectors'=>$sectors,
@@ -100,6 +101,7 @@ class AccountController extends Controller
     public function listIncome(){
         $incomes = Account::where('school_id', \Auth::user()->school_id)
             ->where('type','income')
+            ->whereYear('created_at', date('Y'))
             ->get();
         return view('accounts.new-income-list',['incomes'=>$incomes]);
     }
@@ -137,6 +139,7 @@ class AccountController extends Controller
     public function expense(){
         $sectors = AccountSector::where('school_id', \Auth::user()->school_id)
             ->where('type','expense')
+            ->whereYear('created_at', date('Y'))
             ->get();
         return view('accounts.new-expense',['sectors'=>$sectors]);
 
@@ -152,6 +155,7 @@ class AccountController extends Controller
     public function listExpense(){
         $expenses = Account::where('school_id', auth()->user()->school_id)
             ->where('type', 'income')
+            ->whereYear('created_at', date('Y'))
             ->get();
         return view('accounts.new-expense-list',['expenses'=>$expenses]);
     }

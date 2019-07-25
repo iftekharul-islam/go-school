@@ -82,7 +82,7 @@
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$librarian->student_code}}</td>
                         <td><span class="badge badge-primary attdState">Present</span>&nbsp;&nbsp;{{ $librarian->name }}</td>
-                        <td>{{ ucfirst($librarian->stuff->role) }}</td>
+                        <td>{{ ucfirst($librarian->role) }}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>

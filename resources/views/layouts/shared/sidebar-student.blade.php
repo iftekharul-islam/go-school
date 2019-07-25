@@ -82,11 +82,11 @@
                             <i class="fas fa-poll"></i><span>My Grade</span></a>
                     </li>
                     {{--<li class="nav-item">--}}
-                        {{--<a href="#" class="nav-link">--}}
-                            {{--<i class="fas fa-money-check-alt"></i><span>Payment History</span></a>--}}
+                    {{--<a href="#" class="nav-link">--}}
+                    {{--<i class="fas fa-money-check-alt"></i><span>Payment History</span></a>--}}
                     {{--</li>--}}
                     {{--<li class="nav-item">--}}
-                        {{--<a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>--}}
+                    {{--<a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>--}}
                     {{--</li>--}}
                     <li class="nav-item">
                         <a href="{{ url('student/notices-and-events') }}" class="nav-link {{ (request()->is('student/notices-and-events')) ? 'menu-active' : '' }}"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
@@ -96,8 +96,8 @@
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
                     {{--<li class="nav-item">--}}
-                        {{--<a href="#" class="nav-link">--}}
-                            {{--<i class="far fa-user"></i><span>Account</span></a>--}}
+                    {{--<a href="#" class="nav-link">--}}
+                    {{--<i class="far fa-user"></i><span>Account</span></a>--}}
                     {{--</li>--}}
                 @endif
                 @if($role != 'student' && $role != 'master')
@@ -177,7 +177,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('teacher/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}" href="{{ url('teacher/attendance/'.Auth::user()->id) }}">
-                            <i class="fas fa-book-medical"></i><span>My Attendance</span></a>
+                            <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                     </li>
                 @endif
                 @if($role == 'admin' || $role == 'accountant')
@@ -189,7 +189,7 @@
                     @if($role == 'accountant')
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('accountant/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}" href="{{ url('accountant/attendance/'.Auth::user()->id) }}">
-                                <i class="fas fa-book-medical"></i><span>My Attendance</span></a>
+                                <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                         </li>
                     @endif
                     <li class="nav-item sidebar-nav-item">
@@ -227,7 +227,7 @@
                     @if($role == 'librarian')
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('librarian/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}" href="{{ url('librarian/attendance/'.Auth::user()->id) }}">
-                                <i class="fas fa-book-medical"></i><span>My Attendance</span></a>
+                                <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                         </li>
                     @endif
                     <li class="nav-item sidebar-nav-item">

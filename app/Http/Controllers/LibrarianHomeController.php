@@ -27,22 +27,17 @@ class LibrarianHomeController extends Controller
     {
         $student = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
-        if (@isset($student->school->id)) {
+        if (isset($student->school->id)) {
             $school_id = Auth::user()->school->id;
             $classes = Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
             });
-            $totalStudents = Cache::remember('totalStudents-'.$school_id, $minutes, function () use($school_id) {
-                return User::where('school_id',$school_id)
-                    ->where('role','student')
-                    ->where('active', 1)
-                    ->count();
-            });
+
             $male = User::where('gender','male')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
             $female = User::where('gender','female')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
-
+            $totalStudents = $female + $male;
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)->count();
             });

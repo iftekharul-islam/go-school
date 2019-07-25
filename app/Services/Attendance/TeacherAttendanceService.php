@@ -4,6 +4,7 @@ namespace App\Services\Attendance;
 use App\StuffAttendance;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TeacherAttendanceService {
     public $request;
@@ -12,7 +13,7 @@ class TeacherAttendanceService {
     {
         $i = 0;
         foreach ($this->request->teachers as $key => $teacher) {
-            $user = User::find($teacher);
+            $user = User::findOrFail($teacher);
             $tb = new StuffAttendance();
             $tb->stuff_id = $teacher;
             $tb->role = $user->role;
@@ -49,7 +50,7 @@ class TeacherAttendanceService {
 
     public function getTeacherTotalAttendance()
     {
-        return \DB::table('stuff_attendances')
+        return DB::table('stuff_attendances')
             ->select('stuff_id', \DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
@@ -62,8 +63,8 @@ class TeacherAttendanceService {
 
     public function getLibrarianTotalAttendance()
     {
-        return \DB::table('stuff_attendances')
-            ->select('stuff_id', \DB::raw('
+        return DB::table('stuff_attendances')
+            ->select('stuff_id', DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
             ))
@@ -77,7 +78,7 @@ class TeacherAttendanceService {
     {
         $i = 0;
         foreach ($this->request->attendances as $key => $attendance) {
-            $tb = StuffAttendance::find($attendance);
+            $tb = StuffAttendance::findOrfail($attendance);
             if(isset($this->request["isPresent$i"])){
                 $tb->present = 1;
             }
