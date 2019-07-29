@@ -38,7 +38,7 @@
                                        <td>{{ $dp->department_name }}</td>
                                        <td>{{ $dp->teachers->count() }}</td>
                                        <td>
-                                           <a href="{{ url('admin/department-teachers', $dp->id) }}" class="button button--save">View Department Teachers</a>
+                                           <a href="{{ url('admin/department-teachers', $dp->id) }}" class="button btn-link text-teal">View Department Teachers</a>
                                        </td>
 
                                    </tr>
