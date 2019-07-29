@@ -23,28 +23,30 @@ class SchoolController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
         $schools = School::all();
         $classes = Myclass::all();
         $sections = Section::all();
 
         $studentClasses = Myclass::query()
-            ->where('school_id', Auth::user()->school->id)
+            ->where('school_id', $user->school->id)
             ->pluck('id');
 
         $studentSections = Section::with('class')
             ->whereIn('class_id', $studentClasses)
             ->get();
 
-        $teacherDepartments = Department::where('school_id',Auth::user()->school_id)->get();
-        $teacherClasses = Myclass::where('school_id',Auth::user()->school->id)->pluck('id');
+        $teacherDepartments = Department::where('school_id', $user->school_id)->get();
+        $teacherClasses = Myclass::where('school_id', $user->school->id)->pluck('id');
         $teacherSections = Section::with('class')->whereIn('class_id',$teacherClasses)->get();
-        $gradeSystems = Gradesystem::where('school_id', Auth::user()->school_id)->first();
+        $gradeSystems = Gradesystem::where('school_id', $user->school_id)->first();
 
         $teachers = User::where('role', 'teacher')
             ->orderBy('name','ASC')
             ->where('active', 1)
             ->get();
-        $departments = Department::where('school_id',Auth::user()->school_id)->get();
+        $departments = Department::where('school_id',$user->school_id)->get();
         return view('school.new-create-school', compact('schools',  'gradeSystems','classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 

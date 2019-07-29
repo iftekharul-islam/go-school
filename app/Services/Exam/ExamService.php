@@ -95,7 +95,7 @@ class ExamService {
     }
 
     public function updateExamFields(){
-        $tb = Exam::find($this->request->exam_id);
+        $tb = Exam::findOrFail($this->request->exam_id);
         $tb->notice_published = isset($this->request->notice_published)?1:0;
         $tb->result_published = isset($this->request->result_published)?1:0;
         $tb->active = (isset($this->request->active))?1:0;

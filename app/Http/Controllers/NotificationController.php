@@ -52,7 +52,7 @@ class NotificationController extends Controller
         'recipients' => 'required|array',
         'msg' => 'required|string',
       ]);
-      //DB::transaction(function () {
+      DB::transaction(function ( ) use ($request) {
       for($i=0; $i < count($request->recipients); $i++){
         $tb = new Notification;
         $tb->sent_status = 1;
@@ -65,7 +65,7 @@ class NotificationController extends Controller
         $n[] = $tb->attributesToArray();
       }
       Notification::insert($n);
-      //});
+      });
       return back()->with('status','Message Sent');
     }
 

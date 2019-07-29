@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Issuedbook;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\IssueBook\IssuedBookService;
@@ -55,7 +56,7 @@ class IssuedbookController extends Controller
             'book_id'      => 'required',
         ]);
 
-        $studentExists = \App\User::where('name',$request->name)->first();
+        $studentExists = User::where('name',$request->name)->first();
         if($studentExists){
             $request->request->add(['student_code' => $studentExists->student_code]);
             $this->issuedBookService->request = $request;
@@ -76,11 +77,11 @@ class IssuedbookController extends Controller
     public function update(Request $request)
     {
             DB::transaction(function () use ($request) {
-            $tb = \App\Issuedbook::find($request->issue_id);
+            $tb = Issuedbook::findOrFail($request->issue_id);
             $tb->borrowed = 0;
             $tb->quantity = 0;
             $tb->save();
-            $book = \App\Book::where('id',$request->book_id)->first();
+            $book = Book::where('id',$request->book_id)->first();
             $book->quantity = $book->quantity + 1;
             $book->save();
         }, 5);

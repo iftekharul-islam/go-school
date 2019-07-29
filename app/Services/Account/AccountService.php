@@ -83,7 +83,7 @@ class AccountService {
     }
 
     public function updateAccount(){
-        $account = Account::find($this->request->id);
+        $account = Account::findOrFail($this->request->id);
         $account->amount = $this->request->amount;
         $account->description = $this->request->description;
         $account->save();

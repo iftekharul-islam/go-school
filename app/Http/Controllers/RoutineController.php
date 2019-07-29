@@ -37,7 +37,7 @@ class RoutineController extends Controller
         try{
             if(Schema::hasColumn('routines','section_id')){
                 $files = Routine::with('section')
-                    ->where('school_id',\Auth::user()->school_id)
+                    ->where('school_id', Auth::user()->school_id)
                     ->where('section_id', $section_id)
                     ->where('active',1)
                     ->get();
@@ -59,7 +59,7 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $user = Auth::user();
         $request->validate([
             'file_path' => 'required|string|max:255',
             'title' => 'required|string|max:255',
@@ -68,10 +68,10 @@ class RoutineController extends Controller
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;
         $tb->active = 1;
-        $tb->school_id = Auth::user()->school_id;
-        $tb->user_id = Auth::user()->id;
+        $tb->school_id = $user->school_id;
+        $tb->user_id = $user->id;
         $tb->save();
-        return back()->with('status', 'Uploaded');
+        return back()->with('status', 'Routine upload complete');
     }
 
     /**

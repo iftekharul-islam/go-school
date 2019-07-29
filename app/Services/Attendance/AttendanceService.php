@@ -68,7 +68,6 @@ class AttendanceService {
                       COUNT(CASE WHEN present=2 THEN present END) AS totalEscaped'
             ))
             ->where('section_id', $section_id)
-//            ->where('exam_id', $exam_id)
             ->groupBy('student_id')
             ->get();
     }
@@ -119,7 +118,7 @@ class AttendanceService {
         $i = 0;
         $at = [];
         foreach ($this->request->attendances as $key => $attendance) {
-            $tb = Attendance::find($attendance);
+            $tb = Attendance::findOrFail($attendance);
             if(isset($this->request["isPresent$i"]) && $tb->present == 1){
                 $tb->present =2;
                 $tb->updated_at = date('Y-m-d H:i:s');

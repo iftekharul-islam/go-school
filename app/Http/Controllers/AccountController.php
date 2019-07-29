@@ -51,7 +51,7 @@ class AccountController extends Controller
      * @return Response
      */
     public function editSector($id){
-        $sector = AccountSector::find($id);
+        $sector = AccountSector::findOrFail($id);
         return view('accounts.new-edit_sector',compact('sector'));
     }
 
@@ -75,7 +75,7 @@ class AccountController extends Controller
      * @return Response
      */
     public function deleteSector($id){
-        $sector = AccountSector::find($id);
+        $sector = AccountSector::findOrFail($id);
         $sector->delete();
         return redirect('/accountant/sectors')->with("status","Account Sector Deleted Successfully.");
     }
@@ -118,7 +118,7 @@ class AccountController extends Controller
     }
 
     public function editIncome($id){
-        $income = Account::find($id);
+        $income = Account::findOrFail($id);
         return view('accounts.income-edit',compact('income'));
     }
     public function updateIncome(UpdateAccountRequest $request)
@@ -130,7 +130,7 @@ class AccountController extends Controller
     }
 
     public function deleteIncome($id){
-        $income = Account::find($id);
+        $income = Account::findOrFail($id);
         $income->delete();
 
         return back()->with("status","Income Deleted Successfully.");

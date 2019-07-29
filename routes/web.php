@@ -20,9 +20,6 @@ Route::get('/', function () {
 
 Auth::routes(['login' => false]);
 
-Route::get('foo', function () {
-    return 'Success Message';
-});
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 

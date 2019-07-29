@@ -10,8 +10,8 @@ class MasterHomeController extends Controller
     public function index ()
     {
         $school = School::all()->count();
-        $total_student = User::where('role', 'student')->get()->count();
-        $total_admin = User::where('role', 'admin')->get()->count();
+        $total_student = User::where('role', 'student')->where('active',1)->get()->count();
+        $total_admin = User::where('role', 'admin')->where('active',1)->get()->count();
         return view('master-home',[
             'school'        => $school,
             'total_student' => $total_student,

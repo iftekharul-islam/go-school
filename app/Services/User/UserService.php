@@ -67,9 +67,9 @@ class UserService {
     public function promoteSectionStudentsView($students, $classes, $section_id){
         return view('school.new-promote-students', compact('students','classes','section_id'));
     }
-    
+
     public function promoteSectionStudentsPost($request)
-    {   
+    {
         if ($request->section_id > 0) {
             $students = $this->getSectionStudents($request->section_id);
             $i = 0;
@@ -123,38 +123,38 @@ class UserService {
 
     public function getStudents(){
         return $this->user->with(['section.class', 'school', 'studentInfo'])
-                ->where('code', auth()->user()->school->code)
-                ->student()
-                ->where('active', 1)
-                ->orderBy('name', 'asc')
-                ->paginate(100);
+            ->where('code', auth()->user()->school->code)
+            ->student()
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(100);
     }
 
     public function getTeachers(){
         return $this->user->with(['section', 'school'])
-                ->where('code', auth()->user()->school->code)
-                ->where('role', 'teacher')
-                ->where('active', 1)
-                ->orderBy('name', 'asc')
-                ->paginate(50);
+            ->where('code', auth()->user()->school->code)
+            ->where('role', 'teacher')
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(50);
     }
 
     public function getAccountants(){
         return $this->user->with('school')
-                ->where('code', auth()->user()->school->code)
-                ->where('role', 'accountant')
-                ->where('active', 1)
-                ->orderBy('name', 'asc')
-                ->paginate(50);
+            ->where('code', auth()->user()->school->code)
+            ->where('role', 'accountant')
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(50);
     }
 
     public function getLibrarians(){
         return $this->user->with('school')
-                ->where('code', auth()->user()->school->code)
-                ->where('role', 'librarian')
-                ->where('active', 1)
-                ->orderBy('name', 'asc')
-                ->paginate(50);
+            ->where('code', auth()->user()->school->code)
+            ->where('role', 'librarian')
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(50);
     }
 
     public function getSectionStudentsWithSchool($section_id){
@@ -168,23 +168,23 @@ class UserService {
 
     public function getSectionStudentsWithStudentInfo($section_id){
         return $this->user->with('section', 'studentInfo')
-                ->where('section_id', $section_id)
-                ->where('role', 'student')
-                ->where('active', 1)
-                ->get();
+            ->where('section_id', $section_id)
+            ->where('role', 'student')
+            ->where('active', 1)
+            ->get();
     }
 
     public function getSectionStudents($section_id){
         return $this->user->where('section_id', $section_id)
-                ->where('active', 1)
-                ->where('role', 'student')
-                ->get();
+            ->where('active', 1)
+            ->where('role', 'student')
+            ->get();
     }
 
     public function getUserByUserCode($user_code){
         return User::with('section', 'studentInfo')
-              ->where('student_code', $user_code)
-              ->firstOrFail();
+            ->where('student_code', $user_code)
+            ->firstOrFail();
     }
 
     public function storeAdmin($request){
@@ -256,8 +256,8 @@ class UserService {
             'user_id' => $student->id
         ];
 
-            $info =  StudentInfo::create($data);
-            return $info;
+        $info =  StudentInfo::create($data);
+        return $info;
 
     }
 
@@ -278,11 +278,11 @@ class UserService {
         $tb->pic_path = 'storage/'.$file;
         $tb->verified = 1;
         $tb->department_id = (!empty($request->department_id))?$request->department_id:0;
-        
+
         if($role == 'teacher'){
             $tb->section_id = ($request->class_teacher_section_id != 0) ? $request->class_teacher_section_id : 0;
         }
-        
+
         $tb->save();
         return $tb;
     }

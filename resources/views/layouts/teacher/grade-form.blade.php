@@ -71,10 +71,10 @@
       <span class="badge badge-secondary mr-1 checkbox-inline">
     Final Exam Written
   </span>
-      {{--<input type="checkbox" class="form-group ml-5 mr-3" name="fem" value="19">--}}
-      {{--<span class="badge badge-secondary mr-1 checkbox-inline">--}}
-    {{--Final Exam MCQ--}}
-  {{--</span>--}}
+      <input type="checkbox" class="form-group ml-5 mr-3" name="fem" value="19">
+      <span class="badge badge-secondary mr-1 checkbox-inline">
+    Final Exam MCQ
+  </span>
       <input type="checkbox" class="form-group ml-5 mr-3" name="practical" value="20">
       <span class="badge badge-warning mr-1 checkbox-inline">
     Practical
@@ -115,7 +115,7 @@
         <th scope="col">CT 4</th>
         <th scope="col">CT 5</th>
         <th scope="col">Written</th>
-        {{--<th scope="col">MCQ</th>--}}
+        <th scope="col">MCQ</th>
         <th scope="col">Practical</th>
       </tr>
       </thead>
@@ -173,7 +173,7 @@
             <input type="number" name="written[]" class="form-control input-sm" placeholder="Final Written" value="{{$grade->written}}">
           </td>
           <td>
-            {{--<input type="number" name="mcq[]" class="form-control input-sm" placeholder="Final Mcq" value="{{$grade->mcq}}">--}}
+            <input type="number" name="mcq[]" class="form-control input-sm" placeholder="Final Mcq" value="{{$grade->mcq}}">
           </td>
           <td>
             <input type="number" name="practical[]" class="form-control input-sm" placeholder="Practical" value="{{$grade->practical}}">
