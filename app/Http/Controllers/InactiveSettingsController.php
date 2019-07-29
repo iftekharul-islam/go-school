@@ -22,7 +22,7 @@ class InactiveSettingsController extends Controller
 
     public function notices()
     {
-        $files = Notice::where('school_id', \Auth::user()->school_id)
+        $files = Notice::where('school_id',     Auth::user()->school_id)
             ->where('active', 0)
             ->orderBy('created_at', 'DESC')
             ->get();

@@ -53,14 +53,15 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $tb = new Notice;
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;
         $tb->active = 1;
-        $tb->school_id = Auth::user()->school_id;
-        $tb->user_id = Auth::user()->id;
+        $tb->school_id = $user->school_id;
+        $tb->user_id = $user->id;
         $tb->save();
-        return back()->with('status', 'Uploaded');
+        return back()->with('status', 'New notice upload complete');
     }
 
     /**

@@ -31,7 +31,9 @@ class AttendanceController extends Controller
      */
     public function index($section_id, $student_id, $exam_id)
     {
-        if($section_id > 0 && Auth::user()->role != 'student')
+
+        $user = Auth::user();
+        if($section_id > 0 && $user->role != 'student')
         {
             $students = $this->attendanceService->getStudentsBySection($section_id);
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
@@ -53,7 +55,7 @@ class AttendanceController extends Controller
             // View attendance of a single student by student id//
 
 
-            if(Auth::user()->role == 'student'){
+            if($user->role == 'student'){
                 $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
                 foreach ($attCount as $att) {
                     $total =  $att->total_present + $att->total_absent + $att->total_escaped;
@@ -62,7 +64,7 @@ class AttendanceController extends Controller
                     $escaped = $att->total_escaped;
 
                 }
-                $exam = ExamForClass::where('class_id',\Auth::user()->section->class->id)
+                $exam = ExamForClass::where('class_id',$user->section->class->id)
                     ->where('active', 1)
                     ->first();
             }
@@ -125,12 +127,11 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addStudentsToCourseBeforeAtt($teacher_id,$course_id,$exam_id,$section_id){
-        $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
 
+        $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
         $students = $this->attendanceService->getStudentsBySection($section_id);
         $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
         $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id,$exam_id);
-
         return view('attendance.attendance', [
             'students' => $students,
             'attendances' => $attendances,
@@ -148,7 +149,6 @@ class AttendanceController extends Controller
 
         $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
         $request->session()->put('section-attendance', true);
-
         return view('list.new-student-list',[
             'users' =>$users,
             'current_page'=>$users->currentPage(),
@@ -169,7 +169,7 @@ class AttendanceController extends Controller
         $students = $this->attendanceService->getStudentsBySection($section_id);
         $attCount = $this->attendanceService->getAllAttendanceBySecAndExam($section_id);
         $request->session()->put('section-attendance', true);
-        if($section_id > 0 && \Auth::user()->role != 'student') {
+        if($section_id > 0 && Auth::user()->role != 'student') {
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
             return view('attendance.sectionAttendance', [
                 'users' => $users,

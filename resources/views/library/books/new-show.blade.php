@@ -13,6 +13,11 @@
                 Back &nbsp;&nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
         </li>
+        <li>
+            <a style=" margin-left: 8px" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/all-books')  }}">
+            All Books
+            </a>
+        </li>
         <li>{{ $book->title }}</li>
     </ul>
 </div>

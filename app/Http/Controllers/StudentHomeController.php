@@ -28,7 +28,7 @@ class StudentHomeController extends Controller
         $student = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
         if (isset($student->school_id)) {
-            $school_id = Auth::user()->school_id;
+            $school_id = $student->school_id;
             $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
@@ -51,11 +51,11 @@ class StudentHomeController extends Controller
                     ->get();
             });
 
-            $student_info = Auth::user()->studentInfo;
+            $student_info = $student->studentInfo;
             $present=0;
             $absent=0;
             $escaped=0;
-            $student_id = Auth::id();
+            $student_id = $student->id;
             $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
             if (!empty($attCount)) {
                 foreach ($attCount as $att) {

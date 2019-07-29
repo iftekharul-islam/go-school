@@ -12,14 +12,15 @@ class TeacherAttendanceService {
     public function storeTeacherAttendance()
     {
         $i = 0;
+        $authUser = Auth::user();
         foreach ($this->request->teachers as $key => $teacher) {
             $user = User::findOrFail($teacher);
             $tb = new StuffAttendance();
             $tb->stuff_id = $teacher;
             $tb->role = $user->role;
-            $tb->school_id = Auth::user()->school_id;
+            $tb->school_id = $authUser->school_id;
             $tb->present = isset($this->request["isPresent$i"])?1:0;
-            $tb->user_id = auth()->user()->id;
+            $tb->user_id = $authUser->id;
             $tb->created_at = date('Y-m-d H:i:s');
             $tb->updated_at = date('Y-m-d H:i:s');
             $at[] = $tb->attributesToArray();
@@ -197,14 +198,15 @@ class TeacherAttendanceService {
     public function storeStuffAttendance()
     {
         $i = 0;
+        $authUser = Auth::user();
         foreach ($this->request->staffs as $key => $staff) {
             $user = User::find($staff);
             $tb = new StuffAttendance();
             $tb->stuff_id = $staff;
             $tb->role = $user->role;
-            $tb->school_id = Auth::user()->school_id;
+            $tb->school_id = $authUser->school_id;
             $tb->present = isset($this->request["isPresent$i"])?1:0;
-            $tb->user_id = auth()->user()->id;
+            $tb->user_id = $authUser->id;
             $tb->created_at = date('Y-m-d H:i:s');
             $tb->updated_at = date('Y-m-d H:i:s');
             $at[] = $tb->attributesToArray();

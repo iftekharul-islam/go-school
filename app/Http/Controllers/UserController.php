@@ -47,7 +47,7 @@ class UserController extends Controller
      */
     public function index($school_code, $student_code, $teacher_code){
         session()->forget('section-attendance');
-        
+
         if($this->userService->isListOfStudents($school_code, $student_code))
             return $this->userService->indexView('list.new-student-list', $this->userService->getStudents(), $type= "Students");
         else if($this->userService->isListOfTeachers($school_code, $teacher_code))
@@ -89,9 +89,9 @@ class UserController extends Controller
         ]);
 
         return view('auth.student',[
-           'classes' => $classes,
+            'classes' => $classes,
             session(['register_role' => 'student', 'register_sections' => $sections,])
-            ]);
+        ]);
     }
 
     /**
@@ -126,7 +126,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function promoteSectionStudentsPost(Request $request)
-    {   
+    {
         return $this->userService->promoteSectionStudentsPost($request);
     }
 
@@ -195,12 +195,11 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-
-        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('student_pic'));
-//        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) {
+            $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('student_pic'));
             $password = $request->password;
             $tb = $this->userService->storeStudent($request, $path);
-           $this->userService->storeStudentInfo($request, $tb);
+            $this->userService->storeStudentInfo($request, $tb);
 
             try {
                 // Fire event to store Student information
@@ -214,7 +213,7 @@ class UserController extends Controller
                 Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
             }
 
-//        });
+        });
         return back()->withInput(['tab'=> 'tab12'] )->with('status', 'saved');
     }
 
@@ -385,9 +384,9 @@ class UserController extends Controller
 
     public function deactivateUser($id)
     {
-       $user = $this->user->findOrFail($id);
-       $user->active = 0;
-       $user->save();
+        $user = $this->user->findOrFail($id);
+        $user->active = 0;
+        $user->save();
         return back()->with('status', $user->name .' has been removed!!');
     }
 

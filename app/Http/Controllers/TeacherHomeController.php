@@ -30,15 +30,15 @@ class TeacherHomeController extends Controller
         $student = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
         if (isset($student->school->id)) {
-            $school_id = Auth::user()->school->id;
+            $school_id = $student->school->id;
             $classes = Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
             });
 
-            $male = User::where('gender','male')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
-            $female = User::where('gender','female')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
+            $male = User::where('gender','male')->where('role', 'student')->where('school_id', $student->school_id)->count();
+            $female = User::where('gender','female')->where('role', 'student')->where('school_id', $student->school_id)->count();
             $totalStudents = $male + $female;
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)->count();
@@ -58,6 +58,7 @@ class TeacherHomeController extends Controller
                     ->get();
             });
         }
+
         $courses_student = $this->courseService->getCoursesByTeacher($student->id);
         $allStudents = $this->userService->getStudents();
         return view('teacher-home', [

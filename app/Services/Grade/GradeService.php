@@ -302,7 +302,7 @@ class GradeService {
     public function updateGrade($request){
         $i = 0;
         foreach($request->grade_ids as $id){
-            $tb = Grade::find($id);
+            $tb = Grade::findOrFail($id);
             $tb->attendance = $request->attendance[$i];
             $tb->quiz1 = $request->quiz1[$i];
             $tb->quiz2 = $request->quiz2[$i];

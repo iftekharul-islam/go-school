@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Services\User\UserService;
 use Alert;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -42,45 +43,43 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+     * @name index
+     * @description sends auth users school information related to auth admin users dashboard
      * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
-        $student = Auth::user();
+        $admin = Auth::user();
         $minutes = 1440;// 24 hours = 1440 minutes
 
-        if (isset($student->school->id)) {
-            $school_id = \Auth::user()->school->id;
-//            $classes = \Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-            $classes = Myclass::where('school_id', $school_id)
-                ->pluck('id')
-                ->toArray();
-//            });
-//            $totalStudents = \Cache::remember('totalStudents-'.$school_id, $minutes, function () use($school_id) {
+        if (isset($admin->school->id)) {
+            $school_id = $admin->school->id;
+            $classes = Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
+                return Myclass::where('school_id', $school_id)
+                    ->pluck('id')
+                    ->toArray();
+            });
 
-//            });
-            
-
-            $male = User::where('gender','male')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
-            $female = User::where('gender','female')->where('role', 'student')->where('school_id', Auth::user()->school_id)->count();
+            $male = User::where('gender','male')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
+            $female = User::where('gender','female')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
             $totalStudents = $male + $female;
-//            $totalClasses = \Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
-            $totalClasses =  Myclass::where('school_id', $school_id)->count();
-//            });
-//            $totalSections = \Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
-            $totalSections = Section::whereIn('class_id', $classes)->count();
-//            });
-//            $notices = \Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
-            $notices = Notice::where('school_id', $school_id)
-                ->where('active', 1)
-                ->get();
-//            });
-//            $exams = \Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
-            $exams = Exam::where('school_id', $school_id)
-                ->where('active', 1)
-                ->get();
-//            });
+            $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
+                return  Myclass::where('school_id', $school_id)->count();
+            });
+            $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
+                return Section::whereIn('class_id', $classes)->count();
+            });
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+                return Notice::where('school_id', $school_id)
+                    ->where('active', 1)
+                    ->get();
+            });
+            $exams = Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
+                return Exam::where('school_id', $school_id)
+                    ->where('active', 1)
+                    ->get();
+            });
         }
 
         $allStudents = $this->userService->getStudents();

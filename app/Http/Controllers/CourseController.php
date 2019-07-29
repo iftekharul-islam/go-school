@@ -67,9 +67,7 @@ class CourseController extends Controller
     public function course($teacher_id,$course_id,$exam_id,$section_id)
     {
         $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
-//      $students = $this->courseService->getStudentsFromGradeByCourseAndExam($course_id, $exam_id);
         $students = $this->userService->getSectionStudentsWithSchool($section_id);
-//      return $students;
         return view('course.students', compact('students','teacher_id','section_id'));
     }
 
@@ -128,7 +126,7 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $course = Course::find($id);
+        $course = Course::findOrFail($id);
         return view('course.edit', ['course'=>$course]);
     }
 
@@ -146,7 +144,7 @@ class CourseController extends Controller
             'course_time' => 'required|string',
         ]);
         $this->courseService->updateCourseInfo($id, $request);
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'Course time & title updated');
     }
 
     /**

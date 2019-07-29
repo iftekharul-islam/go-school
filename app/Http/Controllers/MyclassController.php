@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Myclass as Myclass;
 use App\Http\Resources\ClassResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MyclassController extends Controller
 {
@@ -44,7 +45,7 @@ class MyclassController extends Controller
         ]);
         $tb = new Myclass;
         $tb->class_number = $request->class_number;
-        $tb->school_id = \Auth::user()->school_id;
+        $tb->school_id = Auth::user()->school_id;
         $tb->group = (!empty($request->group))?$request->group:'';
         $tb->save();
         return back()->with('status', 'Created');

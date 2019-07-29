@@ -36,15 +36,17 @@ class FeeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $user = Auth::user();
         $request->validate([
             'fee_name' => 'required|string|max:255',
         ]);
         $fee = new Fee;
         $fee->fee_name = $request->fee_name;
-        $fee->school_id = Auth::user()->school_id;
-        $fee->user_id = Auth::user()->id;
+        $fee->school_id = $user->school_id;
+        $fee->user_id = $user->id;
         $fee->save();
-        return back()->with('status', 'Saved');
+        return back()->with('status', 'Fee information stored');
     }
 
     /**
@@ -91,6 +93,6 @@ class FeeController extends Controller
     {
         $fee = Fee::findOrFail($id);
         $fee->delete();
-        return redirect()->back()->with('Status', 'Removed');
+        return redirect()->back()->with('status', 'Removed');
     }
 }

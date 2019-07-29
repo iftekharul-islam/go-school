@@ -33,9 +33,11 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $classes = Myclass::where('school_id', Auth::user()->school->id)
+        $user = Auth::user();
+
+        $classes = Myclass::where('school_id', $user->school->id)
             ->get();
-        $classeIds = Myclass::where('school_id',Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id', $user->school->id)
             ->pluck('id')
             ->toArray();
 
@@ -49,9 +51,10 @@ class SectionController extends Controller
     }
 
     public function attendanceList(){
-        $classes = Myclass::where('school_id',Auth::user()->school->id)
+        $user = Auth::user();
+        $classes = Myclass::where('school_id',$user->school->id)
             ->get();
-        $classeIds = Myclass::where('school_id',Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id',$user->school->id)
             ->pluck('id')
             ->toArray();
         $sections = Section::whereIn('class_id',$classeIds)
@@ -69,9 +72,11 @@ class SectionController extends Controller
 
     public function details($class_id)
     {
-        $classes = Myclass::where('school_id', Auth::user()->school->id)
+
+        $user = Auth::user();
+        $classes = Myclass::where('school_id', $user->school->id)
             ->get();
-        $classeIds = Myclass::where('school_id', Auth::user()->school->id)
+        $classeIds = Myclass::where('school_id', $user->school->id)
             ->pluck('id')
             ->toArray();
         $sections = Section::whereIn('class_id',$classeIds)

@@ -92,8 +92,8 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->stuff_id == $librarian->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
+                                    <td>{{$at->totalpresent}}</td>
+                                    <td>{{$at->totalabsent  }}</td>
                                 @else
                                     <td>0</td>
                                     <td>0</td>
