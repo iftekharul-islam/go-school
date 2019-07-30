@@ -60,10 +60,8 @@ class TeacherHomeController extends Controller
         }
 
         $courses_student = $this->courseService->getCoursesByTeacher($student->id);
-        $allStudents = $this->userService->getStudents();
         return view('teacher-home', [
             'totalStudents' => $totalStudents,
-            'allStudents' => $allStudents,
             'notices' => $notices,
             'exams' => $exams,
             'totalClasses' => $totalClasses,

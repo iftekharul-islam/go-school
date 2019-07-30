@@ -187,7 +187,7 @@ class GradeController extends Controller
             $tb->ct4 = $request->ct4[$i];
             $tb->ct5 = $request->ct5[$i];
             $tb->written = $request->written[$i];
-            $tb->mcq = $request->mcq[$i];
+            $tb->mcq = 0;
             $tb->practical = $request->practical[$i];
             $tb->user_id = Auth::user()->id;
             $tb->exam_id = $request->get('exam_id');

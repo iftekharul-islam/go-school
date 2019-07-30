@@ -195,7 +195,6 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        DB::transaction(function () use ($request) {
             $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('student_pic'));
             $password = $request->password;
             $tb = $this->userService->storeStudent($request, $path);
@@ -212,9 +211,7 @@ class UserController extends Controller
             } catch(\Exception $ex) {
                 Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
             }
-
-        });
-        return back()->withInput(['tab'=> 'tab12'] )->with('status', 'saved');
+        return back()->withInput(['tab'=> 'tab12'] )->with('status', 'New Student Added!');
     }
 
     /**

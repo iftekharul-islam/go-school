@@ -5,6 +5,7 @@ use App\User;
 use App\Course;
 use App\Grade;
 use App\Exam;
+use function foo\func;
 use Illuminate\Support\Facades\Auth;
 
 class CourseService {
@@ -14,8 +15,8 @@ class CourseService {
 
     public function isCourseOfStudentOfASection($section_id){
         return auth()->user()->role == 'student'
-                && $section_id == auth()->user()->section_id
-                && $section_id > 0;
+            && $section_id == auth()->user()->section_id
+            && $section_id > 0;
     }
 
     public function isCourseOfASection($section_id){
@@ -23,15 +24,17 @@ class CourseService {
     }
 
     public function getCoursesByTeacher($teacher_id){
-        return Course::with(['section', 'teacher','exam', 'section.users'])
-                        ->where('teacher_id', $teacher_id)
-                        ->get();
+        return Course::with(['section', 'teacher','exam', 'section.users' => function($q) {
+            $q->where('role','student');
+        }])
+            ->where('teacher_id', $teacher_id)
+            ->get();
     }
 
     public function getExamsBySchoolId(){
         return Exam::where('school_id', auth()->user()->school_id)
-                        ->where('active',1)
-                        ->get();
+            ->where('active',1)
+            ->get();
     }
 
     public function updateCourseInfo($id, $request){
@@ -43,15 +46,15 @@ class CourseService {
 
     public function getCoursesBySection($section_id){
         return Course::with(['section', 'teacher'])
-                        ->where('section_id', $section_id)
-                        ->get();
+            ->where('section_id', $section_id)
+            ->get();
     }
 
     public function getStudentsFromGradeByCourseAndExam($course_id, $exam_id){
-      return Grade::with('student')
-                  ->where('course_id', $course_id)
-                  ->where('exam_id',$exam_id)
-                  ->get();
+        return Grade::with('student')
+            ->where('course_id', $course_id)
+            ->where('exam_id',$exam_id)
+            ->get();
     }
 
     public function addCourse($request, $grade_system){
