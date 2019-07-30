@@ -23,9 +23,9 @@
                         <div class="media  media-none--xs">
                             <div class="row">
                                 <div class="col-12 ">
-                                    <div class="item-img offset-6 mt-5">
+                                    <div class="item-img offset-8 mb-5">
                                         @if(!empty($user->pic_path))
-                                            <img src="{{url($user->pic_path)}}" class=" text-center" alt="student">
+                                            <img src="{{url($user->pic_path)}}" alt="student">
                                         @else
                                             <img src="{{ asset('template/img/user-default.png') }}" alt="user">
                                         @endif

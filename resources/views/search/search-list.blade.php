@@ -35,13 +35,13 @@
                         <tr>
                             <td>{{ $loop->index }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->role }}</td>
+                            <td class="text-capitalize">{{ $user->role }}</td>
                             @if($user->role == 'student')
                                 <td>{{ $user->section->class->class_number }}</td>
                                 <td>{{ $user->section->section_number }}</td>
                             @endif
                             <td>
-                                <a href="{{ url('admin/search-result/'.$user->id) }}" class="button button--save">Detail</a>
+                                <a href="{{ url('admin/search-result/'.$user->id) }}" class="button button--save">Details</a>
                             </td>
                         </tr>
                     @endforeach
