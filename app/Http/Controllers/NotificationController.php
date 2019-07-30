@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Notification as Notification;
 use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NotificationController extends Controller
 {
@@ -15,16 +16,17 @@ class NotificationController extends Controller
      */
     public function index($id)
     {
-      $msg = Notification::with('teacher.department')->where('student_id',$id)->orderBy('id','desc')->paginate(10);
-      $msgs = [];
+      $msg = Notification::with('teacher.department')->where('student_id',$id)->orderBy('created_at','desc')->paginate(10);
       foreach($msg as $m){
-        $msgs[] = [
-            'id' => $m->id,
-            'active' => 0,
-            'updated_at' => date('Y-m-d H:i:s'),
-          ];
+        if ($m->active == 1)
+        {
+              $message = Notification::findOrFail($m->id);
+              $message->active = 0;
+              $message->updated_at = now();
+              $message->save();
+        }
+
       }
-//      \Batch::update('notifications',$msgs,'id');
       return view('message.all-message',['messages'=>$msg]);
     }
 

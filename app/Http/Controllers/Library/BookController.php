@@ -55,7 +55,7 @@ class BookController extends Controller
             'user_id'   => auth()->user()->id
         ]);
 
-        return redirect()->to(Auth::user()->role.'/book', $book->id);
+        return redirect()->to(Auth::user()->role.'/book'.$book->id)->with('status','New book added to library');
     }
 
     public function destroy($id)

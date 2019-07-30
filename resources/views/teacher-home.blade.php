@@ -141,7 +141,7 @@
                                         @foreach($courses_student as $c)
                                             @foreach($c['section']['users'] as $user)
                                                 <tr>
-                                                    <td class="text-center"><img style="max-width: 50px;" src="{{ $user->pic_path }}" alt="student"></td>
+                                                    <td class="text-center"><img style="max-width: 50px;" src="{{ url($user->pic_path) }}" alt="student"></td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
@@ -191,7 +191,7 @@
                                         <td>{{ $book->quantity }}</td>
                                         <td>
                                             <div class="form-group">
-                                                <a href="{{ url('/librarian/book/'.$book->id) }}" class="button button--text float-left">
+                                                <a href="{{ url('/librarian/book/'.$book->id) }}" class="button btn-link text-teal float-left">
                                                     Details
                                                 </a>
                                             </div>
