@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table display data-table text-nowrap">
+                    <table class="table display table-data-div text-wrap">
                         <thead>
                         <tr>
                             <th>Sl.</th>
@@ -74,7 +74,7 @@
                 @endforeach
             </div>
             <div class="table-responsive">
-                <table class="table display data-table text-nowrap">
+                <table class="table display table-data-div text-wrap">
                     <thead>
                     <tr>
                         <th>Exam Name</th>

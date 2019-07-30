@@ -34,11 +34,6 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request) {
-        if ($request->class_id) {
-            $class_id = $request->class_id;
-        } else {
-            $class_id = " 12";
-        }
         $book = Book::create([
             'title'     => $request->title,
             'book_code' => $request->book_code,
@@ -50,7 +45,7 @@ class BookController extends Controller
             'about'     => $request->about,
             'price'     => $request->price,
             'img_path'  => $request->img_path,
-            'class_id'  => $class_id,
+            'class_id'  => isset($request->class_id) ? $request->class_id : '',
             'school_id' => auth()->user()->school_id,
             'user_id'   => auth()->user()->id
         ]);

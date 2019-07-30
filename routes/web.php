@@ -153,6 +153,9 @@ Route::middleware(['auth'])->group(function (){
 // Admin role routes
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         Route::get('/home', 'HomeController@index')->name('admin.home');
+        Route::get('find-user/{query}', 'AdminController@findUser')->name('admin.search');
+        Route::get('search-user/', 'AdminController@index')->name('admin.search-user');
+        Route::get('search-result/{id}', 'AdminController@search')->name('admin.search.result');
 
         Route::get('gpa/create-gpa', 'GradesystemController@create');
         Route::post('store-grade-system', 'GradesystemController@store');

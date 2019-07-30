@@ -105,6 +105,7 @@
         var myTable = $('.section-student-data-table').DataTable({
             paging: true,
             bSort : false,
+            scrollY:        false,
             language: {
                 searchPlaceholder: "Search here"
             }

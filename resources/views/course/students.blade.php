@@ -38,35 +38,36 @@
                             @if(count($students) > 0)
                                 <div class="panel-body">
                                     <div class="col-md-12">
-                                        <table class="table table-bordered table-condensed table-striped">
-                                            <tr>
-                                                <th>
-                                                    <div class="checkbox">
-                                                        <label style="font-weight:bold;">
-                                                            <input type="checkbox" id="selectAll"> All
-                                                        </label>
-                                                    </div>
-                                                </th>
-                                                <th>Student Code</th>
-                                                <th>Student Name</th>
-                                            </tr>
-                                            @foreach ($students as $student)
+                                        <div class="responsive">
+                                            <table class="table table-bordered text-wrap">
                                                 <tr>
-                                                    <td>
+                                                    <th>
                                                         <div class="checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="recipients[]" form="msgForm"
-                                                                       value="{{$student->id}}">
+                                                            <label style="font-weight:bold;">
+                                                                <input type="checkbox" id="selectAll"> All
                                                             </label>
                                                         </div>
-                                                    </td>
-                                                    <td>{{$student->student_code}}</td>
-                                                    <td><a
-                                                                href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a>
-                                                    </td>
+                                                    </th>
+                                                    <th>Student Code</th>
+                                                    <th>Student Name</th>
                                                 </tr>
-                                            @endforeach
-                                        </table>
+                                                @foreach ($students as $student)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="recipients[]" form="msgForm"
+                                                                           value="{{$student->id}}">
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{$student->student_code}}</td>
+                                                        <td><a href="{{url('user/'.$student->student_code)}}" class="text-teal">{{$student->name}}</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
                                     </div>
                                     <div class="col-md-12">
                                         @if (session('status'))

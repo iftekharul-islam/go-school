@@ -87,6 +87,10 @@ body {
   border: none;
 }
 
+a.dropdown-item {
+  font-size: 14px;
+}
+
 #DataTables_Table_0_filter input {
   margin-top: 10px;
   height: 45px;

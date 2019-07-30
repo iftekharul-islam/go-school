@@ -7,6 +7,7 @@ use App\Issuedbook;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\IssueBook\IssuedBookService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class IssuedbookController extends Controller
@@ -38,7 +39,9 @@ class IssuedbookController extends Controller
     }
 
     public function autocomplete(Request $request) {
-        $data = User::where("name","LIKE","%{$request->input('query')}%")->get();
+        $data = User::where("name","LIKE","%{$request->input('query')}%")
+            ->where('school_id', Auth::user()->school_id)
+            ->get();
         return response()->json($data);
     }
 

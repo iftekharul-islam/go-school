@@ -20,7 +20,6 @@
                     <div class="heading-layout1 mb-5">
                         <div class="item-title">
                             <h3 class="">About Me</h3>
-                            {{--                            <a class="btn btn-lg btn-info float-right" role="button" href="{{url('attendances/0/'.$student->id.'/0')}}">View Attendance</a>--}}
                         </div>
                     </div>
                     <div class="student-info">
@@ -37,8 +36,8 @@
                             <h3 class="item-title text-center text-capitalize">{{ Auth::user()->name }}</h3>
                         </div>
                         <p>{{ $student->about }}</p>
-                        <div class="table-responsive info-table">
-                            <table class="table text-nowrap">
+                        <div class="info-table">
+                            <table class="table text-wrap">
                                 <tbody>
                                 <tr>
                                     <td class="font-medium text-dark-medium">Gender:</td>
@@ -209,7 +208,7 @@
                                 <div class="item-content">
                                     <div class="item-title">Attendance</div>
                                     @if(!empty($present))
-                                        <div class="item-number"><span class="counter" data-num="{{ $present }}"></span><span>%</span></div>
+                                        <div class="item-number"><span class="counter" data-num="{{ $present }}"></span><span>{{ $present }}%</span></div>
                                     @else
                                         No Record
                                     @endif

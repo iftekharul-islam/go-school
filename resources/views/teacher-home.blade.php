@@ -124,7 +124,7 @@
                             </div>
                             <div class="table-box-wrap">
                                 <div class="table-responsive student-table-box">
-                                    <table class="table table-data-div text-wrap" id="myStudent">
+                                    <table class="table section-student-data-table text-wrap" id="myStudent">
                                         <thead>
                                         <tr>
                                             <th>Photo</th>

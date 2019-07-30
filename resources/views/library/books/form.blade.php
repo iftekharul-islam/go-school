@@ -37,7 +37,8 @@
             <label for="type" class="col-md-4 control-label">Book Type</label>
 
             <div class="col-md-12">
-                <select id="type" class="select2" name="type">
+                <select id="type" class="select2 book-type" name="type">
+                    <option value="" disabled selected>Select Book Type</option>
                     <option value="Academic">Academic</option>
                     <option value="Magazine">Magazine</option>
                     <option value="Story">Story</option>
@@ -69,7 +70,7 @@
     </div>
 </div>
 
-<div class="row mb-2">
+<div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('author') ? ' has-error' : '' }}">
             <label for="author" class="col-md-4 control-label">Book Author</label>
@@ -102,7 +103,7 @@
     </div>
 </div>
 
-<div class="row mb-2">
+<div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
             <label for="quantity" class="col-md-4 control-label">Book Quantity</label>
@@ -135,7 +136,7 @@
     </div>
 </div>
 
-<div class="row mb-2">
+<div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('rowNo') ? ' has-error' : '' }}">
             <label for="rowNo" class="col-md-4 control-label">Book Row Number</label>
@@ -167,3 +168,30 @@
         </div>
     </div>
 </div>
+
+<div class="row mt-4">
+    <div class="col-md-6 form-group for-class" style="display: none;">
+        <div class="col-md-12">
+            <label>For Class</label>
+            <select class="select2 for-class" id="for_class" name="class_id">
+                @foreach($classes as $class)
+                    <option value="{{ $class->id }}">{{ $class->class_number }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("select.book-type").change(function(){
+                var bookType = $(this).children("option:selected").val();
+                if (bookType === 'Academic') {
+                    $('.for-class').css('display', 'block');
+                } else {
+                    $('.for-class').css('display', 'none');
+                }
+            });
+        });
+</script>

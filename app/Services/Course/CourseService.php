@@ -31,6 +31,12 @@ class CourseService {
             ->get();
     }
 
+    public function getCoursesByTeacherId($teacher_id){
+        return Course::with(['section', 'teacher','exam', 'section.users'])
+            ->where('teacher_id', $teacher_id)
+            ->get();
+    }
+
     public function getExamsBySchoolId(){
         return Exam::where('school_id', auth()->user()->school_id)
             ->where('active',1)
