@@ -8,6 +8,7 @@ use App\Events\UserRegistered;
 use App\Grade;
 use App\Gradesystem;
 use App\GradeSystemInfo;
+use App\Http\Requests\User\CreateAdminRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\School;
 use App\Services\Attendance\AttendanceService;
@@ -123,7 +124,7 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAdminRequest $request)
     {
         $school = School::where('id', $request->school_id)->first();
         $request->request->add(['code' => $school->code]);
