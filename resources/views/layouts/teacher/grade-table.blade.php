@@ -32,7 +32,7 @@
     <tr>
       <th>{{($loop->index + 1)}}</th>
       <td>{{$grade->student->student_code}}</td>
-      <td><a href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
+      <td><a href="{{url('user/'.$grade->student->student_code)}}" class="text-teal">{{$grade->student->name}}</a></td>
       <td>{{$grade->attendance}}</td>
       @for($i=1;$i<=5;$i++)
         <td>{{$grade['quiz'.$i]}}</td>

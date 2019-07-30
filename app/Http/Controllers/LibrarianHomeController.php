@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Exam;
 use App\Myclass;
 use App\Notice;
 use App\Section;

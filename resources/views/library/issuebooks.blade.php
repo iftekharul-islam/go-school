@@ -17,12 +17,6 @@
         <div class="col-md-8">
             <div class="card height-auto false-height">
                 <div class="card-body">
-                    <div class="heading-layout1">
-                        <div class="item-title">
-                            {{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>--}}
-                            {{--                    <h3>Issue book</h3>--}}
-                        </div>
-                    </div>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

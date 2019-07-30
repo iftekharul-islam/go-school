@@ -7,15 +7,16 @@
         </ul>
     </div>
 @endif
-<form action="{{url('admin/staff/teacher-attendance/store')}}" method="post">
+<form action="{{url('admin/staff/attendance/store')}}" method="post">
     {{ csrf_field() }}
     <div class="table-responsive">
         <table class="table display table-bordered table-data-div text-nowrap">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Teachers ID</th>
-                <th>Teacher Name</th>
+                <th>Staff ID</th>
+                <th>Name</th>
+                <th>Role</th>
                 <th>Present</th>
                 <th>Total Attended</th>
                 <th>Total Missed</th>
@@ -27,7 +28,7 @@
                 <input type="text" name="update" value="1" style="display: none;">
 
                 @foreach ($teachers as $teacher)
-                    <input type="text" name="teachers[]" value="{{$teacher->id}}" style="display: none;">
+                    <input type="text" name="staffs[]" value="{{$teacher->id}}" style="display: none;">
                 @endforeach
                 @foreach ($attendances as $attendance)
                     <tr>
@@ -41,6 +42,7 @@
                             @endif
                             &nbsp;&nbsp;<a href="{{url('user/'.$attendance->stuff->student_code)}}">{{$attendance->stuff->name}}</a>
                         </td>
+                        <td>{{ ucfirst($attendance->role) }}</td>
                         <td>
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
                             @if($attendance->present === 1)
@@ -68,19 +70,19 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url('admin/staff/attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else
                 <input type="number" name="update" value="0" style="display: none;">
                 <input type="text" name="attendances[]" value="0" style="display: none;">
                 @foreach ($teachers as $teacher)
-                    <input type="text" name="teachers[]" value="{{$teacher->id}}" style="display: none;">
-{{--                    <input type="text" value="teacher" name="role[]" style="display: none">--}}
+                    <input type="text" name="staffs[]" value="{{$teacher->id}}" style="display: none;">
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$teacher->student_code}}</td>
                         <td><span class="badge badge-primary attdState">Present</span>&nbsp;&nbsp;{{ $teacher->name }}</td>
+                        <td>{{ ucfirst($teacher->role) }}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>
@@ -93,9 +95,7 @@
                                     <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
                                 @else
-                                    <td>0</td>
-                                    <td>0</td>
-                                    @break
+                                    @continue
                                 @endif
                             @endforeach
                         @else

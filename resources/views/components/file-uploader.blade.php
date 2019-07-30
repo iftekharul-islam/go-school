@@ -39,7 +39,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.2/jquery.fileupload.min.js"></script>
 <script>
 $(function () {
-    console.log("File Upload");
     var jqXHR = null;
     var uploadButton = $('<button/>')
             .addClass('btn btn-primary ml-5 mt-2 btn-lg')

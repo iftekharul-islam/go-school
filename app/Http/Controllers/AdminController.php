@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Events\StudentInfoUpdateRequested;
 use App\Events\UserRegistered;
+use App\Grade;
+use App\Gradesystem;
+use App\GradeSystemInfo;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\School;
+use App\Services\Attendance\AttendanceService;
+use App\Services\Attendance\TeacherAttendanceService;
+use App\Services\Course\CourseService;
 use App\Services\User\UserService;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -23,14 +31,80 @@ class AdminController extends Controller
     protected $userService;
     protected $user;
 
-    public function __construct(UserService $userService, User $user){
+    public function __construct(UserService $userService, User $user, AttendanceService $attendanceService, TeacherAttendanceService $teacherAttendanceService, CourseService $courseService){
         $this->userService = $userService;
         $this->user = $user;
+        $this->attendanceService = $attendanceService;
+        $this->teacherAttendanceService = $teacherAttendanceService;
+        $this->courseService = $courseService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = User::where("name","ilike","%{$request->input('search')}%")
+            ->where('school_id', Auth::user()->school_id)
+            ->where('role', '!=', 'admin')
+            ->get();
+//        return $users;
+        return view('search.search-list', compact('users'));
+    }
+
+    public function search($id)
+    {
+        $user = User::findOrFail($id);
+        $user_info = '';
+        $present=0;
+        $absent=0;
+        $escaped=0;
+        if ($user->role == 'student')
+        {
+            $section = $user->section;
+            $student_id = $user->id;
+            $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
+            if (!empty($attCount)) {
+                foreach ($attCount as $att) {
+                    $total =  $att->total_present + $att->total_absent + $att->total_escaped;
+                    if ($total > 0)
+                    {
+                        $present = number_format(($att->total_present * 100) / $total, 2);
+                        $absent = number_format(($att->total_absent * 100) / $total, 2);
+                        $escaped = number_format(($att->total_escaped * 100) / $total, 2);
+                    }
+                }
+            }
+            $courses = Course::with(['section', 'teacher'])
+                ->where('section_id', $user->section_id)
+                ->get();
+            return view('search.search-result', compact('user', 'user_info', 'section', 'present', 'absent', 'escaped', 'courses'));
+        } else {
+            $present = 0;
+            $absent= 0;
+            $total= 0;
+            $courses = 0;
+            $attCount = $this->teacherAttendanceService->getAllAttendanceByStuffId($user->id);
+            if ($attCount) {
+                foreach ($attCount as $att) {
+                    $total =  $att->total_present + $att->total_absent;
+                    $present = number_format(($att->total_present * 100) / $total, 2);
+                    $absent = number_format(($att->total_absent * 100) / $total, 2);
+                }
+                if ($user->role == 'teacher')
+                {
+                    $courses = $this->courseService->getCoursesByTeacherId($user->id);
+                }
+//                return $courses;
+            }
+            return view('search.other-role', compact('user', 'present', 'absent', 'courses'));
+        }
+    }
+
+    public function findUser(Request $request)
+    {
+        $data = User::where("name","ilike","%{$request->input('query')}%")
+            ->where('school_id', Auth::user()->school_id)
+            ->where('role', '!=', 'admin')
+            ->get();
+        return response()->json($data);
     }
 
     /**

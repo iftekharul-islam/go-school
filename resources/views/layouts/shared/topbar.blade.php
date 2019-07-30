@@ -1,3 +1,8 @@
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
+<!-- JS -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+
 <div class="navbar navbar-expand-md header-menu-one bg-light">
     <div class="nav-bar-header-one">
         <div class="header-logo">
@@ -35,13 +40,16 @@
         <ul class="navbar-nav">
             <li class="navbar-item header-search-bar">
                 <div class="input-group stylish-input-group">
-                    @if(\Auth::check())
+                    @if(\Auth::check() && \Auth::user()->role === 'admin')
                         <span class="input-group-addon">
                                 <button type="submit">
                                     <span class="flaticon-search" aria-hidden="true"></span>
                                 </button>
                             </span>
-                        <input type="text" class="form-control" placeholder="Find Something . . .">
+                        <form action="{{ url('admin/search-user/') }}" method="get">
+                            {{ csrf_field() }}
+                            <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Find Something . . .">
+                        </form>
                     @endif
                 </div>
             </li>
@@ -164,3 +172,13 @@
         </ul>
     </div>
 </div>
+<script>
+    var path = "{{ url('admin/find-user/{query}') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+            return $.get(path + $('#search').val(), {}, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>

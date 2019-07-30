@@ -52,7 +52,7 @@ class TeacherAttendanceService {
     public function getTeacherTotalAttendance()
     {
         return DB::table('stuff_attendances')
-            ->select('stuff_id', \DB::raw('
+            ->select('stuff_id', DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
             ))

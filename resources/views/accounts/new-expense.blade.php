@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="col-12 form-group mg-t-8">
-                            <button type="submit" class="button button--save float-left"><b>Save</b></button>
+                            <button type="submit" class="button button--save float-right"><b>Save</b></button>
                         </div>
                     </form>
                 </div>

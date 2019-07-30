@@ -24,17 +24,11 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="heading-layout1">
-                <div class="item-title">
-{{--                    <a class="float-left" href="{{ url()->previous() }}"><h4 style="color: #fea801; margin-left: 8px;">Back</h4></a>--}}
-{{--                    <h3>Add New Book</h3>--}}
-                </div>
-            </div>
             <form class="new-added-form justify-content-md-center" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book/store') }}" method="POST">
                 {{ csrf_field() }}
                 @include('library.books.form')
                 <div class="col-12 form-group mt-5">
-                    <button type="submit" class="button button--save float-left"><b>Save</b></button>
+                    <button type="submit" class="button button--save float-right">Save</button>
                 </div>
             </form>
         </div>
