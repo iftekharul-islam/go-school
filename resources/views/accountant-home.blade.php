@@ -106,7 +106,7 @@
                                             <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
                                         </div>
                                         <div class="col-4">
-                                            <div class="post-date bg-skyblue">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
+                                            <div class="">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
                                         </div>
                                     </div>
                                 </div>

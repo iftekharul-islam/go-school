@@ -39,7 +39,7 @@
                         @endif
                     </div>
                     <div class="table table-responsive mt-4">
-                        <table class="table display text-nowrap">
+                        <table class="table table-bordered display text-nowrap">
                             <thead>
                             <tr>
                                 <th>SL.</th>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-data-div display text-nowrap">
+                        <table class="table table-bordered table-data-div display text-nowrap">
                             <thead>
                             <tr>
                                 <th>SL.</th>

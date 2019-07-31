@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table display table-data-div text-wrap">
+                    <table class="table display table-bordered table-data-div text-wrap">
                         <thead>
                         <tr>
                             <th>Sl.</th>

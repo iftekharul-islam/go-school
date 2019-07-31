@@ -14,7 +14,7 @@
             <a href="{{ url($x.'/home') }}">
 
                 <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
-                 <h4 class="heading-logo float-right">shoroborno</h4>
+                 <h5 class="heading-logo float-right">shoroborno</h5>
             </a>
             @endif
         </div>

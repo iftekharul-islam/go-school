@@ -27,8 +27,8 @@
                     <form class="form-horizontal" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-income')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 mt-5">Sector Name</label>
                             <div class="col-md-12">
+                                <label for="name" class="mt-5">Sector Name</label>
                                 <select class="select2" id="name" name="name">
                                     @foreach($sectors as $sector)
                                         <option>{{$sector->name}}</option>
@@ -44,9 +44,9 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                            <label for="amount" class="col-md-4">Amount</label>
-
                             <div class="col-md-12">
+
+                                <label for="amount">Amount</label>
                                 <input id="amount" type="number" class="form-control" name="amount" value="{{ old('amount') }}" placeholder="Amount" required>
 
                                 @if ($errors->has('amount'))
@@ -58,9 +58,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
-                            <label for="month" class="col-md-4">Income For Month</label>
-
                             <div class="col-md-12">
+
+                                <label for="month">Income For Month</label>
+
                                 <input data-date-format="yyyy-mm-dd" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
                                 @if ($errors->has('month'))
                                     <span class="help-block">
@@ -69,11 +70,9 @@
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4">Description</label>
-
                             <div class="col-md-12">
+                                <label for="description">Description</label>
                                 <textarea rows="3" id="description" class="form-control" name="description" placeholder="Description" required>{{ old('description') }}</textarea>
 
                                 @if ($errors->has('description'))

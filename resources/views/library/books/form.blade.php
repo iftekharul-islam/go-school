@@ -1,9 +1,9 @@
 <div class="row mb-2 mt-5">
-    <div class="col-md-6">
+    <div class="col-md-12 col-lg-6">
         <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-            <label for="about" class="col-md-4 control-label">About Book</label>
 
-            <div class="col-md-12">
+            <div class="">
+                <label for="about" class="control-label">About Book<label class="text-danger">*</label></label>
                 <textarea rows="3" id="about" type="text" class="form-control" name="about" value="{{ old('about') }}" placeholder="About Book" required></textarea>
 
                 @if ($errors->has('about'))
@@ -14,11 +14,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12 col-lg-6">
         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-            <label for="title" class="col-md-4 control-label">Book Title</label>
-
-            <div class="col-md-12">
+            <div class="">
+                <label for="title" class="control-label">Book Title<label class="text-danger">*</label></label>
                 <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Book Title" required>
 
                 @if ($errors->has('title'))
@@ -34,9 +33,8 @@
 <div class="row mb-2">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-            <label for="type" class="col-md-4 control-label">Book Type</label>
-
-            <div class="col-md-12">
+            <div class="">
+                <label for="type" class="control-label">Book Type<label class="text-danger">*</label></label>
                 <select id="type" class="select2 book-type" name="type">
                     <option value="" disabled selected>Select Book Type</option>
                     <option value="Academic">Academic</option>
@@ -55,9 +53,8 @@
     </div>
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('book_code') ? ' has-error' : '' }}">
-            <label for="book_code" class="col-md-4 control-label">Book Code</label>
-
-            <div class="col-md-12">
+            <div class="">
+                <label for="book_code" class="control-label">Book Code<label class="text-danger">*</label></label>
                 <input id="book_code" type="text" class="form-control" name="book_code" value="{{ old('book_code') }}" placeholder="Book Code" required>
 
                 @if ($errors->has('book_code'))
@@ -73,9 +70,9 @@
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('author') ? ' has-error' : '' }}">
-            <label for="author" class="col-md-4 control-label">Book Author</label>
+            <div class="">
+                <label for="author" class="control-label">Book Author<label class="text-danger">*</label></label>
 
-            <div class="col-md-12">
                 <input id="author" type="text" class="form-control" name="author" value="{{ old('author') }}" placeholder="Book Author" required>
 
                 @if ($errors->has('author'))
@@ -88,9 +85,8 @@
     </div>
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-            <label for="price" class="col-md-4 control-label">Book Price</label>
-
-            <div class="col-md-12">
+            <div class="">
+                <label for="price" class=" control-label">Book Price<label class="text-danger">*</label></label>
                 <input id="price" type="number" class="form-control" name="price" value="{{ old('price') }}" placeholder="Book Price" required>
 
                 @if ($errors->has('price'))
@@ -106,9 +102,10 @@
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
-            <label for="quantity" class="col-md-4 control-label">Book Quantity</label>
 
-            <div class="col-md-12">
+
+            <div class="">
+                <label for="quantity" class="control-label">Book Quantity<label class="text-danger">*</label></label>
                 <input id="quantity" type="number" class="form-control" name="quantity" value="{{ old('quantity') }}" placeholder="Book Quantity" required>
 
                 @if ($errors->has('quantity'))
@@ -121,9 +118,9 @@
     </div>
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('rackNo') ? ' has-error' : '' }}">
-            <label for="rackNo" class="col-md-4 control-label">Book Rack Number</label>
 
-            <div class="col-md-12">
+            <div class="">
+                <label for="rackNo" class=" control-label">Book Rack Number<label class="text-danger">*</label></label>
                 <input id="rackNo" type="number" class="form-control" name="rackNo" value="{{ old('rackNo') }}" placeholder="Book Rack Number" required>
 
                 @if ($errors->has('rackNo'))
@@ -139,9 +136,10 @@
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('rowNo') ? ' has-error' : '' }}">
-            <label for="rowNo" class="col-md-4 control-label">Book Row Number</label>
 
-            <div class="col-md-12">
+
+            <div class="">
+                <label for="rowNo" class="control-label">Book Row Number<label class="text-danger">*</label></label>
                 <input id="rowNo" type="number" class="form-control" name="rowNo" value="{{ old('rowNo') }}" placeholder="Book Row Number" required>
 
                 @if ($errors->has('rowNo'))
@@ -154,9 +152,8 @@
     </div>
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
-            <label for="img_path" class="col-md-4 control-label">Book Image URL</label>
-
-            <div class="col-md-12">
+            <div class="">
+                <label for="img_path" class="control-label">Book Image URL<label class="text-danger">*</label></label>
                 <input id="img_path" type="text" class="form-control" name="img_path" value="{{ old('img_path') }}" placeholder="Book Image Url" required>
 
                 @if ($errors->has('img_path'))
@@ -171,7 +168,7 @@
 
 <div class="row mt-4">
     <div class="col-md-6 form-group for-class" style="display: none;">
-        <div class="col-md-12">
+        <div class="">
             <label>For Class</label>
             <select class="select2 for-class" id="for_class" name="class_id">
                 @foreach($classes as $class)

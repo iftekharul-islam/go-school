@@ -147,7 +147,6 @@ Route::middleware(['auth'])->group(function (){
         Route::post('grades/save-grade','GradeController@update');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::post('message/students', 'NotificationController@store');
-        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
     });
 
 // Admin role routes
