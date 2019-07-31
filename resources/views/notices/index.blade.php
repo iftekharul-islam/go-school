@@ -27,10 +27,19 @@
                     <div class="notice-board-wrap">
                         @foreach($notices as $notice)
                             <div class="notice-list">
-                                <div class="post-date bg-skyblue" style="display: inline-block;">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
-                                <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
-                                    <a href="{{ url($notice->file_path) }}"> {{$notice->title}} </a>
-                                </h6>
+                                <div class="row">
+                                    <div class="col-9">
+
+                                        <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
+                                            <a href="{{ url($notice->file_path) }}"> {{$notice->title}} </a>
+                                        </h6>
+                                    </div>
+                                    <div class="col-3">
+
+                                        <div  style="display: inline-block;">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
+                                    </div>
+
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -48,10 +57,18 @@
                     <div class="notice-board-wrap">
                         @foreach($events as $event)
                             <div class="notice-list">
-                                <div class="post-date bg-skyblue" style="display: inline-block;">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
-                                <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
-                                    <a href="{{ url($event->file_path) }}"> {{$event->title}} </a>
-                                </h6>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
+                                            <a href="{{ url($event->file_path) }}"> {{$event->title}} </a>
+                                        </h6>
+                                    </div>
+                                    <div class="col-3">
+
+                                        <div class="" style="display: inline-block;">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
+                                    </div>
+                                </div>
+
                             </div>
                         @endforeach
                     </div>

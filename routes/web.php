@@ -11,7 +11,7 @@
 |
 */
 
-\Debugbar::enable();
+//\Debugbar::enable();
 
 Route::get('/', function () {
     return view('welcome');
