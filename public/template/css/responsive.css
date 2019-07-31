@@ -1,0 +1,26 @@
+@media only screen and (max-width : 320px){
+    .header__text-box {
+        width: 300px;
+        margin-top: 10%;
+    }
+    .button--login {
+        left: 25%;
+    }
+    .form__label {
+        margin-left: 2.8rem;
+    }
+}
+@media only screen and (min-width : 321px) and (max-width: 500px){
+    .header__text-box {
+        width: 340px;
+    }
+    .form__radio-button {
+        text-align: center;
+    }
+    .button--login {
+        left: 28%;
+    }
+    .form__label {
+        margin-left: 3rem;
+    }
+}

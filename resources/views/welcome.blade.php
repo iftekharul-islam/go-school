@@ -11,6 +11,7 @@
 
 {{--    <link rel="stylesheet" href="css/icon-font.css">--}}
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 
 </head>
 
@@ -41,7 +42,7 @@
                                         <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
                                             <input type="email" class="form__input" placeholder="Email address" id="email" name="email" value="{{ old('email') }}" required>
                                             <label for="email" class="form__label">Email Address</label>
-                                            @if ($errors->has('email'))
+                                        @if ($errors->has('email'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
                                             </span>
@@ -53,7 +54,7 @@
                                         <div class="col-lg-12 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                             <input type="password" name="password" class="form__input" placeholder="Password" required>
                                             <label for="name" class="form__label">Password</label>
-                                            @if ($errors->has('password'))
+                                        @if ($errors->has('password'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
@@ -62,7 +63,6 @@
                                     </div>
 
                                     <div class="form__group">
-
                                         <div class="form__radio-group">
                                             <input type="checkbox" checked="checked" type="radio"
                                                    class="form__radio-input" id="small" name="size">

@@ -14,14 +14,15 @@
     z-index: 1;
   }
   .dropdown-content a {
-    color: black;
+    color: #646464;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
   .dropdown-content p {
     margin: auto;
-    color: black;
+      font-weight: 400 !important;
+    color: #646464;
     padding: 8px;
     text-decoration: none;
     display: block;
