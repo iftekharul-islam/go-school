@@ -25,13 +25,14 @@
             </div>
         @endif
         <div class="row mb-5">
-            <div class="col-md-6">
+            <div class="col-md-12 ">
                 <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/list-income')}}" method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
-                            <label for="year" class="col-md-12">Year</label>
-                            <div class="col-md-12">
+
+                            <div class="col-md-6">
+                                <label for="year">Year</label>
                                 <select class="select2 select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true" name="year">
                                     <option value="">Please Select Year</option>
                                     <option value="2019">2019</option>
@@ -49,8 +50,8 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
-                            <label for="year" class="col-md-12">Month</label>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label for="year">Month</label>
                                 <select class="select2 select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true" name="month">
                                     <option value="">Please Select Month</option>
                                     <option value="01">January</option>

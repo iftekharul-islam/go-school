@@ -21,17 +21,17 @@
                 <div class="card-body">
                     @foreach($attendances as $att)
                         <div class="row">
-                            <div class="col">
+                            <div class="col-lg-3 col-xs-6 col-sm-6">
                                 <h5 class="text-teal"><strong><i class="fas fa-id-card-alt mr-2"></i>Name: </strong>{{ $att->student->name }}</h5>
                             </div>
-                            <div class="col">
+                            <div class="col-lg-3 col-xs-6 col-sm-6">
                                 <h5 class="text-teal"><strong><i class="fas fa-sliders-h mr-2"></i>Student ID: </strong>{{ $att->student->student_code }}</h5>
                             </div>
-                            <div class="col">
-                                <h5 class="text-teal"><strong><i class="fas fa-users mr-2"></i>Class: </strong>{{ $att->section->class->class_number }}</h5>
+                            <div class="col-lg-3 col-xs-6 col-sm-6">
+                                <h5 class="text-teal"><strong> <i class="fas fa-building mr-2"></i>Class: </strong>{{ $att->section->class->class_number }}</h5>
                             </div>
-                            <div class="col">
-                                <h5 class="text-teal"><strong><i class="fas fa-border-style mr-2"></i>Section: </strong>{{ $att->section->section_number }}</h5>
+                            <div class="col-lg-3 col-xs-6 col-sm-6">
+                                <h5 class="text-teal"><strong><i class="fas fa-sliders-h mr-2"></i>Section: </strong>{{ $att->section->section_number }}</h5>
                             </div>
                         </div>
                         @break
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="row information">
-                <div class="col-3">
+                <div class="col-6 col-lg-3 col-xs-6 col-sm-6">
                     <div class="dashboard-summery-two">
                         <div class="item-icon bg-light-blue-transparent">
                             <i class="fas fa-building text-light"></i>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-lg-3 col-sm-6 col-xs-6">
                     <div class="dashboard-summery-two">
                         <div class="item-icon bg-light-teal-transparent">
                             <i class="fas fa-clipboard-check text-light"></i>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-6 col-lg-3 col-sm-6 col-xs-6">
                     <div class="dashboard-summery-two">
                         <div class="item-icon bg-light-red-transparent">
                             <i class="far fa-times-circle text-light"></i>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-lg-3 col-sm-6 col-6">
                     <div class="dashboard-summery-two">
                         <div class="item-icon bg-light-yellow-transparent">
                             <i class="fas fa-sign-out-alt text-light"></i>

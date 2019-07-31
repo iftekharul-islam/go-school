@@ -24,7 +24,7 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <form class="new-added-form justify-content-md-center" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book/store') }}" method="POST">
+            <form class="new-added-form justify-content-md-center aesteric" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book/store') }}" method="POST">
                 {{ csrf_field() }}
                 @include('library.books.form')
                 <div class="col-12 form-group mt-5">

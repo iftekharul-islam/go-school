@@ -17,7 +17,7 @@
         </ul>
     </div>
    <div class="row">
-       <div class="col-8">
+       <div class="col-12">
            <div class="card height-auto false-height">
                <div class="card-body">
                    @if(count($dpts) > 0)

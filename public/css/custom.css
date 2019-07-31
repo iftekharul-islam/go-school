@@ -145,3 +145,13 @@
 .aesteric .text-danger {
     margin-left: 2px!important;
 }
+.dataTables_wrapper .table thead .sorting:after {
+    display: none;
+}
+.dataTables_wrapper .table thead .sorting:before {
+    display: none;
+}
+
+.dataTables_wrapper .table thead .sorting_asc:after {
+    display: none;
+}

@@ -1784,8 +1784,8 @@ card-sub-header:first-child {
 
 .header-logo img {
   color: #fff;
-  height: 55px;
-  width: 50px;
+  height: auto;
+  width: 45px;
 }
 
 #elementID {

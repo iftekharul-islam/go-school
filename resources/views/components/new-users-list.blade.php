@@ -57,7 +57,6 @@
                     <th scope="col">#</th>
                     <th>Code</th>
                     <th>Full Name</th>
-                    <th>Email</th>
                     @foreach ($users as $user)
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
@@ -89,7 +88,7 @@
                     @if(Auth::user()->role == 'admin')
                         @if (!Session::has('section-attendance'))
                             @if($user->role != 'student')
-                                <th>View Attendance</th>
+                                <th>Attendance</th>
                             @endif
                             <th>Action</th>
                         @endif
@@ -103,9 +102,6 @@
                         <td>{{$user->student_code}}</td>
                         <td>
                             <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
-                        </td>
-                        <td>
-                            {{$user->email}}
                         </td>
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
@@ -134,13 +130,13 @@
                             @endif
                         @endif
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role == 'student')<td><a class="btn-link text-teal" role="button" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}">View Attendance</a></td>@endif
+                            @if($user->role == 'student')<td><a class="btn-link text-teal" role="button" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}">View</a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
                                 @if($user->role != 'student')
                                     <td>
-                                        <a href="{{ url('admin/staff/attendance/'.$user->id) }}" class="btn-link text-teal">View Attendance</a>
+                                        <a href="{{ url('admin/staff/attendance/'.$user->id) }}" class="btn-link text-teal">View</a>
                                     </td>
                                 @endif
                                 <td>

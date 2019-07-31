@@ -92,9 +92,8 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                                                <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name <label class="text-danger">*</label></label>
-
                                                                 <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Full Name <label class="text-danger">*</label></label>
                                                                     <input id="name" type="text" class="form-control"
                                                                            name="name"
                                                                            value=""
@@ -110,9 +109,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                                                <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address <label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">E-Mail Address <label class="text-danger">*</label></label>
+
                                                                     <input id="email" type="email" class="form-control"
                                                                            name="email"
                                                                            value="" required>
@@ -129,9 +129,9 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                                                <label for="password" class="col-md-4 control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="password" class="control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
                                                                     <input id="password" type="password"
                                                                            class="form-control" name="password"
                                                                            required>
@@ -146,10 +146,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group false-padding-bottom-form">
-                                                                <label for="password-confirm" class="col-md-4 control-label false-padding-bottom">Confirm
-                                                                    Password<label class="text-danger">*</label></label>
+
 
                                                                 <div class="col-md-12">
+                                                                    <label for="password-confirm" class=" control-label false-padding-bottom">Confirm
+                                                                        Password<label class="text-danger">*</label></label>
                                                                     <input id="password-confirm" type="password"
                                                                            class="form-control"
                                                                            name="password_confirmation"
@@ -161,9 +162,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                                                <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="phone_number" class=" control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
+
                                                                     <input id="phone_number" type="text"
                                                                            class="form-control" name="phone_number"
                                                                     >
@@ -178,9 +180,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                                                <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="blood_group" class="control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
+
                                                                     <select id="blood_group" class="form-control"
                                                                             name="blood_group">
                                                                         <option selected="selected">A+</option>
@@ -205,9 +208,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                                                <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="nationality" class="control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
+
                                                                     <input id="nationality" type="text"
                                                                            class="form-control" name="nationality"
                                                                            required>
@@ -222,9 +226,9 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                                                <label for="gender" class="col-md-4 control-label">Gender<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="gender" class="control-label">Gender<label class="text-danger">*</label></label>
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
                                                                         <option class="text-capitalize" value="male" selected="selected">Male</option>
@@ -241,8 +245,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label false-padding-bottom">Upload Profile Picture</label>
+
                                                         <div class="col-md-12">
+                                                            <label class="control-label false-padding-bottom">Upload Profile Picture</label>
                                                             <input type="file" id="picPath" name="pic_path">
                                                         </div>
                                                     </div>
@@ -262,12 +267,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                                                <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Full Name<label class="text-danger">*</label></label>
                                                                     <input id="name" type="text" class="form-control"
                                                                            name="name"
-                                                                           value=""
                                                                            required>
 
                                                                     @if ($errors->has('name'))
@@ -280,9 +284,9 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                                                <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address<label class="text-danger">*</label></label>
-
                                                                 <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">E-Mail Address<label class="text-danger">*</label></label>
+
                                                                     <input id="email" type="email" class="form-control"
                                                                            name="email"
                                                                            required>
@@ -299,9 +303,9 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                                                <label for="password" class="col-md-4 control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
-
                                                                 <div class="col-md-12">
+                                                                    <label for="password" class="control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
+
                                                                     <input id="password" type="password"
                                                                            class="form-control" name="password"
                                                                            required>
@@ -316,10 +320,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group">
-                                                                <label for="password-confirm" class="col-md-4 control-label false-padding-bottom">Confirm
-                                                                    Password<label class="text-danger">*</label></label>
-
                                                                 <div class="col-md-12">
+                                                                    <label for="password-confirm" class="control-label false-padding-bottom">Confirm
+                                                                        Password<label class="text-danger">*</label></label>
+
                                                                     <input id="password-confirm" type="password"
                                                                            class="form-control"
                                                                            name="password_confirmation"
@@ -331,9 +335,9 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                                                <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="phone_number" class="control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
                                                                     <input id="phone_number" type="text"
                                                                            class="form-control" name="phone_number"
                                                                            value="">
@@ -348,9 +352,9 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                                                <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
-
                                                                 <div class="col-md-12">
+                                                                    <label for="blood_group" class="control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
+
                                                                     <select id="blood_group" class="form-control"
                                                                             name="blood_group">
                                                                         <option selected="selected">A+</option>
@@ -375,9 +379,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                                                <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="nationality" class="control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
+
                                                                     <input id="nationality" type="text"
                                                                            class="form-control" name="nationality"
                                                                            value=""
@@ -393,9 +398,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                                                <label for="gender" class="col-md-4 control-label false-padding-bottom">Gender<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="gender" class="control-label false-padding-bottom">Gender<label class="text-danger">*</label></label>
+
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
                                                                         <option class="text-capitalize" value="male" selected="selected">Male</option>
@@ -412,9 +418,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label">Upload Profile
-                                                            Picture</label>
+
                                                         <div class="col-md-12">
+                                                            <label class="control-label">Upload Profile
+                                                                Picture</label>
                                                             <input type="file" id="picPath" name="pic_path">
                                                         </div>
                                                     </div>
@@ -437,9 +444,9 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                                                <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Full Name<label class="text-danger">*</label></label>
                                                                     <input id="na   me" type="text" class="form-control"
                                                                            name="name" value="" required>
 
@@ -451,9 +458,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                                                <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">E-Mail Address<label class="text-danger">*</label></label>
+
                                                                     <input id="email" type="email" class="form-control"
                                                                            name="email" value="{{ old('email') }}"
                                                                            required>
@@ -468,9 +476,9 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                                                <label for="password" class="col-md-4 control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="password" class="control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
                                                                     <input id="password" type="password"
                                                                            class="form-control" name="password"
                                                                            required>
@@ -483,9 +491,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group">
-                                                                <label for="password-confirm" class="col-md-4 control-label false-padding-bottom">Confirm Password<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="password-confirm" class="control-label false-padding-bottom">Confirm Password<label class="text-danger">*</label></label>
+
                                                                     <input id="password-confirm" type="password"
                                                                            class="form-control"
                                                                            name="password_confirmation" required>
@@ -496,9 +505,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('section') ? ' has-error' : '' }}">
-                                                                <label for="section" class="col-md-4 control-label false-padding-bottom">Class and Section<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="section" class="control-label false-padding-bottom">Class and Section<label class="text-danger">*</label></label>
+
                                                                     <select id="section" class="form-control"
                                                                             name="section" required>
                                                                         @foreach ($studentSections as $section)
@@ -517,9 +527,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                                                <label for="birthday" class="col-md-4 control-label false-padding-bottom">Birthday<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="birthday" class="control-label false-padding-bottom">Birthday<label class="text-danger">*</label></label>
+
                                                                     <input data-date-format="yyyy-mm-dd" id="birthday" class="form-control date" name="birthday" value="{{ old('birthday') }}" placeholder="Birthday" required autocomplete="off">
 
                                                                     @if ($errors->has('birthday'))
@@ -532,9 +543,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                                                <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="phone_number" class="control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
+
                                                                     <input id="phone_number" type="text"
                                                                            class="form-control" name="phone_number"
                                                                            value="{{ old('phone_number') }}">
@@ -547,9 +559,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                                                <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="blood_group" class=" control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
+
                                                                     <select id="blood_group" class="form-control"
                                                                             name="blood_group">
                                                                         <option selected="selected">A+</option>
@@ -572,9 +585,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                                                <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="nationality" class=" control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
+
                                                                     <input id="nationality" type="text"
                                                                            class="form-control" name="nationality"
                                                                            value=""
@@ -590,9 +604,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                                                <label for="gender" class="col-md-4 control-label false-padding-bottom">Gender</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="gender" class="control-label false-padding-bottom">Gender</label>
+
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
                                                                         <option class="text-capitalize" value="male" selected="selected">Male</option>
@@ -611,9 +626,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('version') ? ' has-error' : '' }}">
-                                                                <label for="version" class="col-md-4 control-label false-padding-bottom">Version<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="version" class="control-label false-padding-bottom">Version<label class="text-danger">*</label></label>
+
                                                                     <select id="version" class="form-control"
                                                                             name="version">
                                                                         <option selected="selected">Bangla</option>
@@ -630,9 +646,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-                                                                <label for="session" class="col-md-4 control-label false-padding-bottom">Session<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="session" class="control-label false-padding-bottom">Session<label class="text-danger">*</label></label>
+
                                                                     <input id="session" type="text" class="form-control"
                                                                            name="session"
                                                                            value=""
@@ -650,9 +667,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
-                                                                <label for="group" class="col-md-4 control-label false-padding-bottom">Group (Optional)</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="group" class=" control-label false-padding-bottom">Group (Optional)</label>
+
                                                                     <input id="group" type="text" class="form-control"
                                                                            name="group"
                                                                            value="{{ old('group') }}"
@@ -668,9 +686,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
-                                                                <label for="religion" class="col-md-4 control-label false-padding-bottom">Religion<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="religion" class=" control-label false-padding-bottom">Religion<label class="text-danger">*</label></label>
+
                                                                     <select id="religion" class="form-control"
                                                                             name="religion">
                                                                         <option selected="selected">Islam</option>
@@ -692,9 +711,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                                                <label for="address" class="col-md-4 control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="address" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+
                                                                     <input id="address" type="text" class="form-control"
                                                                            name="address"
                                                                            value=""
@@ -710,11 +730,12 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                                                                <label for="about" class="col-md-4 control-label false-padding-bottom">About</label>
 
                                                                 <div class="col-md-12">
-                                            <textarea id="about" class="form-control"
-                                                      name="about">{{ old('about') }}</textarea>
+                                                                    <label for="about" class=" control-label false-padding-bottom">About</label>
+
+                                                                    <textarea id="about" class="form-control"
+                                                                              name="about">{{ old('about') }}</textarea>
 
                                                                     @if ($errors->has('about'))
                                                                         <span class="help-block">
@@ -729,9 +750,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
-                                                                <label for="father_name" class="col-md-4 control-label false-padding-bottom">Father's Name<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="father_name" class=" control-label false-padding-bottom">Father's Name<label class="text-danger">*</label></label>
+
                                                                     <input id="father_name" type="text"
                                                                            class="form-control" name="father_name"
                                                                            value=""
@@ -747,10 +769,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
-                                                                <label for="father_phone_number" class="col-md-4 control-label false-padding-bottom">Father's Phone
-                                                                    Number<label class="text-danger">*</label></label>
+
 
                                                                 <div class="col-md-12">
+                                                                    <label for="father_phone_number" class="control-label false-padding-bottom">Father's Phone
+                                                                        Number<label class="text-danger">*</label></label>
                                                                     <input id="father_phone_number" type="text"
                                                                            class="form-control"
                                                                            name="father_phone_number"
@@ -768,10 +791,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
-                                                                <label for="father_national_id" class="col-md-4 control-label false-padding-bottom">Father's National
-                                                                    ID<label class="text-danger">*</label></label>
+
 
                                                                 <div class="col-md-12">
+                                                                    <label for="father_national_id" class="control-label false-padding-bottom">Father's National
+                                                                        ID<label class="text-danger">*</label></label>
                                                                     <input id="father_national_id" type="text"
                                                                            class="form-control"
                                                                            name="father_national_id"
@@ -787,10 +811,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
-                                                                <label for="father_occupation" class="col-md-4 control-label false-padding-bottom">Father's
-                                                                    Occupation</label>
+
 
                                                                 <div class="col-md-12">
+                                                                    <label for="father_occupation" class=" control-label false-padding-bottom">Father's
+                                                                        Occupation</label>
                                                                     <input id="father_occupation" type="text"
                                                                            class="form-control"
                                                                            name="father_occupation">
@@ -807,10 +832,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
-                                                                <label for="father_annual_income" class="col-md-4 control-label false-padding-bottom">Father's Annual
-                                                                    Income</label>
+
 
                                                                 <div class="col-md-12">
+                                                                    <label for="father_annual_income" class="control-label false-padding-bottom">Father's Annual
+                                                                        Income</label>
                                                                     <input id="father_annual_income" type="text"
                                                                            class="form-control"
                                                                            name="father_annual_income">
@@ -825,10 +851,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
-                                                                <label for="father_designation" class="col-md-4 control-label false-padding-bottom">Father's
-                                                                    Designation</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="father_designation" class=" control-label false-padding-bottom">Father's
+                                                                        Designation</label>
+
                                                                     <input id="father_designation" type="text"
                                                                            class="form-control"
                                                                            name="father_designation"
@@ -846,10 +873,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
-                                                                <label for="mother_phone_number" class="col-md-4 control-label false-padding-bottom">Mother's Phone
-                                                                    Number</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="mother_phone_number" class="control-label false-padding-bottom">Mother's Phone
+                                                                        Number</label>
+
                                                                     <input id="mother_phone_number" type="text"
                                                                            class="form-control"
                                                                            name="mother_phone_number"
@@ -865,9 +893,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
-                                                                <label for="mother_name" class="col-md-4 control-label false-padding-bottom">Mother's Name<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="mother_name" class=" control-label false-padding-bottom">Mother's Name<label class="text-danger">*</label></label>
+
                                                                     <input id="mother_name" type="text"
                                                                            class="form-control" name="mother_name"
                                                                            value=""
@@ -885,10 +914,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
-                                                                <label for="mother_occupation" class="col-md-4 control-label false-padding-bottom">Mother's
-                                                                    Occupation</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="mother_occupation" class="control-label false-padding-bottom">Mother's
+                                                                        Occupation</label>
+
                                                                     <input id="mother_occupation" type="text"
                                                                            class="form-control"
                                                                            name="mother_occupation"
@@ -904,10 +934,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
-                                                                <label for="mother_national_id" class="col-md-4 control-label false-padding-bottom">Mother's National
-                                                                    ID<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="mother_national_id" class=" control-label false-padding-bottom">Mother's National
+                                                                        ID<label class="text-danger">*</label></label>
+
                                                                     <input id="mother_national_id" required type="text"
                                                                            class="form-control"
                                                                            name="mother_national_id"
@@ -925,10 +956,11 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
-                                                                <label for="mother_designation" class="col-md-4 control-label false-padding-bottom">Mother's
-                                                                    Designation</label>
+
 
                                                                 <div class="col-md-12">
+                                                                    <label for="mother_designation" class="control-label false-padding-bottom">Mother's
+                                                                        Designation</label>
                                                                     <input id="mother_designation" type="text"
                                                                            class="form-control"
                                                                            name="mother_designation"
@@ -944,10 +976,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
-                                                                <label for="mother_annual_income" class="col-md-4 control-label false-padding-bottom">Mother's Annual
-                                                                    Income</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="mother_annual_income" class=" control-label false-padding-bottom">Mother's Annual
+                                                                        Income</label>
                                                                     <input id="mother_annual_income" type="text"
                                                                            class="form-control"
                                                                            name="mother_annual_income"
@@ -964,9 +996,10 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label">Upload Profile
-                                                            Picture</label>
+
                                                         <div class="col-md-12">
+                                                            <label class=" control-label">Upload Profile
+                                                                Picture</label>
                                                             <input type="file" id="picPath" name="student_pic">
                                                         </div>
                                                     </div>
@@ -987,9 +1020,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                                                <label for="name" class="col-md-4 control-label false-padding-bottom">Full Name<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Full Name<label class="text-danger">*</label></label>
+
                                                                     <input id="name" type="text" class="form-control"
                                                                            name="name"
                                                                            required>
@@ -1004,9 +1038,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                                                <label for="email" class="col-md-4 control-label false-padding-bottom">E-Mail Address<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">E-Mail Address<label class="text-danger">*</label></label>
+
                                                                     <input id="email" type="email" class="form-control"
                                                                            name="email"
                                                                            value="" required>
@@ -1023,9 +1058,9 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                                                <label for="password" class="col-md-4 control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="password" class="control-label false-padding-bottom">Password<label class="text-danger">*</label></label>
                                                                     <input id="password" type="password"
                                                                            class="form-control" name="password"
                                                                            required>
@@ -1040,10 +1075,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group">
-                                                                <label for="password-confirm" class="col-md-4 control-label false-padding-bottom">Confirm
-                                                                    Password<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="password-confirm" class=" control-label false-padding-bottom">Confirm
+                                                                        Password<label class="text-danger">*</label></label>
+
                                                                     <input id="password-confirm" type="password"
                                                                            class="form-control"
                                                                            name="password_confirmation"
@@ -1055,9 +1091,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                                                                <label for="department" class="col-md-4 control-label false-padding-bottom">Department<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="department" class=" control-label false-padding-bottom">Department<label class="text-danger">*</label></label>
+
                                                                     <select id="department" class="form-control"
                                                                             name="department_id" required>
                                                                         @if (count($teacherDepartments) > 0)
@@ -1077,9 +1114,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
-                                                                <label for="class_teacher" class="col-md-4 control-label false-padding-bottom">Class Teacher</label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="class_teacher" class=" control-label false-padding-bottom">Class Teacher</label>
+
                                                                     <select id="class_teacher" class="form-control"
                                                                             name="class_teacher_section_id">
                                                                         <option selected="selected" value="0">Not Class
@@ -1105,9 +1143,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                                                <label for="phone_number" class="col-md-4 control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="phone_number" class="control-label false-padding-bottom">Phone Number<label class="text-danger">*</label></label>
+
                                                                     <input id="phone_number" type="text"
                                                                            class="form-control" name="phone_number"
                                                                            value="">
@@ -1122,9 +1161,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                                                <label for="blood_group" class="col-md-4 control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="blood_group" class=" control-label false-padding-bottom">Blood Group<label class="text-danger">*</label></label>
+
                                                                     <select id="blood_group" class="form-control"
                                                                             name="blood_group">
                                                                         <option selected="selected">A+</option>
@@ -1149,9 +1189,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                                                <label for="nationality" class="col-md-4 control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="nationality" class="control-label false-padding-bottom">Nationality<label class="text-danger">*</label></label>
+
                                                                     <input id="nationality" type="text"
                                                                            class="form-control" name="nationality"
                                                                            value=""
@@ -1167,9 +1208,10 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                                                <label for="gender" class="col-md-4 control-label false-padding-bottom">Gender<label class="text-danger">*</label></label>
 
                                                                 <div class="col-md-12">
+                                                                    <label for="gender" class="control-label false-padding-bottom">Gender<label class="text-danger">*</label></label>
+
                                                                     <select id="gender" class="form-control"
                                                                             name="gender">
                                                                         <option class="text-capitalize" value="male" selected="selected">Male</option>
@@ -1186,9 +1228,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label">Upload Profile
-                                                            Picture</label>
+
                                                         <div class="col-md-12">
+                                                            <label class="control-label">Upload Profile
+                                                                Picture</label>
                                                             <input type="file" id="picPath" name="teacher_pic">
                                                         </div>
                                                     </div>

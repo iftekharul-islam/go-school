@@ -1,12 +1,12 @@
-<!-- <div class="heading-layout1">
-      <div class="item-title">
-        <h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>
-          @if ($user->role == 'teacher' && $user->section_id > 0)
-    <small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>
-          @endif
-        </h3>
-      </div>
-    </div> -->
+{{--<!-- <div class="heading-layout1">--}}
+      {{--<div class="item-title">--}}
+        {{--<h3>{{$user->name}} <span class="badge badge-danger">{{ucfirst($user->role)}}</span> <span class="badge badge-secondary ml-2">{{ucfirst($user->gender)}}</span>--}}
+          {{--@if ($user->role == 'teacher' && $user->section_id > 0)--}}
+    {{--<small class="ml-5">Class Teacher of Section: <span class="badge badge-primary">{{ucfirst($user->section->section_number)}}</span></small>--}}
+          {{--@endif--}}
+        {{--</h3>--}}
+      {{--</div>--}}
+    {{--</div> -->--}}
 <div class="single-info-details">
     <div class="row">
         <div class="col-md-4">
@@ -181,8 +181,8 @@
                                     </tr>
                                 </table>
                             </div>
-                            </div>
                         </div>
+                    </div>
                 @endif
                 @if($user->role == "teacher" || $user->role == "accountant" || $user->role == "librarian" || $user->role == "admin" )
 
@@ -233,31 +233,6 @@
                             </tbody>
                         </table>
                     </div>
-
-                    {{--                      <div class="table-responsive">--}}
-                    {{--                        <table class="table text-wrap">--}}
-                    {{--                          <tr>--}}
-                    {{--                            <td><b>Code:</b></td>--}}
-                    {{--                            <td>{{$user->student_code}}</td>--}}
-                    {{--                            <td><b>About:</b></td>--}}
-                    {{--                            <td>{{$user->about}}</td>--}}
-                    {{--                          </tr>--}}
-                    {{--                          <tr>--}}
-                    {{--                            <td><b>Nationality:</b></td>--}}
-                    {{--                            <td>{{$user->nationality}}</td>--}}
-                    {{--                            <td><b>Religion:</b></td>--}}
-                    {{--                            <td>{{$user->studentInfo['religion']}}</td>--}}
-                    {{--                          </tr>--}}
-
-                    {{--                          <tr>--}}
-                    {{--                            <td><b>Address:</b></td>--}}
-                    {{--                            <td>{{$user->address}}</td>--}}
-                    {{--                            <td><b>Phone Number:</b></td>--}}
-                    {{--                            <td>{{$user->phone_number}}</td>--}}
-
-                    {{--                          </tr>--}}
-                    {{--                        </table>--}}
-                    {{--                      </div>--}}
                 @endif
             </div>
         </div>

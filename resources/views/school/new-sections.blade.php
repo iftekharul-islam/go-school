@@ -23,7 +23,7 @@
                 @if(count($classes)> 0)
                     @foreach($classes as $class)
                         <?php $total_student = 0 ?>
-                        <div class="col-md-3">
+                        <div class="col-md-4 col-3 col-lg-3">
                             <div class="card-sub mb-5">
                                 <div>
                                     <h5 class="card-sub-header text-muted text-left">
