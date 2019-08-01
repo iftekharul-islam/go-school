@@ -140,7 +140,7 @@
                                                         <div class="dropdown-content"
                                                              aria-labelledby="dropdownMenuButton">
                                                             <p class="text-center text-muted font-weight-bold">
-                                                                No Info Available
+                                                                No Info Available!
                                                             </p>
                                                         </div>
                                                     </div>
