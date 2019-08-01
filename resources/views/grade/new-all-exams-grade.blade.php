@@ -33,7 +33,7 @@
                 <div class="row">
                     @foreach ($classes as $class)
                         <?php $total_student = 0 ?>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-4">
                             <div class="card-sub mb-5">
                                 <h5 class="card-sub-header text-muted text-left">
                                     <i style='font-size:24px;margin-left:-20px;' class='flaticon-books text-teal'></i>
