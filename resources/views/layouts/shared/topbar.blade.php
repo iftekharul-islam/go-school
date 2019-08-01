@@ -12,7 +12,6 @@
             @endphp
 
             <a href="{{ url($x.'/home') }}">
-
                 <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
                  <h5 class="heading-logo float-right">shoroborno</h5>
             </a>
@@ -57,6 +56,20 @@
         <ul class="navbar-nav">
             @guest
             @else
+                @if(Auth::user()->role === 'student')
+                    <li class="navbar-item header-message">
+                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" role="button" aria-expanded="false">
+                            <i class="far fa-envelope"></i>
+                            <div class="item-title d-md-none text-16 mg-l-10">Message</div>
+                            <?php
+                            $mc = \App\Notification::where('student_id',\Auth::user()->id)->where('active',1)->count();
+                            ?>
+                            @if($mc > 0)
+                                <span>{{$mc}}</span>
+                            @endif
+                        </a>
+                    </li>
+                @endif
                 <li class="navbar-item dropdown header-admin">
                     <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                        aria-expanded="false">
@@ -103,71 +116,58 @@
                         </div>
                     </div>
                 </li>
-                @if(Auth::user()->role === 'student')
-                    <li class="navbar-item header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" role="button" aria-expanded="false">
-                            <i class="far fa-envelope"></i>
-                            <div class="item-title d-md-none text-16 mg-l-10">Message</div>
-                            <?php
-                            $mc = \App\Notification::where('student_id',\Auth::user()->id)->where('active',1)->count();
-                            ?>
-                            @if($mc > 0)
-                                <span>{{$mc}}</span>
-                            @endif
-                        </a>
-                    </li>
-                @endif
-                <li class="navbar-item dropdown header-notification">
-                    <a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-expanded="false">
-                        <i class="far fa-bell"></i>
-                        <div class="item-title d-md-none text-16 mg-l-10">Notification</div>
-                        <span>8</span>
-                    </a>
 
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="item-header">
-                            <h6 class="item-title">03 Notifiacations</h6>
-                        </div>
-                        <div class="item-content">
-                            <div class="media">
-                                <div class="item-icon bg-skyblue">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div class="media-body space-sm">
-                                    <div class="post-title">Complete Today Task</div>
-                                    <span>1 Mins ago</span>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="item-icon bg-orange">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </div>
-                                <div class="media-body space-sm">
-                                    <div class="post-title">Director Metting</div>
-                                    <span>20 Mins ago</span>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="item-icon bg-violet-blue">
-                                    <i class="fas fa-cogs"></i>
-                                </div>
-                                <div class="media-body space-sm">
-                                    <div class="post-title">Update Password</div>
-                                    <span>45 Mins ago</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="navbar-item dropdown header-language">
-                    <a class="navbar-nav-link dropdown-toggle" href="#" role="button"
-                       data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Bangla</a>
-                        <a class="dropdown-item" href="#">English</a>
-                    </div>
-                </li>
+                {{--<li class="navbar-item dropdown header-notification">--}}
+                    {{--<a class="navbar-nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"--}}
+                       {{--aria-expanded="false">--}}
+                        {{--<i class="far fa-bell"></i>--}}
+                        {{--<div class="item-title d-md-none text-16 mg-l-10">Notification</div>--}}
+                        {{--<span>8</span>--}}
+                    {{--</a>--}}
+
+                    {{--<div class="dropdown-menu dropdown-menu-right">--}}
+                        {{--<div class="item-header">--}}
+                            {{--<h6 class="item-title">03 Notifiacations</h6>--}}
+                        {{--</div>--}}
+                        {{--<div class="item-content">--}}
+                            {{--<div class="media">--}}
+                                {{--<div class="item-icon bg-skyblue">--}}
+                                    {{--<i class="fas fa-check"></i>--}}
+                                {{--</div>--}}
+                                {{--<div class="media-body space-sm">--}}
+                                    {{--<div class="post-title">Complete Today Task</div>--}}
+                                    {{--<span>1 Mins ago</span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="media">--}}
+                                {{--<div class="item-icon bg-orange">--}}
+                                    {{--<i class="fas fa-calendar-alt"></i>--}}
+                                {{--</div>--}}
+                                {{--<div class="media-body space-sm">--}}
+                                    {{--<div class="post-title">Director Metting</div>--}}
+                                    {{--<span>20 Mins ago</span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="media">--}}
+                                {{--<div class="item-icon bg-violet-blue">--}}
+                                    {{--<i class="fas fa-cogs"></i>--}}
+                                {{--</div>--}}
+                                {{--<div class="media-body space-sm">--}}
+                                    {{--<div class="post-title">Update Password</div>--}}
+                                    {{--<span>45 Mins ago</span>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
+                {{--<li class="navbar-item dropdown header-language">--}}
+                    {{--<a class="navbar-nav-link dropdown-toggle" href="#" role="button"--}}
+                       {{--data-toggle="dropdown" aria-expanded="false"><i class="fas fa-globe-americas"></i>EN</a>--}}
+                    {{--<div class="dropdown-menu dropdown-menu-right">--}}
+                        {{--<a class="dropdown-item" href="#">Bangla</a>--}}
+                        {{--<a class="dropdown-item" href="#">English</a>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
             @endguest
         </ul>
     </div>
