@@ -21,12 +21,8 @@
                     </div>
                     <div class="student-info">
                         <div class="media  media-none--xs">
-                            <div class="row">
-                                <div class="col-12 ">
-                                    <div class="item-img offset-6 mt-5">
-                                        <img src="{{url($user->pic_path)}}" class=" text-center" alt="student">
-                                    </div>
-                                </div>
+                            <div class="item-img mt-5">
+                                <img src="{{url($user->pic_path)}}" class=" text-center" alt="student">
                             </div>
                         </div>
                         <p>{{ $user->about }}</p>

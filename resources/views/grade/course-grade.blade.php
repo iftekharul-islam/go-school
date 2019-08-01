@@ -43,8 +43,8 @@
                     @foreach ($grades as $grade)
                       <div class="page-panel-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
                         <b>Examination</b> -  {{ $exam->exam_name }}     <b>Term</b>   -   {{ $exam->term }}
-                        <button type="submit" class="button button--text text-center float-right">
-                          <i class="far fa-save mr-2"></i>Save Mark Distribution
+                        <button type="submit" class="button button--save text-center float-right">
+                          <i class="far fa-save mr-2"></i><b>Save Mark Distribution</b>
                         </button>
                       </div>
                       @break($loop->first)
@@ -182,8 +182,8 @@
                       @endforeach
                       <input type="hidden" name="exam_id" value="{{$exam->id}}">
                       <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
-                      <button type="submit" class="button button--text ml-3 float-right">
-                        Get Total Marks
+                      <button type="submit" class="button button--save ml-3 float-right">
+                        <b>Get Total Marks</b>
                       </button>
                     </form>
                   </div>

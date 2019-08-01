@@ -21,16 +21,12 @@
                     </div>
                     <div class="student-info">
                         <div class="media  media-none--xs">
-                            <div class="row">
-                                <div class="col-12 ">
-                                    <div class="item-img offset-8 mb-5">
-                                        @if(!empty($user->pic_path))
-                                            <img src="{{url($user->pic_path)}}" alt="student">
-                                        @else
-                                            <img src="{{ asset('template/img/user-default.png') }}" alt="user">
-                                        @endif
-                                    </div>
-                                </div>
+                            <div class="item-img mb-5">
+                                @if(!empty($user->pic_path))
+                                    <img src="{{url($user->pic_path)}}" alt="student">
+                                @else
+                                    <img src="{{ asset('template/img/user-default.png') }}" alt="user">
+                                @endif
                             </div>
                         </div>
                         <p>{{ $user->about }}</p>

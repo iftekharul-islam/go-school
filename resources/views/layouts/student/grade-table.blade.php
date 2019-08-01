@@ -15,7 +15,7 @@
   </thead>
   <tbody>
     @foreach ($grades as $grade)
-    @if($grade->exam->id == $exam->id)
+    @if($grade->exam_id == $exam->id)
     <tr id="heading{{($loop->index + 1)}}">
       <th scope="row">{{($loop->index + 1)}}</th>
       <td>{{$grade->course->course_name}}</td>
@@ -57,6 +57,7 @@
                 <th>Practical</th>
               @endif
                 <th>Total</th>
+                <th>Point</th>
             </tr>
           </thead>
           <tbody>
@@ -79,6 +80,7 @@
                 <td>{{$grade->practical}}</td>
               @endif
                 <td>{{$grade->marks}}</td>
+                <td>{{$grade->gpa}}</td>
             </tr>
           </tbody>
         </table>

@@ -30,18 +30,6 @@
             </div>
           </div>
 
-        {{--<div class="form-group false-padding-bottom-form">--}}
-          {{--<label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Select Grade System</label>--}}
-          {{--<div class="col-sm-10">--}}
-            {{--<select class="form-control" id="assignTeacher{{$section->id}}" name="grade_system">--}}
-              {{--<option value="0" selected disabled>Select Grade System</option>--}}
-              {{--@if($gradeSystems)--}}
-                  {{--<option value="{{$gradeSystems->grade_system_name}}" data-department="{{$gradeSystems->grade_system_name}}">{{$gs->grade_system_name}}</option>--}}
-              {{--@endif--}}
-            {{--</select>--}}
-          {{--</div>--}}
-        {{--</div>--}}
-
         <div class="form-group false-padding-bottom-form">
           <label for="course_type{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Course Type</label>
           <div class="col-sm-10">
@@ -61,7 +49,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="button button--save">Submit</button>
+            <button type="submit" class="button button--save float-right">Submit</button>
           </div>
         </div>
       </form>

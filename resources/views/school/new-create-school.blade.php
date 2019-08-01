@@ -244,10 +244,48 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                                                <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+                                                                    <input id="address" type="text" class="form-control"
+                                                                           name="address"
+                                                                           value=""
+                                                                           required>
+
+                                                                    @if ($errors->has('address'))
+                                                                        <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+
+                                                                <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">About<label class="text-danger">*</label></label>
+
+                                                                    <input id="about" type="text" class="form-control"
+                                                                           name="about"
+                                                                           value="" required>
+
+                                                                    @if ($errors->has('about'))
+                                                                        <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
 
                                                         <div class="col-md-12">
                                                             <label class="control-label false-padding-bottom">Upload Profile Picture</label>
+                                                            <br>
                                                             <input type="file" id="picPath" name="pic_path">
                                                         </div>
                                                     </div>
@@ -417,11 +455,48 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                                                <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+                                                                    <input id="address" type="text" class="form-control"
+                                                                           name="address"
+                                                                           value=""
+                                                                           required>
+
+                                                                    @if ($errors->has('address'))
+                                                                        <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+
+                                                                <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">About<label class="text-danger">*</label></label>
+
+                                                                    <input id="about" type="text" class="form-control"
+                                                                           name="about"
+                                                                           value="" required>
+
+                                                                    @if ($errors->has('about'))
+                                                                        <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
 
                                                         <div class="col-md-12">
-                                                            <label class="control-label">Upload Profile
-                                                                Picture</label>
+                                                            <label class="control-label">Upload Profile Picture</label>
+                                                            <br>
                                                             <input type="file" id="picPath" name="pic_path">
                                                         </div>
                                                     </div>
@@ -1227,11 +1302,48 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                                                <div class="col-md-12">
+                                                                    <label for="name" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+                                                                    <input id="address" type="text" class="form-control"
+                                                                           name="address"
+                                                                           value=""
+                                                                           required>
+
+                                                                    @if ($errors->has('address'))
+                                                                        <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+
+                                                                <div class="col-md-12">
+                                                                    <label for="email" class="control-label false-padding-bottom">About<label class="text-danger">*</label></label>
+
+                                                                    <input id="about" type="text" class="form-control"
+                                                                           name="about"
+                                                                           value="" required>
+
+                                                                    @if ($errors->has('about'))
+                                                                        <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
 
                                                         <div class="col-md-12">
-                                                            <label class="control-label">Upload Profile
-                                                                Picture</label>
+                                                            <label class="control-label">Upload Profile Picture</label>
+                                                            <br>
                                                             <input type="file" id="picPath" name="teacher_pic">
                                                         </div>
                                                     </div>
@@ -1310,7 +1422,7 @@
                                                                             @if($class->school_id == $school->id)
                                                                                 <div class="col-sm-3">
                                                                                     <button type="button"
-                                                                                            class="button button--text float-left"
+                                                                                            class="button button--save float-left"
                                                                                             data-toggle="modal"
                                                                                             data-target="#myModal{{$class->id}}"
                                                                                             style="margin-top: 5%;">
