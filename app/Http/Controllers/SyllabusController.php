@@ -7,6 +7,7 @@ use App\Http\Resources\SyllabusResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SyllabusController extends Controller
 {
@@ -58,8 +59,13 @@ class SyllabusController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'file_path' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+        ]);
         $tb = new Syllabus;
-        $tb->file_path = $request->file_path;
+        $tb->file_path =  $request->hasFile('file_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('file_path')) : null;
         $tb->title = $request->title;
         $tb->active = 1;
         $tb->school_id = \Auth::user()->school_id;

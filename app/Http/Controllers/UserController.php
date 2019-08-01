@@ -195,7 +195,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-            $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('student_pic'));
+            $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('student_pic')) : null;
             $password = $request->password;
             $tb = $this->userService->storeStudent($request, $path);
             $this->userService->storeStudentInfo($request, $tb);
@@ -231,7 +231,7 @@ class UserController extends Controller
      */
     public function storeTeacher(CreateTeacherRequest $request)
     {
-        $path = Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date("Y"), $request->file('teacher_pic'));
+        $path =  $request->hasFile('teacher_pic') ? Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date("Y"), $request->file('teacher_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
         try {
@@ -251,7 +251,7 @@ class UserController extends Controller
     public function storeAccountant(CreateAccountantRequest $request)
     {
 
-        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path'));
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'accountant', $path);
         try {
@@ -271,7 +271,7 @@ class UserController extends Controller
     public function storeLibrarian(CreateLibrarianRequest $request)
     {
 
-        $path = Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path'));
+        $path =$request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'librarian', $path);
         try {

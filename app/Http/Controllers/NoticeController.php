@@ -8,6 +8,8 @@ use App\Http\Resources\NoticeResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+
 class NoticeController extends Controller
 {
     /**
@@ -53,9 +55,13 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'file_path' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+        ]);
         $user = Auth::user();
         $tb = new Notice;
-        $tb->file_path = $request->file_path;
+        $tb->file_path = $request->hasFile('file_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('file_path')) : null;
         $tb->title = $request->title;
         $tb->active = 1;
         $tb->school_id = $user->school_id;
@@ -95,7 +101,7 @@ class NoticeController extends Controller
      */
     public function update($id)
     {
-        $tb = Notice::find($id);
+        $tb = Notice::findOrFail($id);
         $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
         $tb->save();
         return back()->with('status','Notice Updated');

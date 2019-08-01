@@ -39,7 +39,6 @@ Route::middleware(['auth'])->group(function (){
     Route::group(['prefix' => 'master', 'middleware' => 'master'], function() {
         Route::get('/home', 'MasterHomeController@index')->name('master.home');
         Route::get('register/admin/{id}', 'AdminController@create');
-
         Route::post('register/admin', 'AdminController@store');
         Route::get('activate-admin/{id}','AdminController@destroy');
         Route::post('create-school', 'SchoolController@store');
