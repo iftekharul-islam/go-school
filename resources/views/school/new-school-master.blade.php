@@ -16,19 +16,19 @@
         </ul>
     </div>
 
-    <div class="card height-auto false-height">
-        <div class="card-body">
+    <div class="height-auto false-height">
+        <div class="">
             <div class="row">
                 <!-- Summery Area Start Here -->
-                <div class="col-lg-3">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                     <div class="dashboard-summery-one">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-6 col-md-4">
                                 <div class="item-icon bg-light-teal">
                                     <i class="fas fa-user-graduate text-light"></i>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 col-md-8">
                                 <div class="item-content">
                                     <div class="item-title">Total Student</div>
                                     <div class="item-number"><span class="counter"
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
@@ -102,7 +102,7 @@
                     </div>
                 @endif
                 @if(\Auth::user()->role == 'master')
-                    <div class="card" style="width: 100%">
+                    <div class="card false-height ml-4" style="width: 98%">
                         <div class="col-12-xxxl col-xl-12">
                             <div class="account-settings-box">
                                 <div class="card-body">
@@ -147,19 +147,19 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-2 mt-5">
+                                        <div class="col-md-4 mt-5">
                                             <a class="button button--save" role="button"
                                                href="{{url('master/register/admin/'.$school->id)}}">
                                                 + Create Admin
                                             </a>
                                         </div>
-                                        <div class="col-md-2 mt-5">
+                                        <div class="col-md-4 mt-5">
                                             <a class="button button--save" role="button"
                                                href="{{url('master/school/admin-list/'.$school->id)}}">
                                                View Admins
                                             </a>
                                         </div>
-                                        <div class="col-md-1 mt-5">
+                                        <div class="col-md-4 mt-5">
                                             <button class="button button--cancel" type="button"
                                                     onclick="removeSchool({{ $school->id }})">Delete
                                             </button>

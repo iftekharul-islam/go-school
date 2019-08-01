@@ -56,8 +56,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Dashboard summery End Here -->
-            <!-- Students Chart End Here -->
             <div class="col-lg-6 col-4-xxxl col-xl-6">
                 <div class="card dashboard-card-three" style="min-height: 484px !important;">
                     <div class="card-body">
@@ -82,8 +80,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Students Chart End Here -->
-            <!-- Notice Board Start Here -->
             <div class="col-lg-6 col-4-xxxl col-xl-6">
                 <div class="card dashboard-card-six" style="min-height: 484px !important;">
                     <div class="card-body">
@@ -109,7 +105,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Notice Board End Here -->
         </div>
 
         @if(\Auth::user()->role == 'teacher')
@@ -127,13 +122,11 @@
                                     <table class="table section-student-data-table text-wrap" id="myStudent">
                                         <thead>
                                         <tr>
-                                            <th>Photo</th>
                                             <th>Name</th>
                                             <th>Version</th>
                                             <th>Section</th>
                                             <th>Class</th>
                                             <th>Phone</th>
-                                            <th>E-mail</th>
                                             <th>Attendance</th>
                                         </tr>
                                         </thead>
@@ -141,14 +134,12 @@
                                         @foreach($courses_student as $c)
                                             @foreach($c['section']['users'] as $user)
                                                 <tr>
-                                                    <td class="text-center"><img style="max-width: 50px;" src="{{ url($user->pic_path) }}" alt="student"></td>
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
                                                     <td>{{ ucfirst($user['section']['class_id']) }}</td>
                                                     <td>{{ ucfirst($user->phone_number) }}</td>
-                                                    <td>{{ ucfirst($user->email) }}</td>
-                                                    <td><small><a class="button button--text float-left" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View Attendance</a></small></td>
+                                                    <td><b><a class="btn-link text-teal" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View</a></b></td>
                                                 </tr>
                                             @endforeach
                                         @endforeach

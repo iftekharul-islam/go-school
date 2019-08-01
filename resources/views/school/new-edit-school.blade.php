@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-10 col-12">
             <div class="card height-auto false-height">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -38,7 +38,6 @@
                         <div class="col-md-12">
                             <form class="form-horizontal" method="POST" action="{{ url('master/school/edit', $school->id) }}">
                                 {{ csrf_field() }}
-{{--                                {{ method_field('POST' }}--}}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
                                     <label for="school_name" class="control-label">School Name</label>
 

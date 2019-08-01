@@ -19,7 +19,6 @@
         <div class="col-md-12">
             <label for="name" class=" mt-5">Student Name</label>
             <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Student Name" required>
-
             @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('name') }}</strong>

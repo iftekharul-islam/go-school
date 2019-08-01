@@ -14,7 +14,7 @@
     <!-- Breadcubs Area End Here -->
 
     <div class="row">
-        <div class="col-4 col-4-xxxl">
+        <div class="col-12 col-4-xxxl col-md-10 col-lg-6 col-xl-4">
             <div class="card mb-4 dashboard-card-ten">
                 <div class="card-body profile-info">
                     <div class="heading-layout1 mb-5">
@@ -24,12 +24,8 @@
                     </div>
                     <div class="student-info">
                         <div class="media  media-none--xs">
-                            <div class="row">
-                                <div class="col-12 ">
-                                    <div class="item-img offset-6 mt-5">
-                                        <img src="{{url($student->pic_path)}}" class=" text-center" alt="student">
-                                    </div>
-                                </div>
+                            <div class="item-img mt-5">
+                                <img src="{{url($student->pic_path)}}" class=" text-center" alt="student">
                             </div>
                         </div>
                         <div class="media-body mt-5">
@@ -158,9 +154,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-8 col-8-xxxl">
+        <div class="col-12 col-8-xxxl col-md-10 col-lg-6 col-xl-8">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-12 col-md-6 col-xl-4">
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
@@ -178,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-12 col-md-6 col-xl-4">
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
@@ -196,7 +192,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-12 col-md-6 col-xl-4">
                     <div class="dashboard-summery-one">
                         <div class="row">
                             <div class="col-6">
@@ -208,7 +204,7 @@
                                 <div class="item-content">
                                     <div class="item-title">Attendance</div>
                                     @if(!empty($present))
-                                        <div class="item-number"><span class="counter" data-num="{{ $present }}"></span><span>{{ $present }}%</span></div>
+                                        <div class="item-number"><span class="counter" data-num="{{ $present }}"></span><span>%</span></div>
                                     @else
                                         No Record
                                     @endif
@@ -263,7 +259,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6-xxxl col-6">
+                <div class="col-6-xxxl col-12 col-md-12">
                     <div class="card dashboard-card-six">
                         <div class="card-body">
                             <div class="heading-layout1 mg-b-17">
@@ -288,7 +284,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6-xxxl col-6">
+                <div class="col-6-xxxl col-12 col-md-12">
                     <div class="card dashboard-card-six">
                         <div class="card-body">
                             <div class="heading-layout1 mg-b-17">

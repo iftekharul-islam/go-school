@@ -2681,7 +2681,7 @@ ul {
   font-size: 14px;
   color: #ffffff;
   padding: 8px 20px 8px 60px;
-  border-radius: 0 2rem 2rem 0;
+  border-radius: 0;
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -2694,11 +2694,11 @@ ul {
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu>.nav-item .sub-group-menu>.nav-item .nav-link:hover {
   background-color: #32998fc2;
   color: #ffffff;
-  border-radius: 0 2rem 2rem 0;
+  border-radius: 0;
 }
 
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu>.nav-item .sub-group-menu>.nav-item .nav-link.menu-active {
-  background-color: #32998F;
+  background-color: #16776e;
   color: #fff;
 }
 

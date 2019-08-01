@@ -17,7 +17,9 @@
 <body>
 <header class="header">
     <div class="header__logo-box">
-        <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+        </a>
     </div>
     <div class="inner-body effect5">
         <div class="header__text-box effect5">
@@ -32,12 +34,8 @@
                     <div class="book">
                         <div class="book__form">
                             <div class="height-auto false-height">
-                                <!-- <div class="card-header">
-                                        <h1>Login</h1>
-                                    </div> -->
                                 <div class="header__text-box effect5">
                                     <h1 class="heading1 mt-5">
-                                        <!-- <span class="heading--main">Password Reset</span> -->
                                         <span class="heading--main">Password Reset</span>
                                     </h1>
                                     @if (session('status'))
@@ -47,19 +45,16 @@
                                     @endif
                                     <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
                                         {{ csrf_field() }}
-
                                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                            @if ($errors->has('email'))
+                                                <span class="help-block reset-password mt-5">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                            @endif
                                             <label for="email" class="col-md-12 text-left mg-t-30 mb-12 form__label">E-Mail Address</label>
 
                                             <div class="col-md-12">
-                                                <input id="email" type="email" class="form-control form__input mb-5" placeholder="Email Address" name="email" value="{{ old('email') }}"
-                                                       required>
-
-                                                @if ($errors->has('email'))
-                                                    <span class="help-block reset-password mt-5">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                                                @endif
+                                                <input id="email" type="email" class="form-control form__input mb-5" placeholder="Email Address" name="email" value="{{ old('email') }}" required>
                                             </div>
                                         </div>
 

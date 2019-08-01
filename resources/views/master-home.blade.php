@@ -13,7 +13,7 @@
     @endif
 
     <div class="row">
-        <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">
+        <div class="col-4-xxxl col-lg-4 col-sm-6 col-12">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-teal">
                     <i class="fas fa-school text-light"></i>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">
+        <div class="col-4-xxxl col-lg-4 col-sm-6 col-12">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-teal">
                     <i class="fas fa-users text-light"></i>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4-xxxl col-lg-3 col-sm-6 col-12">
+        <div class="col-4-xxxl col-lg-4 col-sm-6 col-12">
             <div class="dashboard-summery-two">
                 <div class="item-icon bg-light-teal">
                     <i class="fas fa-user-cog text-light"></i>
