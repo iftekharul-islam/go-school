@@ -85,32 +85,7 @@
     </div>
     <!-- Page Area End Here -->
 </div>
-<script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
-<script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
-<script>
-    $(document).ready(function () {
-        $('.table-data-div').DataTable({
-            paging: false,
-            bSort : false,
-            language: {
-                search: '',
-                searchPlaceholder: "Search here"
-            }
-        });
-
-        $('.section-student-data-table').DataTable({
-            paging: true,
-            bSort : false,
-            scrollY:        false,
-            language: {
-                searchPlaceholder: "Search here"
-            }
-        });
-
-    });
-
-</script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
 <!-- Popper js -->
@@ -144,6 +119,29 @@
 <script src="{{ asset('template/js/jquery3.4.js') }}"></script>
 @stack('customjs')
 
+<script>
+    $(document).ready(function () {
+        $('.table-data-div').DataTable({
+            paging: false,
+            bSort : false,
+            language: {
+                search: '',
+                searchPlaceholder: "Search here"
+            }
+        });
+
+        $('.section-student-data-table').DataTable({
+            paging: true,
+            bSort : false,
+            scrollY:        false,
+            language: {
+                searchPlaceholder: "Search here"
+            }
+        });
+
+    });
+
+</script>
 </body>
 
 </html>
