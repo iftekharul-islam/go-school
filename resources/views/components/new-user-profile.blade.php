@@ -207,7 +207,12 @@
                                 <td>{{ $user->email }}</td>
                             </tr>
                             <tr>
-                            @if($user->role === 'teacher')
+                                <td class="font-medium text-dark-medium">Blood Group</td>
+                                <td>{{ $user->blood_group }}</td>
+                            </tr>
+
+                            <tr>
+                            @if($user->role === 'teacher' && isset($user->section))
                                 <tr>
                                     <td class="font-medium text-dark-medium">Section:</td>
                                     <td class="text-capitalize">{{ ucfirst($user->section->section_number)}}</td>
@@ -216,8 +221,7 @@
                                     <td class="font-medium text-dark-medium">Class Teacher:</td>
                                     <td class="text-capitalize">{{ ucfirst( $user->section->class_id ) }}</td>
                                 </tr>
-                                @endif
-                                </tr>
+                            @endif
                                 <tr>
                                     <td class="font-medium text-dark-medium">Address:</td>
                                     <td>{{$user->address}}</td>

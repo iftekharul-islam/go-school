@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Attendance;
-use App\Book;
+
 use App\Exam;
 use App\Http\Traits\GradeTrait;
 use App\Myclass;
 use App\Notice;
-use App\School;
 use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
-use App\StudentInfo;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Services\User\UserService;
 use Alert;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {

@@ -268,6 +268,8 @@ class UserService {
         $tb->password = bcrypt($request->password);
         $tb->role = $role;
         $tb->active = 1;
+        $tb->about = (!empty($request->about)) ? $request->about : '';
+        $tb->address = $request->address;
         $tb->school_id = auth()->user()->school_id;
         $tb->code = auth()->user()->code;
         $tb->student_code = auth()->user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
