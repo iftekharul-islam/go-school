@@ -1,7 +1,7 @@
 @if(Auth::check())
     <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
         <div class="mobile-sidebar-header d-md-none">
-            <div class="header-logo">
+            <div class="p-4 text-center">
                 <a href="/"><img src="{{ asset('/template/img/logo1.png') }}" alt="logo"></a>
             </div>
         </div>
@@ -81,13 +81,7 @@
                         <a href="{{ url('student/grades/'.Auth::user()->id) }}" class="nav-link {{ (request()->is('student/grades/'.Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-poll"></i><span>My Grade</span></a>
                     </li>
-                    {{--<li class="nav-item">--}}
-                    {{--<a href="#" class="nav-link">--}}
-                    {{--<i class="fas fa-money-check-alt"></i><span>Payment History</span></a>--}}
-                    {{--</li>--}}
-                    {{--<li class="nav-item">--}}
-                    {{--<a href="#" class="nav-link"><i class="fas fa-bus"></i><span>Transport</span></a>--}}
-                    {{--</li>--}}
+
                     <li class="nav-item">
                         <a href="{{ url('student/notices-and-events') }}" class="nav-link {{ (request()->is('student/notices-and-events')) ? 'menu-active' : '' }}"><i class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
                     </li>
@@ -95,10 +89,6 @@
                         <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" class="nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
-                    {{--<li class="nav-item">--}}
-                    {{--<a href="#" class="nav-link">--}}
-                    {{--<i class="far fa-user"></i><span>Account</span></a>--}}
-                    {{--</li>--}}
                 @endif
                 @if($role != 'student' && $role != 'master')
                     <li class="nav-item">
