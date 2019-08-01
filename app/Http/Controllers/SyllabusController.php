@@ -58,6 +58,10 @@ class SyllabusController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'file_path' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+        ]);
         $tb = new Syllabus;
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;

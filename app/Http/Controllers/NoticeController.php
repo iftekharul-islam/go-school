@@ -53,6 +53,10 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'file_path' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+        ]);
         $user = Auth::user();
         $tb = new Notice;
         $tb->file_path = $request->file_path;

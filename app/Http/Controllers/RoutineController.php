@@ -59,11 +59,12 @@ class RoutineController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+
         $request->validate([
             'file_path' => 'required|string|max:255',
             'title' => 'required|string|max:255',
         ]);
+        $user = Auth::user();
         $tb = new Routine;
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;
