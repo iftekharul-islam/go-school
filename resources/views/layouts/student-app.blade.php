@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{{--    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">--}}
+    {{--    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/normalize.css') }}">
@@ -38,7 +38,7 @@
 
 @stack('customcss')
 
-    <!-- Modernize js -->
+<!-- Modernize js -->
     <script src="{{ asset('/template/js/modernizr-3.6.0.min.js') }}"></script>
 
     <!-- CSRF Token -->
@@ -85,37 +85,7 @@
     </div>
     <!-- Page Area End Here -->
 </div>
-<script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
-<script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
-<script>
-    $(document).ready(function () {
-        var myTable = $('.table-data-div').DataTable({
-            paging: false,
-            bSort : false,
-            language: {
-                search: '',
-                searchPlaceholder: "Search here"
-            }
-        });
-
-    });
-
-
-    $(document).ready(function () {
-        var myTable = $('.section-student-data-table').DataTable({
-            paging: true,
-            bSort : false,
-            scrollY:        false,
-            language: {
-                searchPlaceholder: "Search here"
-            }
-        });
-        $('[data-toggle="popover"]').popover({
-            container: 'body'
-        });
-    });
-</script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
 <!-- Popper js -->
@@ -147,6 +117,37 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
+<script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        var myTable = $('.table-data-div').DataTable({
+            paging: false,
+            bSort : false,
+            language: {
+                search: '',
+                searchPlaceholder: "Search here"
+            }
+        });
+
+    });
+
+
+    $(document).ready(function () {
+        var myTable = $('.section-student-data-table').DataTable({
+            paging: true,
+            bSort : false,
+            scrollY:        false,
+            language: {
+                searchPlaceholder: "Search here"
+            }
+        });
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
+    });
+</script>
+
 @stack('customjs')
 
 </body>
