@@ -116,7 +116,7 @@
 <script src=" {{ asset('/template/js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script src="{{ asset('template/js/jquery3.4.js') }}"></script>
+<script src="{{ asset('template/js/jquery-3.3.1.min.js') }}"></script>
 @stack('customjs')
 
 <script>
