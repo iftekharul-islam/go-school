@@ -201,7 +201,7 @@ class UserService {
         $tb->blood_group = $request->blood_group;
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
-        $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+        $tb->pic_path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path')) : null;;
         $tb->verified = 1;
         $tb->address = $request->address;
         $tb->about = $request->about;

@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index($class_id)
     {
-      return ($class_id > 0)? EventResource::collection(Event::where('class_id', $class_id)->get()):response()->json(['Invalid Class id: '. $class_id, 404]);
+        return ($class_id > 0)? EventResource::collection(Event::where('class_id', $class_id)->get()):response()->json(['Invalid Class id: '. $class_id, 404]);
     }
 
     /**
@@ -25,8 +25,8 @@ class EventController extends Controller
      */
     public function create()
     {
-      $files = Event::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at','DESC')->get();
-      return view('events.create',['files'=>$files]);
+        $files = Event::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at','DESC')->get();
+        return view('events.create',['files'=>$files]);
     }
 
     /**
@@ -37,14 +37,18 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-      $tb = new Event;
-      $tb->file_path = $request->file_path;
-      $tb->title = $request->title;
-      $tb->active = 1;
-      $tb->school_id = Auth::user()->school_id;
-      $tb->user_id = Auth::user()->id;
-      $tb->save();
-      return back()->with('status', 'Uploaded');
+        $request->validate([
+            'file_path' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+        ]);
+        $tb = new Event;
+        $tb->file_path = $request->file_path;
+        $tb->title = $request->title;
+        $tb->active = 1;
+        $tb->school_id = Auth::user()->school_id;
+        $tb->user_id = Auth::user()->id;
+        $tb->save();
+        return back()->with('status', 'Uploaded');
     }
 
     /**
@@ -78,10 +82,10 @@ class EventController extends Controller
      */
     public function update($id)
     {
-      $tb = Event::find($id);
-      $tb->active == 0 ? $tb->active = 1 : $tb->active = 0;
-      $tb->save();
-      return back()->with('status','Event Status changed');
+        $tb = Event::find($id);
+        $tb->active == 0 ? $tb->active = 1 : $tb->active = 0;
+        $tb->save();
+        return back()->with('status','Event Status changed');
     }
 
     /**
@@ -92,10 +96,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-      return (Event::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Event::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }
