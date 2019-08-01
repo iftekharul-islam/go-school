@@ -90,7 +90,7 @@
 
 <script>
     $(document).ready(function () {
-        var myTable = $('.table-data-div').DataTable({
+        $('.table-data-div').DataTable({
             paging: false,
             bSort : false,
             language: {
@@ -99,11 +99,7 @@
             }
         });
 
-    });
-
-
-    $(document).ready(function () {
-        var myTable = $('.section-student-data-table').DataTable({
+        $('.section-student-data-table').DataTable({
             paging: true,
             bSort : false,
             scrollY:        false,
@@ -113,6 +109,7 @@
         });
 
     });
+
 </script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
@@ -144,7 +141,7 @@
 <script src=" {{ asset('/template/js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('template/js/jquery3.4.js') }}"></script>
 @stack('customjs')
 
 </body>
