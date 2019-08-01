@@ -31,7 +31,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.css">
 
 

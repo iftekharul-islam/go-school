@@ -246,34 +246,34 @@ h6 {
   border: none !important;
   -webkit-box-shadow: 0px 10px 20px 0px rgba(199, 194, 194, 0.48);
   box-shadow: 0px 10px 15px 0px rgba(199, 194, 194, 0.32);
-  border-radius: 14px;
+  border-radius: 5px;
 
 }
 .card-sub {
   padding-bottom: 50px;
   height: auto;
   border: none !important;
-  border-radius: 16px;
+  border-radius: 5px;
   -webkit-box-shadow:0px 10px 15px 1px rgba(199, 194, 194, 0.48);
   box-shadow: 0px 10px 15px 1px rgba(199, 194, 194, 0.48);
-  border-radius: 14px;
+  /*border-radius: 14px;*/
 
 }
 .card-sub-header {
   padding: .75rem 1.25rem;
   margin-bottom: 0;
-  border-radius: 10px 010px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
   background-image: linear-gradient(to right top, #ffffff0f, #afafaf63);
   /* border: 1px solid rgba(185, 181, 181, 0.125); */
 }
 card-sub-header:first-child {
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .card-header {
   padding: .75rem 1.25rem;
   margin-bottom: 0;
-  border-radius: 30px;
+  border-radius: 5px;
   background-color: #f9f9f9;
   border-top: 1px solid #eae9e9;
   border-left: 1px solid #eae9e9;
@@ -286,20 +286,20 @@ card-sub-header:first-child {
   height: 100%;
   padding: 30px 30px 0px;
   background-color: #ffffff56;
-  border-radius: 4px;
+  border-radius: 5px;
   /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
   box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75); */
-  border-radius: 14px;
+  /*border-radius: 14px;*/
 
 }
 .card-body-customized{
   height: 100%;
   padding: 15px 13px 0px;
   background-color: #ffffff56;
-  border-radius: 4px;
+  border-radius: 5px;
   /* -webkit-box-shadow: 10px 10px 20px 0px rgba(160, 143, 143, 0.75);
   box-shadow: 0px 10px 20px 0px rgba(229, 229, 229, 0.75); */
-  border-radius: 14px;
+  /*border-radius: 14px;*/
 
 }
 
@@ -2855,7 +2855,7 @@ ul {
   left: -27rem;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 992px) {
   .sidebar-expand-md {
     position: static;
     overflow: visible;
