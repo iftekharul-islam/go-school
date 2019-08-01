@@ -87,7 +87,7 @@
 </div>
 
 
-<script src="{{ asset('template/js/plugins.js') }}"></script>
+{{--<script src="{{ asset('template/js/plugins.js') }}"></script>--}}
 <!-- Popper js -->
 <script src="{{ asset('template/js/popper.min.js') }}"></script>
 <!-- Bootstrap js -->
