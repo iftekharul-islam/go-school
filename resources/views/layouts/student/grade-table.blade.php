@@ -8,8 +8,9 @@
       <th>#</th>
       <th>Course</th>
       <th>Course Teacher</th>
-        <th>Grade</th>
-        <th>Total Marks</th>
+      <th>Grade</th>
+      <th>Total Marks</th>
+      <th>Details</th>
     </tr>
   </thead>
   <tbody>
@@ -29,9 +30,8 @@
                 @endif
             @endforeach
         </td>
-        <td><b>{{$grade->marks}}</b>
-            <a class="button button--primary float-right ml-2" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}"> View Details</a>
-        </td>
+        <td><b>{{$grade->marks}}</b></td>
+        <td><a class="button button--save" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}">View</a></td>
     </tr>
     <tr class="collapse" id="collapse{{($loop->index + 1)}}" aria-labelledby="heading{{($loop->index + 1)}}" aria-expanded="false">
       <td colspan="7">

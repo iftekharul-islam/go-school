@@ -21,7 +21,7 @@ class MasterHomeController extends Controller
 
     public function allSchool()
     {
-        $schools = School::all();
+        $schools = School::get();
         return view('school.all-school', [
            'schools' => $schools
         ]);

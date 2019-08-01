@@ -25,17 +25,15 @@
             @endif
             @if(count($admins) > 0)
                 <div class="table-responsive">
-                    <table class="table table-data-div text-wrap">
+                    <table class="table table-data-div">
                         <thead>
                             <tr>
-                                <th width="10%">Name</th>
-                                <th width="5%">Code</th>
-                                <th width="10%">Email</th>
-                                <th width="10%">Phone Number</th>
-                                <th width="15%">Address</th>
-                                <th width="30%">About</th>
-                                <th width="5%">Edit</th>
-                                <th width="5%">Activate/Deactivate</th>
+                                <th>Name</th>
+                                <th>Code</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Operation</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,12 +46,8 @@
                                 <td>{{$admin->email}}</td>
                                 <td>{{$admin->phone_number}}</td>
                                 <td>{{$admin->address}}</td>
-                                <td>{{$admin->about}}</td>
-                                <td>
-                                    <a href="{{url('master/edit/admin/'.$admin->id)}}" class="button button--edit"
-                                       role="button">Edit</a>
-                                </td>
                                 <td class="text-center">
+                                    <a href="{{url('master/edit/admin/'.$admin->id)}}" class="button button--edit mr-3" role="button"><i class="fas fa-edit"></i></a>
                                     @if($admin->active == 0)
                                         <button class="button button--save" type="button" onclick="removeUser({{ $admin->id }})">Active</button>
                                         <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">

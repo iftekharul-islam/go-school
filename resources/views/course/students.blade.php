@@ -14,7 +14,7 @@
         <div class="col-md-12" id="main-container">
             <div class="breadcrumbs-area">
                 <h3>
-                    </a>Message Student
+                    Message Student
                 </h3>
                 <ul>
                     <li> <a href="javascript:history.back()" style="color: #32998f!important;">
@@ -28,8 +28,7 @@
                 <div class="card-body">
                     @if(count($students) > 0)
                         @foreach ($students as $student)
-                            <h3>Course Students of Class: {{$student->section->class->class_number}} Section:
-                                {{$student->section->section_number}}</h3>
+                            <h4>Students of <b>Class:</b> {{$student->section->class->class_number}} <b>Section:</b> {{$student->section->section_number}}</h4>
                             @break
                         @endforeach
                         <h4>Select Students to send message</h4>
@@ -92,7 +91,7 @@
                                                 <label for="msg">Write Message: </label>
                                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
                                             </div>
-                                            <button type="submit" class="button button--text">Message</button>
+                                            <button type="submit" class="button button--save float-right">Message</button>
                                         </form>
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@
         </ul>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-12 col-lg-8 col-xl-8 col-md-10">
             <div class="card height-auto false-height">
                 <div class="card-body">
                     @if (session('status'))

@@ -50,11 +50,11 @@
                         <input type="hidden" name="user_id" value="{{$user->id}}">
                         <input type="hidden" name="user_role" value="{{$user->role}}">
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label for="name" class="col-md-4 control-label">Full Name</label>
+                                    <label for="name">Full Name</label>
 
-                                    <div class="col-md-12">
+                                    <div>
                                         <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}" required>
 
                                         @if ($errors->has('name'))
@@ -63,11 +63,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                    <label for="email">E-Mail Address</label>
 
-                                    <div class="col-md-12">
+                                    <div>
                                         <input id="email" type="email" class="form-control" name="email"
                                                value="{{ $user->email }}" required>
 
@@ -81,11 +81,11 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                    <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
+                                    <label for="phone_number">Phone Number</label>
 
-                                    <div class="col-md-12">
+                                    <div class="">
                                         <input id="phone_number" type="text" class="form-control" name="phone_number"
                                                value="{{ $user->phone_number }}" required>
 
@@ -97,11 +97,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                    <label for="blood_group" class="col-md-4 control-label">Blood Group</label>
+                                    <label for="blood_group">Blood Group</label>
 
-                                    <div class="col-md-12">
+                                    <div class="">
                                         <select id="blood_group" class="form-control" name="blood_group">
                                             <option selected="selected">A+</option>
                                             <option>A-</option>
@@ -123,11 +123,11 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                    <label for="nationality" class="col-md-4 control-label">Nationality</label>
+                                    <label for="nationality">Nationality</label>
 
-                                    <div class="col-md-12">
+                                    <div class="">
                                         <input id="nationality" type="text" class="form-control" name="nationality"
                                                value="{{ $user->nationality }}"
                                                required>
@@ -140,11 +140,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                    <label for="gender" class="col-md-4 control-label">Gender</label>
+                                    <label for="gender" class="">Gender</label>
 
-                                    <div class="col-md-12">
+                                    <div class="">
                                         <select id="gender" class="form-control" name="gender">
                                             <option selected="selected">Male</option>
                                             <option>Female</option>
@@ -160,11 +160,11 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                     <label for="address" class="col-md-6 control-label">Address</label>
 
-                                    <div class="col-md-12">
+                                    <div class="">
                                         <input id="address" type="text" class="form-control" name="address"
                                                value="{{ $user->address }}"
                                                required>
@@ -177,11 +177,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
                                     <label for="about" class="col-md-6 control-label">About</label>
 
-                                    <div class="col-md-12">
+                                    <div class="">
                                         <textarea id="about" class="form-control" name="about"
                                                   value=""
                                                   required>{{ $user->about }}</textarea>
@@ -196,7 +196,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Upload Profile Picture</label>
+                            <label>Upload Profile Picture</label>
                             <div class="col-md-12">
                                 <input type="hidden" id="picPath" name="pic_path">
                                 @component('components.file-uploader',['upload_type'=>'profile'])
@@ -205,8 +205,8 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" id="registerBtn" class="button button--save">
+                            <div class="col-md-12 col-md-offset-4">
+                                <button type="submit" id="registerBtn" class="button button--save float-right">
                                     Update
                                 </button>
                             </div>

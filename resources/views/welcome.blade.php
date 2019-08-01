@@ -18,7 +18,9 @@
 <body>
 <header class="header">
     <div class="header__logo-box">
-        <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+        </a>
     </div>
     <div class="inner-body effect5">
         <div class="header__text-box effect5">
@@ -40,25 +42,25 @@
                                     {{ csrf_field() }}
                                     <div class="form__group">
                                         <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
-                                            <input type="email" class="form__input" placeholder="Email address" id="email" name="email" value="{{ old('email') }}" required>
-                                            <label for="email" class="form__label">Email Address</label>
-                                        @if ($errors->has('email'))
+                                            @if ($errors->has('email'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
                                             @endif
+                                            <label for="email" class="form__label">Email Address</label>
+                                            <input type="email" class="form__input" placeholder="Email address" id="email" name="email" value="{{ old('email') }}" required>
                                         </div>
                                     </div>
 
                                     <div class="form__group">
                                         <div class="col-lg-12 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                            <input type="password" name="password" class="form__input" placeholder="Password" required>
-                                            <label for="name" class="form__label">Password</label>
-                                        @if ($errors->has('password'))
+                                            @if ($errors->has('password'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
                                             @endif
+                                            <label for="name" class="form__label">Password</label>
+                                            <input type="password" name="password" class="form__input" placeholder="Password" required>
                                         </div>
                                     </div>
 
