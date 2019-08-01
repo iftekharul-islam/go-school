@@ -88,7 +88,32 @@
 <script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
 <script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
+<script>
+    $(document).ready(function () {
+        var myTable = $('.table-data-div').DataTable({
+            paging: false,
+            bSort : false,
+            language: {
+                search: '',
+                searchPlaceholder: "Search here"
+            }
+        });
 
+    });
+
+
+    $(document).ready(function () {
+        var myTable = $('.section-student-data-table').DataTable({
+            paging: true,
+            bSort : false,
+            scrollY:        false,
+            language: {
+                searchPlaceholder: "Search here"
+            }
+        });
+
+    });
+</script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
 <!-- Popper js -->
@@ -120,31 +145,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        var myTable = $('.table-data-div').DataTable({
-            paging: false,
-            bSort : false,
-            language: {
-                search: '',
-                searchPlaceholder: "Search here"
-            }
-        });
-
-    });
-
-
-    $(document).ready(function () {
-        var myTable = $('.section-student-data-table').DataTable({
-            paging: true,
-            bSort : false,
-            scrollY:        false,
-            language: {
-                searchPlaceholder: "Search here"
-            }
-        });
-    });
-</script>
 @stack('customjs')
 
 </body>
