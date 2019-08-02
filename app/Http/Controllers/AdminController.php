@@ -126,6 +126,7 @@ class AdminController extends Controller
      */
     public function store(CreateAdminRequest $request)
     {
+
         $school = School::where('id', $request->school_id)->first();
         $request->request->add(['code' => $school->code]);
         $password = $request->password;

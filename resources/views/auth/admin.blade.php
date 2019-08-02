@@ -45,7 +45,7 @@
             </div>
             <div class="">
                 <div class="">
-                    <form class="new-added-form" method="POST" id="registerForm" action="{{ url('master/register/admin') }}">
+                    <form class="new-added-form" enctype="multipart/form-data" method="POST" id="registerForm" action="{{ url('master/register/admin') }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="school_id" value="{{ $id }}">
                         <div class="row mb-3">
@@ -227,9 +227,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Upload Profile Picture</label>
                             <div class="col-md-12">
-                                <input type="hidden" id="picPath" name="pic_path">
-                                @component('components.file-uploader',['upload_type'=>'profile'])
-                                @endcomponent
+                                <input type="file" required id="picPath" name="pic_path">
                             </div>
                         </div>
 

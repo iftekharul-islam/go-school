@@ -36,6 +36,7 @@ class CreateAdminRequest extends FormRequest
             'blood_group' => 'required',
             'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'email' => 'email|max:255|unique:users',
+            'pic_path' => 'required|image'
         ];
     }
 }
