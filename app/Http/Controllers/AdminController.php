@@ -80,7 +80,6 @@ class AdminController extends Controller
         } else {
             $present = 0;
             $absent= 0;
-            $total= 0;
             $courses = 0;
             $attCount = $this->teacherAttendanceService->getAllAttendanceByStuffId($user->id);
             if ($attCount) {

@@ -116,7 +116,6 @@ class GradeService {
             'course_id' => $this->course_id,
             'teacher_id' => $this->teacher_id,
             'section_id' => $this->section_id,
-//        'students'   => $this->students,
         ]);
     }
 
@@ -170,13 +169,13 @@ class GradeService {
     }
 
     public function getCourseByCourseId(){
-        return Course::find($this->course_id);
+        return Course::findOrFail($this->course_id);
     }
 
     public function saveCalculatedGPAFromTotalMarks($tbc){
         foreach ($tbc as $tb)
         {
-            $grade = Grade::find($tb['id']);
+            $grade = Grade::findOrFail($tb['id']);
             $grade->marks = floatval($tb['marks']);
             $grade->gpa = floatval($tb['gpa']);
             $grade->save();

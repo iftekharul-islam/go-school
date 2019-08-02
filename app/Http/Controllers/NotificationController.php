@@ -16,18 +16,18 @@ class NotificationController extends Controller
      */
     public function index($id)
     {
-      $msg = Notification::with('teacher.department')->where('student_id',$id)->orderBy('created_at','desc')->paginate(10);
-      foreach($msg as $m){
-        if ($m->active == 1)
-        {
-              $message = Notification::findOrFail($m->id);
-              $message->active = 0;
-              $message->updated_at = now();
-              $message->save();
-        }
+        $msg = Notification::with('teacher.department')->where('student_id',$id)->orderBy('created_at','desc')->paginate(10);
+        foreach($msg as $m){
+            if ($m->active == 1)
+            {
+                $message = Notification::findOrFail($m->id);
+                $message->active = 0;
+                $message->updated_at = now();
+                $message->save();
+            }
 
-      }
-      return view('message.all-message',['messages'=>$msg]);
+        }
+        return view('message.all-message',['messages'=>$msg]);
     }
 
     /**
@@ -48,27 +48,27 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-      $request->validate([
-        'section_id' => 'required|numeric',
-        'teacher_id' => 'required|numeric',
-        'recipients' => 'required|array',
-        'msg' => 'required|string',
-      ]);
-      DB::transaction(function ( ) use ($request) {
-      for($i=0; $i < count($request->recipients); $i++){
-        $tb = new Notification;
-        $tb->sent_status = 1;
-        $tb->active = 1;
-        $tb->message = $request->msg;
-        $tb->student_id = $request->recipients[$i];
-        $tb->user_id = $request->teacher_id;
-        $tb->created_at = date('Y-m-d H:i:s');
-        $tb->updated_at = date('Y-m-d H:i:s');
-        $n[] = $tb->attributesToArray();
-      }
-      Notification::insert($n);
-      });
-      return back()->with('status','Message Sent');
+        $request->validate([
+            'section_id' => 'required|numeric',
+            'teacher_id' => 'required|numeric',
+            'recipients' => 'required|array',
+            'msg' => 'required|string',
+        ]);
+        DB::transaction(function ( ) use ($request) {
+            for($i=0; $i < count($request->recipients); $i++){
+                $tb = new Notification;
+                $tb->sent_status = 1;
+                $tb->active = 1;
+                $tb->message = $request->msg;
+                $tb->student_id = $request->recipients[$i];
+                $tb->user_id = $request->teacher_id;
+                $tb->created_at = date('Y-m-d H:i:s');
+                $tb->updated_at = date('Y-m-d H:i:s');
+                $n[] = $tb->attributesToArray();
+            }
+            Notification::insert($n);
+        });
+        return back()->with('status','Message Sent');
     }
 
     /**
@@ -102,14 +102,14 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tb = Notification::find($id);
-      $tb->student_id = $request->student_id;
-      $tb->message = $request->message;
-      return ($tb->save())?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        $tb = Notification::find($id);
+        $tb->student_id = $request->student_id;
+        $tb->message = $request->message;
+        return ($tb->save())?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 
     /**
@@ -120,10 +120,10 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-      return (Notification::destroy($id))?response()->json([
-        'status' => 'success'
-      ]):response()->json([
-        'status' => 'error'
-      ]);
+        return (Notification::destroy($id))?response()->json([
+            'status' => 'success'
+        ]):response()->json([
+            'status' => 'error'
+        ]);
     }
 }

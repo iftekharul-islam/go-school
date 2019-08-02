@@ -13,21 +13,21 @@ class ExamService {
 
     public function getLatestExamsBySchoolIdWithPagination(){
         return Exam::where('school_id', auth()->user()->school_id)
-                ->latest()
-                ->paginate(100);
+            ->latest()
+            ->paginate(100);
     }
 
     public function getActiveExamsBySchoolId(){
         return Exam::where('school_id', auth()->user()->school_id)
-                    ->where('active',1)
-                    ->get();
+            ->where('active',1)
+            ->get();
     }
 
     public function getCoursesByExamIds(){
         return Course::with('class','teacher')
-                    ->whereIn('exam_id', $this->examIds)
-                    ->orderBy('class_id')
-                    ->get();
+            ->whereIn('exam_id', $this->examIds)
+            ->orderBy('class_id')
+            ->get();
     }
 
     public function getClassesBySchoolId(){
@@ -36,12 +36,12 @@ class ExamService {
 
     public function getAlreadyAssignedClasses(){
         $classes = $this->getClassesBySchoolId()
-                        ->pluck('id')
-                        ->toArray();
+            ->pluck('id')
+            ->toArray();
         return ExamForClass::with('exam')
-                            ->where('active', 1)
-                            ->whereIn('class_id', $classes)
-                            ->get();
+            ->where('active', 1)
+            ->whereIn('class_id', $classes)
+            ->get();
     }
 
     public function createExam(){
@@ -83,12 +83,12 @@ class ExamService {
     public function storeExam(){
         \DB::transaction(function () {
             $this->exam = $this->createExam();
-        
+
             // Assign Exam ID to Classes in Course Table
             $this->updateCoursesWithExamId();
 
             $efc = $this->assignClassesToExam();
-            
+
             if(count($efc) > 0)
                 ExamForClass::insert($efc);
         }, 5);

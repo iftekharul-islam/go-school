@@ -99,7 +99,7 @@ class NoticeController extends Controller
      */
     public function update($id)
     {
-        $tb = Notice::find($id);
+        $tb = Notice::findOrFail($id);
         $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
         $tb->save();
         return back()->with('status','Notice Updated');

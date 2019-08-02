@@ -82,7 +82,7 @@ class EventController extends Controller
      */
     public function update($id)
     {
-        $tb = Event::find($id);
+        $tb = Event::findOrFail($id);
         $tb->active == 0 ? $tb->active = 1 : $tb->active = 0;
         $tb->save();
         return back()->with('status','Event Status changed');

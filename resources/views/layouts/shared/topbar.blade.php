@@ -78,7 +78,7 @@
                             <span>{{ ucfirst(\Auth::user()->role) }}</span>
                         </div>
                         <div class="admin-img">
-                            @if(\Auth::user()->role === 'admin' || \Auth::user()->role === 'master')
+                            @if( \Auth::user()->role === 'master')
                                 <img src="{{asset('template/img/user-default.png')}}" alt="Admin" style="width: 40px; height: 40px;">
                             @else
                                 <img src="{{url(\Illuminate\Support\Facades\Auth::user()->pic_path)}}" alt="{{ \Auth::user()->role  }}" style="width: 40px; height: 40px;">

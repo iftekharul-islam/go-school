@@ -32,29 +32,11 @@ class AccountService {
     }
 
     public function updateSector(){
-        $sector = AccountSector::find($this->request->id);
+        $sector = AccountSector::findOrFail($this->request->id);
         $sector->name = $this->request->name;
         $sector->type = $this->request->type;
         $sector->save();
     }
-
-    // public function getClassIds(){
-    //     return Myclass::where('school_id', \Auth::user()->school_id)
-    //                         ->pluck('id');
-    // }
-
-    // public function getSectionsIds(){
-    //     $classes = $this->getClassIds()->toArray();
-    //     return Section::with('class')
-    //                         ->whereIn('class_id', $classes)
-    //                         ->get();
-    // }
-
-    // public function getStudentsBySectionIds(){
-    //     $sections = $this->getSectionsIds();
-    //     return User::whereIn('section_id',$sections->pluck('id')->toArray())
-    //                       ->get();
-    // }
 
     public function storeAccount(){
         $income = new Account();

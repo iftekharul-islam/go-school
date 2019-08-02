@@ -35,15 +35,8 @@ class AttendanceService {
                     $users->present = isset($request->isPresent[$i]) ? 1 : 0;
                     $users->updated_at = date('Y-m-d H:i:s');
                     $users->save();
-//          $atts[] = [
-//            'id' => $request->att_id[$i],
-//            'present' => isset($request->isPresent[$i])?1:0,
-//            'updated_at' => date('Y-m-d H:i:s'),
-//          ];
+                    return back()->with('status', 'Updated');
                 }
-//        \Batch::update('attendances',$atts,'id');
-//        return "fmgkldfmgmfd";
-                return back()->with('status', 'Updated');
             } catch (\Exception $ex) {
                 return false;
             }
@@ -91,26 +84,17 @@ class AttendanceService {
             ->first();
     }
 
-//    public function getAbsentAttendanceByStudentAndExam($student_id, $exId){
-//        return Attendance::with(['student', 'section'])
-//                      ->where('student_id', $student_id)
-//                      ->where('present',0)
-//                      ->orWhere('present',2)
-//                      ->get();
-//    }
 
     public function getAbsentAttendanceByStudentAndExam($student_id, $exId){
         return Attendance::with(['student', 'section'])
             ->where('student_id', $student_id)
             ->whereIn('present',['0','2'])
-//            ->where('exam_id', $exId)
             ->get();
     }
 
     public function getAttendanceByStudentAndExam($student_id, $exId){
         return Attendance::with(['student', 'section'])
             ->where('student_id', $student_id)
-//                      ->where('exam_id', $exId)
             ->get();
     }
 

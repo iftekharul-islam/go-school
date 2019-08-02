@@ -181,7 +181,7 @@ class UserController extends Controller
      */
     public function impersonate(ImpersonateUserRequest $request)
     {
-        $user = $this->user->find($request->id);
+        $user = $this->user->findOrFail($request->id);
         Auth::user()->impersonate($user);
         return redirect($user->role.'/home');
     }
@@ -339,7 +339,7 @@ class UserController extends Controller
     {
 
         DB::transaction(function () use ($request) {
-            $tb = $this->user->find($request->user_id);
+            $tb = $this->user->findOrFail($request->user_id);
             $tb->name = $request->name;
             $tb->email = (!empty($request->email)) ? $request->email : '';
             $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';

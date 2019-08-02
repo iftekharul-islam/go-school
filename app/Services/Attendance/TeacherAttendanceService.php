@@ -182,7 +182,7 @@ class TeacherAttendanceService {
     {
         $i = 0;
         foreach ($this->request->attendances as $key => $attendance) {
-            $tb = StuffAttendance::find($attendance);
+            $tb = StuffAttendance::findOrFail($attendance);
             if(isset($this->request["isPresent$i"])){
                 $tb->present = 1;
             }
@@ -200,7 +200,7 @@ class TeacherAttendanceService {
         $i = 0;
         $authUser = Auth::user();
         foreach ($this->request->staffs as $key => $staff) {
-            $user = User::find($staff);
+            $user = User::findOrFail($staff);
             $tb = new StuffAttendance();
             $tb->stuff_id = $staff;
             $tb->role = $user->role;

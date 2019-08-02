@@ -34,7 +34,8 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request) {
-        $book = Book::create([
+
+        $data = [
             'title'     => $request->title,
             'book_code' => $request->book_code,
             'author'    => $request->author,
@@ -48,7 +49,8 @@ class BookController extends Controller
             'class_id'  => isset($request->class_id) ? $request->class_id : '',
             'school_id' => auth()->user()->school_id,
             'user_id'   => auth()->user()->id
-        ]);
+        ];
+        $book = Book::create($data);
 
         return redirect()->to(Auth::user()->role.'/book'.$book->id)->with('status','New book added to library');
     }

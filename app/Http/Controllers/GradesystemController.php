@@ -29,7 +29,7 @@ class GradesystemController extends Controller
      */
     public function create(){
 
-        $grade_systems = Gradesystem::where('school_id', Auth::user()->school_id)->first();
+        $grade_systems = Gradesystem::where('school_id', Auth::user()->school_id)->firstOrFail();
         return view('gpa.new-create', compact('grade_systems'));
     }
     /**

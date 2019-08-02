@@ -172,7 +172,7 @@ class SchoolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'school_name' => 'required',
             'school_medium' => 'required',
             'school_about' => 'required',

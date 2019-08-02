@@ -23,7 +23,7 @@ class MasterHomeController extends Controller
     {
         $schools = School::get();
         return view('school.all-school', [
-           'schools' => $schools
+            'schools' => $schools
         ]);
     }
 }

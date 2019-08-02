@@ -89,12 +89,7 @@ class CourseService {
         $tb->practical_fullmark = 0;
         $tb->exam_id = 0;
         $tb->school_id = auth()->user()->school_id;
-        $tb->user_id = auth()->user()->id; // who is creating
-        // $tb->quiz_percent = $request->quiz_percent;
-        // $tb->test_percent = $request->test_percent;
-        // $tb->assignment_percent = $request->assignment_percent;
-        // $tb->class_work_percent = $request->class_work_percent;
-        // $tb->final_exam_percent = $request->final_exam_percent;
+        $tb->user_id = auth()->user()->id;
         $tb->save();
     }
 

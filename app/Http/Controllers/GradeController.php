@@ -67,7 +67,7 @@ class GradeController extends Controller
 
     public function cindex($teacher_id,$course_id,$exam_id,$section_id)
     {
-        $course = Course::with('exam')->where('id', $course_id)->first();
+        $course = Course::with('exam')->where('id', $course_id)->firstOrFail();
         $this->addStudentsToCourse($teacher_id,$course_id,$exam_id,$section_id);
         $grades = $this->gradeService->getGradesByCourseExam($course_id, $exam_id);
         $gradesystems = $this->gradeService->getGradeSystemBySchoolId($grades);
@@ -90,10 +90,6 @@ class GradeController extends Controller
 
     public function allExamsGradeDetails($class_id){
         $sections = Section::where('class_id', $class_id)->get();
-//        return $sections;
-//        $classes = $this->gradeService->getClassesBySchoolId();
-//        $classIds = $classes->pluck('id')->toArray();
-//        $sections = $this->gradeService->getSectionsByClassIds($classIds);
         return view('grade.new-all-exams-grade-details',compact('sections'));
     }
 

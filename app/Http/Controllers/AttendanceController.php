@@ -103,7 +103,7 @@ class AttendanceController extends Controller
         $student = $this->attendanceService->getStudent($student_id);
         $exam = ExamForClass::where('class_id',$student->section->class->id)
             ->where('active', 1)
-            ->first();
+            ->firstOrFail();
         if(count((array) $exam) == 1)
             $exId = $exam->exam_id;
         else
@@ -159,7 +159,7 @@ class AttendanceController extends Controller
     public function attendanceDetails(Request $request, $section_id)
     {
 
-        $course =  Course::with('section')->where('section_id', $section_id)->first();
+        $course =  Course::with('section')->where('section_id', $section_id)->firstOrFail();
         $examID = 0;
         if (!empty($course->exam_id))
         {

@@ -79,12 +79,12 @@ class IssuedbookController extends Controller
      */
     public function update(Request $request)
     {
-            DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) {
             $tb = Issuedbook::findOrFail($request->issue_id);
             $tb->borrowed = 0;
             $tb->quantity = 0;
             $tb->save();
-            $book = Book::where('id',$request->book_id)->first();
+            $book = Book::where('id',$request->book_id)->firstOrFail();
             $book->quantity = $book->quantity + 1;
             $book->save();
         }, 5);

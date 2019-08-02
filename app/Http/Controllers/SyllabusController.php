@@ -80,7 +80,7 @@ class SyllabusController extends Controller
      */
     public function show($id)
     {
-        return new SyllabusResource(Syllabus::find($id));
+        return new SyllabusResource(Syllabus::findOrFail($id));
     }
 
     /**

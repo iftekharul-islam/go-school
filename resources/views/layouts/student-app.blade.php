@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('template/css/sweet-alert5.3.5.min.css') }}">
 
 
 @stack('customcss')
@@ -111,7 +111,7 @@
 <!-- Main js -->
 
 <script src=" {{ asset('/template/js/main.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ asset('/template/js/sweetalert.js') }}"></script>
 @stack('customjs')
 
 <script>
