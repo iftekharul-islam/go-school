@@ -116,11 +116,11 @@
 <script src=" {{ asset('/template/js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script src="{{ asset('template/js/jquery-3.3.1.min.js') }}"></script>
+{{--<script src="{{ asset('template/js/jquery-3.3.1.min.js') }}"></script>--}}
 @stack('customjs')
 
 <script>
-    $(document).ready(function () {
+    jQuery(document).ready(function ($) {
         $('.table-data-div').DataTable({
             paging: false,
             bSort : false,
