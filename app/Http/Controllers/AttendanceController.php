@@ -159,7 +159,7 @@ class AttendanceController extends Controller
     public function attendanceDetails(Request $request, $section_id)
     {
 
-        $course =  Course::with('section')->where('section_id', $section_id)->firstOrFail();
+        $course =  Course::with('section')->where('section_id', $section_id)->first();
         $examID = 0;
         if (!empty($course->exam_id))
         {

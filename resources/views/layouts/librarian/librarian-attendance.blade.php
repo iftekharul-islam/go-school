@@ -36,9 +36,9 @@
                         <td>{{$attendance->stuff->student_code}}</td>
                         <td>
                             @if($attendance->present === 1)
-                                <span class="badge-primary badge">Present</span>
+                                <span class="badge-primary badge attdState">Present</span>
                             @else
-                                <span class="badge-danger badge">Absent</span>
+                                <span class="badge-danger badge attdState">Absent</span>
                             @endif
                             &nbsp;&nbsp;<a href="{{url('user/'.$attendance->stuff->student_code)}}">{{$attendance->stuff->name}}</a>
                         </td>
@@ -120,6 +120,10 @@
         @endif
     </div>
 </form>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
 <script>
     $('input[type="checkbox"]').change(function () {
         var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
