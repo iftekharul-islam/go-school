@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -129,7 +130,8 @@ class AdminController extends Controller
         $school = School::where('id', $request->school_id)->first();
         $request->request->add(['code' => $school->code]);
         $password = $request->password;
-        $tb = $this->userService->storeAdmin($request);
+        $pic_path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
+        $tb = $this->userService->storeAdmin($request, $pic_path);
         try {
             event(new UserRegistered($tb, $password));
         } catch(\Exception $ex) {

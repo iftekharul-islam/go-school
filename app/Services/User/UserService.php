@@ -187,7 +187,7 @@ class UserService {
             ->firstOrFail();
     }
 
-    public function storeAdmin($request){
+    public function storeAdmin($request, $path){
         $tb = new $this->user;
         $tb->name = $request->name;
         $tb->email = $request->email;
@@ -201,7 +201,7 @@ class UserService {
         $tb->blood_group = $request->blood_group;
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
-        $tb->pic_path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date("Y"), $request->file('pic_path')) : null;
+        $tb->pic_path = 'storage/'.$path;
         $tb->verified = 1;
         $tb->address = $request->address;
         $tb->about = $request->about;
