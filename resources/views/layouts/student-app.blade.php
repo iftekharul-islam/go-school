@@ -117,6 +117,7 @@
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.table-data-div').DataTable({
