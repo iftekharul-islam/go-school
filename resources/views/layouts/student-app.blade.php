@@ -31,6 +31,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.css">
 
@@ -84,23 +85,7 @@
     </div>
     <!-- Page Area End Here -->
 </div>
-<script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
-<script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
-<script>
-    $(document).ready(function () {
-        var myTable = $('.table-data-div').DataTable({
-            paging: false,
-            bSort : false,
-            language: {
-                searchPlaceholder: "Search here"
-            }
-        });
-        $('[data-toggle="popover"]').popover({
-            container: 'body'
-        });
-    });
-</script>
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
 <!-- Popper js -->
@@ -118,6 +103,7 @@
 <!-- Full Calender Js -->
 <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
 <!-- Chart Js -->
+
 <script src="{{ asset('template/js/Chart.min.js') }}"></script>
 <!-- Data Table Js -->
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
@@ -129,15 +115,13 @@
 
 <script src=" {{ asset('/template/js/main.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
-@stack('customjs')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
+<script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 <script>
-    jQuery(document).ready(function ($) {
-        $('.table-data-div').DataTable({
+    $(document).ready(function () {
+        var myTable = $('.table-data-div').DataTable({
             paging: false,
             bSort : false,
             language: {
@@ -145,8 +129,7 @@
                 searchPlaceholder: "Search here"
             }
         });
-
-        $('.section-student-data-table').DataTable({
+        var myTable = $('.section-student-data-table').DataTable({
             paging: true,
             bSort : false,
             scrollY:        false,
@@ -157,7 +140,11 @@
 
     });
 
+
 </script>
+
+@stack('customjs')
+
 </body>
 
 </html>
