@@ -93,7 +93,6 @@
             $('#fileupload').fileupload({
                 dataType: 'json',
                 add: function (e, data) {
-                    console.log(data);
                     var file = data.originalFiles[0];
                     if (file) {
                         $('#fileInfo').remove();
