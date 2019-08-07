@@ -163,6 +163,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('gpa/all-gpa', 'GradesystemController@index');
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department','SchoolController@allDepartment');
+        Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
 
         Route::prefix('staff')->group(function () {
             Route::get('teacher-attendance', 'StuffAttendanceController@index');

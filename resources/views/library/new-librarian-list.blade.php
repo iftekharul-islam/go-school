@@ -11,7 +11,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                @component('components.new-users-list',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])@endcomponent
+                @component('components.new-users-list',['users'=>$users])@endcomponent
             </div>
         @else
             <div class="">

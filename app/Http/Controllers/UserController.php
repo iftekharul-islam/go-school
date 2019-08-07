@@ -47,7 +47,6 @@ class UserController extends Controller
      */
     public function index($school_code, $student_code, $teacher_code){
         session()->forget('section-attendance');
-
         if($this->userService->isListOfStudents($school_code, $student_code))
             return $this->userService->indexView('list.new-student-list', $this->userService->getStudents(), $type= "Students");
         else if($this->userService->isListOfTeachers($school_code, $teacher_code))

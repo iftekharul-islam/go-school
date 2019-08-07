@@ -31,8 +31,8 @@ class UserService {
     public function indexView($view, $users){
         return view($view, [
             'users' => $users,
-            'current_page' => $users->currentPage(),
-            'per_page' => $users->perPage(),
+//            'current_page' => $users->currentPage(),
+//            'per_page' => $users->perPage(),
         ]);
     }
 
@@ -116,8 +116,8 @@ class UserService {
     public function indexOtherView($view, $users){
         return view($view, [
             'users' => $users,
-            'current_page' => $users->currentPage(),
-            'per_page' => $users->perPage(),
+//            'current_page' => $users->currentPage(),
+//            'per_page' => $users->perPage(),
         ]);
     }
 
@@ -127,7 +127,7 @@ class UserService {
             ->student()
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->paginate(100);
+            ->get();
     }
 
     public function getTeachers(){
@@ -136,7 +136,7 @@ class UserService {
             ->where('role', 'teacher')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->paginate(50);
+            ->get();
     }
 
     public function getAccountants(){
@@ -145,7 +145,7 @@ class UserService {
             ->where('role', 'accountant')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->paginate(50);
+            ->get();
     }
 
     public function getLibrarians(){
@@ -154,7 +154,7 @@ class UserService {
             ->where('role', 'librarian')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->paginate(50);
+            ->get();
     }
 
     public function getSectionStudentsWithSchool($section_id){

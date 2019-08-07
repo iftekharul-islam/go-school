@@ -50,8 +50,8 @@
                     {{ session('error-status') }}
                 </div>
             @endif
-        <div class="table-responsive">
-            <table class="table table-data-div table-bordered display text-wrap">
+        <div class="mb-5">
+            <table class="table data-table-paginate table-bordered display text-wrap">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -98,7 +98,7 @@
                 <tbody>
                 @foreach ($users as $key=>$user)
                     <tr>
-                        <th scope="row">{{ ($current_page-1) * $per_page + $key + 1 }}</th>
+                        <th scope="row">{{$loop->index + 1 }}</th>
                         <td>{{$user->student_code}}</td>
                         <td>
                             <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
@@ -155,9 +155,9 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="paginate123 mt-5 float-right">
-                {{ $users->links() }}
-            </div>
+            {{--<div class="paginate123 mt-5 float-right">--}}
+                {{--{{ $users->links() }}--}}
+            {{--</div>--}}
         </div>
     </div>
 

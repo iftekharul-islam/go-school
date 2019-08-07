@@ -17,7 +17,7 @@ class StuffAttendanceController extends Controller
 
     public function index()
     {
-        $teachers = User::where('school_id', Auth::user()->school_id)->where('role', 'teacher')->where('active',1)->get();
+        $teachers = User::where('school_id', Auth::user()->school_id)->where('role', 'teacher')->orderBy('name', 'ASC')->where('active',1)->get();
         $attendances = $this->teacherAttendanceService->getTeacherTodayAttendance();
         $attCount = $this->teacherAttendanceService->getTeacherTotalAttendance();
         return view('attendance.teacher-attendance', compact('teachers', 'attendances', 'attCount'));

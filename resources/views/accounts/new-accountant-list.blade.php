@@ -6,7 +6,7 @@
 <div>
     @if(count($users) > 0)
         <div class="">
-            @component('components.new-users-list',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])@endcomponent
+            @component('components.new-users-list',['users'=>$users])@endcomponent
         </div>
     @else
         <div class="">

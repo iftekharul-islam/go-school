@@ -128,10 +128,21 @@
                 searchPlaceholder: "Search here"
             }
         });
+
         $('.section-student-data-table').DataTable({
             paging: true,
-            bSort : false,
-            scrollY:        false,
+            bSort: false,
+            scrollY: false,
+            language: {
+                searchPlaceholder: "Search here"
+            }
+        });
+        $('.data-table-paginate').DataTable({
+            paging: true,
+            pageLength: 50,
+            bSort : true,
+            lengthChange: true,
+            scrollY: false,
             language: {
                 searchPlaceholder: "Search here"
             }

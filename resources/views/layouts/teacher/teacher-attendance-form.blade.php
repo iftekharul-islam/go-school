@@ -70,7 +70,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{url('admin/staff/attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
+                        <td><a href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/staff/attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else

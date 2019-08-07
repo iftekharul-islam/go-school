@@ -34,7 +34,6 @@ class SectionController extends Controller
     public function index()
     {
         $user = Auth::user();
-
         $classes = Myclass::where('school_id', $user->school->id)
             ->get();
         $classeIds = Myclass::where('school_id', $user->school->id)

@@ -34,7 +34,7 @@ class TeacherAttendanceService {
         return StuffAttendance::whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('stuff_id', 'ASC')
             ->get()
             ->unique('stuff_id');
     }
@@ -43,7 +43,7 @@ class TeacherAttendanceService {
     {
         return StuffAttendance::whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('stuff_id', 'desc')
             ->whereIn('role', ['librarian', 'accountant'])
             ->get()
             ->unique('stuff_id');
