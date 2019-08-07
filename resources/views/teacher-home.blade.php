@@ -119,7 +119,7 @@
                             </div>
                             <div class="table-box-wrap">
                                 <div class="table-responsive student-table-box">
-                                    <table class="table section-student-data-table text-wrap" id="myStudent">
+                                    <table class="table data-table-paginate table-bordered display text-wrap" id="myStudent">
                                         <thead>
                                         <tr>
                                             <th>Name</th>
@@ -134,7 +134,7 @@
                                         @foreach($courses_student as $c)
                                             @foreach($c['section']['users'] as $user)
                                                 <tr>
-                                                    <td>{{ $user->name }}</td>
+                                                    <td> <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a></td>
                                                     <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
                                                     <td>{{ ucfirst($user['section']['class_id']) }}</td>
