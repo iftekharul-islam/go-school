@@ -1501,14 +1501,6 @@
             </div>
         </div>
     </div>
-    <script>
-        $(function () {
-            $('.date').datepicker({
-                format: 'yyyy-mm-dd',
-                language: 'en'
-            });
-        })
-    </script>
 
     <script>
 
