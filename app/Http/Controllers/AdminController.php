@@ -47,7 +47,6 @@ class AdminController extends Controller
             ->where('school_id', Auth::user()->school_id)
             ->where('role', '!=', 'admin')
             ->get();
-//        return $users;
         return view('search.search-list', compact('users'));
     }
 
@@ -93,7 +92,6 @@ class AdminController extends Controller
                 {
                     $courses = $this->courseService->getCoursesByTeacherId($user->id);
                 }
-//                return $courses;
             }
             return view('search.other-role', compact('user', 'present', 'absent', 'courses'));
         }
@@ -175,6 +173,7 @@ class AdminController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
+
         $tb = $this->user->findOrFail($request->user_id);
         $tb->name = $request->name;
         $tb->email = (!empty($request->email)) ? $request->email : '';
@@ -182,7 +181,7 @@ class AdminController extends Controller
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
         $tb->about = (!empty($request->about)) ? $request->about : '';
-        $tb->pic_path = (!empty($request->pic_path)) ? $request->pic_path : '';
+        $tb->pic_path = $request->hasFile('pic_path') ? 'storage/'.Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
         $tb->save();
 
         return back()->with('status', $request->name. ' User Updated');

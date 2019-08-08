@@ -275,8 +275,9 @@ button:focus {
 }
 
 .form__group:not(:last-child) {
-    margin-bottom: 6rem;
+    margin-bottom: 4rem;
 }
+
 .form__group {
     position: relative;
 }
@@ -439,9 +440,15 @@ button:focus {
 }
 
 .book__form .help-block strong {
-    font-size: 19px;
+    font-size: 14px;
     color: #ed143d;
 }
 
+.error-message {
+    margin-top: -22px!important;
+    margin-bottom: 22px!important;
+    text-align: left;
+    margin-left: 10%;
+}
 
 /*# sourceMappingURL=style.css.map */
