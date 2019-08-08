@@ -1518,7 +1518,6 @@
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var idx = $(this).index('a[data-toggle="tab"]');
-            console.log(idx);
             $('#tab-' + idx).addClass('active');
         });
     </script>
