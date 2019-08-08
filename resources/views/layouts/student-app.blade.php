@@ -49,6 +49,7 @@
         'librarian'))?Auth::user()->school->name: 'Shoroborno' }}</title>
     {{--<script src="{{asset('js/app.js')}}"></script>--}}
     <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
+    <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -110,13 +111,14 @@
 {{--<!-- Select 2 Js -->--}}
 <script src="{{ asset('template/js/select2.min.js') }}"></script>
 {{--<!-- Date Picker Js -->--}}
-<script src="{{ asset('template/js/datepicker.min.js') }}"></script>
+
 {{--<!-- Main js -->--}}
 
 <script src=" {{ asset('template/js/main.js') }}"></script>
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
