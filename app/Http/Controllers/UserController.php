@@ -281,7 +281,6 @@ class UserController extends Controller
         }
 
         return back()->withInput(['tab'=> 'tab11'] )->with('status', 'Librarian Created');
-//        return redirect()->to('/academic-settings#tab11')->with('status', 'Saved');
     }
 
     /**

@@ -135,7 +135,7 @@ class SchoolController extends Controller
         $s->school_id = Auth::user()->school_id;
         $s->department_name = $request->department_name;
         $s->save();
-        return back()->withInput(['tab'=> 'tab8'] )->with('status', 'saved');
+        return back()->withInput(['tab'=> 'tab8'] )->with('status', 'New Department created');
     }
 
     public function allDepartment()
