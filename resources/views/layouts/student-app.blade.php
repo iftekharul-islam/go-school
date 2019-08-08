@@ -46,8 +46,8 @@
 
     <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
-        'librarian'))?Auth::user()->school->name: 'Laravel' }}</title>
-    <script src="{{asset('js/app.js')}}"></script>
+        'librarian'))?Auth::user()->school->name: 'Shoroborno' }}</title>
+    {{--<script src="{{asset('js/app.js')}}"></script>--}}
     <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -88,30 +88,30 @@
 
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
-<!-- Popper js -->
+{{--<!-- Popper js -->--}}
 <script src="{{ asset('template/js/popper.min.js') }}"></script>
-<!-- Bootstrap js -->
+{{--<!-- Bootstrap js -->--}}
 <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
-<!-- Counterup Js -->
+{{--<!-- Counterup Js -->--}}
 <script src="{{ asset('template/js/jquery.counterup.min.js') }}"></script>
-<!-- Moment Js -->
+{{--<!-- Moment Js -->--}}
 <script src="{{ asset('template/js/moment.min.js') }}"></script>
-<!-- Waypoints Js -->
+{{--<!-- Waypoints Js -->--}}
 <script src="{{ asset('template/js/jquery.waypoints.min.js') }}"></script>
-<!-- Scroll Up Js -->
+{{--<!-- Scroll Up Js -->--}}
 <script src="{{ asset('template/js/jquery.scrollUp.min.js') }}"></script>
-<!-- Full Calender Js -->
+{{--<!-- Full Calender Js -->--}}
 <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
-<!-- Chart Js -->
+{{--<!-- Chart Js -->--}}
 
 <script src="{{ asset('template/js/Chart.min.js') }}"></script>
-<!-- Data Table Js -->
+{{--<!-- Data Table Js -->--}}
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
-<!-- Select 2 Js -->
+{{--<!-- Select 2 Js -->--}}
 <script src="{{ asset('template/js/select2.min.js') }}"></script>
-<!-- Date Picker Js -->
+{{--<!-- Date Picker Js -->--}}
 <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
-<!-- Main js -->
+{{--<!-- Main js -->--}}
 
 <script src=" {{ asset('template/js/main.js') }}"></script>
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
@@ -146,13 +146,6 @@
             language: {
                 searchPlaceholder: "Search here"
             }
-        });
-
-        $(function () {
-            $('.date').datepicker({
-                format: 'yyyy-mm-dd',
-                language: 'en'
-            });
         });
 
     });
