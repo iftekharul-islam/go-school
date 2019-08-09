@@ -11,7 +11,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form class="new-added-form" action="{{url('admin/school/add-class')}}" method="post">
+        <form class="new-added-form" action="{{url('admin/school/add-class')}}" method="post">
           {{csrf_field()}}
           <div class="form-group">
             <label for="classNumber{{$school->id}}" class="col-sm-12 control-label">Class Number/Name</label>

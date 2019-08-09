@@ -31,7 +31,6 @@
         <div class="col-md-12 form-group{{ $errors->has('start_date') ? ' has-error' : '' }}">
             <label>Start Date</label>
             <input data-date-format="yyyy-mm-dd" id="start_date" class="form-control date" name="start_date" value="{{ old('start_date') }}" placeholder="Start Date" required autocomplete="off">
-{{--            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" placeholder="5th April..." required>--}}
             @if ($errors->has('start_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('start_date') }}</strong>
@@ -42,7 +41,6 @@
         <div class="col-md-12 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>End Date</label>
             <input data-date-format="yyyy-mm-dd" id="end_date" class="form-control date" name="end_date" value="{{ old('end_date') }}" placeholder="End Date" required autocomplete="off">
-{{--            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ old('end_date') }}" placeholder="20th April..." required>--}}
             @if ($errors->has('end_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('end_date') }}</strong>
@@ -54,13 +52,11 @@
             <label>For Class</label>
                 <select id="book_code" required class="form-control select2 classes-exams" multiple name="classes[]">
                     @foreach($classes as $class)
-{{--                        <option value="{{$class->id}}">--}}
                             @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))
                                 <option value="" disabled><b>Class - {{$class->class_number}}</b>&nbsp;&nbsp; <small>(Exam Assigned)</small></option>
                             @else
                                 <option value="{{ $class->id}}"><b>Class - {{$class->class_number}}</b></option>
                             @endif
-{{--                        </option>--}}
                     @endforeach
                 </select>
 

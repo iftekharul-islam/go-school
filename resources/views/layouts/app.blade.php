@@ -50,58 +50,58 @@
 <!-- Preloader End Here -->
 <div id="wrapper" class="wrapper bg-ash">
 
-    @include('layouts.shared.topbar')
+@include('layouts.shared.topbar')
 
-    <!-- Page Area Start Here -->
-        <div class="dashboard-page-one">
-            <!-- Sidebar Area Start Here -->
-            @include('layouts.shared.sidebar-student')
-            <!-- Sidebar Area End Here -->
-            <div class="dashboard-content-one">
+<!-- Page Area Start Here -->
+    <div class="dashboard-page-one">
+        <!-- Sidebar Area Start Here -->
+    @include('layouts.shared.sidebar-student')
+    <!-- Sidebar Area End Here -->
+        <div class="dashboard-content-one">
 
-                @yield('content')
-                <!-- Footer Area Start Here -->
-                <footer class="footer-wrap-layout1">
-                    <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
-                                href="#">PsdBosS</a></div>
-                </footer>
-                <!-- Footer Area End Here -->
-            </div>
+        @yield('content')
+        <!-- Footer Area Start Here -->
+            <footer class="footer-wrap-layout1">
+                <div class="copyright">© Copyrights <a href="#">akkhor</a> 2019. All rights reserved. Designed by <a
+                            href="#">PsdBosS</a></div>
+            </footer>
+            <!-- Footer Area End Here -->
         </div>
-        <!-- Page Area End Here -->
+    </div>
+    <!-- Page Area End Here -->
 </div>
 
-    <script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-3.3.7.min.js') }}"></script>
+<script src="{{ asset('js/dataTables-1.10.16.min.js') }}"></script>
+<script src="{{ asset('js/dataTables-1.10.16.bootstrap.min.js') }}"></script>
 
 
 
-    <script src="{{ asset('/template/js/plugins.js') }}"></script>
-    <!-- Popper js -->
-    <script src="{{ asset('/template/js/popper.min.js') }}"></script>
-    <!-- Bootstrap js -->
-    <script src="{{ asset('/template/js/bootstrap.min.js') }}"></script>
-    <!-- Counterup Js -->
-    <script src="{{ asset('/template/js/jquery.counterup.min.js') }}"></script>
-    <!-- Moment Js -->
-    <script src="{{ asset('/template/js/moment.min.js') }}"></script>
-    <!-- Waypoints Js -->
-    <script src="{{ asset('/template/js/jquery.waypoints.min.js') }}"></script>
-    <!-- Scroll Up Js -->
-    <script src="{{ asset('/template/js/jquery.scrollUp.min.js') }}"></script>
-    <!-- Full Calender Js -->
-    <script src="{{ asset('/template/js/fullcalendar.min.js') }}"></script>
-    <!-- Chart Js -->
-    <script src="{{ asset('/template/js/Chart.min.js') }}"></script>
-    <!-- Data Table Js -->
-    <script src="{{ asset('/template/js/jquery.dataTables.min.js') }}"></script>
-    <!-- Select 2 Js -->
-    <script src="{{ asset('/template/js/select2.min.js') }}"></script>
-    <!-- Date Picker Js -->
-    <script src="{{ asset('/template/js/datepicker.min.js') }}"></script>
-    <!-- Main js -->
-    <script src=" {{ asset('/template/js/main.js') }}"></script>
+<script src="{{ asset('/template/js/plugins.js') }}"></script>
+<!-- Popper js -->
+<script src="{{ asset('/template/js/popper.min.js') }}"></script>
+<!-- Bootstrap js -->
+<script src="{{ asset('/template/js/bootstrap.min.js') }}"></script>
+<!-- Counterup Js -->
+<script src="{{ asset('/template/js/jquery.counterup.min.js') }}"></script>
+<!-- Moment Js -->
+<script src="{{ asset('/template/js/moment.min.js') }}"></script>
+<!-- Waypoints Js -->
+<script src="{{ asset('/template/js/jquery.waypoints.min.js') }}"></script>
+<!-- Scroll Up Js -->
+<script src="{{ asset('/template/js/jquery.scrollUp.min.js') }}"></script>
+<!-- Full Calender Js -->
+<script src="{{ asset('/template/js/fullcalendar.min.js') }}"></script>
+<!-- Chart Js -->
+<script src="{{ asset('/template/js/Chart.min.js') }}"></script>
+<!-- Data Table Js -->
+<script src="{{ asset('/template/js/jquery.dataTables.min.js') }}"></script>
+<!-- Select 2 Js -->
+<script src="{{ asset('/template/js/select2.min.js') }}"></script>
+<!-- Date Picker Js -->
+<script src="{{ asset('/template/js/datepicker.min.js') }}"></script>
+<!-- Main js -->
+<script src=" {{ asset('/template/js/main.js') }}"></script>
 
 </body>
 

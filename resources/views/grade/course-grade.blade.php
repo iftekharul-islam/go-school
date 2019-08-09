@@ -3,38 +3,38 @@
 @section('title', 'Grade')
 
 @section('content')
-<div class="container-fluid">
-  <div class="breadcrumbs-area">
-    <h3>
-      Assign Grade
-    </h3>
-    <ul>
-      <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-          Back &nbsp;&nbsp;|</a>
-        <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
-      </li>
-      <li>Assign Grade</li>
-    </ul>
-  </div>
-  <div class="card height-auto false-height">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-12" id="main-container">
-          @if (session('status'))
-            <div class="alert alert-success">
-              {{ session('status') }}
-            </div>
-          @endif
-          @if ($errors->any())
-            <div class="alert alert-danger">
-              <ul>
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-              </ul>
-            </div>
-          @endif
-         @if($exam)
+  <div class="container-fluid">
+    <div class="breadcrumbs-area">
+      <h3>
+        Assign Grade
+      </h3>
+      <ul>
+        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            Back &nbsp;&nbsp;|</a>
+          <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+        </li>
+        <li>Assign Grade</li>
+      </ul>
+    </div>
+    <div class="card height-auto false-height">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12" id="main-container">
+            @if (session('status'))
+              <div class="alert alert-success">
+                {{ session('status') }}
+              </div>
+            @endif
+            @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+            @if($exam)
               <form action="{{url('teacher/courses/save-configuration')}}" method="POST">
                 {{csrf_field()}}
                 <input type="hidden" name="id" value="{{$course_id}}">
@@ -196,14 +196,14 @@
                   </div>
                 @endif
               </div>
-           @else
+            @else
               <div class="panel-body">
-               You can not submit grade as there's no examination available for this course.
+                You can not submit grade as there's no examination available for this course.
               </div>
-           @endif
+            @endif
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 @endsection

@@ -1,6 +1,5 @@
 @if(count($attendances) > 0)
-<div class="col-md-12">
-{{--    <h5>Attendance List of This Term</h5>--}}
+<div class="col-md-12">=
     <form action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendance/adjust')}}" method="POST">
         {{ csrf_field() }}
         <table class="table display table-bordered data-table text-nowrap">
@@ -16,9 +15,6 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="isPresent[]" aria-label="Present" checked="">
                             <label for="">&nbsp;</label></div>
-{{--                        <div class="form-check">--}}
-{{--                            <input class="form-check-input position-static" type="checkbox" aria-label="Present" name="isPresent[]">--}}
-{{--                        </div>--}}
                     </td>
                     <td>
                         @if($att->present === 0)

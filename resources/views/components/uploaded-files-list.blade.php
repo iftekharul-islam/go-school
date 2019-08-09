@@ -1,21 +1,21 @@
 <div class="table-responsive">
   <table class="table table-data-div table-bordered table-hover">
     <thead>
-      <tr>
-        <th>#</th>
-        <th>File Name</th>
-        @if($upload_type == 'syllabus' && $parent == 'class')
-          <th>Class</th>
-        @elseif($upload_type == 'routine' && $parent == 'section')
-          <th>Class</th>
-          <th>Section</th>
-        @endif
-        <th>Is Active</th>
-        <th>Action</th>
-      </tr>
+    <tr>
+      <th>#</th>
+      <th>File Name</th>
+      @if($upload_type == 'syllabus' && $parent == 'class')
+        <th>Class</th>
+      @elseif($upload_type == 'routine' && $parent == 'section')
+        <th>Class</th>
+        <th>Section</th>
+      @endif
+      <th>Is Active</th>
+      <th>Action</th>
+    </tr>
     </thead>
     <tbody>
-      @foreach($files as $file)
+    @foreach($files as $file)
       <tr>
         <td>{{($loop->index + 1)}}</td>
         <td><a class="text-teal" href="{{url($file->file_path)}}" target="_blank">{{$file->title}}</a></td>
@@ -27,15 +27,15 @@
         @endif
         <td>{{($file->active === 1)?'Yes':'No'}}</td>
         @if($file->active ===1)
-        <td>
-          <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
-            Deactivate</button>
-          <form id="delete-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
-            @csrf
-            @method('GET')
-          </form>
-        </td>
-          @else
+          <td>
+            <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
+              Deactivate</button>
+            <form id="delete-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
+              @csrf
+              @method('GET')
+            </form>
+          </td>
+        @else
           <td>
             <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
               Activate</button>
@@ -44,9 +44,9 @@
               @method('GET')
             </form>
           </td>
-          @endif
+        @endif
       </tr>
-      @endforeach
+    @endforeach
     </tbody>
   </table>
 </div>

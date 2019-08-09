@@ -1,34 +1,34 @@
 <a class="btn btn-lg btn-info pull-right" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}" aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">+ Add New Course</a>
-  <div class="collapse" id="collapseForNewCourse{{$section->id}}" style="margin-top:1%;">
-    <div class="panel panel-default">
-      <div class="panel-body">
+<div class="collapse" id="collapseForNewCourse{{$section->id}}" style="margin-top:1%;">
+  <div class="panel panel-default">
+    <div class="panel-body">
       <form class="form-horizontal" action="{{url('admin/courses/store')}}" method="post">
-          {{csrf_field()}}
-          <input type="hidden" name="class_id" value="{{$class->id}}"/>
-          <input type="hidden" name="section_id" value="{{$section->id}}"/>
-          <div class="false-padding-bottom-form form-group">
-            <label for="courseName{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Course Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name" placeholder="Course Name">
-            </div>
+        {{csrf_field()}}
+        <input type="hidden" name="class_id" value="{{$class->id}}"/>
+        <input type="hidden" name="section_id" value="{{$section->id}}"/>
+        <div class="false-padding-bottom-form form-group">
+          <label for="courseName{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Course Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name" placeholder="Course Name">
           </div>
+        </div>
 
-          <div class="form-group false-padding-bottom-form">
-            <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Assign Course Teacher</label>
-            <div class="col-sm-10">
-              <select class="form-control" id="assignTeacher{{$section->id}}" name="teacher_id">
-                <option value="0" selected disabled>Select Teacher</option>
-                @if(count($teachers) > 0)
-                  {{$teachers_of_this_school = $teachers->filter(function ($teacher) use ($school){
-                    return $teacher->school_id == $school->id;
-                  })}}
-                  @foreach($teachers_of_this_school as $teacher)
-                    <option value="{{$teacher->id}}" data-department="{{$teacher->department_name}}">{{$teacher->name}} {{$teacher->department_name}}</option>
-                  @endforeach
-                @endif
-              </select>
-            </div>
+        <div class="form-group false-padding-bottom-form">
+          <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Assign Course Teacher</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="assignTeacher{{$section->id}}" name="teacher_id">
+              <option value="0" selected disabled>Select Teacher</option>
+              @if(count($teachers) > 0)
+                {{$teachers_of_this_school = $teachers->filter(function ($teacher) use ($school){
+                  return $teacher->school_id == $school->id;
+                })}}
+                @foreach($teachers_of_this_school as $teacher)
+                  <option value="{{$teacher->id}}" data-department="{{$teacher->department_name}}">{{$teacher->name}} {{$teacher->department_name}}</option>
+                @endforeach
+              @endif
+            </select>
           </div>
+        </div>
 
         <div class="form-group false-padding-bottom-form">
           <label for="course_type{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Course Type</label>
@@ -53,9 +53,9 @@
           </div>
         </div>
       </form>
-      </div>
     </div>
   </div>
+</div>
 <script>
   $('#teacherDepartment{{$section->id}}').click(function () {
     $("#assignTeacher{{$section->id}} option").hide();

@@ -17,12 +17,12 @@
 
     <div class="card height-auto false-height">
         @if($gpa)
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+            <div class="card-body">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <h4><i class="fas fa-poll text-teal"></i> Grade Title: <strong>{{$gpa->grade_system_name   }}</strong></h4>
                 <div class="table-responsive">
                     <table class="table display table-bordered  text-nowraps">
@@ -45,29 +45,29 @@
                                 <td>{{$gpainfo->marks_from}}</td>
                                 <td>{{$gpainfo->marks_to}}</td>
                                 <td>
-                                  <div class="row text-center">
-                                      <div class="col-6">
-                                          <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpainfo->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
-                                      </div>
-                                      <div class="col-6">
-                                          <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i>Delete</button>
-                                          <form id="delete-form-{{ $gpainfo->id }}" class="form-group" action="{{ url('admin/gpa/delete', $gpainfo->id) }}" method="post">
-                                              {{ method_field('DELETE') }}
-                                              {{ csrf_field() }}
-                                          </form>
-                                      </div>
-                                  </div>
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpainfo->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i>Delete</button>
+                                            <form id="delete-form-{{ $gpainfo->id }}" class="form-group" action="{{ url('admin/gpa/delete', $gpainfo->id) }}" method="post">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
-        </div>
+            </div>
         @else
-        <div class="card-body">
-           <h3> No Grade System Available!</h3>
-        </div>
+            <div class="card-body">
+                <h3> No Grade System Available!</h3>
+            </div>
         @endif
     </div>
     <script type="text/javascript">
@@ -79,15 +79,15 @@
                 buttons: true,
                 dangerMode: true,
             })
-            .then((willDelete) => {
-                if (willDelete) {
-                    document.getElementById('delete-form-'+id).submit();
-                    setTimeout(5000);
-                    swal("Poof! Your Selected data has been deleted!", {
-                        icon: "success",
-                    });
-                }
-            });
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                        setTimeout(5000);
+                        swal("Poof! Your Selected data has been deleted!", {
+                            icon: "success",
+                        });
+                    }
+                });
         }
     </script>
 @endsection

@@ -10,7 +10,7 @@
                 <i class="fas fa-users mr-2 "></i>  Accountants
             @elseif($user->role == 'librarian')
                 <i class="fas fa-users mr-2 "></i>   All Librarians
-                @else
+            @else
                 <i class="fas fa-users mr-2 "></i>    All Users
             @endif
             @break
@@ -46,10 +46,10 @@
                 {{ session('status') }}
             </div>
         @elseif(session('error-status'))
-                <div class="alert alert-success">
-                    {{ session('error-status') }}
-                </div>
-            @endif
+            <div class="alert alert-success">
+                {{ session('error-status') }}
+            </div>
+        @endif
         <div class="mb-5">
             <table class="table data-table-paginate table-bordered display text-wrap">
                 <thead>
@@ -143,10 +143,10 @@
                                     <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
                                     <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $user->id }})">
                                         <i class="far fa-trash-alt"></i></button>
-                                        <form id="delete-form-{{ $user->id }}" action="{{ url('admin/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
-                                            @csrf
-                                            @method('GET')
-                                        </form>
+                                    <form id="delete-form-{{ $user->id }}" action="{{ url('admin/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
+                                        @csrf
+                                        @method('GET')
+                                    </form>
                                     </button>
                                 </td>
                             @endif
@@ -156,7 +156,7 @@
                 </tbody>
             </table>
             {{--<div class="paginate123 mt-5 float-right">--}}
-                {{--{{ $users->links() }}--}}
+            {{--{{ $users->links() }}--}}
             {{--</div>--}}
         </div>
     </div>

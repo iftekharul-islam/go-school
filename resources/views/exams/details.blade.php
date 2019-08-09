@@ -3,7 +3,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Exams Details
+            Exams Details
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">

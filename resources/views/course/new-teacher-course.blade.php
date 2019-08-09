@@ -3,28 +3,28 @@
 @section('title', 'Course')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12" id="main-container">
-            <div class="panel panel-default">
-                <div class="breadcrumbs-area">
-                    <h3>
-                        </a>Teacher All Sections
-                    </h3>
-                    <ul>
-                        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                                Back &nbsp;&nbsp;|</a>
-                            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
-                        </li>
-                        <li>Teacher All Sections</li>
-                    </ul>
-                </div>
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" id="main-container">
+                <div class="panel panel-default">
+                    <div class="breadcrumbs-area">
+                        <h3>
+                            </a>Teacher All Sections
+                        </h3>
+                        <ul>
+                            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                                    Back &nbsp;&nbsp;|</a>
+                                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                            </li>
+                            <li>Teacher All Sections</li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <div class="card height-auto false-height">
                             <div class="card-body">
                                 <div class="heading-layout1">
@@ -43,9 +43,9 @@
                                 @endif
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

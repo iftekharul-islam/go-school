@@ -5,19 +5,19 @@
         <input type="hidden" name="section_id" value="{{$section_id}}">
         <table class="table display text-nowrap border">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Left School</th>
-                    <th>From Session</th>
-                    <th>To Session</th>
-                    <th>From Section</th>
-                    <th>To Section</th>
-                </tr>
+            <tr>
+                <th>#</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Left School</th>
+                <th>From Session</th>
+                <th>To Session</th>
+                <th>From Section</th>
+                <th>To Section</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach ($students as $key=>$student)
+            @foreach ($students as $key=>$student)
                 <tr>
                     <th>{{ ($loop->index + 1) }}</th>
                     <td>{{$student->student_code}}</td>
@@ -35,31 +35,31 @@
                     </td>
                     <td>
                         <input data-date-format="yyyy" class="form-control date" name="to_session[]" id="datepicker"
-                            value="{{date('Y', strtotime('+1 year'))}}">
+                               value="{{date('Y', strtotime('+1 year'))}}">
                     </td>
                     <td>
                         Class: {{$student->section->class->class_number}} - Section:
-                            {{$student->section->section_number}}
+                        {{$student->section->section_number}}
                     </td>
                     <td>
                         <select id="to_section" class="form-control" name="to_section[]">
                             @foreach($classes as $class)
-                            @foreach($class->sections as $section)
-                                @if($student->section->class->class_number === $class->class_number && $student->section->section_number === $section->section_number)
-                                    <option value="{{$section->id}}" selected>
-                                        Class: {{$class->class_number}} - Section: {{$section->section_number}}
-                                    </option>
-                                @else
-                                    <option value="{{$section->id}}">
-                                        Class: {{$class->class_number}} - Section: {{$section->section_number}}
-                                    </option>
-                                @endif
-                            @endforeach
+                                @foreach($class->sections as $section)
+                                    @if($student->section->class->class_number === $class->class_number && $student->section->section_number === $section->section_number)
+                                        <option value="{{$section->id}}" selected>
+                                            Class: {{$class->class_number}} - Section: {{$section->section_number}}
+                                        </option>
+                                    @else
+                                        <option value="{{$section->id}}">
+                                            Class: {{$class->class_number}} - Section: {{$section->section_number}}
+                                        </option>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </select>
                     </td>
                 </tr>
-                @endforeach
+            @endforeach
             </tbody>
         </table>
         <div style="text-align:center;" class="mt-5">

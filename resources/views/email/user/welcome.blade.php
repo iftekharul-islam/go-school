@@ -1,27 +1,27 @@
 @component('mail::message')
 
-# Welcome to {{ config('app.name') }}
+    # Welcome to {{ config('app.name') }}
 
-Hi {{ $name }},
+    Hi {{ $name }},
 
-We are glad to have you on board.
+    We are glad to have you on board.
 
-@if(!is_null($password))
-Your login details are as follows:
+    @if(!is_null($password))
+        Your login details are as follows:
 
-**Email**: {{ $email }}
+        **Email**: {{ $email }}
 
-**Password**: {{ $password }}
+        **Password**: {{ $password }}
 
-You can change your password once logged-in.
-@else
-Please ask site administrator to know your login access.
-@endif
+        You can change your password once logged-in.
+    @else
+        Please ask site administrator to know your login access.
+    @endif
 
-@component('mail::button', ['url' => url('login')])
-Visit site
-@endcomponent
+    @component('mail::button', ['url' => url('login')])
+        Visit site
+    @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent
