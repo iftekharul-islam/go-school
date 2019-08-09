@@ -72,13 +72,19 @@
     </div>
 </form>
 
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>--}}
 <script>
-    var path = "{{ url('/librarian/issue-books/autocomplete/{$query}') }}";
-    $('input.typeahead').typeahead({
-        source:  function (query, process) {
-            return $.get(path + $('#show-user').val(), {}, function (data) {
-                return process(data);
-            });
-        }
-    });
+    $(function () {
+        $('.date').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+        var path = "{{ url('/librarian/issue-books/autocomplete/{$query}') }}";
+        $('input.typeahead').typeahead({
+            source:  function (query, process) {
+                return $.get(path + $('#show-user').val(), {}, function (data) {
+                    return process(data);
+                });
+            }
+        });
+    })
 </script>
