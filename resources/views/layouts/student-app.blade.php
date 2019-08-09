@@ -36,19 +36,15 @@
     <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('template/css/sweet-alert5.3.5.min.css') }}">
+    <script src="{{ asset('template/js/modernizr-3.6.0.min.js') }}"></script>
 
+    @stack('customcss')
 
-@stack('customcss')
-
-<!-- Modernize js -->
-    <script src="{{ asset('/template/js/modernizr-3.6.0.min.js') }}"></script>
-
-    <!-- CSRF Token -->
+<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script src="{{asset('js/app.js')}}"></script>
-    <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
-    <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
+    {{--<script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>--}}
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -86,6 +82,10 @@
     <!-- Page Area End Here -->
 </div>
 
+</body>
+<script src="{{ asset('template/js/jquery-3.3.1.min.js') }}"></script>
+
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
 
 <script src="{{ asset('template/js/plugins.js') }}"></script>
 {{--<!-- Popper js -->--}}
@@ -103,7 +103,6 @@
 {{--<!-- Full Calender Js -->--}}
 <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
 {{--<!-- Chart Js -->--}}
-
 <script src="{{ asset('template/js/Chart.min.js') }}"></script>
 {{--<!-- Data Table Js -->--}}
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
@@ -111,14 +110,12 @@
 <script src="{{ asset('template/js/select2.min.js') }}"></script>
 {{--<!-- Date Picker Js -->--}}
 
-{{--<!-- Main js -->--}}
 
 <script src=" {{ asset('template/js/main.js') }}"></script>
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('template/js/datepicker.min.js') }}"></script>
+{{--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>--}}
 <script>
     $(document).ready(function () {
         $('.table-data-div').DataTable({
@@ -150,12 +147,15 @@
         });
 
     });
+    $(function () {
+        $('.date').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    });
 
 
 </script>
 
 @stack('customjs')
-
-</body>
 
 </html>

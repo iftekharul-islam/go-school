@@ -1501,17 +1501,9 @@
             </div>
         </div>
     </div>
-    <script>
-        $(function () {
-            $('.date').datepicker({
-                format: 'yyyy-mm-dd',
-                language: 'en'
-            });
-        })
-    </script>
+
 
     <script>
-
         $(document).ready(function () {
             $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
         });
