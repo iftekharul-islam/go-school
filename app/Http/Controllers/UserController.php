@@ -126,6 +126,7 @@ class UserController extends Controller
      */
     public function promoteSectionStudentsPost(Request $request)
     {
+
         return $this->userService->promoteSectionStudentsPost($request);
     }
 
