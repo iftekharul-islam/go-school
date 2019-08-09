@@ -3,24 +3,24 @@
 @section('title', 'All Books')
 
 @section('content')
-<div class="breadcrumbs-area">
-    <h3>
-        <i class='fas fa-book'></i>
-        Book Details
-    </h3>
-    <ul>
-        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                Back &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
-        </li>
-        <li>
-            <a style=" margin-left: 8px" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/all-books')  }}">
-            All Books
-            </a>
-        </li>
-        <li>{{ $book->title }}</li>
-    </ul>
-</div>
+    <div class="breadcrumbs-area">
+        <h3>
+            <i class='fas fa-book'></i>
+            Book Details
+        </h3>
+        <ul>
+            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                    Back &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            </li>
+            <li>
+                <a style=" margin-left: 8px" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/all-books')  }}">
+                    All Books
+                </a>
+            </li>
+            <li>{{ $book->title }}</li>
+        </ul>
+    </div>
 
     <div class="card height-auto false-height">
         <div class="card-body">
@@ -97,10 +97,10 @@
                                                             <td>{{ $book->type }}</td>
                                                         </tr>
                                                         {{--<tr>--}}
-                                                            {{--<td class="text-nowrap font-medium text-dark-medium">Class--}}
-                                                            {{--</td>--}}
-                                                            {{--<td>--}}
-                                                                {{--{{ $book->class->class_number }}</td>--}}
+                                                        {{--<td class="text-nowrap font-medium text-dark-medium">Class--}}
+                                                        {{--</td>--}}
+                                                        {{--<td>--}}
+                                                        {{--{{ $book->class->class_number }}</td>--}}
                                                         {{--</tr>--}}
                                                         <tr>
                                                             <td class="text-nowrap font-medium text-dark-medium">

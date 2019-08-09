@@ -24,7 +24,6 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        {{--                        <h3>All Section Student</h3>--}}
                     </div>
                 </div>
                 <div class="table-responsive">

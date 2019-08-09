@@ -50,7 +50,7 @@
     </div>
     <div class="card height-auto">
         <div class="card-body">
-{{--            <button class="fw-btn-fill btn-gradient-yellow btn-xs" role="button" id="btnPrint" >Print Fees Form</button>--}}
+            {{--            <button class="fw-btn-fill btn-gradient-yellow btn-xs" role="button" id="btnPrint" >Print Fees Form</button>--}}
             @component('components.new-fees-list',['fees'=>$fees])
             @endcomponent
         </div>

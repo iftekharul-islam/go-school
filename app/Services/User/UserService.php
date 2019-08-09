@@ -31,8 +31,6 @@ class UserService {
     public function indexView($view, $users){
         return view($view, [
             'users' => $users,
-//            'current_page' => $users->currentPage(),
-//            'per_page' => $users->perPage(),
         ]);
     }
 
@@ -117,8 +115,6 @@ class UserService {
     public function indexOtherView($view, $users){
         return view($view, [
             'users' => $users,
-//            'current_page' => $users->currentPage(),
-//            'per_page' => $users->perPage(),
         ]);
     }
 

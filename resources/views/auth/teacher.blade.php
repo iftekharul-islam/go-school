@@ -5,7 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Create Teacher
+        Create Teacher
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">

@@ -180,15 +180,15 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("select.book-type").change(function(){
-                var bookType = $(this).children("option:selected").val();
-                if (bookType === 'Academic') {
-                    $('.for-class').css('display', 'block');
-                } else {
-                    $('.for-class').css('display', 'none');
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("select.book-type").change(function(){
+            var bookType = $(this).children("option:selected").val();
+            if (bookType === 'Academic') {
+                $('.for-class').css('display', 'block');
+            } else {
+                $('.for-class').css('display', 'none');
+            }
         });
+    });
 </script>

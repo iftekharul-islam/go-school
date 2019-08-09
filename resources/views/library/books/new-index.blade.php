@@ -83,15 +83,15 @@
                 buttons: true,
                 dangerMode: true,
             })
-            .then((willDelete) => {
-                if (willDelete) {
-                    document.getElementById('delete-form-'+id).submit();
-                    setTimeout(5000);
-                    swal("Poof! Your Selected file has been deleted!", {
-                        icon: "success",
-                    });
-                }
-            });
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                        setTimeout(5000);
+                        swal("Poof! Your Selected file has been deleted!", {
+                            icon: "success",
+                        });
+                    }
+                });
         }
     </script>
 @endpush

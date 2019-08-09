@@ -66,39 +66,39 @@
                         {{ session('status') }}
                     </div>
                 @endif
-            <div class="mb-5">
-                @foreach($grades as $grade)
-                    <b>Class:</b> {{$grade->course->class->class_number}} &nbsp;
-                    <b>Section:</b> {{$grade->student->section->section_number}}
-                    @break
-                @endforeach
-            </div>
-            <div class="table-responsive">
-                <table class="table display table-data-div text-wrap">
-                    <thead>
-                    <tr>
-                        <th>Exam Name</th>
-                        <th>Course Name</th>
-                        <th>Student Code</th>
-                        <th>Student Name</th>
-                        <th>Total Mark</th>
-                        <th>GPA</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="mb-5">
                     @foreach($grades as $grade)
-                        <tr>
-                            <td>@if(isset($grade->exam->exam_name)){{$grade->exam->exam_name}}@endif</td>
-                            <td>@if(isset($grade->course->course_name)){{$grade->course->course_name}}@endif</td>
-                            <td>@if(isset($grade->student->student_code)){{$grade->student->student_code}}@endif</td>
-                            <td><a class="text-teal btn-link" href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
-                            <td>@if(isset($grade->marks)){{$grade->marks}}@endif</td>
-                            <td>@if(isset($grade->gpa)){{$grade->gpa}}@endif</td>
-                        </tr>
+                        <b>Class:</b> {{$grade->course->class->class_number}} &nbsp;
+                        <b>Section:</b> {{$grade->student->section->section_number}}
+                        @break
                     @endforeach
-                    </tbody>
-                </table>
-            </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table display table-data-div text-wrap">
+                        <thead>
+                        <tr>
+                            <th>Exam Name</th>
+                            <th>Course Name</th>
+                            <th>Student Code</th>
+                            <th>Student Name</th>
+                            <th>Total Mark</th>
+                            <th>GPA</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($grades as $grade)
+                            <tr>
+                                <td>@if(isset($grade->exam->exam_name)){{$grade->exam->exam_name}}@endif</td>
+                                <td>@if(isset($grade->course->course_name)){{$grade->course->course_name}}@endif</td>
+                                <td>@if(isset($grade->student->student_code)){{$grade->student->student_code}}@endif</td>
+                                <td><a class="text-teal btn-link" href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
+                                <td>@if(isset($grade->marks)){{$grade->marks}}@endif</td>
+                                <td>@if(isset($grade->gpa)){{$grade->gpa}}@endif</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else
                 <div class="panel-body">
                     No Related Data Found.

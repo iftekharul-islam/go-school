@@ -185,7 +185,7 @@
   </div>
   <div style="text-align:center;">
     <button type="submit" class="button button--save float-right mr-2"><b>Submit</b></button>
-{{--    <input type="submit" name="save" class="button button--save float-right mr-2" value="Submit">--}}
+    {{--    <input type="submit" name="save" class="button button--save float-right mr-2" value="Submit">--}}
   </div>
 </form>
 

@@ -3,11 +3,6 @@
     @if($upload_type != 'profile')
         <div class="">
             <div class="item-title">
-                {{--                <h3>@if($upload_type === 'routine')--}}
-                {{--                        <i class="far fa-file-alt mr-2"></i>     Class {{ucfirst($upload_type)}}s--}}
-                {{--                    @else--}}
-                {{--                        {{ucfirst($upload_type)}}--}}
-                {{--                    @endif</h3>--}}
             </div>
         </div>
         <div class="item-title">

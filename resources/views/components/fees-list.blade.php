@@ -1,14 +1,14 @@
 <div class="table-responsive">
   <table class="table table-bordered table-data-div table-hover">
     <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Fee Name</th>
-        <th scope="col">Select</th>
-      </tr>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Fee Name</th>
+      <th scope="col">Select</th>
+    </tr>
     </thead>
     <tbody>
-      @foreach($fees as $fee)
+    @foreach($fees as $fee)
       <tr>
         <td>{{($loop->index + 1)}}</td>
         <td>{{$fee->fee_name}}</td>
@@ -18,7 +18,7 @@
           </div>
         </td>
       </tr>
-      @endforeach
+    @endforeach
     </tbody>
   </table>
 </div>
