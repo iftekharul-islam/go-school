@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{--    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">--}}
+    <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
+        || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
+        'librarian'))?Auth::user()->school->name: 'Shoroborno' }}</title>
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/normalize.css') }}">
@@ -23,7 +25,7 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/animate.min.css') }}">
     <!-- Data Table CSS -->
-    {{--<link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">
     {{--<!-- Select 2 CSS -->--}}
     <link rel="stylesheet" href="{{ asset('template/css/select2.min.css') }}">
     <!-- Datepicker CSS -->
@@ -44,12 +46,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
-        || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
-        'librarian'))?Auth::user()->school->name: 'Shoroborno' }}</title>
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
