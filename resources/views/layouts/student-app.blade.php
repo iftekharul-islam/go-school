@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{--    <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/normalize.css') }}">
@@ -21,8 +23,8 @@
     <!-- Animate CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/animate.min.css') }}">
     <!-- Data Table CSS -->
-    <link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">
-    <!-- Select 2 CSS -->
+    {{--<link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">--}}
+    {{--<!-- Select 2 CSS -->--}}
     <link rel="stylesheet" href="{{ asset('template/css/select2.min.css') }}">
     <!-- Datepicker CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/datepicker.min.css') }}">
@@ -45,10 +47,9 @@
     <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
         'librarian'))?Auth::user()->school->name: 'Shoroborno' }}</title>
-
-
     <script src="{{asset('js/app.js')}}"></script>
     <script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -104,7 +105,7 @@
 {{--<!-- Full Calender Js -->--}}
 <script src="{{ asset('template/js/fullcalendar.min.js') }}"></script>
 {{--<!-- Chart Js -->--}}
-<script src=" {{ asset('template/js/main.js') }}"></script>
+
 <script src="{{ asset('template/js/Chart.min.js') }}"></script>
 {{--<!-- Data Table Js -->--}}
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
@@ -113,10 +114,12 @@
 {{--<!-- Date Picker Js -->--}}
 
 {{--<!-- Main js -->--}}
+
+<script src=" {{ asset('template/js/main.js') }}"></script>
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -151,15 +154,6 @@
     });
 
 
-</script>
-
-<script>
-    $(function () {
-        $('.date').datepicker({
-            format: 'yyyy-mm-dd',
-        });
-
-    })
 </script>
 
 @stack('customjs')
