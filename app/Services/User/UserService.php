@@ -74,6 +74,7 @@ class UserService {
             $students = $this->getSectionStudents($request->section_id);
             $i = 0;
             foreach ($students as $student) {
+
                 $this->st[] = [
                     'id' => $student->id,
                     'section_id' => $request->to_section[$i],
@@ -82,7 +83,7 @@ class UserService {
 
                 $this->st2[] = [
                     'student_id' => $student->id,
-                    'session' => $request->to_session[$i],
+                    'session' => $request->to_session[$i]
                 ];
 
                 ++$i;
