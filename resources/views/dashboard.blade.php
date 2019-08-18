@@ -135,40 +135,7 @@
                     {{--                    @endif--}}
                 </div>
             </div>
-            <div class="card dashboard-card-three">
-                <div class="card-body">
-                    <div class="heading-layout1">
-                        <div class="item-title">
-                            <h3>Attendance</h3>
-                        </div>
-                    </div>
-                    @if(!empty($present))
-                        <div class="doughnut-chart-wrap">
-                            <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
-                        </div>
-                        <div class="student-report">
 
-                            <div class="student-count pseudo-bg-present">
-                                <h4 class="item-title">Present</h4>
-                                <div class="item-number">{{ $present }}%</div>
-                            </div>
-
-                            <div class="student-count pseudo-bg-escaped">
-                                <h4 class="item-title">Escaped</h4>
-                                <div class="item-number">{{ $escaped }}%</div>
-                            </div>
-                            <div class="student-count pseudo-bg-absent">
-                                <h4 class="item-title">Absent</h4>
-                                <div class="item-number">{{ $absent }}%</div>
-                            </div>
-                        </div>
-                    @else
-                        <div style="text-align: center">
-                            No Attendance record found
-                        </div>
-                    @endif
-                </div>
-            </div>
         </div>
         <div class="col-12 col-8-xxxl col-md-10 col-lg-6 col-xl-8">
             <div class="row">
@@ -322,6 +289,44 @@
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-6">
+                    <div class="card dashboard-card-three">
+                        <div class="card-body">
+                            <div class="heading-layout1">
+                                <div class="item-title">
+                                    <h3>Attendance</h3>
+                                </div>
+                            </div>
+                            @if(!empty($present))
+                                <div class="doughnut-chart-wrap">
+                                    <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
+                                </div>
+                                <div class="student-report">
+
+                                    <div class="student-count pseudo-bg-present">
+                                        <h4 class="item-title">Present</h4>
+                                        <div class="item-number">{{ $present }}%</div>
+                                    </div>
+
+                                    <div class="student-count pseudo-bg-escaped">
+                                        <h4 class="item-title">Escaped</h4>
+                                        <div class="item-number">{{ $escaped }}%</div>
+                                    </div>
+                                    <div class="student-count pseudo-bg-absent">
+                                        <h4 class="item-title">Absent</h4>
+                                        <div class="item-number">{{ $absent }}%</div>
+                                    </div>
+                                </div>
+                            @else
+                                <div style="text-align: center">
+                                    No Attendance record found
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
