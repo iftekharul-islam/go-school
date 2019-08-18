@@ -165,3 +165,7 @@
 .info-table td {
     width: 40%!important;
 }
+
+.card-height-exams {
+    min-height: 469px;
+}
