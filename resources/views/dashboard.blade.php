@@ -43,42 +43,54 @@
                                     <td class="font-medium text-dark-medium">Blood Group:</td>
                                     <td class="text-capitalize">{{ ucfirst($student->blood_group) }}</td>
                                 </tr>
-                                <tr>
-                                    @if(isset($student_info->father_name))
+                                @if(isset($student_info->father_name))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Father's Name:</td>
                                         <td class="text-capitalize">{{ $student_info->father_name }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    @if(isset($student_info->father_occupation))
+
+                                    </tr>
+                                @endif
+                                @if(isset($student_info->father_occupation))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Father's Occupation:</td>
                                         <td class="text-capitalize">{{ $student_info->father_occupation }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    @if(isset($student_info->mother_name))
+
+                                    </tr>
+                                @endif
+                                @if(isset($student_info->mother_name))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Mother's Name:</td>
                                         <td class="text-capitalize">{{ $student_info->mother_name }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    @if(isset($student_info->mother_occupation))
+
+                                    </tr>
+                                @endif
+                                @if(isset($student_info->mother_occupation))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Mother's Occupation:</td>
                                         <td class="text-capitalize">{{ $student_info->mother_occupation }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    @if(isset($student_info->birthday))
+
+                                    </tr>
+                                @endif
+                                @if(isset($student_info->birthday))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Date of Birth:</td>
                                         <td>{{ date('d-m-Y', strtotime($student_info->birthday)) }}</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    @if(isset($student_info->religion))
+
+                                    </tr>
+                                @endif
+                                @if(isset($student_info->religion))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Religion:</td>
                                         <td class="text-capitalize">{{ ucfirst($student_info->religion) }}</td>
-                                    @endif
-                                </tr>
+
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="font-medium text-dark-medium">E-Mail:</td>
                                     <td>{{ $student->email }}</td>
@@ -88,22 +100,26 @@
                                     <td class="text-capitalize">{{ $student->created_at}}</td>
 
                                 </tr>
-                                <tr>
-                                    @if(isset($student_info->group))
+                                @if(isset($student_info->group))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Group:</td>
                                         <td class="text-capitalize">{{ ucfirst($student_info->group) }}</td>
-                                    @endif
-                                </tr>
+
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="font-medium text-dark-medium">Section:</td>
                                     <td class="text-capitalize">{{ $student->section_id }}</td>
                                 </tr>
-                                <tr>
-                                    @if(isset($student_info->student_id))
+                                @if(isset($student_info->student_id))
+                                    <tr>
+
                                         <td class="font-medium text-dark-medium">Roll:</td>
                                         <td>{{ $student_info->student_id }}</td>
-                                    @endif
-                                </tr>
+
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="font-medium text-dark-medium">Address:</td>
                                     <td class="text-capitalize">{{ $student->address }}</td>
