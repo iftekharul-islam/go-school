@@ -198,8 +198,44 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 mb-5">
-                    <div class="card dashboard-card-eleven">
+                <div class="col-lg-5 mb-5">
+                    <div class="card dashboard-card-three">
+                        <div class="card-body">
+                            <div class="heading-layout1">
+                                <div class="item-title">
+                                    <h3>Attendance</h3>
+                                </div>
+                            </div>
+                            @if(!empty($present))
+                                <div class="doughnut-chart-wrap">
+                                    <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
+                                </div>
+                                <div class="student-report">
+
+                                    <div class="student-count pseudo-bg-present">
+                                        <h4 class="item-title">Present</h4>
+                                        <div class="item-number">{{ $present }}%</div>
+                                    </div>
+
+                                    <div class="student-count pseudo-bg-escaped">
+                                        <h4 class="item-title">Escaped</h4>
+                                        <div class="item-number">{{ $escaped }}%</div>
+                                    </div>
+                                    <div class="student-count pseudo-bg-absent">
+                                        <h4 class="item-title">Absent</h4>
+                                        <div class="item-number">{{ $absent }}%</div>
+                                    </div>
+                                </div>
+                            @else
+                                <div style="text-align: center">
+                                    No Attendance record found
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 mb-5">
+                    <div class="card dashboard-card-eleven card-height-exams">
                         <div class="card-body">
                             <div class="heading-layout1">
                                 <div class="item-title">
@@ -294,42 +330,7 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-6">
-                    <div class="card dashboard-card-three">
-                        <div class="card-body">
-                            <div class="heading-layout1">
-                                <div class="item-title">
-                                    <h3>Attendance</h3>
-                                </div>
-                            </div>
-                            @if(!empty($present))
-                                <div class="doughnut-chart-wrap">
-                                    <canvas id="student-doughnut-chart1" width="100" height="270"></canvas>
-                                </div>
-                                <div class="student-report">
 
-                                    <div class="student-count pseudo-bg-present">
-                                        <h4 class="item-title">Present</h4>
-                                        <div class="item-number">{{ $present }}%</div>
-                                    </div>
-
-                                    <div class="student-count pseudo-bg-escaped">
-                                        <h4 class="item-title">Escaped</h4>
-                                        <div class="item-number">{{ $escaped }}%</div>
-                                    </div>
-                                    <div class="student-count pseudo-bg-absent">
-                                        <h4 class="item-title">Absent</h4>
-                                        <div class="item-number">{{ $absent }}%</div>
-                                    </div>
-                                </div>
-                            @else
-                                <div style="text-align: center">
-                                    No Attendance record found
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <script>
