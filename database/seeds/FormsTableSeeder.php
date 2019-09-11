@@ -11,6 +11,6 @@ class FormsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Form::class, 50)->create();
+        factory(App\Form::class, 5)->create();
     }
 }

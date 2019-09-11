@@ -22,19 +22,22 @@
           <div class="form-group">
             <label for="classRoomNumber{{$school->id}}" class="col-md-12 control-label">Class Group (If Any)</label>
             <div class="col-sm-12">
-              <input type="text" class="form-control" name="group" id="classRoomNumber{{$school->id}}" placeholder="Science, Commerce, Arts, etc.">
-              <span id="helpBlock" class="help-block">Leave Empty if this Class belongs to no Group</span>
+              <select class="form-control" name="group" id="classRoomNumber{{$school->id}}">
+                <option value="">None</option>
+                <option value="Science">Science</option>
+                <option value="Arts">Arts</option>
+                <option value="Commerce">Commerce</option>
+              </select>
+{{--              <input type="text" class="form-control" name="group" id="classRoomNumber{{$school->id}}" placeholder="Science, Commerce, Arts, etc.">--}}
+              <span id="helpBlock" class="help-block">Select none if this Class belongs to no Group</span>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-              <button type="submit" class="button button--save float-left">Submit</button>
+            <div class="col-md-12">
+              <button type="submit" class="button button--save float-right">Submit</button>
             </div>
           </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="button button--cancel" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 @extends('layouts.student-app')
 @section('title', 'Income List')
 @section('content')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
+{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">--}}
 
 <div class="breadcrumbs-area">
     <h3>
@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="year">Year</label>
                                 <select class="select2 select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true" name="year">
                                     <option value="">Please Select Year</option>
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="year">Month</label>
                                 <select class="select2 select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true" name="month">
                                     <option value="">Please Select Month</option>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
-                            <button type="submit" class="button button--text float-left">Get Income List</button>
+                            <button type="submit" class="button button--save float-left">Get Income List</button>
                         </div>
                     </div>
                 </form>

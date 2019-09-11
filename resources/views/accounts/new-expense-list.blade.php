@@ -1,7 +1,7 @@
 @extends('layouts.student-app')
 @section('title', 'Expense List')
 @section('content')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
+{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">--}}
 <div class="breadcrumbs-area">
     <h3>
         <i class="fas fa-file-invoice-dollar"></i>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="button button--text float-left mb-5 mt-4">Expense List</button>
+                            <button type="submit" class="button button--save float-left mb-5 mt-4">Expense List</button>
                         </div>
                     </div>
                 </form>
@@ -123,10 +123,10 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>--}}
+{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>--}}
 
 <script>
     $(function () {

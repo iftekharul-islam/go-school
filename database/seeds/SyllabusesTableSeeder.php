@@ -11,6 +11,6 @@ class SyllabusesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Syllabus::class, 50)->create();
+        factory(App\Syllabus::class, 5)->create();
     }
 }

@@ -94,7 +94,7 @@
 
                 @if(Auth::user()->role == 'admin')
                     <td>
-                        <a href="{{url('admin/edit/course/'.$course->id)}}" class="button button--edit">Edit</a>
+                        <a href="{{url('admin/edit/course/'.$course->id)}}" role="button" class="btn btn-primary btn-lg">Edit</a>
                     </td>
                 @endif
             </tr>

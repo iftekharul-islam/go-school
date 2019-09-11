@@ -3,6 +3,8 @@ namespace App\Services\Attendance;
 
 use App\User;
 use App\Attendance;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 
 class AttendanceService {
@@ -81,7 +83,7 @@ class AttendanceService {
             ->where('id', $student_id)
             ->student()
             ->where('active', 1)
-            ->first();
+            ->firstOrFail();
     }
 
 
@@ -127,6 +129,48 @@ class AttendanceService {
             $at[] = $tb->attributesToArray();
             ++$i;
         }
-        Attendance::insert($at);
+//        Attendance::insert($at);
+        $this->sendSms($at);
+    }
+
+    private function sendSms($data)
+    {
+        $students = array_map(function($item) {
+            if ($item['present'] === 1 ) {
+                return $item['student_id'];
+            }
+        },$data);
+
+        $students = array_filter($students);
+//        dd($students);
+        $students = User::whereIn('id', $students)->get();
+        foreach ($students as $key=>$student) {
+            $phone = $student->studentInfo['father_phone_number'];
+            $checked_digit = substr($phone, 0, 3);
+            if ($checked_digit == '+88') {
+                $phone = ltrim($phone, '+');
+            } else {
+                if ($checked_digit == '880') {
+                    $phone = $phone;
+                } else {
+                    $phone = '88' . $phone;
+                }
+            }
+            $user = config("message.sms_user");
+            $pass = config("message.sms_pass");
+            $sid = config("message.sms_sid");
+            $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+            $client = new Client();
+            $response = $client->request('POST', $url, [
+                'form_params' => [
+                    'user' => $user,
+                    'pass' => $pass,
+                    'sid'  => $sid,
+                    'sms'  => [
+                        [$phone, $student->name . " attended today's (" .Carbon::now()->toFormattedDateString() . ") class."],
+                    ],
+                ],
+            ]);
+        }
     }
 }

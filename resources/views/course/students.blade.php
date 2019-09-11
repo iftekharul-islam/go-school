@@ -3,7 +3,8 @@
 @section('title', 'Course Students')
 
 @section('content')
-    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>
+{{--    <script src="https://cdn.ckeditor.com/ckeditor5/12.0.0/classic/ckeditor.js"></script>--}}
+<script src="{{ asset('js/ckeditor.js') }}"></script>
     <style>
         .ck-editor__editable{
             min-height: 200px;
@@ -38,8 +39,9 @@
                                 <div class="panel-body">
                                     <div class="col-md-12">
                                         <div class="responsive">
-                                            <table class="table table-bordered text-wrap">
-                                                <tr>
+                                            <table class="table table-data-div table-bordered">
+                                                <thead>
+                                                    <tr>
                                                     <th>
                                                         <div class="checkbox">
                                                             <label style="font-weight:bold;">
@@ -50,7 +52,9 @@
                                                     <th>Student Code</th>
                                                     <th>Student Name</th>
                                                 </tr>
-                                                @foreach ($students as $student)
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($students as $student)
                                                     <tr>
                                                         <td>
                                                             <div class="checkbox">
@@ -61,10 +65,10 @@
                                                             </div>
                                                         </td>
                                                         <td>{{$student->student_code}}</td>
-                                                        <td><a href="{{url('user/'.$student->student_code)}}" class="text-teal">{{$student->name}}</a>
-                                                        </td>
+                                                        <td><a href="{{url('user/'.$student->student_code)}}" class="text-teal">{{$student->name}}</a></td>
                                                     </tr>
                                                 @endforeach
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

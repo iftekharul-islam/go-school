@@ -137,7 +137,7 @@
                                                     <td> <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a></td>
                                                     <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
-                                                    <td>{{ ucfirst($user['section']['class_id']) }}</td>
+                                                    <td>{{ ucfirst($user['section']->class['class_number']) }} </td>
                                                     <td>{{ ucfirst($user->phone_number) }}</td>
                                                     <td><b><a class="btn-link text-teal" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View</a></b></td>
                                                 </tr>

@@ -11,6 +11,6 @@ class HomeworksTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Homework::class, 50)->create();
+        factory(App\Homework::class, 5)->create();
     }
 }

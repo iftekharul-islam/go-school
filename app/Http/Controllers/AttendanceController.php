@@ -103,7 +103,7 @@ class AttendanceController extends Controller
         $student = $this->attendanceService->getStudent($student_id);
         $exam = ExamForClass::where('class_id',$student->section->class->id)
             ->where('active', 1)
-            ->firstOrFail();
+            ->first();
         if(count((array) $exam) == 1)
             $exId = $exam->exam_id;
         else

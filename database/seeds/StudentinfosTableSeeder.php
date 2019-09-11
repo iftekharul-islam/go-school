@@ -12,9 +12,9 @@ class StudentinfosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(StudentInfo::class, 50)->states('without_group')->create();
-        factory(StudentInfo::class, 25)->states('science')->create();
-        factory(StudentInfo::class, 15)->states('commerce')->create();
-        factory(StudentInfo::class, 10)->states('arts')->create();
+        factory(StudentInfo::class, 5)->states('without_group')->create();
+        factory(StudentInfo::class, 2)->states('science')->create();
+        factory(StudentInfo::class, 1)->states('commerce')->create();
+        factory(StudentInfo::class, 1)->states('arts')->create();
     }
 }
