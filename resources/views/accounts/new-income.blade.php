@@ -57,15 +57,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
                             <div class="col-md-12">
 
-                                <label for="month">Income For Month</label>
+                                <label for="month">Income For Date</label>
 
-                                <input data-date-format="yyyy-mm-dd" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
-                                @if ($errors->has('month'))
+                                <input data-date-format="yyyy-mm-dd" id="date" class="form-control date" name="date" value="{{ old('month') }}" placeholder="Income Date" required autocomplete="off">
+                                @if ($errors->has('date'))
                                     <span class="help-block">
-                                      <strong>{{ $errors->first('month') }}</strong>
+                                      <strong>{{ $errors->first('date') }}</strong>
                                   </span>
                                 @endif
                             </div>

@@ -16,15 +16,15 @@ class CreateFeeTransactionsTable extends Migration
         Schema::create('fee_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('student_id');
+            $table->integer('school_id');
             $table->double('amount');
-            $table->integer('discount_id');
+            $table->integer('discount_id')->nullable();
             $table->double('discount');
             $table->double('fine');
             $table->string('status');
             $table->string('mode')->nullable();
             $table->integer('fee_master_id');
             $table->integer('accountant_id');
-            $table->string('month')->nullable();
             $table->timestamps();
         });
     }

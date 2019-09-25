@@ -13,6 +13,7 @@
             $gpa = 0;
             $acc = 0;
             $inact = 0;
+            $ac = 0;
             if(strpos($add, 'book'))
                 $lib = 1;
             if(strpos($add, 'exams'))
@@ -23,6 +24,8 @@
                 $inact = 1;
             if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income'))
                 $acc = 1;
+            if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection'))
+                $ac = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -182,6 +185,29 @@
                                 <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                         </li>
                     @endif
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Fees Collection</span></a>
+                        <ul class="nav sub-group-menu {{ $ac == 1 ? 'sub-group-active' : '' }}">
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}" href="{{ url($role.'/fee-types') }}">
+                                    <i class="fas fa-angle-right"></i><span>Fee Types</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is($role.'/fee-master*')) ? 'menu-active' : '' }}" href="{{ url($role.'/fee-master') }}">
+                                    <i class="fas fa-angle-right"></i><span>Fee Master</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is($role.'/fee-discount*')) ? 'menu-active' : '' }}" href="{{ url($role.'/fee-discount') }}">
+                                    <i class="fas fa-angle-right"></i><span>Discount</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->is($role.'/fee-collection*')) ? 'menu-active' : '' }}" href="{{ url($role.'/fee-collection/section/student') }}">
+                                    <i class="fas fa-angle-right"></i><span>Collect Fee</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">

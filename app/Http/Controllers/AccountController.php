@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\AccountSector;
 use App\Account;
+use App\FeeTransaction;
 use App\Myclass;
 use App\User;
 use App\Section;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\Account\StoreSectorRequest;
 use App\Http\Requests\Account\StoreAccountRequest;
@@ -98,29 +100,46 @@ class AccountController extends Controller
         return back()->with("status","Income saved Successfully.");
     }
 
-    public function listIncome(){
+    public function listIncome()
+    {
         $incomes = Account::where('school_id', \Auth::user()->school_id)
             ->where('type','income')
             ->whereYear('created_at', date('Y'))
             ->get();
-        return view('accounts.new-income-list',['incomes'=>$incomes]);
+        $student_amount = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('amount');
+        $student_discount = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('discount');
+        $student_fine = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('fine');
+        $student_total = $student_amount - $student_fine + $student_discount;
+        return view('accounts.new-income-list',['incomes'=>$incomes, 'student_total' => $student_total]);
     }
 
-    public function postIncome(Request $request){
-        $this->accountSectors->request = $request;
-        $this->accountSectors->account_type = 'income';
-        if ($request->month == '') {
-            $incomes = $this->accountSectors->getAccountsByYear();
-        } else {
-            $incomes = $this->accountSectors->getAccountsByMonth();
-        }
-        return view('accounts.new-income-list',compact('incomes'));
+    public function postIncome(Request $request)
+    {
+        $from = date($request->from_date);
+        $to = date($request->to_date);
+        $incomes = Account::where('school_id', \auth()->user()->school_id)
+            ->where('type', 'income')
+            ->whereBetween('date', [$from, $to])
+            ->get();
+        $student_amount = FeeTransaction::where('school_id', \auth()->user()->school_id)
+            ->whereBetween('created_at', [$from, $to])
+            ->sum('amount');
+        $student_discount = FeeTransaction::where('school_id', \auth()->user()->school_id)
+            ->whereBetween('created_at', [$from, $to])
+            ->sum('discount');
+        $student_fine = FeeTransaction::where('school_id', \auth()->user()->school_id)
+            ->whereBetween('created_at', [$from, $to])
+            ->sum('fine');
+        $student_total = $student_amount - $student_fine + $student_discount;
+        return view('accounts.new-income-list',compact('incomes', 'from', 'to', 'student_total'));
     }
 
-    public function editIncome($id){
+    public function editIncome($id)
+    {
         $income = Account::findOrFail($id);
         return view('accounts.income-edit',compact('income'));
     }
+
     public function updateIncome(UpdateAccountRequest $request)
     {
         $this->accountSectors->request = $request;
@@ -129,14 +148,16 @@ class AccountController extends Controller
         return back()->with("status","Income Updated Successfully.");
     }
 
-    public function deleteIncome($id){
+    public function deleteIncome($id)
+    {
         $income = Account::findOrFail($id);
         $income->delete();
 
         return back()->with("status","Income Deleted Successfully.");
     }
 
-    public function expense(){
+    public function expense()
+    {
         $sectors = AccountSector::where('school_id', \Auth::user()->school_id)
             ->where('type','expense')
             ->whereYear('created_at', date('Y'))
@@ -144,7 +165,8 @@ class AccountController extends Controller
         return view('accounts.new-expense',['sectors'=>$sectors]);
 
     }
-    public function storeExpense(StoreAccountRequest $request){
+    public function storeExpense(StoreAccountRequest $request)
+    {
         $this->accountSectors->request = $request;
         $this->accountSectors->account_type = 'expense';
         $this->accountSectors->storeAccount();
@@ -152,39 +174,42 @@ class AccountController extends Controller
         return back()->with("status","Expense saved Successfully.");
     }
 
-    public function listExpense(){
+    public function listExpense()
+    {
         $expenses = Account::where('school_id', auth()->user()->school_id)
-            ->where('type', 'income')
+            ->where('type', 'expense')
             ->whereYear('created_at', date('Y'))
             ->get();
         return view('accounts.new-expense-list',['expenses'=>$expenses]);
     }
 
-    public function postExpense(Request $request){
-        $this->accountSectors->request = $request;
-        $this->accountSectors->account_type = 'expense';
-        if ($request->month == '')
-        {
-            $expenses = $this->accountSectors->getAccountsByYear();
-        } else {
-            $expenses = $this->accountSectors->getAccountsByMonth();
-        }
-        return view('accounts.new-expense-list',compact('expenses'));
+    public function postExpense(Request $request)
+    {
+        $from = date($request->from_date);
+        $to = date($request->to_date);
+        $expenses = Account::where('school_id', \auth()->user()->school_id)
+            ->where('type', 'expense')
+            ->whereBetween('date', [$from, $to])
+            ->get();
+        return view('accounts.new-expense-list',compact('expenses', 'from', 'to'));
     }
 
-    public function editExpense($id){
+    public function editExpense($id)
+    {
         $expense = Account::findOrFail($id);
         return view('accounts.expense-edit',['expense'=>$expense]);
     }
 
-    public function updateExpense(UpdateAccountRequest $request){
+    public function updateExpense(UpdateAccountRequest $request)
+    {
         $this->accountSectors->request = $request;
         $this->accountSectors->updateAccount();
 
         return back()->with("status","expense Updated Successfully.");
     }
 
-    public function deleteExpense($id){
+    public function deleteExpense($id)
+    {
         $expense = Account::findOrFail($id);
         $expense->delete();
         return back()->with("status","expense Deleted Successfully.");

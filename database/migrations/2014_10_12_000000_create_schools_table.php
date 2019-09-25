@@ -21,6 +21,7 @@ class CreateSchoolsTable extends Migration
             $table->string('medium');//bn,en
             $table->integer('code')->unique();
             $table->string('theme');
+            $table->text('school_address');
             $table->timestamps();
         });
     }

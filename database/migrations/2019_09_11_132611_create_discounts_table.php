@@ -18,7 +18,7 @@ class CreateDiscountsTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->double('amount');
-            $table->string('description');
+            $table->text('description');
             $table->integer('school_id');
             $table->timestamps();
         });

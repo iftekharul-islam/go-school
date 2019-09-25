@@ -9,5 +9,6 @@ $factory->define(App\School::class, function (Faker $faker) {
         'medium' => $faker->randomElement(['bangla', 'english']),
         'code' => date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6),
         'theme' => 'flatly',
+        'school_address' => 'House#39, Road#7, Block-C, Mirpur-12, Dhaka',
     ];
 });

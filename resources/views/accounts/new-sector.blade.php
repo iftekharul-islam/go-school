@@ -18,7 +18,7 @@
     <!-- Admit Form Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
-                    <form class="new-added-form mb-5" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-sector')}}" method="post">
+            <form class="new-added-form mb-5" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-sector')}}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-6">

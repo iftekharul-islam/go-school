@@ -18,7 +18,7 @@ class CreateFeeTypesTable extends Migration
             $table->string('name');
             $table->integer('school_id')->unsigned();
             $table->string('code');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

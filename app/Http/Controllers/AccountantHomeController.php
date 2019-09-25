@@ -35,7 +35,7 @@ class AccountantHomeController extends Controller
         if (isset($student->school->id)) {
             $school_id = Auth::user()->school->id;
             $classes = Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-                return\ Myclass::where('school_id', $school_id)
+                return Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
             });
@@ -47,7 +47,7 @@ class AccountantHomeController extends Controller
             });
 
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
-                return     Myclass::where('school_id', $school_id)->count();
+                return Myclass::where('school_id', $school_id)->count();
             });
             $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();

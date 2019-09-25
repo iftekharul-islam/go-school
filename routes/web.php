@@ -91,6 +91,17 @@ Route::middleware(['auth'])->group(function (){
             Route::post('create', 'FeeController@store');
             Route::delete('remove/{id}', 'FeeController@destroy');
         });
+
+        Route::resource('fee-types', 'FeeTypesController');
+        Route::resource('fee-discount', 'FeeDiscountController');
+        Route::resource('fee-master', 'FeeMasterController');
+        Route::resource('fee-transaction', 'FeeTransactionController');
+//        Route::get('fee-collection', 'FeeTransactionController@feeCollection');
+        Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
+        Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
+        Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
+        Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
+
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');

@@ -32,13 +32,10 @@
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
                                     <label for="school_name" class="control-label">School Name</label>
 
-                                    <input id="school_name" type="text" class="form-control" name="school_name"
-                                           value="{{ old('school_name') }}" placeholder="School Name" required>
+                                    <input id="school_name" type="text" class="form-control" name="school_name" value="{{ old('school_name') }}" placeholder="School Name" required>
 
                                     @if ($errors->has('school_name'))
-                                        <span class="help-block">
-                          <strong>{{ $errors->first('school_name') }}</strong>
-                      </span>
+                                        <span class="help-block"><strong>{{ $errors->first('school_name') }}</strong></span>
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_medium') ? ' has-error' : '' }}">
@@ -50,9 +47,7 @@
                                     </select>
 
                                     @if ($errors->has('school_medium'))
-                                        <span class="help-block">
-                          <strong>{{ $errors->first('school_medium') }}</strong>
-                      </span>
+                                        <span class="help-block"><strong>{{ $errors->first('school_medium') }}</strong></span>
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
@@ -62,9 +57,7 @@
                                            value="{{ old('school_established') }}" placeholder="School Established" required>
 
                                     @if ($errors->has('school_established'))
-                                        <span class="help-block">
-                          <strong>{{ $errors->first('school_established') }}</strong>
-                      </span>
+                                        <span class="help-block"><strong>{{ $errors->first('school_established') }}</strong></span>
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_about') ? ' has-error' : '' }}">
@@ -74,20 +67,27 @@
                                               placeholder="About School" required>{{ old('school_about') }}</textarea>
 
                                     @if ($errors->has('school_about'))
-                                        <span class="help-block">
-                          <strong>{{ $errors->first('school_about') }}</strong>
-                      </span>
-                            @endif
+                                        <span class="help-block"><strong>{{ $errors->first('school_about') }}</strong></span>
+                                    @endif
+                                </div>
+                                <div class="mb-4 form-group{{ $errors->has('school_address') ? ' has-error' : '' }}">
+                                    <label for="school_address" class="control-label">Address</label>
+
+                                    <textarea id="school_address" class="form-control" rows="3" name="school_address"
+                                              placeholder="School Address" required>{{ old('school_address') }}</textarea>
+
+                                    @if ($errors->has('school_about'))
+                                        <span class="help-block"><strong>{{ $errors->first('school_address') }}</strong></span>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 mt-5">
+                                        <button type="submit" id="registerBtn" class="button button--save float-right"><i class="fas fa-plus mr-2"></i>Create School</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-4 mt-5">
-                                <button type="submit" id="registerBtn"
-                                        class="button button--save float-right"><i class="fas fa-plus mr-2"></i>
-                                    Create School
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

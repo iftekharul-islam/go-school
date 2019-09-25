@@ -19,6 +19,8 @@ class CreateFeeMastersTable extends Migration
             $table->integer('fee_type_id');
             $table->string('format');
             $table->double('amount');
+            $table->string('due');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();
         });
     }
