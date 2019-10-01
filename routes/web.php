@@ -91,6 +91,17 @@ Route::middleware(['auth'])->group(function (){
             Route::post('create', 'FeeController@store');
             Route::delete('remove/{id}', 'FeeController@destroy');
         });
+
+        Route::resource('fee-types', 'FeeTypesController');
+        Route::resource('fee-discount', 'FeeDiscountController');
+        Route::get('fee-master/class-fe', 'FeeMasterController@classFee')->name('class.fee');
+        Route::resource('fee-master', 'FeeMasterController');
+        Route::resource('fee-transaction', 'FeeTransactionController');
+        Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
+        Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
+        Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
+        Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
+
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
@@ -191,6 +202,7 @@ Route::middleware(['auth'])->group(function (){
             Route::post('edit/{id}', 'ExamController@updateExam');
             Route::get('active', 'ExamController@indexActive');
         });
+
         Route::prefix('inactive')->group(function(){
            Route::get('/notices','InactiveSettingsController@notices');
             Route::get('/events','InactiveSettingsController@events');
@@ -230,6 +242,16 @@ Route::middleware(['auth'])->group(function (){
         Route::get('edit-expense/{id}','AccountController@editExpense');
         Route::post('update-expense','AccountController@updateExpense');
         Route::get('delete-expense/{id}','AccountController@deleteExpense');
+
+        Route::resource('fee-types', 'FeeTypesController');
+        Route::resource('fee-discount', 'FeeDiscountController');
+        Route::get('fee-master/class-fe', 'FeeMasterController@classFee')->name('class.fee');
+        Route::resource('fee-master', 'FeeMasterController');
+        Route::resource('fee-transaction', 'FeeTransactionController');
+        Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
+        Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
+        Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
+        Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
         //Accountant Routes End
 
 

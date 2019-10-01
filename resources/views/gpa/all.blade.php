@@ -50,7 +50,7 @@
                                             <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpainfo->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
                                         </div>
                                         <div class="col-6">
-                                            <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i>Delete</button>
+                                            <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i> Delete</button>
                                             <form id="delete-form-{{ $gpainfo->id }}" class="form-group" action="{{ url('admin/gpa/delete', $gpainfo->id) }}" method="post">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}

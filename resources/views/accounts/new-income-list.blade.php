@@ -1,9 +1,25 @@
 @extends('layouts.student-app')
 @section('title', 'Income List')
 @section('content')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <style>
+        .example-print {
+            display: none;
+        }
+        @media print {
+            .example-screen {
+                display: none;
+            }
 
-<div class="breadcrumbs-area">
+            .example-print {
+                margin: 25mm 0 0 0;
+                display: block;
+            }
+            .income-report {
+                padding-bottom: 20px !important;
+            }
+        }
+    </style>
+<div class="breadcrumbs-area example-screen">
     <h3>
         <i class="fas fa-file-invoice-dollar"></i>
         Income List
@@ -18,79 +34,53 @@
 </div>
 
 <div class="card height-auto">
-    <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-        <div class="row mb-5">
-            <div class="col-md-12 ">
-                <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/list-income')}}" method="post">
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
+    <div class="example-screen">
+        <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <div class="row mb-5">
+                <div class="col-md-12 ">
+                    <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/list-income')}}" method="post">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
 
-                            <div class="col-md-6">
-                                <label for="year">Year</label>
-                                <select class="select2 select2-hidden-accessible" data-select2-id="4" tabindex="-1" aria-hidden="true" name="year">
-                                    <option value="">Please Select Year</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
-                                </select>
-                                {{--                            <input data-date-format="yyyy" id="year" class="form-control date" name="year" value="{{ old('year') }}" placeholder="Year12" required autocomplete="off">--}}
-                                @if ($errors->has('year'))
-                                    <span class="help-block">
-                                      <strong>{{ $errors->first('year') }}</strong>
+                                <div class="col-md-12">
+                                    <label for="from_date">From Date</label>
+                                    <input data-date-format="yyyy-mm-dd" id="datePicker1" class="form-control date" name="from_date" value="{{ $from ?? \Carbon\Carbon::now()->format('Y-m-d') }}" required>
+                                    @if ($errors->has('from_date'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('from_date') }}</strong>
                                   </span>
-                                @endif
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
+                                <div class="col-md-12">
+                                    <label for="year">To Date</label>
+                                    <input data-date-format="yyyy-mm-dd" id="datePicker1" class="form-control date" name="to_date" value="{{ $to ??  \Carbon\Carbon::now()->format('Y-m-d') }}" required>
+                                    @if ($errors->has('to_date'))
+                                        <span class="help-block">
+                                      <strong>{{ $errors->first('to_date') }}</strong>
+                                  </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
-                            <div class="col-md-6">
-                                <label for="year">Month</label>
-                                <select class="select2 select2-hidden-accessible" data-select2-id="7" tabindex="-1" aria-hidden="true" name="month">
-                                    <option value="">Please Select Month</option>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
-                                {{--                            <input data-date-format="mm" id="month" class="form-control date" name="month" value="{{ old('month') }}" placeholder="Month" autocomplete="off">--}}
-                                @if ($errors->has('month'))
-                                    <span class="help-block">
-                                      <strong>{{ $errors->first('month') }}</strong>
-                                  </span>
-                                @endif
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
+                                <button type="submit" class="button button--save float-left">Get Income List</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
-                            <button type="submit" class="button button--text float-left">Get Income List</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-{{--            <div class="col-md-6">--}}
-{{--                <div style="width:100%; height: 300px;">--}}
-{{--                    <canvas id="canvas"></canvas>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-        </div>
             <div class="row">
                 <div class="col-md-12">
+                    <button class="btn btn-secondary float-right mb-3" onclick="window.print()"><i class="fa fa-print"></i> Print</button>
                     @isset($incomes)
                         <div class="table-responsive">
                             <div class="table-responsive">
@@ -99,23 +89,50 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Sector Name</th>
+                                        <th style="width: 40%">Description</th>
+                                        <th>Date</th>
                                         <th>Amount</th>
-                                        <th>Description</th>
-                                        <th>Year</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @php
+                                        $grand_total = 0;
+                                        $loop_ind = 1;
+                                    @endphp
                                     @foreach($incomes as $income)
                                         <tr>
+                                            @php
+                                                $grand_total = $grand_total + $income->amount ;
+                                                $loop_ind ++;
+                                            @endphp
                                             <td>{{($loop->index + 1)}}</td>
                                             <td>{{$income->name}}</td>
-                                            <td>{{$income->amount}}</td>
                                             <td>{{$income->description}}</td>
-                                            <td>{{ Carbon\Carbon::parse($income->created_at)->format('Y')}}</td>
-                                            <td><a title='Edit' class='button button--edit float-left' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-income")}}/{{$income->id}}'>Edit</a></td>
+                                            <td>{{ $income->date }}</td>
+                                            <td>{{$income->amount}}</td>
+                                            <td><a title='Edit' class='button button--edit float-left' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-income")}}/{{$income->id}}'><i class="fa-edit fa"></i></a></td>
                                         </tr>
                                     @endforeach
+                                    @if(isset($student_total))
+                                        <tr>
+                                            @php
+                                                $grand_total = $grand_total + $student_total ;
+                                            @endphp
+                                            <td>{{ $loop_ind }}</td>
+                                            <td>Student Fee Collection</td>
+                                            <td>Total student Fee collection</td>
+                                            <td></td>
+                                            <td>{{ $student_total }}</td>
+                                        </tr>
+                                    @endif
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><b>Grand Total</b></td>
+                                        <td><b>{{ $grand_total }}</b></td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -123,108 +140,95 @@
                     @endisset
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="example-print">
+        <div class="income-report">
+            <div class="school-property mb-5">
+                <h1 class="text-center mb-0">{{ auth()->user()->school->name }}</h1>
+                <h4 class="text-center">{{ auth()->user()->school->school_address }}</h4>
+            </div>
+            <h3>Income Statement
+                @if(isset($from) || isset($to))
+                    From @if(isset($from)){{ ucfirst(strftime("%D", strtotime( $from ))) }}@endif To @if(isset($to)){{ ucfirst(strftime("%D", strtotime( $from ))) }}@endif
+                @else
+                    Of this year
+                @endif
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @isset($incomes)
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="table table-bordered display text-wrap">
+                                <thead>
+                                <tr>
+                                    <th>Sector Name</th>
+                                    <th style="width: 40%">Description</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @php
+                                    $grand_total = 0;
+                                @endphp
+                                @foreach($incomes as $income)
+                                    <tr>
+                                        @php
+                                            $grand_total = $grand_total + $income->amount ;
+                                        @endphp
+                                        <td>{{$income->name}}</td>
+                                        <td>{{$income->description}}</td>
+                                        <td>{{ $income->date }}</td>
+                                        <td>{{$income->amount}}</td>
+                                    </tr>
+                                @endforeach
+                                @if(isset($student_total))
+                                    <tr>
+                                        @php
+                                            $grand_total = $grand_total + $student_total ;
+                                        @endphp
+                                        <td>Student Fee Collection</td>
+                                        <td>Total student Fee collection</td>
+                                        <td></td>
+                                        <td>{{ $student_total }}</td>
+                                    </tr>
+                                @endif
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Grand Total</b></td>
+                                    <td><b>{{ $grand_total }}</b></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endisset
+            </div>
+        </div>
+        <div class="signature" style="margin: 100px 0 0 0;">
+            <hr style="width: 30%; margin-left: -10px; display: block;border-width: 1.4px; border-color: #000000">
+            <p style="margin-left: 50px;">Signature of Accountant</p>
+        </div>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script>
-    $(function () {
-        $('.date').datepicker({
-            format: "yyyy",
-            viewMode: "years",
-            minViewMode: "years"
-        });
-    })
-</script>
-<script>
-$('.datepicker').datepicker({
-  format: 'yyyy',
-  viewMode: "years",
-  minViewMode: "years",
-  autoclose:true,
-});
-$("#btnPrint").on("click", function () {
-            var divContents = $("#printDiv").html();
-            var printWindow = window.open('', '', 'height=400,width=800');
-            printWindow.document.write('<html><head><title>Income List</title>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.document.body.innerHTML = divContents;
-            printWindow.print();
-        });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-	<style>
-		canvas {
-			-moz-user-select: none;
-			-webkit-user-select: none;
-			-ms-user-select: none;
-		}
-    </style>
-    <script>
-        'use strict';
-
-        window.chartColors = {
-            red: 'rgb(255, 99, 132)',
-            orange: 'rgb(255, 159, 64)',
-            yellow: 'rgb(255, 205, 86)',
-            green: 'rgb(75, 192, 192)',
-            blue: 'rgb(54, 162, 235)',
-            purple: 'rgb(153, 102, 255)',
-            grey: 'rgb(201, 203, 207)'
-        };
-
-		var color = Chart.helpers.color;
-		var config = {
-			type: 'bar',
-			data: {
-				datasets: [{
-                    label: 'Income',
-					backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
-					borderColor: window.chartColors.green,
-					fill: false,
-					data: [@foreach($incomes as $s)
-                        {
-                            t:"{{Carbon\Carbon::parse($s->created_at)->format('Y-d-m')}}",
-                            y:{{$s->amount}}
-                        },
-                        @endforeach]
-        }]
-                },
-			options: {
-				title: {
-                    display: true,
-					text: 'Income (In Dollar) in Time Scale'
-				},
-        maintainAspectRatio: false,
-				scales: {
-					xAxes: [{
-						type: 'time',
-						time: {
-							parser: 'YYYY-DD-MM',
-							tooltipFormat: 'll HH:mm'
-						},
-						scaleLabel: {
-							display: true,
-							labelString: 'Date'
-						}
-					}],
-					yAxes: [{
-						scaleLabel: {
-							display: true,
-							labelString: 'Money'
-						}
-					}]
-				},
-			}
-		};
-
-		window.onload = function() {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = new Chart(ctx, config);
-
-		};
-	    </script>
 @endsection
+@push('customjs')
+    <script>
+        $( document ).ready(function() {
+            var date = new Date();
+            var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+            var optSimple1 = {
+                format: 'mm-dd-yyyy',
+                todayHighlight: true,
+                orientation: 'bottom right',
+                autoclose: true,
+                container: '#sandbox'
+            };
+        });
+    </script>
+@endpush

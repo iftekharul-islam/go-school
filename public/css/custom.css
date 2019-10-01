@@ -169,3 +169,8 @@
 .card-height-exams {
     min-height: 469px;
 }
+.enter-icon {
+    width: 30px;
+    float: right;
+    margin-right: 5px;
+}

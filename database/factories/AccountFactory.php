@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(App\Account::class, function (Faker $faker) {
@@ -8,6 +9,7 @@ $factory->define(App\Account::class, function (Faker $faker) {
         'type' => $faker->randomElement(['income','expense']),
         'amount' => $faker->randomNumber(4, false),
         'description' => $faker->sentences(3, true),
+        'date' => Carbon::now(),
         'school_id' => function () use ($faker) {
           if(App\School::count() == 0)
             return factory(App\School::class)->create()->id;

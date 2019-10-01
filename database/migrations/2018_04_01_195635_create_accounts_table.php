@@ -19,6 +19,7 @@ class CreateAccountsTable extends Migration
             $table->string('type');
             $table->integer('amount');
             $table->text('description');
+            $table->date('date');
             $table->integer('school_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

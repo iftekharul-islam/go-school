@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exam;
 use App\Fee;
+use App\FeeTransaction;
 use App\Myclass;
 use App\Notice;
 use App\Section;
@@ -35,7 +36,7 @@ class AccountantHomeController extends Controller
         if (isset($student->school->id)) {
             $school_id = Auth::user()->school->id;
             $classes = Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-                return\ Myclass::where('school_id', $school_id)
+                return Myclass::where('school_id', $school_id)
                     ->pluck('id')
                     ->toArray();
             });
@@ -47,7 +48,7 @@ class AccountantHomeController extends Controller
             });
 
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
-                return     Myclass::where('school_id', $school_id)->count();
+                return Myclass::where('school_id', $school_id)->count();
             });
             $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();
@@ -79,6 +80,13 @@ class AccountantHomeController extends Controller
 
         foreach ($total_income as $ti)
             $total_income = $ti->sum;
+
+
+        $student_amount = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('amount');
+        $student_discount = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('discount');
+        $student_fine = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('fine');
+        $student_total = $student_amount - $student_fine + $student_discount;
+        $total_income = $total_income + $student_total;
 
         $fees = Fee::where('school_id', Auth::user()->school_id)->get();
         return view('accountant-home', [

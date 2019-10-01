@@ -38,4 +38,9 @@ class Myclass extends Model
         return $this->hasMany('App\Book','class_id');
     }
 
+    public function feeMasters()
+    {
+        return $this->hasMany(FeeMaster::class, 'class_id');
+    }
+
 }

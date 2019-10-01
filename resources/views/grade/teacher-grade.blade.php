@@ -46,7 +46,7 @@
                       <div class="col-md-10">
                         <b>Course - </b> {{$grade->course->course_name}}
                         <b>Class - </b> {{$grade->course->section->class->class_number}} <b>Section - </b> {{$grade->course->section->section_number}}
-                        <b>Exam - </b> {{$grade->exam->exam_name}}
+                        <b>Exam - </b> {{ isset($grade->exam->exam_name) ? $grade->exam->exam_name: 'No Exam Assigned'  }}
                       </div>
                     </div>
                     <div class="row">

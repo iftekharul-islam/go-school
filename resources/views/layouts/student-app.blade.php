@@ -71,7 +71,7 @@
 
         @yield('content')
         <!-- Footer Area Start Here -->
-            <footer class="footer-wrap-layout1">
+            <footer class="footer-wrap-layout1 example-screen">
                 <div class="copyright">© Copyrights <a href="https://augnitive.com/" target="_blank">Augnitive</a> 2019.
                     All rights reserved
                 </div>
@@ -116,7 +116,8 @@
 
 <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
 {{--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>--}}
 <script>
     $(document).ready(function () {

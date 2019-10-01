@@ -73,6 +73,7 @@ class SchoolController extends Controller
             'school_medium' => 'required',
             'school_about' => 'required',
             'school_established' => 'required',
+            'school_address' => 'required',
         ]);
         $tb = new School;
         $tb->name = $request->school_name;
@@ -81,6 +82,7 @@ class SchoolController extends Controller
         $tb->medium = $request->school_medium;
         $tb->code = date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6);
         $tb->theme = 'flatly';
+        $tb->school_address = $request->school_address;
         $tb->save();
         return redirect()->back()->with('status', 'New School Added');
     }

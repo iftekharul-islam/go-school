@@ -1422,7 +1422,7 @@
                                                                             @if($class->school_id == $school->id)
                                                                                 <div class="col-sm-3">
                                                                                     <button type="button"
-                                                                                            class="button button--save float-left"
+                                                                                            class="button button--save btn-lg float-left"
                                                                                             data-toggle="modal"
                                                                                             data-target="#myModal{{$class->id}}"
                                                                                             style="margin-top: 5%;">
@@ -1456,13 +1456,10 @@
                                                                                                                 <li class="list-group-item">
                                                                                                                     Section {{$section->section_number}}
                                                                                                                     &nbsp;
-                                                                                                                    <a class="btn btn-lg btn-warning"
-                                                                                                                       href="{{url('admin/courses/0/'.$section->id)}}">View
-                                                                                                                        All
-                                                                                                                        Assigned
-                                                                                                                        Courses</a>
+                                                                                                                    <a class="btn btn-lg btn-warning mr-5"
+                                                                                                                       href="{{url('admin/courses/0/'.$section->id)}}">View All Assigned Courses</a>
                                                                                                                     <span class="pull-right"> &nbsp;&nbsp;
-                                                                                                                <a class="btn btn-lg btn-success mr-2"
+                                                                                                                <a class="btn btn-lg btn-success mr-5"
                                                                                                                    href="{{url('admin/school/promote-students/'.$section->id)}}">+ Promote Students</a></span>
                                                                                                                     @include('layouts.master.add-course-form')
                                                                                                                 </li>
