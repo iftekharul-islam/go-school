@@ -21,33 +21,35 @@
                     @endif
                     <div class="item-title">
                         <h3 class="float-left mb-5">Fee Discounts</h3>
-                        <a href="{{ route('fee-discount.create') }}" class="button button--save float-right">Add discount</a>
+                        <a href="{{ url(auth()->user()->role.'/fee-discount/create') }}" class="button button--save float-right">Add discount</a>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table display text-wrap">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Code</th>
                             <th>Amount</th>
-                            <th>Description</th>
+                            <th>Type</th>
+                            <th width="40%">Description</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($discounts as $discount)
                             <tr>
-                                <td>{{ $loop->index }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $discount->name }}</td>
                                 <td>{{ $discount->code }}</td>
                                 <td>{{ $discount->amount }}</td>
+                                <td>{{ $discount->type }}</td>
                                 <td>{{ $discount->description }}</td>
                                 <td>
-                                    <a href="{{ route('fee-discount.edit', $discount->id) }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
+                                    <a href="{{ url(auth()->user()->role.'/fee-discount/'.$discount->id.'/edit') }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
                                     <button class="button button--cancel" onclick="feeDiscount({{ $discount->id }})"><i class="far fa-trash-alt"></i></button>
-                                    <form id="delete-form-{{ $discount->id }}" action="{{ route('fee-discount.destroy', $discount->id) }}" method="POST">
+                                    <form id="delete-form-{{ $discount->id }}" action="{{ url(auth()->user()->role.'/fee-discount', $discount->id) }}" method="POST">
                                         {!! method_field('delete') !!}
                                         {!! csrf_field() !!}
                                     </form>

@@ -14,6 +14,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App;
+use Illuminate\Support\Facades\DB;
 
 class FeeTransactionController extends Controller
 {
@@ -54,7 +55,8 @@ class FeeTransactionController extends Controller
             'fine' => 'required',
         ]);
         $feeMaster = FeeMaster::find($request->feeMasterId);
-        $user = FeeTransaction::where('student_id', 19)->where('fee_master_id', $request->feeMasterId)->get();
+
+//        $user = FeeTransaction::where('student_id', 19)->where('fee_master_id', $request->feeMasterId)->get();
 
         $value = $request->amount;
         $amount = $request->amount;
@@ -76,15 +78,11 @@ class FeeTransactionController extends Controller
         $ft->discount = $request->get('discountAmount');
         $ft->fine = $request->get('fine');
         $ft->mode = $request->get('mode');
-        $ft->fee_master_id = $request->get('feeMasterId');
         $ft->accountant_id = Auth::id();
         $ft->school_id = \auth()->user()->school_id;
         $ft->status = $status;
         $ft->save();
-        $tm = new App\TransactionMonth();
-        $tm->month = $request->month;
-        $tm->fee_transaction_id = $ft->id;
-        $tm->save();
+        $ft->feeMasters()->attach($request->feeMasterId);
         return redirect()->back();
     }
 
@@ -130,8 +128,9 @@ class FeeTransactionController extends Controller
      */
     public function destroy($id)
     {
-        FeeTransaction::findOrFail($id)->delete();
-        App\TransactionMonth::where('fee_transaction_id', $id)->delete();
+        $ft = FeeTransaction::findOrFail($id);
+        $ft->delete();
+        DB::table('fee_master_fee_transaction')->where('fee_transaction_id', $ft->id)->delete();
         return redirect()->back();
     }
 
@@ -150,7 +149,7 @@ class FeeTransactionController extends Controller
 
     public function collectFee($id)
     {
-        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType', 'section.class.feeMasters.transactions', 'section.class.feeMasters.transactions.transactionMonths'])->where('id', $id)->first();
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::all();
 //        return $student;
         return view('accounts.transaction.feeCollect', compact('student', 'discounts'));
@@ -158,7 +157,7 @@ class FeeTransactionController extends Controller
 
     public function multipleFee($id)
     {
-        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType', 'section.class.feeMasters.transactions'])->where('id', $id)->first();
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::all();
         return view('accounts.transaction.multiple-fee', compact('student', 'discounts'));
     }
@@ -174,55 +173,34 @@ class FeeTransactionController extends Controller
             $myArray = explode(',', $item);
         }
 
+        if (in_array("", $myArray)) {
+            return redirect()->back();
+        }
+
+        $discount = Discount::find($request->discount);
+        $total_discount = 0;
+        if ($discount) {
+            if ($discount->type === 'recurrent') {
+                $total_discount = count($myArray) * $request->discountAmount;
+            } else {
+                $total_discount = $request->discountAmount;
+            }
+        }
+
         $ft = new FeeTransaction();
         $ft->student_id = $request->student_id;
         $ft->school_id = \auth()->user()->school_id;
         $ft->amount = $request->amount;
-        $ft->discount = $request->discountAmount;
+        $ft->discount_id = $request->discount;
+        $ft->discount = $total_discount;
         $ft->fine = $request->fine;
         $ft->mode = $request->mode;
         $ft->accountant_id = \auth()->id();
         $ft->status = 'paid';
-        $ft->fee_master_id = $myArray[0];
         $ft->save();
-        foreach ($request->month as $item) {
-            $tm = new App\TransactionMonth();
-            $tm->month = $item;
-            $tm->fee_transaction_id = $ft->id;
-            $tm->save();
+        foreach ($myArray as $value) {
+            $ft->feeMasters()->attach($value);
         }
-
-//        $index = 0;
-//        foreach ($myArray as $key => $value) {
-//            $ft = new FeeTransaction();
-//            $fm = FeeMaster::find($value);
-//            $amount = $fm->amount;
-//
-//            if ($fm->format === 'recurrent') {
-//                $ft->student_id = $request->student_id;
-//                $ft->school_id = \auth()->user()->school_id;
-//                $ft->amount = $amount;
-//                $ft->discount = $request->discountAmount;
-//                $ft->fine = $request->fine;
-//                $ft->mode = $request->mode;
-//                $ft->accountant_id = \auth()->id();
-//                $ft->status = 'paid';
-//                $ft->fee_master_id = $value;
-//                $ft->save();
-//                $index++;
-//            } else {
-//                $ft->student_id = $request->student_id;
-//                $ft->school_id = \auth()->user()->school_id;
-//                $ft->amount = $amount;
-//                $ft->discount = $request->discountAmount;
-//                $ft->fine = $request->fine;
-//                $ft->mode = $request->mode;
-//                $ft->accountant_id = \auth()->id();
-//                $ft->status = 'paid';
-//                $ft->fee_master_id = $value;
-//                $ft->save();
-//            }
-//        }
         return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
     }
 }

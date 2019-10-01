@@ -8,8 +8,8 @@ class TransactionMonth extends Model
 {
     protected $fillable = ['fee_transaction_id', 'month'];
 
-    public function feeTransaction()
+    public function TransactionProfiles()
     {
-        return $this->belongsTo('App\FeeTransaction');
+        return $this->belongsTo('App\TransactionProfile');
     }
 }

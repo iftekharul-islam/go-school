@@ -41,12 +41,14 @@ class FeeDiscountController extends Controller
             'code' => 'required',
             'amount' => 'required',
             'desc' => 'required',
+            'discount_type' => 'required',
         ]);
 
         $discount = new Discount();
         $discount->name = $request->get('name');
         $discount->code = $request->get('code');
         $discount->amount = $request->get('amount');
+        $discount->type = $request->get('discount_type');
         $discount->description = $request->get('desc');
         $discount->school_id = auth()->user()->school_id;
         $discount->save();

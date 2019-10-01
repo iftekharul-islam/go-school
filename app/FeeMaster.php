@@ -20,6 +20,6 @@ class FeeMaster extends Model
 
     public function transactions()
     {
-        return $this->hasMany('App\FeeTransaction');
+        return $this->belongsToMany('App\FeeTransaction');
     }
 }

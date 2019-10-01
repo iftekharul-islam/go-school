@@ -14,10 +14,11 @@ class FeeMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $feeMasters = FeeMaster::all();
-        return view('accounts.feeMaster.index', compact('feeMasters'));
+//        $feeMasters = FeeMaster::all();
+        $classes = Myclass::all();
+        return view('accounts.feeMaster.index', compact('classes'));
     }
 
     /**
@@ -28,7 +29,7 @@ class FeeMasterController extends Controller
     public function create()
     {
         $classes = Myclass::all();
-        $feeTypes = FeeType::all();
+        $feeTypes = FeeType::where('type', '!=', 'recurrent')->get();;
         return view('accounts.feeMaster.create', compact('classes', 'feeTypes'));
     }
 
@@ -45,15 +46,31 @@ class FeeMasterController extends Controller
             'fee_type' => 'required',
             'amount' => 'required',
             'dueDate' => 'required',
-            'format' => 'required',
         ]);
-        $feeMaster = new FeeMaster();
-        $feeMaster->class_id = $request->get('class_id');
-        $feeMaster->fee_type_id = $request->get('fee_type');
-        $feeMaster->due = $request->get('dueDate');
-        $feeMaster->amount = $request->get('amount');
-        $feeMaster->format = $request->get('format');
-        $feeMaster->save();
+        if ($request->fee_type === 'recurrent') {
+            $feeTypes = FeeType::where('type', 'recurrent')->get();
+//          return $feeTypes;
+            $string = $request->dueDate;
+            $timestamp = strtotime($string);
+            $dueDate =  date("d", $timestamp);
+            foreach ($feeTypes as $feeType) {
+                $feeMaster = new FeeMaster();
+                $feeMaster->class_id = $request->get('class_id');
+                $feeMaster->fee_type_id = $feeType->id;
+                $feeMaster->due = $dueDate;
+                $feeMaster->amount = $request->get('amount');
+                $feeMaster->format = 'recurrent';
+                $feeMaster->save();
+            }
+        } else {
+            $feeMaster = new FeeMaster();
+            $feeMaster->class_id = $request->get('class_id');
+            $feeMaster->fee_type_id = $request->fee_type;
+            $feeMaster->due = $request->get('dueDate');
+            $feeMaster->amount = $request->get('amount');
+            $feeMaster->format = 'onetime';
+            $feeMaster->save();
+        }
         return redirect(auth()->user()->role.'/fee-master')->with('status', 'Fee Master Created');
     }
 
@@ -119,5 +136,12 @@ class FeeMasterController extends Controller
         $feeMaster = FeeMaster::findOrFail($id);
         $feeMaster->delete();
         return redirect(auth()->user()->role.'/fee-master')->with('status', 'Fee Master Deleted');
+    }
+
+    public function classFee(Request $request)
+    {
+        $classes = Myclass::all();
+        $feeMasters = FeeMaster::where('class_id', $request->class)->get();
+        return view('accounts.feeMaster.index', compact('feeMasters', 'classes'));
     }
 }

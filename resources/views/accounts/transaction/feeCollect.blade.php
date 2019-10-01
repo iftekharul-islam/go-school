@@ -95,7 +95,7 @@
                     <div class="item-title">
                         <h3 class="float-left mb-5 float-left">Fee Collection</h3>
                         <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>
-                        <a href="{{ route('multiple.fee', $student->id) }}" class="btn btn-primary text-center btn-lg" style="margin-left: 60px;"><i class="fab fa-buffer"></i> <b>Collect Multiple Fees</b></a>
+                        <a href="{{ url(auth()->user()->role.'/fee-collection/multiple-fee', $student->id) }}" class="btn btn-primary text-center btn-lg" style="margin-left: 60px;"><i class="fab fa-buffer"></i> <b>Collect Multiple Fees</b></a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -104,7 +104,7 @@
                         <tr>
                             <th>Class</th>
                             <th>Fee Name</th>
-                            <th>Fee Code</th>
+                            <th>Year</th>
                             <th>Due Date</th>
                             <th>Amount</th>
                             <th>Status</th>
@@ -127,184 +127,91 @@
                             $totalPaid = 0;
                         @endphp
                         @foreach($student->section->class->feeMasters as $feeMaster)
-                            @if($feeMaster['format'] === 'recurrent')
-                                @foreach($months as $month)
-                                    @php
-                                        $total_paid = 0;
-                                        $totalAmount = $totalAmount + $feeMaster->amount;
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $feeMaster->myclass->class_number }}</td>
-                                        <td class="text-capitalize"> <span class="badge-success badge"><b>{{ $month }}</b></span> {{ $feeMaster->feeType->name }}</td>
-                                        <td>{{ $feeMaster->feeType->code }}</td>
-                                        <td>{{ $month }} - {{ $feeMaster->due }}</td>
-                                        <td>{{ $feeMaster->amount }}</td>
-                                        <td>
-                                            @foreach($feeMaster->transactions as $transaction)
-                                                @foreach($transaction['transactionMonths'] as $tm)
-                                                    @if($tm->fee_transaction_id === $transaction->id && $month === $tm->month)
-                                                        @if($student->id === $transaction->student_id)
-                                                            @php
-                                                                $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
-                                                            @endphp
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endforeach
-                                            @if($total_paid >= $feeMaster->amount)
-                                                <span class="badge-primary badge">Paid</span>
-                                            @elseif($total_paid > 0 && $total_paid < $feeMaster->amount)
-                                                <span class="badge-warning badge">Partial</span>
-                                            @else
-                                                 <span class="badge-danger badge">Unpaid</span>
-                                            @endif
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            @if( !($total_paid > $feeMaster->amount) && !($total_paid == $feeMaster->amount))
-                                                <a data-id="{{ $feeMaster->id }}" data-amount="{{ $feeMaster->amount }}" data-month="{{ $month }}" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#feeCollect"><i class="fa-plus fa"></i></a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @if(count($feeMaster->transactions) != 0)
+                            @php
+                                $total_paid = 0;
+                                $totalAmount = $totalAmount + $feeMaster->amount;
+                            @endphp
+                            <tr>
+                                <td>Class - {{ $feeMaster->myclass->class_number }}</td>
+                                <td class="text-capitalize"> <span class="badge-success badge"></span> {{ $feeMaster->feeType->name }}</td>
+                                <td>{{ now()->year }}</td>
+                                <td>{{ $feeMaster->due }}</td>
+                                <td>{{ $feeMaster->amount }}</td>
+                                <td>
+                                    @foreach($feeMaster->transactions as $transaction)
+                                        @if($student->id === $transaction->student_id)
+                                            @php
+                                                $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    @if($total_paid >= $feeMaster->amount)
+                                        <span class="badge-primary badge">Paid</span>
+                                    @elseif($total_paid > 0 && $total_paid < $feeMaster->amount)
+                                        <span class="badge-warning badge">Partial</span>
+                                    @else
+                                         <span class="badge-danger badge">Unpaid</span>
+                                    @endif
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    @if( !($total_paid > $feeMaster->amount) && !($total_paid == $feeMaster->amount))
+                                        <a data-id="{{ $feeMaster->id }}" data-amount="{{ $feeMaster->amount }}" data-month="" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#feeCollect"><i class="fa-plus fa"></i></a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @if(count($feeMaster->transactions) != 0)
+                                @php
+                                    $paid_amount = 0;
+                                @endphp
+                                @foreach($feeMaster->transactions as $transaction)
+                                    @if($student->id === $transaction->student_id)
                                         @php
-                                            $paid_amount = 0;
+                                            $cunt = count($transaction->feeMasters);
+                                            if ( $cunt == 1 ) {
+                                                $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
+                                                $totalFine = $totalFine + $transaction['fine'];
+                                                $totalDiscount = $totalDiscount + $transaction['discount'];
+                                                $totalPaid = $totalPaid + $transaction['amount'];
+                                            } else {
+                                                $paid_amount = $paid_amount + $transaction['amount'] / $cunt + $transaction['discount'] / $cunt - $transaction['fine'] / $cunt;
+                                                $totalFine = $totalFine + $transaction['fine'] / $cunt;
+                                                $totalDiscount = $totalDiscount + $transaction['discount'] / $cunt;
+                                                $totalPaid = $totalPaid + $transaction['amount'] / $cunt;
+                                            }
                                         @endphp
-                                        @foreach($feeMaster->transactions as $transaction)
-                                            @foreach($transaction['transactionMonths'] as $tm)
-                                                @if($tm->fee_transaction_id === $transaction->id && $month === $tm->month)
-                                                    @if($student->id === $transaction->student_id)
-                                                        @php
-                                                            $cunt = count($transaction->transactionMonths);
-                                                            if ( $cunt == 1 ) {
-                                                                $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
-                                                                $totalFine = $totalFine + $transaction['fine'];
-                                                                $totalDiscount = $totalDiscount + $transaction['discount'];
-                                                                $totalPaid = $totalPaid + $transaction['amount'];
-                                                            } else {
-                                                                $paid_amount = $paid_amount + ($transaction['amount']/$cunt) + ($transaction['discount']/$cunt) - ($transaction['fine']/$cunt);
-                                                                $totalFine = $totalFine + $transaction['fine'] / $cunt;
-                                                                $totalDiscount = $totalDiscount + $transaction['discount'] / $cunt;
-                                                                $totalPaid = $totalPaid + $transaction['amount'] / $cunt;
-                                                            }
-                                                        @endphp
-                                                        <tr>
-                                                            <td></td>
-                                                            <td class="text-capitalize"></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td><img class="enter-icon" src="{{ asset('template/img/enter.png') }}" alt=""></td>
-                                                            <td>{{ $transaction['mode'] }}</td>
-                                                            <td> {{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y') }} </td>
-                                                            <td>{{ $transaction['fine'] / $cunt }}</td>
-                                                            <td>{{ $transaction['discount'] / $cunt }}</td>
-                                                            <td>
-                                                                {{ $cunt > 1 ? $transaction['amount'] / $cunt : $transaction['amount'] }}
-                                                            </td>
-                                                            <td>
-                                                                {{ $feeMaster->amount - $paid_amount }}
-                                                            </td>
-                                                            <td>
-                                                                <button class="btn btn-secondary" onclick="feeTransaction({{ $transaction->id }})"><i class="fas fa-history"></i></button>
-                                                                <form id="delete-form-{{ $transaction->id }}" action="{{ route('fee-transaction.destroy', $transaction->id) }}" method="POST">
-                                                                    {!! method_field('delete') !!}
-                                                                    {!! csrf_field() !!}
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        @endforeach
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-capitalize"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><img class="enter-icon" src="{{ asset('template/img/enter.png') }}" alt=""></td>
+                                            <td>{{ $transaction['mode'] }}</td>
+                                            <td> {{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y') }} </td>
+                                            <td>{{number_format((float)($transaction['fine'] / $cunt), 2, '.', '')}}</td>
+                                            <td>{{number_format((float)($transaction['discount'] / $cunt), 2, '.', '')}}</td>
+                                            <td>
+                                                {{number_format((float)($transaction['amount'] / $cunt), 2, '.', '')}}
+                                            </td>
+                                            <td>
+                                                {{number_format((float)($feeMaster->amount - $paid_amount), 2, '.', '')}}
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-secondary" onclick="feeTransaction({{ $transaction->id }})"><i class="fas fa-history"></i></button>
+                                                <form id="delete-form-{{ $transaction->id }}" action="{{ url(auth()->user()->role.'/fee-transaction', $transaction->id) }}" method="POST">
+                                                    {!! method_field('delete') !!}
+                                                    {!! csrf_field() !!}
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @endif
                                 @endforeach
-                            @else
-                                @php
-                                    $totalAmount = $totalAmount + $feeMaster->amount;
-                                @endphp
-                                <tr>
-                                    <td>{{ $feeMaster->myclass->class_number }}</td>
-                                    <td>{{ $feeMaster->feeType->name }}</td>
-                                    <td>{{ $feeMaster->feeType->code }}</td>
-                                    <td>{{ $feeMaster->due }}</td>
-                                    <td>{{ $feeMaster->amount }}</td>
-                                    <td>
-                                        @php
-                                            $total_paid_onetime = 0;
-                                        @endphp
-                                        @foreach($feeMaster->transactions as $transaction)
-                                            @if($student->id === $transaction->student_id)
-                                                @php
-                                                    $total_paid_onetime = $total_paid_onetime + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        @if($total_paid_onetime >= $feeMaster->amount)
-                                            <span class="badge-primary badge">Paid</span>
-                                        @elseif($total_paid_onetime > 0 && $total_paid_onetime < $feeMaster->amount)
-                                            <span class="badge-warning badge">Partial</span>
-                                        @else
-                                            <span class="badge-danger badge">Unpaid</span>
-                                        @endif
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="">
-                                        @if( !($total_paid_onetime > $feeMaster->amount) && !($total_paid_onetime == $feeMaster->amount))
-                                            <a data-id="{{ $feeMaster->id }}" data-amount="{{ $feeMaster->amount }}" data-month="" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#feeCollect"><i class="fa-plus fa"></i></a>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @if(count($feeMaster->transactions) != 0)
-                                    @php
-                                        $paid_amount1 = 0;
-                                    @endphp
-                                    @foreach($feeMaster->transactions as $transaction)
-                                        @foreach($transaction['transactionMonths'] as $tm)
-                                            @if($tm->fee_transaction_id === $transaction->id)
-                                                @if($student->id === $transaction->student_id)
-                                                    @php
-                                                        $paid_amount1 = $paid_amount1 + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
-                                                        $totalFine = $totalFine + $transaction['fine'];
-                                                        $totalDiscount = $totalDiscount + $transaction['discount'];
-                                                        $totalPaid = $totalPaid + $transaction['amount'];
-                                                    @endphp
-                                                    <tr>
-                                                        <td></td>
-                                                        <td class="text-capitalize"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><img class="enter-icon" src="{{ asset('template/img/enter.png') }}" alt=""></td>
-                                                        <td>{{ $transaction['mode'] }}</td>
-                                                        <td> {{ \Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y') }} </td>
-                                                        <td>{{ $transaction['fine'] }}</td>
-                                                        <td>{{ $transaction['discount'] }}</td>
-                                                        <td>{{ $transaction['amount'] }}</td>
-                                                        <td>{{ $feeMaster->amount - $paid_amount1}}</td>
-                                                        <td>
-                                                            <button class="btn btn-secondary" onclick="feeTransaction({{ $transaction->id }})"><i class="fas fa-history"></i></button>
-                                                            <form id="delete-form-{{ $transaction->id }}" action="{{ route('fee-transaction.destroy', $transaction->id) }}" method="POST">
-                                                                {!! method_field('delete') !!}
-                                                                {!! csrf_field() !!}
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                @endif
                             @endif
                         @endforeach
                         <tr style="background-color: #F0F1F3;">
@@ -312,14 +219,14 @@
                             <td></td>
                             <td></td>
                             <td class="tex text-left">Grand Total</td>
-                            <td>{{ $totalAmount }}</td>
+                            <td>{{number_format((float)($totalAmount), 2, '.', '')}}</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{ $totalFine }}</td>
-                            <td>{{ $totalDiscount }}</td>
-                            <td>{{ $totalPaid }}</td>
-                            <td>{{ (int)($totalAmount - $totalDiscount + $totalFine - $totalPaid) }}</td>
+                            <td>{{number_format((float)($totalFine), 2, '.', '')}}</td>
+                            <td>{{number_format((float)($totalDiscount), 2, '.', '')}}</td>
+                            <td>{{number_format((float)($totalPaid), 2, '.', '')}}</td>
+                            <td>{{number_format((float)((int)($totalAmount - $totalDiscount + $totalFine - $totalPaid)), 2, '.', '')}}</td>
                             <td></td>
                         </tr>
                         </tbody>
@@ -333,7 +240,7 @@
                                     <button type="button" class="btn-secondary btn" data-dismiss="modal" aria-hidden="true"><i class="fas fa-window-close"></i></button>
                                 </div>
                                 <div class="modal-body p-5">
-                                    <form class="new-added-form fee-transaction" id="fee-transaction" action="{{ route('fee-transaction.store') }}" method="post">
+                                    <form class="new-added-form fee-transaction" id="fee-transaction" action="{{ url(auth()->user()->role.'/fee-transaction') }}" method="post">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="student_id" value="{{ $student->id }}">
                                         <input type="hidden" name="feeMasterId" value="" id="feeMasterId">
@@ -384,6 +291,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -424,131 +332,64 @@
                             $paid_amount1 = 0;
                         @endphp
                         @foreach($student->section->class->feeMasters as $feeMaster)
-                            @if($feeMaster['format'] === 'recurrent')
-                                @foreach($months as $month)
-                                    @php
-                                        $total_paid = 0;
-                                        $totalAmount = $totalAmount + $feeMaster->amount;
-                                    @endphp
-                                    <tr>
-                                        <td class="text-capitalize"> <span class="badge-success badge month"><b>{{ $month }}</b></span> {{ $feeMaster->feeType->name }}</td>
-                                        <td>{{ $feeMaster->amount }}</td>
-                                        <td>
-                                            @foreach($feeMaster->transactions as $transaction)
-                                                @foreach($transaction['transactionMonths'] as $tm)
-                                                    @if($tm->fee_transaction_id === $transaction->id && $month === $tm->month)
-                                                        @if($student->id === $transaction->student_id)
-                                                            @php
-                                                                $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
-                                                            @endphp
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endforeach
-                                            @if($total_paid >= $feeMaster->amount)
-                                                <span class="badge-primary badge paid">Paid</span>
-                                            @elseif($total_paid > 0 && $total_paid < $feeMaster->amount)
-                                                <span class="badge-warning badge partial">Partial</span>
-                                            @else
-                                                <span class="badge-danger badge unpaid">Unpaid</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if(count($feeMaster->transactions) != 0)
-                                                @php
-                                                    $paid_amount = 0;
-                                                @endphp
-                                                @foreach($feeMaster->transactions as $transaction)
-                                                    @foreach($transaction['transactionMonths'] as $tm)
-                                                        @if($tm->fee_transaction_id === $transaction->id && $month === $tm->month)
-                                                            @if($student->id === $transaction->student_id)
-                                                                @php
-                                                                    $cunt = count($transaction->transactionMonths);
-                                                                    if ( $cunt == 1 ) {
-                                                                        $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
-                                                                        $totalFine = $totalFine + $transaction['fine'];
-                                                                        $totalDiscount = $totalDiscount + $transaction['discount'];
-                                                                        $totalPaid = $totalPaid + $transaction['amount'];
-                                                                    } else {
-                                                                        $paid_amount = $paid_amount + ($transaction['amount']/$cunt) + ($transaction['discount']/$cunt) - ($transaction['fine']/$cunt);
-                                                                        $totalFine = $totalFine + $transaction['fine'] / $cunt;
-                                                                        $totalDiscount = $totalDiscount + $transaction['discount'] / $cunt;
-                                                                        $totalPaid = $totalPaid + $transaction['amount'] / $cunt;
-                                                                    }
-                                                                @endphp
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                @endforeach
-                                            @endif
-                                            {{ $paid_amount }}
-                                        </td>
-                                        <td>{{ $feeMaster->amount - $paid_amount }}</td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                @php
-                                    $totalAmount = $totalAmount + $feeMaster->amount;
-                                    $paid_amount1 = 0;
-                                @endphp
-                                <tr>
-                                    <td>{{ $feeMaster->feeType->name }}</td>
-                                    <td>{{ $feeMaster->amount }}</td>
-                                    <td>
+                            @php
+                                $total_paid = 0;
+                                $totalAmount = $totalAmount + $feeMaster->amount;
+                            @endphp
+                            <tr>
+                                <td class="text-capitalize"> <span class="badge-success badge month"></span> {{ $feeMaster->feeType->name }}</td>
+                                <td>{{ $feeMaster->amount }}</td>
+                                <td>
+                                    @foreach($feeMaster->transactions as $transaction)
+                                        @if($student->id === $transaction->student_id)
+                                            @php
+                                                $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    @if($total_paid >= $feeMaster->amount)
+                                        <span class="badge-primary badge paid">Paid</span>
+                                    @elseif($total_paid > 0 && $total_paid < $feeMaster->amount)
+                                        <span class="badge-warning badge partial">Partial</span>
+                                    @else
+                                        <span class="badge-danger badge unpaid">Unpaid</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(count($feeMaster->transactions) != 0)
                                         @php
-                                            $total_paid_onetime = 0;
+                                            $paid_amount = 0;
                                         @endphp
                                         @foreach($feeMaster->transactions as $transaction)
-                                            @foreach($transaction['transactionMonths'] as $tm)
-                                                @if($tm->fee_transaction_id === $transaction->id)
-                                                    @if($student->id === $transaction->student_id)
-                                                        @php
-                                                            $total_paid_onetime = $total_paid_onetime + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
-                                                        @endphp
-                                                    @endif
-                                                @endif
-                                            @endforeach
+                                            @if($student->id === $transaction->student_id)
+                                                @php
+                                                    $cunt = count($transaction->feeMasters);
+                                                    if ( $cunt == 1 ) {
+                                                        $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
+                                                        $totalFine = $totalFine + $transaction['fine'];
+                                                        $totalDiscount = $totalDiscount + $transaction['discount'];
+                                                        $totalPaid = $totalPaid + $transaction['amount'];
+                                                    } else {
+                                                        $paid_amount = $paid_amount + ($transaction['amount']/$cunt) + ($transaction['discount']/$cunt) - ($transaction['fine']/$cunt);
+                                                        $totalFine = $totalFine + $transaction['fine'] / $cunt;
+                                                        $totalDiscount = $totalDiscount + $transaction['discount'] / $cunt;
+                                                        $totalPaid = $totalPaid + $transaction['amount'] / $cunt;
+                                                    }
+                                                @endphp
+                                            @endif
                                         @endforeach
-                                        @if($total_paid_onetime >= $feeMaster->amount)
-                                            <span class="badge-primary badge paid">Paid</span>
-                                        @elseif($total_paid_onetime > 0 && $total_paid_onetime < $feeMaster->amount)
-                                            <span class="badge-warning badge partial">Partial</span>
-                                        @else
-                                            <span class="badge-danger badge unpaid">Unpaid</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(count($feeMaster->transactions) != 0)
-                                            @php
-                                                $paid_amount1 = 0;
-                                            @endphp
-                                            @foreach($feeMaster->transactions as $transaction)
-                                                @foreach($transaction['transactionMonths'] as $tm)
-                                                    @if($tm->fee_transaction_id === $transaction->id)
-                                                        @if($student->id === $transaction->student_id)
-                                                            @php
-                                                                $paid_amount1 = $paid_amount1 + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
-                                                                $totalFine = $totalFine + $transaction['fine'];
-                                                                $totalDiscount = $totalDiscount + $transaction['discount'];
-                                                                $totalPaid = $totalPaid + $transaction['amount'];
-                                                            @endphp
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            @endforeach
-                                        @endif
-                                        {{ $paid_amount1 }}
-                                    </td>
-                                    <td>{{ $feeMaster->amount - $paid_amount1 }}</td>
-                                </tr>
-                            @endif
+                                    @endif
+                                    {{number_format((float)($paid_amount), 2, '.', '')}}
+                                </td>
+                                <td>{{number_format((float)($feeMaster->amount - $paid_amount), 2, '.', '')}}</td>
+                            </tr>
                         @endforeach
                         <tr class="grand-total">
                             <td class="tex text-left"><b>Grand Total</b></td>
-                            <td><b>{{ $totalAmount }}</b></td>
+                            <td><b>{{number_format((float)($totalAmount), 2, '.', '')}}</b></td>
                             <td></td>
-                            <td><b>{{ $totalPaid }}</b></td>
-                            <td><b>{{ (int)($totalAmount - $totalDiscount + $totalFine - $totalPaid) }}</b></td>
+                            <td><b>{{number_format((float)($totalPaid), 2, '.', '')}}</b></td>
+                            <td><b> {{number_format((float)((int)($totalAmount - $totalDiscount + $totalFine - $totalPaid)), 2, '.', '')}}</b></td>
                         </tr>
                         </tbody>
                     </table>

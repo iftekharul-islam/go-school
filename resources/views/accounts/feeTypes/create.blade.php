@@ -21,18 +21,27 @@
                                 <h3>Create Fee Types</h3>
                             </div>
                         </div>
-                        <form class="mg-b-20" action="{{ route('fee-types.store') }}" method="post">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form class="mg-b-20" action="{{ url(auth()->user()->role.'/fee-types')  }}" method="post">
                             {{ csrf_field() }}
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
                                     <label for="name">Name</label>
-                                    <input type="text" placeholder="Name" class="form-control" name="name">
+                                    <input type="text" placeholder="Name" class="form-control" name="name" value="{{ old('name') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
                                     <label for="code">Code</label>
-                                    <input type="text" placeholder="Code" class="form-control" name="code">
+                                    <input type="text" placeholder="Code" class="form-control" name="code" value="{{ old('code') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">

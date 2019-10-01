@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FeeType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,11 +44,14 @@ class FeeTypesController extends Controller
             'desc' => 'required',
         ]);
 
+        $today = Carbon::now();
         $feeType = new FeeType();
         $feeType->name = $request->get('name');
         $feeType->code = $request->get('code');
         $feeType->description = $request->get('desc');
         $feeType->school_id = Auth::user()->school_id;
+        $feeType->type = 'onetime';
+        $feeType->year = $today->year;
         $feeType->save();
         return redirect(\auth()->user()->role.'/fee-types')->with('status', 'Fee types Created');
     }

@@ -23,7 +23,6 @@ class CreateFeeTransactionsTable extends Migration
             $table->double('fine');
             $table->string('status');
             $table->string('mode')->nullable();
-            $table->integer('fee_master_id');
             $table->integer('accountant_id');
             $table->timestamps();
         });

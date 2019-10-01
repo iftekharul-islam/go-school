@@ -187,7 +187,7 @@
                     @endif
 
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Fees Collection</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-cash-register"></i><span>Fees Collection</span></a>
                         <ul class="nav sub-group-menu {{ $ac == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}" href="{{ url($role.'/fee-types') }}">

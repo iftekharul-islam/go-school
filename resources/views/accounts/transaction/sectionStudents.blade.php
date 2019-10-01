@@ -14,7 +14,7 @@
         <div class="false-height">
             <div class="card mb-3">
                 <div class="card-body">
-                    <form class="new-added-form" action="{{ route('accountant.all-student') }}" method="get">
+                    <form class="new-added-form" action="{{ url(auth()->user()->role.'/fee-collection/section/student') }}" method="get">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
@@ -31,7 +31,7 @@
                                 <select class="form-control" id="section" name="section" ></select>
                             </div>
                             <div class="col-12 form-group mg-t-2 float-right">
-                                <button type="submit" class="button--save button">Search</button>
+                                <button type="submit" class="button--save button float-right">Search</button>
                             </div>
                         </div>
                     </form>
@@ -70,7 +70,7 @@
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->gender }}</td>
                                         <td>
-                                            <a class="button--save button" href="{{ route('student.fee', $student->id) }}">Collect</a>
+                                            <a class="button--save button" href="{{ url(auth()->user()->role.'/fee-collection/get-fee',$student->id) }}">Collect</a>
                                         </td>
                                     </tr>
                                 @endforeach

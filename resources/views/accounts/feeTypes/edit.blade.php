@@ -21,7 +21,7 @@
                                 <h3>Edit Fee Types</h3>
                             </div>
                         </div>
-                        <form class="mg-b-20" action="{{ route('fee-types.update', $feeType->id) }}" method="post">
+                        <form class="mg-b-20" action="{{ url(auth()->user()->role.'/fee-types', $feeType->id) }}" method="post">
                             {{ csrf_field() }}
                             {!! method_field('patch') !!}
                             <div class="col-md-12">

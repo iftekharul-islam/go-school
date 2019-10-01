@@ -30,7 +30,7 @@
                                 <h3>Create Fee Master</h3>
                             </div>
                         </div>
-                        <form class="mg-b-20" action="{{ route('fee-master.store') }}" method="post">
+                        <form class="mg-b-20" action="{{ url(auth()->user()->role.'/fee-master') }}" method="post">
                             {{ csrf_field() }}
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
@@ -48,6 +48,7 @@
                                     <label for="code">Fee Type</label>
                                     <select name="fee_type" id="" class="select2">
                                         <option value="" selected>Select Fee</option>
+                                        <option value="recurrent">Monthly</option>
                                         @foreach($feeTypes as $feeType)
                                             <option value="{{ $feeType->id }}">{{ $feeType->name }}</option>
                                         @endforeach
@@ -57,23 +58,13 @@
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
                                     <label for="code">Amount</label>
-                                    <input type="number" step="0.01" placeholder="Amount" class="form-control" name="amount">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group mb-4">
-                                    <label for="desc">Type</label>
-                                    <select name="format" id="" class="select2" onchange="getSelected(this)">
-                                        <option value="" selected>Select Type</option>
-                                        <option value="recurrent">Recurrent</option>
-                                        <option value="onetime">One Time</option>
-                                    </select>
+                                    <input type="number" step="0.01" placeholder="Amount" class="form-control" name="amount" value="{{ old('amount') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4" id="name_data">
                                     <label for="desc">Due Date <small>( <b>Select type before due date</b> )</small></label>
-                                    <input type="text" data-date-format="yyyy-mm-dd" id="due_date" class="form-control date" name="dueDate" value="" placeholder="Date of Collect Fee">
+                                    <input type="text" data-date-format="yyyy-mm-dd" id="due_date" class="form-control date" name="dueDate" value="{{ old('dueDate') }}" placeholder="Date of Collect Fee">
                                 </div>
                             </div>
                             <div class="form-group mr-4 float-right mt-3">
@@ -86,17 +77,3 @@
         </div>
     </div>
 @endsection
-@push('customjs')
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
-    <script>
-        function getSelected(item) {
-            if (item.value === 'recurrent')  {
-                $(".date").hide();
-                $("#name_data").append('<input type="text" class="form-control onetime" name="dueDate" placeholder="Monthly date of collect fee">');
-            } else {
-                $(".onetime").hide();
-                $(".date").css("display", "block");
-            }
-        };
-    </script>
-@endpush

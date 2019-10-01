@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exam;
 use App\Fee;
+use App\FeeTransaction;
 use App\Myclass;
 use App\Notice;
 use App\Section;
@@ -79,6 +80,13 @@ class AccountantHomeController extends Controller
 
         foreach ($total_income as $ti)
             $total_income = $ti->sum;
+
+
+        $student_amount = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('amount');
+        $student_discount = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('discount');
+        $student_fine = FeeTransaction::where('school_id', \auth()->user()->school_id)->sum('fine');
+        $student_total = $student_amount - $student_fine + $student_discount;
+        $total_income = $total_income + $student_total;
 
         $fees = Fee::where('school_id', Auth::user()->school_id)->get();
         return view('accountant-home', [

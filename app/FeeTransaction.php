@@ -10,8 +10,8 @@ class FeeTransaction extends Model
         'student_id', 'amount', 'discount_id', 'discount', 'fine', 'status', 'mode', 'fee_master_id', 'accountant_id',
     ];
 
-    public function transactionMonths()
+    public function feeMasters()
     {
-        return $this->hasMany('App\TransactionMonth');
+        return $this->belongsToMany('App\FeeMaster', 'fee_master_fee_transaction');
     }
 }

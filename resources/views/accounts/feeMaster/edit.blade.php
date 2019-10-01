@@ -29,7 +29,7 @@
                                 <h3>Edit Fee Master</h3>
                             </div>
                         </div>
-                        <form class="mg-b-20" action="{{ route('fee-master.update', $feeMaster->id) }}" method="post">
+                        <form class="mg-b-20" action="{{ url(auth()->user()->role.'/fee-master', $feeMaster->id) }}" method="post">
                             {{ csrf_field() }}
                             {!! method_field('patch') !!}
                             <div class="col-md-12">

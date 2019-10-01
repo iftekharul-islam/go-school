@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="mb-5">
-                            <form class="new-added-form" action="{{ route('accountant.all-student') }}" method="get">
+                            <form class="new-added-form" action="{{ url(auth()->user()->role.'/fee-collection/section/student') }}" method="get">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-12-xxxl col-lg-6 col-12 form-group">
@@ -47,7 +47,7 @@
                                         <select class="form-control" id="section" name="section" ></select>
                                     </div>
                                     <div class="col-12 form-group mg-t-8 float-right">
-                                        <button type="submit" class="button--save button">Search</button>
+                                        <button type="submit" class="button--save button float-right">Search</button>
                                     </div>
                                 </div>
                             </form>
