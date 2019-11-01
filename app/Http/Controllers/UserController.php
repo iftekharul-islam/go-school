@@ -287,7 +287,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param int $user_code ( Student_Code )
      *
      * @return UserResource
      */
