@@ -40,7 +40,7 @@
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form class="new-added-form" method="POST" action="{{ url('admin/edit/user') }}">
+                        <form class="new-added-form" method="POST" action="{{ url('admin/edit/user') }}" enctype='multipart/form-data'>
                             {{ csrf_field() }}
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <input type="hidden" name="user_role" value="{{$user->role}}">
@@ -190,8 +190,8 @@
 
                                         <div class="col-md-12">
                                             <select id="gender" class="form-control" name="gender">
-                                                <option selected="selected">Male</option>
-                                                <option>Female</option>
+                                                <option @if($user->gender == 'Male') selected="selected" @endif>Male</option>
+                                                <option @if($user->gender == 'Female') selected="selected" @endif>Female</option>
                                             </select>
 
                                             @if ($errors->has('gender'))
@@ -210,15 +210,16 @@
                                         <label for="blood_group" class="col-md-4 control-label">Blood Group</label>
 
                                         <div class="col-md-12">
+
                                             <select id="blood_group" class="form-control" name="blood_group">
-                                                <option selected="selected">A+</option>
-                                                <option>A-</option>
-                                                <option>B+</option>
-                                                <option>B-</option>
-                                                <option>AB+</option>
-                                                <option>AB-</option>
-                                                <option>O+</option>
-                                                <option>O-</option>
+                                                <option @if($user->blood_group == 'A+') selected="selected" @endif value="A+">A+</option>
+                                                <option @if($user->blood_group == 'A-') selected="selected" @endif value="A-">A-</option>
+                                                <option @if($user->blood_group == 'B+') selected="selected" @endif value="B+">B+</option>
+                                                <option @if($user->blood_group == 'B-') selected="selected" @endif value="B-">B-</option>
+                                                <option @if($user->blood_group == 'AB+') selected="selected" @endif value="AB+">AB+</option>
+                                                <option @if($user->blood_group == 'AB-') selected="selected" @endif value="AB-">AB-</option>
+                                                <option @if($user->blood_group == 'O+') selected="selected" @endif value="O+">O+</option>
+                                                <option @if($user->blood_group == 'O-') selected="selected" @endif value="O-">O-</option>
                                             </select>
 
                                             @if ($errors->has('blood_group'))
@@ -241,6 +242,17 @@
                                     <strong>{{ $errors->first('about') }}</strong>
                                 </span>
                                             @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <div class="col-md-12">
+                                            <label class="control-label">Edit Profile Picture</label>
+                                            <br>
+                                            <input type="file" id="pic_path" name="pic_path" value="{{ $user->pic_path }}">
                                         </div>
                                     </div>
                                 </div>
