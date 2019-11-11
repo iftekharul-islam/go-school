@@ -9,4 +9,7 @@ class Department extends Model
     public function teachers(){
         return $this->hasMany('App\User','department_id');
     }
+    public function students(){
+        return $this->hasMany('App\User', 'department_id');
+    }
 }

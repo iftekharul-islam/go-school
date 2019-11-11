@@ -45,8 +45,8 @@ class CreateUserRequest extends FormRequest
             'religion' => 'required|string',
             'father_phone_number' => 'required',
             'father_national_id' => 'required',
-            'mother_phone_number' => 'required',
-            'mother_national_id' => 'required'
+            'mother_national_id' => 'required',
+            'department_id' => 'required'
         ];
     }
 }

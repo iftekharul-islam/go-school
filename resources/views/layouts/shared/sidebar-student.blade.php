@@ -106,7 +106,11 @@
                 @if($role == 'admin')
                     <li class="nav-item">
                         <a href="{{ url('admin/all-department') }}" class="nav-link {{ (request()->is('admin/all-department')) ? 'menu-active' : '' }}">
-                            <i class="far fa-building"></i><span>All Departments</span></a>
+                            <i class="far fa-building"></i><span>Departments</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.list-of-departments') }}" class="nav-link {{ (request()->is('admin/list-departments')) ? 'menu-active' : '' }}">
+                            <i class="far fa-building"></i><span>List Of Departments</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/academic/routine') }}" class="nav-link {{ (request()->is('admin/academic/routine')) ? 'menu-active' : '' }}">
