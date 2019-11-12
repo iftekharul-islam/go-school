@@ -36,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
             'role' => '[a-z]+',
         ]);
 
+
         parent::boot();
     }
 

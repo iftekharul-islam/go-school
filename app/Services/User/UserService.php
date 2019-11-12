@@ -225,6 +225,7 @@ class UserService {
         $tb->pic_path = 'storage/'.$file;
         $tb->verified = 1;
         $tb->section_id = $request->section;
+        $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
         $tb->save();
         return $tb;
     }

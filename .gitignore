@@ -12,3 +12,4 @@ yarn-error.log
 .php_cs.cache
 composer.lock
 package-lock.json
+/public/*

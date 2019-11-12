@@ -28,7 +28,9 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Total Teacher</th>
+                                    <th>Total Student</th>
                                     <th>List of Teachers</th>
+                                    <th>List of Students</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -37,8 +39,12 @@
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $dp->department_name }}</td>
                                         <td>{{ $dp->teachers->count() }}</td>
+                                        <td>{{ $dp->students->count() }}</td>
                                         <td>
                                             <a href="{{ url('admin/department-teachers', $dp->id) }}" class="button btn-link text-teal">View Department Teachers</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ url('admin/department-students', $dp->id) }}" class="button btn-link text-teal">View Department Students</a>
                                         </td>
 
                                     </tr>

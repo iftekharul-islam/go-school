@@ -31,7 +31,8 @@
         </div>
     </div>
     <div class="d-md-none mobile-nav-bar">
-        <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar" aria-expanded="false">
+        <button class="navbar-toggler pulse-animation" type="button" data-toggle="collapse" data-target="#mobile-navbar"
+                aria-expanded="false">
             <i class="far fa-arrow-alt-circle-down"></i>
         </button>
         <button type="button" class="navbar-toggler sidebar-toggle-mobile">
@@ -50,7 +51,8 @@
                             </span>
                         <form action="{{ url('admin/search-user/') }}" method="get">
                             {{ csrf_field() }}
-                            <input type="text" class="typeahead form-control" name="search" id="search" placeholder="Find Something . . .">
+                            <input type="text" class="typeahead form-control" name="search" id="search"
+                                   placeholder="Find Something . . .">
                         </form>
                     @endif
                 </div>
@@ -61,11 +63,13 @@
             @else
                 @if(Auth::user()->role === 'student')
                     <li class="navbar-item header-message">
-                        <a class="navbar-nav-link dropdown-toggle" href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" role="button" aria-expanded="false">
+                        <a class="navbar-nav-link dropdown-toggle"
+                           href="{{ url('student/user/notifications/'.\Auth::user()->id) }}" role="button"
+                           aria-expanded="false">
                             <i class="far fa-envelope"></i>
                             <div class="item-title d-md-none text-16 mg-l-10">Message</div>
                             <?php
-                            $mc = \App\Notification::where('student_id',\Auth::user()->id)->where('active',1)->count();
+                            $mc = \App\Notification::where('student_id', \Auth::user()->id)->where('active', 1)->count();
                             ?>
                             @if($mc > 0)
                                 <span>{{$mc}}</span>
@@ -82,9 +86,11 @@
                         </div>
                         <div class="admin-img">
                             @if( \Auth::user()->role === 'master')
-                                <img src="{{asset('template/img/user-default.png')}}" alt="Admin" style="width: 40px; height: 40px;">
+                                <img src="{{asset('template/img/user-default.png')}}" alt="Admin"
+                                     style="width: 40px; height: 40px;">
                             @else
-                                <img src="{{url(\Illuminate\Support\Facades\Auth::user()->pic_path)}}" alt="{{ \Auth::user()->role  }}" style="width: 40px; height: 40px;">
+                                <img src="{{url(Auth::user()->pic_path)}}" alt="{{ Auth::user()->role  }}"
+                                     style="width: 40px; height: 40px;">
                             @endif
                         </div>
                     </a>
@@ -95,12 +101,15 @@
                         <div class="item-content">
                             <ul class="settings-list">
                                 @if(Auth::user()->role != 'master')
-                                    <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i class="flaticon-user"></i>My Profile</a></li>
+                                    <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i
+                                                    class="flaticon-user"></i>My Profile</a></li>
                                 @endif
-                                <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>Change Password</a></li>
+                                <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>Change
+                                        Password</a></li>
                                 @if(env('APP_ENV') != 'production')
                                     <li>
-                                        <a href="{{url('user/config/impersonate')}}"><i class="flaticon-gear-loading"></i>
+                                        <a href="{{url('user/config/impersonate')}}"><i
+                                                    class="flaticon-gear-loading"></i>
                                             {{ app('impersonate')->isImpersonating() ? 'Leave Impersonation' : 'Impersonate' }}
                                         </a>
                                     </li>
@@ -111,7 +120,8 @@
                                         <i class="flaticon-turn-off"></i>Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
@@ -126,7 +136,7 @@
 <script>
     var path = "{{ url('admin/find-user/{query}') }}";
     $('input.typeahead').typeahead({
-        source:  function (query, process) {
+        source: function (query, process) {
             return $.get(path + $('#search').val(), {}, function (data) {
                 return process(data);
             });
