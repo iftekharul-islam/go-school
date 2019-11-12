@@ -109,7 +109,7 @@
                             <i class="far fa-building"></i><span>Departments</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.list-of-departments') }}" class="nav-link {{ (request()->is('admin/list-departments')) ? 'menu-active' : '' }}">
+                        <a href="{{ route('admin.department-lists') }}" class="nav-link {{ (request()->is('admin/list-departments')) ? 'menu-active' : '' }}">
                             <i class="far fa-building"></i><span>List Of Departments</span></a>
                     </li>
                     <li class="nav-item">

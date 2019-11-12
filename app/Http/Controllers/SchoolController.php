@@ -142,10 +142,10 @@ class SchoolController extends Controller
         return back()->withInput(['tab' => 'tab8'])->with('status', 'New Department created');
     }
 
-    public function listOfDepartments()
+    public function departmentLists()
     {
         $departments = Department::where('school_id', Auth::user()->school_id)->get();
-        return view('school.list-of-departments', compact('departments'));
+        return view('school.department-lists', compact('departments'));
     }
 
     public function editDepartment($id)
@@ -163,13 +163,13 @@ class SchoolController extends Controller
         $department->department_name = $request->department_name;
         $department->save();
 
-        return redirect()->route('admin.list-of-departments');
+        return redirect()->route('admin.department-lists');
     }
     public function destroyDepartment($id)
     {
         $department = Department::findOrFail($id);
         $department->delete();
-        return redirect()->route('admin.list-of-departments');
+        return redirect()->route('admin.department-lists');
     }
 
     public function allDepartment()
