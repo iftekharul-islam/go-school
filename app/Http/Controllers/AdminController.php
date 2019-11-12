@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Department;
 use App\Events\StudentInfoUpdateRequested;
 use App\Events\UserRegistered;
 use App\Grade;
@@ -113,7 +114,8 @@ class AdminController extends Controller
      */
     public function create($id)
     {
-        return view('auth.admin', compact('id'));
+        $departments = Department::where('school_id', $id)->get();
+        return view('auth.admin', compact('id', 'departments'));
     }
 
     /**
@@ -124,17 +126,19 @@ class AdminController extends Controller
      */
     public function store(CreateAdminRequest $request)
     {
-
         $school = School::where('id', $request->school_id)->first();
         $request->request->add(['code' => $school->code]);
         $password = $request->password;
         $pic_path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
         $tb = $this->userService->storeAdmin($request, $pic_path);
+        $tb->adminDepartments()->sync($request->departments);
+
         try {
             event(new UserRegistered($tb, $password));
         } catch(\Exception $ex) {
             Log::info('Email failed to send to this address: '.$tb->email);
         }
+
 
         return back()->with('status', 'Admin Created');
     }
