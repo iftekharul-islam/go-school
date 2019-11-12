@@ -1,6 +1,6 @@
 <form class="new-added-form" method="POST" id="registerForm"
       enctype="multipart/form-data"
-      action="{{ route('register.student') }}">
+      action="{{ route('register.student.store') }}">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-6">
@@ -80,11 +80,11 @@
 
                 <div class="col-md-12">
                     <label for="department"
-                           class=" control-label false-padding-bottom">Department<label
-                                class="text-danger">*</label></label>
+                           class=" control-label false-padding-bottom">Department</label>
 
                     <select id="department" class="form-control"
-                            name="department_id" required>
+                            name="department_id">
+                        <option value="" selected> --Select Option-- </option>
                         @if (count($departments) > 0)
                             @foreach ($departments as $department)
                                 <option value="{{$department->id}}">{{$department->department_name}}</option>

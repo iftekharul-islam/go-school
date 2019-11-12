@@ -306,7 +306,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
 
         Route::prefix('register')->name('register.')->group(function () {
-            Route::post('student', 'UserController@store')->name('student');
+            Route::post('student', 'UserController@store')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher');
             Route::post('accountant', 'UserController@storeAccountant');
             Route::post('librarian', 'UserController@storeLibrarian');
@@ -322,9 +322,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::post('courses/store', 'CourseController@store');
 
-        Route::get('department/{id}/edit', 'SchoolController@editDepartment');
-        Route::patch('department/{id}', 'SchoolController@updateDepartment')->name('admin.updateDepartment');
-        Route::post('department/{id}', 'SchoolController@destroyDepartment');
+        Route::get('department/{id}/edit', 'SchoolController@departmentEdit');
+        Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('admin.department.update');
+        Route::post('department/{id}', 'SchoolController@departmentDestroy');
     });
 
 });

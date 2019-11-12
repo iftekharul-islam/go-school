@@ -20,7 +20,7 @@
             <div class="col-12">
                 <div class="card height-auto false-height">
                     <div class="card-body">
-                        <form method="POST" id="department" action="{{ route('admin.updateDepartment', $department->id) }}">
+                        <form method="POST" id="department" action="{{ route('admin.department.update', $department->id) }}">
                             {{ method_field('PATCH') }}
                            {{ csrf_field() }}
                             <div class="row">

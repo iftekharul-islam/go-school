@@ -148,13 +148,13 @@ class SchoolController extends Controller
         return view('school.department-lists', compact('departments'));
     }
 
-    public function editDepartment($id)
+    public function departmentEdit($id)
     {
         $department = Department::findOrFail($id);
         return view('school.edit-department', compact('department'));
     }
 
-    public function updateDepartment(Request $request, $id)
+    public function departmentUpdate(Request $request, $id)
     {
         $request->validate([
             'department_name' => 'required|string|max:50',
@@ -165,7 +165,7 @@ class SchoolController extends Controller
 
         return redirect()->route('admin.department-lists');
     }
-    public function destroyDepartment($id)
+    public function departmentDestroy($id)
     {
         $department = Department::findOrFail($id);
         $department->delete();

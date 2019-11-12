@@ -46,7 +46,6 @@ class CreateUserRequest extends FormRequest
             'father_phone_number' => 'required',
             'father_national_id' => 'required',
             'mother_national_id' => 'required',
-            'department_id' => 'required'
         ];
     }
 }
