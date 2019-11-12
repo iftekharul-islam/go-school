@@ -17,7 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'code',/* school code*/'student_code', 'active', 'verified', 'school_id', 'section_id',
+        'name', 'email', 'password', 'role', 'code',/* school code*/
+        'student_code', 'active', 'verified', 'school_id', 'section_id',
     ];
 
     /**
@@ -46,23 +47,31 @@ class User extends Authenticatable
 
     public function department()
     {
-        return $this->belongsTo('App\Department','department_id', 'id');
+        return $this->belongsTo('App\Department', 'department_id', 'id');
     }
 
-    public function studentInfo(){
+    public function studentInfo()
+    {
         return $this->hasOne(StudentInfo::class);
     }
 
-    public function studentBoardExam(){
-        return $this->hasMany('App\StudentBoardExam','student_id');
+    public function studentBoardExam()
+    {
+        return $this->hasMany('App\StudentBoardExam', 'student_id');
     }
 
-    public function notifications(){
-        return $this->hasMany('App\Notification','student_id');
+    public function notifications()
+    {
+        return $this->hasMany('App\Notification', 'student_id');
     }
 
     public function hasRole(string $role): bool
     {
         return $this->role == $role ? true : false;
+    }
+
+    public function adminDepartments()
+    {
+        return $this->belongsToMany('App\Department', 'department_user')->withTimestamps();
     }
 }

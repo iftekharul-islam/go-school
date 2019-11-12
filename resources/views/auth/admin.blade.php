@@ -8,7 +8,7 @@
             Create Admin
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li><a href="javascript:history.back()" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -45,7 +45,8 @@
             </div>
             <div class="">
                 <div class="">
-                    <form class="new-added-form" enctype="multipart/form-data" method="POST" id="registerForm" action="{{ url('master/register/admin') }}">
+                    <form class="new-added-form" enctype="multipart/form-data" method="POST" id="registerForm"
+                          action="{{ url('master/register/admin') }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="school_id" value="{{ $id }}">
                         <div class="row mb-3">
@@ -54,7 +55,8 @@
                                     <label for="name" class="col-md-4 control-label">Full Name</label>
 
                                     <div class="col-md-12">
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                                        <input id="name" type="text" class="form-control" name="name"
+                                               value="{{ old('name') }}" required>
 
                                         @if ($errors->has('name'))
                                             <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
@@ -212,12 +214,32 @@
 
                                     <div class="col-md-12">
                                         <textarea id="about" class="form-control" name="about"
-                                               value="{{ old('about') }}"
+                                                  value="{{ old('about') }}"
                                                   required></textarea>
 
                                         @if ($errors->has('about'))
                                             <span class="help-block">
                                     <strong>{{ $errors->first('about') }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group{{ $errors->has('departments') ? ' has-error' : '' }}">
+                                    <label for="departments" class="col-md-6 control-label">Departments</label>
+
+                                    <div class="col-md-12">
+                                        <select class="form-control select2" name="departments[]" id="departments" multiple>
+                                            @foreach($departments as $department)
+                                                <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @if ($errors->has('departments'))
+                                            <span class="help-block">
+                                    <strong class="text-danger">{{ $errors->first('departments') }}</strong>
                                 </span>
                                         @endif
                                     </div>
@@ -233,12 +255,22 @@
 
                         <div class="form-group">
                             <div class="col-md-12 col-md-offset-4">
-                                <button type="submit" id="registerBtn" class="button button--save float-right">Register</button>
+                                <button type="submit" id="registerBtn" class="button button--save float-right">
+                                    Register
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        @push('customjs')
+            <script type="text/javascript">
+                $(.'select2-multi').select2({
+                    multiple:true
+                });
+
+            </script>
+            @endpush
     </div>
 @endsection
