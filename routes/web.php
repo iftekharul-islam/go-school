@@ -169,6 +169,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('gpa/all-gpa', 'GradesystemController@index');
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department', 'SchoolController@allDepartment');
+        Route::get('department-lists', 'SchoolController@departmentLists')->name('admin.department-lists');
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
 
         Route::prefix('staff')->group(function () {
@@ -185,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::get('department-teachers/{id}', 'SchoolController@departmentTeachers');
+        Route::get('department-students/{id}', 'SchoolController@departmentStudents');
         Route::get('section/students/{section_id}', 'UserController@sectionStudents');
         Route::prefix('exams')->group(function () {
             Route::get('/', 'ExamController@index');
@@ -295,6 +297,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('add-class', 'MyclassController@store');
             Route::post('add-section', 'SectionController@store');
             Route::post('add-department', 'SchoolController@addDepartment');
+            Route::post('add-department', 'SchoolController@addDepartment');
             Route::get('promote-students/{section_id}', 'UserController@promoteSectionStudents');
             Route::post('promote-students', 'UserController@promoteSectionStudentsPost');
             Route::post('theme', 'SchoolController@changeTheme');
@@ -303,7 +306,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
 
         Route::prefix('register')->name('register.')->group(function () {
-            Route::post('student', 'UserController@store');
+            Route::post('student', 'UserController@store')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher');
             Route::post('accountant', 'UserController@storeAccountant');
             Route::post('librarian', 'UserController@storeLibrarian');
@@ -318,6 +321,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user/activate/{id}', 'UserController@activateUser');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::post('courses/store', 'CourseController@store');
+
+        Route::get('department/{id}/edit', 'SchoolController@departmentEdit');
+        Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('admin.department.update');
+        Route::post('department/{id}', 'SchoolController@departmentDestroy');
     });
 
 });
