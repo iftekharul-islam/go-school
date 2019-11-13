@@ -34,7 +34,8 @@ class AdminController extends Controller
     protected $userService;
     protected $user;
 
-    public function __construct(UserService $userService, User $user, AttendanceService $attendanceService, TeacherAttendanceService $teacherAttendanceService, CourseService $courseService){
+    public function __construct(UserService $userService, User $user, AttendanceService $attendanceService, TeacherAttendanceService $teacherAttendanceService, CourseService $courseService)
+    {
         $this->userService = $userService;
         $this->user = $user;
         $this->attendanceService = $attendanceService;
@@ -44,7 +45,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::where("name","ilike","%{$request->input('search')}%")
+        $users = User::where("name", "ilike", "%{$request->input('search')}%")
             ->where('school_id', Auth::user()->school_id)
             ->where('role', '!=', 'admin')
             ->get();
@@ -55,19 +56,17 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         $user_info = '';
-        $present=0;
-        $absent=0;
-        $escaped=0;
-        if ($user->role == 'student')
-        {
+        $present = 0;
+        $absent = 0;
+        $escaped = 0;
+        if ($user->role == 'student') {
             $section = $user->section;
             $student_id = $user->id;
             $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
             if (!empty($attCount)) {
                 foreach ($attCount as $att) {
-                    $total =  $att->total_present + $att->total_absent + $att->total_escaped;
-                    if ($total > 0)
-                    {
+                    $total = $att->total_present + $att->total_absent + $att->total_escaped;
+                    if ($total > 0) {
                         $present = number_format(($att->total_present * 100) / $total, 2);
                         $absent = number_format(($att->total_absent * 100) / $total, 2);
                         $escaped = number_format(($att->total_escaped * 100) / $total, 2);
@@ -80,17 +79,16 @@ class AdminController extends Controller
             return view('search.search-result', compact('user', 'user_info', 'section', 'present', 'absent', 'escaped', 'courses'));
         } else {
             $present = 0;
-            $absent= 0;
+            $absent = 0;
             $courses = 0;
             $attCount = $this->teacherAttendanceService->getAllAttendanceByStuffId($user->id);
             if ($attCount) {
                 foreach ($attCount as $att) {
-                    $total =  $att->total_present + $att->total_absent;
+                    $total = $att->total_present + $att->total_absent;
                     $present = number_format(($att->total_present * 100) / $total, 2);
                     $absent = number_format(($att->total_absent * 100) / $total, 2);
                 }
-                if ($user->role == 'teacher')
-                {
+                if ($user->role == 'teacher') {
                     $courses = $this->courseService->getCoursesByTeacherId($user->id);
                 }
             }
@@ -100,7 +98,7 @@ class AdminController extends Controller
 
     public function findUser(Request $request)
     {
-        $data = User::where("name","ilike","%{$request->input('query')}%")
+        $data = User::where("name", "ilike", "%{$request->input('query')}%")
             ->where('school_id', Auth::user()->school_id)
             ->where('role', '!=', 'admin')
             ->get();
@@ -121,7 +119,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateAdminRequest $request)
@@ -135,8 +133,8 @@ class AdminController extends Controller
 
         try {
             event(new UserRegistered($tb, $password));
-        } catch(\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
+        } catch (\Exception $ex) {
+            Log::info('Email failed to send to this address: ' . $tb->email);
         }
 
 
@@ -146,33 +144,31 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $user = $this->user->findOrFail($id);
-        return view('auth.admin-edit', [
-            'user' => $user
-        ]);
+        return view('auth.admin-edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request)
@@ -185,16 +181,16 @@ class AdminController extends Controller
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
         $tb->about = (!empty($request->about)) ? $request->about : '';
-        $tb->pic_path = $request->hasFile('pic_path') ? 'storage/'.Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
+        $tb->pic_path = $request->hasFile('pic_path') ? 'storage/' . Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
         $tb->save();
 
-        return back()->with('status', $request->name. ' User Updated');
+        return back()->with('status', $request->name . ' User Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -208,6 +204,6 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return back()->with('status', $admin->name.' active status changed');
+        return back()->with('status', $admin->name . ' active status changed');
     }
 }

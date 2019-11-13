@@ -32,7 +32,7 @@ class UpdateUserRequest extends FormRequest
             'user_id' => 'required|numeric',
             'email' => 'required|',
             'name' => 'required|string|max:255',
-            'phone_number' =>  'required|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
+            'phone_number' => 'required|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
         ];
 
         if ($this->get('user_role') == 'teacher') {
