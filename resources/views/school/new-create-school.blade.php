@@ -1026,6 +1026,10 @@
     </div>
 
 
+
+@endsection
+
+@push('customjs')
     <script>
         $(document).ready(function () {
             $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
@@ -1036,4 +1040,4 @@
             $('#tab-' + idx).addClass('active');
         });
     </script>
-@endsection
+@endpush
