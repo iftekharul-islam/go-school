@@ -13,6 +13,8 @@ use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\SectionResource;
 
+
+
 class SectionController extends Controller
 {
     protected $userService;
@@ -32,20 +34,20 @@ class SectionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Myclass::where('school_id', $user->school->id)
+        $classes = Myclass::where('school_id', $user->school->id)->get();
+        $classFilterByDepartments = Myclass::where('school_id', $user->school->id)
+            ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
-        $classeIds = Myclass::where('school_id', $user->school->id)
+
+        $classIds = Myclass::where('school_id', $user->school->id)
             ->pluck('id')
             ->toArray();
 
-        $exams = ExamForClass::whereIn('class_id', $classeIds)
+        $exams = ExamForClass::whereIn('class_id', $classIds)
             ->where('active', 1)
             ->get()->groupBy('class_id');
 
-        return view('school.new-sections', [
-            'classes' => $classes,
-            'exams' => $exams,
-        ]);
+        return view('school.new-sections', compact('classes', 'classFilterByDepartments', 'exams'));
     }
 
     public function attendanceList()
@@ -53,13 +55,13 @@ class SectionController extends Controller
         $user = Auth::user();
         $classes = Myclass::where('school_id', $user->school->id)
             ->get();
-        $classIds = Myclass::where('school_id', $user->school->id)
+        $classeIds = Myclass::where('school_id', $user->school->id)
             ->pluck('id')
             ->toArray();
-        $sections = Section::whereIn('class_id', $classIds)
+        $sections = Section::whereIn('class_id', $classeIds)
             ->orderBy('section_number')
             ->get();
-        $exams = ExamForClass::whereIn('class_id', $classIds)
+        $exams = ExamForClass::whereIn('class_id', $classeIds)
             ->where('active', 1)
             ->get()->groupBy('class_id');
 
@@ -109,11 +111,13 @@ class SectionController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)

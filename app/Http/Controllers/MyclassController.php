@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Myclass as Myclass;
-use App\Http\Resources\ClassResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ClassResource;
 
 class MyclassController extends Controller
 {
@@ -16,9 +16,9 @@ class MyclassController extends Controller
      */
     public function index($school_id)
     {
-        return ($school_id > 0)? ClassResource::collection(Myclass::where('school_id', $school_id)->get()):response()->json([
-            'Invalid School id: '. $school_id,
-            404
+        return ($school_id > 0) ? ClassResource::collection(Myclass::where('school_id', $school_id)->get()) : response()->json([
+            'Invalid School id: '.$school_id,
+            404,
         ]);
     }
 
@@ -29,32 +29,33 @@ class MyclassController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'class_number' => 'required'
+            'class_number' => 'required',
         ]);
-        $tb = new Myclass;
+        $tb = new Myclass();
         $tb->class_number = $request->class_number;
         $tb->school_id = Auth::user()->school_id;
-        $tb->group = (!empty($request->group))?$request->group:'';
+        $tb->group = (! empty($request->group)) ? $request->group : '';
+        $tb->department_id = (! empty($request->department)) ? $request->department : 0;
         $tb->save();
-        return back()->withInput(['tab'=> 'tab8'] )->with('status', 'New Class created');
+
+        return back()->withInput(['tab' => 'tab8'])->with('status', 'New Class created');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -65,19 +66,19 @@ class MyclassController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -85,25 +86,27 @@ class MyclassController extends Controller
         $tb = Myclass::findOrFail($id);
         $tb->class_number = $request->class_number;
         $tb->school_id = $request->school_id;
-        return ($tb->save())?response()->json([
-            'status' => 'success'
-        ]):response()->json([
-            'status' => 'error'
+
+        return ($tb->save()) ? response()->json([
+            'status' => 'success',
+        ]) : response()->json([
+            'status' => 'error',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return (Myclass::destroy($id))?response()->json([
-            'status' => 'success'
-        ]):response()->json([
-            'status' => 'error'
+        return (Myclass::destroy($id)) ? response()->json([
+            'status' => 'success',
+        ]) : response()->json([
+            'status' => 'error',
         ]);
     }
 }

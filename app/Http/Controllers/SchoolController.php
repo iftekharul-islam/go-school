@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
-use App\Gradesystem;
+use App\User;
 use App\School;
 use App\Myclass;
 use App\Section;
-use App\User;
 use App\Department;
+use App\Gradesystem;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class SchoolController extends Controller
 {
@@ -47,7 +46,10 @@ class SchoolController extends Controller
             ->where('active', 1)
             ->get();
         $departments = Department::where('school_id', $user->school_id)->get();
-        return view('school.new-create-school', compact('schools', 'gradeSystems', 'classes', 'sections', 'teachers', 'departments', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+
+        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+
+        return view('school.new-create-school', compact('schools', 'gradeSystems', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
     /**
@@ -63,7 +65,6 @@ class SchoolController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -75,27 +76,30 @@ class SchoolController extends Controller
             'school_established' => 'required',
             'school_address' => 'required',
         ]);
-        $tb = new School;
+        $tb = new School();
         $tb->name = $request->school_name;
         $tb->established = $request->school_established;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
-        $tb->code = date("y") . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6);
+        $tb->code = date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6);
         $tb->theme = 'flatly';
         $tb->school_address = $request->school_address;
         $tb->save();
+
         return redirect()->back()->with('status', 'New School Added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($school_id)
     {
         $admins = User::where('school_id', $school_id)->where('role', 'admin')->get();
+
         return view('school.admin-list', compact('admins'));
     }
 
@@ -114,19 +118,21 @@ class SchoolController extends Controller
             'total_classes' => $total_classes,
             'total_teacher' => $total_teacher,
             'total_exams' => $total_exams,
-            'admins' => $admins
+            'admins' => $admins,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $school = School::findOrFail($id);
+
         return view('school.new-edit-school', compact('school'));
     }
 
@@ -135,16 +141,18 @@ class SchoolController extends Controller
         $request->validate([
             'department_name' => 'required|string|max:50',
         ]);
-        $s = new Department;
+        $s = new Department();
         $s->school_id = Auth::user()->school_id;
         $s->department_name = $request->department_name;
         $s->save();
+
         return back()->withInput(['tab' => 'tab8'])->with('status', 'New Department created');
     }
 
     public function departmentEdit($id)
     {
         $department = Department::findOrFail($id);
+
         return view('school.edit-department', compact('department'));
     }
 
@@ -164,6 +172,7 @@ class SchoolController extends Controller
     {
         $department = Department::findOrFail($id);
         $department->delete();
+
         return redirect()->route('admin.department-lists');
     }
 
@@ -193,6 +202,7 @@ class SchoolController extends Controller
             ->where('department_id', $id)
             ->orderBy('created_at', 'DESC')
             ->get();
+
         return view('school.department-teachers', compact('users'));
     }
 
@@ -213,14 +223,15 @@ class SchoolController extends Controller
         $tb = School::findOrFail($request->s);
         $tb->theme = $request->school_theme;
         $tb->save();
+
         return back();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -235,13 +246,15 @@ class SchoolController extends Controller
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
         $tb->save();
+
         return redirect()->back()->with('status', 'School Information Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -249,6 +262,7 @@ class SchoolController extends Controller
         $school = School::findOrFail($id);
         $name = $school->name;
         $school->delete();
-        return redirect('master/home')->with('status', $name . '   deleted');
+
+        return redirect('master/home')->with('status', $name.'   deleted');
     }
 }
