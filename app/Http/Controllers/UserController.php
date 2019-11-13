@@ -2,32 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
+use App\User;
 use App\Myclass;
 use App\Section;
-use App\User;
+use App\Department;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Events\UserRegistered;
+use App\Services\User\UserService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use App\Events\StudentInfoUpdateRequested;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\CreateAdminRequest;
 use App\Http\Requests\User\CreateTeacherRequest;
 use App\Http\Requests\User\ChangePasswordRequest;
-use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
+use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
-use App\Events\UserRegistered;
-use App\Events\StudentInfoUpdateRequested;
-use Illuminate\Support\Facades\Log;
-use App\Services\User\UserService;
-use Illuminate\Support\Facades\Storage;
 
 /**
- * Class UserController
- * @package App\Http\Controllers
+ * Class UserController.
  */
 class UserController extends Controller
 {
@@ -46,32 +45,36 @@ class UserController extends Controller
      * @param $school_code
      * @param $student_code
      * @param $teacher_code
+     *
      * @return \Illuminate\Http\Response
      */
     public function index($school_code, $student_code, $teacher_code)
     {
         session()->forget('section-attendance');
-        if ($this->userService->isListOfStudents($school_code, $student_code))
-            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents(), $type = "Students");
-        else if ($this->userService->isListOfTeachers($school_code, $teacher_code))
-            return $this->userService->indexView('list.new-teacher-list', $this->userService->getTeachers(), $type = "Teachers");
-        else
+        if ($this->userService->isListOfStudents($school_code, $student_code)) {
+            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents(), $type = 'Students');
+        } elseif ($this->userService->isListOfTeachers($school_code, $teacher_code)) {
+            return $this->userService->indexView('list.new-teacher-list', $this->userService->getTeachers(), $type = 'Teachers');
+        } else {
             return view('home');
+        }
     }
 
     /**
      * @param $school_code
      * @param $role
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function indexOther($school_code, $role)
     {
-        if ($this->userService->isAccountant($role))
+        if ($this->userService->isAccountant($role)) {
             return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants());
-        else if ($this->userService->isLibrarian($role))
+        } elseif ($this->userService->isLibrarian($role)) {
             return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians());
-        else
+        } else {
             return view('home');
+        }
     }
 
     /**
@@ -94,12 +97,13 @@ class UserController extends Controller
 
         return view('auth.student', [
             'classes' => $classes,
-            session(['register_role' => 'student', 'register_sections' => $sections,])
+            session(['register_role' => 'student', 'register_sections' => $sections]),
         ]);
     }
 
     /**
      * @param $section_id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function sectionStudents($section_id)
@@ -111,33 +115,33 @@ class UserController extends Controller
 
     /**
      * @param $section_id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function promoteSectionStudents($section_id)
     {
-        if ($this->userService->hasSectionId($section_id))
+        if ($this->userService->hasSectionId($section_id)) {
             return $this->userService->promoteSectionStudentsView(
                 $this->userService->getSectionStudentsWithStudentInfo($section_id),
                 Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get(),
                 $section_id
             );
-        else
+        } else {
             return $this->userService->promoteSectionStudentsView([], [], $section_id);
+        }
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function promoteSectionStudentsPost(Request $request)
     {
-
         return $this->userService->promoteSectionStudentsPost($request);
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\
-     * View
+     *                                                              View
      */
     public function changePasswordGet()
     {
@@ -145,24 +149,21 @@ class UserController extends Controller
     }
 
     /**
-     * @param ChangePasswordRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function changePasswordPost(ChangePasswordRequest $request)
     {
-
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-
+        if (! (Hash::check($request->get('current-password'), Auth::user()->password))) {
             return back()->with('status', 'Saved');
         }
-        if (strcmp($request->get('current-password'), $request->get('password')) == 0) {
-            return redirect()->back()->with("error-status", "New Password cannot be same as your current password. Please choose a different password.");
+        if (0 == strcmp($request->get('current-password'), $request->get('password'))) {
+            return redirect()->back()->with('error-status', 'New Password cannot be same as your current password. Please choose a different password.');
         }
         $user = Auth::user();
         $user->password = bcrypt($request->get('password'));
         $user->save();
 
-        return redirect()->back()->with("status", "Password updated");
+        return redirect()->back()->with('status', 'Password updated');
     }
 
     /**
@@ -172,10 +173,11 @@ class UserController extends Controller
     {
         if (app('impersonate')->isImpersonating()) {
             Auth::user()->leaveImpersonation();
+
             return redirect('master/home');
         } else {
             return view('profile.impersonate', [
-                'other_users' => $this->user->where('id', '!=', auth()->id())->get(['id', 'name', 'role'])
+                'other_users' => $this->user->where('id', '!=', auth()->id())->get(['id', 'name', 'role']),
             ]);
         }
     }
@@ -187,19 +189,18 @@ class UserController extends Controller
     {
         $user = $this->user->findOrFail($request->id);
         Auth::user()->impersonate($user);
-        return redirect($user->role . '/home');
+
+        return redirect($user->role.'/home');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param CreateUserRequest $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function store(CreateUserRequest $request)
     {
-        $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('student_pic')) : null;
+        $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('student_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStudent($request, $path);
         $this->userService->storeStudentInfo($request, $tb);
@@ -213,76 +214,71 @@ class UserController extends Controller
                 throw new \Exeception('Event returned false');
             }
         } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: ' . $tb->email . '\n' . $ex->getMessage());
+            Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
         }
+
         return back()->withInput(['tab' => 'tab12'])->with('status', 'New Student Added!');
     }
 
     /**
      * @param CreateAdminRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function createAdmin()
     {
         return view('auth.admin');
     }
 
-
     /**
-     * @param CreateTeacherRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storeTeacher(CreateTeacherRequest $request)
     {
-        $path = $request->hasFile('teacher_pic') ? Storage::disk('public')->put('school-' . Auth::user()->school_id . '/' . date("Y"), $request->file('teacher_pic')) : null;
+        $path = $request->hasFile('teacher_pic') ? Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date('Y'), $request->file('teacher_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
         } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: ' . $tb->email);
+            Log::info('Email failed to send to this address: '.$tb->email);
         }
 
         return back()->withInput(['tab' => 'tab13'])->with('status', 'Teacher Created');
     }
 
     /**
-     * @param CreateAccountantRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storeAccountant(CreateAccountantRequest $request)
     {
-
-        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'accountant', $path);
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
         } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: ' . $tb->email);
+            Log::info('Email failed to send to this address: '.$tb->email);
         }
 
         return back()->withInput(['tab' => 'tab10'])->with('status', 'Accountant created');
     }
 
     /**
-     * @param CreateLibrarianRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storeLibrarian(CreateLibrarianRequest $request)
     {
-
-        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'librarian', $path);
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb, $password));
         } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: ' . $tb->email);
+            Log::info('Email failed to send to this address: '.$tb->email);
         }
 
         return back()->withInput(['tab' => 'tab11'])->with('status', 'Librarian Created');
@@ -298,6 +294,7 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
+
         return view('profile.user-profile', compact('user'));
     }
 
@@ -335,42 +332,40 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateUserRequest $request
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request)
     {
-        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
-        $image_path = 'storage/' . $path;
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
+        $image_path = 'storage/'.$path;
 
         DB::transaction(function () use ($request, $image_path) {
             $tb = $this->user->findOrFail($request->user_id);
             $tb->name = $request->name;
-            $tb->email = (!empty($request->email)) ? $request->email : '';
-            $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
+            $tb->email = (! empty($request->email)) ? $request->email : '';
+            $tb->nationality = (! empty($request->nationality)) ? $request->nationality : '';
             $tb->phone_number = $request->phone_number;
-            $tb->address = (!empty($request->address)) ? $request->address : '';
-            $tb->about = (!empty($request->about)) ? $request->about : '';
+            $tb->address = (! empty($request->address)) ? $request->address : '';
+            $tb->about = (! empty($request->about)) ? $request->about : '';
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
-            $tb->blood_group = (!empty($request->blood_group)) ? $request->blood_group : '';
-            $tb->gender = (!empty($request->gender)) ? $request->gender : '';
-            if ($request->user_role == 'teacher') {
+            $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : '';
+            $tb->gender = (! empty($request->gender)) ? $request->gender : '';
+            if ('teacher' == $request->user_role) {
                 $tb->department_id = $request->department_id;
                 $tb->section_id = $request->class_teacher_section_id;
             }
             if ($tb->save()) {
-                if ($request->user_role == 'student') {
+                if ('student' == $request->user_role) {
                     try {
                         event(new StudentInfoUpdateRequested($request, $tb->id));
                     } catch (\Exception $ex) {
-                        Log::info('Failed to update Student information, Id: ' . $tb->id . 'err:' . $ex->getMessage());
+                        Log::info('Failed to update Student information, Id: '.$tb->id.'err:'.$ex->getMessage());
                     }
                 }
             }
         });
 
-
-        return back()->with('status', $request->name . ' User Updated');
+        return back()->with('status', $request->name.' User Updated');
     }
 
     public function deactivateUser($id)
@@ -378,7 +373,8 @@ class UserController extends Controller
         $user = $this->user->findOrFail($id);
         $user->active = 0;
         $user->save();
-        return back()->with('status', $user->name . ' has been removed!!');
+
+        return back()->with('status', $user->name.' has been removed!!');
     }
 
     public function activateUser($id)
@@ -386,7 +382,8 @@ class UserController extends Controller
         $user = $this->user->findOrFail($id);
         $user->active = 1;
         $user->save();
-        return back()->with('status', $user->name . ' has been Activated!!');
+
+        return back()->with('status', $user->name.' has been Activated!!');
     }
 
     /**
@@ -398,6 +395,5 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

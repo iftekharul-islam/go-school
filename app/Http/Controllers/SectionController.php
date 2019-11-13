@@ -13,6 +13,8 @@ use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\SectionResource;
 
+
+
 class SectionController extends Controller
 {
     protected $userService;
@@ -63,11 +65,7 @@ class SectionController extends Controller
             ->where('active', 1)
             ->get()->groupBy('class_id');
 
-        return view('school.attendance', [
-            'classes' => $classes,
-            'sections' => $sections,
-            'exams' => $exams,
-        ]);
+        return view('school.attendance', compact('classes', 'sections', 'exams'));
     }
 
     public function details($class_id)
@@ -113,11 +111,13 @@ class SectionController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
