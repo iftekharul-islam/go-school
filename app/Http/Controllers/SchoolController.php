@@ -142,12 +142,6 @@ class SchoolController extends Controller
         return back()->withInput(['tab' => 'tab8'])->with('status', 'New Department created');
     }
 
-    public function departmentLists()
-    {
-        $departments = Department::where('school_id', Auth::user()->school_id)->get();
-        return view('school.department-lists', compact('departments'));
-    }
-
     public function departmentEdit($id)
     {
         $department = Department::findOrFail($id);
@@ -165,6 +159,7 @@ class SchoolController extends Controller
 
         return redirect()->route('admin.department-lists');
     }
+
     public function departmentDestroy($id)
     {
         $department = Department::findOrFail($id);
@@ -178,10 +173,16 @@ class SchoolController extends Controller
             $q->where('role', 'teacher');
         }, 'students' => function ($query) {
             $query->where('role', 'student');
-        }
-        ])->where('school_id', Auth::user()->school_id)->get();
+        }])->where('school_id', Auth::user()->school_id)->get();
 
-        return view('school.departments', compact('dpts'));
+        $adminWithDepartment = Department::with(['teachers' => function ($q) {
+            $q->where('role', 'teacher');
+        }, 'students' => function ($query) {
+            $query->where('role', 'student');
+        }])->where('school_id', Auth::user()->school_id)
+            ->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+
+        return view('school.departments', compact('dpts', 'adminWithDepartment'));
     }
 
     public function departmentTeachers($id)
