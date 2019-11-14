@@ -35,7 +35,18 @@ class CreateTeacherRequest extends FormRequest
             'blood_group' => 'required',
             'department_id' => 'required|numeric',
             'phone_number' =>  'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
-            'address' => 'required|string'
+            'address' => 'required|string',
+            'teacher_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name field cannot be empty',
+            'teacher_pic.required' => 'Please provide and image for the profile',
+            'teacher_pic.image' => 'Invalid image type',
+            'teacher_pic.max' => 'Image size cannot be larger than 800KB',
+            'email.email' => 'Please provide a valid email address',
         ];
     }
 }

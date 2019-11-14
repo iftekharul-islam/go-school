@@ -162,7 +162,7 @@
                         <div class="row mb-3">
                             <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                    <label for="address" class="col-md-6 control-label">Address</label>
+                                    <label for="address">Address</label>
 
                                     <div class="">
                                         <input id="address" type="text" class="form-control" name="address"
@@ -179,7 +179,7 @@
                             </div>
                             <div class="col-md-10 col-lg-6">
                                 <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                                    <label for="about" class="col-md-6 control-label">About</label>
+                                    <label for="about">About</label>
 
                                     <div class="">
                                         <textarea id="about" class="form-control" name="about"
@@ -195,11 +195,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-10 col-lg-6">
+                                <div class="form-group{{ $errors->has('departments') ? ' has-error' : '' }}">
+                                    <label for="departments">Departments</label>
+
+                                    <div class="">
+                                        <select class="form-control select2" name="departments[]" id="departments" multiple>
+                                            @foreach($departments as $department)
+                                                <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('departments'))
+                                            <span class="help-block">
+                                              <strong class="text-danger">{{ $errors->first('departments') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label>Upload Profile Picture</label>
-                            <div class="col-md-12">
+                            <div>
                                 <input type="file"   id="picPath" name="pic_path">
-
                             </div>
                         </div>
 

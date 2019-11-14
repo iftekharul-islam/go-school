@@ -36,7 +36,17 @@ class CreateAdminRequest extends FormRequest
             'blood_group' => 'required',
             'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'email' => 'email|max:255|unique:users',
-            'pic_path' => 'required|image'
+            'pic_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name field cannot be empty',
+            'pic_path.required' => 'Please provide and image for the profile',
+            'pic_path.image' => 'Invalid image type',
+            'pic_path.max' => 'Image size cannot be larger than 800KB',
         ];
     }
 }

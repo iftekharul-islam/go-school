@@ -153,8 +153,8 @@ class UserController extends Controller
      */
     public function changePasswordPost(ChangePasswordRequest $request)
     {
-        if (! (Hash::check($request->get('current-password'), Auth::user()->password))) {
-            return back()->with('status', 'Saved');
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            return back()->with('error-status', 'Current password do not match');
         }
         if (0 == strcmp($request->get('current-password'), $request->get('password'))) {
             return redirect()->back()->with('error-status', 'New Password cannot be same as your current password. Please choose a different password.');
@@ -163,7 +163,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->get('password'));
         $user->save();
 
-        return redirect()->back()->with('status', 'Password updated');
+        return back()->with('status', 'Password updated');
     }
 
     /**

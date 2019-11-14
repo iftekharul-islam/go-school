@@ -161,7 +161,8 @@ class AdminController extends Controller
     public function edit($id)
     {
         $user = $this->user->findOrFail($id);
-        return view('auth.admin-edit', compact('user'));
+        $departments = Department::where('school_id', $user->school_id)->get();
+        return view('auth.admin-edit', compact('user', 'departments'));
     }
 
     /**
@@ -178,10 +179,12 @@ class AdminController extends Controller
         $tb->name = $request->name;
         $tb->email = (!empty($request->email)) ? $request->email : '';
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
+        $tb->blood_group = $request->blood_group;
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
+        $tb->adminDepartments()->sync($request->departments);
         $tb->about = (!empty($request->about)) ? $request->about : '';
-        $tb->pic_path = $request->hasFile('pic_path') ? 'storage/' . Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : null;
+        $tb->pic_path = $request->hasFile('pic_path') ? 'storage/' . Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date("Y"), $request->file('pic_path')) : $tb->pic_path;
         $tb->save();
 
         return back()->with('status', $request->name . ' User Updated');

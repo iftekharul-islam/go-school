@@ -240,7 +240,7 @@
                                         @if ($errors->has('departments'))
                                             <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('departments') }}</strong>
-                                </span>
+                                        </span>
                                         @endif
                                     </div>
                                 </div>

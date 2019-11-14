@@ -6,15 +6,6 @@
     <div class="false-height">
         <div class="row">
             <div class="col-lg-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="breadcrumbs-area">
                     <h3>
                         Change Password
@@ -29,6 +20,26 @@
                 </div>
                 <div class="row">
                     <div class="col-md-8">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @if (session('error-status'))
+                            <div class="alert alert-danger">
+                                {{ session('error-status') }}
+                            </div>
+                        @endif
+
+                    @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="card height-auto false-height">
                             <div class="card-body">
                                 <form class="new-added-form" method="POST"

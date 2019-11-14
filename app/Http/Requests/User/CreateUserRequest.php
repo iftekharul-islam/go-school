@@ -46,6 +46,19 @@ class CreateUserRequest extends FormRequest
             'father_phone_number' => 'required',
             'father_national_id' => 'required',
             'mother_national_id' => 'required',
+            'pic_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name field cannot be empty',
+            'pic_path.required' => 'Please provide and image for the profile',
+            'pic_path.image' => 'Invalid image type',
+            'pic_path.max' => 'Image size cannot be larger than 800KB',
+            'email.email' => 'Please provide a valid email address',
+        ];
+    }
+
 }
