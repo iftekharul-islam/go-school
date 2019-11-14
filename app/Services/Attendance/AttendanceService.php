@@ -129,7 +129,7 @@ class AttendanceService {
             $at[] = $tb->attributesToArray();
             ++$i;
         }
-//        Attendance::insert($at);
+        Attendance::insert($at);
         $this->sendSms($at);
     }
 
