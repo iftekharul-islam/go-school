@@ -34,7 +34,18 @@ class CreateLibrarianRequest extends FormRequest
             'gender' => 'required',
             'blood_group' => 'required',
             'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
-            'address' => 'required|string'
+            'address' => 'required|string',
+            'pic_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'The name field cannot be empty',
+            'pic_path.required' => 'Please provide and image for the profile',
+            'pic_path.image' => 'Invalid image type',
+            'pic_path.max' => 'Image size cannot be larger than 800KB',
+            'email.email' => 'Please provide a valid email address',
         ];
     }
 }

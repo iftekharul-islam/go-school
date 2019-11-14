@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <form action="{{url('admin/staff/attendance/adjust/post')}}" method="POST">
             {{ csrf_field() }}
-            <table class="table display table-bordered data-table text-nowrap">
+            <table class="table display table-bordered data-table text-nowrap mb-5">
                 <tr>
                     <th>Present</th>
                     <th>Status</th>
