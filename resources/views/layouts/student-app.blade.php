@@ -43,15 +43,8 @@
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('template/js/main.js')}}"></script>
     {{--<script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>--}}
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
 </head>
 
 <body>
@@ -110,13 +103,19 @@
 <script src="{{ asset('template/js/select2.min.js') }}"></script>
 {{--<!-- Date Picker Js -->--}}
 
-
 <script src=" {{ asset('template/js/main.js') }}"></script>
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
 <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
 
 <script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
 {{--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>--}}
 <script>

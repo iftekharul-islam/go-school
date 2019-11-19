@@ -47,15 +47,15 @@
                                                             @if($section->class_id == $class->id)
                                                                 <li class="list-group-item">
                                                                     Section {{$section->section_number}}
-                                                                    &nbsp;
+                                                                    &nbsp
                                                                     <a class="btn btn-lg btn-warning mr-5"
                                                                        href="{{url('admin/courses/0/'.$section->id)}}">View
                                                                         All
                                                                         Assigned
                                                                         Courses</a>
-                                                                    <span class="pull-right"> &nbsp;&nbsp;
-                                                                                                                <a class="btn btn-lg btn-success mr-5"
-                                                                                                                   href="{{url('admin/school/promote-students/'.$section->id)}}">+ Promote Students</a></span>
+                                                                    <span class="pull-right"> &nbsp;&nbsp
+                                                                        <a class="btn btn-lg btn-success mr-5" href="{{url('admin/school/promote-students/'.$section->id)}}">+ Promote Students</a>
+                                                                    </span>
                                                                     @include('layouts.master.add-course-form')
                                                                 </li>
                                                             @endif

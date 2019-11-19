@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
     Route::get('user/{user_code}', 'UserController@show');
+    Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
+    Route::patch('user/edit-information/{id}', 'UserController@updateUserInfo')->name('update-user-info');
+    Route::patch('user/update-staff-information/{id}', 'UserController@updateStaffInformation')->name('update-staff-information');
     Route::get('user/config/change_password', 'UserController@changePasswordGet');
     Route::post('user/config/change_password', 'UserController@changePasswordPost');
 
@@ -77,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('book/store', 'Library\BookController@store');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+        Route::get('edit-book-details/{id}', 'Library\BookController@edit')->name('edit-book-details');
+        Route::patch('update-book-details/{id}', 'Library\BookController@update')->name('update-book-details');
+
     });
 
     //Accountant role routes
@@ -259,6 +265,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('all-books', 'Library\BookController@index');
         Route::delete('/books/{id}', 'Library\BookController@destroy');
         Route::get('book/{id}', 'Library\BookController@show');
+        Route::get('edit-book-details/{id}', 'Library\BookController@edit')->name('edit-book-details');
+        Route::patch('update-book-details/{id}', 'Library\BookController@update')->name('update-book-details');
         Route::get('create/book', 'Library\BookController@create');
         Route::post('book/store', 'Library\BookController@store');
         //Librarian Route End
@@ -274,6 +282,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('routine/{section_id}', 'RoutineController@create');
             Route::get('routine/update/{id}', 'RoutineController@update');
             Route::get('event/update/{id}', 'EventController@update');
+            Route::patch('update-class-info/{id}','MyClassController@updateClassDetails')->name('update-class-info');
             Route::prefix('remove')->name('remove.')->group(function () {
                 Route::get('notice/{id}', 'NoticeController@update');
             });

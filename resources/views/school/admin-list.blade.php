@@ -69,7 +69,7 @@
                 </div>
             @else
         </div>
-            <div class="card-body">
+            <div class="card-body mt-5 text-center">
                 No Related Data Found.
             </div>
         @endif

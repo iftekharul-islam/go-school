@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\user\UpdateStaffProfileRequest;
+use App\StudentInfo;
 use App\User;
 use App\Myclass;
 use App\Section;
@@ -19,6 +21,7 @@ use App\Events\StudentInfoUpdateRequested;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\CreateAdminRequest;
+use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\User\CreateTeacherRequest;
 use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
@@ -153,7 +156,7 @@ class UserController extends Controller
      */
     public function changePasswordPost(ChangePasswordRequest $request)
     {
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        if (! (Hash::check($request->get('current-password'), Auth::user()->password))) {
             return back()->with('error-status', 'Current password do not match');
         }
         if (0 == strcmp($request->get('current-password'), $request->get('password'))) {
@@ -296,6 +299,57 @@ class UserController extends Controller
         $user = $this->userService->getUserByUserCode($user_code);
 
         return view('profile.user-profile', compact('user'));
+    }
+
+    public function editUserInfo($user_code)
+    {
+        $user = User::with('studentInfo')->where('id', $user_code)->firstOrFail();
+        if ($user->role == 'student') {
+            return view('profile.edit-student-info', compact('user'));
+        } else {
+            return view('profile.authority-member-info-edit', compact('user'));
+        }
+    }
+
+    public function updateUserInfo(UpdateUserProfileRequest $request, $user_code)
+    {
+        $tb = $this->user->findOrFail($user_code);
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : $tb->pic_path;
+        $image_path = 'storage/'.$path;
+        $tb->name = $request->name;
+        $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
+        $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
+        $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
+        $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
+        $tb->gender = (! empty($request->gender)) ? $request->gender : $tb->gender;
+        if ($tb->save()) {
+            $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
+            $info->religion = (!empty($request->religion)) ? $request->religion : $info->religion;
+            $info->father_name = (!empty($request->father_name)) ? $request->father_name : $info->father_name;
+            $info->father_designation = (!empty($request->father_designation)) ? $request->father_designation : $info->father_designation;
+            $info->mother_name = (!empty($request->mother_name)) ? $request->mother_name : $info->mother_name;
+            $info->mother_occupation = (!empty($request->mother_occupation)) ? $request->mother_occupation : $info->mother_occupation;
+            $info->father_occupation = (!empty($request->father_occupation)) ? $request->father_occupation : $info->father_occupation;
+            $info->mother_designation = (!empty($request->mother_designation)) ? $request->mother_designation : $info->mother_designation;
+            $info->user_id = auth()->user()->id;
+            $info->save();
+        }
+
+        return back()->with('status', $request->name.' Information Updated');
+
+    }
+    public function updateStaffInformation(UpdateStaffProfileRequest $request, $user_code) {
+        $tb = $this->user->findOrFail($user_code);
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : $tb->pic_path;
+        $image_path = 'storage/'.$path;
+        $tb->name = $request->name;
+        $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
+        $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
+        $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
+        $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
+        $tb->gender = (! empty($request->gender)) ? $request->gender : $tb->gender;
+        $tb->save();
+        return back()->with('status', $request->name.' Information Updated');
     }
 
     /**

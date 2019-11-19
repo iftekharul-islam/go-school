@@ -82,7 +82,7 @@
                   @endforeach
                 </div>
               @else
-                <div class="panel-body" style="text-align: center">
+                <div class="panel-body text-center mt-5">
                   No Related Data Found.
                 </div>
               @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Library;
 
 use App\Book;
+use App\Http\Requests\BookUpdateRequest;
 use App\Myclass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -60,5 +61,31 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
         return redirect()->to(Auth::user()->role.'/all-books')->with('status', 'Book has been deleted!');
+    }
+
+    public function edit($id)
+    {
+        $book = Book::findOrFail($id);
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
+        return view('library.books.edit-book', compact('book', 'classes'));
+    }
+    public function update(BookUpdateRequest $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        $book->title = $request->get('title');
+        $book->author = $request->get('author');
+        $book->rackNo = $request->get('rackNo');
+        $book->rowNo = $request->get('rowNo');
+        $book->about = $request->get('about');
+        $book->quantity = $request->get('quantity');
+        $book->price = $request->get('price');
+        $book->img_path = $request->get('img_path');
+        $book->type = $request->get('type');
+        $book->class_id = $request->get('class_id') ? $request->get('class_id') : '';
+        if ($book->save())
+        {
+            return back()->with('status', 'Book information updated');
+        }
+        return back()->with('error', 'Something went wrong please try again');
     }
 }

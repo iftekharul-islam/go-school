@@ -93,6 +93,16 @@ class MyclassController extends Controller
             'status' => 'error',
         ]);
     }
+    public function updateClassDetails(Request $request, $id) {
+         $class = Myclass::findOrFail($id);
+         $class->class_number = $request->get('class_number');
+         $class->group = $request->get('group');
+         $class->department_id = $request->get('department');
+         if ($class->save()) {
+             return back()->with('status', 'Class info updated!');
+         }
+         return back()->with('error', 'Something went wrong! Please try again.');
+    }
 
     /**
      * Remove the specified resource from storage.

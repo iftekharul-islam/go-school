@@ -13,7 +13,7 @@
                             @endcomponent
                         </div>
                     @else
-                        <div class="panel-body">
+                        <div class="panel-body mt-5 text-center">
                             No Related Data Found.
                         </div>
                     @endif

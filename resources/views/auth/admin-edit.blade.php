@@ -103,7 +103,8 @@
 
                                     <div class="">
                                         <select id="blood_group" class="form-control" name="blood_group">
-                                            <option selected="selected">A+</option>
+                                            <option selected="{{$user->blood_group}}">{{$user->blood_group}}</option>
+                                            <option>A+</option>
                                             <option>A-</option>
                                             <option>B+</option>
                                             <option>B-</option>

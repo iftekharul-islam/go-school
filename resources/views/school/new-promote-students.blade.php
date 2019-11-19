@@ -36,7 +36,7 @@
                         @endcomponent
                     </div>
                 @else
-                    <div class="">
+                    <div class="mt-5 text-center panel-body">
                         No Related Data Found.
                     </div>
             @endif

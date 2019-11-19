@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'All Books')
+@section('title', $book->title)
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -34,6 +34,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h3 class="text-teal fancy4"><i class="mr-2 text-teal"></i> Book Details </h3>
+                        <a href="{{ route('edit-book-details', $book->id) }}" class="float-right text-teal"><i class="far fa-edit text-teal"></i> Edit</a>
                     </div>
                     <div class="col-md-3 library-image"><img src="{{ $book->img_path }}" alt="{{ $book->title }}"/>
                     </div>
