@@ -655,11 +655,9 @@
     </div>
 
     <div class="form-group">
-
         <div class="col-md-12">
-            <label class=" control-label">Upload Profile
-                Picture</label>
-            <input type="file" id="picPath" name="student_pic">
+            <label class=" control-label">Upload Profile Picture <label class="text-danger">*</label></label>
+            <input type="file" required id="picPath" name="student_pic">
         </div>
     </div>
 

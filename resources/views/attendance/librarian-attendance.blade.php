@@ -32,7 +32,7 @@
                     @include('layouts.librarian.librarian-attendance')
                 </div>
             @else
-                <div class="panel-body">
+                <div class="panel-body text-center mt-5">
                     No Related Data Found.
                 </div>
             @endif

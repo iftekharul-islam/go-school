@@ -9,7 +9,7 @@
             @component('components.new-users-list',['users'=>$users])@endcomponent
         </div>
     @else
-        <div class="">
+        <div class="text-center mt-5">
             No Related Data Found.
         </div>
     @endif

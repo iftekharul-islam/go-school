@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/chosen.min.css') }}">
 <!-- JS -->
 {{--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>--}}
-<script src="{{ asset('js/chosen.jquery.min.js') }}"></script>
+{{--<script src="{{ asset('js/chosen.jquery.min.js') }}"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
 <script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
 

@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="heading-sub fancy4 ">Basic Details</div>
+            <div class="heading-sub fancy4 ">Basic Details <a href="{{ route('edit-information', $user->id) }}"><i class="fas fa-user-edit float-right"></i></a></div>
             <div class="item-content">
                 @if($user->role == "student")
                     <div class="row">

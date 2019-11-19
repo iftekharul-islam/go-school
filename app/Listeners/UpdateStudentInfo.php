@@ -33,7 +33,7 @@ class UpdateStudentInfo
             $this->userService->updateStudentInfo($event->request,$event->student_id);
             return true;
         } catch(\Exception $ex) {
-            Log::info('Failed to update Student information, Id: '.$event->user_id);
+            Log::info('Failed to update Student information, Id: '.$ex);
             return false;
         }
     }
