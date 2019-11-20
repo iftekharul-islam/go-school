@@ -56,6 +56,7 @@
                                     <select id="school_medium" class="select2" name="school_medium">
                                         <option selected="selected">Bangla</option>
                                         <option>English</option>
+                                        <option>Bangla & English</option>
                                     </select>
 
                                     @if ($errors->has('school_medium'))
@@ -64,11 +65,23 @@
                       </span>
                                     @endif
                                 </div>
+                                <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
+                                    <label for="school_established" class="control-label">School Established</label>
+                                    <input data-date-format="yyyy-mm-dd" id="birthday"
+                                           class="form-control date" name="school_established"
+                                           placeholder="School Stablished" required
+                                           autocomplete="off">
+                                    @if ($errors->has('birthday'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('birthday') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_about') ? ' has-error' : '' }}">
                                     <label for="school_about" class="control-label">About</label>
 
                                     <textarea id="school_about" class="form-control" rows="3" name="school_about"
-                                              placeholder="About School" required>{{ old('school_about') }}>{{ $school->about }}</textarea>
+                                              placeholder="About School" required>{{ old('school_about') }}{{ $school->about }}</textarea>
 
                                     @if ($errors->has('school_about'))
                                         <span class="help-block">

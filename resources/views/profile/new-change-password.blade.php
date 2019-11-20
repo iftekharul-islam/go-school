@@ -42,8 +42,7 @@
                         @endif
                         <div class="card height-auto false-height">
                             <div class="card-body">
-                                <form class="new-added-form" method="POST"
-                                      action="{{url('user/config/change_password')}}">
+                                <form class="new-added-form" method="POST" action="{{url('user/config/change_password')}}">
                                     {{ csrf_field() }}
                                     <div class="row mt-5">
                                         <div class="col-lg-12 form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">

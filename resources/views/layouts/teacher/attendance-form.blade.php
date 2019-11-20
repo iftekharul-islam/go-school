@@ -126,7 +126,7 @@
             </tbody>
         </table>
     </div>
-    <div class="attendance">
+    <div class="attendance mt-5">
         @if (count($attendances) > 0)
             <button type="submit" class="button button--save float-right mb-5"><i class="far fa-save mr-2"></i> Update</button>
         @else
@@ -134,7 +134,6 @@
         @endif
     </div>
 </form>
-<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script>
     $('input[type="checkbox"]').change(function () {
         var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');

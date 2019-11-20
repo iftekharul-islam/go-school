@@ -28,6 +28,11 @@ class StudentInfo extends Model
         'mother_annual_income',
         'user_id'
     ];
+
+    protected $casts = [
+      'birthday' => 'dateTime'
+    ];
+
     /**
      * Get the student record associated with the user.
      */

@@ -37,7 +37,7 @@
                             <tr>
                                 <td class="font-medium text-dark-medium">Birthday :</td>
                                 <td class="text-left">
-                                    {{Carbon\Carbon::parse($user->birthday)->format('d/m/Y')}}</td>
+                                    {{Carbon\Carbon::parse($user->studentInfo['birthday'])->format('d/m/Y')}}</td>
                             </tr>
                         </table>
                     </div>

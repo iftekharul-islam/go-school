@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
         'librarian'))?Auth::user()->school->name: 'Shoroborno' }}</title>
@@ -36,20 +35,31 @@
     <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('template/css/sweet-alert5.3.5.min.css') }}">
-    <script src="{{ asset('template/js/modernizr-3.6.0.min.js') }}"></script>
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/chosen.min.css') }}">
     @stack('customcss')
+
+    <!--JS Begin -->
+
+
+    <script src="{{ asset('template/js/jquery-3.3.1.min.js') }}"></script>
+{{--    <script src="{{ asset('js/chosen.jquery.min.js') }}"></script>--}}
+    <script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
+    <!--JS END-->
 
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <script src="{{asset('template/js/main.js')}}"></script>
-    {{--<script src="{{asset('js/jquery-2.1.3.min.js')}}"></script>--}}
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 </head>
 
 <body>
 <!-- Preloader Start Here -->
-<div id="preloader"></div>
+{{--<div id="preloader"></div>--}}
 <!-- Preloader End Here -->
 <div id="wrapper" class="wrapper bg-ash">
 
@@ -80,7 +90,7 @@
 
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
 
-<script src="{{ asset('template/js/plugins.js') }}"></script>
+{{--<script src="{{ asset('template/js/plugins.js') }}"></script>--}}
 {{--<!-- Popper js -->--}}
 <script src="{{ asset('template/js/popper.min.js') }}"></script>
 {{--<!-- Bootstrap js -->--}}
@@ -102,20 +112,11 @@
 {{--<!-- Select 2 Js -->--}}
 <script src="{{ asset('template/js/select2.min.js') }}"></script>
 {{--<!-- Date Picker Js -->--}}
-
 <script src=" {{ asset('template/js/main.js') }}"></script>
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
 <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
 
-<script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-</script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
 {{--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>--}}
 <script>
@@ -154,8 +155,6 @@
             format: 'yyyy-mm-dd',
         });
     });
-
-
 
 </script>
 

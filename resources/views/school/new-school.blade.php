@@ -44,6 +44,7 @@
                                     <select id="school_medium" class="select2" name="school_medium">
                                         <option selected="selected">Bangla</option>
                                         <option>English</option>
+                                        <option>Bangla & English</option>
                                     </select>
 
                                     @if ($errors->has('school_medium'))
@@ -52,12 +53,14 @@
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
                                     <label for="school_established" class="control-label">School Established</label>
-
-                                    <input id="school_established" type="text" class="form-control" name="school_established"
-                                           value="{{ old('school_established') }}" placeholder="School Established" required>
-
-                                    @if ($errors->has('school_established'))
-                                        <span class="help-block"><strong>{{ $errors->first('school_established') }}</strong></span>
+                                    <input data-date-format="yyyy-mm-dd" id="birthday"
+                                           class="form-control date" name="school_established"
+                                           placeholder="School Stablished" required
+                                           autocomplete="off">
+                                    @if ($errors->has('birthday'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('birthday') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_about') ? ' has-error' : '' }}">

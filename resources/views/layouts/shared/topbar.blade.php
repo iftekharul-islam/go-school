@@ -1,11 +1,3 @@
-{{--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">--}}
-<link rel="stylesheet" type="text/css" href="{{ asset('css/chosen.min.css') }}">
-<!-- JS -->
-{{--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>--}}
-{{--<script src="{{ asset('js/chosen.jquery.min.js') }}"></script>--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
-<script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
-
 <div class="navbar navbar-expand-md header-menu-one bg-light">
     <div class="nav-bar-header-one">
         <div class="header-logo">

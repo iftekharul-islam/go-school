@@ -245,6 +245,7 @@ class SchoolController extends Controller
         $tb->name = $request->school_name;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
+        $tb->established = $request->school_established;
         $tb->save();
 
         return redirect()->back()->with('status', 'School Information Updated');

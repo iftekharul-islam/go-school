@@ -137,8 +137,8 @@
                             @endpush
                         </div>
                     @else
-                        <div class="panel-body mt-5">
-                           <h2> There's no teacher assigned for this section</h2>
+                        <div class="panel-body text-center mt-5 mb-12">
+                           <h3 class="text-teal"> There's no teacher assigned for this section</h3>
                         </div>
                     @endif
                 </div>
