@@ -598,16 +598,4 @@
             </div>
         </div>
     </div>
-{{--    <script>--}}
-{{--        $(function () {--}}
-{{--            $('#birthday').datepicker({--}}
-{{--                format: "yyyy-mm-dd",--}}
-{{--            });--}}
-{{--            $('#session').datepicker({--}}
-{{--                format: "yyyy",--}}
-{{--                viewMode: "years",--}}
-{{--                minViewMode: "years"--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
 @endsection

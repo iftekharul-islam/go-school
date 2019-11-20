@@ -63,7 +63,7 @@ class SyllabusController extends Controller
             'file_path' => 'required|string|max:255',
             'title' => 'required|string|max:255',
         ]);
-        $tb = new Syllabus();
+        $tb = new Syllabus;
         $tb->file_path = $request->file_path;
         $tb->title = $request->title;
         $tb->active = 1;
