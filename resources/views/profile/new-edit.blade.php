@@ -37,18 +37,23 @@
                     <div class="alert alert-success">
                         {{ session('status') }}
                     </div>
+                    @elseif(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <form class="new-added-form" method="POST" action="{{ url('admin/edit/user') }}" enctype='multipart/form-data'>
                             {{ csrf_field() }}
+                            {{ method_field('patch') }}
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <input type="hidden" name="user_role" value="{{$user->role}}">
 
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label for="name" class="col-md-4 control-label">Full Name</label>
+                                        <label for="name" class="col-md-4 control-label">Full Name <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="name" type="text" class="form-control" name="name"
@@ -65,7 +70,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                        <label for="email" class="col-md-4 control-label">E-Mail Address <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="email" type="email" class="form-control" name="email"
@@ -84,7 +89,7 @@
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                        <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
+                                        <label for="phone_number" class="col-md-4 control-label">Phone Number <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="phone_number" type="text" class="form-control" name="phone_number"
@@ -100,7 +105,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                        <label for="address" class="col-md-4 control-label">Address</label>
+                                        <label for="address" class="col-md-4 control-label">Address <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="address" type="text" class="form-control" name="address"
@@ -120,7 +125,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('department') ? ' has-error' : '' }}">
-                                            <label for="department" class="col-md-4 control-label">Department</label>
+                                            <label for="department" class="col-md-4 control-label">Department <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <select id="department" class="form-control" name="department_id">
@@ -169,7 +174,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                        <label for="nationality" class="col-md-4 control-label">Nationality</label>
+                                        <label for="nationality" class="col-md-4 control-label">Nationality <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="nationality" type="text" class="form-control" name="nationality"
@@ -186,7 +191,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                        <label for="gender" class="col-md-4 control-label">Gender</label>
+                                        <label for="gender" class="col-md-4 control-label">Gender <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <select id="gender" class="form-control" name="gender">
@@ -204,11 +209,10 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mt-4 mb-4">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                        <label for="blood_group" class="col-md-4 control-label">Blood Group</label>
-
+                                        <label for="blood_group" class="col-md-4 control-label">Blood Group <label class="text-danger">*</label></label>
                                         <div class="col-md-12">
 
                                             <select id="blood_group" class="form-control" name="blood_group">
@@ -224,10 +228,11 @@
 
                                             @if ($errors->has('blood_group'))
                                                 <span class="help-block">
-                                    <strong>{{ $errors->first('blood_group') }}</strong>
-                                </span>
+                                                    <strong>{{ $errors->first('blood_group') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -245,39 +250,33 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-
-                                        <div class="col-md-12">
-                                            <label class="control-label">Edit Profile Picture</label>
-                                            <br>
-                                            <input type="file" id="pic_path" name="pic_path" value="{{ $user->pic_path }}">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             @if($user->role == 'student')
                                 <div class="row mb-4">
                                     <div class="col-md-6">
-                                        <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                            <label for="birthday" class="col-md-4 control-label">Birthday</label>
-
+                                        <div class="form-group {{ $errors->has('version') ? 'has-error' : '' }}">
+                                            <label for="version" class="col-md-6 control-label">Version <label class="text-danger">*</label></label>
                                             <div class="col-md-12">
-                                                <input id="birthday" type="text" class="form-control" name="birthday" value="{{ $user->studentInfo['birthday'] }}"  required>
 
-                                                @if ($errors->has('birthday'))
+                                                <select id="version" class="form-control" name="version">
+                                                    <option @if($user->version == 'Bangla') selected="selected" @endif value="Bangla">Bangla</option>
+                                                    <option @if($user->version == 'English') selected="selected" @endif value="English">English</option>
+                                                    <option @if($user->version == 'Bangla & English') selected="selected" @endif value="Bangla & English">Bangla & English</option>
+                                                </select>
+
+                                                @if ($errors->has('blood_group'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('birthday') }}</strong>
-                                </span>
+                                                    <strong>{{ $errors->first('blood_group') }}</strong>
+                                                </span>
                                                 @endif
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('session') ? ' has-error' : '' }}">
-                                            <label for="session" class="col-md-4 control-label">Session</label>
+                                            <label for="session" class="col-md-4 control-label">Session  <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="session" type="text" class="form-control" name="session" value="{{ $user->studentInfo['session'] }}" required>
@@ -311,7 +310,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
-                                            <label for="father_name" class="col-md-4 control-label">Father's Name</label>
+                                            <label for="father_name" class="col-md-6 control-label">Father's Name <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="father_name" type="text" class="form-control" name="father_name"
@@ -319,8 +318,8 @@
 
                                                 @if ($errors->has('father_name'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('father_name') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('father_name') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -329,36 +328,38 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
-                                            <label for="father_phone_number" class="col-md-4 control-label">Father's Phone
-                                                Number</label>
+                                            <label for="father_phone_number" class="col-md-8 control-label">Father's Phone
+                                                Number <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="father_phone_number" type="text" class="form-control"
                                                        name="father_phone_number"
+                                                       required
                                                        value="{{ $user->studentInfo['father_phone_number'] }}">
 
                                                 @if ($errors->has('father_phone_number'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('father_phone_number') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('father_phone_number') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
-                                            <label for="father_national_id" class="col-md-4 control-label">Father's National
-                                                ID</label>
+                                            <label for="father_national_id" class="col-md-8 control-label">Father's National
+                                                ID <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="father_national_id" type="text" class="form-control"
                                                        name="father_national_id"
+                                                       required
                                                        value="{{ $user->studentInfo['father_national_id'] }}">
 
                                                 @if ($errors->has('father_national_id'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('father_national_id') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('father_national_id') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -367,7 +368,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
-                                            <label for="father_occupation" class="col-md-4 control-label">Father's
+                                            <label for="father_occupation" class="col-md-8 control-label">Father's
                                                 Occupation</label>
 
                                             <div class="col-md-12">
@@ -377,8 +378,8 @@
 
                                                 @if ($errors->has('father_occupation'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('father_occupation') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('father_occupation') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -395,8 +396,8 @@
 
                                                 @if ($errors->has('father_designation'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('father_designation') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('father_designation') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -405,7 +406,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
-                                            <label for="father_annual_income" class="col-md-4 control-label">Father's Annual
+                                            <label for="father_annual_income" class="col-md-8 control-label">Father's Annual
                                                 Income</label>
 
                                             <div class="col-md-12">
@@ -415,15 +416,15 @@
 
                                                 @if ($errors->has('father_annual_income'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('father_annual_income') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('father_annual_income') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
-                                            <label for="mother_name" class="col-md-4 control-label">Mother's Name</label>
+                                            <label for="mother_name" class="col-md-4 control-label">Mother's Name <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="mother_name" type="text" class="form-control" name="mother_name"
@@ -431,8 +432,8 @@
 
                                                 @if ($errors->has('mother_name'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('mother_name') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('mother_name') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -441,36 +442,38 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
-                                            <label for="mother_phone_number" class="col-md-4 control-label">Mother's Phone
-                                                Number</label>
+                                            <label for="mother_phone_number" class="col-md-8 control-label">Mother's Phone
+                                                Number <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="mother_phone_number" type="text" class="form-control"
                                                        name="mother_phone_number"
+                                                       required
                                                        value="{{ $user->studentInfo['mother_phone_number'] }}">
 
                                                 @if ($errors->has('mother_phone_number'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('mother_phone_number') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('mother_phone_number') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
-                                            <label for="mother_national_id" class="col-md-4 control-label">Mother's National
-                                                ID</label>
+                                            <label for="mother_national_id" class="col-md-8 control-label">Mother's National
+                                                ID <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input id="mother_national_id" type="text" class="form-control"
                                                        name="mother_national_id"
+                                                       required
                                                        value="{{ $user->studentInfo['mother_national_id'] }}">
 
                                                 @if ($errors->has('mother_national_id'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('mother_national_id') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('mother_national_id') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -479,9 +482,8 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
-                                            <label for="mother_occupation" class="col-md-4 control-label">Mother's
+                                            <label for="mother_occupation" class="col-md-8 control-label">Mother's
                                                 Occupation</label>
-
                                             <div class="col-md-12">
                                                 <input id="mother_occupation" type="text" class="form-control"
                                                        name="mother_occupation"
@@ -489,8 +491,8 @@
 
                                                 @if ($errors->has('mother_occupation'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('mother_occupation') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('mother_occupation') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -499,16 +501,14 @@
                                         <div class="form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
                                             <label for="mother_designation" class="col-md-4 control-label">Mother's
                                                 Designation</label>
-
                                             <div class="col-md-12">
                                                 <input id="mother_designation" type="text" class="form-control"
                                                        name="mother_designation"
                                                        value="{{ $user->studentInfo['mother_designation'] }}">
-
                                                 @if ($errors->has('mother_designation'))
                                                     <span class="help-block">
-                                    <strong>{{ $errors->first('mother_designation') }}</strong>
-                                </span>
+                                                        <strong>{{ $errors->first('mother_designation') }}</strong>
+                                                    </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -517,7 +517,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
-                                            <label for="mother_annual_income" class="col-md-4 control-label">Mother's Annual
+                                            <label for="mother_annual_income" class="col-md-8 control-label">Mother's Annual
                                                 Income</label>
 
                                             <div class="col-md-12">
@@ -533,9 +533,58 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
+                                            <label for="birthday" class="col-md-4 control-label">Birthday  <label class="text-danger">*</label></label>
+
+                                            <div class="col-md-12">
+                                                <input data-date-format="yyyy-mm-dd" id="birthday"
+                                                       class="form-control date" name="birthday"
+                                                       placeholder="Birthday" required
+                                                       autocomplete="off">
+                                                @if ($errors->has('birthday'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('birthday') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
+                                            <label for="religion" class="col-md-4 control-label">Religion</label>
+
+                                            <div class="col-md-12">
+                                                <select id="religion" class="form-control" name="religion">
+                                                    <option selected="selected">Islam</option>
+                                                    <option>Hinduism</option>
+                                                    <option>Christianism</option>
+                                                    <option>Buddhism</option>
+                                                    <option>Other</option>
+                                                </select>
+
+                                                @if ($errors->has('religion'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('religion') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <div class="col-md-12">
+                                                <label class="control-label">Edit Profile Picture</label>
+                                                <br>
+                                                <input type="file" id="pic_path" name="pic_path" value="{{ $user->pic_path }}">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
-
                             <div class="form-group mt-5">
                                 <div class="col-md-6 col-md-offset-4">
                                     <a href="javascript:history.back()" class="button button--cancel" style="margin-right: 2%;"
@@ -549,24 +598,16 @@
             </div>
         </div>
     </div>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css"
-          rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function () {
-            $('#birthday').datepicker({
-                format: "yyyy-mm-dd",
-            });
-            var myDate = {{ Carbon\Carbon::parse($user->studentInfo['birthday'])->format('Y-m-d') }}
-            $('#birthday').datepicker('setDate',myDate);
-            $('#session').datepicker({
-                format: "yyyy",
-                viewMode: "years",
-                minViewMode: "years"
-            });
-            var session = {{ Carbon\Carbon::parse($user->studentInfo['session'])->format('Y') }}
-            $('#session').datepicker('setDate',session);
-        });
-    </script>
+{{--    <script>--}}
+{{--        $(function () {--}}
+{{--            $('#birthday').datepicker({--}}
+{{--                format: "yyyy-mm-dd",--}}
+{{--            });--}}
+{{--            $('#session').datepicker({--}}
+{{--                format: "yyyy",--}}
+{{--                viewMode: "years",--}}
+{{--                minViewMode: "years"--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection

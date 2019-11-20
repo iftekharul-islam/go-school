@@ -392,31 +392,46 @@ class UserController extends Controller
     {
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $image_path = 'storage/'.$path;
-
         DB::transaction(function () use ($request, $image_path) {
             $tb = $this->user->findOrFail($request->user_id);
             $tb->name = $request->name;
-            $tb->email = (! empty($request->email)) ? $request->email : '';
-            $tb->nationality = (! empty($request->nationality)) ? $request->nationality : '';
+            $tb->email = (! empty($request->email)) ? $request->email : $tb->email;
+            $tb->nationality = (! empty($request->nationality)) ? $request->nationality : $tb->nationality;
             $tb->phone_number = $request->phone_number;
-            $tb->address = (! empty($request->address)) ? $request->address : '';
-            $tb->about = (! empty($request->about)) ? $request->about : '';
+            $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
+            $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
-            $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : '';
-            $tb->gender = (! empty($request->gender)) ? $request->gender : '';
+            $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
+            $tb->gender = (! empty($request->gender)) ? $request->gender : $tb->gender;
             if ('teacher' == $request->user_role) {
                 $tb->department_id = $request->department_id;
                 $tb->section_id = $request->class_teacher_section_id;
             }
             if ($tb->save()) {
-                if ('student' == $request->user_role) {
-                    try {
-                        event(new StudentInfoUpdateRequested($request, $tb->id));
-                    } catch (\Exception $ex) {
-                        Log::info('Failed to update Student information, Id: '.$tb->id.'err:'.$ex->getMessage());
-                    }
+                if ($request->user_role == 'student') {
+                    $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
+                    $info->student_id = $tb->student_code;
+                    $info->session = $request->get('session');
+                    $info->version =$request->get('version');
+                    $info->group = $request->get('group');
+                    $info->birthday = $request->get('birthday');
+                    $info->religion = $request->get('religion');
+                    $info->father_name = $request->get('father_name');
+                    $info->father_phone_number = $request->get('father_phone_number');
+                    $info->father_national_id = $request->get('father_national_id');
+                    $info->father_occupation = $request->get('father_occupation');
+                    $info->father_designation = $request->get('father_designation');
+                    $info->father_annual_income = $request->get('father_annual_income');
+                    $info->mother_phone_number = $request->get('mother_phone_number');
+                    $info->mother_national_id =$request->get('mother_national_id');
+                    $info->mother_occupation = $request->get('mother_occupation');
+                    $info->mother_designation = $request->get('mother_designation');
+                    $info->mother_annual_income = $request->get('mother_annual_income');
+                    $info->user_id = $tb->id;
+                    $info->save();
                 }
             }
+            return back()->with('error', 'Something went wrong please try again!');
         });
 
         return back()->with('status', $request->name.' User Updated');

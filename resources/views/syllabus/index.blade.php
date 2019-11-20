@@ -23,6 +23,14 @@
                     {{ session('status') }}
                 </div>
             @endif
+            <div class="row">
+                <div class="col-12">
+                    <span class="d-inline-block float-right" tabindex="0" data-toggle="tooltip" title="Upload Syllabus">
+                         <a href="{{ route('upload-syllabus') }}" class="float-right text-teal"><i class="fas fa-file-upload text-teal font-35"></i></a>
+                    </span>
+
+                </div>
+            </div>
             @component('components.uploaded-files-list',['files'=>$files,'parent'=>($class_id !== 0)?'class':'','upload_type'=>'syllabus'])
             @endcomponent
         </div>

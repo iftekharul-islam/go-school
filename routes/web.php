@@ -272,6 +272,7 @@ Route::middleware(['auth'])->group(function () {
         //Librarian Route End
 
         Route::prefix('academic')->group(function () {
+            Route::get('upload-syllabus', 'SyllabusController@upload')->name('upload-syllabus');
             Route::get('syllabus', 'SyllabusController@index');
             Route::get('syllabus/{class_id}', 'SyllabusController@create');
             Route::get('notice', 'NoticeController@create');
@@ -323,7 +324,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('edit/course/{id}', 'CourseController@updateNameAndTime');
 
         Route::get('edit/user/{id}', 'UserController@edit');
-        Route::post('edit/user', 'UserController@update');
+        Route::patch('edit/user', 'UserController@update');
         Route::post('upload/file', 'UploadController@upload');
         Route::get('user/deactivate/{id}', 'UserController@deactivateUser');
         Route::get('user/activate/{id}', 'UserController@activateUser');

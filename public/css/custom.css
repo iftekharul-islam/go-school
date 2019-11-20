@@ -174,3 +174,10 @@
     float: right;
     margin-right: 5px;
 }
+
+.font-35 {
+    font-size: 35px;
+}
+.form-group .help-block {
+    color: red;
+}

@@ -26,7 +26,7 @@ class UploadController extends Controller {
     public function upload(Request $request){
         $request->validate([
             'upload_type' => 'required',
-            'file' => 'required|max:1024|mimes:doc,docx,png,jpeg,pdf,xlsx,xls,ppt,pptx,txt'
+            'file' => 'required|max:6000|mimes:doc,docx,png,jpeg,pdf,xlsx,xls,ppt,pptx,txt'
         ]);
 
         $authUser = Auth::user();
