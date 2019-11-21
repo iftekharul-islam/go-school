@@ -3,7 +3,7 @@
 @section('content')
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
-            <h3>Dashboard</h3>
+            <h3>Edit Fee Master</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>

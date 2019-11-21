@@ -80,7 +80,7 @@
                                         <td>{{ $feeMaster->amount }}</td>
                                         <td>{{ now()->year }}</td>
                                         <td>{{ $feeMaster->due }}</td>
-                                        <td>{{ $feeMaster->format }}</td>
+                                        <td class="text-capitalize">{{ $feeMaster->format }}</td>
                                         <td>
                                             <a href="{{ url(auth()->user()->role.'/fee-master/'.$feeMaster->id.'/edit') }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
                                             <button class="button button--cancel" onclick="feeMaster({{ $feeMaster->id }})"><i class="far fa-trash-alt"></i></button>
