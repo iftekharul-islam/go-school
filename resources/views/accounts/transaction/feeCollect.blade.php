@@ -133,7 +133,7 @@
                             @endphp
                             <tr>
                                 <td>Class - {{ $feeMaster->myclass->class_number }}</td>
-                                <td class="text-capitalize"> <span class="badge-success badge"></span> {{ $feeMaster->feeType['name']f }}</td>
+                                <td class="text-capitalize"> <span class="badge-success badge"></span> {{ $feeMaster->feeType['name'] }}</td>
                                 <td>{{ now()->year }}</td>
                                 <td>{{ $feeMaster->due }}</td>
                                 <td>{{ $feeMaster->amount }}</td>
