@@ -142,7 +142,7 @@ class FeeTransactionController extends Controller
 
     public function sectionsStudent(Request $request)
     {
-        $classes = Myclass::with('sections')->get();
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($request->section);
         return view('accounts.transaction.sectionStudents', compact('students', 'classes'));
     }

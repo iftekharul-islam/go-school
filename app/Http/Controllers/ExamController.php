@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Exam;
 use App\ExamForClass;
+use App\Http\Requests\UpdateExamDetailsRequest;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Http\Requests\Exam\CreateExamRequest;
@@ -100,9 +101,9 @@ class ExamController extends Controller
         return view('exams.edit',compact('classes','already_assigned_classes', 'exams', 'exam'));
     }
 
-    public function updateExam(CreateExamRequest $request, $id) {
+    public function updateExam(UpdateExamDetailsRequest $request, $id) {
         $exam = Exam::findOrFail($id);
-        $exam->term = $request->get('term');
+        $exam->term = !empty($request->get('other_term')) ? $request->get('other_term') : $request->get('term');
         $exam->exam_name = $request->get('exam_name');
         $exam->start_date = $request->get('start_date');
         $exam->end_date = $request->get('end_date');

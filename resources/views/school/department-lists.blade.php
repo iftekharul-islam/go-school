@@ -73,7 +73,9 @@
                             @endpush
                         </div>
                     @else
-                        No Department Found
+                        <div class="card-body text-center">
+                            <h6>No Department Found</h6>
+                        </div>
                     @endif
                 </div>
             </div>

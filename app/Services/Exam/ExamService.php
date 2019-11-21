@@ -48,7 +48,7 @@ class ExamService {
         $exam = new Exam;
         $exam->exam_name = $this->request->exam_name;
         $exam->active = 1;
-        $exam->term = $this->request->term;
+        $exam->term =!empty($this->request->other_term) ? $this->request->other_term : $this->request->term;
         $exam->start_date = $this->request->start_date;
         $exam->end_date = $this->request->end_date;
         $exam->notice_published = 0;
@@ -96,8 +96,8 @@ class ExamService {
 
     public function updateExamFields(){
         $tb = Exam::findOrFail($this->request->exam_id);
-        $tb->notice_published = isset($this->request->notice_published)?1:0;
-        $tb->result_published = isset($this->request->result_published)?1:0;
+        $tb->notice_published = isset($this->request->notice_published) ? 1 : 0;
+        $tb->result_published = isset($this->request->result_published) ? 1 : 0;
         $tb->active = (isset($this->request->active))?1:0;
         $tb->save();
     }

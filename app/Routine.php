@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Routine extends Model
 {
+    protected $fillable = ['title', 'description', 'user_id', 'section_id', 'school_id', 'file_path', 'active'];
     /**
      * Get the school record associated with the user.
     */

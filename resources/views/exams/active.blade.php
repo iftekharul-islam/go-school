@@ -23,8 +23,8 @@
                         <div class="col-md-3">
                             <div class="card mb-5">
                                 <h5 class="card-sub-header text-muted text-left" style="text-transform: capitalize;">
-                                    <i style='font-size:24px;margin-left:-20px;' class='flaticon-classmates text-teal'></i>
-                                    {{$exam->exam_name}}</h5>
+                                    <i style='font-size:24px;' class="text-teal fas fa-pencil-alt mr-2"></i>
+                                    Term:{{$exam->term}} ({{ $exam->exam_name }})</h5>
                                 <div class="card-body-customized">
                                     <?php $total = 0 ?>
                                     @foreach($courses as $course)
@@ -47,8 +47,12 @@
                 </div>
 
             @else
-                <div class="panel-body">
-                    No Exam Active right now!
+                <div class="card mt-5 false-height">
+                    <div class="card-body">
+                        <div class="card-body-body mt-5 text-center">
+                            No exam active right now.
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>

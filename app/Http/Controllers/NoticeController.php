@@ -119,4 +119,6 @@ class NoticeController extends Controller
             'status' => 'error'
         ]);
     }
+
+
 }

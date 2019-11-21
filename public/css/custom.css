@@ -181,3 +181,8 @@
 .form-group .help-block {
     color: red;
 }
+.routine-button:disabled {
+    background-color: #5a6268!important;
+    border: #5a6268!important;
+    cursor: not-allowed;
+}

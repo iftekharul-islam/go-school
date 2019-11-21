@@ -22,12 +22,13 @@
                             </div>
                         </div>
                         <div class="col-md-7 offset-2">
-                            <form class="new-added-form" action="{{ url(auth()->user()->role.'/fee-master/class-fe') }}" method="get">
+                            <form class="new-added-form" action="{{ url(auth()->user()->role.'/fee-master/class-fee') }}" method="get">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6 offset-4 col-lg-6 col-6 form-group">
                                         <label>Class</label>
                                         <select name="class" id="class_number" class="select2">
+                                            <option>Select class</option>
                                             @foreach($classes as $class)
                                                 <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
                                             @endforeach
@@ -93,6 +94,12 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+                @else
+                <div class="card height-auto">
+                    <div class="card-body text-center">
+                        No Fees are assigned for this class!
                     </div>
                 </div>
             @endif

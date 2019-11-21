@@ -39,8 +39,12 @@
                     @include('layouts.teacher.attendance-form')
                 </div>
             @else
-                <div class="panel-body text-center mt-5">
-                    No Related Data Found.
+                <div class="card mt-5 false-height">
+                    <div class="card-body">
+                        <div class="card-body-body mt-5 text-center">
+                            No Related Data Found.
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>

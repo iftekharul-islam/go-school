@@ -65,8 +65,12 @@
                 </div>
             </div>
         @else
-            <div class="card-body">
-                <h3> No Grade System Available!</h3>
+            <div class="card mt-5 false-height">
+                <div class="card-body">
+                    <div class="card-body mt-5 text-center">
+                        No Grade System Available!
+                    </div>
+                </div>
             </div>
         @endif
     </div>

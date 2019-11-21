@@ -290,8 +290,13 @@
                                 </div>
                             </div>
                         @endforeach
+                        @else
+                        <div class="card-body mt-5 text-center">
+                            <h5>No related data found</h5>
+                        </div>
                     @endif
                 @endif
+
             </div>
         </div>
     </div>

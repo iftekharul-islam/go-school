@@ -6,6 +6,7 @@ use App\FeeMaster;
 use App\FeeType;
 use App\Myclass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeeMasterController extends Controller
 {
@@ -17,7 +18,7 @@ class FeeMasterController extends Controller
     public function index(Request $request)
     {
 //        $feeMasters = FeeMaster::all();
-        $classes = Myclass::all();
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
         return view('accounts.feeMaster.index', compact('classes'));
     }
 
@@ -28,7 +29,7 @@ class FeeMasterController extends Controller
      */
     public function create()
     {
-        $classes = Myclass::all();
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
         $feeTypes = FeeType::where('type', '!=', 'recurrent')->get();;
         return view('accounts.feeMaster.create', compact('classes', 'feeTypes'));
     }
@@ -140,7 +141,7 @@ class FeeMasterController extends Controller
 
     public function classFee(Request $request)
     {
-        $classes = Myclass::all();
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
         $feeMasters = FeeMaster::where('class_id', $request->class)->get();
         return view('accounts.feeMaster.index', compact('feeMasters', 'classes'));
     }
