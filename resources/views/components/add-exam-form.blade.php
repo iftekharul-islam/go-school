@@ -93,8 +93,7 @@
         $("#term").on("change", function() {
             if ($(this).val() === "other") {
                 $("#other-term").show();
-            }
-            else {
+            } else {
                 $("#other-term").hide();
             }
         });

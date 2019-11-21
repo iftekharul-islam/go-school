@@ -69,7 +69,7 @@
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
-                                        <td>{{ $student->gender }}</td>
+                                        <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
                                             <a class="button--save button" href="{{ url(auth()->user()->role.'/fee-collection/get-fee',$student->id) }}">Collect</a>
                                         </td>

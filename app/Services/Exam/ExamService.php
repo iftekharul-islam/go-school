@@ -48,7 +48,7 @@ class ExamService {
         $exam = new Exam;
         $exam->exam_name = $this->request->exam_name;
         $exam->active = 1;
-        $exam->term =!empty($this->request->other_term) ? $this->request->other_term : $this->request->term;
+        $exam->term = !empty($this->request->other_term) ? $this->request->other_term : $this->request->term;
         $exam->start_date = $this->request->start_date;
         $exam->end_date = $this->request->end_date;
         $exam->notice_published = 0;
