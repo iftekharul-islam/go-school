@@ -35,7 +35,9 @@
                     @endcomponent
                 </div>
             @else
-                No Related Data Found.
+                <div class="card-body text-center mt-5">
+                    No Related Data Found.
+                </div>
             @endif
         </div>
     </div>

@@ -137,8 +137,12 @@
                             @endpush
                         </div>
                     @else
-                        <div class="panel-body text-center mt-5 mb-12">
-                           <h3 class="text-teal"> There's no teacher assigned for this section</h3>
+                        <div class="card mt-5 false-height">
+                            <div class="card-body">
+                                <div class="card-body-body mt-5 text-center">
+                                    No Related Data Found.
+                                </div>
+                            </div>
                         </div>
                     @endif
                 </div>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Syllabus extends Model
 {
 	protected $table = 'syllabuses';
+
+	protected $fillable = ['file_path', 'user_id', 'class_id', 'title', 'active', 'description', 'school_id'];
     /**
      * Get the school record associated with the user.
     */

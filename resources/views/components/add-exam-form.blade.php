@@ -2,11 +2,12 @@
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-12 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-            <label>Terms</label>
+            <label>Term</label>
             <select id="term" class="select2 ml-2 " name="term">
                <option value="First Term">1st Term</option>
                <option value="Second Term">2nd Term</option>
                <option value="Third Term">3rd Term</option>
+               <option value="other">Other</option>
             </select>
             @if ($errors->has('term'))
                 <span class="help-block">
@@ -14,7 +15,15 @@
                 </span>
             @endif
         </div>
-
+        <div id="other-term" class="col-md-12 form-group{{ $errors->has('other-term') ? ' has-error' : '' }}" style="display: none">
+            <label>Term</label>
+            <input id="other-term" type="text" class="form-control" name="other_term" value="{{ old('other-term') }}" placeholder="Term title">
+            @if ($errors->has('other-term'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('other-term') }}</strong>
+                </span>
+            @endif
+        </div>
 
         <div class="col-md-12 form-group{{ $errors->has('exam_name') ? ' has-error' : '' }}">
             <label>Examination Name</label>
@@ -79,5 +88,15 @@
             format: 'yyyy-mm-dd',
             language: 'en'
         });
-    })
+    });
+    $(document).ready(function() {
+        $("#term").on("change", function() {
+            if ($(this).val() === "other") {
+                $("#other-term").show();
+            } else {
+                $("#other-term").hide();
+            }
+        });
+    });
+
 </script>

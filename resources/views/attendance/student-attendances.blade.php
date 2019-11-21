@@ -64,9 +64,13 @@
                     @include('layouts.student.attendances-table')
                 </div>
                 @else
-                <div class="panel-body mt-5 text-center">
-                    No Related Data Found.
-                </div>
+                    <div class="card mt-5 false-height">
+                        <div class="card-body">
+                            <div class="card-body-body mt-5 text-center">
+                                No Related Data Found.
+                            </div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

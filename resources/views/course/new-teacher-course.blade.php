@@ -27,8 +27,6 @@
                         @endif
                         <div class="card height-auto false-height">
                             <div class="card-body">
-                                <div class="heading-layout1">
-                                </div>
                                 @if(count($courses) > 0)
                                     @if(count($courses) > 0)
                                         @foreach ($courses as $course)
@@ -39,7 +37,9 @@
                                     @component('components.new-course-table',['courses'=>$courses, 'exams'=>$exams, 'student'=>false])
                                     @endcomponent
                                 @else
-                                    No Related Data Found.
+                                    <div class="text-center mt-5">
+                                        No Related Data Found.
+                                    </div>
                                 @endif
                             </div>
                         </div>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SyllabusUploadRequest;
 use App\Myclass;
 use Illuminate\Http\Request;
 use App\Syllabus as Syllabus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Resources\SyllabusResource;
+use Illuminate\Support\Facades\Storage;
 
 class SyllabusController extends Controller
 {
@@ -132,7 +134,25 @@ class SyllabusController extends Controller
 
     public function upload()
     {
-      return  $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
+        return view('syllabus.upload', compact('classes'));
+    }
 
+    public function storeSyllabus(SyllabusUploadRequest $request)
+    {
+
+        $upload_dir = 'school-'.Auth::user()->school_id.'/'.date("Y").'/syllabus';
+        $path = Storage::disk('public')->putFile($upload_dir, $request->file('file'));
+        $path = 'storage/'.$path;
+        $data = [
+          'file_path'  => $path,
+          'title' => $request->get('syllabus_title'),
+          'active' => 1,
+          'school_id' =>Auth::user()->school_id,
+          'class_id' => $request->get('class'),
+          'user_id' => Auth::user()->id
+        ];
+        Syllabus::create($data);
+        return back()->with('status', 'Syllabus created successfully');
     }
 }

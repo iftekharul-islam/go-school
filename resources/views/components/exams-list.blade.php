@@ -15,6 +15,7 @@
     <thead>
     <tr>
       <th>#</th>
+      <th>Term</th>
       <th>Examination Name</th>
       <th>Notice Published</th>
       <th>Start Date</th>
@@ -28,6 +29,7 @@
     @foreach ($exams as $exam)
       <tr>
         <th>{{($loop->index + 1)}}</th>
+        <td class="text-capitalize">{{ $exam->term }}</td>
         <td>{{$exam->exam_name}}</td>
         <td>
           @if($exam->notice_published === 1)
@@ -59,19 +61,19 @@
         </td>
         <td>
           <input type="hidden" name="exam_id" value="{{$exam->id}}" form="form{{$exam->id}}"/>
-          @if($exam->active === 1)
+          @if($exam->active == 1)
             <label class="checkbox-label">
               <input type="checkbox" name="active" form="form{{$exam->id}}" checked />
-              Active
+              <span class="badge badge-info ml-1">Active</span>
               <span class="checkmark"></span>
             </label>
           @else
             @if($exam->result_published === 1)
-              Completed
+              <span class="badge badge-success">Completed</span>
             @else
               <label class="checkbox-label">
                 <input type="checkbox" name="active" form="form{{$exam->id}}" />
-                Not Active
+                <span class="badge badge-warning ml-1">Not Active</span>
                 <span class="checkmark"></span>
               </label>
             @endif
@@ -104,7 +106,7 @@
     function removeExam(id) {
       swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this file!",
+        text: "Once deleted, you will not be able to recover this data!",
         icon: "warning",
         buttons: true,
         dangerMode: true,

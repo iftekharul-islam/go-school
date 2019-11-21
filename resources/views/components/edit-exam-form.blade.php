@@ -4,15 +4,25 @@
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-            <label>Terms</label>
+            <label>Term</label>
             <select id="term" class="select2" name="term">
-                <option value="First Term">1st Term</option>
-                <option value="Second Term">2nd Term</option>
-                <option value="Third Term">3rd Term</option>
+                <option @if($exam->term == 'First Term') selected="selected" @endif value="First Term">1st Term</option>
+                <option @if($exam->term == 'Second Term') selected="selected" @endif value="Second Term">2nd Term</option>
+                <option @if($exam->term == 'Third Term') selected="selected" @endif value="Third Term">3rd Term</option>
+                <option value="other">Other</option>
             </select>
             @if ($errors->has('term'))
                 <span class="help-block">
                     <strong>{{ $errors->first('term') }}</strong>
+                </span>
+            @endif
+        </div>
+        <div id="other-term" class="col-md-8 form-group{{ $errors->has('other-term') ? ' has-error' : '' }}" style="display: none">
+            <label>Term</label>
+            <input id="other-term" type="text" class="form-control" name="other_term" value="{{ old('other-term') }}" placeholder="Term title">
+            @if ($errors->has('other-term'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('other-term') }}</strong>
                 </span>
             @endif
         </div>
@@ -53,28 +63,7 @@
             @endif
         </div>
 
-        <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
-            <label>For Class</label>
-            <select id="book_code" class="form-control select2" multiple name="classes[]">
-                @foreach($classes as $class)
-                    <option value="{{$class->id}}">
-                    @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))
-                        <option value="" disabled><b>Class - {{$class->class_number}}</b>&nbsp;&nbsp;
-                            <small>(Exam Assigned)</small>
-                        </option>
-                    @else
-                        <option value="{{ $class->id}}"><b>Class - {{$class->class_number}}</b></option>
-                        @endif
-                        </option>
-                        @endforeach
-            </select>
-            @if ($errors->has('classes'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('classes') }}</strong>
-                </span>
-            @endif
-        </div>
-        <div class="col-12 form-group mg-t-8">
+               <div class="col-12 form-group mg-t-8">
             <button type="submit" class="button button--edit">Save</button>
             <a href="javascript:history.back()" class="button button--cancel"
                style="margin-left: 1%;" role="button">Cancel</a>
@@ -87,5 +76,14 @@
         $('.date').datepicker({
             format: 'yyyy-mm-dd',
         });
-    })
+    });
+    $(document).ready(function() {
+        $("#term").on("change", function() {
+            if ($(this).val() === "other") {
+                $("#other-term").show();
+            } else {
+                $("#other-term").hide();
+            }
+        });
+    });
 </script>

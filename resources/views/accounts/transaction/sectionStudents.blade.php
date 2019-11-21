@@ -20,6 +20,7 @@
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                 <label>Class</label>
                                 <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                    <option>Select Class</option>
                                     @foreach($classes as $class)
                                         <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
                                     @endforeach
@@ -68,7 +69,7 @@
                                         <td>{{ $student->code }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
-                                        <td>{{ $student->gender }}</td>
+                                        <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
                                             <a class="button--save button" href="{{ url(auth()->user()->role.'/fee-collection/get-fee',$student->id) }}">Collect</a>
                                         </td>
@@ -103,3 +104,4 @@
             });
         }
     </script>
+@endpush

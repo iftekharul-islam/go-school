@@ -98,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('fee-types', 'FeeTypesController');
         Route::resource('fee-discount', 'FeeDiscountController');
-        Route::get('fee-master/class-fe', 'FeeMasterController@classFee')->name('class.fee');
+        Route::get('fee-master/class-fee', 'FeeMasterController@classFee')->name('class.fee');
         Route::resource('fee-master', 'FeeMasterController');
         Route::resource('fee-transaction', 'FeeTransactionController');
         Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
@@ -247,7 +247,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('fee-types', 'FeeTypesController');
         Route::resource('fee-discount', 'FeeDiscountController');
-        Route::get('fee-master/class-fe', 'FeeMasterController@classFee')->name('class.fee');
+        Route::get('fee-master/class-fee', 'FeeMasterController@classFee')->name('class.fee');
         Route::resource('fee-master', 'FeeMasterController');
         Route::resource('fee-transaction', 'FeeTransactionController');
         Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
@@ -273,15 +273,18 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('academic')->group(function () {
             Route::get('upload-syllabus', 'SyllabusController@upload')->name('upload-syllabus');
-            Route::get('syllabus', 'SyllabusController@index');
+            Route::post('upload-syllabus', 'SyllabusController@storeSyllabus')->name('store-syllabus');
+            Route::get('syllabus', 'SyllabusController@index')->name('academic-syllabus');
             Route::get('syllabus/{class_id}', 'SyllabusController@create');
             Route::get('notice', 'NoticeController@create');
             Route::get('event', 'EventController@create');
-            Route::get('routine', 'RoutineController@index');
+            Route::get('routine', 'RoutineController@index')->name('academic-routines');
             Route::get('notice/update/{id}', 'NoticeController@update');
             Route::get('syllabus/update/{id}', 'SyllabusController@update');
             Route::get('routine/{section_id}', 'RoutineController@create');
             Route::get('routine/update/{id}', 'RoutineController@update');
+            Route::get('upload-routine', 'RoutineController@upload')->name('upload-routine');
+            Route::post('upload-routine', 'RoutineController@storeRoutine')->name('store-routine');
             Route::get('event/update/{id}', 'EventController@update');
             Route::patch('update-class-info/{id}','MyClassController@updateClassDetails')->name('update-class-info');
             Route::prefix('remove')->name('remove.')->group(function () {

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoutineUploadRequest;
+use App\Myclass;
 use App\Syllabus;
 use App\Routine as Routine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Resources\RoutineResource;
+use Illuminate\Support\Facades\Storage;
 
 class RoutineController extends Controller
 {
@@ -129,5 +132,31 @@ class RoutineController extends Controller
         ]) : response()->json([
             'status' => 'error',
         ]);
+    }
+    public function upload()
+    {
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
+        return view('routines.upload', compact('classes'));
+    }
+
+    public function storeRoutine(RoutineUploadRequest $request)
+    {
+
+        $upload_dir = 'school-'.Auth::user()->school_id.'/'.date("Y").'/routine';
+        $path = Storage::disk('public')->putFile($upload_dir, $request->file('file'));
+        $path = 'storage/'.$path;
+
+        $data = [
+            'section_id' => $request->get('section'),
+            'file_path' => $path,
+            'title' => $request->get('title'),
+            'active' => 1,
+            'school_id' => Auth::user()->school_id,
+            'user_id' => Auth::user()->id,
+
+        ];
+         Routine::create($data);
+        return back()->with('status', 'New Routine added successfully!');
+
     }
 }
