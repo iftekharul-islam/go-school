@@ -74,7 +74,7 @@
 
         @yield('content')
         <!-- Footer Area Start Here -->
-            <footer class="footer-wrap-layout1 example-screen">
+            <footer class="ml-4 footer-wrap-layout1 example-screen">
                 <div class="copyright">© Copyrights <a href="https://augnitive.com/" target="_blank">Augnitive</a> 2019.
                     All rights reserved
                 </div>

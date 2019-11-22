@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('register/admin/{id}', 'AdminController@create');
         Route::post('register/admin', 'AdminController@store');
         Route::get('activate-admin/{id}', 'AdminController@destroy');
+        Route::delete('delete-admin/{id}', 'AdminController@delete')->name('delete-admin');
         Route::post('create-school', 'SchoolController@store');
         Route::get('school/admin-list/{school_id}', 'SchoolController@show');
         Route::get('school/{school_id}', 'SchoolController@showSchool');

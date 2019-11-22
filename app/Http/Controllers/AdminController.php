@@ -128,6 +128,24 @@ class AdminController extends Controller
         $request->request->add(['code' => $school->code]);
         $password = $request->password;
         $pic_path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
+
+        $user = User::where('email', $request->email)->first();
+        if ($user && $user->role == 'admin')
+        {
+           $school = School::find($user->school_id);
+           if ( $school)
+           {
+               return back()->with('error', 'The email address you provided belongs to an admin of an active school! Provide different email address');
+           }
+           else
+           {
+               $user->delete();
+           }
+        }
+        elseif ($user && $user->role != 'admin')
+        {
+            return back()->with('error', 'The email address you provided is already in use please choose different email to continue');
+        }
         $tb = $this->userService->storeAdmin($request, $pic_path);
         $tb->adminDepartments()->sync($request->departments);
 
@@ -210,5 +228,10 @@ class AdminController extends Controller
         $admin->save();
 
         return back()->with('status', $admin->name.' active status changed');
+    }
+
+    public function delete(Request $request ,$id) {
+        User::destroy($id);
+        return back()->with('status', 'Admin deleted from school');
     }
 }
