@@ -27,7 +27,7 @@
                     @endif
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" method="POST" action="{{ url('master/create-school') }}">
+                            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ url('master/create-school') }}">
                                 {{ csrf_field() }}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
                                     <label for="school_name" class="control-label">School Name</label>
@@ -81,6 +81,15 @@
 
                                     @if ($errors->has('school_about'))
                                         <span class="help-block"><strong>{{ $errors->first('school_address') }}</strong></span>
+                                    @endif
+                                </div>
+                                <div class="mb-4 form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
+                                    <label for="logo" class="control-label">School Logo</label>
+
+                                    <input id="logo" type="file" class="form-control" name="logo" required>
+
+                                    @if ($errors->has('logo'))
+                                        <span class="help-block"><strong>{{ $errors->first('logo') }}</strong></span>
                                     @endif
                                 </div>
                                 <div class="form-group">

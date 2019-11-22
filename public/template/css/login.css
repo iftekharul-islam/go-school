@@ -28,8 +28,7 @@ body {
 }
 
 .header__logo {
-    height: 70px;
-    width: 70px;
+    width: 150px;
 }
 
 .header__text-box {
@@ -449,6 +448,9 @@ button:focus {
     margin-bottom: 22px!important;
     text-align: left;
     margin-left: 10%;
+}
+.main-logo {
+    width: 250px;
 }
 
 /*# sourceMappingURL=style.css.map */

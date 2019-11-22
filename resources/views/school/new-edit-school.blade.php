@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Create School')
+@section('title', 'Edit School')
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -20,7 +20,7 @@
         <div class="col-lg-8 col-md-10 col-12">
             <div class="card height-auto false-height">
                 @if (session('status'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success mb-3">
                         {{ session('status') }}
                     </div>
                 @endif
@@ -36,7 +36,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" method="POST" action="{{ url('master/school/edit', $school->id) }}">
+                            <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ url('master/school/edit', $school->id) }}">
                                 {{ csrf_field() }}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
                                     <label for="school_name" class="control-label">School Name</label>
@@ -71,9 +71,9 @@
                                            class="form-control date" name="school_established"
                                            placeholder="School Stablished" required
                                            autocomplete="off">
-                                    @if ($errors->has('birthday'))
+                                    @if ($errors->has('school_established'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('birthday') }}</strong>
+                                            <strong>{{ $errors->first('school_established') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -85,21 +85,30 @@
 
                                     @if ($errors->has('school_about'))
                                         <span class="help-block">
-                          <strong>{{ $errors->first('school_about') }}</strong>
-                      </span>
-                            @endif
+                                              <strong>{{ $errors->first('school_about') }}</strong>
+                                          </span>
+                                    @endif
+                                </div>
+                                <div class="mb-4 form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
+                                    <label for="logo" class="control-label">School Logo</label>
+
+                                    <input id="logo" type="file" class="form-control" name="logo">
+
+                                    @if ($errors->has('logo'))
+                                        <span class="help-block"><strong>{{ $errors->first('logo') }}</strong></span>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 mt-5">
+                                        <button type="submit" id="registerBtn"
+                                                class="button button--save font-weight-bold float-left">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-4 mt-5">
-                                <button type="submit" id="registerBtn"
-                                        class="button button--save font-weight-bold float-left">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 @endsection

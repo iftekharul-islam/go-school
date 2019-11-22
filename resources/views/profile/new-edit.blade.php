@@ -348,12 +348,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
                                             <label for="father_national_id" class="col-md-8 control-label">Father's National
-                                                ID <label class="text-danger">*</label></label>
+                                                ID</label>
 
                                             <div class="col-md-12">
                                                 <input id="father_national_id" type="text" class="form-control"
                                                        name="father_national_id"
-                                                       required
                                                        value="{{ $user->studentInfo['father_national_id'] }}">
 
                                                 @if ($errors->has('father_national_id'))
@@ -443,12 +442,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
                                             <label for="mother_phone_number" class="col-md-8 control-label">Mother's Phone
-                                                Number <label class="text-danger">*</label></label>
+                                                Number</label>
 
                                             <div class="col-md-12">
                                                 <input id="mother_phone_number" type="text" class="form-control"
                                                        name="mother_phone_number"
-                                                       required
                                                        value="{{ $user->studentInfo['mother_phone_number'] }}">
 
                                                 @if ($errors->has('mother_phone_number'))
@@ -462,12 +460,11 @@
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
                                             <label for="mother_national_id" class="col-md-8 control-label">Mother's National
-                                                ID <label class="text-danger">*</label></label>
+                                                ID</label>
 
                                             <div class="col-md-12">
                                                 <input id="mother_national_id" type="text" class="form-control"
                                                        name="mother_national_id"
-                                                       required
                                                        value="{{ $user->studentInfo['mother_national_id'] }}">
 
                                                 @if ($errors->has('mother_national_id'))
