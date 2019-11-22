@@ -133,7 +133,7 @@ class SectionController extends Controller
         $tb->class_id = $request->class_id;
         $tb->save();
 
-        return back()->withInput(['tab' => 'tab8'])->with('status', 'New Section Created');
+        return back()->withInput(['tab' => 'tab2', 'tabMain' => 'tab8'])->with('status', 'New Section Created');
     }
 
     /**

@@ -52,7 +52,7 @@
                                aria-selected="true">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab-1" data-toggle="tab" href="#tab8" role="tab"
+                            <a class="nav-link " id="tab-1" data-toggle="tab" href="#tab8" role="tab"
                                aria-selected="false">Academics</a>
                         </li>
                     </ul>
@@ -957,7 +957,9 @@
 @push('customjs')
     <script>
         $(document).ready(function () {
-            $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
+            $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show');
+            $('#tabMenu a[href="#{{ old('tabMain') }}"]').tab('show');
+
         });
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
