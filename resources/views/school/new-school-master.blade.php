@@ -112,6 +112,13 @@
                                             <a href="{{ url('master/school/edit', $school->id) }}" class="button button--edit float-right"><i class="fas fa-edit"></i>&nbsp;Edit School</a>
                                         </div>
                                     </div>
+                                    @if($school->logo)
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <img class="details-page-logo" src="{{ asset($school->logo) }}">
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="user-details-box">
                                         <div class="item-content">
                                             <div class="info-table table-responsive">

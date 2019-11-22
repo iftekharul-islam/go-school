@@ -186,3 +186,17 @@
     border: #5a6268!important;
     cursor: not-allowed;
 }
+.all-school-logo {
+    width: 32px;
+    margin-right: 6px;
+}
+.details-page-logo {
+    border: 1px solid #bfbaba;
+    padding: 20px;
+    width: 111px;
+}
+
+.topbar-logo-mg {
+    margin-left: 5px;
+    margin-bottom: 8px;
+}

@@ -1785,7 +1785,12 @@ card-sub-header:first-child {
 .header-logo img {
   color: #fff;
   height: auto;
-  width: 45px;
+  max-width: 190px;
+}
+.school-logo img {
+  color: #fff;
+  height: auto;
+  max-width: 187px;
 }
 
 #elementID {

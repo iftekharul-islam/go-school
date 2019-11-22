@@ -1,17 +1,24 @@
 <div class="navbar navbar-expand-md header-menu-one bg-light">
     <div class="nav-bar-header-one">
-        <div class="header-logo">
             @if(\Auth::check())
                 @php
                     $x = \Illuminate\Support\Facades\Auth::user()->role;
+                    $school = \App\School::find(\Illuminate\Support\Facades\Auth::user()->school_id);
                 @endphp
-
                 <a href="{{ url($x.'/home') }}">
-                    <img class="logo float-left" src="{{ asset('/template/img/logo3.png') }}" alt="logo">
-                    <h5 class="heading-logo float-right">shoroborno</h5>
+                    @if($school && $school->logo && $x != 'master')
+                        <div class="school-logo">
+                         <img class="logo topbar-logo-mg float-left" src="{{ asset($school->logo) }}">
+                        </div>
+                    @else
+                        <div class="header-logo">
+                            <img class="logo float-left" src="{{ asset('/logos/header-logo.png') }}" alt="logo">
+{{--                            <h5 class="heading-logo float-right">shoroborno</h5>--}}
+                        </div>
+                    @endif
                 </a>
             @endif
-        </div>
+
         <div class="toggle-button sidebar-toggle">
             <button type="button" class="item-link">
                         <span class="btn-icon-wrap">

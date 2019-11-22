@@ -396,10 +396,9 @@
                         Phone
                         Number<label
                                 class="text-danger">*</label></label>
-                    <input id="father_phone_number" type="text"
+                    <input id="father_phone_number" required type="text"
                            class="form-control"
-                           name="father_phone_number"
-                           value="">
+                           name="father_phone_number">
 
                     @if ($errors->has('father_phone_number'))
                         <span class="help-block">
@@ -418,8 +417,7 @@
                 <div class="col-md-12">
                     <label for="father_national_id"
                            class="control-label false-padding-bottom">Father's
-                        National
-                        ID<label class="text-danger">*</label></label>
+                        National ID</label>
                     <input id="father_national_id" type="text"
                            class="form-control"
                            name="father_national_id"
@@ -554,8 +552,7 @@
 
                     <input id="mother_occupation" type="text"
                            class="form-control"
-                           name="mother_occupation"
-                           value="">
+                           name="mother_occupation">
 
                     @if ($errors->has('mother_occupation'))
                         <span class="help-block">
@@ -570,14 +567,11 @@
 
                 <div class="col-md-12">
                     <label for="mother_national_id"
-                           class=" control-label false-padding-bottom">Mother's
-                        National
-                        ID<label class="text-danger">*</label></label>
+                           class=" control-label false-padding-bottom">Mother's National ID</label>
 
-                    <input id="mother_national_id" required type="text"
+                    <input id="mother_national_id"  type="text"
                            class="form-control"
-                           name="mother_national_id"
-                           value="">
+                           name="mother_national_id">
 
                     @if ($errors->has('mother_national_id'))
                         <span class="help-block">

@@ -12,6 +12,7 @@ use App\Gradesystem;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SchoolController extends Controller
 {
@@ -75,7 +76,10 @@ class SchoolController extends Controller
             'school_about' => 'required',
             'school_established' => 'required',
             'school_address' => 'required',
+            'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg'
         ]);
+        $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
+        $path = 'storage/'.$path;
         $tb = new School();
         $tb->name = $request->school_name;
         $tb->established = $request->school_established;
@@ -83,6 +87,7 @@ class SchoolController extends Controller
         $tb->medium = $request->school_medium;
         $tb->code = date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6);
         $tb->theme = 'flatly';
+        $tb->logo = $path;
         $tb->school_address = $request->school_address;
         $tb->save();
 
@@ -240,12 +245,22 @@ class SchoolController extends Controller
             'school_name' => 'required',
             'school_medium' => 'required',
             'school_about' => 'required',
+            'logo' => 'max:1024|mimes:jpeg,png,jpg,gif,svg'
+
         ]);
+
         $tb = School::findOrFail($id);
+        $path = $tb->logo;
+        if ($request->hasFile('logo'))
+        {
+            $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
+            $path = 'storage/'.$path;
+        }
         $tb->name = $request->school_name;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
         $tb->established = $request->school_established;
+        $tb->logo = $path;
         $tb->save();
 
         return redirect()->back()->with('status', 'School Information Updated');

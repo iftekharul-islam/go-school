@@ -19,14 +19,14 @@
 <header class="header">
     <div class="header__logo-box">
         <a href="{{ url('/') }}">
-            <img src="{{ asset('template/img/logo/logo.jpg') }}" class="header__logo">
+            <img src="{{ asset('logos/Logo-Icon-Only.png') }}" class="header__logo">
         </a>
     </div>
     <div class="inner-body effect5">
         <div class="header__text-box effect5">
 
             <h1 class="heading">
-                <span class="heading--main">Shoroborno</span>
+                <span class="heading--main"><img class="main-logo" src="{{ asset('logos/Logo-Text-Only.png') }}"></span>
                 <span class="heading--sub"></span>
             </h1>
 
