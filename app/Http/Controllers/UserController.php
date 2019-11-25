@@ -207,19 +207,7 @@ class UserController extends Controller
         $password = $request->password;
         $tb = $this->userService->storeStudent($request, $path);
         $this->userService->storeStudentInfo($request, $tb);
-
-        try {
-            // Fire event to store Student information
-            if (event(new StudentInfoUpdateRequested($request, $tb->id))) {
-                // Fire event to send welcome email
-                event(new UserRegistered($tb, $password));
-            } else {
-                throw new \Exeception('Event returned false');
-            }
-        } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email.'\n'.$ex->getMessage());
-        }
-
+        event(new UserRegistered($tb, $password));
         return back()->withInput(['tab' => 'tab12'])->with('status', 'New Student Added!');
     }
 

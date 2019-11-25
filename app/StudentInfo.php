@@ -29,10 +29,6 @@ class StudentInfo extends Model
         'user_id'
     ];
 
-    protected $casts = [
-      'birthday' => 'dateTime'
-    ];
-
     /**
      * Get the student record associated with the user.
      */
