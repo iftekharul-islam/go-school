@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Message as Message;
 use App\Http\Resources\MessageResource;
+use App\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -108,5 +110,12 @@ class MessageController extends Controller
         ]):response()->json([
             'status' => 'error'
         ]);
+    }
+    public function adminSendMessage()
+    {
+        $students = User::where('role', 'student')
+            ->where('school_id', Auth::user()->school_id)
+            ->paginate(20);
+        return view('message.message-student', compact('students'));
     }
 }

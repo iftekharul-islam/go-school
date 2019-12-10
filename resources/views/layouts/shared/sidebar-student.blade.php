@@ -14,6 +14,8 @@
             $acc = 0;
             $inact = 0;
             $ac = 0;
+            $std = 0;
+            $all_student = 0;
             if(strpos($add, 'book'))
                 $lib = 1;
             if(strpos($add, 'exams'))
@@ -26,6 +28,10 @@
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection'))
                 $ac = 1;
+            if(strpos($add, 'users/') || strpos($add, 'student-message'))
+                $std = 1;
+            if(strpos($add, 'users/'))
+                    $all_student = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -110,10 +116,22 @@
                     </li>
                 @endif
                 @if($role != 'student' && $role != 'master')
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}"
-                           href="{{url('users/'.Auth::user()->school->code.'/1/0?student=1')}}">
-                            <i class="flaticon-classmates"></i> <span>Students</span></a>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
+                        <ul class="nav sub-group-menu {{ $std == 1 ? 'sub-group-active' : '' }}">
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}"
+                                   href="{{url('users/'.Auth::user()->school->code.'/1/0?student=1')}}">
+                                    <i class="fas fa-angle-right"></i> <span>All Students </span></a>
+                            </li>
+                            @if($role == 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('admin/student-message')) ? 'menu-active' : '' }}"
+                                       href="{{ url('admin/student-message') }}">
+                                        <i class="fas fa-angle-right"></i><span>Message Student</span></a>
+                                </li>
+                            @endif
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' : '' }}"
