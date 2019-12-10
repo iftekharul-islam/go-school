@@ -26,7 +26,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                 <label>Section</label>
                                 <select class="form-control" id="section" name="section" ></select>
@@ -77,6 +76,14 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <div class="card-body-body mb-5 text-center">
+                            No Related Data Here.
                         </div>
                     </div>
                 </div>

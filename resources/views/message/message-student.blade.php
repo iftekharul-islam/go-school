@@ -10,24 +10,49 @@
             min-height: 200px;
         }
     </style>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12" id="main-container">
-                <div class="breadcrumbs-area">
-                    <h3>
-                        Message Student
-                    </h3>
-                    <ul>
-                        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                                Back &nbsp;&nbsp;|</a>
-                            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
-                        </li>
-                        <li>Message Student</li>
-                    </ul>
-                </div>
-                <div class="card height-auto false-height">
-                    <div class="card-body">
 
+    <div class="dashboard-content-one">
+        <div class="breadcrumbs-area">
+            <h3>
+                Message Student
+            </h3>
+            <ul>
+                <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+                        Back &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                </li>
+                <li>Message Student</li>
+            </ul>
+        </div>
+        <div class="false-height">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form class="new-added-form" action="{{ url(auth()->user()->role.'/student-message') }}" method="get">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                <label>Class</label>
+                                <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                    <option>Select Class</option>
+                                    @foreach($classes as $class)
+                                        <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                <label>Section</label>
+                                <select class="form-control" id="section" name="section" ></select>
+                            </div>
+                            <div class="col-12 form-group mg-t-2 float-right">
+                                <button type="submit" class="button--save button float-right">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+               <div class="card height-auto">
+                    <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
@@ -121,18 +146,39 @@
 
                                 </script>
                             @else
-                                <div class="card mt-5 false-height">
-                                    <div class="card-body">
-                                        <div class="card-body-body mt-5 text-center">
-                                            No Related Data Found.
-                                        </div>
+                                <div class="card-body ">
+                                    <div class="card-body-body pb-5 text-center">
+                                        No Related Data Found.
                                     </div>
                                 </div>
                             @endif
                         </div>
                     </div>
-                </div>
-            </div>
+               </div>
+
         </div>
     </div>
+
+
+@push('customjs')
+    <script type="text/javascript">
+
+        function getSections(item) {
+            let selectedClass = item.value;
+            let classes = {!! json_encode($classes->toArray()) !!};
+            let sections = [];
+            classes.forEach((cls) => {
+                if (cls.id == selectedClass) {
+                    sections = cls.sections;
+                }
+            });
+
+            $('#section').empty();
+            sections.forEach((sec) => {
+                $('#section').append($("<option />").val(sec.id).text(sec.section_number));
+            });
+        }
+    </script>
+@endpush
+
 @endsection

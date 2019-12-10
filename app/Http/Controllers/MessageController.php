@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Message as Message;
 use App\Http\Resources\MessageResource;
+use App\Myclass;
+use App\Services\User\UserService;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use App\FeeTransaction;
 
 class MessageController extends Controller
 {
+
+    public function __construct(UserService $userService){
+        $this->userService = $userService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -111,11 +118,11 @@ class MessageController extends Controller
             'status' => 'error'
         ]);
     }
-    public function adminSendMessage()
+    public function adminSendMessage(Request $request)
     {
-        $students = User::where('role', 'student')
-            ->where('school_id', Auth::user()->school_id)
-            ->paginate(20);
-        return view('message.message-student', compact('students'));
+
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
+        $students = $this->userService->getSectionStudentsWithSchool($request->section);
+        return view('message.message-student', compact('students','classes'));
     }
 }
