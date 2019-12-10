@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('user/config/impersonate', 'UserController@impersonate');
     }
 
-    Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
+    Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
     Route::get('user/{user_code}', 'UserController@show');
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
     Route::patch('user/edit-information/{id}', 'UserController@updateUserInfo')->name('update-user-info');
@@ -338,6 +338,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('department/{id}/edit', 'SchoolController@departmentEdit');
         Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('admin.department.update');
         Route::post('department/{id}', 'SchoolController@departmentDestroy');
+
+        Route::get('student-message','MessageController@adminSendMessage');
     });
 
 });

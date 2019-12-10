@@ -3,6 +3,12 @@
 @section('title', 'Students')
 
 @section('content')
+    <script src="{{ asset('js/ckeditor.js') }}"></script>
+    <style>
+        .ck-editor__editable{
+            min-height: 200px;
+        }
+    </style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12" id="main-container">
@@ -12,6 +18,7 @@
                             @component('components.new-users-list',['users'=>$users])
                             @endcomponent
                         </div>
+
                     @else
                         <div class="card mt-5 false-height">
                             <div class="card-body">
