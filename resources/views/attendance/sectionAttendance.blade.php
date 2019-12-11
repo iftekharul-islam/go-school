@@ -53,6 +53,29 @@
             <div class="panel panel-default">
                 @if(count($users) > 0)
                     <div class="panel-body">
+                        <h4 class="text-teal text-left pl-5">Attendance Summary</h4>
+                        <form method="get" action="/admin/attendances-summary">
+                            <input type="hidden" name="section_id" value="{{ $student->section->id }}" >
+                            <div class="row pl-5">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        Start Date
+                                        <input name="start_date" type="date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        End Date
+                                        <input name="end_date" type="date" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pl-5">
+                                <div class="col-3">
+                                    <button type="submit" class="button button--save">Submit</button>
+                                </div>
+                            </div>
+                        </form>
                         @component('components.users',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])
                         @endcomponent
                     </div>

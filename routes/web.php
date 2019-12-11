@@ -301,6 +301,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
+        Route::get('attendances-summary', 'AttendanceController@attendancesSummary');
         Route::get('grades/classes', 'GradeController@allExamsGrade');
         Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
 

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Myclass;
 use App\Section;
 use App\Attendance;
 use App\ExamForClass;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Traits\GradeTrait;
 use Illuminate\Support\Facades\Auth;
@@ -214,4 +218,36 @@ class AttendanceController extends Controller
 
         return back()->with('status', 'Attendance record updated');
     }
+     public function attendancesSummary(Request $request)
+     {
+         $students = $this->attendanceService->getAttendanceSummary($request);
+         $start_date = $request->start_date;
+         $end_date = $request->end_date;
+
+         $begin = new DateTime($start_date);
+         $end = new DateTime($end_date);
+         $interval = DateInterval::createFromDateString('1 day');
+         $period = new DatePeriod($begin, $interval, $end);
+         $final = [];
+         foreach ($students as $student) {
+             $final[$student->id] = [
+                 "name" => $student->name,
+             ];
+
+//             return $student['attendances'];
+             foreach ($period as $dt) {
+                 $attendance = null;
+                 if ($student['attendances']) {
+                     $attendance = $student->attendances->filter(function ($att) use($dt) {
+                         return $att->created_at->format('Y-m-d') === $dt->format('Y-m-d');
+                     })->first();
+                 }
+
+                 $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
+             }
+         }
+         //         return $final;
+
+ return view('attendance.attandence-summary', compact('final', 'start_date', 'end_date'));
+     }
 }

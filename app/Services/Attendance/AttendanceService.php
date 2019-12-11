@@ -55,6 +55,18 @@ class AttendanceService {
             ->unique('student_id');
     }
 
+    public function getAttendanceSummary($request)
+    {
+        return User::with(['attendances' => function ($query) use ($request) {
+            $query->whereBetween('created_at', [$request->start_date, $request->end_date])->get();
+        }])
+        ->where('section_id', $request->section_id)
+        ->student()
+        ->where('active', 1)
+        ->orderBy('name', 'asc')
+        ->paginate(50);
+    }
+
     public function getAllAttendanceBySecAndExam($section_id){
         return \DB::table('attendances')
             ->select('student_id', \DB::raw('
