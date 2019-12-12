@@ -60,7 +60,6 @@
                             </table>
                         </div>
                     @endif
-
                     @include('layouts.student.attendances-table')
                 </div>
                 @else

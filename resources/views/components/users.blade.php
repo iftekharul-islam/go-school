@@ -1,6 +1,3 @@
-
-<div class="card height-auto">
-    <div class="card-body">
         <div class="table-responsive">
             <table class="table display table-bordered table-data-div text-nowrap">
                 <thead>
@@ -134,9 +131,7 @@
                 {{ $users->links() }}
             </div>
         </div>
-    </div>
 
-</div>
 
 @push('customjs')
     <script type="text/javascript">

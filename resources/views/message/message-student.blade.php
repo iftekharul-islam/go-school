@@ -25,31 +25,31 @@
             </ul>
         </div>
         <div class="false-height">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <form class="new-added-form" action="{{ url(auth()->user()->role.'/student-message') }}" method="get">
-                        {{ csrf_field() }}
-                        <div class="row">
-                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                <label>Class</label>
-                                <select name="class" id="class_number" class="select2" onchange="getSections(this)">
-                                    <option>Select Class</option>
-                                    @foreach($classes as $class)
-                                        <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
-                                    @endforeach
-                                </select>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form class="new-added-form" action="{{ url(auth()->user()->role.'/student-message') }}" method="get">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                    <label>Class</label>
+                                    <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                        <option>Select Class</option>
+                                        @foreach($classes as $class)
+                                            <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                    <label>Section</label>
+                                    <select class="form-control" id="section" name="section" ></select>
+                                </div>
+                                <div class="col-12 form-group mg-t-2 float-right">
+                                    <button type="submit" class="button--save button float-right">Search</button>
+                                </div>
                             </div>
-                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                <label>Section</label>
-                                <select class="form-control" id="section" name="section" ></select>
-                            </div>
-                            <div class="col-12 form-group mg-t-2 float-right">
-                                <button type="submit" class="button--save button float-right">Search</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
                <div class="card height-auto">
                     <div class="card-body">

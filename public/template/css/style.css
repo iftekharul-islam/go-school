@@ -1791,6 +1791,7 @@ card-sub-header:first-child {
   color: #fff;
   height: auto;
   max-width: 187px;
+  max-height: 52px;
 }
 
 #elementID {
