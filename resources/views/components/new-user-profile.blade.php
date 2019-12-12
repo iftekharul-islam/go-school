@@ -40,6 +40,9 @@
                                     {{Carbon\Carbon::parse($user->studentInfo['birthday'])->format('d/m/Y')}}</td>
                             </tr>
                         </table>
+                        <div class="rfid-area">
+                            <a href="{{ route('rfid.create', $user->student_code) }}" class="button button--save">Set RFID</a>
+                        </div>
                     </div>
                 @endif
             </div>

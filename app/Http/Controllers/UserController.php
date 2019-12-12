@@ -443,6 +443,24 @@ class UserController extends Controller
         return back()->with('status', $user->name.' has been Activated!!');
     }
 
+    public function rfidCreate($id)
+    {
+        $user = $this->user->where('student_code', $id)->first();
+
+        return view('rfid.create',  compact('user'));
+    }
+
+    public function rfidStore(Request $request, $id)
+    {
+        $user = $this->user->where('student_code', $id)->first();
+
+        $user->rfid = $request->rfid;
+
+        return redirect()->route('user.show', $id)->with('status', $user->name.' RFID set successfull!');
+    }
+
+
+
     /**
      * Remove the specified resource from storage.
      *
