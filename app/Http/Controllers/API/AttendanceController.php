@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use App\Attendance;
 use Illuminate\Http\Request;
+use App\Jobs\SendAttendanceSms;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\AttendanceStoreRequest;
 
@@ -39,18 +40,10 @@ class AttendanceController extends Controller
      */
     public function store(AttendanceStoreRequest $request)
     {
-        // return 'hello';
-        // return $request->all();
+        
         $student = User::where('student_code', $request->student_code)->first();
 
-        // return $student;
-
-        // return Attendance::all();
-
         $today = Carbon::today();
-        
-
-        // return $today;
 
         if (!$student) {
             return response([
@@ -59,13 +52,11 @@ class AttendanceController extends Controller
             ]);
         }
 
+        //SMS queue
+        SendAttendanceSms::dispatch($student);
+
         $attendance = Attendance::whereDate('created_at', Carbon::today())
                                 ->where('student_id', $student->id)->first();
-
-        // return  $attendance;
-
-        
-        
 
         if ($attendance) {
             // Add 1 hour to the existing attendance time
