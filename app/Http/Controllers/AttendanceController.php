@@ -213,7 +213,7 @@ class AttendanceController extends Controller
         if ($section_id > 0 && 'student' != Auth::user()->role) {
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
 
-            return view('attendance.StudentSectionAttendance', [
+            return view('attendance.student-section-attendance', [
                 'users' => $users,
                 'current_page' => $users->currentPage(),
                 'per_page' => $users->perPage(),
