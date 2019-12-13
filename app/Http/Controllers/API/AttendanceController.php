@@ -41,7 +41,11 @@ class AttendanceController extends Controller
     public function store(AttendanceStoreRequest $request)
     {
         
+        Logger("working: ");
+        Logger($request->all());
         $student = User::where('student_code', $request->student_code)->first();
+
+        Logger("Student: " . $student);
 
         $today = Carbon::today();
 
