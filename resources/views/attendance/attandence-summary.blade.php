@@ -20,7 +20,7 @@
         <div class="false-height">
             <div class="card mb-3">
                 <div class="card-body">
-                <form class="new-added-form" action="{{ route('attendance.summary.date') }}" method="get">
+                <form class="new-added-form" action="{{ route('attendance.summary', $students[0]->section->id) }}" method="get">
                     {{ csrf_field() }}
                     <input type="hidden" name="section_id" value="{{ $students[0]->section->id }}" >
                     <div class="row">

@@ -297,13 +297,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('section/details/attendance/{section_id}', 'AttendanceController@attendanceDetails');
-        Route::get('section/details/studentAttendance/{section_id}', 'AttendanceController@attendanceDetailsview');
+        Route::get('section/details/studentAttendance/{section_id}', 'AttendanceController@attendanceDetailsview')->name('student.attendance');
 
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
-        Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummary')->name('attendance.summary');
-        Route::get('attendances-summary/date', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary.date');
+        Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary');
         Route::get('grades/classes', 'GradeController@allExamsGrade');
         Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
 

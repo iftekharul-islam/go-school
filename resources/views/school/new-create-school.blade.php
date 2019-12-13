@@ -591,7 +591,7 @@
                                                                 <div class="col-md-12">
                                                                     <label for="name"
                                                                            class="control-label false-padding-bottom">Full
-                                                                        Name<label class="text-danger">*</label></label>
+                                                                        Name <label class="text-danger">*</label></label>
 
                                                                     <input id="name" type="text" class="form-control"
                                                                            name="name"

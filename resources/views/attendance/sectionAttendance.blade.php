@@ -45,7 +45,7 @@
                                    href={{ route('attendance.summary', $students[0]->section->id) }}>
                                     View Summary</a>
                                 <a class="button button--save float-left"
-                                   href={{url('/admin/section/details/studentAttendance/'.$students[0]->section->id)}}>
+                                   href={{ route('student.attendance', $students[0]->section->id) }}>
                                     Take Attendance</a>
                             </div>
                         </div>

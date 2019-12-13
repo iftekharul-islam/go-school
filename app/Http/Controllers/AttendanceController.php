@@ -198,6 +198,10 @@ class AttendanceController extends Controller
     public function attendanceDetailsview(Request $request, $section_id)
     {
         $course = Course::with('section')->where('section_id', $section_id)->first();
+        if (!$course)
+        {
+            abort(404,'Course not found');
+        }
         $examID = 0;
         if (! empty($course->exam_id)) {
             $examID = $course->exam_id;
@@ -245,52 +249,22 @@ class AttendanceController extends Controller
 
         return back()->with('status', 'Attendance record updated');
     }
-     public function attendancesSummary(Request $request, $section_id)
+
+     public function attendancesSummaryDate(Request $request,$section_id)
      {
-         $request['start_date'] = date('Y-m-d', strtotime("-30 days"));
-         $request['end_date'] = Carbon::today()->format('Y-m-d');
+         $students = $this->attendanceService->getAttendanceSummary($request);
+         $start_date = $request->start_date;
+         $end_date = $request->end_date;
+
+         if(!$start_date) {
+             $start_date = date('Y-m-d', strtotime("-30 days"));
+         }
+
+         if(!$end_date) {
+             $end_date = Carbon::today()->format('Y-m-d');
+         }
          $request['section_id'] = $section_id;
 
-         $students = $this->attendanceService->getAttendanceSummary($request);
-         $start_date = $request->start_date;
-         $end_date = $request->end_date;
-
-
-         $begin = new DateTime($start_date);
-         $end = new DateTime($end_date);
-         $interval = DateInterval::createFromDateString('1 day');
-         $period = new DatePeriod($begin, $interval, $end);
-         $final = [];
-         foreach ($students as $student) {
-             $final[$student->id] = [
-                 "name" => $student->name,
-             ];
-
-             foreach ($period as $dt) {
-                 $attendance = null;
-                 if ($student['attendances']) {
-                     $attendance = $student->attendances->filter(function ($att) use($dt) {
-                         return $att->created_at->format('Y-m-d') === $dt->format('Y-m-d');
-                     })->first();
-                 }
-
-                 $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
-             }
-         }
-        return view('attendance.attandence-summary', compact('final', 'start_date', 'end_date', 'students'));
-     }
-
-     public function attendancesSummaryDate(Request $request)
-     {
-
-         $request->validate([
-             'start_date' => 'required',
-             'end_date'   => 'required',
-         ]);
-
-         $students = $this->attendanceService->getAttendanceSummary($request);
-         $start_date = $request->start_date;
-         $end_date = $request->end_date;
 
 
          $begin = new DateTime($start_date);
