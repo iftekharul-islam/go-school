@@ -10,7 +10,7 @@
                     <label for="name"
                            class="control-label false-padding-bottom">Full
                         Name<label class="text-danger">*</label></label>
-                    <input id="na   me" type="text" class="form-control"
+                    <input id="name" type="text" class="form-control"
                            name="name" value="{{ old('name') }}"
                            required>
 
@@ -159,7 +159,7 @@
 
                     <input id="session" type="text" class="form-control"
                            name="session"
-                           value=""
+                           value="{{ old('session') }}"
                            required>
 
                     @if ($errors->has('session'))
@@ -275,7 +275,7 @@
 
                     <input id="nationality" type="text"
                            class="form-control" name="nationality"
-                           value=""
+                           value="{{ old('nationality') }}"
                            required>
 
                     @if ($errors->has('nationality'))
@@ -351,7 +351,7 @@
 
                     <input id="address" type="text" class="form-control"
                            name="address"
-                           value=""
+                           value="{{ old('address') }}"
                            required>
 
                     @if ($errors->has('address'))
@@ -375,7 +375,7 @@
 
                     <input id="father_name" type="text"
                            class="form-control" name="father_name"
-                           value=""
+                           value="{{ old('father_name') }}"
                            required>
 
                     @if ($errors->has('father_name'))
@@ -396,9 +396,10 @@
                         Phone
                         Number<label
                                 class="text-danger">*</label></label>
-                    <input id="father_phone_number" required type="text"
+                    <input id="father_phone_number"  type="text"
                            class="form-control"
-                           name="father_phone_number">
+                           name="father_phone_number"
+                            value="{{ old('father_phone_number') }}"required>
 
                     @if ($errors->has('father_phone_number'))
                         <span class="help-block">
@@ -441,7 +442,8 @@
                         Occupation</label>
                     <input id="father_occupation" type="text"
                            class="form-control"
-                           name="father_occupation">
+                           name="father_occupation"
+                            value="{{ old('father_occupation') }}">
 
                     @if ($errors->has('father_occupation'))
                         <span class="help-block">
@@ -464,7 +466,8 @@
                         Income</label>
                     <input id="father_annual_income" type="text"
                            class="form-control"
-                           name="father_annual_income">
+                           name="father_annual_income"
+                           value="{{ old('father_annual_income') }}">
 
                     @if ($errors->has('father_annual_income'))
                         <span class="help-block">
@@ -485,6 +488,7 @@
                     <input id="father_designation" type="text"
                            class="form-control"
                            name="father_designation"
+                           value="{{ old('father_designation') }}"
                     >
 
                     @if ($errors->has('father_designation'))
@@ -509,6 +513,7 @@
                     <input id="mother_phone_number" type="text"
                            class="form-control"
                            name="mother_phone_number"
+                           value="{{ old('mother_phone_number') }}"
                     >
 
                     @if ($errors->has('mother_phone_number'))
@@ -529,7 +534,7 @@
 
                     <input id="mother_name" type="text"
                            class="form-control" name="mother_name"
-                           value=""
+                           value="{{ old('mother_name') }}"
                            required>
 
                     @if ($errors->has('mother_name'))
@@ -552,7 +557,8 @@
 
                     <input id="mother_occupation" type="text"
                            class="form-control"
-                           name="mother_occupation">
+                           name="mother_occupation"
+                           value="{{ old('mother_occupation') }}">
 
                     @if ($errors->has('mother_occupation'))
                         <span class="help-block">
@@ -571,7 +577,9 @@
 
                     <input id="mother_national_id"  type="text"
                            class="form-control"
-                           name="mother_national_id">
+                           name="mother_national_id"
+                           value="{{ old('mother_national_id') }}"
+                            >
 
                     @if ($errors->has('mother_national_id'))
                         <span class="help-block">
@@ -594,6 +602,7 @@
                     <input id="mother_designation" type="text"
                            class="form-control"
                            name="mother_designation"
+                           value="{{ old('mother_designation') }}"
                     >
 
                     @if ($errors->has('mother_designation'))
@@ -615,6 +624,7 @@
                     <input id="mother_annual_income" type="text"
                            class="form-control"
                            name="mother_annual_income"
+                           value="{{ old('mother_annual_income') }}"
                     >
 
                     @if ($errors->has('mother_annual_income'))

@@ -14,7 +14,8 @@ use App\FeeTransaction;
 class MessageController extends Controller
 {
 
-    public function __construct(UserService $userService){
+    public function __construct(UserService $userService)
+    {
         $this->userService = $userService;
     }
     /**
