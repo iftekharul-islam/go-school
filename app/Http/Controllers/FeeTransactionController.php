@@ -144,14 +144,25 @@ class FeeTransactionController extends Controller
     {
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($request->section);
-        return view('accounts.transaction.sectionStudents', compact('students', 'classes'));
+
+        $studentIds = array_map(function($std) {
+            return $std['id'];
+        }, $students->toArray());
+
+//        return $studentIds;
+
+        $studentWithFees = User::whereIn('id', $studentIds)->with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->orderBy('name', 'asc')->get();
+        $dis = Discount::all();
+
+//        return $studentWithFees;
+        return view('accounts.transaction.sectionStudents', compact('students', 'classes','studentWithFees'));
     }
 
     public function collectFee($id)
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::all();
-//        return $student;
+
         return view('accounts.transaction.feeCollect', compact('student', 'discounts'));
     }
 
@@ -159,6 +170,7 @@ class FeeTransactionController extends Controller
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::all();
+
         return view('accounts.transaction.multiple-fee', compact('student', 'discounts'));
     }
 

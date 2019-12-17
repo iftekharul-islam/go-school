@@ -1,6 +1,43 @@
 @extends('layouts.student-app')
 @section('title', 'Fee Transaction')
 @section('content')
+    <style type="text/css">
+        .example-print {
+            display: none;
+        }
+        @media print {
+            .example-screen {
+                display: none;
+            }
+            .example-print {
+                margin: 10mm 0 0 0;
+                display: block;
+            }
+            .report {
+                margin-bottom: 20px;
+            }
+            table tbody .grand-total td {
+                background-color: #DCDCDC !important;
+            }
+            tbody td .month {
+                background-color: #42A746 !important;
+            }
+            tbody td .month b {
+                color: white !important;
+            }
+            tbody td .paid {
+                color: white !important;
+                background-color: #287C71 !important;
+            }
+            tbody td .partial {
+                background-color: #FEC23E !important;
+            }
+            tbody td .unpaid {
+                color: white !important;
+                background-color: #DC3C45 !important;
+            }
+        }
+    </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
             <h3>Dashboard</h3>
@@ -39,7 +76,7 @@
             </div>
             @if(count($students) > 0)
                 <div class="card height-auto">
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <div class="heading-layout1">
                             <div class="item-title">
                                 <h3>All Students</h3>
@@ -92,50 +129,98 @@
             <div class="card mt-5">
                 <div class="card-body">
                     <div class="card-body-body mb-5 text-center">
+                        <div class="heading-layout1">
+                            <div class="item-title">
+                                <h3>Students Payment Summary</h3>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered ">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    @php
-                                        $begin = new DateTime($start_date);
-                                        $end = new DateTime($end_date);
-
-                                        $interval = DateInterval::createFromDateString('1 day');
-                                        $period = new DatePeriod($begin, $interval, $end);
-                                    @endphp
-                                    @foreach ($period as $dt)
-                                        <th>{{ $dt->format("d") }}</th>
-                                    @endforeach
+                                    <th colspan="2">Students info</th>
+                                    <th colspan="3">Payment Condition</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
-
-                                @foreach ($final as $student)
                                     <tr>
-                                        <td class="text-nowrap text-left"> {{ $student['name'] }} </td>
-                                        @foreach ($student['attendances'] as $item)
-                                            @if ($item >= 0)
-                                                <td class="px-5">
-                                                    @if ($item == '0')
-                                                        <i class="fa fa-circle text-info"></i>
-                                                    @elseif($item == '1')
-                                                        <i class="fa fa-check text-success"></i>
-                                                    @elseif($item == '2')
-                                                        <i class="fa fa-plane text-warning"></i>
-                                                    @elseif($item == null)
-                                                        <i class="fa fa-times text-danger"></i>
-                                                    @endif
-                                                </td>
-                                            @else
-                                                <td></td>
-                                            @endif
+                                    <td>Name</td>
+                                    <td>code</td>
+                                    <td>Total Amount</td>
+                                    <td>Partial Paid</td>
+                                    <td>Due</td>
 
-                                        @endforeach
                                     </tr>
-                                @endforeach
+
+                                    @php
+                                        $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
+                                        $totalAmount = 0;
+                                        $totalFine = 0;
+                                        $totalDiscount = 0;
+                                        $totalDue = 0;
+                                        $total_paid = 0;
+                                        $paid_amount = 0;
+                                        $paid_amount1 = 0;
+                                        $test = '';
+                                    @endphp
+
+                                    @foreach($studentWithFees as $student)
+                                        <tr>
+                                            <td class="text-left">{{ $student->name  }}</td>
+                                            <td class="text-left">{{ $student->student_code  }}</td>
+                                            <td>{{ $student->section->class->feeMasters->sum('amount')  }}</td>
+
+                                            <td>
+                                                @php $totalPaid = 0; @endphp
+                                                @foreach($student->section->class->feeMasters as $feeMaster)
+
+                                                    @foreach($feeMaster->transactions as $transaction)
+                                                        @if($student->id === $transaction->student_id)
+                                                            @php
+                                                            $totalPaid = (float)$totalPaid + (float)$transaction['amount']
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+
+                                                @endforeach
+                                                {{ $totalPaid }}
+
+                                            </td>
+                                            <td>
+                                                @php $totalPaid = 0; @endphp
+                                                @foreach($student->section->class->feeMasters as $feeMaster)
+
+                                                    @foreach($feeMaster->transactions as $transaction)
+                                                        @if($student->id === $transaction->student_id)
+                                                            @php
+                                                                $totalPaid = (float)$totalPaid + (float)$transaction['amount']
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+
+                                                @endforeach
+                                                {{ $student->section->class->feeMasters->sum('amount') - $totalPaid }}
+
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+
+{{--                                    @foreach($fee[1]->section->class->feeMasters as $feeMaster)--}}
+{{--                                         <tr>--}}
+{{--                                            <td class="text-capitalize"> <span class="badge-success badge"></span> {{ $feeMaster->feeType['name'] }}</td>--}}
+{{--                                            <td>{{ now()->year }}</td>--}}
+{{--                                            <td>{{ $feeMaster->due }}</td>--}}
+{{--                                            <td>{{ $feeMaster->amount }}</td>--}}
+{{--                                        </tr>--}}
+{{--                                    @endforeach--}}
+
+
                                 </tbody>
+
                             </table>
+
                         </div>
                     </div>
                 </div>

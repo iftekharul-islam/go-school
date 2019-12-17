@@ -121,7 +121,6 @@ class MessageController extends Controller
     }
     public function adminSendMessage(Request $request)
     {
-
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($request->section);
         return view('message.message-student', compact('students','classes'));
