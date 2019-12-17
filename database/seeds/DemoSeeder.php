@@ -8,6 +8,10 @@ use App\StudentInfo;
 use App\Myclass;
 use App\Section;
 use App\Book;
+use App\Gradesystem;
+use App\GradeSystemInfo;
+use App\Department;
+use App\Course;
 
 use Illuminate\Support\Facades\DB;
 
@@ -43,7 +47,7 @@ class DemoSeeder extends Seeder
                'student_code' => rand(10000,99999),
            ]);
 
-        User::create([
+        $teacher = User::create([
             'name'     => "Teacher",
             'email'    => 'teacher@shoroborno.com',
             'password' => bcrypt('teacher'),
@@ -89,7 +93,7 @@ class DemoSeeder extends Seeder
 
 
            ]);
-                       $class = Myclass::create([
+           $class = Myclass::create([
                     'class_number' => '1',
                     'school_id' => $school->id,
                     'group' =>'A',
@@ -154,6 +158,53 @@ class DemoSeeder extends Seeder
             'user_id'              => $student->id
 
         ]);
+
+        $grade = Gradesystem::create([
+            'grade_system_name' => 'Default grade system',
+            'school_id' => $school->id
+        ]);
+        GradeSystemInfo::create([
+            'grade'         => 'A+',
+            'grade_points'  => 5.00,
+            'marks_from'    => 80,
+            'marks_to'      => 100,
+            'gradesystem_id'=> $grade->id
+        ]);
+
+        Department::create([
+            'school_id'       => $school->id,
+            'department_name' => 'Bangla',
+        ]);
+
+        Course::create([
+            'course_name' => 'Final course',
+            'class_id'    =>  $class->id,
+            'course_type' => 'Core',
+            'course_time' => '9:30AM-10:20AM',
+            'school_id'   => $school->id,
+            'teacher_id'  => $teacher->id,
+            'section_id'  => $section->id,
+            'grade_system_name' => $grade->grade_system_name,
+            'exam_id' => 1,
+            'quiz_count'=>2,
+            'assignment_count'=>3,
+            'ct_count'=>4,
+            'quiz_percent' => 10,
+            'attendance_percent' => 5,
+            'assignment_percent' => 15,
+            'ct_percent' => 10,
+            'final_exam_percent' => 50,
+            'practical_percent' => 25,
+            'att_fullmark' => 5,
+            'quiz_fullmark' => 15,
+            'a_fullmark' => 20,
+            'ct_fullmark' => 15,
+            'final_fullmark' => 100,
+            'practical_fullmark' => 30,
+            'user_id' => $admin->id,
+        ]);
+
+
 
 
 

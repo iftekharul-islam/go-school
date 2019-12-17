@@ -20,6 +20,15 @@
         <div class="col-12">
             <div class="card height-auto false-height">
                 <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @elseif (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     @if(count($dpts) > 0)
                         <div class="table-responsive">
                             <table class="table table-bordered display text-nowrap">
@@ -61,7 +70,7 @@
                                                       action="{{ url('admin/department/'.$dp->id) }}"
                                                       method="post" style="display: none;">
                                                     @csrf
-                                                    @method('DELETE')
+                                                    {{ method_field('delete') }}
                                                 </form>
                                             </td>
 
@@ -89,11 +98,10 @@
                                                 <button class="btn btn-danger btn-lg" type="button"
                                                         onclick="removeDepartment({{ $dp->id }})">
                                                     <i class="far fa-trash-alt"></i></button>
-                                                <form id="delete-form-{{ $dp->id }}"
-                                                      action="{{ url('admin/department/'.$dp->id) }}"
+                                                <form id="delete-form-{{ $dp->id }}" action="{{ route('delete-department', $dp->id) }}"
                                                       method="post" style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('delete') }}
                                                 </form>
                                             </td>
 

@@ -206,6 +206,14 @@
                         </div>
                     </div>
                 </div>
+            @else
+                <div class="card mt-5 ">
+                    <div class="card-body">
+                        <div class="card-body-body mt-5 text-center">
+                            No Related Data Found.
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
     </div>

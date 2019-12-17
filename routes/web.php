@@ -302,7 +302,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('section/details/attendance/{section_id}', 'AttendanceController@attendanceDetails');
-        Route::get('section/details/studentAttendance/{section_id}', 'AttendanceController@attendanceDetailsview')->name('student.attendance');
+        Route::get('section/details/student-attendance/{section_id}', 'AttendanceController@attendanceDetailsview')->name('student.attendance');
 
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
@@ -344,7 +344,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('department/{id}/edit', 'SchoolController@departmentEdit');
         Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('admin.department.update');
-        Route::post('department/{id}', 'SchoolController@departmentDestroy');
+        Route::delete('department/{id}', 'SchoolController@departmentDestroy')->name('delete-department');
 
         Route::get('student-message','MessageController@adminSendMessage');
     });
