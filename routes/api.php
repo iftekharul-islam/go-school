@@ -29,7 +29,9 @@ $api->version('v1', function ($api) {
         $api->post('/teachers/deactivate/{id}', 'App\Http\Controllers\API\TeachersController@deactivateUser');
         $api->post('/teachers/activate/{id}', 'App\Http\Controllers\API\TeachersController@activateUser');
 
-
     });
+
+    //Non authorized routes
+    $api->post('/machine-attendances', 'App\Http\Controllers\API\AttendanceController@store');
 });
 

@@ -88,8 +88,13 @@
                                 <img src="{{asset('template/img/user-default.png')}}" alt="Admin"
                                      style="width: 40px; height: 40px;">
                             @else
-                                <img src="{{url(Auth::user()->pic_path)}}" alt="{{ Auth::user()->role  }}"
-                                     style="width: 40px; height: 40px;">
+                                @if(Auth::user()->pic_path)
+                                    <img src="{{url(Auth::user()->pic_path)}}" alt="{{ Auth::user()->role  }}"
+                                         style="width: 40px; height: 40px;">
+                                    @else
+                                    <img src="{{asset('template/img/user-default.png')}}" alt="Admin"
+                                         style="width: 40px; height: 40px;">
+                                    @endif
                             @endif
                         </div>
                     </a>

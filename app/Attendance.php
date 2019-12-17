@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
+    protected $fillable = ['student_id', 'section_id', 'exam_id', 'present', 'user_id'];
+
     /**
      * Get the student record associated with the user.
      */

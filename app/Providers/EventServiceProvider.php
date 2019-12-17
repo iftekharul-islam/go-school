@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\StudentInfoUpdateRequested' => [
             'App\Listeners\UpdateStudentInfo',
-        ],
+        ]
     ];
 
     /**
