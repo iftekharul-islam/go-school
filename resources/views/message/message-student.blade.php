@@ -121,7 +121,13 @@
                                                 <label for="msg">Write Message: </label>
                                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
                                             </div>
-                                            <button type="submit" class="button button--save float-right">Message</button>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="sentsms" name="recipients[]" form="msgForm"
+                                                       value="{{$student->id}}">
+                                                <label for="sentsms">Sent SMS</label>
+                                                <button type="submit" class="button button--save float-right">Message</button>
+                                            </div>
+
                                         </form>
                                     </div>
                                 </div>

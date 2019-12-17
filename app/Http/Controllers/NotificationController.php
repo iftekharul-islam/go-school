@@ -7,6 +7,8 @@ use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+
 class NotificationController extends Controller
 {
     /**

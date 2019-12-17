@@ -151,11 +151,14 @@ class AttendanceService {
             if ($item['present'] === 1 ) {
                 return $item['student_id'];
             }
-        },$data);
+        }, $data);
+
+
 
         $students = array_filter($students);
 //        dd($students);
         $students = User::whereIn('id', $students)->get();
+
         foreach ($students as $key=>$student) {
             $phone = $student->studentInfo['father_phone_number'];
             $checked_digit = substr($phone, 0, 3);
