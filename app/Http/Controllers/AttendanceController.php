@@ -264,9 +264,6 @@ class AttendanceController extends Controller
              $end_date = Carbon::today()->format('Y-m-d');
          }
          $request['section_id'] = $section_id;
-
-
-
          $begin = new DateTime($start_date);
          $end = new DateTime($end_date);
          $interval = DateInterval::createFromDateString('1 day');
@@ -287,6 +284,6 @@ class AttendanceController extends Controller
                  $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
              }
          }
-        return view('attendance.attandence-summary', compact('final', 'start_date', 'end_date', 'students'));
+        return view('attendance.attandence-summary', compact('final', 'start_date', 'end_date', 'students', 'period'));
      }
 }

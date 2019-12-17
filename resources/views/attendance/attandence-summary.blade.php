@@ -51,13 +51,6 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                @php
-                                    $begin = new DateTime($start_date);
-                                    $end = new DateTime($end_date);
-
-                                    $interval = DateInterval::createFromDateString('1 day');
-                                    $period = new DatePeriod($begin, $interval, $end);
-                                @endphp
                                 @foreach ($period as $dt)
                                     <th>{{ $dt->format("d") }}</th>
                                 @endforeach
