@@ -133,13 +133,13 @@ class UserService
     public function getStudents()
     {
         $students = $this->user->with(['section.class', 'school', 'studentInfo'])
-            ->where('code', auth()->user()->school->code)
+            ->where('school_id', auth()->user()->school_id)
             ->student()
             ->where('active', 1)
             ->orderBy('name', 'asc')
             ->get();
         $studentFilterByDepartments = $this->user->with(['section.class', 'school', 'studentInfo'])
-            ->where('code', auth()->user()->school->code)
+            ->where('school_id', auth()->user()->school_id)
             ->student()
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
@@ -156,14 +156,14 @@ class UserService
     public function getTeachers()
     {
         $teachers = $this->user->with(['section', 'school'])
-            ->where('code', auth()->user()->school->code)
+            ->where('school_id', auth()->user()->school_id)
             ->where('role', 'teacher')
             ->where('active', 1)
             ->orderBy('name', 'asc')
             ->get();
 
         $teacherFilterByDepartments = $this->user->with(['section', 'school'])
-            ->where('code', auth()->user()->school->code)
+            ->where('school_id', auth()->user()->school_id)
             ->where('role', 'teacher')
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
@@ -179,7 +179,7 @@ class UserService
     public function getAccountants()
     {
         return $this->user->with('school')
-            ->where('code', auth()->user()->school->code)
+            ->where('school_id', auth()->user()->school_id)
             ->where('role', 'accountant')
             ->where('active', 1)
             ->orderBy('name', 'asc')
@@ -189,7 +189,7 @@ class UserService
     public function getLibrarians()
     {
         return $this->user->with('school')
-            ->where('code', auth()->user()->school->code)
+            ->where('school_id', auth()->user()->school_id)
             ->where('role', 'librarian')
             ->where('active', 1)
             ->orderBy('name', 'asc')
