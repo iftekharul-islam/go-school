@@ -116,115 +116,105 @@
                         </div>
                     </div>
                 </div>
-
-            @else
+            @endif
+            @if(count($students)>0)
                 <div class="card mt-5">
                     <div class="card-body">
                         <div class="card-body-body mb-5 text-center">
-                            No Related Data Here.
+                            <div class="heading-layout1">
+                                <div class="item-title">
+                                    <h3>Students Payment Summary</h3>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered ">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Students info</th>
+                                        <th colspan="3">Payment Condition</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                        <td>Name</td>
+                                        <td>code</td>
+                                        <td>Total Amount</td>
+                                        <td>Partial Paid</td>
+                                        <td>Due</td>
+
+                                        </tr>
+
+                                        @php
+                                            $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
+                                            $totalAmount = 0;
+                                            $totalFine = 0;
+                                            $totalDiscount = 0;
+                                            $totalDue = 0;
+                                            $total_paid = 0;
+                                            $paid_amount = 0;
+                                            $paid_amount1 = 0;
+                                            $test = '';
+                                        @endphp
+
+                                        @foreach($studentWithFees as $student)
+                                            <tr>
+                                                <td class="text-left">{{ $student->name  }}</td>
+                                                <td class="text-left">{{ $student->student_code  }}</td>
+                                                <td>{{ $student->section->class->feeMasters->sum('amount')  }}</td>
+
+                                                <td>
+                                                    @php $totalPaid = 0; @endphp
+                                                    @foreach($student->section->class->feeMasters as $feeMaster)
+
+                                                        @foreach($feeMaster->transactions as $transaction)
+                                                            @if($student->id === $transaction->student_id)
+                                                                @php
+                                                                $totalPaid = (float)$totalPaid + (float)$transaction['amount']
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+
+                                                    @endforeach
+                                                    {{ $totalPaid }}
+
+                                                </td>
+                                                <td>
+                                                    @php $totalPaid = 0; @endphp
+                                                    @foreach($student->section->class->feeMasters as $feeMaster)
+
+                                                        @foreach($feeMaster->transactions as $transaction)
+                                                            @if($student->id === $transaction->student_id)
+                                                                @php
+                                                                    $totalPaid = (float)$totalPaid + (float)$transaction['amount']
+                                                                @endphp
+                                                            @endif
+                                                        @endforeach
+
+                                                    @endforeach
+                                                    {{ $student->section->class->feeMasters->sum('amount') - $totalPaid }}
+
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+                                     </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div class="card mt-5 ">
+                    <div class="card-body">
+                        <div class="card-body-body mt-5 text-center">
+                            No Related Data Found.
                         </div>
                     </div>
                 </div>
             @endif
-            <div class="card mt-5">
-                <div class="card-body">
-                    <div class="card-body-body mb-5 text-center">
-                        <div class="heading-layout1">
-                            <div class="item-title">
-                                <h3>Students Payment Summary</h3>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered ">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">Students info</th>
-                                    <th colspan="3">Payment Condition</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                    <td>Name</td>
-                                    <td>code</td>
-                                    <td>Total Amount</td>
-                                    <td>Partial Paid</td>
-                                    <td>Due</td>
-
-                                    </tr>
-
-                                    @php
-                                        $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
-                                        $totalAmount = 0;
-                                        $totalFine = 0;
-                                        $totalDiscount = 0;
-                                        $totalDue = 0;
-                                        $total_paid = 0;
-                                        $paid_amount = 0;
-                                        $paid_amount1 = 0;
-                                        $test = '';
-                                    @endphp
-
-                                    @foreach($studentWithFees as $student)
-                                        <tr>
-                                            <td class="text-left">{{ $student->name  }}</td>
-                                            <td class="text-left">{{ $student->student_code  }}</td>
-                                            <td>{{ $student->section->class->feeMasters->sum('amount')  }}</td>
-
-                                            <td>
-                                                @php $totalPaid = 0; @endphp
-                                                @foreach($student->section->class->feeMasters as $feeMaster)
-
-                                                    @foreach($feeMaster->transactions as $transaction)
-                                                        @if($student->id === $transaction->student_id)
-                                                            @php
-                                                            $totalPaid = (float)$totalPaid + (float)$transaction['amount']
-                                                            @endphp
-                                                        @endif
-                                                    @endforeach
-
-                                                @endforeach
-                                                {{ $totalPaid }}
-
-                                            </td>
-                                            <td>
-                                                @php $totalPaid = 0; @endphp
-                                                @foreach($student->section->class->feeMasters as $feeMaster)
-
-                                                    @foreach($feeMaster->transactions as $transaction)
-                                                        @if($student->id === $transaction->student_id)
-                                                            @php
-                                                                $totalPaid = (float)$totalPaid + (float)$transaction['amount']
-                                                            @endphp
-                                                        @endif
-                                                    @endforeach
-
-                                                @endforeach
-                                                {{ $student->section->class->feeMasters->sum('amount') - $totalPaid }}
-
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-
-{{--                                    @foreach($fee[1]->section->class->feeMasters as $feeMaster)--}}
-{{--                                         <tr>--}}
-{{--                                            <td class="text-capitalize"> <span class="badge-success badge"></span> {{ $feeMaster->feeType['name'] }}</td>--}}
-{{--                                            <td>{{ now()->year }}</td>--}}
-{{--                                            <td>{{ $feeMaster->due }}</td>--}}
-{{--                                            <td>{{ $feeMaster->amount }}</td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
-
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

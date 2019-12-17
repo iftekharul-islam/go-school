@@ -183,7 +183,7 @@ class AttendanceController extends Controller
         if ($section_id > 0 && 'student' != Auth::user()->role) {
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
 
-            return view('attendance.sectionAttendance', [
+            return view('attendance.section-attendance', [
                 'users' => $users,
                 'current_page' => $users->currentPage(),
                 'per_page' => $users->perPage(),
@@ -200,8 +200,9 @@ class AttendanceController extends Controller
         $course = Course::with('section')->where('section_id', $section_id)->first();
         if (!$course)
         {
-            abort(404,'Course not found');
+           return back()->with('error','No course is assigned for this section,please assign a course first');
         }
+
         $examID = 0;
         if (! empty($course->exam_id)) {
             $examID = $course->exam_id;

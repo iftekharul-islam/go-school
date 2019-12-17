@@ -175,10 +175,11 @@ class SchoolController extends Controller
 
     public function departmentDestroy($id)
     {
+
         $department = Department::findOrFail($id);
         $department->delete();
 
-        return redirect()->route('admin.department-lists');
+        return back()->with('status', 'Department info deleted');
     }
 
     public function allDepartment()

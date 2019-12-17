@@ -905,7 +905,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" id="tab-7" data-toggle="tab" href="#tab2" role="tab"
-                                                   aria-selected="false">Mange Classes</a>
+                                                   aria-selected="false">Manage Classes</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
