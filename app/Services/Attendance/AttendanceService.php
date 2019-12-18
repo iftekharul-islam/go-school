@@ -117,8 +117,13 @@ class AttendanceService {
         $at = [];
         foreach ($this->request->attendances as $key => $attendance) {
             $tb = Attendance::findOrFail($attendance);
-            if(isset($this->request["isPresent$i"]) && $tb->present == 1){
-                $tb->present =2;
+            if( !isset($this->request["isPresent$i"]) && $tb->present == 1){
+                $tb->present = 0;
+                $tb->updated_at = date('Y-m-d H:i:s');
+                $tb->save();
+            }
+            elseif(isset($this->request["isPresent$i"]) && $tb->present == 0){
+                $tb->present = 1;
                 $tb->updated_at = date('Y-m-d H:i:s');
                 $tb->save();
             }

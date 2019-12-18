@@ -18,11 +18,6 @@
 
     <div class="card height-auto false-height">
         <div class="card-body">
-{{--            @foreach($teachers as $teacher)--}}
-
-{{--                {{ $teacher }}--}}
-
-{{--            @endforeach--}}
                 @if(count($teachers) > 0)
                 <div class="card-header-title mt-5 ml-2">
                     <b>Date</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
@@ -33,7 +28,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     @include('layouts.teacher.teacher-attendance-form')
                 </div>
             @else
