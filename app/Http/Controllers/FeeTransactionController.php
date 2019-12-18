@@ -149,13 +149,10 @@ class FeeTransactionController extends Controller
             return $std['id'];
         }, $students->toArray());
 
-//        return $studentIds;
-
         $studentWithFees = User::whereIn('id', $studentIds)->with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->orderBy('name', 'asc')->get();
         $dis = Discount::all();
 
-//        return $studentWithFees;
-        return view('accounts.transaction.sectionStudents', compact('students', 'classes','studentWithFees'));
+        return view('accounts.transaction.sectionStudents', compact('students', 'classes','studentWithFees','dis'));
     }
 
     public function collectFee($id)

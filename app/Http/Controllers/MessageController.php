@@ -7,6 +7,8 @@ use App\Http\Resources\MessageResource;
 use App\Myclass;
 use App\Services\User\UserService;
 use App\User;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Auth;
 use App\FeeTransaction;
@@ -123,6 +125,7 @@ class MessageController extends Controller
     {
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($request->section);
+
         return view('message.message-student', compact('students','classes'));
     }
 }

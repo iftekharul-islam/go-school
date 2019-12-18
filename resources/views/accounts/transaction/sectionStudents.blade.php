@@ -102,7 +102,7 @@
                                         <td>{{ $loop->index }}</td>
                                         <td>{{ $student->section->class->class_number }}</td>
                                         <td>{{ $student->section->section_number }}</td>
-                                        <td>{{ $student->code }}</td>
+                                        <td>{{ $student->student_code }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->email }}</td>
                                         <td class="text-capitalize">{{ $student->gender }}</td>
@@ -163,37 +163,25 @@
                                                 <td class="text-left">{{ $student->student_code  }}</td>
                                                 <td>{{ $student->section->class->feeMasters->sum('amount')  }}</td>
 
-                                                <td>
-                                                    @php $totalPaid = 0; @endphp
-                                                    @foreach($student->section->class->feeMasters as $feeMaster)
+                                                @php $totalPaid = 0; $total_amount = 0; @endphp
+                                                @foreach($student->section->class->feeMasters as $feeMaster)
 
-                                                        @foreach($feeMaster->transactions as $transaction)
-                                                            @if($student->id === $transaction->student_id)
-                                                                @php
-                                                                $totalPaid = (float)$totalPaid + (float)$transaction['amount']
-                                                                @endphp
-                                                            @endif
-                                                        @endforeach
-
+                                                    @foreach($feeMaster->transactions as $transaction)
+                                                        @if($student->id === $transaction->student_id)
+                                                            @php
+                                                                $total_amount = (float)$totalPaid + (float)$transaction['amount']+$transaction['discount'];
+                                                                $totalPaid = $transaction['discount'];
+                                                            @endphp
+                                                        @endif
                                                     @endforeach
-                                                    {{ $totalPaid }}
 
+                                                @endforeach
+
+                                                <td>
+                                                    {{ $total_amount}}
                                                 </td>
                                                 <td>
-                                                    @php $totalPaid = 0; @endphp
-                                                    @foreach($student->section->class->feeMasters as $feeMaster)
-
-                                                        @foreach($feeMaster->transactions as $transaction)
-                                                            @if($student->id === $transaction->student_id)
-                                                                @php
-                                                                    $totalPaid = (float)$totalPaid + (float)$transaction['amount']
-                                                                @endphp
-                                                            @endif
-                                                        @endforeach
-
-                                                    @endforeach
                                                     {{ $student->section->class->feeMasters->sum('amount') - $totalPaid }}
-
                                                 </td>
 
                                             </tr>

@@ -122,8 +122,8 @@
                                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
                                             </div>
                                             <div class="checkbox">
-                                                <input type="checkbox" id="sentsms" name="recipients[]" form="msgForm"
-                                                       value="{{$student->id}}">
+                                                <input type="checkbox" id="sentsms" name="sentsms"  form="msgForm"
+                                                       value="">
                                                 <label for="sentsms">Sent SMS</label>
                                                 <button type="submit" class="button button--save float-right">Message</button>
                                             </div>
