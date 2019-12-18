@@ -302,6 +302,7 @@ class UserService
             'mother_designation' => $request->get('mother_designation'),
             'mother_annual_income' => $request->get('mother_annual_income'),
             'user_id' => $student->id,
+            'is_sms_enabled' => $request->sms_enabled == 'true' ? true : false
         ];
 
         $info = StudentInfo::create($data);
