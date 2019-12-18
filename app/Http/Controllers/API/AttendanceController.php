@@ -45,7 +45,7 @@ class AttendanceController extends Controller
         Logger($request->all());
         $student = User::where('student_code', $request->student_code)->first();
 
-        Logger("Student: " . $student);
+        // Logger("Student: " . $student);
 
         $today = Carbon::today();
 
@@ -57,7 +57,20 @@ class AttendanceController extends Controller
         }
 
         //SMS queue
-        SendAttendanceSms::dispatch($student);
+        // SendAttendanceSms::dispatch($student);
+
+        Attendance::create([
+            'student_id' => $student->id,
+            'section_id' => $student->section->id,
+            'exam_id' => 0,
+            'present' => 1,
+            'user_id' => 0
+        ]);
+
+        return response([
+            'error' => false,
+            'massage' => 'Attendance added successfully!'
+        ]);
 
         $attendance = Attendance::whereDate('created_at', Carbon::today())
                                 ->where('student_id', $student->id)->first();

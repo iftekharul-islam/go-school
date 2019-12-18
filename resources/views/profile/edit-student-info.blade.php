@@ -34,6 +34,7 @@
             <form class="new-added-form" method="POST" enctype="multipart/form-data" action="{{ route('update-user-info', $user->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
+                
                 <div class="row mb-5">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
