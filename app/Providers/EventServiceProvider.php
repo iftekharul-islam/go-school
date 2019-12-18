@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\StudentInfoUpdateRequested' => [
             'App\Listeners\UpdateStudentInfo',
+        ],
+        'App\Events\AttendanceCreated' => [
+            'App\Listeners\SendAttendanceSms',
         ]
     ];
 

@@ -292,6 +292,7 @@ class UserController extends Controller
     public function editUserInfo($user_code)
     {
         $user = User::with('studentInfo')->where('id', $user_code)->firstOrFail();
+        return $user;
         if ($user->role == 'student') {
             return view('profile.edit-student-info', compact('user'));
         } else {
@@ -299,8 +300,10 @@ class UserController extends Controller
         }
     }
 
-    public function updateUserInfo(UpdateUserProfileRequest $request, $user_code)
+    public function updateUserInfo(Request $request, $user_code)
     {
+
+        // return $request->all();
         $tb = $this->user->findOrFail($user_code);
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : $tb->pic_path;
         $image_path = 'storage/'.$path;
@@ -319,6 +322,8 @@ class UserController extends Controller
             $info->mother_occupation = (!empty($request->mother_occupation)) ? $request->mother_occupation : $info->mother_occupation;
             $info->father_occupation = (!empty($request->father_occupation)) ? $request->father_occupation : $info->father_occupation;
             $info->mother_designation = (!empty($request->mother_designation)) ? $request->mother_designation : $info->mother_designation;
+
+            $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
             $info->user_id = auth()->user()->id;
             $info->save();
         }
@@ -378,6 +383,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
+        // return $request->all();
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $image_path = 'storage/'.$path;
         DB::transaction(function () use ($request, $image_path) {
@@ -415,6 +421,7 @@ class UserController extends Controller
                     $info->mother_occupation = $request->get('mother_occupation');
                     $info->mother_designation = $request->get('mother_designation');
                     $info->mother_annual_income = $request->get('mother_annual_income');
+                    $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
                     $info->user_id = $tb->id;
                     $info->save();
                 }

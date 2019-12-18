@@ -50,6 +50,16 @@
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <input type="hidden" name="user_role" value="{{$user->role}}">
 
+                            @if($user->role == 'student')
+                                <div class="offset-9 col-3 text-right">
+                                    <div class="form-check">
+                                        <input type='hidden' value="false" name='sms_enabled'>
+                                        <input type="checkbox" name="sms_enabled" value="true" @if($user->studentInfo['is_sms_enabled']) checked @endif class="form-check-input checkAll" id="sms-enabled">
+                                        <label class="form-check-label" for="sms-enabled">Is SMS enabled </label>
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -532,13 +542,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                                            <label for="birthday" class="col-md-4 control-label">Birthday  <label class="text-danger">*</label></label>
+                                            <label for="birthday" class="col-md-4 control-label">Birthday <label class="text-danger">*</label></label>
 
                                             <div class="col-md-12">
                                                 <input data-date-format="yyyy-mm-dd" id="birthday"
                                                        class="form-control date" name="birthday"
                                                        placeholder="Birthday" required
-                                                       autocomplete="off">
+                                                       autocomplete="off" value="{{ \Carbon\Carbon::parse($user->studentInfo['birthday'])->toDateString() }}">
                                                 @if ($errors->has('birthday'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('birthday') }}</strong>

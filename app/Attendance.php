@@ -2,11 +2,21 @@
 
 namespace App;
 
+use App\Events\AttendanceCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
     protected $fillable = ['student_id', 'section_id', 'exam_id', 'present', 'user_id'];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => AttendanceCreated::class,
+    ];
 
     /**
      * Get the student record associated with the user.
