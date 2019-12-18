@@ -71,7 +71,6 @@
                             <td>0</td>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
-                            {{ $teacher->id }}
                             <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
                         @endif
                     </tr>

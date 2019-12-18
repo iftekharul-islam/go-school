@@ -18,15 +18,9 @@
                 <th>#</th>
                 <th>Student_Code</th>
                 <th>Name</th>
-                @if (count($attendances) > 0)
-                    <th>Escaped</th>
-                @else
-                    <th>Present</th>
-                @endif
+                <th>Present</th>
                 <th>Total Attended</th>
                 <th>Total Missed</th>
-                <th>Total Escaped</th>
-                <th>Adjust Missed Attendance</th>
             </tr>
             </thead>
             <tbody>
@@ -42,11 +36,9 @@
                         <td>{{$attendance->student->student_code}}</td>
                         <td>
                             @if($attendance->present === 1)
-                                <span class="badge-primary badge">Present</span>
-                            @elseif($attendance->present === 2)
-                                <span class="badge-warning badge">Escaped</span>
+                                <span class="badge-primary attdState badge">Present</span>
                             @else
-                                <span class="badge-danger badge">Absent</span>
+                                <span class="badge-danger attdState badge">Absent</span>
                             @endif
                             &nbsp;&nbsp;<a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
                         </td>
@@ -59,7 +51,7 @@
                                 </div>
                             @else
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent" disabled>
+                                    <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent">
                                     <label for="">&nbsp;</label>
                                 </div>
                             @endif
@@ -69,7 +61,6 @@
                                 @if($at->student_id == $attendance->student->id)
                                     <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
                                     <td>{{$at->totalabsent ? $at->totalabsent : 0}}</td>
-                                    <td>{{$at->totalescaped ? $at->totalescaped: 0}}</td>
                                 @else
                                     @continue
                                 @endif
@@ -77,9 +68,7 @@
                         @else
                             <td>0</td>
                             <td>0</td>
-                            <td>0</td>
                         @endif
-                        <td><a href="{{url('teacher/attendance/adjust/'.$attendance->student->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
                     </tr>
                 @endforeach
             @else
@@ -102,9 +91,7 @@
                                 @if($at->student_id == $student->id)
                                     <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
-                                    <td>{{$at->totalescaped ? $at->totalescaped: 0 }}</td>
                                 @else
-                                    <td>0</td>
                                     <td>0</td>
                                     <td>0</td>
                                     @break
@@ -113,13 +100,8 @@
                         @else
                             <td>0</td>
                             <td>0</td>
-                            <td>0</td>
                         @endif
-                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'teacher')
-                            <td><a href="{{url('teacher/attendance/adjust/'.$student->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
-                        @else
-                            <td><a href="{{url('admin/attendance/adjust/'.$student->id)}}" role="button" class="btn-link text-teal">Adjust Missing Attendances</a></td>
-                        @endif
+
                     </tr>
                 @endforeach
             @endif
