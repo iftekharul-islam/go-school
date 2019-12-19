@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendSmsToStudents;
 use App\Message as Message;
 use App\Http\Resources\MessageResource;
 use App\Myclass;

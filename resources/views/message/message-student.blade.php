@@ -122,9 +122,10 @@
                                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
                                             </div>
                                             <div class="checkbox">
-                                                <input type="checkbox" id="sentsms" name="sentsms"  form="msgForm"
-                                                       value="">
-                                                <label for="sentsms">Sent SMS</label>
+                                                <input type="checkbox" id="sent-sms" name="sent_sms"  form="msgForm">
+                                                <label style="font-weight:bold; margin-left:10px">
+                                                    Also Send as SMS
+                                                </label>
                                                 <button type="submit" class="button button--save float-right">Message</button>
                                             </div>
 
