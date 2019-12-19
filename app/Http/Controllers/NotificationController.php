@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendSmsToStudents;
 use App\Notification as Notification;
 use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     *  a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -70,6 +71,11 @@ class NotificationController extends Controller
             }
             Notification::insert($n);
         });
+
+        if (isset($request->sent_sms))
+        {
+            SendSmsToStudents::dispatch($request->recipients, $request->msg);
+        }
         return back()->with('status','Message Sent');
     }
 
