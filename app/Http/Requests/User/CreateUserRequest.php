@@ -44,7 +44,7 @@ class CreateUserRequest extends FormRequest
             'birthday' => 'required',
             'religion' => 'required|string',
             'father_phone_number' => 'required',
-            'student_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
+            'student_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
     }
 

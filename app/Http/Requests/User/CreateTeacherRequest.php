@@ -36,7 +36,7 @@ class CreateTeacherRequest extends FormRequest
             'department_id' => 'required|numeric',
             'phone_number' =>  'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'address' => 'required|string',
-            'teacher_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
+            'teacher_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
     }
     public function messages()

@@ -35,7 +35,7 @@ class CreateAccountantRequest extends FormRequest
             'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'email' => 'sometimes|email|max:255|unique:users',
             'address' => 'required|string',
-            'pic_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:800',
+            'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
     }
     public function messages()
