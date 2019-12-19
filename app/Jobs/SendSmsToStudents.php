@@ -65,8 +65,6 @@ class SendSmsToStudents implements ShouldQueue
                     ],
                 ],
             ]);
-
-            Logger('response: ' . $response->getBody());
         }
     }
 }
