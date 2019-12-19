@@ -252,9 +252,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Upload Profile Picture <label class="text-danger">*</label> </label>
+                            <label class="col-md-4 control-label">Upload Profile Picture </label>
                             <div class="col-md-12">
-                                <input type="file" required id="picPath" name="pic_path">
+                                <input type="file"  id="picPath" name="pic_path">
                             </div>
                         </div>
 
