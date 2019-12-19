@@ -337,7 +337,7 @@
                                 $totalAmount = $totalAmount + $feeMaster->amount;
                             @endphp
                             <tr>
-                                <td class="text-capitalize"> <span class="badge-success badge month"></span> {{ $feeMaster->feeType->name }}</td>
+                                <td class="text-capitalize"> <span class="badge-success badge month"></span> {{ $feeMaster->feeType['name'] }}</td>
                                 <td>{{ $feeMaster->amount }}</td>
                                 <td>
                                     @foreach($feeMaster->transactions as $transaction)

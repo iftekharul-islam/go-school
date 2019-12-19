@@ -28,7 +28,7 @@
                                     <div class="col-md-6 offset-4 col-lg-6 col-6 form-group">
                                         <label>Class</label>
                                         <select name="class" id="class_number" class="select2">
-                                            <option>Select class</option>
+                                            <option value="0">Select class</option>
                                             @foreach($classes as $class)
                                                 <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
                                             @endforeach
@@ -76,7 +76,7 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $feeMaster->myclass->class_number }}</td>
-                                        <td>{{ $feeMaster->feeType->name }}</td>
+                                        <td>{{ $feeMaster->feeType['name'] }}</td>
                                         <td>{{ $feeMaster->amount }}</td>
                                         <td>{{ now()->year }}</td>
                                         <td>{{ $feeMaster->due }}</td>
