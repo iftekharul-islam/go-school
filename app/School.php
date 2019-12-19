@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\SchoolCreated;
 use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
@@ -13,6 +14,10 @@ class School extends Model
      */
     protected $fillable = [
         'name', 'about', 'medium', 'code', 'theme',
+    ];
+
+    protected $dispatchesEvents = [
+      'created' => SchoolCreated::class,
     ];
 
   public function users()

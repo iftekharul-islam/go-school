@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \jdavidbakr\LaravelCacheGarbageCollector\LaravelCacheGarbageCollector::class,
+        Commands\SendAbsentMessage::class
     ];
 
     /**
@@ -24,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //$schedule->command('cache:gc')
-        //          ->everyMinute();
+        $schedule->command('absent:sms')
+                 ->everyFiveMinutes();
     }
 
     /**
