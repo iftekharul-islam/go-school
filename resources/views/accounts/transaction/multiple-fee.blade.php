@@ -62,7 +62,7 @@
                                             <td class="text-capitalize">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" value="" id="chktype" onclick="calculateTotal({{ $feeMaster->amount }}, $(this), {{ $feeMaster->id }})">
-                                                    <label class="form-check-label"><span class="badge-success badge"></span> {{ $feeMaster->feeType->name }}</label>
+                                                    <label class="form-check-label"><span class="badge-success badge"></span> {{ $feeMaster->feeType['name'] }}</label>
                                                 </div>
                                             </td>
                                             <td>{{ now()->year }}</td>
