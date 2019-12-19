@@ -35,9 +35,7 @@ class SendSmsToStudents implements ShouldQueue
      */
     public function handle()
     {
-
-        $message = $this->message;
-        $message = strip_tags($message);
+        $message = strip_tags($this->message);
         $students = User::whereIn('id', $this->data)->get();
         foreach ( $students as $student)
         {

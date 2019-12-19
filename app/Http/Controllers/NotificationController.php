@@ -72,7 +72,7 @@ class NotificationController extends Controller
             Notification::insert($n);
         });
 
-        if(isset($request->sent_sms))
+        if (isset($request->sent_sms))
         {
             SendSmsToStudents::dispatch($request->recipients, $request->msg);
         }
