@@ -667,11 +667,11 @@
 
                                                                 <div class="col-md-12">
                                                                     <label for="department"
-                                                                           class=" control-label false-padding-bottom">Department<label
-                                                                                class="text-danger">*</label></label>
+                                                                           class=" control-label false-padding-bottom">Department</label>
 
                                                                     <select id="department" class="form-control"
                                                                             name="department_id" required>
+                                                                        <option value="0">Select Department</option>
                                                                         @if (count($teacherDepartments) > 0)
                                                                             @foreach ($teacherDepartments as $d)
                                                                                 <option value="{{$d->id}}">{{$d->department_name}}</option>

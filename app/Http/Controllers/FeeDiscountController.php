@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Discount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FeeDiscountController extends Controller
 {
@@ -14,7 +15,7 @@ class FeeDiscountController extends Controller
      */
     public function index()
     {
-        $discounts =  Discount::all();
+        $discounts =  Discount::where('school_id', Auth::user()->school_id)->get();
         return view('accounts.discount.index', compact('discounts'));
     }
 

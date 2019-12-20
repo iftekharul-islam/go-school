@@ -198,6 +198,10 @@
                                 <td class="font-medium text-dark-medium">Gender:</td>
                                 <td class="text-capitalize">{{ $user->gender }}</td>
                             </tr>
+                            <tr>
+                                <td class="font-medium text-dark-medium">Nationality:</td>
+                                <td class="text-capitalize">{{ $user->nationality }}</td>
+                            </tr>
 
                             <tr>
                                 <td class="font-medium text-dark-medium">E-mail:</td>
