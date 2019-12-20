@@ -1956,11 +1956,13 @@ ul {
 }
 
 .nav-bar-header-one .toggle-button .item-link {
-  padding: 26px 15px;
   display: block;
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+.nav-bar-header-one a {
+  margin: 0 auto;
 }
 
 .nav-bar-header-one .toggle-button .item-link .btn-icon-wrap {

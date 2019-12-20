@@ -9,7 +9,7 @@
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Fee Master</li>
+                <li>Fee Master </li>
             </ul>
         </div>
         <div class="row">

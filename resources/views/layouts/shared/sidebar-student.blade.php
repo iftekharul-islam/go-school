@@ -2,7 +2,7 @@
     <div class="sidebar-main sidebar-menu-one sidebar-expand-md sidebar-color">
         <div class="mobile-sidebar-header d-md-none">
             <div class="p-4 text-center">
-                <a href="/"><img src="{{ asset('/template/img/logo1.png') }}" alt="logo"></a>
+                <a href="/"><img src="{{ asset('/template/img/logo1.png') }}" alt="logo" class="center"></a>
             </div>
         </div>
         @php
@@ -16,22 +16,22 @@
             $ac = 0;
             $std = 0;
             $all_student = 0;
-            if(strpos($add, 'book'))
+            if (strpos($add, 'book') || strpos($add, 'librarian') )
                 $lib = 1;
-            if(strpos($add, 'exams'))
+            if (strpos($add, 'exams'))
                 $ex = 1;
             if (strpos($add, 'gpa'))
                 $gpa = 1;
             if (strpos($add, 'inactive'))
                 $inact = 1;
-            if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income'))
+            if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant'))
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection'))
                 $ac = 1;
-            if(strpos($add, 'users/') || strpos($add, 'student-message'))
+            if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message'))
                 $std = 1;
-            if(strpos($add, 'users/'))
-                    $all_student = 1;
+            if (strpos($add, 'users/'))
+                $all_student = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -58,7 +58,6 @@
                         </ul>
                     </li>
                 @endif
-
 
                 @if($role == 'admin')
                     <li class="nav-item sidebar-nav-item">
@@ -121,8 +120,8 @@
                         <ul class="nav sub-group-menu {{ $std == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}"
-                                   href="{{url('users/'.Auth::user()->school->code.'/1/0?student=1')}}">
-                                    <i class="fas fa-angle-right"></i> <span>All Students </span></a>
+                                   href="{{ url('users/'.Auth::user()->school->code.'/1/0?student=1') }}">
+                                    <i class="fas fa-angle-right"></i> <span>All Students</span></a>
                             </li>
                             @if($role == 'admin')
                                 <li class="nav-item">
@@ -134,8 +133,8 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' : '' }}"
-                           href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}">
+                        <a href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}"
+                            class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
                             <i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
                     </li>
                 @endif
@@ -143,7 +142,7 @@
                     <li class="nav-item">
                         <a href="{{ url('admin/all-department') }}"
                            class="nav-link {{ (request()->is('admin/all-department')) ? 'menu-active' : '' }}">
-                            <i class="far fa-building"></i><span>Department </span></a>
+                            <i class="far fa-building"></i><span>Department</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('admin/academic/routine') }}"
@@ -226,11 +225,11 @@
                 @endif
                 @if($role == 'admin' || $role == 'accountant')
 
-                    <li class="nav-item">
-                        <a href="{{ url($role.'/fees/all') }}"
-                           class="nav-link {{ (request()->is($role.'/fees/all')) ? 'menu-active' : '' }}">
-                            <i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ url($role.'/fees/all') }}"--}}
+{{--                           class="nav-link {{ (request()->is($role.'/fees/all')) ? 'menu-active' : '' }}">--}}
+{{--                            <i class="fas fa-hand-holding-usd"></i><span>Fees Generators</span></a>--}}
+{{--                    </li>--}}
                     @if($role == 'accountant')
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('accountant/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}"
@@ -271,8 +270,8 @@
                                     class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a class="nav-link"
-                                   href="{{url($role.'/users/'.Auth::user()->school->code.'/accountant')}}">
+                                <a class="nav-link {{ ($acc == 1 && $all_student == 1 ) ? 'menu-active' : '' }}"
+                                   href="{{url($role.'/users/' .Auth::user()->school->code. '/accountant')}}">
                                     <i class="fas fa-angle-right"></i><span>Accountant List</span></a>
                             </li>
                             <li class="nav-item">
@@ -317,8 +316,8 @@
                         <ul class="nav sub-group-menu menu-open {{ $lib==1 ? 'sub-group-active' : '' }}"
                             style="display: block;">
                             <li class="nav-item">
-                                <a href="{{url($role.'/users/'.Auth::user()->school->code.'/librarian')}}"
-                                   class="nav-link"><i
+                                <a href="{{ url($role.'/users/'.Auth::user()->school->code.'/librarian') }}"
+                                   class="nav-link {{ (request()->is($role.'/users/' .Auth::user()->school->code. '/librarian')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>Librarian List</a>
                             </li>
                             <li class="nav-item">

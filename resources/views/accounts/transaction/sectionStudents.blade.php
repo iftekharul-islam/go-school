@@ -40,7 +40,7 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
-            <h3>Dashboard</h3>
+            <h3>Fee Transaction</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
