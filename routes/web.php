@@ -266,7 +266,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('issue-books', 'IssuedbookController@create');
         Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
         Route::post('issue-books', 'IssuedbookController@store');
-        Route::get('issued-books', 'IssuedbookControllefee-collection/section/studentr@index');
+        Route::get('issued-books', 'IssuedbookController@index');
         Route::post('save_as_returned', 'IssuedbookController@update');
         Route::get('all-books', 'Library\BookController@index');
         Route::delete('/books/{id}', 'Library\BookController@destroy');
