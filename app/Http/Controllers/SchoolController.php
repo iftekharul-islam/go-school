@@ -90,8 +90,7 @@ class SchoolController extends Controller
         $tb->logo = $path;
         $tb->school_address = $request->school_address;
         $tb->save();
-
-        return redirect()->back()->with('status', 'New School Added');
+        return redirect()->route('school-details', $tb->id)->with('status', $tb->name.' created successfully');
     }
 
     /**
@@ -246,6 +245,7 @@ class SchoolController extends Controller
             'school_name' => 'required',
             'school_medium' => 'required',
             'school_about' => 'required',
+            'school_established' => 'required',
             'logo' => 'max:1024|mimes:jpeg,png,jpg,gif,svg'
 
         ]);

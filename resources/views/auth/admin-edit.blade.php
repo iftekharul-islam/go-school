@@ -5,7 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Create Admin
+            Edit Admin
         </h3>
         <ul>
             <li> <a href="javascript:history.back()" style="color: #32998f!important;">
@@ -23,26 +23,24 @@
                     <h3></h3>
                 </div>
             </div>
-            <div class="col-md-12" id="main-container">
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                        @if (session('register_school_id'))
-                            <a href="{{ url('school/admin-list/' . session('register_school_id')) }}"
-                               target="_blank" class="text-primary pull-right ml-5">View Admins</a>
-                        @endif
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                    @if (session('register_school_id'))
+                        <a href="{{ url('school/admin-list/' . session('register_school_id')) }}"
+                           target="_blank" class="text-primary pull-right ml-5">View Admins</a>
+                    @endif
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="">
                 <div class="">
                     <form class="new-added-form" method="POST" enctype="multipart/form-data" id="registerForm" action="{{ url('master/edit/admin') }}">

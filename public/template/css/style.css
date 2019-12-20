@@ -5651,3 +5651,12 @@ ul {
   width: 400px;
   margin-bottom: 13px;
 }
+.school .card {
+  height: 370px!important;
+}
+.dataTables_filter {
+  padding: 3px!important;
+}
+.fc-day-grid-event {
+  margin: 5px!important;
+}

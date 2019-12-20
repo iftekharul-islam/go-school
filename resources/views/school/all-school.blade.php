@@ -16,7 +16,7 @@
         <div class="card-body-entire">
             <div class="row">
                 @foreach($schools as $school)
-                    <div class="col-12 col-xl-6 col-lg-6 col-4-xxxl">
+                    <div class="col-12 school col-xl-6 col-lg-6 col-4-xxxl">
                         <div class="card dashboard-card-four pd-b-0 mt-4">
                             <div class="card-body border pb-5">
                                 <div class="card-body-inner">
@@ -28,8 +28,8 @@
                                                     @else
                                                     <i class="fas fa-school mr-4"></i>
                                                     @endif
-                                                    <a style="color: #269589" href="{{url('master/school/'.$school->id)}}">{{ $school->name }}</a></h3>
-                                            <p class="mb-4 ml-2 float-right" data-toggle="popover" data-trigger="hover" data-title="{{ $school->name }}" data-content="{{ $school->about }}">{{ str_limit($school->about, $limit = 100, $end = '........') }}</p>
+                                                    <a style="color: #269589" href="{{url('master/school/'.$school->id)}}">{{ str_limit($school->name, $limit = 40, $end = '.....') }}</a></h3>
+                                            <p class="mb-4 ml-2 float-right" data-toggle="popover" data-trigger="hover" data-title="{{ $school->name }}" data-content="{{ $school->about }}">{{ str_limit($school->about, $limit = 70, $end = '........') }}</p>
                                         </div>
                                     </div>
                                     <div class="table-responsive">

@@ -188,6 +188,12 @@
                                 <td class="font-medium text-dark-medium">User Type:</td>
                                 <td class="text-capitalize">{{$user->role}}</td>
                             </tr>
+                            @if($user->role === 'teacher' && isset($user->department))
+                                <tr>
+                                    <td class="font-medium text-dark-medium">Department:</td>
+                                    <td class="text-capitalize"> {{ $user->department['department_name'] }}</td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td class="font-medium text-dark-medium">Gender:</td>
                                 <td class="text-capitalize">{{ $user->gender }}</td>

@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('delete-admin/{id}', 'AdminController@delete')->name('delete-admin');
         Route::post('create-school', 'SchoolController@store');
         Route::get('school/admin-list/{school_id}', 'SchoolController@show');
-        Route::get('school/{school_id}', 'SchoolController@showSchool');
+        Route::get('school/{school_id}', 'SchoolController@showSchool')->name('school-details');
         Route::get('school/delete/{school_id}', 'SchoolController@destroy');
         Route::get('school/edit/{school_id}', 'SchoolController@edit');
         Route::post('school/edit/{school_id}', 'SchoolController@update');
