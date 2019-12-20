@@ -5,7 +5,6 @@
                 <a href="/"><img src="{{ asset('/template/img/logo1.png') }}" alt="logo" class="center"></a>
             </div>
         </div>
-        {{ Request()->parameter }}
         @php
             $role = \Illuminate\Support\Facades\Auth::user()->role;
             $add = URL::current();
@@ -16,11 +15,10 @@
             $inact = 0;
             $ac = 0;
             $std = 0;
-            $te = 0;
             $all_student = 0;
-            if(strpos($add, 'book') || strpos($add, 'librarian') )
+            if (strpos($add, 'book') || strpos($add, 'librarian') )
                 $lib = 1;
-            if(strpos($add, 'exams'))
+            if (strpos($add, 'exams'))
                 $ex = 1;
             if (strpos($add, 'gpa'))
                 $gpa = 1;
@@ -30,9 +28,9 @@
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection'))
                 $ac = 1;
-            if(( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message'))
+            if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message'))
                 $std = 1;
-            if(strpos($add, 'users/'))
+            if (strpos($add, 'users/'))
                 $all_student = 1;
         @endphp
         <div class="sidebar-menu-content">
@@ -272,8 +270,8 @@
                                     class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a class="nav-link {{  ($acc == 1 && $all_student == 1 ) ? 'menu-active' : '' }}"
-                                   href="{{url($role.'/users/'.Auth::user()->school->code.'/accountant')}}">
+                                <a class="nav-link {{ ($acc == 1 && $all_student == 1 ) ? 'menu-active' : '' }}"
+                                   href="{{url($role.'/users/' .Auth::user()->school->code. '/accountant')}}">
                                     <i class="fas fa-angle-right"></i><span>Accountant List</span></a>
                             </li>
                             <li class="nav-item">
@@ -319,7 +317,7 @@
                             style="display: block;">
                             <li class="nav-item">
                                 <a href="{{ url($role.'/users/'.Auth::user()->school->code.'/librarian') }}"
-                                   class="nav-link {{ (request()->is($role.'/users/'.Auth::user()->school->code.'/librarian')) ? 'menu-active' : '' }}"><i
+                                   class="nav-link {{ (request()->is($role.'/users/' .Auth::user()->school->code. '/librarian')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>Librarian List</a>
                             </li>
                             <li class="nav-item">
