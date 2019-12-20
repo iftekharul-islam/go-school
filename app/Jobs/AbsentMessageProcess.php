@@ -84,7 +84,6 @@ class AbsentMessageProcess implements ShouldQueue
                 $phone = '88' . $phone;
             }
         }
-        $phone = '8801960229599';
         $user = config("message.sms_user");
         $pass = config("message.sms_pass");
         $sid = config("message.sms_sid");

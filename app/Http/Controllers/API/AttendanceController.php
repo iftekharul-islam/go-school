@@ -91,11 +91,15 @@ class AttendanceController extends Controller
                 if (!$attendance->is_exit_message_sent) {
                     event(new AttendanceCreated($attendance, 'update'));
 
+                    Logger('Student left for today!');
+
                     return response([
                         'error' => false,
                         'massage' => 'Student left for today!'
                     ]);
                 }
+
+                Logger('Student left already!');
     
                 return response([
                     'error' => false,
@@ -118,6 +122,8 @@ class AttendanceController extends Controller
         ]);
 
         event(new AttendanceCreated($attendance, 'create'));
+
+        Logger('Attendance added successfully!');
 
         return response([
             'error' => false,
