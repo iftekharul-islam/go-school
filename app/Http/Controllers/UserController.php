@@ -292,7 +292,6 @@ class UserController extends Controller
     public function editUserInfo($user_code)
     {
         $user = User::with('studentInfo')->where('id', $user_code)->firstOrFail();
-        return $user;
         if ($user->role == 'student') {
             return view('profile.edit-student-info', compact('user'));
         } else {

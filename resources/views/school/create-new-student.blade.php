@@ -3,6 +3,16 @@
       action="{{ route('register.student.store') }}">
     {{ csrf_field() }}
     <div class="row">
+        <div class="offset-9 col-3 text-right">
+            <div class="form-check mr-4">
+                <input type='hidden' value="false" name='sms_enabled'>
+                <input type="checkbox" name="sms_enabled" value="true" class="form-check-input checkAll" id="sms-enabled">
+                <label class="form-check-label" for="sms-enabled">Is SMS enabled </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        
         <div class="col-md-6">
             <div class="false-padding-bottom-form form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 

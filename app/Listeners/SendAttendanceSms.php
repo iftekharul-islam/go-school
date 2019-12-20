@@ -4,6 +4,8 @@ namespace App\Listeners;
 
 use App\User;
 use Carbon\Carbon;
+use App\Attendance;
+use App\SmsHistory;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use App\Http\Traits\CustomQueue;
@@ -35,23 +37,38 @@ class SendAttendanceSms implements ShouldQueue
     public function handle(AttendanceCreated $event)
     {
         Logger('env ' . config('app.env'));
-        if (config('app.env') == 'production') {
-            $this->sendSms($event->attendance);
-        }
-        
-        
+        $this->sendSms($event);
     }
 
 
-    public function sendSms($attendance)
+    public function sendSms($event)
     {
-        $student = User::find($attendance->student_id);
+
+        $student = User::find($event->attendance['student_id']);
 
         if(!$student->studentInfo['is_sms_enabled'])  {
           Logger('SMS not enabled');  
           return;
         }
-        
+
+        // $attendance = Attendance::find($data['attendance']['id']);
+
+        if ($event->status == 'create') {
+            Logger('Student Enter');
+            $text = " attended today's (";
+            $type = "entry";
+            $event->attendance->is_entry_message_sent = true;
+            $event->attendance->save();
+        } else {
+
+            Logger('Student left');
+            $text = " left today's (";
+            $type = "exit";
+            $event->attendance->is_exit_message_sent = true;
+            $event->attendance->save();
+            
+        }
+
         $phone = $student->studentInfo['father_phone_number'];
 
         $checked_digit = substr($phone, 0, 3);
@@ -69,17 +86,32 @@ class SendAttendanceSms implements ShouldQueue
         $pass = config("message.sms_pass");
         $sid = config("message.sms_sid");
         $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+        $message = $student->name . $text . Carbon::now()->toFormattedDateString() . ") class.";
         $client = new Client();
+
+        if (config('app.env') != 'production') {
+            Logger('App is not in production');
+            return;
+        }
+
         $response = $client->request('POST', $url, [
             'form_params' => [
                 'user' => $user,
                 'pass' => $pass,
                 'sid'  => $sid,
                 'sms'  => [
-                    [$phone, $student->name . " attended today's (" . Carbon::now()->toFormattedDateString() . ") class."],
+                    [$phone, $message],
                 ],
             ],
         ]);
+
+        SmsHistory::create([
+            'content' => $message,
+            'type'    => $type,
+            'student_id' => $student->id,
+            'school_id' => $student->school_id
+        ]);
+
 
         Logger('response: ' . $response->getBody());
     }

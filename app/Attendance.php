@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
 {
-    protected $fillable = ['student_id', 'section_id', 'exam_id', 'present', 'user_id'];
+    protected $fillable = ['student_id', 'section_id', 'exam_id', 'present', 'user_id', 'is_entry_message_sent', 'is_exit_message_sent'];
 
     /**
      * The event map for the model.
@@ -15,7 +15,7 @@ class Attendance extends Model
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => AttendanceCreated::class,
+        // 'created' => AttendanceCreated::class,
     ];
 
     /**

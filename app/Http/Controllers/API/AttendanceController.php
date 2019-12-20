@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\User;
 use Carbon\Carbon;
 use App\Attendance;
+use App\Configuration;
 use Illuminate\Http\Request;
 use App\Jobs\SendAttendanceSms;
+use App\Events\AttendanceCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\AttendanceStoreRequest;
 
@@ -56,41 +58,48 @@ class AttendanceController extends Controller
             ]);
         }
 
-        //SMS queue
-        // SendAttendanceSms::dispatch($student);
+        //for test
 
-        Attendance::create([
-            'student_id' => $student->id,
-            'section_id' => $student->section->id,
-            'exam_id' => 0,
-            'present' => 1,
-            'user_id' => 0
-        ]);
+        // $attendance = Attendance::create([
+        //     'student_id' => $student->id,
+        //     'section_id' => $student->section->id,
+        //     'exam_id' => 0,
+        //     'present' => 1,
+        //     'user_id' => 0
+        // ]);
 
-        return response([
-            'error' => false,
-            'massage' => 'Attendance added successfully!'
-        ]);
+        // event(new AttendanceCreated($attendance, 'create'));
+
+        // return response([
+        //     'error' => false,
+        //     'massage' => 'Attendance added successfully!'
+        // ]);
+
+        //end for test
 
         $attendance = Attendance::whereDate('created_at', Carbon::today())
                                 ->where('student_id', $student->id)->first();
 
         if ($attendance) {
             // Add 1 hour to the existing attendance time
-            $time = Carbon::parse($attendance->created_at)->addHour();
-            if (Carbon::now()->gt($time) ) {
+            $exitTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'exit_time')->first();
+            
+            $exitTime = Carbon::parse($exitTimeConfig->value);
 
-                Attendance::create([
-                    'student_id' => $student->id,
-                    'section_id' => $student->section->id,
-                    'exam_id' => 0,
-                    'present' => 1,
-                    'user_id' => 0
-                ]);
+            if (Carbon::now()->gte($exitTime) ) {
+
+                if (!$attendance->is_exit_message_sent) {
+                    event(new AttendanceCreated($attendance, 'update'));
+
+                    return response([
+                        'error' => false,
+                        'massage' => 'Student left for today!'
+                    ]);
+                }
     
                 return response([
                     'error' => false,
-                    'massage' => 'Attendance added successfully!'
+                    'massage' => 'Student left already'
                 ]);
             }
     
@@ -100,13 +109,15 @@ class AttendanceController extends Controller
             ]);
         }
 
-        Attendance::create([
+        $attendance = Attendance::create([
             'student_id' => $student->id,
             'section_id' => $student->section->id,
             'exam_id' => 0,
             'present' => 1,
             'user_id' => 0
         ]);
+
+        event(new AttendanceCreated($attendance, 'create'));
 
         return response([
             'error' => false,

@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\AttendanceCreated' => [
             'App\Listeners\SendAttendanceSms',
+        ],
+        'App\Events\SchoolCreated' => [
+            'App\Listeners\CreateDefaultConfigurations',
         ]
     ];
 
