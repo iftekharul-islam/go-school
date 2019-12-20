@@ -305,6 +305,7 @@
                     <div class="school-property mb-5">
                         <h2 class="text-center mb-0">{{ $student->school->name }}</h2>
                         <h5 class="text-center">{{ $student->school->school_address }}</h5>
+                        <h5 class="text-center"><strong>Date:</strong> {{ date('d-M-Y') }}</h5>
                     </div>
                     <h4 class="float-left mr-5"><span><strong>Student Name :</strong> {{ $student->name }}</span></h4>
                     <h4 class="float-left mr-5"><span><strong>Student ID :</strong> {{ $student->student_code }}</span></h4>
