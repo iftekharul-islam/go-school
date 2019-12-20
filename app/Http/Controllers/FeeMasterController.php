@@ -132,12 +132,11 @@ class FeeMasterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Request $request, $id)
+    public function destroy($id)
     {
-        return $request;
-//        $feeMaster = FeeMaster::findOrFail($id);
-//        $feeMaster->delete();
-//        return redirect(auth()->user()->role.'/fee-master')->with('status', 'Fee Master Deleted');
+        $feeMaster = FeeMaster::findOrFail($id);
+        $feeMaster->delete();
+        return redirect(auth()->user()->role.'/fee-master')->with('status', 'Fee Master Deleted');
     }
 
     public function classFee(Request $request)
