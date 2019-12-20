@@ -1,5 +1,5 @@
 @extends('layouts.student-app')
-@section('title', 'Fee Transaction')
+@section('title', 'Collect Fee')
 @section('content')
     <style type="text/css">
         .example-print {
@@ -40,7 +40,7 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
-            <h3>Fee Transaction</h3>
+            <h3>Collect Fee</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table display data-table text-nowrap">
+                            <table class="data-table-paginate table-bordered display text-wrap">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered ">
+                                <table class="table data-table-paginate-section table-bordered display text-wrap">
                                     <thead>
                                     <tr>
                                         <th colspan="2">Students info</th>
