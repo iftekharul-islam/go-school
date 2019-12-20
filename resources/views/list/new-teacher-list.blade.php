@@ -12,6 +12,17 @@
                             @endcomponent
                         </div>
                     @else
+                        <div class="breadcrumbs-area">
+                            <ul>
+                                <h3>All Teachers</h3>
+                                <li>
+                                    <a href="javascript:history.back()" style="color: #32998f!important;">
+                                        Back &nbsp;|</a>
+                                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                                </li>
+                                <li>All Teachers</li>
+                            </ul>
+                        </div>
                         <div class="card mt-5 false-height">
                             <div class="card-body">
                                 <div class="card-body-body mt-5 text-center">

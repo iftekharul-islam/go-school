@@ -25,6 +25,8 @@ class AlterTableUsersChangePicPath extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('pic_path')->nullable(false)->change();
+        });
     }
 }
