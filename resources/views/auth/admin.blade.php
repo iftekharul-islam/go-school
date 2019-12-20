@@ -57,7 +57,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label for="name" class="col-md-4 control-label">Full Name <label class="text-danger">*</label> </label>
+                                    <label for="name" class="col-md-12 control-label">Full Name <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <input id="name" type="text" class="form-control" name="name"
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="col-md-4 control-label">E-Mail Address<label class="text-danger">*</label> </label>
+                                    <label for="email" class="col-md-12 control-label">E-Mail Address<label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <input id="email" type="email" class="form-control" name="email"
@@ -89,7 +89,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Password <label class="text-danger">*</label> </label>
+                                    <label for="password" class="col-md-12 control-label">Password <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <input id="password" type="password" class="form-control" name="password"
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="password-confirm" class="col-md-4 control-label">Confirm
+                                    <label for="password-confirm" class="col-md-12 control-label">Confirm
                                         Password <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
@@ -119,7 +119,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                    <label for="phone_number" class="col-md-4 control-label">Phone Number <label class="text-danger">*</label> </label>
+                                    <label for="phone_number" class="col-md-12 control-label">Phone Number <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <input id="phone_number" type="text" class="form-control" name="phone_number"
@@ -135,7 +135,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                                    <label for="blood_group" class="col-md-4 control-label">Blood Group <label class="text-danger">*</label> </label>
+                                    <label for="blood_group" class="col-md-12 control-label">Blood Group <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <select id="blood_group" class="form-control" name="blood_group">
@@ -161,7 +161,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-                                    <label for="nationality" class="col-md-4 control-label">Nationality <label class="text-danger">*</label> </label>
+                                    <label for="nationality" class="col-md-12 control-label">Nationality <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <input id="nationality" type="text" class="form-control" name="nationality"
@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                                    <label for="gender" class="col-md-4 control-label">Gender <label class="text-danger">*</label> </label>
+                                    <label for="gender" class="col-md-12 control-label">Gender <label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <select id="gender" class="form-control" name="gender">
@@ -198,7 +198,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                    <label for="address" class="col-md-6 control-label">Address<label class="text-danger">*</label> </label>
+                                    <label for="address" class="col-md-12 control-label">Address<label class="text-danger">*</label> </label>
 
                                     <div class="col-md-12">
                                         <input id="address" type="text" class="form-control" name="address"
@@ -215,7 +215,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
-                                    <label for="about" class="col-md-6 control-label">About</label>
+                                    <label for="about" class="col-md-12 control-label">About</label>
 
                                     <div class="col-md-12">
                                         <textarea id="about" class="form-control" name="about"
@@ -231,9 +231,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-2">
                                 <div class="form-group{{ $errors->has('departments') ? ' has-error' : '' }}">
-                                    <label for="departments" class="col-md-6 control-label">Departments</label>
+                                    <label for="departments" class="col-md-12 control-label">Departments</label>
 
                                     <div class="col-md-12">
                                         <select class="form-control select2" name="departments[]" id="departments" multiple>

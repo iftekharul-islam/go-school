@@ -17,6 +17,11 @@
     </div>
 
     <div class="height-auto false-height">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="">
             <div class="row">
                 <!-- Summery Area Start Here -->
@@ -96,11 +101,6 @@
                         </div>
                     </div>
                 </div>
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
                 @if(\Auth::user()->role == 'master')
                     <div class="card false-height ml-4" style="width: 98%">
                         <div class="col-12-xxxl col-xl-12">

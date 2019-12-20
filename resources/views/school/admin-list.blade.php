@@ -25,7 +25,7 @@
             @endif
             @if(count($admins) > 0)
                 <div class="table-responsive">
-                    <table class="table table-data-div">
+                    <table class="table table-hover table-data-div">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -45,27 +45,37 @@
                                 <td>{{$admin->student_code}}</td>
                                 <td>{{$admin->email}}</td>
                                 <td>{{$admin->phone_number}}</td>
-                                <td width="25%">{{$admin->address}}</td>
-                                <td class="text-center">
-                                    <a href="{{url('master/edit/admin/'.$admin->id)}}" class="button button--edit mr-3" role="button"><i class="fas fa-edit"></i></a>
-                                    @if($admin->active == 0)
-                                        <button class="button button--save" type="button" onclick="activeUser({{ $admin->id }})">Active</button>
-                                        <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
-                                            @csrf
-                                            @method('GET')
-                                        </form>
-                                    @else
-                                        <button class="button button--cancel" type="button" onclick="removeUser({{ $admin->id }})">Deactivate</button>
-                                        <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
-                                            @csrf
-                                            @method('GET')
-                                        </form>
-                                    @endif
-                                    <button class="button button--cancel ml-3" type="button" onclick="deleteUser({{ $admin->id }})">Delete</button>
-                                    <form id="delete-admin-form-{{ $admin->id }}" action="{{ route('delete-admin', $admin->id) }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        {{ method_field('delete') }}
-                                    </form>
+                                <td width="15%">{{$admin->address}}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class=" col-md-4 col-sm-12">
+                                            <a href="{{url('master/edit/admin/'.$admin->id)}}" class="button button--edit" data-toggle="tooltip" data-placement="top" title="Edit Admin" role="button"><i class="fas fa-edit"></i></a>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12">
+                                            @if($admin->active == 0)
+                                                <button class="button button--save" type="button" data-toggle="tooltip" data-placement="top" title="Active Admin" onclick="activeUser({{ $admin->id }})"><i class="far fa-check-circle"></i></button>
+                                                <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
+                                                    @csrf
+                                                    @method('GET')
+                                                </form>
+                                            @else
+                                                <button class="button button--cancel" type="button" data-toggle="tooltip" data-placement="top" title="Deactivate Admin" onclick="removeUser({{ $admin->id }})"><i class="far fa-times-circle"></i></button>
+                                                <form id="delete-form-{{ $admin->id }}" action="{{url('master/activate-admin/'.$admin->id)}}" method="GET" style="display: none;">
+                                                    @csrf
+                                                    @method('GET')
+                                                </form>
+                                            @endif
+                                        </div>
+                                        <div class=" col-md-4 col-sm-12">
+                                            <button class="button button--cancel" type="button" data-toggle="tooltip" data-placement="top" title="Delete Admin" onclick="deleteUser({{ $admin->id }})"><i class="far fa-trash-alt"></i></button>
+                                            <form id="delete-admin-form-{{ $admin->id }}" action="{{ route('delete-admin', $admin->id) }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                                {{ method_field('delete') }}
+                                            </form>
+                                        </div>
+
+                                    </div>
+
                                 </td>
                             </tr>
                         @endforeach

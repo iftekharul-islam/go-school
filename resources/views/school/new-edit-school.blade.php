@@ -54,9 +54,9 @@
                                     <label for="school_medium" class="control-label">School Medium</label>
 
                                     <select id="school_medium" class="select2" name="school_medium">
-                                        <option selected="selected">Bangla</option>
-                                        <option>English</option>
-                                        <option>Bangla & English</option>
+                                        <option {{ $school->medium == 'Bangla' ? 'selected' : '' }}>Bangla</option>
+                                        <option {{ $school->medium == 'English' ? 'selected' : '' }}>English</option>
+                                        <option {{ $school->medium == 'Bangla & English' ? 'selected' : '' }}>Bangla & English</option>
                                     </select>
 
                                     @if ($errors->has('school_medium'))
@@ -67,9 +67,9 @@
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
                                     <label for="school_established" class="control-label">School Established</label>
-                                    <input data-date-format="yyyy-mm-dd" id="birthday"
+                                    <input readonly="readonly" value="{{ $school->established }}" data-date-format="yyyy-mm-dd" id="birthday"
                                            class="form-control date" name="school_established"
-                                           placeholder="School Stablished" required
+                                           placeholder="School Established" required
                                            autocomplete="off">
                                     @if ($errors->has('school_established'))
                                         <span class="help-block">

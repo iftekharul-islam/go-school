@@ -307,6 +307,7 @@
                         <h5 class="text-center">{{ $student->school->school_address }}</h5>
                     </div>
                     <h4 class="float-left mr-5"><span><strong>Student Name :</strong> {{ $student->name }}</span></h4>
+                    <h4 class="float-left mr-5"><span><strong>Student ID :</strong> {{ $student->student_code }}</span></h4>
                     <h4 class="ml-5"><span><strong>Class :</strong> Class{{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</span></h4>
                 </div>
                 <div class="table-responsive print-div">

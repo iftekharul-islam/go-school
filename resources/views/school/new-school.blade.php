@@ -53,13 +53,13 @@
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
                                     <label for="school_established" class="control-label">School Established</label>
-                                    <input data-date-format="yyyy-mm-dd" id="birthday"
+                                    <input readonly="readonly" data-date-format="yyyy-mm-dd" id="birthday"
                                            class="form-control date" name="school_established"
-                                           placeholder="School Stablished" required
+                                           placeholder="School Established" required
                                            autocomplete="off">
-                                    @if ($errors->has('birthday'))
+                                    @if ($errors->has('school_established'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('birthday') }}</strong>
+                                            <strong>{{ $errors->first('school_established') }}</strong>
                                         </span>
                                     @endif
                                 </div>

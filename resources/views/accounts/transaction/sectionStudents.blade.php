@@ -45,7 +45,7 @@
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Fee Transaction</li>
+                <li>Collect Fee</li>
             </ul>
         </div>
         <div class="false-height">
