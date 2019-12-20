@@ -81,6 +81,8 @@ class SendAttendanceSms implements ShouldQueue
                 $phone = '88' . $phone;
             }
         }
+
+        Logger('Sms Phone number ' . $phone);
         
         $user = config("message.sms_user");
         $pass = config("message.sms_pass");
