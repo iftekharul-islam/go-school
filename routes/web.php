@@ -68,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
-        Route::get('/fees-summary', 'FeeTransactionController@myFeeDetails')->name('fees.summary');
+        Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
     });
 
     //Librarian role routes
