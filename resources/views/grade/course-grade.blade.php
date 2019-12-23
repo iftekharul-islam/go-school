@@ -38,10 +38,10 @@
               <form action="{{url('teacher/courses/save-configuration')}}" method="POST">
                 {{csrf_field()}}
                 <input type="hidden" name="id" value="{{$course_id}}">
-                <div class="panel panel-default" id="main-container">
+                <div class="card panel-default" id="main-container">
                   @if(count($grades) > 0)
                     @foreach ($grades as $grade)
-                      <div class="page-panel-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
+                      <div class="card-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
                         <b>Examination</b> -  {{ $exam->exam_name }}     <b>Term</b>   -   {{ $exam->term }}
                         <button type="submit" class="button button--save text-center float-right">
                           <i class="far fa-save mr-2"></i><b>Save Mark Distribution</b>
@@ -49,7 +49,7 @@
                       </div>
                       @break($loop->first)
                     @endforeach
-                    <div class="panel-body" style="padding-top: 0px;">
+                    <div class="card-body" style="padding-top: 0px;">
                       <div class="alert alert-info alert-dismissible mt-5" style="font-size:13px; margin-top: 10px;">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <ul>
