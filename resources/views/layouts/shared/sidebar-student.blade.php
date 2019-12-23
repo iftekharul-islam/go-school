@@ -113,6 +113,11 @@
                            class="nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is($role.'/fee-collection')) ? 'menu-active' : '' }}"
+                           href="{{ route('fees.summary') }}">
+                            <i class="fas fa-cash-register"></i><span>Fees Summary</span></a>
+                    </li>
                 @endif
                 @if($role != 'student' && $role != 'master')
                     <li class="nav-item sidebar-nav-item">

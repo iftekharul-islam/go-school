@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
+        Route::get('/fees-summary', 'FeeTransactionController@myFeeDetails')->name('fees.summary');
     });
 
     //Librarian role routes
@@ -341,6 +342,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user/activate/{id}', 'UserController@activateUser');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::post('courses/store', 'CourseController@store');
+
+        Route::delete('user/{id}', 'UserController@destroy')->name('delete-user');
 
         Route::get('department/{id}/edit', 'SchoolController@departmentEdit');
         Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('admin.department.update');

@@ -44,9 +44,9 @@ class SectionController extends Controller
     public function attendanceList()
     {
         $user = Auth::user();
-        $classes = Myclass::where('school_id', $user->school->id)
+        $classes = Myclass::where('school_id', $user->school_id)
             ->get();
-        $classeIds = Myclass::where('school_id', $user->school->id)
+        $classeIds = Myclass::where('school_id', $user->school_id)
             ->pluck('id')
             ->toArray();
         $sections = Section::whereIn('class_id', $classeIds)
@@ -62,9 +62,9 @@ class SectionController extends Controller
     public function details($class_id)
     {
         $user = Auth::user();
-        $classes = Myclass::where('school_id', $user->school->id)
+        $classes = Myclass::where('school_id', $user->school_id)
             ->get();
-        $classeIds = Myclass::where('school_id', $user->school->id)
+        $classeIds = Myclass::where('school_id', $user->school_id)
             ->pluck('id')
             ->toArray();
         $sections = Section::whereIn('class_id', $classeIds)

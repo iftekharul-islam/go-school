@@ -119,7 +119,7 @@
                         </thead>
                         <tbody>
                         @php
-                            $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
+                            $months = ['January', 'February', 'March','April','May','June','July', 'August', 'September', 'October', 'November', 'December'];
                             $totalAmount = 0;
                             $totalFine = 0;
                             $totalDiscount = 0;
