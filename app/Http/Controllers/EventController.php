@@ -85,7 +85,8 @@ class EventController extends Controller
         $tb = Event::findOrFail($id);
         $tb->active == 0 ? $tb->active = 1 : $tb->active = 0;
         $tb->save();
-        return back()->with('status','Event Status changed');
+        $status = $tb->active == 0 ? $status = 'inactive' : $status = 'active';
+        return back()->with('status','Event status changed to '.$status.'!');
     }
 
     /**

@@ -133,7 +133,7 @@ class UserService
     public function getStudents()
     {
         $students = $this->user->with(['section.class', 'school', 'studentInfo'])
-            ->where('school_id', auth()->user()->school_id)
+            ->where('school_id', Auth::user()->school_id)
             ->student()
             ->where('active', 1)
             ->orderBy('name', 'asc')

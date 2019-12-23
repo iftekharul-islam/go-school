@@ -34,20 +34,11 @@ class SectionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Myclass::where('school_id', $user->school->id)->get();
-        $classFilterByDepartments = Myclass::where('school_id', $user->school->id)
+        $classes = Myclass::where('school_id', $user->school_id)->get();
+        $classFilterByDepartments = Myclass::where('school_id', $user->school_id)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
-
-        $classIds = Myclass::where('school_id', $user->school->id)
-            ->pluck('id')
-            ->toArray();
-
-        $exams = ExamForClass::whereIn('class_id', $classIds)
-            ->where('active', 1)
-            ->get()->groupBy('class_id');
-
-        return view('school.new-sections', compact('classes', 'classFilterByDepartments', 'exams'));
+        return view('school.new-sections', compact('classes', 'classFilterByDepartments'));
     }
 
     public function attendanceList()
