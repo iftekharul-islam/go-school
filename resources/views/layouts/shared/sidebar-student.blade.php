@@ -26,7 +26,7 @@
                 $inact = 1;
             if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant'))
                 $acc = 1;
-            if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection'))
+            if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection') || strpos($add, 'fees-summary'))
                 $ac = 1;
             if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message'))
                 $std = 1;
@@ -114,7 +114,7 @@
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is($role.'/fee-collection')) ? 'menu-active' : '' }}"
+                        <a class="nav-link {{ $ac == 1 ? 'menu-active' : '' }}"
                            href="{{ route('fees.summary') }}">
                             <i class="fas fa-cash-register"></i><span>Fees Summary</span></a>
                     </li>
