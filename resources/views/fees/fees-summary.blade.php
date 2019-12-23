@@ -79,15 +79,13 @@
                                                 <span class="badge-danger badge unpaid">Unpaid</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            @php
-                                                $paid_amount = 0;
-                                                if(count($feeMaster->transactions) != 0)
-
-                                                   foreach($feeMaster->transactions as $transaction)
-                                                   {
+                                            <td>
+                                                @php
+                                                    $paid_amount = 0;
+                                                    if(count($feeMaster->transactions) != 0)
+                                                       foreach($feeMaster->transactions as $transaction) {
                                                         $count = count($transaction->feeMasters);
-                                                       if($student->id === $transaction->student_id)
+                                                        if($student->id === $transaction->student_id)
                                                            if ( $count == 1 ) {
                                                                $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
                                                                $totalFine = $totalFine + $transaction['fine'];
@@ -99,11 +97,11 @@
                                                                $totalDiscount = $totalDiscount + $transaction['discount'] / $count;
                                                                $totalPaid = $totalPaid + $transaction['amount'] / $count;
                                                            }
-                                                   }
-                                            @endphp
-                                            {{number_format((float)($paid_amount), 2, '.', '')}}
-                                        </td>
-                                        <td>{{number_format((float)($feeMaster->amount - $paid_amount), 2, '.', '')}}</td>
+                                                       }
+                                                @endphp
+                                                {{number_format((float)($paid_amount), 2, '.', '')}}
+                                            </td>
+                                            <td>{{number_format((float)($feeMaster->amount - $paid_amount), 2, '.', '')}}</td>
                                     </tr>
                                 @endforeach
                                 <tr class="grand-total">

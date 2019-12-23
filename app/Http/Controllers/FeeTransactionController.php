@@ -212,10 +212,10 @@ class FeeTransactionController extends Controller
         }
         return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
     }
-    public function myFeeDetails()
+    public function studentFeeDetails()
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', Auth::id())->first();
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
-        return view('fees.fees-summary',compact('student','discounts'));
+        return view('fees.fees-summary', compact('student','discounts'));
     }
 }

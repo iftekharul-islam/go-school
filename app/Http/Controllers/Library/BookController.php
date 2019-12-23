@@ -53,7 +53,7 @@ class BookController extends Controller
         ];
         $book = Book::create($data);
 
-        return redirect()->to(Auth::user()->role.'/book/'.$book->id)->with('status','New book added to library');
+        return redirect()->to(Auth::user()->role. '/book/' .$book->id)->with('status','New book added to library');
     }
 
     public function destroy($id)
