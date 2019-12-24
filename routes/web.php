@@ -314,6 +314,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('academic-settings', 'SchoolController@index');
 
+        Route::get('new-student','UserController@createStudent');
+        Route::get('new-teacher','UserController@createTeacher');
+
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyclassController@store');
             Route::post('add-section', 'SectionController@store');

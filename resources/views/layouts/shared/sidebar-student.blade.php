@@ -134,6 +134,12 @@
                                        href="{{ url('admin/student-message') }}">
                                         <i class="fas fa-angle-right"></i><span>Message Student</span></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('admin/new-student')) ? 'menu-active' : '' }}"
+                                       href="{{ url('admin/new-student') }}">
+                                        <i class="fas fa-angle-right"></i><span>Add Student</span></a>
+                                </li>
+
                             @endif
                         </ul>
                     </li>
@@ -141,6 +147,11 @@
                         <a href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}"
                             class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
                             <i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url('admin/new-teacher')}}"
+                           class="nav-link {{ Request::get('admin/new-teacher') == 1 ? 'menu-active' :''}}">
+                            <i class="flaticon-multiple-users-silhouette"></i><span>Add Teacher</span></a>
                     </li>
                 @endif
                 @if($role == 'admin')
