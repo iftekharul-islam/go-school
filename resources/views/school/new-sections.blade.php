@@ -39,7 +39,7 @@
                                 <div class="card-body-customized">
                                     @foreach($class->sections as $sec)
                                         @php
-                                            $total_student = $total_student + $sec->users->count();
+                                            $total_student = $total_student + $sec->users->where('role', 'student')->where('active', 1)->where('section_id', '=' ,  $sec->id)->count();
                                         @endphp
                                     @endforeach
                                     <div>
@@ -174,7 +174,7 @@
                                     <div class="card-body-customized">
                                         @foreach($class->sections as $sec)
                                             @php
-                                                $total_student = $total_student + $sec->users->count();
+                                                $total_student = $total_student + $sec->users->where('role', 'student')->where('active', 1)->where('section_id', '=' ,  $sec->id)->count();
                                             @endphp
                                         @endforeach
                                         <div>
