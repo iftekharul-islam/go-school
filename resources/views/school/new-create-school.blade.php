@@ -76,10 +76,6 @@
                                                    role="tab" aria-selected="false">Add Librarian</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="tab-4" data-toggle="tab" href="#tab12"
-                                                   role="tab" aria-selected="false">Add Student</a>
-                                            </li>
-                                            <li class="nav-item">
                                                 <a class="nav-link" id="tab-5" data-toggle="tab" href="#tab13"
                                                    role="tab" aria-selected="false">Add Teacher</a>
                                             </li>
