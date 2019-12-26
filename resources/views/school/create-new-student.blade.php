@@ -1,8 +1,23 @@
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <form method="POST" id="registerForm" enctype="multipart/form-data" action="{{ route('students.import') }}">
+                {{ csrf_field() }}
+                <input type="file" name="users" accept=".xlsx,.csv,.xls" required>
+                <button type="submit" id="" class="button mt-3 button--save">
+                    Import from Excel
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <form class="new-added-form" method="POST" id="registerForm"
       enctype="multipart/form-data"
       action="{{ route('register.student.store') }}">
     {{ csrf_field() }}
-    <div class="row">
+    <div class="row mb-3">
         <div class="offset-9 col-3 text-right">
             <div class="form-check mr-4">
                 <input type='hidden' value="false" name='sms_enabled'>
@@ -20,7 +35,7 @@
                     <label for="name"
                            class="control-label false-padding-bottom">Full
                         Name<label class="text-danger">*</label></label>
-                    <input id="name" type="text" class="form-control"
+                    <input id="name" type="text" class="form-control student-name"
                            name="name" value="{{ old('name') }}"
                            required>
 
@@ -35,13 +50,23 @@
 
                 <div class="col-md-12">
                     <label for="email"
-                           class="control-label false-padding-bottom">E-Mail
-                        Address<label
+                           class="control-label false-padding-bottom">E-Mail/Username<label
                                 class="text-danger">*</label></label>
+                    <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
-                    <input id="email" type="email" class="form-control"
+                    @php
+                        $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
+                    @endphp
+
+                    <input type="hidden" name="student_code" value="{{ $code }}">
+
+                    <input id="email" type="email" class="form-control student-username"
                            name="email" value=""
-                           required>
+                           required readonly>
+
+                    <div class="email-visible"></div>
+
+
 
                     @if ($errors->has('email'))
                         <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
@@ -671,6 +696,7 @@
     <div class="form-group">
         <div class="col-md-12">
             <label class=" control-label">Upload Profile Picture</label>
+            <br>
             <input type="file"  id="picPath" name="student_pic">
         </div>
     </div>
@@ -684,3 +710,45 @@
         </div>
     </div>
 </form>
+
+<script>
+    function enableEmail () {
+
+    }
+    $(document).ready(function() {
+
+        $('.student-name').focusout(function() {
+            let inputName = $('.student-name').val();
+            console.log('hello ', inputName);
+            if (inputName) {
+                let names = inputName.split(' ');
+
+                console.log('names ', names);
+
+                let code = {!! $code !!};
+                console.log('code', code);
+
+                let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
+
+                let username = lastName + code;
+
+                $('.student-username').val(username.toLowerCase());
+
+                console.log('lastname ', lastName);
+            }
+        });
+
+        $('.email-enable-button').click(function(event) {
+            event.preventDefault();
+            console.log('hello');
+            $('.student-username').remove();
+            $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
+                           name="email" value="" placeholder="Enter email address"
+                           required>`);
+            $('.email-enable-button').remove();
+        });
+
+
+
+    });
+</script>

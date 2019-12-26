@@ -27,6 +27,8 @@ use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
 use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
 
 /**
  * Class UserController.
@@ -463,6 +465,14 @@ class UserController extends Controller
         $user->rfid = $request->rfid;
 
         return redirect()->route('user.show', $id)->with('status', $user->name.' RFID set successfull!');
+    }
+
+    public function importStudents(Request $request)
+    {
+//        return 'hello';
+
+        Excel::import(new usersImport, $request->file('users'));
+        return redirect()->back()->with('status','Student Successfullty added');
     }
 
 

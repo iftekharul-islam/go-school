@@ -264,7 +264,7 @@ class UserService
         $tb->active = 1;
         $tb->school_id = auth()->user()->school_id;
         $tb->code = auth()->user()->code;
-        $tb->student_code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+        $tb->student_code = $request->student_code;
         $tb->gender = $request->gender;
         $tb->blood_group = $request->blood_group;
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
