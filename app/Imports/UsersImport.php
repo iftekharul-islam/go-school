@@ -5,7 +5,6 @@ namespace App\Imports;
 use App\StudentInfo;
 use App\User;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
 
@@ -20,8 +19,9 @@ class UsersImport implements ToCollection
     {
         foreach ($rows as $key => $row)
         {
-            if ($key == 0)
+            if ($key == 0) {
                 continue;
+            }
 
             if (!$row[1]) {
                 $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
@@ -30,7 +30,7 @@ class UsersImport implements ToCollection
                 $username = array_last($name) . $code;
                 $row[1] = $username;
             }
-//            dd($row);
+
             $user = User::create([
                 'name' => $row[0],
                 'email' => $row[1],
@@ -60,9 +60,7 @@ class UsersImport implements ToCollection
                 'mother_name' => $row[13],
                 'religion' => $row[14],
                 'user_id' => $user->id,
-
             ]);
-            Logger($student);
         }
     }
 }
