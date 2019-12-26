@@ -1,17 +1,41 @@
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="col-md-12">
-            <form method="POST" id="registerForm" enctype="multipart/form-data" action="{{ route('students.import') }}">
-                {{ csrf_field() }}
-                <input type="file" name="users" accept=".xlsx,.csv,.xls" required>
-                <button type="submit" id="" class="button mt-3 button--save">
-                    Import from Excel
-                </button>
-            </form>
+<form method="POST" id="registerForm" enctype="multipart/form-data" action="{{ route('students.import') }}">
+    {{ csrf_field() }}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="false-padding-bottom-form form-group{{ $errors->has('section') ? ' has-error' : '' }}">
+
+                <div class="col-md-12">
+                    <label for="section"
+                           class="control-label false-padding-bottom">Class
+                        and Section<label class="text-danger">*</label></label>
+
+                    <select id="section" class="form-control"
+                            name="section" required>
+                        @foreach ($studentSections as $section)
+                            <option value="{{$section->id}}">
+                                Section: {{$section->section_number}}
+                                Class:
+                                {{$section->class->class_number}}</option>
+                        @endforeach
+                    </select>
+
+                    @if ($errors->has('section'))
+                        <span class="help-block"><strong>{{ $errors->first('section') }}</strong></span>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                    <input type="file" name="users" accept=".xlsx,.csv,.xls" required>
+                    <button type="submit" id="" class="button mt-3 button--save">
+                        Import from Excel
+                    </button>
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 <form class="new-added-form" method="POST" id="registerForm"
       enctype="multipart/form-data"

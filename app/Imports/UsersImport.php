@@ -7,9 +7,16 @@ use App\User;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 class UsersImport implements ToCollection
 {
+
+    public  function __construct($section)
+    {
+        $this->section = $section;
+    }
+
     /**
     * @param array $row
     *
@@ -43,7 +50,7 @@ class UsersImport implements ToCollection
                 'gender' => $row[3],
                 'nationality'=> $row[4],
                 'address' => $row[5],
-                'section_id' => 1,//need to decide
+                'section_id' => $this->section
 
             ]);
 
