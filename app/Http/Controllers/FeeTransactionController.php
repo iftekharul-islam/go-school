@@ -136,7 +136,7 @@ class FeeTransactionController extends Controller
 
     public function feeCollection()
     {
-        $classes = Myclass::with('sections')->get();
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         return view('accounts.transaction.index', compact('classes'));
     }
 
@@ -150,7 +150,7 @@ class FeeTransactionController extends Controller
         }, $students->toArray());
 
         $studentWithFees = User::whereIn('id', $studentIds)->with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->orderBy('name', 'asc')->get();
-        $dis = Discount::all();
+        $dis = Discount::where('school_id', Auth::user()->school_id)->get();
 
         return view('accounts.transaction.sectionStudents', compact('students', 'classes','studentWithFees','dis'));
     }
@@ -158,7 +158,7 @@ class FeeTransactionController extends Controller
     public function collectFee($id)
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
-        $discounts = Discount::all();
+        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
 
         return view('accounts.transaction.feeCollect', compact('student', 'discounts'));
     }
@@ -166,7 +166,7 @@ class FeeTransactionController extends Controller
     public function multipleFee($id)
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
-        $discounts = Discount::all();
+        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
 
         return view('accounts.transaction.multiple-fee', compact('student', 'discounts'));
     }
@@ -211,5 +211,11 @@ class FeeTransactionController extends Controller
             $ft->feeMasters()->attach($value);
         }
         return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
+    }
+    public function studentFeeDetails()
+    {
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', Auth::id())->first();
+        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
+        return view('fees.fees-summary', compact('student','discounts'));
     }
 }

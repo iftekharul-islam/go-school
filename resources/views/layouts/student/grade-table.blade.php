@@ -23,12 +23,13 @@
                                 <a class="text-teal" href="{{url('user/'.$grade->teacher->student_code)}}">{{$grade->teacher->name}}</a>
                             </td>
                             <td>
-                                @foreach($gradesystems->gradeSystemInfo as $gs)
-                                    @if($grade->marks >= $gs->marks_from && $grade->marks <= $gs->marks_to)
-                                        <b>{{$gs->grade}}</b>
-                                        @break
-                                    @endif
-                                @endforeach
+                                    @foreach($gradesystems['gradeSystemInfo'] as $gs)
+                                        @if($grade->marks >= $gs->marks_from && $grade->marks <= $gs->marks_to)
+                                            <b>{{$gs->grade}}</b>
+                                            @break
+                                        @endif
+                                    @endforeach
+
                             </td>
                             <td><b>{{$grade->marks}}</b></td>
                             <td><a class="button button--save" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}">View</a></td>

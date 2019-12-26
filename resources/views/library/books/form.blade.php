@@ -153,8 +153,8 @@
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
             <div class="">
-                <label for="img_path" class="control-label">Book Image URL<label class="text-danger">*</label></label>
-                <input id="img_path" type="text" class="form-control" name="img_path" value="{{ old('img_path') }}" placeholder="Book Image Url" required>
+                <label for="img_path" class="control-label">Book Image URL</label>
+                <input id="img_path" type="text" class="form-control" name="img_path" value="{{ old('img_path') }}" placeholder="Book Image Url">
 
                 @if ($errors->has('img_path'))
                     <span class="help-block">

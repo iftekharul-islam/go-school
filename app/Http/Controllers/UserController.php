@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Gradesystem;
 use App\Http\Requests\user\UpdateStaffProfileRequest;
+use App\School;
 use App\StudentInfo;
 use App\User;
 use App\Myclass;
@@ -208,7 +210,7 @@ class UserController extends Controller
         $tb = $this->userService->storeStudent($request, $path);
         $this->userService->storeStudentInfo($request, $tb);
         event(new UserRegistered($tb, $password));
-        return back()->withInput(['tab' => 'tab12'])->with('status', 'New Student Added!');
+        return back()->with('status', 'New Student Added!');
     }
 
     /**
@@ -219,6 +221,52 @@ class UserController extends Controller
     public function createAdmin()
     {
         return view('auth.admin');
+    }
+
+    public function createStudent()
+    {
+        $user = Auth::user();
+
+        $schools = School::all();
+        $classes = Myclass::all();
+        $sections = Section::all();
+
+        $studentClasses = Myclass::query()
+        ->where('school_id', $user->school->id)
+        ->pluck('id');
+
+        $studentSections = Section::with('class')
+        ->whereIn('class_id', $studentClasses)
+        ->get();
+        $departments = Department::where('school_id', $user->school_id)->get();
+
+        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+
+        return view('school.new-student', compact('schools', 'classes', 'sections','departments','adminAccessDepartment','studentClasses', 'studentSections'));
+
+    }
+
+    public function createTeacher()
+    {
+        $user = Auth::user();
+
+        $schools = School::all();
+        $classes = Myclass::all();
+        $sections = Section::all();
+
+        $teacherDepartments = Department::where('school_id', $user->school_id)->get();
+        $teacherClasses = Myclass::where('school_id', $user->school->id)->pluck('id');
+        $teacherSections = Section::with('class')->whereIn('class_id', $teacherClasses)->get();
+
+        $teachers = User::where('role', 'teacher')
+            ->orderBy('name', 'ASC')
+            ->where('active', 1)
+            ->get();
+        $departments = Department::where('school_id', $user->school_id)->get();
+
+        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+
+        return view('school.new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
     /**
@@ -476,5 +524,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return back()->with('status', 'Student deleted permanently!');
     }
 }

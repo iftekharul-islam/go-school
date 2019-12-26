@@ -26,7 +26,7 @@
                 $inact = 1;
             if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant'))
                 $acc = 1;
-            if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection'))
+            if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection') || strpos($add, 'fees-summary'))
                 $ac = 1;
             if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message'))
                 $std = 1;
@@ -113,6 +113,11 @@
                            class="nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
                             <i class="fas fa-envelope-open"></i><span>Messages</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ $ac == 1 ? 'menu-active' : '' }}"
+                           href="{{ route('fees.summary') }}">
+                            <i class="fas fa-cash-register"></i><span>Fees Summary</span></a>
+                    </li>
                 @endif
                 @if($role != 'student' && $role != 'master')
                     <li class="nav-item sidebar-nav-item">
@@ -129,6 +134,12 @@
                                        href="{{ url('admin/student-message') }}">
                                         <i class="fas fa-angle-right"></i><span>Message Student</span></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('admin/new-student')) ? 'menu-active' : '' }}"
+                                       href="{{ url('admin/new-student') }}">
+                                        <i class="fas fa-angle-right"></i><span>Add Student</span></a>
+                                </li>
+
                             @endif
                         </ul>
                     </li>
@@ -136,6 +147,11 @@
                         <a href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}"
                             class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
                             <i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url('admin/new-teacher')}}"
+                           class="nav-link {{ Request::get('admin/new-teacher') == 1 ? 'menu-active' :''}}">
+                            <i class="flaticon-multiple-users-silhouette"></i><span>Add Teacher</span></a>
                     </li>
                 @endif
                 @if($role == 'admin')

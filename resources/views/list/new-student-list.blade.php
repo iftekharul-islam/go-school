@@ -14,6 +14,18 @@
             <div class="col-md-12" id="main-container">
                 <div class="panel panel-default">
                     @if(count($users) > 0)
+                        <div class="breadcrumbs-area">
+                            <h3>
+                                All Students
+                            </h3>
+                            <ul>
+                                <li>
+                                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
+                                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                                </li>
+                                <li>All Students</li>
+                            </ul>
+                        </div>
                         <div class="panel-body">
                             @component('components.new-users-list',['users'=>$users])
                             @endcomponent

@@ -57,6 +57,13 @@
                                         @csrf
                                         @method('GET')
                                     </form>
+                                <button class="button ml-1 button--cancel " type="button" onclick="deleteUser({{ $user->id }})">
+                                    <i class="far fa-trash-alt mr-1"></i>Delete</button>
+                                <form id="delete-user-form-{{ $user->id }}" action="{{ route('delete-user', $user->id) }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                    {{ method_field('delete') }}
+                                </form>
+                                </button>
                             </td>
                         </tr>
 
@@ -82,6 +89,20 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             document.getElementById('delete-form-'+id).submit();
+                        }
+                    });
+            }
+            function deleteUser(id) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Selected user will be deleted permanently",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            document.getElementById('delete-user-form-'+id).submit();
                         }
                     });
             }
