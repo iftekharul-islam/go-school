@@ -544,8 +544,6 @@ class UserController extends Controller
 
     public function importStudents(Request $request)
     {
-//        return 'hello';
-
         Excel::import(new usersImport($request->section), $request->file('users'));
         return redirect()->back()->with('status','Student Successfullty added');
     }
