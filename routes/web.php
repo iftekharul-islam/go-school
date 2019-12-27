@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user/config/change_password', 'UserController@changePasswordGet');
     Route::post('user/config/change_password', 'UserController@changePasswordPost');
 
+    Route::post('students/import', 'UserController@importStudents')->name('students.import');
+
     Route::get('user/rfid/{student_code}', 'UserController@rfidCreate')->name('rfid.create');
     Route::post('user/rfid/{student_code}', 'UserController@rfidStore')->name('rfid.store');
     // Route::get('user/rfid/{student_code}', 'UserController@rfidCreate')->name('rfid.edit');
@@ -314,8 +316,12 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('academic-settings', 'SchoolController@index');
 
+        Route::get('import-student','UserController@importStudent');
+
         Route::get('new-student','UserController@createStudent');
         Route::get('new-teacher','UserController@createTeacher');
+        Route::get('new-librarian','UserController@createLibrarian');
+        Route::get('new-accountant','UserController@createAccountant');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyclassController@store');
