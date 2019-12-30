@@ -95,7 +95,7 @@
             function deleteUser(id) {
                 swal({
                     title: "Are you sure?",
-                    text: "Selected user will be deleted permanently",
+                    text: "Selected Student will be deleted permanently",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
