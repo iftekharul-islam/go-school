@@ -9,7 +9,7 @@
             Upload Routine
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -80,7 +80,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-6 form-group mg-t-8 mt-4" style="text-align: right">
-                                                <a href="javascript:history.back()" class="button button--cancel mr-2" style="margin-left: 1%;" role="button"><b>Cancel</b></a>
+                                                <a href="{{ URL::previous() }}" class="button button--cancel mr-2" style="margin-left: 1%;" role="button"><b>Cancel</b></a>
                                                 <button id="submit-value" type="submit" disabled class="button routine-button button--save"><b>Save</b></button>
                                             </div>
                                         </div>

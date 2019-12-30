@@ -37,7 +37,6 @@ class UsersImport implements ToCollection
                 $username = array_last($name) . $code;
                 $row[1] = $username;
             }
-
             $user = User::create([
                 'name' => $row[0],
                 'email' => $row[1],

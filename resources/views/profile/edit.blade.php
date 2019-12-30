@@ -384,7 +384,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="javascript:history.back()" class="button button--cancel" style="margin-right: 2%;"
+                                    <a href="{{ URL::previous() }}" class="button button--cancel" style="margin-right: 2%;"
                                        role="button">Cancel</a>
                                     <input type="submit" role="button" class="btn btn-success" value="Save">
                                 </div>

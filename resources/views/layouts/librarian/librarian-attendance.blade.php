@@ -112,7 +112,7 @@
         </table>
     </div>
     <div class="float-right mb-4">
-        <a href="javascript:history.back()" class="button button--cancel mr-3" role="button"><i class="fas fa-window-close mr-2"></i>Cancel</a>
+        <a href="{{ URL::previous() }}" class="button button--cancel mr-3" role="button"><i class="fas fa-window-close mr-2"></i>Cancel</a>
         @if (count($attendances) > 0)
             <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>Update</button>
         @else

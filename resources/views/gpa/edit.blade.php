@@ -6,7 +6,7 @@
             Edit Grade System
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -69,7 +69,7 @@
 
                             <div class="col-12 form-group mg-t-8">
                                 <button type="submit" class="button button--save float-right"><b>Update</b></button>
-                                <a href="javascript:history.back()" class="button button--cancel float-right mr-3"  role="button"><b>Cancel</b></a>
+                                <a href="{{ URL::previous() }}" class="button button--cancel float-right mr-3"  role="button"><b>Cancel</b></a>
                             </div>
                         </div>
                     </form>
