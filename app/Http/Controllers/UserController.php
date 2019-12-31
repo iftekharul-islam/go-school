@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gradesystem;
+use App\Http\Requests\ImportStudentRequest;
 use App\Http\Requests\user\UpdateStaffProfileRequest;
 use App\School;
 use App\StudentInfo;
@@ -542,7 +543,7 @@ class UserController extends Controller
         return redirect()->route('user.show', $id)->with('status', $user->name.' RFID set successfull!');
     }
 
-    public function importStudents(Request $request)
+    public function importStudents(ImportStudentRequest $request)
     {
         Excel::import(new usersImport($request->section), $request->file('users'));
         return redirect()->back()->with('status','Student Successfullty added');

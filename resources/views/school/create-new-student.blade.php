@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Manage Schools')
+@section('title', 'Create Student')
 
 @section('content')
     <div class="dashboard-content-one" >

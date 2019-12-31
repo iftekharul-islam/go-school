@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Students')
+@section('title', 'Students List')
 
 @section('content')
     <script src="{{ asset('js/ckeditor.js') }}"></script>

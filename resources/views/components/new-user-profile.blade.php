@@ -66,7 +66,7 @@
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Class:</td>
-                                        <td>{{$user->section->class->class_number}}</td>
+                                        <td>{{$user->section['class']['class_number']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Gender:</td>
@@ -89,7 +89,7 @@
                                 <table class="text-wrap table-borderless table ">
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Section:</td>
-                                        <td class="text-capitalize">{{$user->section->section_number}}</td>
+                                        <td class="text-capitalize">{{$user->section['section_number']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Session:</td>

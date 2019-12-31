@@ -23,7 +23,6 @@
         "spatie/laravel-tail": "^3.3"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
         "filp/whoops": "~2.0",
         "friendsofphp/php-cs-fixer": "^2.14",
         "fzaninotto/faker": "~1.4",

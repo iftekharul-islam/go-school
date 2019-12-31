@@ -30,25 +30,25 @@ class UsersImport implements ToCollection
                 continue;
             }
 
-            if (!$row[1]) {
+            {
                 $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
                 $name = explode(" ", $row[0]);
 
                 $username = array_last($name) . $code;
-                $row[1] = $username;
+                $pass = $username;
             }
             $user = User::create([
                 'name' => $row[0],
-                'email' => $row[1],
-                'password'=> bcrypt($row[2]),
+                'email' => $username,
+                'password'=> bcrypt($pass),
                 'role'     => 'student',
                 'active'   => 1,
                 'school_id'=> auth()->user()->school_id,
                 'code'     => auth()->user()->code,
                 'student_code' => $code,
-                'gender' => $row[3],
-                'nationality'=> $row[4],
-                'address' => $row[5],
+                'gender' => $row[1],
+                'nationality'=> $row[2],
+                'address' => $row[3],
                 'section_id' => $this->section
 
             ]);
@@ -56,15 +56,15 @@ class UsersImport implements ToCollection
             $student = StudentInfo::create([
                 'student_id' => $code,
                 'session' => now('y'),
-                'version' => $row[6],
-                'group'  =>  $row[7] ? $row[7] : '',
-                'birthday' => Carbon::parse($row[8]),
-                'father_name' => $row[9],
-                'father_phone_number' => $row[10],
-                'father_national_id' => $row[11] ? $row[11] : '',
-                'father_occupation' => $row[12],
-                'mother_name' => $row[13],
-                'religion' => $row[14],
+                'version' => $row[4],
+                'group'  =>  $row[5] ? $row[5] : '',
+                'birthday' => Carbon::parse($row[6]),
+                'father_name' => $row[7],
+                'father_phone_number' => $row[8],
+                'father_national_id' => $row[9] ? $row[9] : '',
+                'father_occupation' => $row[10],
+                'mother_name' => $row[11],
+                'religion' => $row[12],
                 'user_id' => $user->id,
             ]);
         }

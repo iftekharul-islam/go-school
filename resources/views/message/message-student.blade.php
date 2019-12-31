@@ -69,7 +69,7 @@
                         @endif
                         @if(count($students) > 0)
                             @foreach ($students as $student)
-                                <h4>Students of <b>Class:</b> {{$student->section->class->class_number}} <b>Section:</b> {{$student->section->section_number}}</h4>
+                                <h4>Students of <b>Class:</b> {{$student->section['class']['class_number']}} <b>Section:</b> {{$student->section['section_number']}}</h4>
                                 @break
                             @endforeach
                             <h4>Select Students to send message</h4>
