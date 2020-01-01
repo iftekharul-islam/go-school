@@ -9,6 +9,7 @@
         "dingo/api": "2.2.3",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.5",
         "intervention/image": "^2.5",
         "jdavidbakr/laravel-cache-garbage-collector": "^1.0",
         "lab404/laravel-impersonate": "1.2",
@@ -19,6 +20,7 @@
         "mavinoo/laravel-batch": "dev-master",
         "pda/pheanstalk": "~3.0",
         "renatomarinho/laravel-page-speed": "^1.8",
+        "spatie/laravel-backup": "^5.0.0",
         "spatie/laravel-tail": "^3.3"
     },
     "require-dev": {
