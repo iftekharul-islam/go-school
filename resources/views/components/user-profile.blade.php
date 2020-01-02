@@ -95,7 +95,7 @@
                   <tr>
                     <td>Email:</td>
                     <td>{{$user->email}}</td>
-                    <td>Contact Number</td>
+                    <td>Contact Number:</td>
                     <td>{{$user->phone_number}}</td>
                   </tr>
                   <tr>
