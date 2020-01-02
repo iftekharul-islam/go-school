@@ -38,7 +38,7 @@ class CreateUserRequest extends FormRequest
             'nationality' => 'required|string',
             'father_name' => 'required|string',
             'mother_name' => 'required|string',
-            'phone_number' => 'unique:users',
+            'phone_number' => 'numeric',
             'address' => 'required|string',
             'session' => 'required',
             'version' => 'required',

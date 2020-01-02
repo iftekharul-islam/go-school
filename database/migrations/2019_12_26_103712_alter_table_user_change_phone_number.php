@@ -15,6 +15,7 @@ class AlterTableUserChangePhoneNumber extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropUnique(['phone_number']);
+            $table->string('phone_number')->nullable()->change();
         });
     }
 
@@ -27,6 +28,7 @@ class AlterTableUserChangePhoneNumber extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unique('phone_number');
+            $table->string('phone_number')->nullable(false)->change();
         });
     }
 }
