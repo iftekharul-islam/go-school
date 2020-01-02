@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersImport implements ToCollection
 {
@@ -49,13 +50,12 @@ class UsersImport implements ToCollection
                 'gender' => $row[1],
                 'nationality'=> $row[2],
                 'address' => $row[3],
-                'section_id' => $this->section
-
+                'section_id' => $this->section,
             ]);
 
             $student = StudentInfo::create([
-                'student_id' => $code,
-                'session' => now('y'),
+                'student_id' => $user->id,
+                'session' => date("Y"),
                 'version' => $row[4],
                 'group'  =>  $row[5] ? $row[5] : '',
                 'birthday' => Carbon::parse($row[6]),
@@ -65,7 +65,7 @@ class UsersImport implements ToCollection
                 'father_occupation' => $row[10],
                 'mother_name' => $row[11],
                 'religion' => $row[12],
-                'user_id' => $user->id,
+                'user_id' => Auth::user()->id,
             ]);
         }
     }

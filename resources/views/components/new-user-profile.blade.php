@@ -1,4 +1,4 @@
-<div class="single-info-details">
+<div class="">
     <div class="row">
         <div class="col-md-4">
             <div class="item-img-round">
@@ -22,20 +22,6 @@
                 <!-- <td>Student's Name:</td> -->
                     <div class="profile-name">
                         <h3 class="mt-3">{{$user->name}}</h3>
-                    </div>
-                    <div class="info-table table-responsive">
-                        <table class="text-nowrap table-borderless table ">
-                            <tr>
-                                <td class="font-medium text-dark-medium">Email:</td>
-                                <td class="text-left">{{$user->email}}</td>
-
-                            </tr>
-                            <tr>
-                                <td class="font-medium text-dark-medium">Birthday :</td>
-                                <td class="text-left">
-                                    {{Carbon\Carbon::parse($user->studentInfo['birthday'])->format('d/m/Y')}}</td>
-                            </tr>
-                        </table>
                     </div>
                 @endif
             </div>
@@ -61,16 +47,21 @@
                                         <td class="text-capitalize">{{$user->studentInfo['version']}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Class:</td>
-                                        <td>{{$user->section['class']['class_number']}}</td>
-                                    </tr>
-                                    <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Gender:</td>
                                         <td class="text-capitalize">{{$user->gender}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Religion:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['religion']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium">Birthday :</td>
+                                        <td class="text-left">
+                                            {{Carbon\Carbon::parse($user->studentInfo['birthday'])->format('d/m/Y')}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium">Email:</td>
+                                        <td class="text-left">{{$user->email}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Address:</td>
@@ -83,6 +74,10 @@
                         <div class="col-md-6">
                             <div class=" table-responsive">
                                 <table class="text-wrap table-borderless table ">
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Class:</td>
+                                        <td>{{$user->section['class']['class_number']}}</td>
+                                    </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Section:</td>
                                         <td class="text-capitalize">{{$user->section['section_number']}}</td>
@@ -103,74 +98,6 @@
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Blood Group:</td>
                                         <td class="text-capitalize">{{$user->blood_group}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="heading-sub fancy4 ">Parent's Information</div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="table-responsive border-right">
-                                <table class="text-wrap table-borderless table">
-                                    <th>Father's Information:</th>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Name:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['father_name']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
-                                        <td>{{$user->studentInfo['father_phone_number']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">National ID:</td>
-                                        <td>{{$user->studentInfo['father_national_id']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Occupation:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['father_occupation']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Annual Income:</td>
-                                        <td>{{$user->studentInfo['father_annual_income']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Designation:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['father_designation']}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="table-responsive">
-                                <table class="text-wrap table-borderless table">
-                                    <th>Mother's Information:</th>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Name:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['mother_name']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
-                                        <td>{{$user->studentInfo['mother_phone_number']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-nowrap text-dark-medium">National ID:</td>
-                                        <td class="">{{$user->studentInfo['mother_national_id']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Occupation:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['mother_occupation']}}</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-nowrap text-dark-medium">Annual Income:
-                                        </td>
-                                        <td>{{$user->studentInfo['mother_annual_income']}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium">Designation:</td>
-                                        <td class="text-capitalize">{{$user->studentInfo['mother_designation']}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -244,4 +171,76 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+        <div class="heading-sub fancy4 ">Parent's Information</div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-6">
+                <div class="table-responsive border-right">
+                    <table class="text-wrap table-borderless table">
+                        <th>Father's Information:</th>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Name:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['father_name']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
+                            <td>{{$user->studentInfo['father_phone_number']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-dark-medium">National ID:</td>
+                            <td>{{$user->studentInfo['father_national_id']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Occupation:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['father_occupation']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Annual Income:</td>
+                            <td>{{$user->studentInfo['father_annual_income']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Designation:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['father_designation']}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="table-responsive">
+                    <table class="text-wrap table-borderless table">
+                        <th>Mother's Information:</th>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Name:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['mother_name']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
+                            <td>{{$user->studentInfo['mother_phone_number']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-nowrap text-dark-medium">National ID:</td>
+                            <td class="">{{$user->studentInfo['mother_national_id']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Occupation:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['mother_occupation']}}</td>
+
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-nowrap text-dark-medium">Annual Income:
+                            </td>
+                            <td>{{$user->studentInfo['mother_annual_income']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Designation:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['mother_designation']}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+    </div>
+
 </div>
