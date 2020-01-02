@@ -96,8 +96,8 @@ class MyclassController extends Controller
     public function updateClassDetails(Request $request, $id) {
          $class = Myclass::findOrFail($id);
          $class->class_number = $request->get('class_number');
-         $class->group = $request->get('group');
-         $class->department_id = $request->get('department');
+         $class->group = $request->get('group') ? $request->get('group') : '';
+         $class->department_id = $request->get('department') ? $request->get('department') : 0;
          if ($class->save()) {
              return back()->with('status', 'Class info updated!');
          }

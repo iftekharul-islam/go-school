@@ -126,11 +126,10 @@
                                     <div class="col-md-12">
                                         <label for="phone_number"
                                                class="control-label false-padding-bottom">Phone
-                                            Number<label
-                                                class="text-danger">*</label></label>
+                                            Number</label>
                                         <input id="phone_number" type="text"
                                                class="form-control" name="phone_number"
-                                               value="" required>
+                                               value="" >
 
                                         @if ($errors->has('phone_number'))
                                             <span class="help-block">
