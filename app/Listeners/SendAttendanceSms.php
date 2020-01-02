@@ -84,11 +84,16 @@ class SendAttendanceSms implements ShouldQueue
 
         Logger('Sms Phone number ' . $phone);
         
-        $user = config("message.sms_user");
-        $pass = config("message.sms_pass");
-        $sid = config("message.sms_sid");
-        $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+//               $user = config("message.sms_user");
+//        $pass = config("message.sms_pass");
+//        $sid = config("message.sms_sid");
+//        $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+
+        $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
+
         $message = $student->name . $text . Carbon::now()->toFormattedDateString() . ") class.";
+
+        $url = "http://smscp.datasoftbd.com/smsapi/non-masking?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
         $client = new Client();
 
         if (config('app.env') != 'production') {
@@ -96,16 +101,18 @@ class SendAttendanceSms implements ShouldQueue
             return;
         }
 
-        $response = $client->request('POST', $url, [
-            'form_params' => [
-                'user' => $user,
-                'pass' => $pass,
-                'sid'  => $sid,
-                'sms'  => [
-                    [$phone, $message],
-                ],
-            ],
-        ]);
+//        $response = $client->request('POST', $url, [
+//            'form_params' => [
+//                'user' => $user,
+//                'pass' => $pass,
+//                'sid'  => $sid,
+//                'sms'  => [
+//                    [$phone, $message],
+//                ],
+//            ],
+//        ]);
+
+        $response = $client->get($url);
 
         SmsHistory::create([
             'content' => $message,
