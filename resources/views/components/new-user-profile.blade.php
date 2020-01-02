@@ -26,14 +26,10 @@
                     <div class="info-table table-responsive">
                         <table class="text-nowrap table-borderless table ">
                             <tr>
-                                <td class="font-medium text-dark-medium">Email :</td>
+                                <td class="font-medium text-dark-medium">Email:</td>
                                 <td class="text-left">{{$user->email}}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-medium text-dark-medium">Contact Number :</td>
-                                <td class="text-left">{{$user->phone_number}}</td>
-                            </tr>
 
+                            </tr>
                             <tr>
                                 <td class="font-medium text-dark-medium">Birthday :</td>
                                 <td class="text-left">
@@ -118,6 +114,7 @@
                         <div class="col-md-6">
                             <div class="table-responsive border-right">
                                 <table class="text-wrap table-borderless table">
+                                    <th>Father's Information:</th>
                                     <tr>
                                         <td class="font-medium text-dark-medium">Father Name:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['father_name']}}</td>
