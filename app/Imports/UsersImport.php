@@ -54,7 +54,7 @@ class UsersImport implements ToCollection
             ]);
 
             $student = StudentInfo::create([
-                'student_id' => $user->id,
+                'student_id' => $code,
                 'session' => date("Y"),
                 'version' => $row[4],
                 'group'  =>  $row[5] ? $row[5] : '',
@@ -65,7 +65,7 @@ class UsersImport implements ToCollection
                 'father_occupation' => $row[10],
                 'mother_name' => $row[11],
                 'religion' => $row[12],
-                'user_id' => Auth::user()->id,
+                'user_id' => $user->id,
             ]);
         }
     }

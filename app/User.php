@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function studentInfo()
     {
-        return $this->hasOne(StudentInfo::class, 'student_id');
+        return $this->hasOne(StudentInfo::class, 'user_id');
     }
 
     public function studentBoardExam()
