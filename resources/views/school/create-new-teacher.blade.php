@@ -188,7 +188,7 @@
 
                                 <input id="phone_number" type="text"
                                        class="form-control" name="phone_number"
-                                       value="">
+                                       value="" required>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">

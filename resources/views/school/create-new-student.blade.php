@@ -88,7 +88,7 @@
                                         <input type="hidden" name="student_code" value="{{ $code }}">
 
                                         <input id="email" type="email" class="form-control student-username"
-                                               name="email" value=""
+                                               name="email" value="{{ old('email') }}"
                                                required readonly>
 
                                         <div class="email-visible"></div>
@@ -146,7 +146,7 @@
 
                                         <select id="department" class="form-control"
                                                 name="department_id">
-                                            <option value="" selected> --Select Option-- </option>
+                                            <option value="{{ old('department_id') }}" selected> --Select Option-- </option>
                                             @if (count($departments) > 0)
                                                 @foreach ($departments as $department)
                                                     <option value="{{$department->id}}">{{$department->department_name}}</option>
@@ -261,11 +261,10 @@
                                     <div class="col-md-12">
                                         <label for="phone_number"
                                                class="control-label false-padding-bottom">Phone
-                                            Number<label
-                                                class="text-danger">*</label></label>
+                                            Number</label>
 
                                         <input id="phone_number" type="text"
-                                               class="form-control" required name="phone_number"
+                                               class="form-control"  name="phone_number"
                                                value="{{ old('phone_number') }}">
 
                                         @if ($errors->has('phone_number'))

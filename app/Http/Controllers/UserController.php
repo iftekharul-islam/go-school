@@ -247,11 +247,6 @@ class UserController extends Controller
     public function createStudent()
     {
         $user = Auth::user();
-
-        $schools = School::all();
-        $classes = Myclass::all();
-        $sections = Section::all();
-
         $studentClasses = Myclass::query()
         ->where('school_id', $user->school->id)
         ->pluck('id');
@@ -263,7 +258,7 @@ class UserController extends Controller
 
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
 
-        return view('school.create-new-student', compact('schools', 'classes', 'sections','departments','adminAccessDepartment','studentClasses', 'studentSections'));
+        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections'));
 
     }
 

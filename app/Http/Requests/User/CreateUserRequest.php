@@ -38,7 +38,7 @@ class CreateUserRequest extends FormRequest
             'nationality' => 'required|string',
             'father_name' => 'required|string',
             'mother_name' => 'required|string',
-            'phone_number' => 'required|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
+            'phone_number' => 'unique:users',
             'address' => 'required|string',
             'session' => 'required',
             'version' => 'required',
