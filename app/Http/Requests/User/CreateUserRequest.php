@@ -29,7 +29,8 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'sometimes|email|max:255|unique:users',
+            'email' => 'sometimes|max:255|unique:users',
+            'student_code' => 'required|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'section' => 'required|numeric',
             'gender' => 'required|string',
@@ -37,7 +38,6 @@ class CreateUserRequest extends FormRequest
             'nationality' => 'required|string',
             'father_name' => 'required|string',
             'mother_name' => 'required|string',
-            'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'address' => 'required|string',
             'session' => 'required',
             'version' => 'required',

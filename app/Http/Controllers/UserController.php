@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gradesystem;
+use App\Http\Requests\ImportStudentRequest;
 use App\Http\Requests\user\UpdateStaffProfileRequest;
 use App\School;
 use App\StudentInfo;
@@ -29,6 +30,8 @@ use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
 use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
 
 /**
  * Class UserController.
@@ -205,11 +208,14 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('student_pic')) : null;
+        $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date('Y'), $request->file('student_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStudent($request, $path);
         $this->userService->storeStudentInfo($request, $tb);
-        event(new UserRegistered($tb, $password));
+        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL))
+        {
+            event(new UserRegistered($tb, $password));
+        }
         return back()->with('status', 'New Student Added!');
     }
 
@@ -223,14 +229,24 @@ class UserController extends Controller
         return view('auth.admin');
     }
 
-    public function createStudent()
+    public function importStudent()
     {
         $user = Auth::user();
 
-        $schools = School::all();
-        $classes = Myclass::all();
-        $sections = Section::all();
+        $studentClasses = Myclass::query()
+            ->where('school_id', $user->school->id)
+            ->pluck('id');
 
+        $studentSections = Section::with('class')
+            ->whereIn('class_id', $studentClasses)
+            ->get();
+
+        return view('school.import-student',compact('studentSections','studentClasses','user'));
+    }
+
+    public function createStudent()
+    {
+        $user = Auth::user();
         $studentClasses = Myclass::query()
         ->where('school_id', $user->school->id)
         ->pluck('id');
@@ -242,7 +258,7 @@ class UserController extends Controller
 
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
 
-        return view('school.new-student', compact('schools', 'classes', 'sections','departments','adminAccessDepartment','studentClasses', 'studentSections'));
+        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections'));
 
     }
 
@@ -266,9 +282,18 @@ class UserController extends Controller
 
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
 
-        return view('school.new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+        return view('school.create-new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
 
+    public function createLibrarian()
+    {
+        return view('school.create-new-librarian');
+    }
+
+    public function createAccountant()
+    {
+        return view('school.create-new-accountant');
+    }
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -511,6 +536,12 @@ class UserController extends Controller
         $user->rfid = $request->rfid;
 
         return redirect()->route('user.show', $id)->with('status', $user->name.' RFID set successfull!');
+    }
+
+    public function importStudents(ImportStudentRequest $request)
+    {
+        Excel::import(new usersImport($request->section), $request->file('users'));
+        return redirect()->back()->with('status','Student Successfullty added');
     }
 
 

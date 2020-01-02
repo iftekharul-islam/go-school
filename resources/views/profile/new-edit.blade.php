@@ -8,7 +8,7 @@
             Edit
         </h3>
         <ul>
-            <li> <a href="javascript:history.back()" style="color: #32998f!important;">
+            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -594,7 +594,7 @@
                             @endif
                             <div class="form-group mt-5">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <a href="javascript:history.back()" class="button button--cancel" style="margin-right: 2%;"
+                                    <a href="{{ URL::previous() }}" class="button button--cancel" style="margin-right: 2%;"
                                        role="button">Cancel</a>
                                     <input type="submit" role="button" class="button button--save" value="Save">
                                 </div>

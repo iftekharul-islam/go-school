@@ -15,8 +15,10 @@
             $inact = 0;
             $ac = 0;
             $std = 0;
+            $t = 0;
             $all_student = 0;
-            if (strpos($add, 'book') || strpos($add, 'librarian') )
+            $teacher = 0;
+            if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
             if (strpos($add, 'exams'))
                 $ex = 1;
@@ -28,10 +30,14 @@
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection') || strpos($add, 'fees-summary'))
                 $ac = 1;
-            if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message'))
+            if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message') || strpos($add, 'new-student') || strpos($add, 'import-student'))
                 $std = 1;
             if (strpos($add, 'users/'))
                 $all_student = 1;
+            if ((strpos($add, 'users/') && Request::get('teacher'))  || strpos($add,'new-teacher'))
+                $teacher = 1;
+            if(strpos($add,'new-teacher'))
+                $t = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -139,19 +145,30 @@
                                        href="{{ url('admin/new-student') }}">
                                         <i class="fas fa-angle-right"></i><span>Add Student</span></a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('admin/import-student')) ? 'menu-active' : '' }}"
+                                       href="{{ url('admin/import-student') }}">
+                                        <i class="fas fa-angle-right"></i><span>Import Student</span></a>
+                                </li>
                             @endif
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}"
-                            class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
-                            <i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{url('admin/new-teacher')}}"
-                           class="nav-link {{ Request::get('admin/new-teacher') == 1 ? 'menu-active' :''}}">
-                            <i class="flaticon-multiple-users-silhouette"></i><span>Add Teacher</span></a>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
+                        <ul class="nav sub-group-menu {{ $teacher == 1 ? 'sub-group-active' : ''}}">
+                            <li class="nav-item">
+                                <a href="{{url('users/'.Auth::user()->school->code.'/0/1?teacher=1')}}"
+                                   class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
+                                    <i class="fas fa-angle-right"></i><span>All Teachers</span></a>
+                            </li>
+                            @if($role == 'admin')
+                            <li class="nav-item">
+                                <a href="{{url('admin/new-teacher')}}"
+                                   class="nav-link {{ (request()->is('admin/new-teacher')) ? 'menu-active' : '' }}">
+                                    <i class="fas fa-angle-right"></i><span>Add Teacher</span></a>
+                            </li>
+                            @endif
+                        </ul>
                     </li>
                 @endif
                 @if($role == 'admin')
@@ -286,6 +303,11 @@
                                     class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
+                                <a class="nav-link {{ (request()->is('admin/new-accountant')) ? 'menu-active' : '' }}"
+                                   href="{{ 'new-accountant' }}">
+                                    <i class="fas fa-angle-right"></i><span>Add accountant</span></a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link {{ ($acc == 1 && $all_student == 1 ) ? 'menu-active' : '' }}"
                                    href="{{url($role.'/users/' .Auth::user()->school->code. '/accountant')}}">
                                     <i class="fas fa-angle-right"></i><span>Accountant List</span></a>
@@ -331,6 +353,11 @@
                         <a href="#" class="nav-link"><i class="fas fa-book-open"></i><span>Manage Library</span></a>
                         <ul class="nav sub-group-menu menu-open {{ $lib==1 ? 'sub-group-active' : '' }}"
                             style="display: block;">
+                            <li class="nav-item">
+                                <a href="{{ url('admin/new-librarian') }}"
+                                   class="nav-link {{ (request()->is('admin/new-librarian')) ? 'menu-active' : '' }}"><i
+                                        class="fas fa-angle-right"></i>Add Librarian</a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ url($role.'/users/'.Auth::user()->school->code.'/librarian') }}"
                                    class="nav-link {{ (request()->is($role.'/users/' .Auth::user()->school->code. '/librarian')) ? 'menu-active' : '' }}"><i

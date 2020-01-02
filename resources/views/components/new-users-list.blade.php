@@ -17,8 +17,8 @@
         @endforeach
     </h3>
     <ul>
-        <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                Back &nbsp;&nbsp;|</a>
+        <li>
+            <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
         </li>
         <li>   @foreach($users as $user)
@@ -107,8 +107,8 @@
                             @if (!Session::has('section-attendance'))
                                 <td>{{$user->studentInfo['session']}}</td>
                                 <td>{{ucfirst($user->studentInfo['version'])}}</td>
-                                <td>{{$user->section->class->class_number}} {{!empty($user->group)? '- '.$user->group:''}}</td>
-                                <td style="white-space: nowrap;">{{$user->section->section_number}}
+                                <td>{{$user->section['class']['class_number']}} {{!empty($user->group)? '- '.$user->group:''}}</td>
+                                <td style="white-space: nowrap;">{{$user->section['section_number']}}
                                 </td>
                             @endif
                         @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')

@@ -17,8 +17,8 @@
                 Message Student
             </h3>
             <ul>
-                <li> <a href="javascript:history.back()" style="color: #32998f!important;">
-                        Back &nbsp;&nbsp;|</a>
+                <li>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
                     <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
                 </li>
                 <li>Message Student</li>
@@ -69,7 +69,7 @@
                         @endif
                         @if(count($students) > 0)
                             @foreach ($students as $student)
-                                <h4>Students of <b>Class:</b> {{$student->section->class->class_number}} <b>Section:</b> {{$student->section->section_number}}</h4>
+                                <h4>Students of <b>Class:</b> {{$student->section['class']['class_number']}} <b>Section:</b> {{$student->section['section_number']}}</h4>
                                 @break
                             @endforeach
                             <h4>Select Students to send message</h4>
@@ -186,6 +186,7 @@
             });
         }
     </script>
+
 @endpush
 
 @endsection

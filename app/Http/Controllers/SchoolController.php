@@ -29,28 +29,21 @@ class SchoolController extends Controller
         $classes = Myclass::all();
         $sections = Section::all();
 
-        $studentClasses = Myclass::query()
-            ->where('school_id', $user->school->id)
-            ->pluck('id');
-
-        $studentSections = Section::with('class')
-            ->whereIn('class_id', $studentClasses)
-            ->get();
-
-        $teacherDepartments = Department::where('school_id', $user->school_id)->get();
-        $teacherClasses = Myclass::where('school_id', $user->school->id)->pluck('id');
-        $teacherSections = Section::with('class')->whereIn('class_id', $teacherClasses)->get();
-        $gradeSystems = Gradesystem::where('school_id', $user->school_id)->first();
-
         $teachers = User::where('role', 'teacher')
             ->orderBy('name', 'ASC')
             ->where('active', 1)
             ->get();
+
         $departments = Department::where('school_id', $user->school_id)->get();
-
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
-
-        return view('school.new-create-school', compact('schools', 'gradeSystems', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'studentClasses', 'studentSections', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+        return view('school.academic-settings',
+            compact('schools',
+                'adminAccessDepartment',
+                'user',
+                'classes',
+                'sections',
+                'departments',
+                'teachers'));
     }
 
     /**

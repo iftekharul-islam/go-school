@@ -63,7 +63,7 @@
             </tbody>
         </table>
         <div style="text-align:center;" class="mt-5">
-            <input type="submit" class="button button--save" value="Submit">
+            <input type="submit" class="button button--save float-right" value="Submit">
         </div>
     </form>
 </div>

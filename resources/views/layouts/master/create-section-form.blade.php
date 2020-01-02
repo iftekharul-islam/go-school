@@ -12,7 +12,7 @@
                     Name</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="section_number{{$class->class_number}}"
-                           name="section_number" placeholder="A, B, C, etc..">
+                           name="section_number" placeholder="A, B, C etc..">
                 </div>
             </div>
             <div class="form-group false-padding-bottom-form">

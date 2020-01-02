@@ -34,7 +34,6 @@ class CreateTeacherRequest extends FormRequest
             'gender' => 'required',
             'blood_group' => 'required',
             'department_id' => 'required|numeric',
-            'phone_number' =>  'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'address' => 'required|string',
             'teacher_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];

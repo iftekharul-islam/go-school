@@ -32,7 +32,6 @@ class CreateAccountantRequest extends FormRequest
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
             'blood_group' => 'required',
-            'phone_number' => 'required|unique:users|regex:/\+?(88)?0?1[56789][0-9]{8}\b/',
             'email' => 'sometimes|email|max:255|unique:users',
             'address' => 'required|string',
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',

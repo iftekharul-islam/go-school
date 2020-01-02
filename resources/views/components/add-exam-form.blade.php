@@ -76,7 +76,7 @@
             @endif
         </div>
         <div class="col-12 form-group mg-t-8" style="text-align: right">
-            <a href="javascript:history.back()" class="button button--cancel mr-2" style="margin-left: 1%;" role="button"><b>Cancel</b></a>
+            <a href="{{ URL::previous() }}" class="button button--cancel mr-2" style="margin-left: 1%;" role="button"><b>Cancel</b></a>
             <button type="submit" class="button button--save"><b>Save</b></button>
         </div>
     </div>
