@@ -27,6 +27,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('absent:sms')
                  ->everyFiveMinutes();
+        $schedule->command('backup:clean')->quarterly();
+        $schedule->command('backup:run')->dailyAt('00:00');
     }
 
     /**
