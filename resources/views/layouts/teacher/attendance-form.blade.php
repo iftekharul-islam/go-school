@@ -7,7 +7,7 @@
         </ul>
     </div>
 @endif
-<form action="{{url('teacher/attendance/take-attendance')}}" method="post">
+<form id="attendance-form" action="{{url('teacher/attendance/take-attendance')}}" method="post">
     {{ csrf_field() }}
     <input type="text" name="section_id" value="{{$section_id}}" style="display: none;">
     <input type="hidden" name="exam_id" value="{{$exam_id}}">
@@ -18,7 +18,9 @@
                 <th>#</th>
                 <th>Student_Code</th>
                 <th>Name</th>
-                <th>Present</th>
+                <th>Present
+                    <button type="button" id="over-ride" class="button button--primary badge btn-override" onclick="activeAttendance();">Over ride</button>
+                </th>
                 <th>Total Attended</th>
                 <th>Total Missed</th>
             </tr>
@@ -42,16 +44,16 @@
                             @endif
                             &nbsp;&nbsp;<a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
                         </td>
-                        <td>
+                        <td class="attendance-bar">
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
                             @if($attendance->present === 1)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" aria-label="Present" name="isPresent{{$loop->index}}" checked>
+                                    <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" disabled="disabled" checked>
                                     <label for="">&nbsp;</label>
                                 </div>
                             @else
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent">
+                                    <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent" disabled="disabled" >
                                     <label for="">&nbsp;</label>
                                 </div>
                             @endif
@@ -79,10 +81,10 @@
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
-                        <td><span class="badge badge-primary attdState">Present</span>&nbsp;&nbsp;{{$student->name}}</td>
+                        <td><span class="badge badge-danger attdState">Absent</span>&nbsp;&nbsp;<a href="{{url('user/',$student->student_code)}}">{{$student->name}}</a></td>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>
+                                <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="present" disabled="disabled" checked>
                                 <label for="">&nbsp;</label>
                             </div>
                         </td>
@@ -110,19 +112,10 @@
     </div>
     <div class="attendance mt-5">
         @if (count($attendances) > 0)
-            <button type="submit" class="button button--save float-right mb-5"><i class="far fa-save mr-2"></i> Update</button>
+            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i> Update</button>
         @else
-            <button type="submit" class="button button--save float-right mb-5"><i class="far fa-save mr-2"></i>Submit</button>
+            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i>Submit</button>
         @endif
     </div>
 </form>
-<script>
-    $('input[type="checkbox"]').change(function () {
-        var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
-        if ($(this).is(':checked')) {
-            attdState.addClass('badge-primary').text('Present');
-        } else {
-            attdState.addClass('badge-danger').text('Absent');
-        }
-    });
-</script>
+

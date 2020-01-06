@@ -1156,6 +1156,9 @@ card-sub-header:first-child {
 .dataTables_wrapper .table tbody tr {
   border: 1px solid #e1e1e1;
 }
+.attendance-bar {
+  background-color: #F2F2F2;
+}
 
 .dataTables_wrapper .table tbody tr td {
   font-size: 15px;
