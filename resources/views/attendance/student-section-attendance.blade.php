@@ -77,7 +77,6 @@
                             location.reload();
                         }
                     }
-
                 });
         }
         $('input[type="checkbox"]').change(function () {
