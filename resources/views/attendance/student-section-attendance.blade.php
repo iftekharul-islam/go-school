@@ -62,27 +62,27 @@
                     if(willenable){
                         $(".formCheck").attr('disabled', !$(".formCheck").attr('disabled'));
                         $(".updatebtn").attr('disabled', !$(".updatebtn").attr('disabled'));
-                        let btnText = $(".btn-override").html();
+                        let btnText = $(".btn-override").attr('data-purpose');
 
-                        if(btnText == 'Over ride') {
+                        if(btnText == 'over') {
                             $(".btn-override").html('Cancel');
                             $(".btn-override").removeClass('button--primary');
                             $(".btn-override").addClass('button--cancel');
                             $(".attendance-bar").css('background', 'transparent');
+                            $(".btn-override").attr('data-purpose','cancel');
                         } else {
-                            $(".btn-override").html('Over ride');
+                            $(".btn-override").attr('data-purpose','over');
                             $(".btn-override").removeClass('button--cancel');
                             $(".btn-override").addClass('button--primary');
                             location.reload();
-
                         }
-
                     }
 
                 });
         }
         $('input[type="checkbox"]').change(function () {
             var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
+
             if ($(this).is(':checked')) {
                 attdState.addClass('badge-primary').text('Present');
             } else {

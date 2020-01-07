@@ -19,7 +19,7 @@
                 <th>Student_Code</th>
                 <th>Name</th>
                 <th>Present
-                    <button type="button" id="over-ride" class="button button--primary badge btn-override" onclick="activeAttendance();">Over ride</button>
+                    <button type="button" id="over-ride" class="button button--primary badge btn-override" data-purpose="over" onclick="activeAttendance();">Over ride</button>
                 </th>
                 <th>Total Attended</th>
                 <th>Total Missed</th>
@@ -82,9 +82,9 @@
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
                         <td><span class="badge badge-danger attdState">Absent</span>&nbsp;&nbsp;<a href="{{url('user/',$student->student_code)}}">{{$student->name}}</a></td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="present" disabled="disabled" checked>
+                        <td class="attendance-bar">
+                            <div class="form-check ">
+                                <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="present" disabled="disabled">
                                 <label for="">&nbsp;</label>
                             </div>
                         </td>
