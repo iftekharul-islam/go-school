@@ -17,12 +17,6 @@
     <div class="section-students">
         <div class="card height-auto mt-5 false-height">
             <div class="card-body">
-                <div class="heading-layout1">
-                    <div class="item-title ">
-                        <h2 class="text-teal text-center">Students</h2>
-                    </div>
-
-                </div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

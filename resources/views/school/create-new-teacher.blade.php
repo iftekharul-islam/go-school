@@ -51,6 +51,7 @@
 
                                 <input id="name" type="text" class="form-control"
                                        name="name"
+                                       value="{{ old('name') }}"
                                        required>
 
                                 @if ($errors->has('name'))
@@ -72,7 +73,7 @@
 
                                 <input id="email" type="email" class="form-control"
                                        name="email"
-                                       value="" required>
+                                       value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -129,7 +130,9 @@
                                        class=" control-label false-padding-bottom">Department</label>
 
                                 <select id="department" class="form-control"
-                                        name="department_id" required>
+                                        name="department_id"
+                                        value="{{ old('department') }}"
+                                        required>
                                     <option value="0">Select Department</option>
                                     @if (count($teacherDepartments) > 0)
                                         @foreach ($teacherDepartments as $d)
@@ -155,7 +158,7 @@
                                     Teacher</label>
 
                                 <select id="class_teacher" class="form-control"
-                                        name="class_teacher_section_id">
+                                        name="class_teacher_section_id" value="{{ old('class_teacher') }}">
                                     <option selected="selected" value="0">Not Class
                                         Teacher
                                     </option>
@@ -187,7 +190,7 @@
 
                                 <input id="phone_number" type="text"
                                        class="form-control" name="phone_number"
-                                       value="" >
+                                       value="{{ old('phone_number') }}" >
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
@@ -207,7 +210,8 @@
                                         class="text-danger">*</label></label>
 
                                 <select id="blood_group" class="form-control"
-                                        name="blood_group">
+                                        name="blood_group"
+                                        value="{{ old('blood_group') }}">
                                     <option selected="selected">A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
@@ -238,7 +242,7 @@
 
                                 <input id="nationality" type="text"
                                        class="form-control" name="nationality"
-                                       value=""
+                                       value="{{ old('nationality') }}"
                                        required>
 
                                 @if ($errors->has('nationality'))
@@ -258,7 +262,7 @@
                                         class="text-danger">*</label></label>
 
                                 <select id="gender" class="form-control"
-                                        name="gender">
+                                        name="gender" value="value="{{ old('gender') }}">
                                     <option class="text-capitalize" value="male"
                                             selected="selected">Male
                                     </option>
@@ -285,7 +289,7 @@
                                         class="text-danger">*</label></label>
                                 <input id="address" type="text" class="form-control"
                                        name="address"
-                                       value=""
+                                       value="{{ old('address') }}"
                                        required>
 
                                 @if ($errors->has('address'))
@@ -306,7 +310,7 @@
 
                                 <input id="about" type="text" class="form-control"
                                        name="about"
-                                       value="" required>
+                                       value="{{ old('about') }}" required>
 
                                 @if ($errors->has('about'))
                                     <span class="help-block">

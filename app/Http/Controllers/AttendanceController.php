@@ -200,7 +200,7 @@ class AttendanceController extends Controller
         $course = Course::with('section')->where('section_id', $section_id)->first();
         if (!$course)
         {
-           return back()->with('error','No course is assigned for this section,please assign a course first');
+           return back()->with('error','No course is assigned for this section, Please assign a course first');
         }
 
         $examID = 0;
