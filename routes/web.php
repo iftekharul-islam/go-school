@@ -322,7 +322,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('new-accountant','UserController@createAccountant');
 
         Route::prefix('school')->name('school.')->group(function () {
-            Route::post('add-class', 'MyclassController@store');
+            Route::post('add-class', 'MyClassController@store');
             Route::post('add-section', 'SectionController@store');
             Route::post('add-department', 'SchoolController@addDepartment');
             Route::post('add-department', 'SchoolController@addDepartment');
