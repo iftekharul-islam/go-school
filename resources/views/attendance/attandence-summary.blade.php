@@ -26,11 +26,11 @@
                     <div class="row">
                         <div class="col-6-xxxl col-lg-6 col-6 form-group">
                             <label>Start Date</label>
-                            <input name="start_date" type="date" class="form-control" value="{{ $start_date ?? $start_date }}">
+                            <input name="start_date" type="date" class="form-control" value="{{ $start_display ?? $start_display }}">
                         </div>
                         <div class="col-6-xxxl col-lg-6 col-6 form-group">
                             <label>End Date</label>
-                            <input name="end_date" type="date" class="form-control" value="{{ $end_date ?? $end_date }}">
+                            <input name="end_date" type="date" class="form-control" value="{{ $end_display ?? $end_display }}">
                         </div>
                         <div class="col-12 form-group mg-t-2 float-right">
                             <button type="submit" class="button--save button float-right">Search</button>
@@ -41,18 +41,17 @@
             </div>
             <div class="card mb-5">
                 <div class="card-body">
-                <div class="card-body">
                     <h1 class="text-teal text-center">Student Attendance Summary</h1>
                     <div class="card-header-title mt-5 ml-2">
-                        <b>Attendance:</b> {{ $start_date}}&nbsp;&nbsp; <b>to</b> {{$end_date}} &nbsp
+                        <b>Attendance:</b> {{ $start_display }}&nbsp; <b>to</b> &nbsp {{ $end_display }} &nbsp
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered ">
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th class="take-col">Name</th>
                                 @foreach ($period as $dt)
-                                    <th>{{ $dt->format("d") }}</th>
+                                    <th class="text-center">{{ $dt->format("d") }}</th>
                                 @endforeach
                             </tr>
                             </thead>
@@ -60,18 +59,18 @@
 
                             @foreach ($final as $student)
                                 <tr>
-                                    <td class="text-nowrap text-left"> {{ $student['name'] }} </td>
+                                    <td class="text-nowrap text-left take-col"> {{ $student['name'] }} </td>
                                     @foreach ($student['attendances'] as $item)
                                         @if ($item >= 0)
                                             <td class="px-5">
                                                 @if ($item == '0')
-                                                    <i class="fa fa-circle text-info"></i>
+                                                    <i class="fa fa-times text-danger"></i>
                                                 @elseif($item == '1')
                                                     <i class="fa fa-check text-success"></i>
                                                 @elseif($item == '2')
-                                                    <i class="fa fa-plane text-warning"></i>
+                                                    <i class="fa fa-running text-danger"></i>
                                                 @elseif($item == null)
-                                                    <i class="fa fa-times text-danger"></i>
+                                                    <i class="fa fa-circle text-info"></i>
                                                 @endif
                                             </td>
                                         @else
@@ -85,7 +84,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>

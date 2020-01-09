@@ -3702,6 +3702,13 @@ ul {
   flex-direction: column;
   padding: 0 30px;
 }
+.take-col{
+  position: absolute;
+  top: auto;
+  width: 155px;
+  padding-bottom: 5px;
+  background: white;
+}
 
 @media only screen and (max-width: 767px) {
   .dashboard-content-one {
