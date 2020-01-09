@@ -16,6 +16,7 @@ class AttendanceService {
             ->where('section_id', $section_id)
             ->student()
             ->where('active', 1)
+            ->orderBy('student_code', 'DESC')
             ->get();
     }
 

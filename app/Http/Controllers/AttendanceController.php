@@ -200,7 +200,7 @@ class AttendanceController extends Controller
         $course = Course::with('section')->where('section_id', $section_id)->first();
         if (!$course)
         {
-           return back()->with('error','No course is assigned for this section,please assign a course first');
+           return back()->with('error','No course is assigned for this section, Please assign a course first');
         }
 
         $examID = 0;
@@ -246,40 +246,46 @@ class AttendanceController extends Controller
         return back()->with('status', 'Attendance record updated');
     }
 
-     public function attendancesSummaryDate(Request $request,$section_id)
+     public function attendancesSummaryDate(Request $request, $section_id)
      {
+         $s_date = $request->start_date;
+         $start_display = date("d-m-Y", strtotime($s_date));
+         $e_date = $request->end_date;
+         $end_display = date("d-m-Y", strtotime($e_date));
+
+         if (!$request->has('start_date') || !$request->filled('start_date')) {
+             $start_date = Carbon::today()->addDays(-30)->format('d-m-Y');
+             $start_display = $start_date;
+             $request->start_date = $start_date;
+         }
+         if (!$request->has('end_date') || !$request->filled('end_date')) {
+             $end_date = Carbon::today()->addDay(1)->format('d-m-Y');
+             $end_display = Carbon::today()->format('d-m-Y');
+             $request->end_date = $end_date;
+         }
          $students = $this->attendanceService->getAttendanceSummary($request);
-         $start_date = $request->start_date;
-         $end_date = $request->end_date;
 
-         if(!$start_date) {
-             $start_date = date('Y-m-d', strtotime("-30 days"));
-         }
-
-         if(!$end_date) {
-             $end_date = Carbon::today()->format('Y-m-d');
-         }
-         $request['section_id'] = $section_id;
-         $begin = new DateTime($start_date);
-         $end = new DateTime($end_date);
+         $begin = new DateTime($request->start_date);
+         $end = new DateTime($request->end_date);
          $interval = DateInterval::createFromDateString('1 day');
          $period = new DatePeriod($begin, $interval, $end);
          $final = [];
          foreach ($students as $student) {
-             $final[$student->id] = [
+               $final[$student->id] = [
                  "name" => $student->name,
              ];
 
              foreach ($period as $dt) {
                  $attendance = null;
-                 if ($student['attendances']) {
+                 if (isset($student['attendances'])) {
                      $attendance = $student->attendances->filter(function ($att) use($dt) {
-                         return $att->created_at->format('Y-m-d') === $dt->format('Y-m-d');
+                         return $att->created_at->format('d-m-Y') == $dt->format('d-m-Y');
                      })->first();
                  }
-                 $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
+                 $final[$student->id]['attendances'][$dt->format('d-m-Y')] = $attendance ? $attendance->present : null;
              }
          }
-        return view('attendance.attandence-summary', compact('final', 'start_date', 'end_date', 'students', 'period'));
+
+        return view('attendance.attandence-summary', compact('final', 'start_display', 'end_display', 'students', 'period'));
      }
 }

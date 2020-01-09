@@ -1156,6 +1156,9 @@ card-sub-header:first-child {
 .dataTables_wrapper .table tbody tr {
   border: 1px solid #e1e1e1;
 }
+.attendance-bar {
+  background-color: #F2F2F2;
+}
 
 .dataTables_wrapper .table tbody tr td {
   font-size: 15px;
@@ -3698,6 +3701,13 @@ ul {
   -ms-flex-direction: column;
   flex-direction: column;
   padding: 0 30px;
+}
+.take-col{
+  position: absolute;
+  top: auto;
+  width: 155px;
+  padding-bottom: 5px;
+  background: white;
 }
 
 @media only screen and (max-width: 767px) {

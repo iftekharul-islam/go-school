@@ -48,3 +48,46 @@
     </div>
 @endsection
 
+@push('customjs')
+    <script>
+        function activeAttendance() {
+            swal({
+                title: "Are you sure?",
+                text: "Student attendance option will be changed ",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willenable) => {
+                    if(willenable){
+                        $(".formCheck").attr('disabled', !$(".formCheck").attr('disabled'));
+                        $(".updatebtn").attr('disabled', !$(".updatebtn").attr('disabled'));
+                        let btnText = $(".btn-override").attr('data-purpose');
+
+                        if(btnText == 'over') {
+                            $(".btn-override").html('Cancel');
+                            $(".btn-override").removeClass('button--primary');
+                            $(".btn-override").addClass('button--cancel');
+                            $(".attendance-bar").css('background', 'transparent');
+                            $(".btn-override").attr('data-purpose','cancel');
+                        } else {
+                            $(".btn-override").attr('data-purpose','over');
+                            $(".btn-override").removeClass('button--cancel');
+                            $(".btn-override").addClass('button--primary');
+                            location.reload();
+                        }
+                    }
+                });
+        }
+        $('input[type="checkbox"]').change(function () {
+            var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
+
+            if ($(this).is(':checked')) {
+                attdState.addClass('badge-primary').text('Present');
+            } else {
+                attdState.addClass('badge-danger').text('Absent');
+            }
+        });
+
+    </script>
+@endpush

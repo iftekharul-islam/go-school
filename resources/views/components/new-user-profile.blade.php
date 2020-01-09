@@ -171,6 +171,7 @@
             </div>
         </div>
     </div>
+    @if($user->role == "student")
     <div class="row">
         <div class="col-12">
         <div class="heading-sub fancy4 ">Parent's Information</div>
@@ -242,5 +243,6 @@
                 </div>
             </div>
     </div>
+    @endif
 
 </div>
