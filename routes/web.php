@@ -325,7 +325,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');
             Route::post('add-section', 'SectionController@store');
-            Route::post('add-department', 'SchoolController@addDepartment');
+            Route::post('add-department', 'SchoolController@storeDepartment');
             Route::get('promote-students/{section_id}', 'UserController@promoteSectionStudents');
             Route::post('promote-students', 'UserController@promoteSectionStudentsPost');
             Route::post('theme', 'SchoolController@changeTheme');

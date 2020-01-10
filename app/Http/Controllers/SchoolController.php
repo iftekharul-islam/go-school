@@ -28,28 +28,9 @@ class SchoolController extends Controller
 
     public function createDepartment()
     {
-        $user = Auth::user();
-
-        $schools = School::all();
-        $classes = Myclass::all();
-        $sections = Section::all();
-
-        $teachers = User::where('role', 'teacher')
-            ->orderBy('name', 'ASC')
-            ->where('active', 1)
-            ->get();
-
-        $departments = Department::where('school_id', $user->school_id)->get();
-        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
-        return view('school.create-new-department',
-            compact('schools',
-                'adminAccessDepartment',
-                'user',
-                'classes',
-                'sections',
-                'departments',
-                'teachers'));
+        return view('school.create-new-department');
     }
+
     public function manageClasses()
     {
         $user = Auth::user();
@@ -161,7 +142,7 @@ class SchoolController extends Controller
         return view('school.new-edit-school', compact('school'));
     }
 
-    public function addDepartment(Request $request)
+    public function storeDepartment(Request $request)
     {
         $request->validate([
             'department_name' => 'required|string|max:50',
@@ -171,7 +152,7 @@ class SchoolController extends Controller
         $s->department_name = $request->department_name;
         $s->save();
 
-        return back()->withInput(['tab' => 'tab8'])->with('status', 'New Department created');
+        return back()->with('status', 'New Department created');
     }
 
     public function departmentEdit($id)
