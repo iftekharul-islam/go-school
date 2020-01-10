@@ -23,6 +23,11 @@ class SchoolController extends Controller
      */
     public function index()
     {
+
+    }
+
+    public function createDepartment()
+    {
         $user = Auth::user();
 
         $schools = School::all();
@@ -36,7 +41,7 @@ class SchoolController extends Controller
 
         $departments = Department::where('school_id', $user->school_id)->get();
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
-        return view('school.academic-settings',
+        return view('school.create-new-department',
             compact('schools',
                 'adminAccessDepartment',
                 'user',
@@ -45,7 +50,30 @@ class SchoolController extends Controller
                 'departments',
                 'teachers'));
     }
+    public function manageClasses()
+    {
+        $user = Auth::user();
 
+        $schools = School::all();
+        $classes = Myclass::all();
+        $sections = Section::all();
+
+        $teachers = User::where('role', 'teacher')
+            ->orderBy('name', 'ASC')
+            ->where('active', 1)
+            ->get();
+
+        $departments = Department::where('school_id', $user->school_id)->get();
+        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+        return view('school.manage-classes',
+            compact('schools',
+                'adminAccessDepartment',
+                'user',
+                'classes',
+                'sections',
+                'departments',
+                'teachers'));
+    }
     /**
      * Show the form for creating a new resource.
      *

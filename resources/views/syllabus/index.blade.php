@@ -7,6 +7,7 @@
         <h3>
             <i class="fab fa-readme"></i>
             All Syllabus
+            <a class="btn btn-lg btn-info float-right font-bold" href="{{url('admin/inactive/syllabuses')}}">See Inactive Syllabus</a>
         </h3>
         <ul>
             <li>

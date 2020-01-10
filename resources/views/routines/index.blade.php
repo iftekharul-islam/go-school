@@ -7,6 +7,7 @@
         <h3>
             <i class="fa fa-calendar"></i>
             All Routines
+            <a class="btn btn-lg btn-info float-right font-bold" href="{{url('admin/inactive/routines')}}">See Inactive Routines</a>
         </h3>
         <ul>
             <li>

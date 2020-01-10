@@ -3,13 +3,17 @@
     <h3>
         @foreach($users as $user)
             @if($user->role == 'teacher')
-                <i class='fas fa-chalkboard-teacher'></i>  All Teachers
+                    <i class='fas fa-chalkboard-teacher float-left'></i>  All Teachers
+                    <a class="btn btn-lg btn-info float-right font-bold" href="{{url('admin/inactive/teachers')}}">See Inactive Teachers</a>
             @elseif($user->role == 'student')
                 <i class="fas fa-users mr-2 "></i>   All Students
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{url('admin/inactive/students')}}">See Inactive Students</a>
             @elseif($user->role == 'accountant')
                 <i class="fas fa-users mr-2 "></i>  Accountants
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{url('admin/inactive/accountants')}}">See Inactive Accountants</a>
             @elseif($user->role == 'librarian')
                 <i class="fas fa-users mr-2 "></i>   All Librarians
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{url('admin/inactive/librarians')}}">See Inactive Librarians</a>
             @else
                 <i class="fas fa-users mr-2 "></i>    All Users
             @endif
@@ -147,7 +151,6 @@
                                         @csrf
                                         @method('GET')
                                     </form>
-                                    </button>
                                 </td>
                             @endif
                         @endif

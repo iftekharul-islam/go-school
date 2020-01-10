@@ -312,7 +312,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('grades/classes', 'GradeController@allExamsGrade');
         Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
 
-        Route::get('academic-settings', 'SchoolController@index');
+        Route::get('create-department', 'SchoolController@createDepartment');
+        Route::get('manage-class', 'SchoolController@manageClasses');
 
         Route::get('import-student','UserController@importStudent');
 
@@ -324,7 +325,6 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');
             Route::post('add-section', 'SectionController@store');
-            Route::post('add-department', 'SchoolController@addDepartment');
             Route::post('add-department', 'SchoolController@addDepartment');
             Route::get('promote-students/{section_id}', 'UserController@promoteSectionStudents');
             Route::post('promote-students', 'UserController@promoteSectionStudentsPost');
