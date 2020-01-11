@@ -200,7 +200,7 @@
                                     <i class="fas fa-angle-right"></i><span>Manage Classes</span></a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('academic.routines') }}"
+                                <a href="{{ route('academic.routines') }}"
                                    class="nav-link {{ (request()->is('academic.routines')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Class Routine</span></a>
                             </li>

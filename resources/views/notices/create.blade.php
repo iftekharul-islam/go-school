@@ -7,7 +7,7 @@
         <h3>
             <i class="fas fa-exclamation-circle"></i>
             Notices
-            <a class="btn btn-lg btn-info float-right font-bold" href="{{url('inactive.notices')}}">See Inactive Notices</a>
+            <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.notices')}}">See Inactive Notices</a>
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">

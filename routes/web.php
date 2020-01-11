@@ -65,7 +65,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/home', 'StudentHomeController@index')->name('student.home');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
-        Route::get('grades/{student_id}', 'GradeController@index');
+        Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
         Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
@@ -153,7 +153,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('attendance/take-attendance', 'AttendanceController@store');
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
-        Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('section/students/{section_id}', 'UserController@sectionStudents');
         Route::get('course/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'CourseController@course');
         Route::post('courses/create', 'CourseController@create');
