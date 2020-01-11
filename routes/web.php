@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     }
 
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
-    Route::get('useradmin/new-teacher/{user_code}', 'UserController@show')->name('user.show');
+    Route::get('user/{user_code}', 'UserController@show')->name('user.show');
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
     Route::patch('user/edit-information/{id}', 'UserController@updateUserInfo')->name('update-user-info');
     Route::patch('user/update-staff-information/{id}', 'UserController@updateStaffInformation')->name('update-staff-information');

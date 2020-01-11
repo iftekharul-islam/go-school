@@ -3,8 +3,8 @@
     <h3>
         @foreach($users as $user)
             @if($user->role == 'teacher')
-                    <i class='fas fa-chalkboard-teacher'></i>  All Teachers
-                    <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">See Inactive Teachers</a>
+                <i class='fas fa-chalkboard-teacher'></i>  All Teachers
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">See Inactive Teachers</a>
             @elseif($user->role == 'student')
                 <i class="fas fa-users mr-2 "></i>   All Students
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">See Inactive Students</a>
