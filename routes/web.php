@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     }
 
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
-    Route::get('user/{user_code}', 'UserController@show')->name('user.show');
+    Route::get('useradmin/new-teacher/{user_code}', 'UserController@show')->name('user.show');
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
     Route::patch('user/edit-information/{id}', 'UserController@updateUserInfo')->name('update-user-info');
     Route::patch('user/update-staff-information/{id}', 'UserController@updateStaffInformation')->name('update-staff-information');
@@ -181,7 +181,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('gpa/edit/{id}', 'GradesystemController@edit');
         Route::get('gpa/all-gpa', 'GradesystemController@index');
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
-        Route::get('all-department', 'SchoolController@allDepartment');
+        Route::get('all-department', 'SchoolController@allDepartment')->name('all.department');
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
 
         Route::prefix('staff')->group(function () {
@@ -201,26 +201,26 @@ Route::middleware(['auth'])->group(function () {
         Route::get('department-students/{id}', 'SchoolController@departmentStudents');
         Route::get('section/students/{section_id}', 'UserController@sectionStudents');
         Route::prefix('exams')->group(function () {
-            Route::get('/', 'ExamController@index');
+            Route::get('/', 'ExamController@index')->name('exams');
             Route::get('/details/{exam_id}', 'ExamController@details');
-            Route::get('create', 'ExamController@create');
+            Route::get('create', 'ExamController@create')->name('exams.create');
             Route::post('create', 'ExamController@store');
             Route::post('activate-exam', 'ExamController@update');
             Route::get('remove/{id}', 'ExamController@destroy');
             Route::get('edit/{id}', 'ExamController@edit');
             Route::post('edit/{id}', 'ExamController@updateExam');
-            Route::get('active', 'ExamController@indexActive');
+            Route::get('active', 'ExamController@indexActive')->name('exams.active');
         });
 
         Route::prefix('inactive')->group(function () {
-            Route::get('/notices', 'InactiveSettingsController@notices');
-            Route::get('/events', 'InactiveSettingsController@events');
-            Route::get('/syllabuses', 'InactiveSettingsController@syllabuses');
-            Route::get('/routines', 'InactiveSettingsController@routines');
-            Route::get('/students', 'InactiveSettingsController@students');
-            Route::get('/teachers', 'InactiveSettingsController@teachers');
-            Route::get('/librarians', 'InactiveSettingsController@librarians');
-            Route::get('/accountants', 'InactiveSettingsController@accountants');
+            Route::get('/notices', 'InactiveSettingsController@notices')->name('inactive.notices');
+            Route::get('/events', 'InactiveSettingsController@events')->name('inactive.events');
+            Route::get('/syllabuses', 'InactiveSettingsController@syllabuses')->name('inactive.syllabuses');
+            Route::get('/routines', 'InactiveSettingsController@routines')->name('inactive.routines');
+            Route::get('/students', 'InactiveSettingsController@students')->name('inactive.students');
+            Route::get('/teachers', 'InactiveSettingsController@teachers')->name('inactive.teachers');
+            Route::get('/librarians', 'InactiveSettingsController@librarians')->name('inactive.librarian');
+            Route::get('/accountants', 'InactiveSettingsController@accountants')->name('inactive.accountants');
         });
 
         //Accountant Routes
@@ -281,11 +281,11 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('academic')->group(function () {
             Route::get('upload-syllabus', 'SyllabusController@upload')->name('upload-syllabus');
             Route::post('upload-syllabus', 'SyllabusController@storeSyllabus')->name('store-syllabus');
-            Route::get('syllabus', 'SyllabusController@index')->name('academic-syllabus');
+            Route::get('syllabus', 'SyllabusController@index')->name('academic.syllabus');
             Route::get('syllabus/{class_id}', 'SyllabusController@create');
-            Route::get('notice', 'NoticeController@create');
-            Route::get('event', 'EventController@create');
-            Route::get('routine', 'RoutineController@index')->name('academic-routines');
+            Route::get('notice', 'NoticeController@create')->name('academic.notice');
+            Route::get('event', 'EventController@create')->name('academic.event');
+            Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');
             Route::get('syllabus/update/{id}', 'SyllabusController@update');
             Route::get('routine/{section_id}', 'RoutineController@create');
@@ -299,7 +299,7 @@ Route::middleware(['auth'])->group(function () {
             });
         });
 
-        Route::get('school/sections', 'SectionController@index');
+        Route::get('school/sections', 'SectionController@index')->name('school.section');
         Route::get('school/section/details/{section_id}', 'SectionController@sectionDetails');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('section/details/attendance/{section_id}', 'AttendanceController@attendanceDetails');
@@ -309,23 +309,23 @@ Route::middleware(['auth'])->group(function () {
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
         Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary');
-        Route::get('grades/classes', 'GradeController@allExamsGrade');
+        Route::get('grades/classes', 'GradeController@allExamsGrade')->name('grades.classes');
         Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
 
-        Route::get('create-department', 'SchoolController@createDepartment');
-        Route::get('manage-class', 'SchoolController@manageClasses');
+        Route::get('create-department', 'SchoolController@createDepartment')->name('create.department');
+        Route::get('manage-class', 'SchoolController@manageClasses')->name('manage.class');
 
         Route::get('import-student','UserController@importStudent');
 
         Route::get('new-student','UserController@createStudent');
-        Route::get('new-teacher','UserController@createTeacher');
+        Route::get('new-teacher','UserController@createTeacher')->name('new.teacher');
         Route::get('new-librarian','UserController@createLibrarian');
         Route::get('new-accountant','UserController@createAccountant');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');
             Route::post('add-section', 'SectionController@store');
-            Route::post('add-department', 'SchoolController@storeDepartment');
+            Route::post('add-department', 'SchoolController@storeDepartment')->name('add.department');
             Route::get('promote-students/{section_id}', 'UserController@promoteSectionStudents');
             Route::post('promote-students', 'UserController@promoteSectionStudentsPost');
             Route::post('theme', 'SchoolController@changeTheme');
