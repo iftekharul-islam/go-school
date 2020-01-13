@@ -21,6 +21,7 @@
         "mavinoo/laravel-batch": "dev-master",
         "pda/pheanstalk": "~3.0",
         "renatomarinho/laravel-page-speed": "^1.8",
+        "sentry/sentry-laravel": "1.5.0",
         "spatie/laravel-backup": "^5.0.0",
         "spatie/laravel-tail": "^3.3"
     },
