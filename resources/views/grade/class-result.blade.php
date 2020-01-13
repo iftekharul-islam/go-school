@@ -42,7 +42,7 @@
                             <tr>
                                 <td>{{ ($loop->index+1) }}</td>
                                 <td>{{ $student['student_code'] }}</td>
-                                <td><a class="text-teal" href="{{ url('user/'.$student->student_code) }}">{{$student->name}}</a></td>
+                                <td><a class="text-teal" href="{{ route('user.show',$student->student_code) }}">{{$student->name}}</a></td>
                                 <td>{{ $student->email }}</td>
                                 <td><a class="btn-link text-teal" role="button" href="{{ route('student.grades',$student->id) }}">View Grade History</a></td>
                             </tr>
