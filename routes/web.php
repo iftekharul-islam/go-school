@@ -369,3 +369,7 @@ Route::middleware(['auth'])->group(function () {
             return new App\Mail\SendWelcomeEmailToUser($user, $password);
         });
 });
+
+Route::get('/debug-sentry', function () {
+	throw new Exception('My first Sentry error!');
+});
