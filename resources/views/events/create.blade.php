@@ -8,7 +8,7 @@
         <h3>
             <i class="fa fa-bullhorn"></i>
             All Events
-            <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.events') }}">See Inactive Events</a>
+            <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.events') }}">Inactive Events</a>
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">

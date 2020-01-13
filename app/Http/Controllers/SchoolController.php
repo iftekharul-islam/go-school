@@ -21,11 +21,6 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-
-    }
-
     public function createDepartment()
     {
         return view('school.create-new-department');
