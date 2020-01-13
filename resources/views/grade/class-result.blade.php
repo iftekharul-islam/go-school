@@ -10,7 +10,7 @@
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role.'.home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li><a href="{{url('/grades/classes')}}">Classes</a></li>
             @if(Auth::user()->role != 'student')
@@ -40,11 +40,11 @@
                         <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                <td>{{($loop->index+1)}}</td>
-                                <td>{{$student->student_code}}</td>
-                                <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
+                                <td>{{ ($loop->index+1) }}</td>
+                                <td>{{ $student['student_code'] }}</td>
+                                <td><a class="text-teal" href="{{ route('user.show',$student->student_code) }}">{{$student->name}}</a></td>
                                 <td>{{ $student->email }}</td>
-                                <td><a class="btn-link text-teal" role="button" href="{{url('admin/grades/'.$student->id)}}">View Grade History</a></td>
+                                <td><a class="btn-link text-teal" role="button" href="{{ route('student.grades',$student->id) }}">View Grade History</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -88,12 +88,12 @@
                         <tbody>
                         @foreach($grades as $grade)
                             <tr>
-                                <td>@if(isset($grade->exam->exam_name)){{$grade->exam->exam_name}}@endif</td>
-                                <td>@if(isset($grade->course->course_name)){{$grade->course->course_name}}@endif</td>
-                                <td>@if(isset($grade->student->student_code)){{$grade->student->student_code}}@endif</td>
-                                <td><a class="text-teal btn-link" href="{{url('user/'.$grade->student->student_code)}}">{{$grade->student->name}}</a></td>
-                                <td>@if(isset($grade->marks)){{$grade->marks}}@endif</td>
-                                <td>@if(isset($grade->gpa)){{$grade->gpa}}@endif</td>
+                                <td>@if (isset($grade->exam->exam_name)){{$grade->exam->exam_name}} @endif</td>
+                                <td>@if (isset($grade->course->course_name)){{$grade->course->course_name}} @endif</td>
+                                <td>@if (isset($grade->student['student_code'])){{$grade->student['student_code']}} @endif</td>
+                                <td><a class="text-teal btn-link" href="{{ url('user/'.$grade->student['student_code'])}}">{{$grade->student['name']}}</a></td>
+                                <td>@if (isset($grade->marks)){{$grade->marks}} @endif</td>
+                                <td>@if (isset($grade->gpa)){{$grade->gpa}} @endif</td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -21,7 +21,12 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function createDepartment()
+    {
+        return view('school.create-new-department');
+    }
+
+    public function manageClasses()
     {
         $user = Auth::user();
 
@@ -36,7 +41,7 @@ class SchoolController extends Controller
 
         $departments = Department::where('school_id', $user->school_id)->get();
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
-        return view('school.academic-settings',
+        return view('school.manage-classes',
             compact('schools',
                 'adminAccessDepartment',
                 'user',
@@ -45,7 +50,6 @@ class SchoolController extends Controller
                 'departments',
                 'teachers'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -133,7 +137,7 @@ class SchoolController extends Controller
         return view('school.new-edit-school', compact('school'));
     }
 
-    public function addDepartment(Request $request)
+    public function storeDepartment(Request $request)
     {
         $request->validate([
             'department_name' => 'required|string|max:50',
@@ -143,7 +147,7 @@ class SchoolController extends Controller
         $s->department_name = $request->department_name;
         $s->save();
 
-        return back()->withInput(['tab' => 'tab8'])->with('status', 'New Department created');
+        return back()->with('status', 'New Department created');
     }
 
     public function departmentEdit($id)

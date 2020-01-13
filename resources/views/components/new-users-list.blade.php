@@ -4,12 +4,16 @@
         @foreach($users as $user)
             @if($user->role == 'teacher')
                 <i class='fas fa-chalkboard-teacher'></i>  All Teachers
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">Inactive Teachers</a>
             @elseif($user->role == 'student')
                 <i class="fas fa-users mr-2 "></i>   All Students
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
             @elseif($user->role == 'accountant')
                 <i class="fas fa-users mr-2 "></i>  Accountants
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.accountants') }}">Inactive Accountants</a>
             @elseif($user->role == 'librarian')
                 <i class="fas fa-users mr-2 "></i>   All Librarians
+                <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.librarian') }}">Inactive Librarians</a>
             @else
                 <i class="fas fa-users mr-2 "></i>    All Users
             @endif
@@ -147,7 +151,6 @@
                                         @csrf
                                         @method('GET')
                                     </form>
-                                    </button>
                                 </td>
                             @endif
                         @endif

@@ -64,7 +64,7 @@
                                                              aria-labelledby="dropdownMenuButton">
                                                             @foreach($class->sections as $section)
                                                                 <a href="{{ url('admin/school/section/details/'.$section->id. '?course=1') }}">
-                                                                    Section:{{$section->section_number}}</a>
+                                                                    Section: {{$section->section_number}}</a>
                                                             @endforeach
                                                         </div>
 
@@ -199,7 +199,7 @@
                                                                  aria-labelledby="dropdownMenuButton">
                                                                 @foreach($class->sections as $section)
                                                                     <a href="{{ url('admin/school/section/details/'.$section->id. '?course=1') }}">
-                                                                        Section:{{$section->section_number}}</a>
+                                                                        Section: {{$section->section_number}}</a>
                                                                 @endforeach
                                                             </div>
 
