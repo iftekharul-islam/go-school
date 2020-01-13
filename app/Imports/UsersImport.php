@@ -25,6 +25,7 @@ class UsersImport implements ToCollection
     */
     public function collection(Collection $rows)
     {
+//        dd($rows);
         foreach ($rows as $key => $row)
         {
             if ($key == 0) {
@@ -38,6 +39,7 @@ class UsersImport implements ToCollection
                 $username = array_last($name) . $code;
                 $pass = $username;
             }
+
             $user = User::create([
                 'name' => $row[0],
                 'email' => $username,
@@ -53,12 +55,14 @@ class UsersImport implements ToCollection
                 'section_id' => $this->section,
             ]);
 
+
             $student = StudentInfo::create([
                 'student_id' => $code,
                 'session' => date("Y"),
                 'version' => $row[4],
                 'group'  =>  $row[5] ? $row[5] : '',
-                'birthday' => Carbon::parse($row[6]),
+//                'birthday' => Carbon::parse($row[6])->format('dd/mm/yy'),
+                'birthday' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[6]),
                 'father_name' => $row[7],
                 'father_phone_number' => $row[8],
                 'father_national_id' => $row[9] ? $row[9] : '',
@@ -67,6 +71,7 @@ class UsersImport implements ToCollection
                 'religion' => $row[12],
                 'user_id' => $user->id,
             ]);
+            dd($student);
         }
     }
 }
