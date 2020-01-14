@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SectionsRequest;
 use App\User;
 use App\Course;
 use App\Myclass;
@@ -111,13 +112,8 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SectionsRequest $request)
     {
-        $request->validate([
-            'section_number' => 'required',
-            'room_number' => 'required|numeric',
-            'class_id' => 'required|numeric',
-        ]);
         $tb = new Section();
         $tb->section_number = $request->section_number;
         $tb->room_number = $request->room_number;
