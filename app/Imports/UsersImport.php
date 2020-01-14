@@ -6,14 +6,10 @@ use App\StudentInfo;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-use Maatwebsite\Excel\Concerns\SkipsOnFailure;
-use Maatwebsite\Excel\Concerns\WithValidation;
 
 class UsersImport implements ToCollection
 {
