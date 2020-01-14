@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Gradesystem;
 use App\Http\Requests\ImportStudentRequest;
 use App\Http\Requests\user\UpdateStaffProfileRequest;
 use App\School;
@@ -19,13 +18,10 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use App\Events\StudentInfoUpdateRequested;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\CreateAdminRequest;
-use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Requests\User\CreateTeacherRequest;
 use App\Http\Requests\User\ChangePasswordRequest;
 use App\Http\Requests\User\CreateLibrarianRequest;
