@@ -342,7 +342,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('edit/course/{id}', 'CourseController@updateNameAndTime');
 
         Route::get('edit/user/{id}', 'UserController@edit');
-        Route::patch('edit/user', 'UserController@update');
+        Route::patch('edit/user', 'UserController@update')->name('edit.user');
         Route::post('upload/file', 'UploadController@upload');
         Route::get('user/deactivate/{id}', 'UserController@deactivateUser');
         Route::get('user/activate/{id}', 'UserController@activateUser');

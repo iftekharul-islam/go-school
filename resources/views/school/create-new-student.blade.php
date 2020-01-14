@@ -54,7 +54,6 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
@@ -90,10 +89,7 @@
                                         <input id="email" type="email" class="form-control student-username"
                                                name="email" value="{{ old('email') }}"
                                                required readonly>
-
                                         <div class="email-visible"></div>
-
-
 
                                         @if ($errors->has('email'))
                                             <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
