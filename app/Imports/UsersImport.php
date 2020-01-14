@@ -5,7 +5,6 @@ namespace App\Imports;
 use App\StudentInfo;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
@@ -28,32 +27,33 @@ class UsersImport implements ToCollection
 
     public function collection(Collection $rows)
     {
-        Validator::make($rows->toArray(), [
-            '*.0' => 'required',
-            '*.1' => 'required',
-            '*.2' => 'required',
-            '*.3' => 'required',
-            '*.4' => 'required',
-            '*.6' => 'required',
-            '*.7' => 'required',
-            '*.8' => 'required',
-            '*.10' => 'required',
-            '*.11' => 'required',
-            '*.12' => 'required',
-        ],[
-            '*.0.required' => 'name is required',
-            '*.1.required' => 'Gender is required',
-            '*.2.required' => 'Nationality is required',
-            '*.3.required' => 'Address is required',
-            '*.4.required' => 'Version is required',
-            '*.6.required' => 'Birthday is required',
-            '*.7.required' => 'Father Name is required',
-            '*.8.required' => 'Father Phone number is required',
-            '*.10.required' => 'Father occupation is required',
-            '*.11.required' => 'Mother name is required',
-            '*.12.required' => 'Religion is required',
-        ])->validate();
+//        Validator::make($rows->toArray(), [
+//            '*.0' => 'required',
+//            '*.1' => 'required',
+//            '*.2' => 'required',
+//            '*.3' => 'required',
+//            '*.4' => 'required',
+//            '*.6' => 'required',
+//            '*.7' => 'required',
+//            '*.8' => 'required',
+//            '*.10' => 'required',
+//            '*.11' => 'required',
+//            '*.12' => 'required',
+//        ],[
+//            '*.0.required' => 'name is required',
+//            '*.1.required' => 'Gender is required',
+//            '*.2.required' => 'Nationality is required',
+//            '*.3.required' => 'Address is required',
+//            '*.4.required' => 'Version is required',
+//            '*.6.required' => 'Birthday is required',
+//            '*.7.required' => 'Father Name is required',
+//            '*.8.required' => 'Father Phone number is required',
+//            '*.10.required' => 'Father occupation is required',
+//            '*.11.required' => 'Mother name is required',
+//            '*.12.required' => 'Religion is required',
+//        ])->validate();
 
+        $error_rows = [];
         foreach ($rows as $key => $row)
         {
             if ($key == 0) {
@@ -67,6 +67,14 @@ class UsersImport implements ToCollection
                 $username = array_last($name) . $code;
                 $pass = $username;
             }
+
+            if (!$this->validateSheet($row))
+            {
+                session()->put('importWarning', true);
+                $error_rows[] = $key+1;
+                continue;
+            }
+
 
             $user = User::create([
                 'name' => $row[0],
@@ -98,5 +106,15 @@ class UsersImport implements ToCollection
                 'user_id' => $user->id,
             ]);
         }
+        session()->put('error_rows',$error_rows);
+    }
+    public function validateSheet($row)
+    {
+        if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4])  && !empty($row[6])
+            && !empty($row[7]) && !empty($row[8]) && !empty($row[10]) && !empty($row[11]) && !empty($row[12]))
+        {
+            return true;
+        }
+        return false;
     }
 }

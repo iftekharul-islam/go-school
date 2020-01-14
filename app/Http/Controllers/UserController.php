@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
@@ -538,7 +539,14 @@ class UserController extends Controller
     public function importStudents(ImportStudentRequest $request)
     {
         Excel::import(new usersImport($request->section), $request->file('users'));
-        return redirect()->back()->with('status','Student Successfully added');
+        $msg = 'Student Successfully added';
+        if (Session::has('importWarning') && Session::get('importWarning') == true){
+            $msg = 'Few rows are skipped due to invalid data.Row number : '.implode(', ',Session::get('error_rows'));
+            session()->forget('importWarning');
+            session()->forget('error_rows');
+
+        }
+        return redirect()->back()->with('status', $msg);
     }
 
 
