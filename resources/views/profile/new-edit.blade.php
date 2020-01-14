@@ -5,24 +5,19 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Edit
+            Edit {{ ucfirst($user->role) }}
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Edit</li>
+            <li>Edit {{ ucfirst($user->role) }}</li>
         </ul>
     </div>
 
     <div class="card height-auto false-height">
         <div class="card-body">
-            <div class="heading-layout1 mb-5">
-                <div class="item-title">
-                    <h3>Edit {{ ucfirst($user->role) }}</h3>
-                </div>
-            </div>
             <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 12 }}" id="main-container">
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -44,7 +39,7 @@
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form class="new-added-form" method="POST" action="{{ url('admin/edit/user') }}" enctype='multipart/form-data'>
+                        <form class="new-added-form" method="POST" action="{{ route('edit.user') }}" enctype='multipart/form-data'>
                             {{ csrf_field() }}
                             {{ method_field('patch') }}
                             <input type="hidden" name="user_id" value="{{$user->id}}">
@@ -55,12 +50,12 @@
                                     <div class="form-check">
                                         <input type='hidden' value="false" name='sms_enabled'>
                                         <input type="checkbox" name="sms_enabled" value="true" @if($user->studentInfo['is_sms_enabled']) checked @endif class="form-check-input checkAll" id="sms-enabled">
-                                        <label class="form-check-label" for="sms-enabled">Is SMS enabled </label>
+                                        <label class="form-check-label" for="sms-enabled">Is SMS enabled</label>
                                     </div>
                                 </div>
                             @endif
 
-                            <div class="row mb-4">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="name" class="col-md-4 control-label">Full Name <label class="text-danger">*</label></label>
@@ -72,24 +67,24 @@
 
                                             @if ($errors->has('name'))
                                                 <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
+                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label for="email" class="col-md-4 control-label">E-Mail Address <label class="text-danger">*</label></label>
+                                        <label for="email" class="col-md-4 control-label">E-Mail/Username <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
-                                            <input id="email" type="email" class="form-control" name="email"
+                                            <input id="email" type="text" class="form-control" name="email"
                                                    value="{{ $user->email }}">
 
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
@@ -99,7 +94,7 @@
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-                                        <label for="phone_number" class="col-md-4 control-label">Phone Number <label class="text-danger">*</label></label>
+                                        <label for="phone_number" class="col-md-4 control-label">Phone Number</label>
 
                                         <div class="col-md-12">
                                             <input id="phone_number" type="text" class="form-control" name="phone_number"

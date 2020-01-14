@@ -26,6 +26,7 @@
                 {{ session('error') }}
             </div>
         @endif
+{{--        {{ dd($errors->all()) }}--}}
 
         @if ($errors->any())
             <div class="alert alert-danger">

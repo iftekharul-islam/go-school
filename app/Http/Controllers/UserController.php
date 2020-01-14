@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Events\StudentInfoUpdateRequested;
 use App\Http\Requests\User\CreateUserRequest;
@@ -541,7 +542,7 @@ class UserController extends Controller
     public function importStudents(ImportStudentRequest $request)
     {
         Excel::import(new usersImport($request->section), $request->file('users'));
-        return redirect()->back()->with('status','Student Successfullty added');
+        return redirect()->back()->with('status','Student Successfully added');
     }
 
 
