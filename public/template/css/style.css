@@ -5672,3 +5672,7 @@ ul {
 .fc-day-grid-event {
   margin: 5px!important;
 }
+/* start on 16/01/2020 */
+.sub-group-menu .sidebar-nav-item .nav-link {position:relative}
+.sub-group-menu .sidebar-nav-item .nav-link:after,
+.sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu .nav-item.active .sidebar-nav-item .nav-link:after {color:#ffffff}
