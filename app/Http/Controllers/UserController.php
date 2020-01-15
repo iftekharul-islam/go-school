@@ -540,11 +540,16 @@ class UserController extends Controller
     {
         Excel::import(new usersImport($request->section), $request->file('users'));
         $msg = 'Student Successfully added';
-        if (Session::has('importWarning') && Session::get('importWarning') == true){
+        if (Session::has('importWarning') && Session::get('importWarning') == true)
+        {
             $msg = 'Few rows are skipped due to invalid data.Row number : '.implode(', ',Session::get('error_rows'));
             session()->forget('importWarning');
             session()->forget('error_rows');
-
+        }
+        if (Session::has('duplicateWarning') && Session::get('duplicateWarning') == true)
+        {
+            $msg = 'Duplicated entry skipped';
+            session()->forget('duplicateWarning');
         }
         return redirect()->back()->with('status', $msg);
     }

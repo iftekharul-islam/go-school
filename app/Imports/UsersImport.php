@@ -73,7 +73,12 @@ class UsersImport implements ToCollection
                 session()->put('importWarning', true);
                 $error_rows[] = $key+1;
                 continue;
+            }elseif($this->checkDuplicate($row[0],$row[7]))
+            {
+                session()->put('duplicateWarning', true);
+                continue;
             }
+
 
 
             $user = User::create([
@@ -116,5 +121,17 @@ class UsersImport implements ToCollection
             return true;
         }
         return false;
+    }
+    public function checkDuplicate($student_name,$father_name)
+    {
+       $count = User::join('student_infos','users.id','=', 'student_infos.user_id')
+                ->where('users.name',$student_name)
+                ->where('student_infos.father_name',$father_name)
+                ->count();
+       if ($count > 0)
+       {
+           return true;
+       }
+       return false;
     }
 }
