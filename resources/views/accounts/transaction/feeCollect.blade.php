@@ -56,6 +56,7 @@
                     </div>
                     <div class="col-md-10">
                         <div class="row">
+                      
                             <table class="table">
                                 <tr>
                                     <th>Name</th>
@@ -73,7 +74,7 @@
                                 @endif
                                 <tr>
                                     <th>Version</th>
-                                    <td>{{ $student->studentInfo['version'] }}</td>
+                                    <td>@if($student->studentInfo){{ $student->studentInfo['version'] }}@endif </td>
                                     <th>Student Code</th>
                                     <td>{{ $student->student_code }}</td>
                                 </tr>
@@ -274,10 +275,21 @@
                                                 <div class="error text-danger"></div>
                                             </div>
                                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                                <label>Advance Amount </label>
+                                                <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="" id="advance_amount" required>
+                                                <div class="error text-danger"></div>
+                                            </div>
+                                            <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                                 <label>Payment Method</label>
                                                 <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash
                                                 <input class="" type="radio" name="mode" value="cheque"> Cheque
                                             </div>
+                                            <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                                <label>Payment Method</label>
+                                                <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash
+                                                <input class="" type="radio" name="mode" value="cheque"> Cheque
+                                            </div>
+                                            
                                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                                 <label>Note</label>
                                                 <textarea name="note" id="" cols="30" rows="10" class="form-control"></textarea>
