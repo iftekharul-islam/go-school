@@ -24,6 +24,7 @@
                             <h3>
                                 All Students
                             </h3>
+                            <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
                             <ul>
                                 <li>
                                     <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>

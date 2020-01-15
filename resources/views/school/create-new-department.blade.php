@@ -38,7 +38,7 @@
         <div class="false-height">
             <div class="card height-auto">
                 <div class="card-body">
-                    <form class="new-added-form" action="{{ route('add.department')}}" method="post">
+                    <form class="new-added-form" action="{{ route('school.add.department') }}" method="post">
                         {{csrf_field()}}
                         <div class="false-padding-bottom-form form-group">
                             <label for="department_name"
