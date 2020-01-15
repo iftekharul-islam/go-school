@@ -25,7 +25,7 @@
                 $ex = 1;
             if (strpos($add, 'gpa'))
                 $gpa = 1;
-            if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant'))
+            if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant') || strpos($add, 'fee-types'))
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection') || strpos($add, 'fees-summary'))
                 $ac = 1;
@@ -293,33 +293,6 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i
-                                    class="fas fa-cash-register"></i><span>Fees Collection</span></a>
-                        <ul class="nav sub-group-menu {{ $ac == 1 ? 'sub-group-active' : '' }}">
-                            <li class="nav-item">
-                                <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"
-                                   href="{{ url($role.'/fee-types') }}">
-                                    <i class="fas fa-angle-right"></i><span>Fee Types</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ (request()->is($role.'/fee-master*')) ? 'menu-active' : '' }}"
-                                   href="{{ url($role.'/fee-master') }}">
-                                    <i class="fas fa-angle-right"></i><span>Fee Master</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ (request()->is($role.'/fee-discount*')) ? 'menu-active' : '' }}"
-                                   href="{{ url($role.'/fee-discount') }}">
-                                    <i class="fas fa-angle-right"></i><span>Discount</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ (request()->is($role.'/fee-collection*')) ? 'menu-active' : '' }}"
-                                   href="{{ url($role.'/fee-collection/section/student') }}">
-                                    <i class="fas fa-angle-right"></i><span>Collect Fee</span></a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i
                                     class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
@@ -357,7 +330,33 @@
                                    href="{{ url($role.'/income-list') }}">
                                     <i class="fas fa-angle-right"></i><span>Income List</span></a>
                             </li>
+                            <li class="nav-item sidebar-nav-item second-lbl-menu">
+                                <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>Fee Collection</span></a>
+                                <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"
+                                    href="{{ url($role.'/fee-types') }}">
+                                        <i class="fas fa-angle-right"></i><span>Fee Types</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ (request()->is($role.'/fee-master*')) ? 'menu-active' : '' }}"
+                                        href="{{ url($role.'/fee-master') }}">
+                                            <i class="fas fa-angle-right"></i><span>Fee Master</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ (request()->is($role.'/fee-discount*')) ? 'menu-active' : '' }}"
+                                        href="{{ url($role.'/fee-discount') }}">
+                                            <i class="fas fa-angle-right"></i><span>Discount</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ (request()->is($role.'/fee-collection*')) ? 'menu-active' : '' }}"
+                                        href="{{ url($role.'/fee-collection/section/student') }}">
+                                            <i class="fas fa-angle-right"></i><span>Collect Fee</span></a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
+                        
                     </li>
                 @endif
 
