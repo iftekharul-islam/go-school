@@ -25,7 +25,7 @@
                 $ex = 1;
             if (strpos($add, 'gpa'))
                 $gpa = 1;
-            if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant') || strpos($add, 'fee-types'))
+            if (strpos($add, 'sectors') || strpos($add, 'expense') || strpos($add, 'income') ||  strpos($add, 'accountant') || strpos($add, 'fee-types') || strpos($add, 'fee-collection') || strpos($add, 'fee-discount') || strpos($add, 'fee-master'))
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection') || strpos($add, 'fees-summary'))
                 $ac = 1;
