@@ -254,12 +254,12 @@ class AttendanceController extends Controller
          $end_display = date("d-m-Y", strtotime($e_date));
 
          if (!$request->has('start_date') || !$request->filled('start_date')) {
-             $start_date = Carbon::today()->addDays(-30)->format('d-m-Y');
-             $start_display = $start_date;
+             $start_date = Carbon::today()->addDays(-30)->format('Y-m-d');
+             $start_display = date("d-m-Y", strtotime($start_date));;
              $request->start_date = $start_date;
          }
          if (!$request->has('end_date') || !$request->filled('end_date')) {
-             $end_date = Carbon::today()->addDay(1)->format('d-m-Y');
+             $end_date = Carbon::today()->addDay(1)->format('Y-m-d');
              $end_display = Carbon::today()->format('d-m-Y');
              $request->end_date = $end_date;
          }
@@ -279,10 +279,10 @@ class AttendanceController extends Controller
                  $attendance = null;
                  if (isset($student['attendances'])) {
                      $attendance = $student->attendances->filter(function ($att) use($dt) {
-                         return $att->created_at->format('d-m-Y') == $dt->format('d-m-Y');
+                         return $att->created_at->format('Y-m-d') == $dt->format('Y-m-d');
                      })->first();
                  }
-                 $final[$student->id]['attendances'][$dt->format('d-m-Y')] = $attendance ? $attendance->present : null;
+                 $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
              }
          }
 
