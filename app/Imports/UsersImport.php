@@ -27,32 +27,6 @@ class UsersImport implements ToCollection
 
     public function collection(Collection $rows)
     {
-//        Validator::make($rows->toArray(), [
-//            '*.0' => 'required',
-//            '*.1' => 'required',
-//            '*.2' => 'required',
-//            '*.3' => 'required',
-//            '*.4' => 'required',
-//            '*.6' => 'required',
-//            '*.7' => 'required',
-//            '*.8' => 'required',
-//            '*.10' => 'required',
-//            '*.11' => 'required',
-//            '*.12' => 'required',
-//        ],[
-//            '*.0.required' => 'name is required',
-//            '*.1.required' => 'Gender is required',
-//            '*.2.required' => 'Nationality is required',
-//            '*.3.required' => 'Address is required',
-//            '*.4.required' => 'Version is required',
-//            '*.6.required' => 'Birthday is required',
-//            '*.7.required' => 'Father Name is required',
-//            '*.8.required' => 'Father Phone number is required',
-//            '*.10.required' => 'Father occupation is required',
-//            '*.11.required' => 'Mother name is required',
-//            '*.12.required' => 'Religion is required',
-//        ])->validate();
-
         $error_rows = [];
         foreach ($rows as $key => $row)
         {
@@ -73,7 +47,7 @@ class UsersImport implements ToCollection
                 session()->put('importWarning', true);
                 $error_rows[] = $key+1;
                 continue;
-            }elseif($this->checkDuplicate($row[0],$row[7]))
+            }elseif($this->checkDuplicate($row[0],$row[9],$row[8]))
             {
                 session()->put('duplicateWarning', true);
                 continue;
@@ -90,25 +64,26 @@ class UsersImport implements ToCollection
                 'school_id'=> auth()->user()->school_id,
                 'code'     => auth()->user()->code,
                 'student_code' => $code,
-                'gender' => $row[1],
-                'nationality'=> $row[2],
-                'address' => $row[3],
+                'gender' => $row[2],
+                'nationality'=> $row[3],
+                'address' => $row[4],
                 'section_id' => $this->section,
             ]);
 
             StudentInfo::create([
                 'student_id' => $code,
                 'session' => date("Y"),
-                'version' => $row[4],
-                'shift' => $row[5] ? $row[5] : '',
-                'group'  =>  $row[6] ? $row[6] : '',
-                'birthday' => is_string($row[7]) ? Carbon::parse((string)$row[7]) : Date::excelToDateTimeObject($row[7]),
-                'father_name' => $row[8],
-                'father_phone_number' => $row[9],
-                'father_national_id' => $row[10] ? $row[10] : '',
-                'father_occupation' => $row[11],
-                'mother_name' => $row[12],
-                'religion' => $row[13],
+                'roll_number' => $row[1] ? $row[1] : '',
+                'version' => $row[5],
+                'shift' => $row[6] ? $row[6] : '',
+                'group'  =>  $row[7] ? $row[7] : '',
+                'birthday' => is_string($row[8]) ? Carbon::parse((string)$row[8]) : Date::excelToDateTimeObject($row[8]),
+                'father_name' => $row[9],
+                'father_phone_number' => $row[10],
+                'father_national_id' => $row[11] ? $row[11] : '',
+                'father_occupation' => $row[12],
+                'mother_name' => $row[13],
+                'religion' => $row[14],
                 'user_id' => $user->id,
             ]);
         }
@@ -116,19 +91,22 @@ class UsersImport implements ToCollection
     }
     public function validateSheet($row)
     {
-        if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4])  && !empty($row[7])
-            && !empty($row[8]) && !empty($row[9]) && !empty($row[11]) && !empty($row[12]) && !empty($row[13]))
+        if (!empty($row[0]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4]) && !empty($row[5])  && !empty($row[8])
+            && !empty($row[9]) && !empty($row[10]) && !empty($row[12]) && !empty($row[13]) && !empty($row[14]))
         {
             return true;
         }
         return false;
     }
-    public function checkDuplicate($student_name,$father_name)
+    public function checkDuplicate($student_name,$father_name,$birthday)
     {
+       $birth = is_string($birthday) ? Carbon::parse((string)$birthday) : Date::excelToDateTimeObject($birthday);
        $count = User::join('student_infos','users.id','=', 'student_infos.user_id')
                 ->where('users.name',$student_name)
                 ->where('student_infos.father_name',$father_name)
+                ->whereDate('student_infos.birthday',$birth)
                 ->count();
+//       dd($count);
        if ($count > 0)
        {
            return true;

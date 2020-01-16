@@ -60,7 +60,7 @@
                                             {{Carbon\Carbon::parse($user->studentInfo['birthday'])->format('d/m/Y')}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Email:</td>
+                                        <td class="font-medium text-dark-medium">E-mail / Username:</td>
                                         <td class="text-left">{{$user->email}}</td>
                                     </tr>
                                     <tr>
@@ -81,6 +81,10 @@
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Section:</td>
                                         <td class="text-capitalize">{{$user->section['section_number']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Roll no:</td>
+                                        <td class="text-capitalize">{{ $user->studentInfo['roll_number'] }}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Shift:</td>
@@ -137,7 +141,7 @@
                             </tr>
 
                             <tr>
-                                <td class="font-medium text-dark-medium">E-mail:</td>
+                                <td class="font-medium text-dark-medium">E-mail / Username:</td>
                                 <td>{{ $user->email }}</td>
                             </tr>
                             <tr>

@@ -475,6 +475,7 @@ class UserController extends Controller
             $info->session = $request->get('session');
             $info->version =$request->get('version');
             $info->shift =$request->get('shift');
+            $info->roll_number =$request->get('roll_number');
             $info->group = $request->get('group');
             $info->birthday = $request->get('birthday');
             $info->religion = $request->get('religion');

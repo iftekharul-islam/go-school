@@ -287,6 +287,7 @@ class UserService
             'session' => $request->get('session'),
             'version' => $request->get('version'),
             'shift' => $request->get('shift'),
+            'roll_number' => $request->get('roll_number'),
             'group' => (!empty($request->get('group'))) ? $request->get('group') : '',
             'birthday' => $request->get('birthday'),
             'religion' => $request->get('religion'),
