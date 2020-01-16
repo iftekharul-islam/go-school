@@ -70,7 +70,7 @@
                                                                                     <div class="false-padding-bottom-form form-group">
                                                                                         <label for="" class="col-sm-12 control-label false-padding-bottom">Section Number</label>
                                                                                         <div class="col-sm-12">
-                                                                                            <input type="text" class="form-control" name="section_number" value="{{$section->section_number}}">
+                                                                                            <input type="text" class="form-control" name="section_number" value="{{$section->section_number}}" required>
                                                                                         </div>
                                                                                     </div>
 
