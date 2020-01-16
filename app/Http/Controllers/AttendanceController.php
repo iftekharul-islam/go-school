@@ -250,8 +250,10 @@ class AttendanceController extends Controller
      {
          $s_date = $request->start_date;
          $start_display = date("d-m-Y", strtotime($s_date));
-         $e_date = $request->end_date;
-         $end_display = date("d-m-Y", strtotime($e_date));
+         $date = $request->end_date;
+         $e_date = Carbon::parse($date)->addDays(1)->format('Y-m-d');
+         $request->end_date = $e_date;
+         $end_display =Carbon::parse($date)->format('d-m-Y');
 
          if (!$request->has('start_date') || !$request->filled('start_date')) {
              $start_date = Carbon::today()->addDays(-30)->format('Y-m-d');
