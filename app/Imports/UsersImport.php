@@ -100,15 +100,15 @@ class UsersImport implements ToCollection
                 'student_id' => $code,
                 'session' => date("Y"),
                 'version' => $row[4],
-                'group'  =>  $row[5] ? $row[5] : '',
-                'birthday' => is_string($row[6]) ? Carbon::parse((string)$row[6]) : Date::excelToDateTimeObject($row[6]),
-                'father_name' => $row[7],
-                'father_phone_number' => $row[8],
-                'father_national_id' => $row[9] ? $row[9] : '',
-                'father_occupation' => $row[10],
-                'mother_name' => $row[11],
-                'religion' => $row[12],
-                'shift' => $row[13],
+                'shift' => $row[5] ? $row[5] : '',
+                'group'  =>  $row[6] ? $row[6] : '',
+                'birthday' => is_string($row[7]) ? Carbon::parse((string)$row[7]) : Date::excelToDateTimeObject($row[7]),
+                'father_name' => $row[8],
+                'father_phone_number' => $row[9],
+                'father_national_id' => $row[10] ? $row[10] : '',
+                'father_occupation' => $row[11],
+                'mother_name' => $row[12],
+                'religion' => $row[13],
                 'user_id' => $user->id,
             ]);
         }
@@ -116,8 +116,8 @@ class UsersImport implements ToCollection
     }
     public function validateSheet($row)
     {
-        if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4])  && !empty($row[6])
-            && !empty($row[7]) && !empty($row[8]) && !empty($row[10]) && !empty($row[11]) && !empty($row[12]))
+        if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4])  && !empty($row[7])
+            && !empty($row[8]) && !empty($row[9]) && !empty($row[11]) && !empty($row[12]) && !empty($row[13]))
         {
             return true;
         }
