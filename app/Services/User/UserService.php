@@ -286,6 +286,7 @@ class UserService
             'student_id' => $student->student_code,
             'session' => $request->get('session'),
             'version' => $request->get('version'),
+            'shift' => $request->get('shift'),
             'group' => (!empty($request->get('group'))) ? $request->get('group') : '',
             'birthday' => $request->get('birthday'),
             'religion' => $request->get('religion'),

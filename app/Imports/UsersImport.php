@@ -108,6 +108,7 @@ class UsersImport implements ToCollection
                 'father_occupation' => $row[10],
                 'mother_name' => $row[11],
                 'religion' => $row[12],
+                'shift' => $row[13],
                 'user_id' => $user->id,
             ]);
         }
