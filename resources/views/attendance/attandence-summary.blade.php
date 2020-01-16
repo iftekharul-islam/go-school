@@ -45,11 +45,14 @@
                     <div class="card-header-title mt-5 ml-2">
                         <b>Attendance:</b> {{ $start_display }}&nbsp; <b>to</b> &nbsp {{ $end_display }} &nbsp
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
+                <div class="table">
+                    <div class="table-scroll">
+                        <table class="table-main table-bordered">
+{{--                    <div class="table-responsive">--}}
+{{--                        <table class="table table-bordered">--}}
                             <thead>
                             <tr>
-                                <th class="take-col">Name</th>
+                                <th class="fix-col">Name</th>
                                 @foreach ($period as $dt)
                                     <th class="text-center">{{ $dt->format("d") }}</th>
                                 @endforeach
@@ -59,7 +62,8 @@
 
                             @foreach ($final as $student)
                                 <tr>
-                                    <td class="text-nowrap text-left take-col"> {{ $student['name'] }} </td>
+                                    <td class="text-left fix-col" data-toggle="tooltip" data-placement="top" title="{{ $student['name'] }}"> {{ $student['name'] }} </td>
+
                                     @foreach ($student['attendances'] as $item)
                                         @if ($item >= 0)
                                             <td class="px-5">
@@ -83,6 +87,7 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

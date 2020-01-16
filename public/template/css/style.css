@@ -3702,12 +3702,54 @@ ul {
   flex-direction: column;
   padding: 0 30px;
 }
-.take-col{
+/*.table-main {*/
+/*  border: none;*/
+/*  border-right: solid 1px rgb(75, 90, 102);*/
+/*  border-collapse: separate;*/
+/*  border-spacing: 0;*/
+/*  font: normal 13px Arial, sans-serif;*/
+/*}*/
+
+/*.table-main thead th {*/
+/*  background-color: rgb(203, 220, 233);*/
+/*  border: none;*/
+/*  color: #336B6B;*/
+/*  padding: 10px;*/
+/*  text-align: left;*/
+/*  text-shadow: 1px 1px 1px #fff;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.table-main tbody td {*/
+/*  border-bottom: solid 1px rgb(75, 90, 102);*/
+/*  color: #333;*/
+/*  padding: 10px;*/
+/*  text-shadow: 1px 1px 1px #fff;*/
+/*  white-space: nowrap;*/
+/*}*/
+
+/*.table {*/
+/*  position: relative;*/
+/*}*/
+
+.table-scroll {
+  margin-left: 199px;
+  overflow-x: scroll;
+  overflow-y: visible;
+  padding-bottom: 5px;
+}
+
+.table-main .fix-col {
+  /*border-left: solid 1px rgb(75, 90, 102);*/
+  /*border-right: solid 1px rgb(75, 90, 102);*/
+  left: 33px;
   position: absolute;
   top: auto;
-  width: 155px;
-  padding-bottom: 5px;
-  background: white;
+  width: 198px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
 }
 
 @media only screen and (max-width: 767px) {
