@@ -83,6 +83,10 @@
                                         <td class="text-capitalize">{{$user->section['section_number']}}</td>
                                     </tr>
                                     <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Shift:</td>
+                                        <td class="text-capitalize">{{ $user->studentInfo['shift'] }}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Session:</td>
                                         <td class="text-capitalize">{{$user->studentInfo['session']}}</td>
                                     </tr>

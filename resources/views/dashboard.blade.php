@@ -112,6 +112,10 @@
                                     <td class="font-medium text-dark-medium">Section:</td>
                                     <td class="text-capitalize">{{ $student->section_id }}</td>
                                 </tr>
+                                <tr>
+                                    <td class="font-medium text-dark-medium text-nowrap">Shift:</td>
+                                    <td class="text-capitalize">{{ $student->studentInfo['shift'] }}</td>
+                                </tr>
                                 @if(isset($student_info->student_id))
                                     <tr>
 
