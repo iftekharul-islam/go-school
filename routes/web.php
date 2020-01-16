@@ -356,6 +356,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('department/{id}', 'SchoolController@departmentDestroy')->name('delete-department');
 
         Route::get('student-message','MessageController@adminSendMessage');
+
+        Route::post('edit/section/{id}', 'SectionController@updateSection')->name('edit.section');
+        
     });
 
 });
