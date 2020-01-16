@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdvanceCollectionsTable extends Migration
+class AddAdvanceAmountColumnsToStudentInfos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateAdvanceCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('advance_collections', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::table('student_infos', function (Blueprint $table) {
+            $table->unsignedBigInteger('advance_amount')->default(0);
         });
     }
 
@@ -26,6 +25,8 @@ class CreateAdvanceCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('advance_collections');
+        Schema::table('student_infos', function (Blueprint $table) {
+            $table->dropColumn('advance_amount');
+        });
     }
 }

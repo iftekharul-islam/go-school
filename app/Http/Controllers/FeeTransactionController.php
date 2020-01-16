@@ -7,6 +7,7 @@ use App\FeeMaster;
 use App\FeeTransaction;
 use App\Myclass;
 use App\Section;
+use App\StudentInfo;
 use App\Services\User\UserService;
 use App\User;
 use Carbon\Carbon;
@@ -49,14 +50,38 @@ class FeeTransactionController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'amount' => 'required',
             'discountAmount' => 'required',
             'fine' => 'required',
         ]);
         $feeMaster = FeeMaster::find($request->feeMasterId);
+        $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
 
 //        $user = FeeTransaction::where('student_id', 19)->where('fee_master_id', $request->feeMasterId)->get();
+        
+        if($request->get('advance_amount')){
+            // $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
+            $studentInfo->advance_amount += $request->get('advance_amount');
+            $studentInfo->save();
+        }
+
+        if($request->get('pay_from_advance_blnc') == 1){
+            if($request->get('totalAmount') < $studentInfo->advance_amount){
+                $newBalance = $studentInfo->advance_amount - $request->get('totalAmount');
+                $studentInfo->advance_amount = $newBalance; 
+                $request->amount = $request->get('totalAmount');
+            }else{
+                $collectiveAmount = ($request->get('totalAmount') - $studentInfo->advance_amount) + ($request->get('amount')+ $request->get('fine');
+                if($collectiveAmount < $request->get('totalAmount')){
+                    $request->amount = $collectiveAmount;
+                }
+                $studentInfo->advance_amount = 0;
+                $request->amount = $request->get('totalAmount');
+            }
+            $studentInfo->save();
+        }
 
         $value = $request->amount;
         $amount = $request->amount;
@@ -71,6 +96,8 @@ class FeeTransactionController extends Controller
             $status = 'Unpaid';
         }
 
+        
+
         $ft = new FeeTransaction();
         $ft->student_id = $request->get('student_id');
         $ft->amount = $amount;
@@ -83,6 +110,7 @@ class FeeTransactionController extends Controller
         $ft->status = $status;
         $ft->save();
         $ft->feeMasters()->attach($request->feeMasterId);
+        
         return redirect()->back();
     }
 

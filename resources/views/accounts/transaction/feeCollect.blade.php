@@ -78,6 +78,10 @@
                                     <th>Student Code</th>
                                     <td>{{ $student->student_code }}</td>
                                 </tr>
+                                <tr>
+                                    <th>Balance</th>
+                                    <td colspan="3">{{number_format($student->studentInfo->advance_amount, 2)}}</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -232,7 +236,7 @@
                         </tr>
                         </tbody>
                     </table>
-
+                   
                     <div class="modal fade" id="feeCollect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -274,16 +278,23 @@
                                                 <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="" id="amount" required>
                                                 <div class="error text-danger"></div>
                                             </div>
-                                            <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                            <div class="col-12-xxxl col-lg-6 col-6 form-group">
                                                 <label>Advance Amount </label>
-                                                <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="" id="advance_amount" required>
+                                                <input type="number" placeholder="" class="form-control" name="advance_amount" value="" id="advance_amount">
                                                 <div class="error text-danger"></div>
                                             </div>
-                                            <div class="col-12-xxxl col-lg-6 col-12 form-group">
-                                                <label>Payment Method</label>
-                                                <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash
-                                                <input class="" type="radio" name="mode" value="cheque"> Cheque
+                                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                                <label class="font-bold">Balance </label>
+                                                <input type="number" id="balance" readonly class="form-control" value="{{number_format($student->studentInfo->advance_amount, 2)}}">
                                             </div>
+
+                                            <div class="col-6-xxxl col-lg-6 col-6 form-group text-left">
+                                                <label class="font-bold">Pay from Advance Balance</label>
+
+                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" class="form-control" >
+                                               
+                                            </div>
+                                          
                                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                                 <label>Payment Method</label>
                                                 <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash
@@ -454,6 +465,8 @@
         };
 
         $(document).ready(function() {
+            var totalPayable = $('.open-AddBookDialog').data('amount');
+            console.log(totalPayable);
             $(".fine").change(function() {
                 let grandTotal = 0;
                 let fine = $(".fine").val();
@@ -465,12 +478,32 @@
                 let dis = $(".discount").val();
                 grandTotal = grandTotal - dis;
                 $("#amount").val(grandTotal);
+                totalPayable = grandTotal;
             });
 
             $('#feeCollect').on('hidden.bs.modal', function (e) {
                 $('.discount').prop('selectedIndex',0);
                 $("form").trigger("reset");
             });
+
+           $('#pay_from_advance_blnc').click(function(){
+                
+                let advance_amount = "{{$student->studentInfo->advance_amount}}";
+                console.log('payable' + totalPayable);
+                if($(this). prop("checked") == true){
+                    if(advance_amount > totalPayable){
+                        $('#amount').val(0);
+                       console.log('b'+advance_amount);
+                    }else{
+                        let payable = totalPayable - advance_amount;
+                        $('#amount').val(payable);
+                        console.log('L '+advance_amount);
+                    }
+                }else{
+                    $('#amount').val(totalPayable);
+                }
+            });
+
         });
 
         $(document).on("click", ".open-AddBookDialog", function (e) {
@@ -485,6 +518,7 @@
             $("#totalAmount").val(amount);
             $("#month").val(month);
             $(_self.attr('href')).modal('show');
+            totalPayable = amount;
         });
 
         function getDiscount(item) {
@@ -508,5 +542,6 @@
             grandTotal = grandTotal - dis;
             $("#amount").val(grandTotal);
         }
+
     </script>
 @endpush
