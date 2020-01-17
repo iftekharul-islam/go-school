@@ -319,7 +319,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('new-student','UserController@createStudent');
         Route::get('new-teacher','UserController@createTeacher')->name('new.teacher');
         Route::get('new-librarian','UserController@createLibrarian');
-        Route::get('new-accountant','UserController@createAccountant');
+        Route::get('new-accountant','UserController@createAccountant')->name('new.accountant');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');
