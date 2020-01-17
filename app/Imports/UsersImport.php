@@ -31,23 +31,24 @@ class UsersImport implements ToCollection, WithHeadingRow
         $error_rows = [];
         foreach ($rows as $key => $row)
         {
+            if (!$this->validateSheet($row))
+            {
+                session()->put('importWarning', true);
+                $error_rows[] = $key+1;
+                continue;
+            }
+            elseif ($this->checkDuplicate($row['name'], $row['father_name'], $row['birthday']))
+            {
+                session()->put('duplicateWarning', true);
+                continue;
+            }
+
             {
                 $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
                 $name = explode(" ", $row['name']);
 
                 $username = array_last($name) . $code;
                 $pass = $username;
-            }
-
-            if (!$this->validateSheet($row))
-            {
-                session()->put('importWarning', true);
-                $error_rows[] = $key+1;
-                continue;
-            }elseif($this->checkDuplicate($row['name'],$row['father_name'],$row['birthday']))
-            {
-                session()->put('duplicateWarning', true);
-                continue;
             }
 
             $user = User::create([
@@ -86,20 +87,29 @@ class UsersImport implements ToCollection, WithHeadingRow
     }
     public function validateSheet($row)
     {
-        if (!empty($row['name']) && !empty($row['gender']) && !empty($row['nationality']) && !empty($row['address']) && !empty($row['version'])  && !empty($row['birthday'])
-            && !empty($row['father_name']) && !empty($row['father_phone_number']) && !empty($row['father_occupation']) && !empty($row['mother_name']) && !empty($row['religion']))
+        if (isset($row['name']) && !empty($row['name'])
+            && isset($row['gender']) && !empty($row['gender'])
+            && isset($row['nationality']) && !empty($row['nationality'])
+            && isset($row['address']) && !empty($row['address'])
+            && isset($row['version']) && !empty($row['version'])
+            && isset($row['birthday']) && !empty($row['birthday'])
+            && isset($row['father_name']) && !empty($row['father_name'])
+            && isset($row['father_phone_number']) && !empty($row['father_phone_number'])
+            && isset($row['father_occupation']) && !empty($row['father_occupation'])
+            && isset($row['mother_name']) && !empty($row['mother_name'])
+            && isset($row['religion']) && !empty($row['religion']))
         {
             return true;
         }
         return false;
     }
-    public function checkDuplicate($student_name,$father_name,$birthday)
+    public function checkDuplicate($student_name, $father_name, $birthday)
     {
        $birth = is_string($birthday) ? Carbon::parse((string)$birthday) : Date::excelToDateTimeObject($birthday);
-       $count = User::join('student_infos','users.id','=', 'student_infos.user_id')
-                ->where('users.name',$student_name)
-                ->where('student_infos.father_name',$father_name)
-                ->whereDate('student_infos.birthday',$birth)
+       $count = User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
+                ->where('users.name', $student_name)
+                ->where('student_infos.father_name', $father_name)
+                ->whereDate('student_infos.birthday', $birth)
                 ->count();
        if ($count > 0)
        {
