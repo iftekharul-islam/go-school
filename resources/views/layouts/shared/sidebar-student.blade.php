@@ -33,13 +33,13 @@
                 $std = 1;
             if (strpos($add, 'users/'))
                 $all_student = 1;
-            if ((strpos($add, 'users/') && Request::get('teacher'))  || strpos($add,'new.teacher'))
+            if ((strpos($add, 'users/') && Request::get('teacher'))  || strpos($add,'new-teacher'))
                 $teacher = 1;
-            if (strpos($add,'all.department')  || strpos($add,'create.department'))
+            if (strpos($add,'all-department')  || strpos($add,'create-department'))
                 $department = 1;
-            if (strpos($add,'academic.routines')  || Request::get('course') || strpos($add,'manage.class'))
+            if (strpos($add,'routine')  || Request::get('course') == 1 || strpos($add,'manage-class'))
                 $class = 1;
-            if (strpos($add,'grades.classes')  || (strpos($add,'academic.syllabus')) || strpos($add,'academic.notice') || (strpos($add,'academic.event')))
+            if (strpos($add,'classes')  || (strpos($add,'syllabus')) || strpos($add,'notice') || (strpos($add,'event')))
                 $academic = 1;
         @endphp
         <div class="sidebar-menu-content">
@@ -135,7 +135,7 @@
                             @if($role == 'admin')
                                 <li class="nav-item">
                                     <a href="{{ route('new.teacher') }}"
-                                       class="nav-link {{ (request()->is('new.teacher')) ? 'menu-active' : '' }}">
+                                       class="nav-link {{ (request()->routeIs('new.teacher')) ? 'menu-active' : '' }}">
                                         <i class="fas fa-angle-right"></i><span>Add Teacher</span></a>
                                 </li>
                             @endif
@@ -176,12 +176,12 @@
                         <ul class="nav sub-group-menu {{ $department == 1 ? 'sub-group-active' : ''}}">
                             <li class="nav-item">
                                 <a href="{{ route('all.department') }}"
-                                   class="nav-link {{ (request()->is('all.department')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('all.department')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>All Department</span></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('create.department') }}"
-                                   class="nav-link {{ (request()->is('create.department')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('create.department')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Add Department</span></a>
                             </li>
                         </ul>
@@ -196,37 +196,37 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('manage.class') }}"
-                                   class="nav-link {{ (request()->is('manage.class')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('manage.class')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Manage Classes</span></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('academic.routines') }}"
-                                   class="nav-link {{ (request()->is('academic.routines')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('academic.routines')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Class Routine</span></a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-sliders-h"></i><span>Academic Settings</span></a></a>
+                        <a href="#" class="nav-link"><i class="fas fa-sliders-h"></i><span>Academic</span></a></a>
                         <ul class="nav sub-group-menu {{ $academic == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="{{ route('grades.classes') }}"
-                                   class="nav-link {{ (request()->is('grades.classes')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('grades.classes')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Grades</span></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('academic.syllabus') }}"
-                                   class="nav-link {{ (request()->is('academic.syllabus')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('academic.syllabus')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Syllabus</span></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('academic.notice') }}"
-                                   class="nav-link {{ (request()->is('academic.notice')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('academic.notice')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Notice</span></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('academic.event') }}"
-                                   class="nav-link {{ (request()->is('academic.event')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('academic.event')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Events</span></a>
                             </li>
                         </ul>

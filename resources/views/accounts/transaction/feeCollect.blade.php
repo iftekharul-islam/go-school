@@ -40,7 +40,7 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area example-screen">
-            <h3>Dashboard</h3>
+            <h3>Fee Collection</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
@@ -61,12 +61,12 @@
                                 <tr>
                                     <th>Name</th>
                                     <td>{{ $student->name }}</td>
-                                    <th>Class && Section</th>
+                                    <th>Class & Section</th>
                                     <td> Class {{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</td>
                                 </tr>
                                 @if($student->studentInfo)
                                     <tr>
-                                        <th>Father Name</th>
+                                        <th>Father's Name</th>
                                         <td>{{ $student->studentInfo['father_name'] }}</td>
                                         <th>Phone</th>
                                         <td>{{ $student->studentInfo['father_phone_number'] }}</td>

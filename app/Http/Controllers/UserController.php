@@ -282,16 +282,15 @@ class UserController extends Controller
 
         return view('school.create-new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
     }
-
+    public function createAccountant()
+    {
+        return view('school.create-new-accountant');
+    }
     public function createLibrarian()
     {
         return view('school.create-new-librarian');
     }
 
-    public function createAccountant()
-    {
-        return view('school.create-new-accountant');
-    }
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
