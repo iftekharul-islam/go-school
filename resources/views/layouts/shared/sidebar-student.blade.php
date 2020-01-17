@@ -249,15 +249,15 @@
                         <a href="#" class="nav-link"><i class="fas fa-file-alt"></i><span>Exams</span></a>
                         <ul class="nav sub-group-menu {{ $ex == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('exams.create')) ? 'menu-active' : '' }}"
+                                <a class="nav-link {{ (request()->routeIs('exams.create')) ? 'menu-active' : '' }}"
                                    href="{{ route('exams.create') }}"><i class="fas fa-angle-right"></i><span>Add Examination</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('exams.active')) ? 'menu-active' : '' }}"
+                                <a class="nav-link {{ (request()->routeIs('exams.active')) ? 'menu-active' : '' }}"
                                    href="{{ route('exams.active') }}"><i class="fas fa-angle-right"></i><span>Active Exams</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('exams')) ? 'menu-active' : '' }}"
+                                <a class="nav-link {{ (request()->routeIs('exams')) ? 'menu-active' : '' }}"
                                    href="{{ route('exams') }}"><i class="fas fa-angle-right"></i><span>Manage Examinations</span></a>
                             </li>
                         </ul>
@@ -296,8 +296,8 @@
                                     class="fas fa-file-invoice-dollar"></i><span>Manage Accounts</span></a>
                         <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('admin/new-accountant')) ? 'menu-active' : '' }}"
-                                   href="{{ 'new-accountant' }}">
+                                <a class="nav-link {{ (request()->routeIs('new.accountant')) ? 'menu-active' : '' }}"
+                                   href="{{ route('new.accountant') }}">
                                     <i class="fas fa-angle-right"></i><span>Add accountant</span></a>
                             </li>
                             <li class="nav-item">
