@@ -50,8 +50,6 @@ class UsersImport implements ToCollection, WithHeadingRow
                 continue;
             }
 
-
-
             $user = User::create([
                 'name' => $row['name'],
                 'email' => $username,
@@ -72,12 +70,12 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'session' => date("Y"),
                 'roll_number' => $row['roll_number'],
                 'version' => $row['version'],
-                'shift' => $row['shift'] ? $row['shift'] : '',
-                'group'  =>  $row['group'] ? $row['group'] : '',
+                'shift' => $row['shift'],
+                'group'  =>  $row['group'],
                 'birthday' => is_string($row['birthday']) ? Carbon::parse((string)$row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
                 'father_name' => $row['father_name'],
                 'father_phone_number' => $row['father_phone_number'],
-                'father_national_id' => $row['father_national_id'] ? $row['father_national_id'] : '',
+                'father_national_id' => $row['father_national_id'],
                 'father_occupation' => $row['father_occupation'],
                 'mother_name' => $row['mother_name'],
                 'religion' => $row['religion'],
@@ -88,7 +86,7 @@ class UsersImport implements ToCollection, WithHeadingRow
     }
     public function validateSheet($row)
     {
-        if (!empty($row['name']) && !empty($row['roll_number']) && !empty($row['nationality']) && !empty($row['address']) && !empty($row['version'])  && !empty($row['birthday'])
+        if (!empty($row['name']) && !empty($row['gender']) && !empty($row['nationality']) && !empty($row['address']) && !empty($row['version'])  && !empty($row['birthday'])
             && !empty($row['father_name']) && !empty($row['father_phone_number']) && !empty($row['father_occupation']) && !empty($row['mother_name']) && !empty($row['religion']))
         {
             return true;
