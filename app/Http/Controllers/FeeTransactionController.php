@@ -58,33 +58,35 @@ class FeeTransactionController extends Controller
         ]);
         $feeMaster = FeeMaster::find($request->feeMasterId);
         $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
-
-//        $user = FeeTransaction::where('student_id', 19)->where('fee_master_id', $request->feeMasterId)->get();
         
         if($request->get('advance_amount')){
-            // $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
             $studentInfo->advance_amount += $request->get('advance_amount');
-            $studentInfo->save();
-        }
-
-        if($request->get('pay_from_advance_blnc') == 1){
-            if($request->get('totalAmount') < $studentInfo->advance_amount){
-                $newBalance = $studentInfo->advance_amount - $request->get('totalAmount');
-                $studentInfo->advance_amount = $newBalance; 
-                $request->amount = $request->get('totalAmount');
-            }else{
-                $collectiveAmount = ($request->get('totalAmount') - $studentInfo->advance_amount) + ($request->get('amount')+ $request->get('fine');
-                if($collectiveAmount < $request->get('totalAmount')){
-                    $request->amount = $collectiveAmount;
-                }
-                $studentInfo->advance_amount = 0;
-                $request->amount = $request->get('totalAmount');
-            }
             $studentInfo->save();
         }
 
         $value = $request->amount;
         $amount = $request->amount;
+        $deducted_advance_amount = 0;
+        
+        if($request->get('pay_from_advance_blnc') == 1){
+            $totalAmount =  $request->get('totalAmount') - $request->get('discountAmount');
+            if($totalAmount < $studentInfo->advance_amount){
+                $studentInfo->advance_amount = $studentInfo->advance_amount - $totalAmount;
+                $amount =  $request->get('totalAmount') + $request->get('fine');
+                $deducted_advance_amount = $totalAmount;
+            }else{
+                $collectiveAmount =  $studentInfo->advance_amount + $request->get('amount');
+                $amount = $collectiveAmount;
+                $deducted_advance_amount = $studentInfo->advance_amount;
+                $studentInfo->advance_amount = 0;
+                //echo 'Total Amount '.$collectiveAmount;
+
+            }
+            // if($request->get('discountAmount') > 0){
+            //     $amount = $amount - $request->get('discountAmount');
+            // }
+            $studentInfo->save();
+        }
 
         if ($value === $feeMaster->amount) {
             $status = 'Paid';
@@ -96,7 +98,12 @@ class FeeTransactionController extends Controller
             $status = 'Unpaid';
         }
 
-        
+        // echo 'Total Amount '.$request->get('totalAmount').'<br/>';
+        // echo 'advance '.$studentInfo->advance_amount.'<br/>';
+        // echo 'discount '.$request->get('discountAmount').'<br/>';
+        // echo 'final amount: '.$amount.'<br/>';
+        // echo $request->get('fine').'<br/>';
+        //die('X');
 
         $ft = new FeeTransaction();
         $ft->student_id = $request->get('student_id');
@@ -108,6 +115,8 @@ class FeeTransactionController extends Controller
         $ft->accountant_id = Auth::id();
         $ft->school_id = \auth()->user()->school_id;
         $ft->status = $status;
+        $ft->deducted_advance_amount = $deducted_advance_amount;
+        
         $ft->save();
         $ft->feeMasters()->attach($request->feeMasterId);
         
@@ -157,6 +166,9 @@ class FeeTransactionController extends Controller
     public function destroy($id)
     {
         $ft = FeeTransaction::findOrFail($id);
+        $studentInfo = StudentInfo::where('user_id', $ft->student_id)->first();
+        $studentInfo->advance_amount += $ft->deducted_advance_amount;
+        $studentInfo->save();
         $ft->delete();
         DB::table('fee_master_fee_transaction')->where('fee_transaction_id', $ft->id)->delete();
         return redirect()->back();

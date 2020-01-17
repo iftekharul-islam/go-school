@@ -56,7 +56,6 @@
                     </div>
                     <div class="col-md-10">
                         <div class="row">
-                      
                             <table class="table">
                                 <tr>
                                     <th>Name</th>
@@ -88,7 +87,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="card height-auto false-height example-screen">
             <div class="card-body">
                 <div class="heading-layout1">
@@ -283,16 +282,15 @@
                                                 <input type="number" placeholder="" class="form-control" name="advance_amount" value="" id="advance_amount">
                                                 <div class="error text-danger"></div>
                                             </div>
-                                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                            <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                                 <label class="font-bold">Balance </label>
-                                                <input type="number" id="balance" readonly class="form-control" value="{{number_format($student->studentInfo->advance_amount, 2)}}">
+                                                <input type="number" id="balance" readonly class="form-control" value="{{$student->studentInfo->advance_amount}}">
                                             </div>
 
-                                            <div class="col-6-xxxl col-lg-6 col-6 form-group text-left">
-                                                <label class="font-bold">Pay from Advance Balance</label>
-
-                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" class="form-control" >
-                                               
+                                            <div class="col-12-xxxl col-lg-12 col-12 form-group text-left">
+                                                <label class="font-bold">Pay from Advance Balance &nbsp;
+                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" class="" >
+                                                </label>
                                             </div>
                                           
                                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
@@ -466,7 +464,7 @@
 
         $(document).ready(function() {
             var totalPayable = $('.open-AddBookDialog').data('amount');
-            console.log(totalPayable);
+           
             $(".fine").change(function() {
                 let grandTotal = 0;
                 let fine = $(".fine").val();
@@ -487,20 +485,19 @@
             });
 
            $('#pay_from_advance_blnc').click(function(){
-                
                 let advance_amount = "{{$student->studentInfo->advance_amount}}";
-                console.log('payable' + totalPayable);
+                let discountValue = parseFloat($('#discountValue').val());
+                let  fine = parseFloat($(".fine").val());
                 if($(this). prop("checked") == true){
                     if(advance_amount > totalPayable){
                         $('#amount').val(0);
                        console.log('b'+advance_amount);
                     }else{
-                        let payable = totalPayable - advance_amount;
+                        let payable = totalPayable - advance_amount - discountValue;
                         $('#amount').val(payable);
-                        console.log('L '+advance_amount);
                     }
                 }else{
-                    $('#amount').val(totalPayable);
+                    $('#amount').val(totalPayable - discountValue);
                 }
             });
 

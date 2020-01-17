@@ -30,7 +30,7 @@ class FeeMasterController extends Controller
     public function create()
     {
         $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
-        $feeTypes = FeeType::where('type', '!=', 'recurrent')->get();;
+        $feeTypes = FeeType::where('type', '!=', 'recurrent')->get();
         return view('accounts.feeMaster.create', compact('classes', 'feeTypes'));
     }
 
