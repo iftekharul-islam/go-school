@@ -96,6 +96,7 @@ class UsersImport implements ToCollection, WithHeadingRow
             && isset($row['father_name']) && !empty($row['father_name'])
             && isset($row['father_phone_number']) && !empty($row['father_phone_number'])
             && isset($row['father_occupation']) && !empty($row['father_occupation'])
+            && isset($row['father_national_id']) && !empty($row['father_national_id'])
             && isset($row['mother_name']) && !empty($row['mother_name'])
             && isset($row['religion']) && !empty($row['religion']))
         {
