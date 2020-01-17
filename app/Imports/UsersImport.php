@@ -69,6 +69,7 @@ class UsersImport implements ToCollection, WithHeadingRow
             StudentInfo::create([
                 'student_id' => $code,
                 'session' => date("Y"),
+                'student_indentification' => $row['student_indentification'],
                 'roll_number' => $row['roll_number'],
                 'version' => $row['version'],
                 'shift' => $row['shift'],

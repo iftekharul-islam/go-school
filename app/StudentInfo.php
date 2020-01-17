@@ -28,7 +28,8 @@ class StudentInfo extends Model
         'mother_annual_income',
         'user_id',
         'shift',
-        'roll_number'
+        'roll_number',
+        'student_indentification'
     ];
 
     /**
