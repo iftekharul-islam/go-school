@@ -182,6 +182,23 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('student_indentification') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="student_indentification"
+                                               class="control-label false-padding-bottom">Student ID:</label>
+                                        <input id="student_indentification"  type="text"
+                                               class="form-control"
+                                               name="student_indentification">
+
+                                        @if ($errors->has('student_indentification'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('student_indentification') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('roll_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="roll_number"
@@ -198,6 +215,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('shift') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -219,8 +238,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('version') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -242,6 +259,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -262,8 +281,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -284,9 +301,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
-
                                     <div class="col-md-12">
                                         <label for="phone_number"
                                                class="control-label false-padding-bottom">Phone
@@ -302,8 +320,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -323,6 +339,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -349,11 +367,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
-
                                     <div class="col-md-12">
                                         <label for="nationality"
                                                class=" control-label false-padding-bottom">Nationality<label
@@ -372,6 +387,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -396,8 +413,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -422,9 +437,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-
                                     <div class="col-md-12">
                                         <label for="address"
                                                class="control-label false-padding-bottom">Address<label
@@ -437,14 +453,12 @@
 
                                         @if ($errors->has('address'))
                                             <span class="help-block">
-                                    <strong>{{ $errors->first('address') }}</strong>
-                                </span>
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -465,6 +479,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -480,14 +496,12 @@
 
                                         @if ($errors->has('father_phone_number'))
                                             <span class="help-block">
-                                    <strong>{{ $errors->first('father_phone_number') }}</strong>
-                                </span>
+                                                <strong>{{ $errors->first('father_phone_number') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -507,10 +521,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
-
-
                                     <div class="col-md-12">
                                         <label for="father_occupation"
                                                class=" control-label false-padding-bottom">Father's
@@ -528,8 +542,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_annual_income') ? ' has-error' : '' }}">
 
@@ -551,6 +563,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
 
@@ -573,8 +587,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
 
@@ -587,8 +599,7 @@
                                         <input id="mother_phone_number" type="text"
                                                class="form-control"
                                                name="mother_phone_number"
-                                               value="{{ old('mother_phone_number') }}"
-                                        >
+                                               value="{{ old('mother_phone_number') }}">
 
                                         @if ($errors->has('mother_phone_number'))
                                             <span class="help-block">
@@ -598,6 +609,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
 
@@ -613,17 +626,14 @@
 
                                         @if ($errors->has('mother_name'))
                                             <span class="help-block">
-                                    <strong>{{ $errors->first('mother_name') }}</strong>
-                                </span>
+                                                <strong>{{ $errors->first('mother_name') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
-
                                     <div class="col-md-12">
                                         <label for="mother_occupation"
                                                class="control-label false-padding-bottom">Mother's
@@ -642,6 +652,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
 
@@ -663,12 +675,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
-
-
                                     <div class="col-md-12">
                                         <label for="mother_designation"
                                                class="control-label false-padding-bottom">Mother's
@@ -687,6 +695,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
 
@@ -709,8 +719,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
 

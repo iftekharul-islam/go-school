@@ -39,8 +39,12 @@
                             <div class=" table-responsive border-right">
                                 <table class="text-wrap table-borderless table ">
                                     <tr>
-                                        <td class="text-nowrap font-medium text-dark-medium">Student ID:</td>
+                                        <td class="text-nowrap font-medium text-dark-medium">Student Code:</td>
                                         <td class="text-capitalize">{{$user->student_code}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-nowrap font-medium text-dark-medium">Student Id:</td>
+                                        <td class="text-capitalize">{{$user->studentInfo['student_indentification']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Version:</td>
