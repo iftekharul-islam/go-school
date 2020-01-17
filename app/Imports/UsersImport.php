@@ -8,9 +8,10 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class UsersImport implements ToCollection
+class UsersImport implements ToCollection, WithHeadingRow
 {
     use Importable;
 
@@ -30,13 +31,9 @@ class UsersImport implements ToCollection
         $error_rows = [];
         foreach ($rows as $key => $row)
         {
-            if ($key == 0) {
-                continue;
-            }
-
             {
                 $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-                $name = explode(" ", $row[0]);
+                $name = explode(" ", $row['name']);
 
                 $username = array_last($name) . $code;
                 $pass = $username;
@@ -47,7 +44,7 @@ class UsersImport implements ToCollection
                 session()->put('importWarning', true);
                 $error_rows[] = $key+1;
                 continue;
-            }elseif($this->checkDuplicate($row[0],$row[9],$row[8]))
+            }elseif($this->checkDuplicate($row['name'],$row['father_name'],$row['birthday']))
             {
                 session()->put('duplicateWarning', true);
                 continue;
@@ -56,34 +53,34 @@ class UsersImport implements ToCollection
 
 
             $user = User::create([
-                'name' => $row[0],
+                'name' => $row['name'],
                 'email' => $username,
-                'password'=> bcrypt($pass),
+                'password' => bcrypt($pass),
                 'role'     => 'student',
                 'active'   => 1,
                 'school_id'=> auth()->user()->school_id,
                 'code'     => auth()->user()->code,
                 'student_code' => $code,
-                'gender' => $row[2],
-                'nationality'=> $row[3],
-                'address' => $row[4],
+                'gender' => $row['gender'],
+                'nationality'=> $row['nationality'],
+                'address' => $row['address'],
                 'section_id' => $this->section,
             ]);
 
             StudentInfo::create([
                 'student_id' => $code,
                 'session' => date("Y"),
-                'roll_number' => $row[1] ? $row[1] : '',
-                'version' => $row[5],
-                'shift' => $row[6] ? $row[6] : '',
-                'group'  =>  $row[7] ? $row[7] : '',
-                'birthday' => is_string($row[8]) ? Carbon::parse((string)$row[8]) : Date::excelToDateTimeObject($row[8]),
-                'father_name' => $row[9],
-                'father_phone_number' => $row[10],
-                'father_national_id' => $row[11] ? $row[11] : '',
-                'father_occupation' => $row[12],
-                'mother_name' => $row[13],
-                'religion' => $row[14],
+                'roll_number' => $row['roll_number'],
+                'version' => $row['version'],
+                'shift' => $row['shift'] ? $row['shift'] : '',
+                'group'  =>  $row['group'] ? $row['group'] : '',
+                'birthday' => is_string($row['birthday']) ? Carbon::parse((string)$row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
+                'father_name' => $row['father_name'],
+                'father_phone_number' => $row['father_phone_number'],
+                'father_national_id' => $row['father_national_id'] ? $row['father_national_id'] : '',
+                'father_occupation' => $row['father_occupation'],
+                'mother_name' => $row['mother_name'],
+                'religion' => $row['religion'],
                 'user_id' => $user->id,
             ]);
         }
@@ -91,8 +88,8 @@ class UsersImport implements ToCollection
     }
     public function validateSheet($row)
     {
-        if (!empty($row[0]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4]) && !empty($row[5])  && !empty($row[8])
-            && !empty($row[9]) && !empty($row[10]) && !empty($row[12]) && !empty($row[13]) && !empty($row[14]))
+        if (!empty($row['name']) && !empty($row['roll_number']) && !empty($row['nationality']) && !empty($row['address']) && !empty($row['version'])  && !empty($row['birthday'])
+            && !empty($row['father_name']) && !empty($row['father_phone_number']) && !empty($row['father_occupation']) && !empty($row['mother_name']) && !empty($row['religion']))
         {
             return true;
         }
@@ -106,7 +103,6 @@ class UsersImport implements ToCollection
                 ->where('student_infos.father_name',$father_name)
                 ->whereDate('student_infos.birthday',$birth)
                 ->count();
-//       dd($count);
        if ($count > 0)
        {
            return true;
