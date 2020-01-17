@@ -26,7 +26,7 @@ class AddDeductedAdvanceAmountColumnsToFeeTransactions extends Migration
     public function down()
     {
         Schema::table('fee_transactions', function (Blueprint $table) {
-            $table->unsignedBigInteger('deducted_advance_amount')->default(0);
+            $table->dropColumn('deducted_advance_amount');
         });
     }
 }
