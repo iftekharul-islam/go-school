@@ -8,9 +8,10 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class UsersImport implements ToCollection
+class UsersImport implements ToCollection, WithHeadingRow
 {
     use Importable;
 
@@ -27,87 +28,59 @@ class UsersImport implements ToCollection
 
     public function collection(Collection $rows)
     {
-//        Validator::make($rows->toArray(), [
-//            '*.0' => 'required',
-//            '*.1' => 'required',
-//            '*.2' => 'required',
-//            '*.3' => 'required',
-//            '*.4' => 'required',
-//            '*.6' => 'required',
-//            '*.7' => 'required',
-//            '*.8' => 'required',
-//            '*.10' => 'required',
-//            '*.11' => 'required',
-//            '*.12' => 'required',
-//        ],[
-//            '*.0.required' => 'name is required',
-//            '*.1.required' => 'Gender is required',
-//            '*.2.required' => 'Nationality is required',
-//            '*.3.required' => 'Address is required',
-//            '*.4.required' => 'Version is required',
-//            '*.6.required' => 'Birthday is required',
-//            '*.7.required' => 'Father Name is required',
-//            '*.8.required' => 'Father Phone number is required',
-//            '*.10.required' => 'Father occupation is required',
-//            '*.11.required' => 'Mother name is required',
-//            '*.12.required' => 'Religion is required',
-//        ])->validate();
-
         $error_rows = [];
         foreach ($rows as $key => $row)
         {
-            if ($key == 0) {
-                continue;
-            }
-
-            {
-                $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-                $name = explode(" ", $row[0]);
-
-                $username = array_last($name) . $code;
-                $pass = $username;
-            }
-
             if (!$this->validateSheet($row))
             {
                 session()->put('importWarning', true);
                 $error_rows[] = $key+1;
                 continue;
-            }elseif($this->checkDuplicate($row[0],$row[7]))
+            }
+            elseif ($this->checkDuplicate($row['name'], $row['father_name'], $row['birthday']))
             {
                 session()->put('duplicateWarning', true);
                 continue;
             }
 
+            {
+                $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+                $name = explode(" ", $row['name']);
 
+                $username = array_last($name) . $code;
+                $pass = $username;
+            }
 
             $user = User::create([
-                'name' => $row[0],
+                'name' => $row['name'],
                 'email' => $username,
-                'password'=> bcrypt($pass),
+                'password' => bcrypt($pass),
                 'role'     => 'student',
                 'active'   => 1,
                 'school_id'=> auth()->user()->school_id,
                 'code'     => auth()->user()->code,
                 'student_code' => $code,
-                'gender' => $row[1],
-                'nationality'=> $row[2],
-                'address' => $row[3],
+                'gender' => $row['gender'],
+                'nationality'=> $row['nationality'],
+                'address' => $row['address'],
                 'section_id' => $this->section,
             ]);
 
             StudentInfo::create([
                 'student_id' => $code,
                 'session' => date("Y"),
-                'version' => $row[4],
-                'group'  =>  $row[5] ? $row[5] : '',
-                'birthday' => is_string($row[6]) ? Carbon::parse((string)$row[6]) : Date::excelToDateTimeObject($row[6]),
-                'father_name' => $row[7],
-                'father_phone_number' => $row[8],
-                'father_national_id' => $row[9] ? $row[9] : '',
-                'father_occupation' => $row[10],
-                'mother_name' => $row[11],
-                'religion' => $row[12],
+                'student_indentification' => $row['student_indentification'],
+                'roll_number' => $row['roll_number'],
+                'version' => $row['version'],
+                'shift' => $row['shift'],
+                'group'  =>  $row['group'],
+                'birthday' => is_string($row['birthday']) ? Carbon::parse((string)$row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
+                'father_name' => $row['father_name'],
+                'father_phone_number' => $row['father_phone_number'],
+                'father_national_id' => $row['father_national_id'],
+                'father_occupation' => $row['father_occupation'],
+                'mother_name' => $row['mother_name'],
+                'religion' => $row['religion'],
                 'user_id' => $user->id,
             ]);
         }
@@ -115,18 +88,30 @@ class UsersImport implements ToCollection
     }
     public function validateSheet($row)
     {
-        if (!empty($row[0]) && !empty($row[1]) && !empty($row[2]) && !empty($row[3]) && !empty($row[4])  && !empty($row[6])
-            && !empty($row[7]) && !empty($row[8]) && !empty($row[10]) && !empty($row[11]) && !empty($row[12]))
+        if (isset($row['name']) && !empty($row['name'])
+            && isset($row['gender']) && !empty($row['gender'])
+            && isset($row['nationality']) && !empty($row['nationality'])
+            && isset($row['address']) && !empty($row['address'])
+            && isset($row['version']) && !empty($row['version'])
+            && isset($row['birthday']) && !empty($row['birthday'])
+            && isset($row['father_name']) && !empty($row['father_name'])
+            && isset($row['father_phone_number']) && !empty($row['father_phone_number'])
+            && isset($row['father_occupation']) && !empty($row['father_occupation'])
+            && isset($row['father_national_id']) && !empty($row['father_national_id'])
+            && isset($row['mother_name']) && !empty($row['mother_name'])
+            && isset($row['religion']) && !empty($row['religion']))
         {
             return true;
         }
         return false;
     }
-    public function checkDuplicate($student_name,$father_name)
+    public function checkDuplicate($student_name, $father_name, $birthday)
     {
-       $count = User::join('student_infos','users.id','=', 'student_infos.user_id')
-                ->where('users.name',$student_name)
-                ->where('student_infos.father_name',$father_name)
+       $birth = is_string($birthday) ? Carbon::parse((string)$birthday) : Date::excelToDateTimeObject($birthday);
+       $count = User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
+                ->where('users.name', $student_name)
+                ->where('student_infos.father_name', $father_name)
+                ->whereDate('student_infos.birthday', $birth)
                 ->count();
        if ($count > 0)
        {

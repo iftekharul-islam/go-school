@@ -40,7 +40,7 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area example-screen">
-            <h3>Dashboard</h3>
+            <h3>Fee Collection</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
@@ -60,12 +60,12 @@
                                 <tr>
                                     <th>Name</th>
                                     <td>{{ $student->name }}</td>
-                                    <th>Class && Section</th>
+                                    <th>Class & Section</th>
                                     <td> Class {{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</td>
                                 </tr>
                                 @if($student->studentInfo)
                                     <tr>
-                                        <th>Father Name</th>
+                                        <th>Father's Name</th>
                                         <td>{{ $student->studentInfo['father_name'] }}</td>
                                         <th>Phone</th>
                                         <td>{{ $student->studentInfo['father_phone_number'] }}</td>
@@ -292,7 +292,7 @@
                                                 <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) title="Balance: 0.00" onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" onchange="makeAdvancePayment()" >
                                                 </label>
                                             </div>
-                                          
+
                                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                                 <label>Payment Method</label>
                                                 <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash

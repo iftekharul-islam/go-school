@@ -3702,12 +3702,27 @@ ul {
   flex-direction: column;
   padding: 0 30px;
 }
-.take-col{
+
+/*
+Attendance result table customisation
+ */
+
+.table-scroll {
+  margin-left: 199px;
+  overflow-x: scroll;
+  overflow-y: visible;
+  padding-bottom: 5px;
+}
+
+.table-main .fix-col {
+  left: 33px;
   position: absolute;
   top: auto;
-  width: 155px;
-  padding-bottom: 5px;
-  background: white;
+  width: 198px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
 }
 
 @media only screen and (max-width: 767px) {
