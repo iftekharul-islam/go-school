@@ -205,11 +205,11 @@
                                             <select id="class_teacher" class="form-control" name="class_teacher_section_id">
                                                 <option selected="selected" value="{{$user->section['id']}}">Section:
                                                     {{$user->section['section_number']}} Class:
-                                                    {{$user->section->class['class_number']}}</option>
+                                                    {{$user->section['class']['class_number']}}</option>
                                                 @foreach ($sections as $section)
                                                     <option value="{{$section['id']}}">Section: {{$section['section_number']}}
                                                         Class:
-                                                        {{$section->class['class_number']}}</option>
+                                                        {{$section['class']['class_number']}}</option>
                                                 @endforeach
                                             </select>
 
