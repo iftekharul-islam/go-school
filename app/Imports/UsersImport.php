@@ -110,7 +110,7 @@ class UsersImport implements ToCollection, WithHeadingRow
         ];
         foreach ($validhead as $item)
         {
-            if (!array_key_exists($item,$all))
+            if (!array_key_exists($item, $all))
             {
              $this->error_head[] = $item;
             }

@@ -541,7 +541,7 @@ class UserController extends Controller
         $msg = 'Student Successfully added';
         if (Session::has('headerwarining') && Session::get('headerwarining') == true)
         {
-            $msg = 'Some mandatory Header column is missing, Column: ' .implode(', ',Session::get('error_head') );
+            $msg = 'Some mandatory Header column is missing, Column: ' .implode(', ', Session::get('error_head') );
             session()->forget('headerwarining');
         }
         if (Session::has('importWarning') && Session::get('importWarning') == true)
