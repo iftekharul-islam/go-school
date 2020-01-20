@@ -7,6 +7,7 @@ use App\FeeMaster;
 use App\FeeTransaction;
 use App\Myclass;
 use App\Section;
+use App\StudentInfo;
 use App\Services\User\UserService;
 use App\User;
 use Carbon\Carbon;
@@ -14,6 +15,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class FeeTransactionController extends Controller
@@ -55,11 +57,31 @@ class FeeTransactionController extends Controller
             'fine' => 'required',
         ]);
         $feeMaster = FeeMaster::find($request->feeMasterId);
-
-//        $user = FeeTransaction::where('student_id', 19)->where('fee_master_id', $request->feeMasterId)->get();
+        $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
+        
+        if ($request->get('advance_amount')){
+            $studentInfo->advance_amount += $request->get('advance_amount');
+            $studentInfo->save();
+        }
 
         $value = $request->amount;
         $amount = $request->amount;
+        $deducted_advance_amount = 0;
+        
+        if ($request->get('pay_from_advance_blnc') == 1){
+            $totalAmount =  $request->get('totalAmount') + $request->get('fine') - $request->get('discountAmount');
+            if ($totalAmount < $studentInfo->advance_amount){
+                $studentInfo->advance_amount = $studentInfo->advance_amount - $totalAmount;
+                $amount =  $totalAmount;
+                $deducted_advance_amount = $totalAmount;
+            }else {
+                $collectiveAmount =  $studentInfo->advance_amount + $request->get('amount');
+                $amount = $collectiveAmount;
+                $deducted_advance_amount = $studentInfo->advance_amount;
+                $studentInfo->advance_amount = 0;
+            }
+            $studentInfo->save();
+        }
 
         if ($value === $feeMaster->amount) {
             $status = 'Paid';
@@ -81,6 +103,7 @@ class FeeTransactionController extends Controller
         $ft->accountant_id = Auth::id();
         $ft->school_id = \auth()->user()->school_id;
         $ft->status = $status;
+        $ft->deducted_advance_amount = $deducted_advance_amount;
         $ft->save();
         $ft->feeMasters()->attach($request->feeMasterId);
         return redirect()->back();
@@ -129,6 +152,12 @@ class FeeTransactionController extends Controller
     public function destroy($id)
     {
         $ft = FeeTransaction::findOrFail($id);
+        $studentInfo = StudentInfo::where('user_id', $ft->student_id)->first();
+        if (empty($studentInfo)){
+            return redirect()->back()->with('status', 'Student information not found');
+        }
+        $studentInfo->advance_amount += $ft->deducted_advance_amount;
+        $studentInfo->save();
         $ft->delete();
         DB::table('fee_master_fee_transaction')->where('fee_transaction_id', $ft->id)->delete();
         return redirect()->back();

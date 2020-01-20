@@ -48,6 +48,11 @@
                 <li>Fee Collection</li>
             </ul>
         </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="card height-auto mb-3 example-screen">
             <div class="card-body">
                 <div class="row">
@@ -56,7 +61,6 @@
                     </div>
                     <div class="col-md-10">
                         <div class="row">
-                      
                             <table class="table">
                                 <tr>
                                     <th>Name</th>
@@ -78,21 +82,20 @@
                                     <th>Student Code</th>
                                     <td>{{ $student->student_code }}</td>
                                 </tr>
+                                <tr>
+                                    <th>Balance</th>
+                                    <td colspan="3">{{ number_format($student->studentInfo->advance_amount, 2) }}</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <div class="card height-auto false-height example-screen">
             <div class="card-body">
                 <div class="heading-layout1">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     <div class="item-title">
                         <h3 class="float-left mb-5 float-left">Fee Collection</h3>
                         <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>
@@ -232,7 +235,7 @@
                         </tr>
                         </tbody>
                     </table>
-
+                   
                     <div class="modal fade" id="feeCollect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -274,6 +277,22 @@
                                                 <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="" id="amount" required>
                                                 <div class="error text-danger"></div>
                                             </div>
+                                            <div class="col-12-xxxl col-lg-6 col-6 form-group">
+                                                <label>Advance Amount </label>
+                                                <input type="number" class="form-control" name="advance_amount" value="0" id="advance_amount">
+                                                <div class="error text-danger"></div>
+                                            </div>
+                                            <div class="col-12-xxxl col-lg-12 col-12 form-group">
+                                                <label class="font-bold">Advance Balance</label>
+                                                <input type="number" id="balance" readonly class="form-control" value="{{$student->studentInfo->advance_amount}}">
+                                            </div>
+
+                                            <div class="col-12-xxxl col-lg-12 col-12 form-group text-left">
+                                                <label class="font-bold">Pay from Advance Balance &nbsp;
+                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) title="Balance: 0.00" onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" onchange="makeAdvancePayment()" >
+                                                </label>
+                                            </div>
+
                                             <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                                 <label>Payment Method</label>
                                                 <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash
@@ -428,13 +447,11 @@
                     }
                 });
         };
-
         function formSubmit() {
             let send_amount = $("#amount").val();
             let send_dis = $(".discount").val();
             let send_fine = $(".fine").val();
             let demo = parseFloat(send_amount) + parseFloat(send_dis) - parseFloat(send_fine);
-
             if (demo > amounts) {
                 $(".error").append("<p class='text-danger'>Paid amount can not be greater than Payable amount</p>")
             }
@@ -442,7 +459,6 @@
                 document.getElementById('fee-transaction').submit();
             }
         };
-
         $(document).ready(function() {
             $(".fine").change(function() {
                 let grandTotal = 0;
@@ -455,6 +471,7 @@
                 let dis = $(".discount").val();
                 grandTotal = grandTotal - dis;
                 $("#amount").val(grandTotal);
+                makeAdvancePayment();
             });
 
             $('#feeCollect').on('hidden.bs.modal', function (e) {
@@ -476,8 +493,8 @@
             $("#month").val(month);
             $(_self.attr('href')).modal('show');
         });
-
         function getDiscount(item) {
+            console.log('called');
             let selectedDiscount = item.value;
             let discounts = {!! json_encode($discounts->toArray()) !!};
             let value;
@@ -497,6 +514,28 @@
             let dis = $(".discount").val();
             grandTotal = grandTotal - dis;
             $("#amount").val(grandTotal);
+            makeAdvancePayment();
+        }
+        function makeAdvancePayment(){
+            let advance_amount = "{{$student->studentInfo->advance_amount}}";
+            advance_amount = (advance_amount != '') ? parseFloat(advance_amount) : 0;
+            let discountValue = ($('#discountValue').val() != '') ? parseFloat($('#discountValue').val()) : 0;
+            let  fine = parseFloat($(".fine").val());
+            let totalPayable =  parseFloat(amounts) + fine - discountValue;
+            let advanceAmountInput = $('#advance_amount');
+            if ($('#pay_from_advance_blnc'). prop("checked") == true){
+                console.log('in true');
+                advanceAmountInput.attr('disabled', 'disabled').val(0);
+                if (advance_amount > totalPayable){
+                    $('#amount').val(0);
+                }else {
+                    let payable = totalPayable - parseFloat(advance_amount);
+                    $('#amount').val(payable);
+                }
+            }else {
+                $('#amount').val(totalPayable);
+                advanceAmountInput.removeAttr('disabled');
+            }
         }
     </script>
 @endpush

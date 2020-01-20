@@ -5691,3 +5691,5 @@ Attendance result table customisation
 .sub-group-menu .sidebar-nav-item .nav-link {position:relative}
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu .second-lbl-menu.nav-item.active .nav-link:after,
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu .nav-item.active .sidebar-nav-item .nav-link:after {color:#ffffff}
+.new-added-form .form-group input[type=checkbox].form-control{height:25px}
+.sidebar-menu-one .sidebar-menu-content .sidebar-nav-item.second-lbl-menu  > a.nav-link {background-color:#0e211f5c}
