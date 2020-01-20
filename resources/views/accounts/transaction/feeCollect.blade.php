@@ -279,17 +279,17 @@
                                             </div>
                                             <div class="col-12-xxxl col-lg-6 col-6 form-group">
                                                 <label>Advance Amount </label>
-                                                <input type="number" placeholder="" class="form-control" name="advance_amount" value="" id="advance_amount">
+                                                <input type="number" placeholder="" class="form-control" name="advance_amount" value="0" id="advance_amount">
                                                 <div class="error text-danger"></div>
                                             </div>
                                             <div class="col-12-xxxl col-lg-12 col-12 form-group">
-                                                <label class="font-bold">Balance </label>
+                                                <label class="font-bold">Advance Balance</label>
                                                 <input type="number" id="balance" readonly class="form-control" value="{{$student->studentInfo->advance_amount}}">
                                             </div>
 
                                             <div class="col-12-xxxl col-lg-12 col-12 form-group text-left">
                                                 <label class="font-bold">Pay from Advance Balance &nbsp;
-                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" class="" >
+                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) title="Balance: 0.00" onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" onchange="makeAdvancePayment()" >
                                                 </label>
                                             </div>
                                           
@@ -447,13 +447,11 @@
                     }
                 });
         };
-
         function formSubmit() {
             let send_amount = $("#amount").val();
             let send_dis = $(".discount").val();
             let send_fine = $(".fine").val();
             let demo = parseFloat(send_amount) + parseFloat(send_dis) - parseFloat(send_fine);
-
             if (demo > amounts) {
                 $(".error").append("<p class='text-danger'>Paid amount can not be greater than Payable amount</p>")
             }
@@ -461,10 +459,7 @@
                 document.getElementById('fee-transaction').submit();
             }
         };
-
         $(document).ready(function() {
-            var totalPayable = $('.open-AddBookDialog').data('amount');
-           
             $(".fine").change(function() {
                 let grandTotal = 0;
                 let fine = $(".fine").val();
@@ -476,31 +471,13 @@
                 let dis = $(".discount").val();
                 grandTotal = grandTotal - dis;
                 $("#amount").val(grandTotal);
-                totalPayable = grandTotal;
+                makeAdvancePayment();
             });
 
             $('#feeCollect').on('hidden.bs.modal', function (e) {
                 $('.discount').prop('selectedIndex',0);
                 $("form").trigger("reset");
             });
-
-           $('#pay_from_advance_blnc').click(function(){
-                let advance_amount = "{{$student->studentInfo->advance_amount}}";
-                let discountValue = parseFloat($('#discountValue').val());
-                let  fine = parseFloat($(".fine").val());
-                if($(this). prop("checked") == true){
-                    if(advance_amount > totalPayable){
-                        $('#amount').val(0);
-                       console.log('b'+advance_amount);
-                    }else{
-                        let payable = totalPayable - advance_amount - discountValue;
-                        $('#amount').val(payable);
-                    }
-                }else{
-                    $('#amount').val(totalPayable - discountValue);
-                }
-            });
-
         });
 
         $(document).on("click", ".open-AddBookDialog", function (e) {
@@ -515,10 +492,9 @@
             $("#totalAmount").val(amount);
             $("#month").val(month);
             $(_self.attr('href')).modal('show');
-            totalPayable = amount;
         });
-
         function getDiscount(item) {
+            console.log('called');
             let selectedDiscount = item.value;
             let discounts = {!! json_encode($discounts->toArray()) !!};
             let value;
@@ -538,7 +514,29 @@
             let dis = $(".discount").val();
             grandTotal = grandTotal - dis;
             $("#amount").val(grandTotal);
+            makeAdvancePayment();
         }
-
+        function makeAdvancePayment(){
+            let advance_amount = "{{$student->studentInfo->advance_amount}}";
+            advance_amount = (advance_amount != '') ? parseFloat(advance_amount) : 0;
+            console.log(advance_amount);
+            let discountValue = ($('#discountValue').val() != '') ? parseFloat($('#discountValue').val()) : 0;
+            let  fine = parseFloat($(".fine").val());
+            let totalPayable =  parseFloat(amounts) + fine - discountValue;
+            let advanceAmountInput = $('#advance_amount');
+            if($('#pay_from_advance_blnc'). prop("checked") == true){
+                console.log('in true');
+                advanceAmountInput.attr('disabled', 'disabled').val(0);
+                if(advance_amount > totalPayable){
+                    $('#amount').val(0);
+                }else{
+                    let payable = totalPayable - parseFloat(advance_amount);
+                    $('#amount').val(payable);
+                }
+            }else{
+                $('#amount').val(totalPayable);
+                advanceAmountInput.removeAttr('disabled');
+            }
+        }
     </script>
 @endpush

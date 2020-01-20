@@ -48,6 +48,7 @@
                                     <label for="code">Fee Type</label>
                                     <select name="fee_type" id="" class="select2">
                                         <option value="" selected>Select Fee</option>
+                                        <option value="recurrent">Monthly</option>
                                         @foreach($feeTypes as $feeType)
                                             <option value="{{ $feeType->id }}">{{ $feeType->name }}</option>
                                         @endforeach

@@ -69,22 +69,19 @@ class FeeTransactionController extends Controller
         $deducted_advance_amount = 0;
         
         if($request->get('pay_from_advance_blnc') == 1){
-            $totalAmount =  $request->get('totalAmount') - $request->get('discountAmount');
+            $totalAmount =  $request->get('totalAmount') + $request->get('fine') - $request->get('discountAmount');
+            
             if($totalAmount < $studentInfo->advance_amount){
                 $studentInfo->advance_amount = $studentInfo->advance_amount - $totalAmount;
-                $amount =  $request->get('totalAmount') + $request->get('fine');
+                $amount =  $totalAmount;
                 $deducted_advance_amount = $totalAmount;
             }else{
                 $collectiveAmount =  $studentInfo->advance_amount + $request->get('amount');
                 $amount = $collectiveAmount;
                 $deducted_advance_amount = $studentInfo->advance_amount;
                 $studentInfo->advance_amount = 0;
-                //echo 'Total Amount '.$collectiveAmount;
-
             }
-            // if($request->get('discountAmount') > 0){
-            //     $amount = $amount - $request->get('discountAmount');
-            // }
+
             $studentInfo->save();
         }
 
