@@ -204,19 +204,19 @@
                                             <label for="class_teacher" class="control-label false-padding-bottom">Class Teacher</label>
                                             <select id="class_teacher" class="form-control" name="class_teacher_section_id">
                                                 <option selected="selected" value="{{$user->section['id']}}">Section:
-                                                    {{$user->section->section_number}} Class:
-                                                    {{$user->section->class->class_number}}</option>
+                                                    {{$user->section['section_number']}} Class:
+                                                    {{$user->section->class['class_number']}}</option>
                                                 @foreach ($sections as $section)
-                                                    <option value="{{$section->id}}">Section: {{$section->section_number}}
+                                                    <option value="{{$section['id']}}">Section: {{$section['section_number']}}
                                                         Class:
-                                                        {{$section->class->class_number}}</option>
+                                                        {{$section->class['class_number']}}</option>
                                                 @endforeach
                                             </select>
 
                                             @if ($errors->has('class_teacher'))
                                                 <span class="help-block">
-                                <strong>{{ $errors->first('class_teacher') }}</strong>
-                            </span>
+                                                    <strong>{{ $errors->first('class_teacher') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
