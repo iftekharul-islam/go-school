@@ -538,9 +538,14 @@ class UserController extends Controller
     {
         Excel::import(new usersImport($request->section), $request->file('users'));
         $msg = 'Student Successfully added';
+        if (Session::has('headerwarining') && Session::get('headerwarining') == true)
+        {
+            $msg = 'Some mandatory Header column is missing, Column: ' .implode(', ', Session::get('error_head') );
+            session()->forget('headerwarining');
+        }
         if (Session::has('importWarning') && Session::get('importWarning') == true)
         {
-            $msg = 'Few rows are skipped due to invalid data.Row number : '.implode(', ',Session::get('error_rows'));
+            $msg = 'Few rows are skipped due to invalid data.Row number : '.implode(', ', Session::get('error_rows'));
             session()->forget('importWarning');
             session()->forget('error_rows');
         }
@@ -551,8 +556,6 @@ class UserController extends Controller
         }
         return redirect()->back()->with('status', $msg);
     }
-
-
 
     /**
      * Remove the specified resource from storage.
