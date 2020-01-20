@@ -48,6 +48,11 @@
                 <li>Fee Collection</li>
             </ul>
         </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="card height-auto mb-3 example-screen">
             <div class="card-body">
                 <div class="row">
@@ -79,7 +84,7 @@
                                 </tr>
                                 <tr>
                                     <th>Balance</th>
-                                    <td colspan="3">{{number_format($student->studentInfo->advance_amount, 2)}}</td>
+                                    <td colspan="3">{{ number_format($student->studentInfo->advance_amount, 2) }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -91,11 +96,6 @@
         <div class="card height-auto false-height example-screen">
             <div class="card-body">
                 <div class="heading-layout1">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     <div class="item-title">
                         <h3 class="float-left mb-5 float-left">Fee Collection</h3>
                         <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>
@@ -279,7 +279,7 @@
                                             </div>
                                             <div class="col-12-xxxl col-lg-6 col-6 form-group">
                                                 <label>Advance Amount </label>
-                                                <input type="number" placeholder="" class="form-control" name="advance_amount" value="0" id="advance_amount">
+                                                <input type="number" class="form-control" name="advance_amount" value="0" id="advance_amount">
                                                 <div class="error text-danger"></div>
                                             </div>
                                             <div class="col-12-xxxl col-lg-12 col-12 form-group">
@@ -519,21 +519,20 @@
         function makeAdvancePayment(){
             let advance_amount = "{{$student->studentInfo->advance_amount}}";
             advance_amount = (advance_amount != '') ? parseFloat(advance_amount) : 0;
-            console.log(advance_amount);
             let discountValue = ($('#discountValue').val() != '') ? parseFloat($('#discountValue').val()) : 0;
             let  fine = parseFloat($(".fine").val());
             let totalPayable =  parseFloat(amounts) + fine - discountValue;
             let advanceAmountInput = $('#advance_amount');
-            if($('#pay_from_advance_blnc'). prop("checked") == true){
+            if ($('#pay_from_advance_blnc'). prop("checked") == true){
                 console.log('in true');
                 advanceAmountInput.attr('disabled', 'disabled').val(0);
-                if(advance_amount > totalPayable){
+                if (advance_amount > totalPayable){
                     $('#amount').val(0);
-                }else{
+                }else {
                     let payable = totalPayable - parseFloat(advance_amount);
                     $('#amount').val(payable);
                 }
-            }else{
+            }else {
                 $('#amount').val(totalPayable);
                 advanceAmountInput.removeAttr('disabled');
             }
