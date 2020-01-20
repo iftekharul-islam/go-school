@@ -45,13 +45,15 @@
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <input type="hidden" name="user_role" value="{{$user->role}}">
 
-                            <div class="offset-9 col-3 text-right">
-                                <div class="form-check">
-                                    <input type='hidden' value="false" name='sms_enabled'>
-                                    <input type="checkbox" name="sms_enabled" value="true" @if($user->studentInfo['is_sms_enabled']) checked @endif class="form-check-input checkAll" id="sms-enabled">
-                                    <label class="form-check-label" for="sms-enabled">Is SMS enabled</label>
+                            @if($user->role == 'student')
+                                <div class="offset-9 col-3 text-right">
+                                    <div class="form-check">
+                                        <input type='hidden' value="false" name='sms_enabled'>
+                                        <input type="checkbox" name="sms_enabled" value="true" @if($user->studentInfo['is_sms_enabled']) checked @endif class="form-check-input checkAll" id="sms-enabled">
+                                        <label class="form-check-label" for="sms-enabled">Is SMS enabled </label>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -87,15 +89,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
+                            @if($user->role == 'student')
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('student_indentification') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="student_indentification" class="control-label false-padding-bottom">Roll Number</label>
-                                            <input id="student_indentification" type="text" class="form-control" name="student_indentification" value="{{ $user->studentInfo['student_indentification'] }}" required>
+                                            <label for="student_indentification" class="control-label false-padding-bottom">Student identification no.</label>
+                                            <input id="student_indentification" type="text" class="form-control" name="student_indentification" value="{{ $user->studentInfo['student_indentification'] }}">
 
                                             @if ($errors->has('student_indentification'))
                                                 <span class="help-block">
@@ -110,7 +111,7 @@
 
                                         <div class="col-md-12">
                                             <label for="roll_number" class="control-label false-padding-bottom">Roll Number</label>
-                                            <input id="roll_number" type="number" class="form-control" name="roll_number" value="{{ $user->studentInfo['roll_number'] }}" required>
+                                            <input id="roll_number" type="number" class="form-control" name="roll_number" value="{{ $user->studentInfo['roll_number'] }}">
 
                                             @if ($errors->has('roll_number'))
                                                 <span class="help-block">
@@ -120,9 +121,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('shift') ? ' has-error' : '' }}">
 
@@ -142,6 +141,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endif
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
 
@@ -158,14 +158,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="address" class="control-label false-padding-bottom">Address <label class="text-danger">*</label></label>
+                                            <label for="address" class="control-label false-padding-bottom">Address</label>
                                             <input id="address" type="text" class="form-control" name="address"
                                                    value="{{ $user->address }}">
 
@@ -198,16 +196,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
+                            @if($user->role == 'teacher')
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
                                             <label for="class_teacher" class="control-label false-padding-bottom">Class Teacher</label>
                                             <select id="class_teacher" class="form-control" name="class_teacher_section_id">
-                                                <option selected="selected" value="{{$user->section->id}}">Section:
+                                                <option selected="selected" value="{{$user->section['id']}}">Section:
                                                     {{$user->section->section_number}} Class:
                                                     {{$user->section->class->class_number}}</option>
                                                 @foreach ($sections as $section)
@@ -225,6 +221,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endif
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
 
@@ -242,9 +239,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
 
@@ -288,9 +283,7 @@
 
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row mb-4">
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
 
@@ -306,6 +299,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            @if($user->role == 'student')
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group {{ $errors->has('version') ? 'has-error' : '' }}">
 
@@ -326,8 +320,7 @@
 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
+
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
 
@@ -360,8 +353,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                         <label for="father_name" class="col-md-6 control-label">Father's Name <label class="text-danger">*</label></label>
@@ -397,8 +389,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
                                         <label for="father_national_id" class="col-md-8 control-label">Father's National
@@ -435,8 +426,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
+
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
 
@@ -473,8 +463,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
 
@@ -509,8 +498,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
+
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
                                         <label for="mother_national_id" class="col-md-8 control-label">Mother's National
@@ -547,8 +535,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
+
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
 
@@ -584,8 +571,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
+
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                         <label for="birthday" class="col-md-4 control-label">Birthday <label class="text-danger">*</label></label>
@@ -624,9 +610,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row mb-4">
+                            @endif
                                 <div class="col-md-6">
                                     <div class="form-group">
 
