@@ -168,6 +168,22 @@ class SectionController extends Controller
     }
 
     /**
+     * Update Section .
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateSection(Request $request, $id)
+    {
+        $tb = Section::findOrFail($id);
+        $tb->section_number = $request->section_number;
+        $tb->save();
+
+        return back()->with('status', 'Section updated');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param int $id

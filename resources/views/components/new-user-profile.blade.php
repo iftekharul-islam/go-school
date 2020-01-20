@@ -39,8 +39,12 @@
                             <div class=" table-responsive border-right">
                                 <table class="text-wrap table-borderless table ">
                                     <tr>
-                                        <td class="text-nowrap font-medium text-dark-medium">Student ID:</td>
+                                        <td class="text-nowrap font-medium text-dark-medium">Student Code:</td>
                                         <td class="text-capitalize">{{$user->student_code}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-nowrap font-medium text-dark-medium">Student Id:</td>
+                                        <td class="text-capitalize">{{$user->studentInfo['student_indentification']}}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Version:</td>
@@ -60,7 +64,7 @@
                                             {{Carbon\Carbon::parse($user->studentInfo['birthday'])->format('d/m/Y')}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium">Email:</td>
+                                        <td class="font-medium text-dark-medium">E-mail / Username:</td>
                                         <td class="text-left">{{$user->email}}</td>
                                     </tr>
                                     <tr>
@@ -81,6 +85,14 @@
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Section:</td>
                                         <td class="text-capitalize">{{$user->section['section_number']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Roll no:</td>
+                                        <td class="text-capitalize">{{ $user->studentInfo['roll_number'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Shift:</td>
+                                        <td class="text-capitalize">{{ $user->studentInfo['shift'] }}</td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Session:</td>
@@ -133,7 +145,7 @@
                             </tr>
 
                             <tr>
-                                <td class="font-medium text-dark-medium">E-mail:</td>
+                                <td class="font-medium text-dark-medium">E-mail / Username:</td>
                                 <td>{{ $user->email }}</td>
                             </tr>
                             <tr>

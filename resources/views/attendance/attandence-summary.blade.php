@@ -45,43 +45,45 @@
                     <div class="card-header-title mt-5 ml-2">
                         <b>Attendance:</b> {{ $start_display }}&nbsp; <b>to</b> &nbsp {{ $end_display }} &nbsp
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th class="take-col">Name</th>
-                                @foreach ($period as $dt)
-                                    <th class="text-center">{{ $dt->format("d") }}</th>
+                    <div class="table">
+                        <div class="table-scroll">
+                            <table class="table-main table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="fix-col">Name</th>
+                                        @foreach ($period as $dt)
+                                            <th class="text-center">{{ $dt->format("d") }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($final as $student)
+                                    <tr>
+                                        <td class="text-left fix-col" data-toggle="tooltip" data-placement="top" title="{{ $student['name'] }}"> {{ $student['name'] }} </td>
+
+                                        @foreach ($student['attendances'] as $item)
+                                            @if ($item >= 0)
+                                                <td class="px-5">
+                                                    @if ($item == '0')
+                                                        <i class="fa fa-times text-danger"></i>
+                                                    @elseif($item == '1')
+                                                        <i class="fa fa-check text-success"></i>
+                                                    @elseif($item == '2')
+                                                        <i class="fa fa-running text-danger"></i>
+                                                    @elseif($item == null)
+                                                        <i class="fa fa-circle text-info"></i>
+                                                    @endif
+                                                </td>
+                                            @else
+                                                <td></td>
+                                            @endif
+
+                                        @endforeach
+                                    </tr>
                                 @endforeach
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            @foreach ($final as $student)
-                                <tr>
-                                    <td class="text-nowrap text-left take-col"> {{ $student['name'] }} </td>
-                                    @foreach ($student['attendances'] as $item)
-                                        @if ($item >= 0)
-                                            <td class="px-5">
-                                                @if ($item == '0')
-                                                    <i class="fa fa-times text-danger"></i>
-                                                @elseif($item == '1')
-                                                    <i class="fa fa-check text-success"></i>
-                                                @elseif($item == '2')
-                                                    <i class="fa fa-running text-danger"></i>
-                                                @elseif($item == null)
-                                                    <i class="fa fa-circle text-info"></i>
-                                                @endif
-                                            </td>
-                                        @else
-                                            <td></td>
-                                        @endif
-
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -159,6 +159,21 @@
                        </div>
                    </div>
                 </div>
+                <div class="row mb-5">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="control-label mr-2">Upload Profile Picture</label>
+                                <input type="file" id="picPath" name="pic_path">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <button type="submit" id="registerBtn" class="button button--save float-right">Update Information</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
