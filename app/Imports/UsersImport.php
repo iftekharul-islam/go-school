@@ -64,7 +64,7 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'code' => auth()->user()->code,
                 'student_code' => $code,
                 'gender' => $row['gender'],
-                'nationality' => $row['nationality'],
+                'nationality' => $row['nationality'] ? $row['nationality'] : 'Bangladeshi',
                 'address' => $row['address'],
                 'section_id' => $this->section,
             ]);
@@ -97,7 +97,6 @@ class UsersImport implements ToCollection, WithHeadingRow
         $validhead = [
             'name',
             'gender',
-            'nationality',
             'address',
             'version',
             'birthday',
@@ -117,7 +116,6 @@ class UsersImport implements ToCollection, WithHeadingRow
         }
         return (array_key_exists('name', $all)
             && array_key_exists('gender', $all)
-            && array_key_exists('nationality', $all)
             && array_key_exists('address', $all)
             && array_key_exists('version', $all)
             && array_key_exists('birthday', $all)
@@ -133,7 +131,6 @@ class UsersImport implements ToCollection, WithHeadingRow
     {
         return (isset($row['name']) && !empty($row['name'])
             && isset($row['gender']) && !empty($row['gender'])
-            && isset($row['nationality']) && !empty($row['nationality'])
             && isset($row['address']) && !empty($row['address'])
             && isset($row['version']) && !empty($row['version'])
             && isset($row['birthday']) && !empty($row['birthday'])
