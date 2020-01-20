@@ -183,7 +183,7 @@
                                             <select id="department" class="form-control" name="department_id">
                                                 @if (count($departments)) > 0)
                                                 @foreach ($departments as $d)
-                                                    <option value="{{$d->id}}">{{$d->department_name}}</option>
+                                                    <option value="{{$d['id']}}">{{$d['department_name']}}</option>
                                                 @endforeach
                                                 @endif
                                             </select>
