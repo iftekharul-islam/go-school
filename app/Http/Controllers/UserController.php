@@ -460,13 +460,13 @@ class UserController extends Controller
             $tb->email = (! empty($request->email)) ? $request->email : $tb->email;
             $tb->nationality = (! empty($request->nationality)) ? $request->nationality : $tb->nationality;
             $tb->phone_number = $request->phone_number;
-            $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
+            $tb->address = $request->address;
             $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
             $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
             $tb->gender = (! empty($request->gender)) ? $request->gender : $tb->gender;
             if ('teacher' == $request->user_role) {
-                $tb->department_id = $request->department_id;
+                $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
                 $tb->section_id = $request->class_teacher_section_id;
             }
             if ($tb->save()) {

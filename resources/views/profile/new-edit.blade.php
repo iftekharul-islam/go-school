@@ -163,9 +163,9 @@
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="address" class="control-label false-padding-bottom">Address</label>
+                                            <label for="address" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
                                             <input id="address" type="text" class="form-control" name="address"
-                                                   value="{{ $user->address }}">
+                                                   value="{{ $user->address }}" required>
 
                                             @if ($errors->has('address'))
                                                 <span class="help-block">
@@ -179,8 +179,8 @@
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('department') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="department" class="control-label false-padding-bottom">Department <label class="text-danger">*</label></label>
-                                            <select id="department" class="form-control" name="department_id">
+                                            <label for="department" class="control-label false-padding-bottom">Department</label>
+                                            <select id="department" class="form-control" name="department_id" >
                                                 @if (count($departments)) > 0)
                                                 @foreach ($departments as $d)
                                                     <option value="{{$d['id']}}">{{$d['department_name']}}</option>
@@ -226,10 +226,9 @@
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="nationality" class="control-label false-padding-bottom">Nationality <label class="text-danger">*</label></label>
+                                            <label for="nationality" class="control-label false-padding-bottom">Nationality</label>
                                             <input id="nationality" type="text" class="form-control" name="nationality"
-                                                   value="{{ $user->nationality }}"
-                                                   required>
+                                                   value="{{ $user->nationality }}">
 
                                             @if ($errors->has('nationality'))
                                                 <span class="help-block">
@@ -262,8 +261,9 @@
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="blood_group" class="control-label false-padding-bottom">Blood Group <label class="text-danger">*</label></label>
+                                            <label for="blood_group" class="control-label false-padding-bottom">Blood Group</label>
                                             <select id="blood_group" class="form-control" name="blood_group">
+                                                <option @if($user->blood_group == 'N/A') selected="selected" @endif value="N/A">N/A</option>
                                                 <option @if($user->blood_group == 'A+') selected="selected" @endif value="A+">A+</option>
                                                 <option @if($user->blood_group == 'A-') selected="selected" @endif value="A-">A-</option>
                                                 <option @if($user->blood_group == 'B+') selected="selected" @endif value="B+">B+</option>

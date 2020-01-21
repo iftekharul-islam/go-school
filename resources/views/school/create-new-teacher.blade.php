@@ -38,7 +38,7 @@
         @endif
         <div class="card-body">
             <form class="new-added-form" method="POST" enctype="multipart/form-data"
-                  id="registerForm" action="{{ url('admin/register/teacher') }}">
+                  id="registerForm" action="{{ route('register.teacher.store') }}">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-md-6">
@@ -186,11 +186,11 @@
                             <div class="col-md-12">
                                 <label for="phone_number"
                                        class="control-label false-padding-bottom">Phone
-                                    Number</label>
+                                    Number<label class="text-danger">*</label></label>
 
                                 <input id="phone_number" type="text"
                                        class="form-control" name="phone_number"
-                                       value="{{ old('phone_number') }}" >
+                                       value="{{ old('phone_number') }}" required>
 
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
@@ -206,13 +206,13 @@
                             <div class="col-md-12">
                                 <label for="blood_group"
                                        class=" control-label false-padding-bottom">Blood
-                                    Group<label
-                                        class="text-danger">*</label></label>
+                                    Group</label>
 
                                 <select id="blood_group" class="form-control"
                                         name="blood_group"
                                         value="{{ old('blood_group') }}">
-                                    <option selected="selected">A+</option>
+                                    <option selected="selected">N/A</option>
+                                    <option>A+</option>
                                     <option>A-</option>
                                     <option>B+</option>
                                     <option>B-</option>
@@ -237,13 +237,11 @@
 
                             <div class="col-md-12">
                                 <label for="nationality"
-                                       class="control-label false-padding-bottom">Nationality<label
-                                        class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">Nationality</label>
 
                                 <input id="nationality" type="text"
                                        class="form-control" name="nationality"
-                                       value="{{ old('nationality') }}"
-                                       required>
+                                       value="{{ old('nationality') }}">
 
                                 @if ($errors->has('nationality'))
                                     <span class="help-block">
@@ -285,8 +283,7 @@
                         <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <label for="name"
-                                       class="control-label false-padding-bottom">Address<label
-                                        class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
                                 <input id="address" type="text" class="form-control"
                                        name="address"
                                        value="{{ old('address') }}"
@@ -305,12 +302,11 @@
 
                             <div class="col-md-12">
                                 <label for="email"
-                                       class="control-label false-padding-bottom">About<label
-                                        class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">About</label>
 
                                 <input id="about" type="text" class="form-control"
                                        name="about"
-                                       value="{{ old('about') }}" required>
+                                       value="{{ old('about') }}">
 
                                 @if ($errors->has('about'))
                                     <span class="help-block">

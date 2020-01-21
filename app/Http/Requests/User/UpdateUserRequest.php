@@ -32,11 +32,12 @@ class UpdateUserRequest extends FormRequest
         $rules = [
             'user_id' => 'required|numeric',
             'name' => 'required|string|max:255',
+            'address' => 'required|string',
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
 
         if ($this->get('user_role') == 'teacher') {
-            $rules['department_id'] = 'required|numeric';
+            $rules['phone_number'] = 'required|numeric';
         }
 
         return $rules;
@@ -47,6 +48,7 @@ class UpdateUserRequest extends FormRequest
             'name.required' => 'Name field cannot be empty',
             'pic_path.max' => 'Image size cannot be larger than 800KB',
             'pic_path.image' => 'Invalid image type',
+            'phone_number.required' => 'Please enter a valid phone number'
         ];
     }
 }

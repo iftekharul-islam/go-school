@@ -328,11 +328,11 @@ class UserService
         $tb->student_code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
         $tb->gender = $request->gender;
         $tb->blood_group = $request->blood_group;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
+        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : 'Bangladeshi';
         $tb->phone_number = $request->phone_number;
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
-        $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
+        $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
 
         if ('teacher' == $role) {
             $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;
