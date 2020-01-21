@@ -334,7 +334,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@store')->name('student.store');
-            Route::post('teacher', 'UserController@storeTeacher');
+            Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant');
             Route::post('librarian', 'UserController@storeLibrarian');
         });

@@ -56,6 +56,7 @@ class CreateUserRequest extends FormRequest
             'student_pic.image' => 'Invalid image type',
             'student_pic.max' => 'Image size cannot be larger than 800KB',
             'email.email' => 'Please provide a valid email address',
+            'father_phone_number.required' => 'Please enter a Valid phone number'
         ];
     }
 
