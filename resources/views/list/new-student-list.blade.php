@@ -28,7 +28,7 @@
                             <ul>
                                 <li>
                                     <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                                    <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role. '.home') }}">&nbsp;&nbsp;Home</a>
                                 </li>
                                 <li>All Students</li>
                             </ul>

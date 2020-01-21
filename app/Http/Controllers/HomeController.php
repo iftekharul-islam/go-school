@@ -10,6 +10,7 @@ use App\Notice;
 use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Services\User\UserService;
@@ -55,8 +56,8 @@ class HomeController extends Controller
                     ->toArray();
             });
 
-            $male = User::where('gender','male')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
-            $female = User::where('gender','female')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
+            $male = User::where('gender', 'ilike', 'male')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
+            $female = User::where('gender', 'ilike', 'female')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
             $totalStudents = $male + $female;
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return  Myclass::where('school_id', $school_id)->count();

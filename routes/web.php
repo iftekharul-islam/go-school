@@ -218,7 +218,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/routines', 'InactiveSettingsController@routines')->name('inactive.routines');
             Route::get('/students', 'InactiveSettingsController@students')->name('inactive.students');
             Route::get('/teachers', 'InactiveSettingsController@teachers')->name('inactive.teachers');
-            Route::get('/librarians', 'InactiveSettingsController@librarians')->name('inactive.librarian');
+            Route::get('/librarians', 'InactiveSettingsController@librarians')->name('inactive.librarians');
             Route::get('/accountants', 'InactiveSettingsController@accountants')->name('inactive.accountants');
         });
 

@@ -245,7 +245,7 @@ class UserService
         $tb->blood_group = $request->blood_group;
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
-        $tb->pic_path = 'storage/' . $path;
+        $tb->pic_path = $path ? 'storage/' .$path : '';
         $tb->verified = 1;
         $tb->address = $request->address;
         $tb->about = $request->about;
@@ -271,7 +271,7 @@ class UserService
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
         $tb->about = (!empty($request->about)) ? $request->about : '';
-        $tb->pic_path = 'storage/' . $file;
+        $tb->pic_path = $path ? 'storage/' .$path : '';
         $tb->verified = 1;
         $tb->section_id = $request->section;
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
@@ -330,7 +330,7 @@ class UserService
         $tb->blood_group = $request->blood_group;
         $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
         $tb->phone_number = $request->phone_number;
-        $tb->pic_path = 'storage/' . $file;
+        $tb->pic_path = $path ? 'storage/' .$path : '';
         $tb->verified = 1;
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
 

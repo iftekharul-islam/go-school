@@ -60,7 +60,7 @@ class InactiveSettingsController extends Controller
     public function librarians()
     {
         $type = "Librarians";
-        $users = User::where('school_id', Auth::user()->school_id)->where('active', 0)->where('role', 'librarians')->get();
+        $users = User::where('school_id', Auth::user()->school_id)->where('active', 0)->where('role', 'librarian')->get();
         return view('inactiveSettings.users', compact('type', 'users'));
 
     }
