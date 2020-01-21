@@ -10,7 +10,6 @@ use App\Notice;
 use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
-use function GuzzleHttp\Psr7\str;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Services\User\UserService;
