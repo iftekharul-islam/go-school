@@ -55,8 +55,17 @@ class HomeController extends Controller
                     ->toArray();
             });
 
-            $male = User::where('gender','male')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
-            $female = User::where('gender','female')->where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->count();
+            $students = User::where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->get();
+            $male = 0;
+            $female = 0;
+            foreach($students as $std)
+            {
+                if (strtolower($std['gender']) == 'male') {
+                    $male++;
+                } else {
+                    $female++;
+                }
+            }
             $totalStudents = $male + $female;
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return  Myclass::where('school_id', $school_id)->count();

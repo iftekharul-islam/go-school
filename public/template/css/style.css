@@ -1640,6 +1640,9 @@ card-sub-header:first-child {
   position: relative;
   z-index: 1;
 }
+.text-color{
+  color: #32998f!important;
+}
 
 .breadcrumbs-area h3 {
   font-weight: 500;
