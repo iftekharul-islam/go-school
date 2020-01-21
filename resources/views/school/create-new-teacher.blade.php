@@ -49,7 +49,7 @@
                                        class="control-label false-padding-bottom">Full
                                     Name <label class="text-danger">*</label></label>
 
-                                <input id="name" type="text" class="form-control"
+                                <input id="name" type="text" class="form-control teacher-name"
                                        name="name"
                                        value="{{ old('name') }}"
                                        required>
@@ -70,10 +70,17 @@
                                        class="control-label false-padding-bottom">E-Mail
                                     Address<label
                                         class="text-danger">*</label></label>
+                                <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
-                                <input id="email" type="email" class="form-control"
+                                @php
+                                    $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
+                                @endphp
+
+                                <input id="email" type="email" class="form-control teacher-username"
                                        name="email"
-                                       value="{{ old('email') }}" required>
+                                       value="{{ old('email') }}"
+                                       required readonly>
+                                <div class="email-visible"></div>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -343,15 +350,32 @@
 
 @push('customjs')
     <script>
-        $(document).ready(function () {
-            $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show');
-            $('#tabMenu a[href="#{{ old('tabMain') }}"]').tab('show');
+        $(document).ready(function() {
 
-        });
+            $('.teacher-name').focusout(function() {
+                let inputName = $('.teacher-name').val();
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var idx = $(this).index('a[data-toggle="tab"]');
-            $('#tab-' + idx).addClass('active');
+                if (inputName) {
+                    let names = inputName.split(' ');
+
+
+                    let code = {!! $code !!};
+
+                    let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
+
+                    let username = lastName + code;
+
+                    $('.teacher-username').val(username.toLowerCase());
+                }
+            });
+            $('.email-enable-button').click(function(event) {
+                event.preventDefault();
+                $('.teacher-username').remove();
+                $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
+                           name="email" value="" placeholder="Enter email address"
+                           required>`);
+                $('.email-enable-button').remove();
+            });
         });
     </script>
 @endpush
