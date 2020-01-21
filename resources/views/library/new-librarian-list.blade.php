@@ -16,7 +16,7 @@
                 </h3>
                 <ul>
                     <li>
-                        <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
+                        <a href="{{ URL::previous() }}" class="text-color">Back &nbsp;|</a>
                         <a style="margin-left: 8px;" href="{{ route(Auth::user()->role. '.home') }}">&nbsp;&nbsp;Home</a>
                     </li>
                     <li>All Librarian</li>
