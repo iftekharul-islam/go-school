@@ -54,6 +54,7 @@ class UsersImport implements ToCollection, WithHeadingRow
             $username = array_last($name) . $code;
             $pass = $username;
 
+
             $user = User::create([
                 'name' => $row['name'],
                 'email' => $username,
@@ -133,13 +134,15 @@ class UsersImport implements ToCollection, WithHeadingRow
             && isset($row['gender']) && !empty($row['gender'])
             && isset($row['address']) && !empty($row['address'])
             && isset($row['version']) && !empty($row['version'])
-            && isset($row['birthday']) && !empty($row['birthday'])
+            && isset($row['birthday']) && !empty($row['birthday']) && !$this->datecheck($row['birthday'])
             && isset($row['father_name']) && !empty($row['father_name'])
             && isset($row['father_phone_number']) && !empty($row['father_phone_number'])
             && isset($row['father_occupation']) && !empty($row['father_occupation'])
             && isset($row['father_national_id']) && !empty($row['father_national_id'])
             && isset($row['mother_name']) && !empty($row['mother_name'])
             && isset($row['religion']) && !empty($row['religion']));
+
+
     }
 
     public function checkDuplicate($student_name, $father_name, $birthday)
@@ -151,6 +154,14 @@ class UsersImport implements ToCollection, WithHeadingRow
             ->whereDate('student_infos.birthday', $birth)
             ->count();
         if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+    public function datecheck($row)
+    {
+        if (preg_match("/[a-z]/i",$row))
+        {
             return true;
         }
         return false;

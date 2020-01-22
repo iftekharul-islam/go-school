@@ -16,7 +16,7 @@
                                 <i class="flaticon-classmates text-light"></i>
                             </div>
                             <div class="item-content">
-                                <div class="item-number"><span class="counter" data-num="{{ $totalStudents }}"></span></div>
+                                <div class="item-number"><span class="counter" data-num="{{ $students->count() }}"></span></div>
                                 <div class="item-title">Total Students</div>
                             </div>
                         </div>

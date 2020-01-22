@@ -13,6 +13,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use PHPUnit\Framework\Constraint\Count;
 
 class TeacherHomeController extends Controller
 {
@@ -48,7 +49,6 @@ class TeacherHomeController extends Controller
                     $female++;
                 }
             }
-            $totalStudents = $male + $female;
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)->count();
             });
@@ -70,14 +70,14 @@ class TeacherHomeController extends Controller
 
         $courses_student = $this->courseService->getCoursesByTeacher($teacher->id);
         return view('teacher-home', [
-            'totalStudents' => $totalStudents,
+            'students' => $students,
             'notices' => $notices,
             'exams' => $exams,
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
             'male' => $male,
             'female' => $female,
-            'courses_student' => $courses_student
+            'courses_student' => $courses_student,
         ]);
     }
 }

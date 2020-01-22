@@ -66,7 +66,6 @@ class HomeController extends Controller
                     $female++;
                 }
             }
-            $totalStudents = $male + $female;
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return  Myclass::where('school_id', $school_id)->count();
             });
@@ -87,7 +86,7 @@ class HomeController extends Controller
 
         $allStudents = $this->userService->getStudents();
         return view('teacher-home', [
-            'totalStudents' => $totalStudents,
+            'students' => $students,
             'allStudents' => $allStudents,
             'notices' => $notices,
             'exams' => $exams,
