@@ -8,9 +8,9 @@
             Section Details
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+            <li> <a href="{{ URL::previous() }}" class="text-color">
                     Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <a style="margin-left: 8px;" href="{{ route(Auth::user()->role. '.home') }}">&nbsp;&nbsp;Home</a>
             </li>
             @if(isset($_GET['grade']) && $_GET['grade'] == 1)
                 <li><a href="{{url('grades/all-exams-grade')}}">Grades</a></li>
@@ -56,9 +56,9 @@
                                         {{ $key+1 }}
                                     </td>
                                     <td>{{ $course->course_name }}</td>
-                                    <td>{{ $course->section->room_number }}</td>
+                                    <td>{{ $course->section['room_number'] }}</td>
                                     <td>{{ $course->course_time }}</td>
-                                    <td><a class="text-teal" href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a></td>
+                                    <td><a class="text-teal" href="{{ route('user.show', $course->teacher['student_code'])}}">{{$course->teacher['name']}}</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -93,10 +93,10 @@
                             @foreach ($students as $student)
                                 <tr>
                                     <td>{{($loop->index+1)}}</td>
-                                    <td>{{$student->student_code}}</td>
-                                    <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
+                                    <td>{{$student['student_code']}}</td>
+                                    <td><a class="text-teal" href="{{ route('user.show', $student['student_code']) }}">{{$student['name']}}</a></td>
                                     <td>{{ $student->email }}</td>
-                                    <td><a class="btn-link text-teal" role="button" href="{{url('admin/grades/'.$student->id)}}">View Grade History</a></td>
+                                    <td><a class="btn-link text-teal" role="button" href="{{ route('student.grades', $student->id) }}">View Grade History</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
