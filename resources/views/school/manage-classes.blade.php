@@ -7,14 +7,14 @@
         <div class="breadcrumbs-area">
             <h3>
                 <i class="fas fa-cog fa-fw"></i>
-                Manage Classes
+                All Classes
             </h3>
             <ul>
-                <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                <li><a href="{{ URL::previous() }}" class="text-color">
                         Back &nbsp;&nbsp;|</a>
                     <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role.'.home') }}">&nbsp;&nbsp;Home</a>
                 </li>
-                <li>Manage Classes</li>
+                <li>All Classes</li>
             </ul>
         </div>
         @if (session('status'))
