@@ -765,19 +765,6 @@
 
 @push('customjs')
     <script>
-        $(document).ready(function () {
-            $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show');
-            $('#tabMenu a[href="#{{ old('tabMain') }}"]').tab('show');
-
-        });
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var idx = $(this).index('a[data-toggle="tab"]');
-            $('#tab-' + idx).addClass('active');
-        });
-
-        function enableEmail () {
-        }
         $(document).ready(function() {
 
             $('.student-name').focusout(function() {

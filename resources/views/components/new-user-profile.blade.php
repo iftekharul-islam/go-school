@@ -156,6 +156,10 @@
                             <tr>
                             @if($user->role === 'teacher' && isset($user->section))
                                 <tr>
+                                    <td class="font-medium text-dark-medium">Class:</td>
+                                    <td class="text-capitalize">{{($user->section['class']['class_number'])}}</td>
+                                </tr>
+                                <tr>
                                     <td class="font-medium text-dark-medium">Section:</td>
                                     <td class="text-capitalize">{{ ucfirst($user->section->section_number)}}</td>
                                 </tr>
