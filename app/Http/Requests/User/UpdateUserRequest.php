@@ -34,6 +34,8 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'address' => 'required|string',
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
+            'father_annual_income' => 'nullable|integer',
+            'mother_annual_income' => 'nullable|integer'
         ];
 
         if ($this->get('user_role') == 'teacher') {

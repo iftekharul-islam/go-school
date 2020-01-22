@@ -550,7 +550,7 @@
                                                class="control-label false-padding-bottom">Father's
                                             Annual
                                             Income</label>
-                                        <input id="father_annual_income" type="text"
+                                        <input id="father_annual_income" type="number"
                                                class="form-control"
                                                name="father_annual_income"
                                                value="{{ old('father_annual_income') }}">
@@ -705,7 +705,7 @@
                                                class=" control-label false-padding-bottom">Mother's
                                             Annual
                                             Income</label>
-                                        <input id="mother_annual_income" type="text"
+                                        <input id="mother_annual_income" type="number"
                                                class="form-control"
                                                name="mother_annual_income"
                                                value="{{ old('mother_annual_income') }}"

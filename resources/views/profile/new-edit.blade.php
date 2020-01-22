@@ -451,7 +451,7 @@
                                         <div class="col-md-12">
                                             <label for="father_annual_income" class="control-label false-padding-bottom">Father's Annual
                                                 Income</label>
-                                            <input id="father_annual_income" type="text" class="form-control"
+                                            <input id="father_annual_income" type="number" class="form-control"
                                                    name="father_annual_income"
                                                    value="{{ $user->studentInfo['father_annual_income'] }}">
 
@@ -559,7 +559,7 @@
                                             Income</label>
 
                                         <div class="col-md-12">
-                                            <input id="mother_annual_income" type="text" class="form-control"
+                                            <input id="mother_annual_income" type="number" class="form-control"
                                                    name="mother_annual_income"
                                                    value="{{ $user->studentInfo['mother_annual_income'] }}">
 
