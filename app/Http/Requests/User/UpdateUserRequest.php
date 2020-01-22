@@ -34,8 +34,8 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'address' => 'required|string',
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
-            'father_annual_income' => 'nullable|integer|max:10',
-            'mother_annual_income' => 'nullable|integer|max:10'
+            'father_annual_income' => 'nullable|integer|digits_between:0,10',
+            'mother_annual_income' => 'nullable|integer|digits_between:0,10'
         ];
 
         if ($this->get('user_role') == 'teacher') {
@@ -51,8 +51,8 @@ class UpdateUserRequest extends FormRequest
             'pic_path.max' => 'Image size cannot be larger than 800KB',
             'pic_path.image' => 'Invalid image type',
             'phone_number.required' => 'Please enter a valid phone number',
-            'father_annual_income.max' => 'Income amount should be max 10 character',
-            'mother_annual_income.max' => 'Income amount should be max 10 character',
+            'father_annual_income.digits_between' => 'Income amount should be max 10 character',
+            'mother_annual_income.digits_between' => 'Income amount should be max 10 character',
         ];
     }
 }
