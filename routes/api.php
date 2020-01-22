@@ -35,3 +35,4 @@ $api->version('v1', function ($api) {
     $api->post('/machine-attendances', 'App\Http\Controllers\API\AttendanceController@store');
 });
 
+

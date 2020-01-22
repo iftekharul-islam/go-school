@@ -11,6 +11,8 @@ use App\Jobs\SendAttendanceSms;
 use App\Events\AttendanceCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\AttendanceStoreRequest;
+use App\SectionMeta;
+use App\StudentInfo;
 
 class AttendanceController extends Controller
 {
@@ -45,9 +47,7 @@ class AttendanceController extends Controller
         
         Logger("working: ");
         Logger($request->all());
-        $student = User::where('student_code', $request->student_code)->first();
-
-        // Logger("Student: " . $student);
+        $student = User::with('studentInfo')->where('student_code', $request->student_code)->first();
 
         $today = Carbon::today();
 
@@ -79,15 +79,22 @@ class AttendanceController extends Controller
 
         $attendance = Attendance::whereDate('created_at', Carbon::today())
                                 ->where('student_id', $student->id)->first();
-
-        if ($attendance) {
-            // Add 1 hour to the existing attendance time
-            $exitTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'exit_time')->first();
+        $sectionMeta = SectionMeta::where('section_id', $student->section_id)->where('shift', $student->studentInfo->shift)->first();
+        
+        $exitTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'exit_time')->first();
+        $entryTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'last_attendance_time')->first();
             
+        if ($sectionMeta){
+            $exitTime = Carbon::parse($sectionMeta->exit_time);
+            $last_attendance_time = Carbon::parse($sectionMeta->last_attendance_time);
+            
+        }else {
             $exitTime = Carbon::parse($exitTimeConfig->value);
-
-            if (Carbon::now()->gte($exitTime) ) {
-
+            $last_attendance_time = Carbon::parse($entryTimeConfig->value);
+        }
+        
+        if ($attendance) {
+            if ( Carbon::now()->gte($exitTime) ) {
                 if (!$attendance->is_exit_message_sent) {
                     event(new AttendanceCreated($attendance, 'update'));
 
@@ -98,38 +105,47 @@ class AttendanceController extends Controller
                         'massage' => 'Student left for today!'
                     ]);
                 }
-
-                Logger('Student left already!');
-    
-                return response([
-                    'error' => false,
-                    'massage' => 'Student left already'
-                ]);
             }
+
+            Logger('Attendance Already Added!');
     
             return response([
-                'error' => true,
-                'massage' => 'Attendance already added!'
+                'error' => false,
+                'massage' => 'Attendance Already Added!'
             ]);
-        }
+        }else {
+            $studentData = [
+                'student_id' => $student->id,
+                'section_id' => $student->section->id,
+                'exam_id' => 0,
+                'present' => 0,
+                'user_id' => 0
+            ];
 
-        $attendance = Attendance::create([
-            'student_id' => $student->id,
-            'section_id' => $student->section->id,
-            'exam_id' => 0,
-            'present' => 1,
-            'user_id' => 0
-        ]);
-
-        event(new AttendanceCreated($attendance, 'create'));
-
-        Logger('Attendance added successfully!');
-
-        return response([
-            'error' => false,
-            'massage' => 'Attendance added successfully!'
-        ]);
+            if (Carbon::now()->lte($last_attendance_time)) {
+                $studentData['present'] = 1;
+                $attendance = Attendance::create($studentData);
         
+                event(new AttendanceCreated($attendance, 'create'));
+        
+                Logger('Attendance added successfully!');
+        
+                return response([
+                    'error' => false,
+                    'massage' => 'Attendance added successfully!'
+                ]);
+            }
+
+            $attendance = Attendance::create($studentData);
+            event(new AttendanceCreated($attendance, 'create'));
+
+            Logger('Last Attendance Time Crossed!');
+
+            return response([
+                'error' => true,
+                'massage' => 'Last Attendance Time Crossed!'
+            ]);
+        } 
     }
 
     /**
