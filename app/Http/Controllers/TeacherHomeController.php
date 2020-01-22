@@ -10,11 +10,8 @@ use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
 use App\Services\User\UserService;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use PHPUnit\Framework\Constraint\Count;
-
 class TeacherHomeController extends Controller
 {
     public function __construct(UserService $userService, User $user, CourseService $courseService, AttendanceService $attendanceService)
