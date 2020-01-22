@@ -5693,3 +5693,9 @@ Attendance result table customisation
 .sidebar-menu-one .sidebar-menu-content .nav-sidebar-menu .nav-item.active .sidebar-nav-item .nav-link:after {color:#ffffff}
 .new-added-form .form-group input[type=checkbox].form-control{height:25px}
 .sidebar-menu-one .sidebar-menu-content .sidebar-nav-item.second-lbl-menu  > a.nav-link {background-color:#0e211f5c}
+.attendance-timings .cls-title{
+  font-size:1em;
+  font-weight: bold;
+}
+.attendance-timings .sec-title, .attendance-timings .cls-title{color:#319689}
+.attendance-timings .cls-title:hover, .attendance-timings .sec-title:hover{color:#8aaba6}
