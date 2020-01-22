@@ -44,8 +44,8 @@ class CreateUserRequest extends FormRequest
             'birthday' => 'required',
             'religion' => 'required|string',
             'father_phone_number' => 'required',
-            'father_annual_income' => 'nullable|integer|max:10',
-            'mother_annual_income' => 'nullable|integer|max:10',
+            'father_annual_income' => 'nullable|integer|digits_between:0,10',
+            'mother_annual_income' => 'nullable|integer|digits_between:0,10',
             'student_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
     }
@@ -59,8 +59,8 @@ class CreateUserRequest extends FormRequest
             'student_pic.max' => 'Image size cannot be larger than 800KB',
             'email.email' => 'Please provide a valid email address',
             'father_phone_number.required' => 'Please enter a Valid phone number',
-            'father_annual_income.max' => 'Income amount should be max 10 character',
-            'mother_annual_income.max' => 'Income amount should be max 10 character',
+            'father_annual_income.digits_between' => 'Income amount should be max 10 character',
+            'mother_annual_income.digits_between' => 'Income amount should be max 10 character',
         ];
     }
 
