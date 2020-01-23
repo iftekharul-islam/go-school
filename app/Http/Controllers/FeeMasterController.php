@@ -30,7 +30,7 @@ class FeeMasterController extends Controller
     public function create()
     {
         $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
-        $feeTypes = FeeType::where('type', '!=', 'recurrent')->get();
+        $feeTypes = FeeType::where('type', '!=', 'recurrent')->where('school_id', Auth::user()->school_id)->get();
         return view('accounts.feeMaster.create', compact('classes', 'feeTypes'));
     }
 
@@ -95,8 +95,8 @@ class FeeMasterController extends Controller
     public function edit($id)
     {
         $feeMaster = FeeMaster::findOrFail($id);
-        $classes = Myclass::all();
-        $feeTypes = FeeType::all();
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
+        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->get();
         return view('accounts.feeMaster.edit', compact('feeMaster', 'classes', 'feeTypes'));
     }
 
