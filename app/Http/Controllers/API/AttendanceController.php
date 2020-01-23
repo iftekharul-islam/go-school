@@ -106,7 +106,6 @@ class AttendanceController extends Controller
                     ]);
                 }
             }
-
             Logger('Attendance Already Added!');
     
             return response([
@@ -114,16 +113,14 @@ class AttendanceController extends Controller
                 'massage' => 'Attendance Already Added!'
             ]);
         }else {
-            $studentData = [
-                'student_id' => $student->id,
-                'section_id' => $student->section->id,
-                'exam_id' => 0,
-                'present' => 0,
-                'user_id' => 0
-            ];
-
             if (Carbon::now()->lte($last_attendance_time)) {
-                $studentData['present'] = 1;
+                $studentData = [
+                    'student_id' => $student->id,
+                    'section_id' => $student->section->id,
+                    'exam_id' => 0,
+                    'present' => 0,
+                    'user_id' => 0
+                ];
                 $attendance = Attendance::create($studentData);
         
                 event(new AttendanceCreated($attendance, 'create'));
@@ -134,10 +131,14 @@ class AttendanceController extends Controller
                     'error' => false,
                     'massage' => 'Attendance added successfully!'
                 ]);
-            }
+            }elseif ( Carbon::now()->gte($exitTime) ) {
+                Logger('Student left for today!');
 
-            $attendance = Attendance::create($studentData);
-            event(new AttendanceCreated($attendance, 'create'));
+                return response([
+                    'error' => false,
+                    'massage' => 'Student left for today!'
+                ]);
+            }
 
             Logger('Last Attendance Time Crossed!');
 
