@@ -118,7 +118,7 @@ class AttendanceController extends Controller
                     'student_id' => $student->id,
                     'section_id' => $student->section->id,
                     'exam_id' => 0,
-                    'present' => 0,
+                    'present' => 1,
                     'user_id' => 0
                 ];
                 $attendance = Attendance::create($studentData);
