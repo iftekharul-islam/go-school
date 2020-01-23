@@ -40,7 +40,10 @@ class SectionMetaController extends Controller
     public function edit($id)
     {
         $classes = Myclass::with('sections.attendanceTimes')->where('school_id', \auth::user()->school_id)->get();
-        $sectionMeta = SectionMeta::findOrFail($id);
+        $sectionMeta = SectionMeta::join('sections','sections.id','section_metas.section_id')->where('section_metas.id', $id)
+            ->select('sections.section_number','section_metas.*')
+            ->first();
+       
         return view('attendance.configAttendance.edit-attendance-time', compact('classes', 'sectionMeta'));
     }
 
