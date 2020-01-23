@@ -95,7 +95,7 @@ class FeeMasterController extends Controller
     public function edit($id)
     {
         $feeMaster = FeeMaster::findOrFail($id);
-        $classes = Myclass::all();
+        $classes = Myclass::where('school_id', Auth::user()->school_id)->get();
         $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->get();
         return view('accounts.feeMaster.edit', compact('feeMaster', 'classes', 'feeTypes'));
     }
