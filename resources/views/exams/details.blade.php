@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                 @foreach($courses as $course)
-                    @if( $exam_id == $course->exam_id )
+                    @if ( $exam_id == $course->exam_id )
                         <tr>
                             <td>{{ $course->class->class_number }}</td>
                             <td>{{ $course->course_name }}</td>
@@ -39,7 +39,7 @@
                                 @if ( isset($course->teacher['student_code']) )
                                     <a href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher->name }}</a>
                                 @else
-                                    {{ $course->teacher->name }}
+                                    {{ $course->teacher['name'] }}
                                 @endif
                             </td>
                         </tr>
