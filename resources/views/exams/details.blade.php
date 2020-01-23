@@ -36,7 +36,11 @@
                             <td>{{$course->course_type}}</td>
                             <td>{{$course->course_time}}</td>
                             <td>
-                                <a href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a>
+                                @if($course->teacher->student_code)
+                                    <a href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher->name }}</a>
+                                @else
+                                    {{ $course->teacher->name }}
+                                @endif
                             </td>
                         </tr>
                     @endif
