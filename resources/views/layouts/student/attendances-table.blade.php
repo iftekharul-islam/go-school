@@ -2,6 +2,19 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css"/>
+
+<style>
+    .fc-agendaWeek-button {
+        display: none;
+    }
+    .fc-agendaDay-button {
+        display: none;
+    }
+    .fc-month-button {
+        display: none;
+    }
+</style>
+
 <?php
 if(count($attendances) > 0){
 $events = array();
@@ -17,7 +30,7 @@ foreach ($attendances as $attendance){
 if(sizeof($events) > 0){
 $calendar = \Calendar::addEvents($events);
 ?>
-<div class="col-md-12 col-sm-12 col-lg-12  text-capitalize">
+<div class="col-md-12 col-sm-12 col-lg-12  text-capitalize " id="calendar">
   <h5>Attendance List of Full Semester</h5>
   {!! $calendar->calendar() !!}
 </div>
