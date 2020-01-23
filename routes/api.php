@@ -33,5 +33,7 @@ $api->version('v1', function ($api) {
 
     //Non authorized routes
     $api->post('/machine-attendances', 'App\Http\Controllers\API\AttendanceController@store');
+    $api->post('/staff-attendances', 'App\Http\Controllers\API\StaffAttendanceController@store');
 });
+
 

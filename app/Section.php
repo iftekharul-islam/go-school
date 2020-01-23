@@ -27,8 +27,8 @@ class Section extends Model
         return $this->hasMany('App\User');
     }
 
-    public function courses()
+    public function attendanceTimes()
     {
-        return $this->hasMany('App\Course');
+        return $this->hasMany('App\SectionMeta');
     }
 }

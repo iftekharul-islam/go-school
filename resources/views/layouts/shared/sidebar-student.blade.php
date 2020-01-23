@@ -86,6 +86,10 @@
                                    href="{{ url('admin/school/sections?att=1') }}"><i class="fas fa-angle-right"></i>Students
                                     Attendance</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ Request::get('att') == 1 ? 'menu-active' : '' }}"
+                                   href="{{ route('configure.attendance.time') }}"><i class="fas fa-angle-right"></i>Configuration</a>
+                            </li>
                         </ul>
                     </li>
                 @endif

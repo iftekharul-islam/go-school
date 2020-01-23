@@ -437,7 +437,7 @@ class UserController extends Controller
         $departments = Department::query()
             ->where('school_id', Auth::user()->school_id)
             ->get();
-
+        
         return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
