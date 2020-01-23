@@ -30,7 +30,7 @@ foreach ($attendances as $attendance){
 if(sizeof($events) > 0){
 $calendar = \Calendar::addEvents($events);
 ?>
-<div class="col-md-12 col-sm-12 col-lg-12  text-capitalize " id="calendar">
+<div class="col-md-12 col-sm-12 col-lg-12  text-capitalize ">
   <h5>Attendance List of Full Semester</h5>
   {!! $calendar->calendar() !!}
 </div>
