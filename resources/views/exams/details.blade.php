@@ -29,14 +29,14 @@
                 </thead>
                 <tbody>
                 @foreach($courses as $course)
-                    @if($exam_id == $course->exam_id)
+                    @if( $exam_id == $course->exam_id )
                         <tr>
-                            <td>{{$course->class->class_number}}</td>
-                            <td>{{$course->course_name}}</td>
-                            <td>{{$course->course_type}}</td>
-                            <td>{{$course->course_time}}</td>
+                            <td>{{ $course->class->class_number }}</td>
+                            <td>{{ $course->course_name }}</td>
+                            <td>{{ $course->course_type }}</td>
+                            <td>{{ $course->course_time }}</td>
                             <td>
-                                @if($course->teacher->student_code)
+                                @if ( isset($course->teacher['student_code']) )
                                     <a href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher->name }}</a>
                                 @else
                                     {{ $course->teacher->name }}
