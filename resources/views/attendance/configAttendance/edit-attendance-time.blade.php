@@ -57,7 +57,7 @@
                             <div class="col-md-12">
                                 <label for="section_id" class="control-label false-padding-bottom">Section<label class="text-danger">*</label></label>
                                 <select id="section_id" class="form-control select2" name="section_id" >
-                                     <option value="{{$sectionMeta->section_id}}" selected>{{$sectionMeta->section_id}}</option> 
+                                     <option value="{{$sectionMeta->section_id}}" selected>{{$sectionMeta->section_number}}</option> 
                                 </select>
                                 @if ($errors->has('section_id'))
                                     <span class="help-block">

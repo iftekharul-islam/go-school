@@ -64,10 +64,10 @@
                                                                     <a href="{{route('attendance.time.edit',['id' => $timing->id])}}" class="btn btn-delete btn-primary btn-md mr-1" title="Edit">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
-                                                                    <form id="{{$timing->id}}" class="d-md-inline-block" action="{{route('attendance.time.delete',['id' => $timing->id])}}" method="POST"> 
+                                                                    <form id="timing-{{$timing->id}}" class="d-md-inline-block" action="{{route('attendance.time.delete',['id' => $timing->id])}}" method="POST"> 
                                                                         {{method_field('DELETE')}}
                                                                         {{ csrf_field() }}
-                                                                        <button type='submit' class="btn btn-delete btn-danger btn-md" title="Delete">
+                                                                        <button type='button' onclick="removeTiming('timing-{{$timing->id}}')" class="btn btn-delete btn-danger btn-md" title="Delete">
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
                                                                     </form>
@@ -99,17 +99,17 @@
 
                         @push('customjs')
                             <script type="text/javascript">
-                                function removeUser(id) {
+                                function removeTiming(id) {
                                     swal({
                                         title: "Are you sure?",
-                                        text: "Once deleted, you will not be able to recover this user!",
+                                        text: "Once deleted, you will not be able to recover!",
                                         icon: "warning",
                                         buttons: true,
                                         dangerMode: true,
                                     })
                                         .then((willDelete) => {
                                             if (willDelete) {
-                                                document.getElementById('delete-form-'+id).submit();
+                                                document.getElementById(id).submit();
                                             }
                                         });
                                 }
