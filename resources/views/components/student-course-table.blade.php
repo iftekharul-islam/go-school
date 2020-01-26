@@ -18,7 +18,13 @@
       <td>{{ $course->course_name }}</td>
       <td>{{ $course->section->room_number }}</td>
       <td>{{ $course->course_time }}</td>
-      <td><a class="text-teal" href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a></td>
+      <td>
+        @if ( !empty($course->teacher['student_code'])) )
+          <a class="text-teal" href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher['name'] }}</a>
+        @else
+            {{ $course->teacher['name'] }} 
+        @endif
+      </td>
     </tr>
   @endforeach
   </tbody>
