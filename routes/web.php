@@ -211,6 +211,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{id}', 'ExamController@edit');
             Route::post('edit/{id}', 'ExamController@updateExam');
             Route::get('active', 'ExamController@indexActive')->name('exams.active');
+            Route::get('results', 'ExamController@resultFiles')->name('exams.results');
         });
 
         Route::prefix('inactive')->group(function () {
