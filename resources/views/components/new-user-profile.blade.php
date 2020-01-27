@@ -122,30 +122,30 @@
                         <table class="table text-wrap">
                             <tbody>
                             <tr>
-                                <td class="font-medium text-dark-medium">Name:</td>
+                                <td class="font-medium text-dark-medium">Name</td>
                                 <td>{{$user->name}}</td>
                             </tr>
                             <tr>
-                                <td class="font-medium text-dark-medium">User Type:</td>
+                                <td class="font-medium text-dark-medium">User Type</td>
                                 <td class="text-capitalize">{{$user->role}}</td>
                             </tr>
                             @if($user->role === 'teacher' && isset($user->department))
                                 <tr>
-                                    <td class="font-medium text-dark-medium">Department:</td>
+                                    <td class="font-medium text-dark-medium">Department</td>
                                     <td class="text-capitalize"> {{ $user->department['department_name'] }}</td>
                                 </tr>
                             @endif
                             <tr>
-                                <td class="font-medium text-dark-medium">Gender:</td>
+                                <td class="font-medium text-dark-medium">Gender</td>
                                 <td class="text-capitalize">{{ $user->gender }}</td>
                             </tr>
                             <tr>
-                                <td class="font-medium text-dark-medium">Nationality:</td>
+                                <td class="font-medium text-dark-medium">Nationality</td>
                                 <td class="text-capitalize">{{ $user->nationality }}</td>
                             </tr>
 
                             <tr>
-                                <td class="font-medium text-dark-medium">E-mail / Username:</td>
+                                <td class="font-medium text-dark-medium">E-mail / Username</td>
                                 <td>{{ $user->email }}</td>
                             </tr>
                             <tr>
@@ -156,28 +156,28 @@
                             <tr>
                             @if($user->role === 'teacher' && isset($user->section))
                                 <tr>
-                                    <td class="font-medium text-dark-medium">Class:</td>
+                                    <td class="font-medium text-dark-medium">Class</td>
                                     <td class="text-capitalize">{{($user->section['class']['class_number'])}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-medium text-dark-medium">Section:</td>
+                                    <td class="font-medium text-dark-medium">Section</td>
                                     <td class="text-capitalize">{{ ucfirst($user->section->section_number)}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-medium text-dark-medium">Class Teacher:</td>
+                                    <td class="font-medium text-dark-medium">Class Teacher</td>
                                     <td class="text-capitalize">{{ ucfirst( $user->section->class_id ) }}</td>
                                 </tr>
                             @endif
                             <tr>
-                                <td class="font-medium text-dark-medium">Address:</td>
+                                <td class="font-medium text-dark-medium">Address</td>
                                 <td>{{$user->address}}</td>
                             </tr>
                             <tr>
-                                <td class="font-medium text-dark-medium">Phone:</td>
+                                <td class="font-medium text-dark-medium">Phone</td>
                                 <td>{{$user->phone_number}}</td>
                             </tr>
                             <tr>
-                                <td class="font-medium text-dark-medium">About:</td>
+                                <td class="font-medium text-dark-medium">About</td>
                                 <td>{{$user->about}}</td>
                             </tr>
                             </tbody>

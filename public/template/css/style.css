@@ -302,6 +302,11 @@ card-sub-header:first-child {
   /*border-radius: 14px;*/
 
 }
+/* notice view card body make equal size  */
+
+.equal-size-body{
+  min-height: 460px;
+}
 
 .library-table {
   vertical-align: baseline;
