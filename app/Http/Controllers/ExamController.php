@@ -154,13 +154,20 @@ class ExamController extends Controller
         return redirect()->back()->with('status', 'Exam Deleted');
     }
 
-    /**uploaded exam result*/
-    public function uploadResults($exam_id) {
+    /**uploaded exam result file*/
+    public function updateResultFile($exam_id) {
 
     }
 
-    /**uploaded exam result*/
+    /**edit exam result file*/
+    public function editResultFile($exam_id) {
+        $exam = Exam::findOrFail($exam_id)->first();
+        return view('exams.result.upload-result', compact('exam'));
+    }
+
+    /**uploaded exam result file*/
     public function resultFiles() {
-        return view('exams.results', compact(''));
+        $exams = $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
+        return view('exams.result.results', compact('exams'));
     }
 }
