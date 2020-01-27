@@ -84,7 +84,7 @@
                                 </tr>
                                 <tr>
                                     <th>Balance</th>
-                                    <td colspan="3">{{ number_format($student->studentInfo->advance_amount, 2) }}</td>
+                                    <td colspan="3">{{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -517,7 +517,7 @@
             makeAdvancePayment();
         }
         function makeAdvancePayment(){
-            let advance_amount = "{{$student->studentInfo->advance_amount}}";
+            let advance_amount = "{{$student->studentInfo['advance_amount']}}";
             advance_amount = (advance_amount != '') ? parseFloat(advance_amount) : 0;
             let discountValue = ($('#discountValue').val() != '') ? parseFloat($('#discountValue').val()) : 0;
             let  fine = parseFloat($(".fine").val());
