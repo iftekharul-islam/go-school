@@ -161,6 +161,6 @@ class ExamController extends Controller
 
     /**uploaded exam result*/
     public function resultFiles() {
-
+        return view('exams.results', compact(''));
     }
 }
