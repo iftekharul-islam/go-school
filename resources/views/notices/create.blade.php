@@ -44,8 +44,7 @@
                         <input type="text" name="title" id="title" placeholder="File title here..." required class="form-control">
                     </div>
                     <div class="form-group mg-t-10">
-                        <input type="file" id="picPath" name="file_path">
-{{--                        <input type="file"  id="picPath" name="student_pic">--}}
+                        <input type="file" id="filePath" name="file_path">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>: </label>

@@ -29,9 +29,11 @@
                                 <div class="">
                                     {!! $notice->description ? $notice->description : Null !!}
                                 </div>
-                                <div class="mt-5">
-                                <a class="button button--save mr-2" href="{{url($notice['file_path'])}}" target="_blank">Show Attachment</a>
-                                </div>
+                                @if(!empty($notice->file_path))
+                                    <div class="mt-5">
+                                    <a class="button button--save mr-2" href="{{url($notice['file_path'])}}" target="_blank">Show Attachment</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
