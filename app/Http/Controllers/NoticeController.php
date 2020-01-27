@@ -87,7 +87,7 @@ class NoticeController extends Controller
                 ->get();
 
         $notice ='';
-        foreach($notices as $ntc)
+        foreach ($notices as $ntc)
         {
             if ($ntc['id'] == $id )
             {

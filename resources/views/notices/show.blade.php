@@ -1,4 +1,5 @@
 @extends('layouts.student-app')
+@section('title', 'Notice view')
 @section('content')
     <div class="container-fluid">
         <div class="breadcrumbs-area">
@@ -16,7 +17,7 @@
         <!-- Breadcubs Area End Here -->
         <!-- Student Details Area Start Here -->
         <div>
-            @if(!empty($notice))
+            @if (!empty($notice))
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="card dashboard-card-three equal-size-body" >
@@ -29,7 +30,7 @@
                                 <div class="">
                                     {!! $notice->description ? $notice->description : Null !!}
                                 </div>
-                                @if(!empty($notice->file_path))
+                                @if (!empty($notice->file_path))
                                     <div class="mt-5">
                                     <a class="button button--save mr-2" href="{{url($notice['file_path'])}}" target="_blank">Show Attachment</a>
                                     </div>
@@ -47,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="notice-box-wrap">
-                                    @foreach($notices as $notice)
+                                    @foreach ($notices as $notice)
                                         <div class="notice-list">
                                             <div class="row">
                                                 <div class="col-md-12">
