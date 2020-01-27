@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
         Route::post('user/config/impersonate', 'UserController@impersonate');
     }
+    //Access for All authentic user
+    Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
 
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
     Route::get('user/{user_code}', 'UserController@show')->name('user.show');
@@ -285,7 +287,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('notice', 'NoticeController@list')->name('academic.notice');
             Route::get('create-notice', 'NoticeController@create')->name('create.notice');
             Route::post('store-notice', 'NoticeController@store')->name('store.notice');
-            Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
             Route::get('event', 'EventController@create')->name('academic.event');
             Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');

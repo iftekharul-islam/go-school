@@ -36,9 +36,17 @@ class LibrarianHomeController extends Controller
                     ->toArray();
             });
 
-            $male = User::where('gender','male')->where('role', 'student')->where('school_id', $librarian->school_id)->where('active',1)->count();
-            $female = User::where('gender','female')->where('role', 'student')->where('school_id', $librarian->school_id)->where('active',1)->count();
-            $totalStudents = $female + $male;
+            $students = User::where('role', 'student')->where('school_id', $librarian->school_id)->where('active',1)->get();
+            $male = 0;
+            $female = 0;
+            foreach($students as $std)
+            {
+                if (strtolower($std['gender']) == 'male') {
+                    $male++;
+                } else {
+                    $female++;
+                }
+            }
             $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return Myclass::where('school_id', $school_id)->count();
             });
@@ -58,7 +66,7 @@ class LibrarianHomeController extends Controller
         }
         $books = Book::bySchool(auth()->user()->school_id)->paginate();
         return view('teacher-home', [
-            'totalStudents' => $totalStudents,
+            'students' => $students,
             'notices' => $notices,
             'exams' => $exams,
             'totalClasses' => $totalClasses,
