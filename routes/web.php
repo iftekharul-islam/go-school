@@ -225,6 +225,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::post('edit/{id}', 'ExamController@updateExam');
             Route::get('active', 'ExamController@indexActive')->name('exams.active');
             Route::get('results', 'ExamController@resultFiles')->name('exams.results');
+            Route::get('edit/results/{exam_id}', 'ExamController@editResultFile')->name('exams.edit.result');
+            Route::get('update/results/{exam_id}', 'ExamController@updateResultFile')->name('exams.update.result');
+            Route::post('remove/results/{exam_id}', 'ExamController@removeResultFile')->name('exams.remove.result');
         });
 
         Route::prefix('inactive')->group(function () {
