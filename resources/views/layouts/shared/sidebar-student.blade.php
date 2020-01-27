@@ -264,6 +264,10 @@
                                 <a class="nav-link {{ (request()->routeIs('exams')) ? 'menu-active' : '' }}"
                                    href="{{ route('exams') }}"><i class="fas fa-angle-right"></i><span>Manage Examinations</span></a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ (request()->routeIs('exams.results')) ? 'menu-active' : '' }}"
+                                   href="{{ route('exams.results') }}"><i class="fas fa-angle-right"></i><span>Results</span></a>
+                            </li>
                         </ul>
                     </li>
                 @endif
