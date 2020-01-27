@@ -282,7 +282,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('upload-syllabus', 'SyllabusController@storeSyllabus')->name('store-syllabus');
             Route::get('syllabus', 'SyllabusController@index')->name('academic.syllabus');
             Route::get('syllabus/{class_id}', 'SyllabusController@create');
-            Route::get('notice', 'NoticeController@create')->name('academic.notice');
+            Route::get('notice', 'NoticeController@list')->name('academic.notice');
+            Route::get('create-notice', 'NoticeController@create')->name('create.notice');
+            Route::post('store-notice', 'NoticeController@store')->name('store.notice');
+            Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
             Route::get('event', 'EventController@create')->name('academic.event');
             Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');

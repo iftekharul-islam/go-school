@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Http\Requests\NoticeRequest;
 use App\Notice;
 use App\Http\Resources\NoticeResource;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+
 class NoticeController extends Controller
 {
     /**
@@ -39,10 +41,14 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function list()
     {
         $files = Notice::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at', 'DESC')->get();
-        return view('notices.create',['files'=>$files]);
+        return view('notices.list',['files'=>$files]);
+    }
+    public function create()
+    {
+        return view('notices.create');
     }
 
     /**
@@ -51,16 +57,15 @@ class NoticeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NoticeRequest $request)
     {
-        $request->validate([
-            'file_path' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
-        ]);
         $user = Auth::user();
+        $path = $request->hasFile('file_path') ? Storage::disk('public')->put('school-' . $user->school_id . '/' . date('Y'), $request->file('file_path')) : null;
+
         $tb = new Notice;
-        $tb->file_path = $request->file_path;
+        $tb->file_path = $path ? 'storage/' . $path : '';
         $tb->title = $request->title;
+        $tb->description = $request->description;
         $tb->active = 1;
         $tb->school_id = $user->school_id;
         $tb->user_id = $user->id;
@@ -76,7 +81,23 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        return new NoticeResource(Notice::findOrFail($id));
+        $users = Auth::user();
+        $notices = Notice::where('school_id', $users->school_id)
+                ->where('active', 1)
+                ->get();
+
+        $notice ='';
+        foreach($notices as $ntc)
+        {
+            if ($ntc['id'] == $id )
+            {
+                $notice = $ntc;
+            }
+        }
+
+        return view('notices.show',compact('notices','notice'));
+
+//        return new NoticeResource(Notice::findOrFail($id));
     }
 
     /**

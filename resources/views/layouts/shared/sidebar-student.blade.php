@@ -39,7 +39,7 @@
                 $department = 1;
             if (strpos($add,'routine')  || Request::get('course') == 1 || strpos($add,'manage-class'))
                 $class = 1;
-            if (strpos($add,'classes')  || (strpos($add,'syllabus')) || strpos($add,'notice') || (strpos($add,'event')))
+            if (strpos($add, 'classes')  || (strpos($add, 'syllabus')) || strpos($add, 'notice') || (strpos($add, 'event')))
                 $academic = 1;
         @endphp
         <div class="sidebar-menu-content">
@@ -221,7 +221,9 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('academic.notice') }}"
-                                   class="nav-link {{ (request()->routeIs('academic.notice')) ? 'menu-active' : '' }}">
+                                   class="nav-link {{ (request()->routeIs('academic.notice')) ? 'menu-active' : '' }}
+                                       && {{ (request()->routeIs('create.notice')) ? 'menu-active' : '' }}
+                                       && {{ (request()->routeIs('show.notice')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Notice</span></a>
                             </li>
                             <li class="nav-item">

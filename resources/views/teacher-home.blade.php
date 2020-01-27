@@ -93,7 +93,7 @@
                                 <div class="notice-list">
                                     <div class="row">
                                         <div class="col-8">
-                                            <h6 class="notice-title"><a href="{{ url($notice->file_path) }}">{{ $notice->title }}</a></h6>
+                                            <h6 class="notice-title"><a href="{{ route('show.notice', $notice->id) }}">{{ $notice->title }}</a></h6>
                                         </div>
                                         <div class="col-4">
                                             <div class="">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>

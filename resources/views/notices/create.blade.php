@@ -3,18 +3,25 @@
 @section('title', 'Add Notice')
 
 @section('content')
+    <script src="{{ asset('js/ckeditor.js') }}"></script>
+    <style>
+        .ck-editor__editable{
+            min-height: 200px;
+        }
+    </style>
+
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-exclamation-circle"></i>
-            Notices
+            Create Notices
             <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.notices')}}">Inactive Notices</a>
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+            <li> <a href="{{ URL::previous() }}" class="text-color">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Notices</li>
+            <li>Create Notices</li>
         </ul>
     </div>
     <div class="card height-auto false-height">
@@ -24,11 +31,50 @@
                     {{ session('status') }}
                 </div>
             @endif
-            @component('components.file-uploader',['upload_type'=>'notice', 'section_id' => ''])
-            @endcomponent
-            <br>
-            @component('components.uploaded-files-list',['files'=>$files,'upload_type'=>'notice'])
-            @endcomponent
+            <div class="item-title">
+                <h4 class="text-teal fancy4">
+                   Create Notice
+                </h4>
+            </div>
+            <div class="col-md-12">
+                <form action="{{ route('store.notice') }}" method="POST" class="new-added-form" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <label>Title: </label>
+                    <div class="form-group">
+                        <input type="text" name="title" id="title" placeholder="File title here..." required class="form-control">
+                    </div>
+                    <div class="form-group mg-t-10">
+                        <input type="file" id="picPath" name="file_path">
+{{--                        <input type="file"  id="picPath" name="student_pic">--}}
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>: </label>
+                        <textarea class="form-control" name="description" id="description" rows="10" ></textarea>
+                    </div>
+                    <button type="submit" class="button button--save float-right">Upload</button>
+                </form>
+            </div>
+
+
+{{--            @component('components.file-uploader',['upload_type'=>'notice', 'section_id' => ''])--}}
+{{--            @endcomponent--}}
+{{--            <br>--}}
+
         </div>
     </div>
+
 @endsection
+@push('customjs')
+    <script type="text/javascript">
+        $(function () {
+            ClassicEditor
+                .create(document.querySelector('#description'), {
+                    toolbar: ['bold', 'italic','Heading', 'Link', 'bulletedList', 'numberedList', 'blockQuote']
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script>
+
+@endpush

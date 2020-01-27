@@ -742,8 +742,7 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label class=" control-label">Upload Profile Picture</label>
-                                <br>
-                                <input type="file"  id="picPath" name="student_pic">
+                                <br>= <input type="file"  id="picPath" name="student_pic">
                             </div>
                         </div>
 
