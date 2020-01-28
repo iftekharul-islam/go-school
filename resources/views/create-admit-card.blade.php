@@ -41,7 +41,6 @@
                         {{ session('status') }}
                     </div>
                 @endif
-
                 <div class="border">
                     <div class="page-header text-center">
                         <div class="fancy4">
@@ -107,7 +106,7 @@
         </div>
         <div class="comtainer example-print">
             <div class="card-body">
-                    <div class="page-header text-center">
+                <div class="page-header text-center">
                         <div class="fancy4">
                             @if(!empty($school->school->logo))
                                 <div class="school-logo">
@@ -187,8 +186,6 @@
                         <li>Carring any kind of electronic device like the mobile phone is strongly prohibited.</li>
                     </ol>
                 </div>
-            </div>
-
             </div>
         </div>
 
