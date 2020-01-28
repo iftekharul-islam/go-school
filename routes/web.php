@@ -280,6 +280,7 @@ Route::middleware(['auth'])->group(function () {
         //Librarian Route End
 
         Route::prefix('academic')->group(function () {
+            Route::get("create-admit-card","AdmitCardController@createAdmit")->name('create.admit');
             Route::get('upload-syllabus', 'SyllabusController@upload')->name('upload-syllabus');
             Route::post('upload-syllabus', 'SyllabusController@storeSyllabus')->name('store-syllabus');
             Route::get('syllabus', 'SyllabusController@index')->name('academic.syllabus');

@@ -183,8 +183,10 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //laravel-backup
-
         Spatie\Backup\BackupServiceProvider::class,
+
+        //Generate PDF
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
 
     ],
 
@@ -237,6 +239,7 @@ return [
         'Batch' => Mavinoo\LaravelBatch\LaravelBatchFacade::class,
         'DingoApi' => Dingo\Api\Facade\API::class,
         'DingoRoute' => Dingo\Api\Facade\Route::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
     ],
 
 ];
