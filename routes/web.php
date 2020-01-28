@@ -226,8 +226,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('active', 'ExamController@indexActive')->name('exams.active');
             Route::get('results', 'ExamController@resultFiles')->name('exams.results');
             Route::get('edit/results/{exam_id}', 'ExamController@editResultFile')->name('exams.edit.result');
-            Route::get('update/results/{exam_id}', 'ExamController@updateResultFile')->name('exams.update.result');
-            Route::post('remove/results/{exam_id}', 'ExamController@removeResultFile')->name('exams.remove.result');
+            Route::post('update/results/{exam_id}', 'ExamController@updateResultFile')->name('exams.update.result');
+            Route::post('remove/result/{exam_id}', 'ExamController@removeResultFile')->name('exams.remove.result');
         });
 
         Route::prefix('inactive')->group(function () {
@@ -397,6 +397,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('shift/update/{id}', 'ShiftController@update')->name('shift.update');
         Route::delete('shift/delete/{id}', 'ShiftController@destroy')->name('shift.delete');
     });
+    Route::get('/exams/download/result/{exam_id}', 'ExamController@downloadResultFile')->name('exams.download.result');
 
 });
 
