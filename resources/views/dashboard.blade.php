@@ -257,7 +257,6 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Result Published</th>
-                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -267,7 +266,17 @@
                                                     <td>{{ $exam->term }}</td>
                                                     <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
                                                     <td>{{ date('d-m-Y',strtotime($exam->end_date)) }}</td>
-                                                    <td>{{($exam->result_published === 1)?'Yes':'No'}}</td>
+                                                    <td>
+                                                        @if ($exam->result_published)
+                                                            @if (!empty($exam->result_file))
+                                                                <a href="{{route('exams.download.result',['exam_id' => $exam->id])}}" title="Download" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>
+                                                            @else
+                                                                Yes
+                                                            @endif
+                                                        @else
+                                                            No
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>

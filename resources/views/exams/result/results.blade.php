@@ -32,6 +32,7 @@
                             <th>Examination Name</th>
                             <th>Start Date</th>
                             <th>End Date</th>
+                            <th>Publish</th>
                             <th>Active</th>
                             <th>File</th>
                             <th>Action</th>
@@ -45,6 +46,13 @@
                             <td>{{ Carbon\Carbon::parse($exam->start_date)->format('d/m/Y') }}</td>
                             <td>{{ Carbon\Carbon::parse($exam->end_date)->format('d/m/Y') }}</td>
                             <td>
+                                @if($exam->result_published == 1)
+                                   <span class="badge badge-info">Yes</span>
+                                @else
+                                    <span class="badge badge-warning">No</span>
+                                @endif
+                            </td>
+                            <td>
                                 @if($exam->active == 1)
                                    <span class="badge badge-info">Yes</span>
                                 @else
@@ -53,25 +61,27 @@
                             </td>
                             <td>
                                 @if ($exam->result_file)
-                                <a href="#" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>
+                                    <a href="{{route('exams.download.result',['exam_id' => $exam->id])}}" title="Download" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>
                                 @else
                                     N/A
                                 @endif
                             </td>
                             <td>
                                 <button class="btn btn-danger btn-lg" type="button" onclick="removeExam({{ $exam->id }})"><i class="far fa-trash-alt"></i></button>
-                                <form id="delete-form-{{ $exam->id }}" action="{{ route('exams.remove.result', ['id' => $exam->id]) }}" method="POST" style="display: none;">
-                                    @csrf
+                                <form id="delete-form-{{ $exam->id }}" action="{{ route('exams.remove.result', ['exam_id' => $exam->id]) }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
                                 </form>
-                                <a href="{{ route('exams.edit.result', ['id' => $exam->id]) }}">
-                                    <button class="btn btn-info btn-lg ml-3"><i class="far fa-edit"></i></button>
+                                <a href="{{ route('exams.edit.result', ['exam_id' => $exam->id]) }}">
+                                    <button class="btn btn-info btn-lg ml-3"><i class="fa fa-upload"></i></button>
                                 </a>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                {{ $exams->links() }}
+                
+                <div class="float-right">{{ $exams->links() }}</div>
+                
             @endif
         </div>
     </div>

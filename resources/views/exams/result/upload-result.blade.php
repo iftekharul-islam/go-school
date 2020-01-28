@@ -14,27 +14,35 @@
             <li>Upload Result</li>
         </ul>
     </div>
-
-    <div class="card height-auto">
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            <div class="card height-auto">
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <h3>Exam Name: {{ $exam->exam_name }}</h3>
+                    <form class="new-added-form" action="{{ route('exams.update.result',['exam_id' => $exam->id]) }}" method="POST" enctype='multipart/form-data'>
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="result_file" class="control-label false-padding-bottom">Select File (pdf,excel)<label class="text-danger">*</label></label>
+                                <input type="file" class="form-control" id="result_file" name="result_file" value="" >
+                                 @if ($errors->has('result_file'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('result_file') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-12 form-group"">
+                                <button type="submit"  class="button button--save"> Upload </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            @endif
-            <h3>Examination Name: {{ $exam->exam_name }}</h3>
-            <form class="new-added-form" enctype="multipart/form-data" >
-                <div class="row">
-                    <div class="col-md-6  form-group">
-                        <label for="email" class="control-label false-padding-bottom">Select File (pdf,excel)<label class="text-danger">*</label></label>
-                        <input type="file" class="form-control" name="result_file" value="" required >
-                    </div>
-                    <div class="col-md-12 form-group"">
-                        <button type="submit"  class="button button--save"> Upload </button>
-                    </div>
-                </div>
-           
-           </form>
+            </div>
         </div>
     </div>
 @endsection
