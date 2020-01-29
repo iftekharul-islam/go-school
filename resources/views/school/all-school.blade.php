@@ -11,7 +11,11 @@
             <li>All Schools</li>
         </ul>
     </div>
-
+     @if (session('status'))
+        <div class="alert alert-success mb-2">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="card height-auto false-height">
         <div class="card-body-entire">
             <div class="row">

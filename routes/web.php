@@ -19,7 +19,7 @@ Auth::routes(['login' => false]);
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
-Route::middleware(['auth', 'check.account.status'])->group(function () {
+Route::middleware(['auth','check.account.status'])->group(function () {
 
     if (config('app.env') != 'production') {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
@@ -53,13 +53,13 @@ Route::middleware(['auth', 'check.account.status'])->group(function () {
         Route::post('create-school', 'SchoolController@store');
         Route::get('school/admin-list/{school_id}', 'SchoolController@show');
         Route::get('school/{school_id}', 'SchoolController@showSchool')->name('school-details');
-        Route::get('school/delete/{school_id}', 'SchoolController@destroy');
+        Route::post('school/delete/{school_id}', 'SchoolController@destroy')->name('school.delete');
         Route::get('school/edit/{school_id}', 'SchoolController@edit');
         Route::post('school/edit/{school_id}', 'SchoolController@update');
         Route::get('new/create-school', 'SchoolController@create');
         Route::get('edit/admin/{id}', 'AdminController@edit');
         Route::post('edit/admin', 'AdminController@update');
-        Route::get('new/all-school', 'MasterHomeController@allSchool');
+        Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
     });
 
