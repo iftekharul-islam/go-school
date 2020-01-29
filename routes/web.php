@@ -19,7 +19,7 @@ Auth::routes(['login' => false]);
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
-Route::middleware(['auth','check.account.status'])->group(function () {
+Route::middleware(['auth', 'check.account.status'])->group(function () {
 
     if (config('app.env') != 'production') {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');

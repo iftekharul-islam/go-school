@@ -146,7 +146,7 @@
                                           
                                         </div>
                                     </div>
-                                    @if($school->logo)
+                                    @if ( $school->logo )
                                     <div class="row">
                                         <div class="col-6">
                                             <img class="details-page-logo" src="{{ asset($school->logo) }}">
