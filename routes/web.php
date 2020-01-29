@@ -19,7 +19,7 @@ Auth::routes(['login' => false]);
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','check.account.status'])->group(function () {
 
     if (config('app.env') != 'production') {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
@@ -60,6 +60,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('edit/admin/{id}', 'AdminController@edit');
         Route::post('edit/admin', 'AdminController@update');
         Route::get('new/all-school', 'MasterHomeController@allSchool');
+        Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
     });
 
     //Student role routes
@@ -384,6 +385,8 @@ Route::middleware(['auth'])->group(function () {
             return new App\Mail\SendWelcomeEmailToUser($user, $password);
         });
 });
+
+Route::get('/account-suspended', 'UserController@inactiveAccount')->name('account.suspended');
 
 Route::get('/debug-sentry', function () {
 	throw new Exception('My first Sentry error!');

@@ -6,7 +6,7 @@ use App\School;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckAdmin
+class CheckAccountStatus
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,11 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->hasRole('admin')) {
-            return $next($request);
+        $school = School::findOrFail(Auth::user()->school_id)->first();
+        if ( $school->is_active == 0 && Auth::user()->role != 'master') {
+            return redirect('/account-suspended');
         }
-        return redirect(Auth::user()->role.'/home');
+
+        return $next($request);
     }
 }

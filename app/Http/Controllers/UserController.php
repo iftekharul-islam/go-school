@@ -573,4 +573,8 @@ class UserController extends Controller
         $user->delete();
         return back()->with('status', 'Student deleted permanently!');
     }
+
+    public function inactiveAccount() {
+        return view('inactive-account');
+    }
 }
