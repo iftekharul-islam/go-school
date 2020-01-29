@@ -39,7 +39,7 @@
                 $department = 1;
             if (strpos($add,'routine')  || Request::get('course') == 1 || strpos($add,'manage-class'))
                 $class = 1;
-            if (strpos($add, 'classes')  || (strpos($add, 'syllabus')) || strpos($add, 'notice') || (strpos($add, 'event')))
+            if (strpos($add, 'classes')  || (strpos($add, 'syllabus')) || strpos($add, 'notice') || (strpos($add, 'event')) || (strpos($add, 'create-admit-card')))
                 $academic = 1;
         @endphp
         <div class="sidebar-menu-content">
@@ -234,6 +234,11 @@
                                 <a href="{{ route('academic.event') }}"
                                    class="nav-link {{ (request()->routeIs('academic.event')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Events</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('create.admit') }}"
+                                   class="nav-link {{ (request()->routeIs('create.admit')) ? 'menu-active' : '' }}">
+                                    <i class="fas fa-angle-right"></i><span>Admit Card</span></a>
                             </li>
                         </ul>
                     </li>
