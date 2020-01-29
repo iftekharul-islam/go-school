@@ -279,4 +279,22 @@ class SchoolController extends Controller
 
         return redirect('master/home')->with('status', $name.'   deleted');
     }
+
+    /**
+     * update  school status
+     *
+     * @param int $school_id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatusSchool($school_id, $status)
+    {
+        $school = School::findOrFail($school_id);
+        $name = $school->name;
+        $school->is_active = $status;
+        $school->save();
+        $schoolStatus = $status == 0 ? 'deactivated' : 'activated';
+        return back()->with('status', $name.' '.$schoolStatus);
+    }
+
 }
