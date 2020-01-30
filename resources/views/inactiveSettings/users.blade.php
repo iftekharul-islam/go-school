@@ -68,19 +68,20 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
             </form>
             @else 
-                 <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <p class="text-center">No Data Found</p>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <p class="text-center">No Data Found</p>
+                    </div>
                 </div>
-            </div>
             @endif
             </div>
         </div>
-
+       
     </div>
-
+     <div class="clearfix"></div>
     @push('customjs')
         <script type="text/javascript">
             jQuery(document).ready(function(){
