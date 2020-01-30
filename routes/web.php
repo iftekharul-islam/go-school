@@ -355,6 +355,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('user/activate/{id}', 'UserController@activateUser');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::post('courses/store', 'CourseController@store');
+        Route::post('user/bulk-action', 'UserController@bulkAction')->name('user.bulk.action');
 
         Route::delete('user/{id}', 'UserController@destroy')->name('delete-user');
 
@@ -372,7 +373,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendance-time/edit/{id}', 'SectionMetaController@edit')->name('attendance.time.edit');
         Route::put('attendance-time/update/{id}', 'SectionMetaController@update')->name('attendance.time.update');
         Route::delete('attendance-time/delete/{id}', 'SectionMetaController@destroy')->name('attendance.time.delete');
-        
     });
 
 });

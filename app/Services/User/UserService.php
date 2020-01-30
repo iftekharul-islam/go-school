@@ -2,6 +2,7 @@
 
 namespace App\Services\User;
 
+use App\Myclass;
 use App\User;
 use App\StudentInfo;
 use Mavinoo\LaravelBatch\Batch;
@@ -33,10 +34,12 @@ class UserService
         return !empty($school_code) && 1 == $teacher_code;
     }
 
-    public function indexView($view, $users)
+    public function indexView($view, $users, $classes, $searchData)
     {
         return view($view, [
             'users' => $users,
+            'classes' => $classes,
+            'searchData' => $searchData
         ]);
     }
 
@@ -130,21 +133,27 @@ class UserService
         ]);
     }
 
-    public function getStudents()
+    public function getStudents($section_id = null, $name = null)
     {
         $students = $this->user->with(['section.class', 'school', 'studentInfo'])
             ->where('school_id', Auth::user()->school_id)
             ->student()
             ->where('active', 1)
+            ->when($section_id, function($query) use ($section_id){
+                return $query->where('section_id', $section_id);
+            })
+            ->when($name, function($query) use ($name){
+                return $query->where('name', 'like', "%{$name}%");
+            })
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(30);
         $studentFilterByDepartments = $this->user->with(['section.class', 'school', 'studentInfo'])
             ->where('school_id', auth()->user()->school_id)
             ->student()
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(30);
 
         if ($studentFilterByDepartments->count() > 0) {
             $students = $studentFilterByDepartments;

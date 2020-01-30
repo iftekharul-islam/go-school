@@ -29,21 +29,32 @@
                     {{ session('error-status') }}
                 </div>
             @endif
+            <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
+            <div class="row">
+                <div class="col-md-2 col-sm-12">
+                    <div class="form-group">
+                        <select id='action' name="action" class="form-control form-control-sm">
+                            <option value="" disabled selected>Bulk Action</option>
+                            <option value="activate">Activate</option>
+                            <option value="delete">Delete Permanently</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
-                <table class="table table-data-div table-bordered display text-wrap">
+                <table class="table display text-wrap">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
                         <th>Code</th>
                         <th>Full Name</th>
                         <th>Email</th>
-                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($users as $key=>$user)
                         <tr>
-                            <th scope="row">{{ $loop->index+1 }}</th>
+                            <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
                             <td>{{$user->student_code}}</td>
                             <td>
                                 <a class="text-teal" href="{{url('/user/'.$user->student_code)}}">{{$user->name}}</a>
@@ -51,26 +62,12 @@
                             <td>
                                 {{$user->email}}
                             </td>
-                            <td>
-                                <button class="button button--save" type="button" onclick="removeUser({{ $user->id }})"><i class="fas fa-user-check"></i>  Activate</button>
-                                    <form id="delete-form-{{ $user->id }}" action="{{ url('admin/user/activate/'.$user->id) }}" method="GET" style="display: none;">
-                                        @csrf
-                                        @method('GET')
-                                    </form>
-                                <button class="button ml-1 button--cancel " type="button" onclick="deleteUser({{ $user->id }})">
-                                    <i class="far fa-trash-alt mr-1"></i>Delete</button>
-                                <form id="delete-user-form-{{ $user->id }}" action="{{ route('delete-user', $user->id) }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                    {{ method_field('delete') }}
-                                </form>
-                                </button>
-                            </td>
                         </tr>
 
                     @endforeach
                     </tbody>
                 </table>
-
+            </form>
             </div>
         </div>
 
@@ -78,33 +75,61 @@
 
     @push('customjs')
         <script type="text/javascript">
-            function removeUser(id) {
+            jQuery(document).ready(function(){
+                $("#checkAll").click(function(){
+                    $('input:checkbox').not(this).prop('checked', this.checked);
+                });
+
+                $('#action').change(function(){
+                    let action = $(this).val();
+                    let user_ids = [];
+                    
+                    $("input[name='user_ids[]']").each(function () {
+                        if($(this).is(":checked")){
+                                user_ids.push($(this).val());
+                        }
+                    });
+
+                    if(user_ids.length > 0){
+                        submitForm('userBulkAction');
+                    } else {
+                        showAlert();
+                    }
+                });
+            });
+
+            function submitForm(formId) {
                 swal({
                     title: "Are you sure?",
-                    text: "Selected user status will be changed to activate",
+                    text: " You want to perform this action!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            document.getElementById('delete-form-'+id).submit();
-                        }
-                    });
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById(formId).submit();
+                    }
+                });
             }
-            function deleteUser(id) {
+
+            function showAlert() {
                 swal({
-                    title: "Are you sure?",
-                    text: "Selected Student will be deleted permanently",
+                    title: "No Student Selected",
+                    text: "Please select at least one student",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
+                    buttons: {
+                        cancel: false,
+                        confirm: true,
+                    },
                 })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            document.getElementById('delete-user-form-'+id).submit();
-                        }
-                    });
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById(formId).submit();
+                    }
+                });
             }
         </script>
     @endpush
