@@ -45,7 +45,7 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
             'Student Code',
             'Student Name',
             'Email',
-            'Gendeer',
+            'Gender',
             'Roll Number',
             'Blood Group',
             'Address',

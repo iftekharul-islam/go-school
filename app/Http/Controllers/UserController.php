@@ -31,7 +31,6 @@ use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
-use Maatwebsite\Excel\Excel as ExcelExcel;
 
 /**
  * Class UserController.
