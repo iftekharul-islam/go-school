@@ -71,6 +71,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
         Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
+        Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
     });
 
@@ -340,7 +341,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
 
         Route::prefix('register')->name('register.')->group(function () {
-            Route::post('student', 'UserController@store')->name('student.store');
+            Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant');
             Route::post('librarian', 'UserController@storeLibrarian');

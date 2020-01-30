@@ -197,6 +197,15 @@
             <div class="col-md-6">
                 <div class="table-responsive border-right">
                     <table class="text-wrap table-borderless table">
+                        <th>Guardian's Information:</th>
+                        <tr>
+                            <td class="font-medium text-dark-medium">Name:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['guardian_name']}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
+                            <td>{{$user->studentInfo['guardian_phone_number']}}</td>
+                        </tr>
                         <th>Father's Information:</th>
                         <tr>
                             <td class="font-medium text-dark-medium">Name:</td>
@@ -218,16 +227,16 @@
                             <td class="font-medium text-dark-medium">Annual Income:</td>
                             <td>{{$user->studentInfo['father_annual_income']}}</td>
                         </tr>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Designation:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['father_designation']}}</td>
-                        </tr>
                     </table>
                 </div>
             </div>
             <div class="col-md-6 ">
                 <div class="table-responsive">
                     <table class="text-wrap table-borderless table">
+                        <tr>
+                            <td class="font-medium text-dark-medium">Designation:</td>
+                            <td class="text-capitalize">{{$user->studentInfo['father_designation']}}</td>
+                        </tr>
                         <th>Mother's Information:</th>
                         <tr>
                             <td class="font-medium text-dark-medium">Name:</td>

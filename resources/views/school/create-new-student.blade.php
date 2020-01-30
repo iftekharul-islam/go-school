@@ -105,9 +105,10 @@
                                         <label for="password"
                                                class="control-label false-padding-bottom">Password<label
                                                 class="text-danger">*</label></label>
+                                        <button class="btn btn-primary btn-sm remove-pass float-right">Create Password</button>
                                         <input id="password" type="password"
-                                               class="form-control" name="password"
-                                               required>
+                                               class="form-control student-password" name="password"
+                                               required readonly>
 
                                         @if ($errors->has('password'))
                                             <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
@@ -125,13 +126,11 @@
                                                 class="text-danger">*</label></label>
 
                                         <input id="password-confirm" type="password"
-                                               class="form-control"
-                                               name="password_confirmation" required>
+                                               class="form-control student-password"
+                                               name="password_confirmation" required readonly>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -167,7 +166,8 @@
                                                 name="section" required>
                                             @foreach ($studentSections as $section)
                                                 <option value="{{$section->id}}">
-                                                    Section: {{$section->section_number}}
+                                                    Section:
+                                                    {{$section->section_number}}
                                                     Class:
                                                     {{$section->class->class_number}}</option>
                                             @endforeach
@@ -179,8 +179,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('student_indentification') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -215,8 +213,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('shift') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -259,8 +255,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -301,8 +295,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -339,8 +331,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -351,7 +341,8 @@
 
                                         <select id="blood_group" class="form-control"
                                                 name="blood_group">
-                                            <option selected="selected">A+</option>
+                                            <option selected="selected">N/A</option>
+                                            <option>A+</option>
                                             <option>A-</option>
                                             <option>B+</option>
                                             <option>B-</option>
@@ -371,13 +362,11 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="nationality"
-                                               class=" control-label false-padding-bottom">Nationality<label
-                                                class="text-danger">*</label></label>
+                                               class=" control-label false-padding-bottom">Nationality</label>
 
                                         <input id="nationality" type="text"
                                                class="form-control" name="nationality"
-                                               value="{{ old('nationality') }}"
-                                               required>
+                                               value="{{ old('nationality') }}">
 
                                         @if ($errors->has('nationality'))
                                             <span class="help-block">
@@ -387,8 +376,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -437,23 +424,39 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
-                                        <label for="address"
-                                               class="control-label false-padding-bottom">Address<label
-                                                class="text-danger">*</label></label>
+                                        <label for="guardian_name"
+                                               class=" control-label false-padding-bottom">Guardian's Name<label class="text-danger">*</label></label>
 
-                                        <input id="address" type="text" class="form-control"
-                                               name="address"
-                                               value="{{ old('address') }}"
+                                        <input id="guardian_name" type="text"
+                                               class="form-control" name="guardian_name"
+                                               value="{{ old('guardian_name') }}"
                                                required>
 
-                                        @if ($errors->has('address'))
+                                        @if ($errors->has('guardian_name'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('address') }}</strong>
+                                    <strong>{{ $errors->first('guardian_name') }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="guardian_phone_number"
+                                               class="control-label false-padding-bottom">Guardian's Phone Number<label
+                                                class="text-danger">*</label></label>
+                                        <input id="guardian_phone_number"  type="text"
+                                               class="form-control"
+                                               name="guardian_phone_number"
+                                               value="{{ old('guardian_phone_number') }}"required>
+
+                                        @if ($errors->has('guardian_phone_number'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('guardian_phone_number') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -464,12 +467,11 @@
                                     <div class="col-md-12">
                                         <label for="father_name"
                                                class=" control-label false-padding-bottom">Father's
-                                            Name<label class="text-danger">*</label></label>
+                                            Name</label>
 
                                         <input id="father_name" type="text"
                                                class="form-control" name="father_name"
-                                               value="{{ old('father_name') }}"
-                                               required>
+                                               value="{{ old('father_name') }}">
 
                                         @if ($errors->has('father_name'))
                                             <span class="help-block">
@@ -479,20 +481,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
-                                        <label for="father_phone_number"
-                                               class="control-label false-padding-bottom">Father's
-                                            Phone
-                                            Number<label
-                                                class="text-danger">*</label></label>
+                                        <label for="father_phone_number" class="control-label false-padding-bottom">Father's Phone Number</label>
                                         <input id="father_phone_number"  type="text"
                                                class="form-control"
                                                name="father_phone_number"
-                                               value="{{ old('father_phone_number') }}"required>
+                                               value="{{ old('father_phone_number') }}">
 
                                         @if ($errors->has('father_phone_number'))
                                             <span class="help-block">
@@ -521,8 +517,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -563,8 +557,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_designation') ? ' has-error' : '' }}">
 
@@ -576,13 +568,32 @@
                                         <input id="father_designation" type="text"
                                                class="form-control"
                                                name="father_designation"
-                                               value="{{ old('father_designation') }}"
-                                        >
+                                               value="{{ old('father_designation') }}">
 
                                         @if ($errors->has('father_designation'))
                                             <span class="help-block">
                                     <strong>{{ $errors->first('father_designation') }}</strong>
                                 </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
+
+                                    <div class="col-md-12">
+                                        <label for="mother_name"
+                                               class=" control-label false-padding-bottom">Mother's
+                                            Name</label>
+
+                                        <input id="mother_name" type="text"
+                                               class="form-control" name="mother_name"
+                                               value="{{ old('mother_name') }}">
+
+                                        @if ($errors->has('mother_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('mother_name') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -609,29 +620,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
-
-                                    <div class="col-md-12">
-                                        <label for="mother_name"
-                                               class=" control-label false-padding-bottom">Mother's
-                                            Name<label class="text-danger">*</label></label>
-
-                                        <input id="mother_name" type="text"
-                                               class="form-control" name="mother_name"
-                                               value="{{ old('mother_name') }}"
-                                               required>
-
-                                        @if ($errors->has('mother_name'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('mother_name') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -652,8 +640,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_national_id') ? ' has-error' : '' }}">
 
@@ -695,8 +681,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_annual_income') ? ' has-error' : '' }}">
 
@@ -715,6 +699,24 @@
                                             <span class="help-block">
                                     <strong>{{ $errors->first('mother_annual_income') }}</strong>
                                 </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="address"
+                                               class="control-label false-padding-bottom">Address</label>
+
+                                        <input id="address" type="text" class="form-control"
+                                               name="address"
+                                               value="{{ old('address') }}">
+
+                                        @if ($errors->has('address'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -742,7 +744,7 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label class=" control-label">Upload Profile Picture</label>
-                                <br>= <input type="file"  id="picPath" name="student_pic">
+                                <br> <input type="file"  id="picPath" name="student_pic">
                             </div>
                         </div>
 
@@ -768,14 +770,10 @@
 
             $('.student-name').focusout(function() {
                 let inputName = $('.student-name').val();
-                console.log('hello ', inputName);
                 if (inputName) {
                     let names = inputName.split(' ');
 
-                    console.log('names ', names);
-
                     let code = {!! $code !!};
-                    console.log('code', code);
 
                     let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
 
@@ -783,21 +781,30 @@
 
                     $('.student-username').val(username.toLowerCase());
 
-                    console.log('lastname ', lastName);
+                    $('.student-password, .confirm-password').val(username.toLowerCase());
+
                 }
             });
 
             $('.email-enable-button').click(function(event) {
                 event.preventDefault();
-                console.log('hello');
+
                 $('.student-username').remove();
                 $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
                            name="email" value="" placeholder="Enter email address"
                            required>`);
                 $('.email-enable-button').remove();
+
+                $('.student-username').remove();
             });
 
+            $('.remove-pass').click(function(event) {
+                event.preventDefault();
 
+                $('.student-password').val('').removeAttr('readonly');
+
+                $('.remove-pass').remove();
+            });
 
         });
     </script>

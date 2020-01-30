@@ -276,7 +276,7 @@ class UserService
         $tb->student_code = $request->student_code;
         $tb->gender = $request->gender;
         $tb->blood_group = $request->blood_group;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
+        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : 'Bangladeshi';
         $tb->phone_number = $request->phone_number;
         $tb->address = (!empty($request->address)) ? $request->address : '';
         $tb->about = (!empty($request->about)) ? $request->about : '';
@@ -301,6 +301,8 @@ class UserService
             'group' => (!empty($request->get('group'))) ? $request->get('group') : '',
             'birthday' => $request->get('birthday'),
             'religion' => $request->get('religion'),
+            'guardian_name' => $request->get('guardian_name'),
+            'guardian_phone_number' => $request->get('guardian_phone_number'),
             'father_name' => $request->get('father_name'),
             'father_phone_number' => $request->get('father_phone_number'),
             'father_national_id' => $request->get('father_national_id'),
