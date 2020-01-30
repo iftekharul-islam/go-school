@@ -12,6 +12,7 @@ use App\Section;
 use App\Department;
 use Illuminate\Http\Request;
 use App\Events\UserRegistered;
+use App\Exports\ExportStudent;
 use App\Services\User\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -623,5 +624,9 @@ class UserController extends Controller
         }
 
         return back()->with('status' , $message);
+    }
+
+    public function exportStudent(){
+        return Excel::download(new  ExportStudent, 'students.xls');
     }
 }
