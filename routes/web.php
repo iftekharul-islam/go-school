@@ -71,6 +71,7 @@ Route::middleware(['auth', 'check.account.status'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
         Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
+        Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
     });
 
