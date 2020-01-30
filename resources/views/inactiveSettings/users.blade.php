@@ -18,6 +18,7 @@
     </div>
 
     <div class="card false-height">
+         @if (count($users) > 0)
         <div class="card-body">
 
             @if (session('status'))
@@ -29,7 +30,7 @@
                     {{ session('error-status') }}
                 </div>
             @endif
-             @if (count($users) > 0)
+            
             <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-2 col-sm-12">
@@ -70,16 +71,16 @@
                 </table>
             </div>
             </form>
-            @else 
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <p class="text-center">No Data Found</p>
-                    </div>
-                </div>
-            @endif
+            
             </div>
         </div>
-       
+       @else 
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <p class="text-center pt-3">No Data Found</p>
+            </div>
+        </div>
+    @endif
     </div>
      <div class="clearfix"></div>
     @push('customjs')
