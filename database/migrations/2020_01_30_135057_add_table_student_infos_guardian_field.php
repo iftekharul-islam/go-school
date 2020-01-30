@@ -15,8 +15,8 @@ class AddTableStudentInfosGuardianField extends Migration
     {
         Schema::table('student_infos', function(Blueprint $table)
         {
-            $table->string('guardian_name');
-            $table->string('guardian_phone_number');
+            $table->string('guardian_name')->nullable();
+            $table->string('guardian_phone_number')->nullable();
         });
     }
     /**
