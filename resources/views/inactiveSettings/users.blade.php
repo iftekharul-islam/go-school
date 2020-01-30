@@ -30,7 +30,6 @@
                     {{ session('error-status') }}
                 </div>
             @endif
-            
             <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-2 col-sm-12">
@@ -43,8 +42,9 @@
                     </div>
                 </div>
             </div>
+            
             <div class="table-responsive">
-                <table class="table display text-wrap">
+                <table class="table table-bordered display text-wrap">
                     <thead>
                     <tr>
                         <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
@@ -54,25 +54,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $key=>$user)
-                        <tr>
-                            <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
-                            <td>{{$user->student_code}}</td>
-                            <td>
-                                <a class="text-teal" href="{{url('/user/'.$user->student_code)}}">{{$user->name}}</a>
-                            </td>
-                            <td>
-                                {{$user->email}}
-                            </td>
-                        </tr>
-
-                    @endforeach
+                        @foreach ($users as $key=>$user)
+                            <tr>
+                                <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
+                                <td>{{$user->student_code}}</td>
+                                <td>
+                                    <a class="text-teal" href="{{url('/user/'.$user->student_code)}}">{{$user->name}}</a>
+                                </td>
+                                <td>
+                                    {{$user->email}}
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             </form>
-            
-            </div>
         </div>
        @else 
         <div class="row">
@@ -80,9 +77,8 @@
                 <p class="text-center pt-3">No Data Found</p>
             </div>
         </div>
-    @endif
+        @endif
     </div>
-     <div class="clearfix"></div>
     @push('customjs')
         <script type="text/javascript">
             jQuery(document).ready(function(){
