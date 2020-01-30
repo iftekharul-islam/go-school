@@ -54,133 +54,228 @@
                 {{ session('error-status') }}
             </div>
         @endif
-        <div class="mb-5">
-            <table class="table data-table-paginate table-bordered display text-wrap">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th>Code</th>
-                    <th>Full Name</th>
-                    @foreach ($users as $user)
-                        @if($user->role == 'student')
-                            @if (!Session::has('section-attendance'))
-                                <th>Session</th>
-                                <th>Version</th>
-                                <th>Class</th>
-                                <th>Section</th>
-                            @endif
-                        @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
-                            @if (!Session::has('section-attendance'))
-                                @if($user->role == 'teacher')
-                                    <th>Courses</th>
-                                @endif
-                            @endif
-                        @elseif($user->role == 'accountant' || $user->role == 'librarian')
-                            @if (!Session::has('section-attendance'))
-                                <th>Phone Number</th>
-                                <th>Email</th>
-                            @endif
-                        @endif
-                        @break($loop->first)
+        <form method='GET' action="">
+        <div class="row border-bottom mb-3">
+            <div class="form-group col-md-3">
+                <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="Name" />
+            </div>
+            <div class="form-group col-md-3">
+                <select name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
+                    <option value="" disabled selected>Class</option>
+                     @foreach ($classes as $class)
+                        <option value="{{$class->id}}" @if($class->id == $searchData['class_id']) selected @endif>{{$class->class_number}}</option>    
                     @endforeach
-                    @foreach ($users as $user)
-                        @if(Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role === 'student')<th>Attendance</th>@endif
-                        @endif
-                        @break($loop->first)
-                    @endforeach
-                    @if(Auth::user()->role == 'admin')
-                        @if (!Session::has('section-attendance'))
-                            @if($user->role != 'student')
-                                <th>Attendance</th>
-                            @endif
-                            <th>Action</th>
-                        @endif
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <select name="section_id" id="section_id" class="form-control form-control-sm">
+                    @if($searchData['section_id'])
+                        <option value="{{$searchData['section_id']}}" >{{$searchData['section_number']}}</option>
+                    @else 
+                        <option value="" disabled selected >Section</option>
                     @endif
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($users as $key=>$user)
+                </select>
+            </div>
+            <div class="form-group col-md-1">
+                <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Filter" />
+            </div>
+        </div>
+        </form>
+         @if(count($users) > 0)
+            <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
+            <div class="row">
+                <div class="col-md-2 col-sm-12">
+                    <div class="form-group">
+                        <select id='action' name="action" class="form-control form-control-sm">
+                            <option value="" disabled selected>Bulk Action</option>
+                            <option value="enable_sms">Enable SMS</option>
+                            <option value="disable_sms">Disable SMS</option>
+                            <option value="deactivate">Deactivate</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <table class="table table-bordered display text-wrap">
+                    <thead>
                     <tr>
-                        <th scope="row">{{$loop->index + 1 }}</th>
-                        <td>{{$user->student_code}}</td>
-                        <td>
-                            <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
-                        </td>
-                        @if($user->role == 'student')
-                            @if (!Session::has('section-attendance'))
-                                <td>{{$user->studentInfo['session']}}</td>
-                                <td>{{ucfirst($user->studentInfo['version'])}}</td>
-                                <td>{{$user->section['class']['class_number']}} {{!empty($user->group)? '- '.$user->group:''}}</td>
-                                <td style="white-space: nowrap;">{{$user->section['section_number']}}
-                                </td>
-                            @endif
-                        @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
-                            @if (!Session::has('section-attendance'))
-                                @if($user->role == 'teacher')
-                                    <td style="white-space: nowrap;">
-
-                                        <a class="text-teal" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/courses/'.$user->id.'/0')}}">All Courses</a>
-
-                                    </td>
+                        <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
+                        <th>Code</th>
+                        <th>Full Name</th>
+                        @foreach ($users as $user)
+                            @if($user->role == 'student')
+                                @if (!Session::has('section-attendance'))
+                                    <th>Session</th>
+                                    <th>Version</th>
+                                    <th>Class</th>
+                                    <th>Section</th>
+                                @endif
+                            @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
+                                @if (!Session::has('section-attendance'))
+                                    @if($user->role == 'teacher')
+                                        <th>Courses</th>
+                                    @endif
+                                @endif
+                            @elseif($user->role == 'accountant' || $user->role == 'librarian')
+                                @if (!Session::has('section-attendance'))
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
                                 @endif
                             @endif
-                        @elseif($user->role == 'accountant' || $user->role == 'librarian')
-                            @if (!Session::has('section-attendance'))
-                                <td>{{$user->phone_number}}</td>
-                                <td>
-                                    {{$user->email}}
-                                </td>
+                            @break($loop->first)
+                        @endforeach
+                        @foreach ($users as $user)
+                            @if(Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                                @if($user->role === 'student')<th>Attendance</th>@endif
                             @endif
-                        @endif
-                        @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role == 'student')<td><a class="btn-link text-teal" role="button" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}">View</a></td>@endif
-                        @endif
+                            @break($loop->first)
+                        @endforeach
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
                                 @if($user->role != 'student')
-                                    <td>
-                                        <a href="{{ url('admin/staff/attendance/'.$user->id) }}" class="btn-link text-teal">View</a>
-                                    </td>
+                                    <th>Attendance</th>
                                 @endif
-                                <td>
-                                    <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
-                                    <button class="btn btn-danger btn-lg" type="button" onclick="removeUser({{ $user->id }})">
-                                        <i class="far fa-trash-alt"></i></button>
-                                    <form id="delete-form-{{ $user->id }}" action="{{ url('admin/user/deactivate/'.$user->id) }}" method="GET" style="display: none;">
-                                        @csrf
-                                        @method('GET')
-                                    </form>
-                                </td>
+                                <th>Action</th>
                             @endif
                         @endif
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
-            {{--<div class="paginate123 mt-5 float-right">--}}
-            {{--{{ $users->links() }}--}}
-            {{--</div>--}}
-        </div>
+                    </thead>
+                    <tbody>
+                    @foreach ($users as $key=>$user)
+                        <tr>
+                            <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
+                            <td>{{$user->student_code}}</td>
+                            <td>
+                                <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
+                            </td>
+                            @if($user->role == 'student')
+                                @if (!Session::has('section-attendance'))
+                                    <td>{{$user->studentInfo['session']}}</td>
+                                    <td>{{ucfirst($user->studentInfo['version'])}}</td>
+                                    <td>{{$user->section['class']['class_number']}} {{!empty($user->group)? '- '.$user->group:''}}</td>
+                                    <td style="white-space: nowrap;">{{$user->section['section_number']}}
+                                    </td>
+                                @endif
+                            @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
+                                @if (!Session::has('section-attendance'))
+                                    @if($user->role == 'teacher')
+                                        <td style="white-space: nowrap;">
+                                            <a class="text-teal" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/courses/'.$user->id.'/0')}}">All Courses</a>
+                                        </td>
+                                    @endif
+                                @endif
+                            @elseif($user->role == 'accountant' || $user->role == 'librarian')
+                                @if (!Session::has('section-attendance'))
+                                    <td>{{$user->phone_number}}</td>
+                                    <td>
+                                        {{$user->email}}
+                                    </td>
+                                @endif
+                            @endif
+                            @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
+                                @if($user->role == 'student')<td><a class="btn-link text-teal" role="button" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/attendances/0/'.$user->id.'/0')}}">View</a></td>@endif
+                            @endif
+                            @if(Auth::user()->role == 'admin')
+                                @if (!Session::has('section-attendance'))
+                                    @if($user->role != 'student')
+                                        <td>
+                                            <a href="{{ url('admin/staff/attendance/'.$user->id) }}" class="btn-link text-teal">View</a>
+                                        </td>
+                                    @endif
+                                    <td>
+                                        <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
+                                    </td>
+                                @endif
+                            @endif
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <div class="paginate123 mt-5 float-right">
+                    {{ $users->appends(request()->query())->links() }}
+                </div>
+            </div>
+        </form>
+         @else
+            <p class="text-center">No Related Data Found.</p>
+        @endif
     </div>
+    
 
 </div>
 
 @push('customjs')
     <script type="text/javascript">
-        function removeUser(id) {
+        jQuery(document).ready(function(){
+            $("#checkAll").click(function(){
+                $('input:checkbox').not(this).prop('checked', this.checked);
+            });
+
+            $('#action').change(function(){
+               let action = $(this).val();
+               let user_ids = [];
+               
+                $("input[name='user_ids[]']").each(function () {
+                   if($(this).is(":checked")){
+                        user_ids.push($(this).val());
+                   }
+                });
+
+                if(user_ids.length > 0){
+                    submitForm('userBulkAction');
+                } else {
+                    showAlert();
+                }
+           });
+        });
+
+       function getSections(item) {
+            let selectedClass = item.value;
+            let classes = {!! json_encode($classes->toArray()) !!};
+            let sections = [];
+            classes.forEach((cls) => {
+                if (cls.id == selectedClass) {
+                    sections = cls.sections;
+                }
+            });
+            $('#section_id').empty();
+            sections.forEach((sec) => {
+                $('#section_id').append($("<option />").val(sec.id).text(sec.section_number));
+            });
+        }
+
+        function submitForm(formId) {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this user!",
+                text: " You want to perform this action!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
             })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        document.getElementById('delete-form-'+id).submit();
-                    }
-                });
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+
+        function showAlert() {
+            swal({
+                title: "No Student Selected",
+                text: "Please select at least one student",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: {
+                    cancel: false,
+                    confirm: true,
+                },
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    document.getElementById(formId).submit();
+                }
+            });
         }
     </script>
 @endpush
