@@ -36,8 +36,7 @@
                             <div class="col-6 col-md-8">
                                 <div class="item-content">
                                     <div class="item-title">Total Student</div>
-                                    <div class="item-number"><span class="counter"
-                                                                   data-num="{{ $total_students }}">{{ $total_students }}</span>
+                                    <div class="item-number"><span class="counter" data-num="{{ $total_students }}">{{ $total_students }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -55,8 +54,7 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Total Classes</div>
-                                    <div class="item-number"><span class="counter"
-                                                                   data-num="{{ $total_classes }}">{{ $total_classes }}</span>
+                                    <div class="item-number"><span class="counter" data-num="{{ $total_classes }}">{{ $total_classes }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -74,8 +72,7 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Total Teacher</div>
-                                    <div class="item-number"><span class="counter"
-                                                                   data-num="{{ $total_teacher }}">{{ $total_teacher }}</span>
+                                    <div class="item-number"><span class="counter" data-num="{{ $total_teacher }}">{{ $total_teacher }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +90,7 @@
                             <div class="col-6">
                                 <div class="item-content">
                                     <div class="item-title">Total Departments</div>
-                                    <div class="item-number"><span class="counter"
-                                                                   data-num="{{count($school->departments)}}">{{count($school->departments)}}</span>
+                                    <div class="item-number"><span class="counter" data-num="{{count($school->departments)}}">{{count($school->departments)}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +102,6 @@
                         <div class="col-12-xxxl col-xl-12">
                             <div class="account-settings-box">
                                 <div class="card-body">
-        
                                     <div class="row">
                                         <div class="col-md-6 heading-layout1 ">
                                             <div class="item-title">
@@ -134,16 +129,7 @@
 
                                             <a href="{{ route('school.status.update', ['school_id' => $school->id, 'status' => $status]) }}" class="button button--cancel mr-1 mb-1"><i class="{{ $btnIcon }}"></i>&nbsp; {{ $btnText }}</a>
 
-                                             <button class="button button--cancel mb-1" type="button"
-                                                    onclick="removeSchool({{ $school->id }})"><i class="fas fa-trash"></i> Delete
-                                            </button>
-                                            <form id="delete-form-{{ $school->id }}"
-                                                  action="{{ url('master/school/delete/'.$school->id) }}" method="GET"
-                                                  style="display: none;">
-                                                @csrf
-                                                @method('GET')
-                                            </form>
-                                          
+                                            <button type="button" class="button button--cancel mb-1" data-toggle="modal" data-target="#confirmPassword"><i class="fas fa-trash"></i> Delete</button> 
                                         </div>
                                     </div>
                                     @if ( $school->logo )
@@ -155,8 +141,8 @@
                                     @endif
                                     <div class="user-details-box">
                                         <div class="item-content">
-                                            <div class="info-table table-responsive">
-                                                <table class="table text-wrap">
+                                            <div class="table-responsive">
+                                                <table class="table text-wrap table-borderless">
                                                     <tbody>
                                                     <tr>
                                                         <td width="20%" class="">Name:</td>
@@ -195,6 +181,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="confirmPassword" role="dialog" aria-labelledby="confirmPassword">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Confirm Password</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <form class="new-added-form" action="{{ route('school.delete',['school_id' => $school->id]) }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="password" class="col-sm-12 control-label">Enter Password</label>
+                            <div class="col-sm-12">
+                                <input type="password" name="password" class="form-control" id="password" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group modal-footer pb-">
+                        <div class="col-md-12">
+                            <button type="submit" class="button button--save float-right">Confirm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+                      
     @push('customjs')
         <script type="text/javascript">
             function removeSchool(id) {
