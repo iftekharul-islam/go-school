@@ -14,7 +14,10 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
     */
     public function collection()
     {
-        $students = User::with(['studentInfo', 'section.class'])->where('role', 'student')->get();
+        $students = User::with(['studentInfo', 'section.class'])
+            ->where('role', 'student')
+            ->where('school_id', \auth::user()->school_id)
+            ->get();
         return $students;
     }
 
