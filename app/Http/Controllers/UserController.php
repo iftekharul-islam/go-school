@@ -12,6 +12,7 @@ use App\Section;
 use App\Department;
 use Illuminate\Http\Request;
 use App\Events\UserRegistered;
+use App\Exports\ExportStudent;
 use App\Services\User\UserService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -54,13 +55,32 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($school_code, $student_code, $teacher_code)
+    public function index($school_code, $student_code, $teacher_code, Request $request)
     {
         session()->forget('section-attendance');
         if ($this->userService->isListOfStudents($school_code, $student_code)) {
-            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents(), $type = 'Students');
+            $searchData['section_id']= '';
+            $searchData['section_number']= '';
+            $searchData['class_id']= '';
+            $searchData['class_name']= '';
+            $searchData['student_name']= '';
+
+            if($request->section_id){
+                $searchedSection = Section::with('class')->find($request->section_id);
+                $searchData['section_id'] =  $searchedSection->id;
+                $searchData['section_number'] =  $searchedSection->section_number;
+                $searchData['class_id'] =  $searchedSection->class->id;
+                $searchData['class_name'] =  $searchedSection->class->class_number;
+            }
+            if($request->student_name){
+                $searchData['student_name']= $request->student_name;
+            }
+
+            $classes = Myclass::with('sections')->where('school_id', \auth::user()->school_id)->get();
+            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents($request->section_id, $request->student_name), $classes, $searchData,
+             $type = 'Students');
         } elseif ($this->userService->isListOfTeachers($school_code, $teacher_code)) {
-            return $this->userService->indexView('list.new-teacher-list', $this->userService->getTeachers(), $type = 'Teachers');
+            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers(),'','',  $type = 'Teachers');
         } else {
             return view('home');
         }
@@ -204,7 +224,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function storeStudent(CreateUserRequest $request)
     {
         $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date('Y'), $request->file('student_pic')) : null;
         $password = $request->password;
@@ -306,7 +326,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab' => 'tab13'])->with('status', 'Teacher Created');
+        return back()->with('status', 'Teacher Created');
     }
 
     /**
@@ -324,7 +344,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab' => 'tab10'])->with('status', 'Accountant created');
+        return back()->with('status', 'Accountant created');
     }
 
     /**
@@ -342,7 +362,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab' => 'tab11'])->with('status', 'Librarian Created');
+        return back()->with('status', 'Librarian Created');
     }
 
     /**
@@ -459,8 +479,9 @@ class UserController extends Controller
             $tb->name = $request->name;
             $tb->email = (! empty($request->email)) ? $request->email : $tb->email;
             $tb->nationality = (! empty($request->nationality)) ? $request->nationality : $tb->nationality;
+            $tb->section_id = $request->section;
             $tb->phone_number = $request->phone_number;
-            $tb->address = $request->address;
+            $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
             $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
             $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
@@ -481,6 +502,8 @@ class UserController extends Controller
                     $info->group = $request->get('group');
                     $info->birthday = $request->get('birthday');
                     $info->religion = $request->get('religion');
+                    $info->guardian_name = $request->get('guardian_name');
+                    $info->guardian_phone_number = $request->get('guardian_phone_number');
                     $info->father_name = $request->get('father_name');
                     $info->father_phone_number = $request->get('father_phone_number');
                     $info->father_national_id = $request->get('father_national_id');
@@ -572,5 +595,38 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return back()->with('status', 'Student deleted permanently!');
+    }
+
+    public function inactiveAccount() 
+    {
+        return view('inactive-account');
+    }
+    
+    public function bulkAction(Request $request)
+    {
+        $message = '';
+        if ($request->action == 'enable_sms' || $request->action == 'disable_sms') {
+            $status = $request->action == 'enable_sms' ? 1 : 0;
+            StudentInfo::whereIn('user_id', $request->user_ids)->update(['is_sms_enabled' => $status]);
+            $message = $request->action == 'enable_sms' ? 'Message enabled successfully' : 'Message disabled successfully';
+        }
+        elseif ($request->action == 'deactivate') {
+            User::whereIn('id', $request->user_ids)->update(['active' => 0]);
+            $message = 'Student(s) deactivated';
+        }
+        elseif ($request->action == 'activate') {
+            User::whereIn('id', $request->user_ids)->update(['active' => 1]);
+            $message = 'Student(s) activated';
+        }
+        elseif ($request->action == 'delete') {
+            User::whereIn('id', $request->user_ids)->delete();
+            $message = 'Student(s) deleted';
+        }
+
+        return back()->with('status' , $message);
+    }
+
+    public function exportStudent(){
+        return Excel::download(new  ExportStudent, 'students.xls');
     }
 }

@@ -128,10 +128,9 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
-        return (Notification::destroy($id))?response()->json([
-            'status' => 'success'
-        ]):response()->json([
-            'status' => 'error'
-        ]);
+        $message = Notification::findOrFail($id);
+        $message->delete();
+
+        return back()->with('status', 'Message deleted permanently!');
     }
 }

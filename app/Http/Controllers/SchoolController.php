@@ -12,6 +12,7 @@ use App\Gradesystem;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class SchoolController extends Controller
@@ -271,12 +272,38 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $school_id)
     {
-        $school = School::findOrFail($id);
+        $school = School::findOrFail($school_id);
+        $user = Auth::user();
+        $message = '';
         $name = $school->name;
-        $school->delete();
 
-        return redirect('master/home')->with('status', $name.'   deleted');
+        if( Hash::check($request->password, $user->password) ) {
+            $school->delete();
+            $message = $name.' deleted successfully';
+        } else {
+            return back()->with('status', 'Incorrect Password Provided');
+        }
+
+        return redirect()->route('all.school')->with('status', $message);
     }
+
+    /**
+     * update  school status
+     *
+     * @param int $school_id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatusSchool($school_id, $status)
+    {
+        $school = School::findOrFail($school_id);
+        $name = $school->name;
+        $school->is_active = $status;
+        $school->save();
+        $schoolStatus = $status == 0 ? 'deactivated' : 'activated';
+        return back()->with('status', $name.' '.$schoolStatus);
+    }
+
 }

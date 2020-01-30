@@ -19,7 +19,7 @@ Auth::routes(['login' => false]);
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','check.account.status'])->group(function () {
 
     if (config('app.env') != 'production') {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
@@ -53,13 +53,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('create-school', 'SchoolController@store');
         Route::get('school/admin-list/{school_id}', 'SchoolController@show');
         Route::get('school/{school_id}', 'SchoolController@showSchool')->name('school-details');
-        Route::get('school/delete/{school_id}', 'SchoolController@destroy');
+        Route::post('school/delete/{school_id}', 'SchoolController@destroy')->name('school.delete');
         Route::get('school/edit/{school_id}', 'SchoolController@edit');
         Route::post('school/edit/{school_id}', 'SchoolController@update');
         Route::get('new/create-school', 'SchoolController@create');
         Route::get('edit/admin/{id}', 'AdminController@edit');
         Route::post('edit/admin', 'AdminController@update');
-        Route::get('new/all-school', 'MasterHomeController@allSchool');
+        Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
+        Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
     });
 
     //Student role routes
@@ -70,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
         Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
+        Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
     });
 
@@ -339,7 +341,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
 
         Route::prefix('register')->name('register.')->group(function () {
-            Route::post('student', 'UserController@store')->name('student.store');
+            Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant');
             Route::post('librarian', 'UserController@storeLibrarian');
@@ -354,6 +356,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user/activate/{id}', 'UserController@activateUser');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::post('courses/store', 'CourseController@store');
+        Route::post('user/bulk-action', 'UserController@bulkAction')->name('user.bulk.action');
+        Route::get('student/export', 'UserController@exportStudent')->name('student.export');
 
         Route::delete('user/{id}', 'UserController@destroy')->name('delete-user');
 
@@ -371,7 +375,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('attendance-time/edit/{id}', 'SectionMetaController@edit')->name('attendance.time.edit');
         Route::put('attendance-time/update/{id}', 'SectionMetaController@update')->name('attendance.time.update');
         Route::delete('attendance-time/delete/{id}', 'SectionMetaController@destroy')->name('attendance.time.delete');
-        
     });
 
 });
@@ -384,6 +387,8 @@ Route::middleware(['auth'])->group(function () {
             return new App\Mail\SendWelcomeEmailToUser($user, $password);
         });
 });
+
+Route::get('/account-suspended', 'UserController@inactiveAccount')->name('account.suspended');
 
 Route::get('/debug-sentry', function () {
 	throw new Exception('My first Sentry error!');

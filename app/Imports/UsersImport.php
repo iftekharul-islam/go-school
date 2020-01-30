@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
+use DateTime;
 
 class UsersImport implements ToCollection, WithHeadingRow
 {
@@ -25,6 +26,7 @@ class UsersImport implements ToCollection, WithHeadingRow
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+
 
     public function collection(Collection $rows)
     {
@@ -78,7 +80,9 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'version' => $row['version'],
                 'shift' => isset($row['shift']) ? $row['shift'] : '',
                 'group' => isset($row['group']) ? $row['group'] : '',
-                'birthday' => is_string($row['birthday']) ? Carbon::parse((string)$row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
+                'birthday' => is_string($row['birthday']) ? Carbon::createFromFormat('d/m/Y', $row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
+                'guardian_name' => $row['guardian_name'],
+                'guardian_phone_number' => $row['guardian_phone_number'],
                 'father_name' => $row['father_name'],
                 'father_phone_number' => $row['father_phone_number'],
                 'father_national_id' => $row['father_national_id'],
@@ -101,11 +105,8 @@ class UsersImport implements ToCollection, WithHeadingRow
             'address',
             'version',
             'birthday',
-            'father_name',
-            'father_phone_number',
-            'father_occupation',
-            'father_national_id',
-            'mother_name',
+            'guardian_name',
+            'guardian_phone_number',
             'religion',
         ];
         foreach ($validhead as $item)
@@ -120,11 +121,8 @@ class UsersImport implements ToCollection, WithHeadingRow
             && array_key_exists('address', $all)
             && array_key_exists('version', $all)
             && array_key_exists('birthday', $all)
-            && array_key_exists('father_name', $all)
-            && array_key_exists('father_phone_number', $all)
-            && array_key_exists('father_occupation', $all)
-            && array_key_exists('father_national_id', $all)
-            && array_key_exists('mother_name', $all)
+            && array_key_exists('guardian_name', $all)
+            && array_key_exists('guardian_phone_number', $all)
             && array_key_exists('religion', $all));
     }
 
@@ -134,23 +132,20 @@ class UsersImport implements ToCollection, WithHeadingRow
             && isset($row['gender']) && !empty($row['gender'])
             && isset($row['address']) && !empty($row['address'])
             && isset($row['version']) && !empty($row['version'])
-            && isset($row['birthday']) && !empty($row['birthday']) && !$this->datecheck($row['birthday'])
-            && isset($row['father_name']) && !empty($row['father_name'])
-            && isset($row['father_phone_number']) && !empty($row['father_phone_number'])
-            && isset($row['father_occupation']) && !empty($row['father_occupation'])
-            && isset($row['father_national_id']) && !empty($row['father_national_id'])
-            && isset($row['mother_name']) && !empty($row['mother_name'])
+            && isset($row['birthday']) && !empty($row['birthday']) && $this->datecheck($row['birthday']) == true
+            && isset($row['guardian_name']) && !empty($row['guardian_name'])
+            && isset($row['guardian_phone_number']) && !empty($row['guardian_phone_number'])
             && isset($row['religion']) && !empty($row['religion']));
 
 
     }
 
-    public function checkDuplicate($student_name, $father_name, $birthday)
+    public function checkDuplicate($student_name, $guardian_name, $birthday)
     {
-        $birth = is_string($birthday) ? Carbon::parse((string)$birthday) : Date::excelToDateTimeObject($birthday);
+        $birth = is_string($birthday) ? Carbon::createFromFormat('d/m/Y', (string)$birthday) : Date::excelToDateTimeObject($birthday);
         $count = User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
             ->where('users.name', $student_name)
-            ->where('student_infos.father_name', $father_name)
+            ->where('student_infos.guardian_name', $guardian_name)
             ->whereDate('student_infos.birthday', $birth)
             ->count();
         if ($count > 0) {
@@ -160,10 +155,20 @@ class UsersImport implements ToCollection, WithHeadingRow
     }
     public function datecheck($row)
     {
+        $status = false;
         if (preg_match("/[a-z]/i",$row))
         {
-            return true;
+            $status = true;
         }
-        return false;
+        $status = $this->validateDate($row);
+        return $status;
+    }
+    public function validateDate($date, $format = 'd/m/Y')
+    {
+        if(is_string($date)){
+            $d = DateTime::createFromFormat($format, $date);
+            return $d && $d->format($format) === $date;
+        }
+        return true;
     }
 }

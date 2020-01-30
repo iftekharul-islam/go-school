@@ -91,6 +91,49 @@
                                 </div>
 
                             @if($user->role == 'student')
+                                    <div class="col-md-6">
+                                        <div class="false-padding-bottom-form form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+
+                                            <div class="col-md-12">
+                                                <label for="department" class="control-label false-padding-bottom">Department</label>
+                                                <select id="department" class="form-control" name="department_id" >
+                                                    @if (count($departments)) > 0)
+                                                        @foreach ($departments as $d)
+                                                            <option value="{{$d['id']}}">{{$d['department_name']}}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+
+                                                @if ($errors->has('department'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('department') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="false-padding-bottom-form form-group{{ $errors->has('section') ? ' has-error' : '' }}">
+                                            <div class="col-md-12">
+                                                <label for="section"
+                                                       class="control-label false-padding-bottom">Class
+                                                    and Section<label class="text-danger">*</label></label>
+
+                                                <select id="section" class="form-control" name="section" required>
+                                                    @foreach ($sections as $section)
+                                                        <option value="{{ $section->id }}" @if($user->section_id == $section->id) selected @endif>
+                                                            Section: {{ $section->section_number }}
+                                                            Class: {{ $section->class->class_number }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @if ($errors->has('section'))
+                                                    <span class="help-block"><strong>{{ $errors->first('section') }}</strong></span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('student_indentification') ? ' has-error' : '' }}">
 
@@ -158,14 +201,14 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            @if($user->role == 'student')
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="address" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+                                            <label for="address" class="control-label false-padding-bottom">Address</label>
                                             <input id="address" type="text" class="form-control" name="address"
-                                                   value="{{ $user->address }}" required>
+                                                   value="{{ $user->address }}">
 
                                             @if ($errors->has('address'))
                                                 <span class="help-block">
@@ -175,27 +218,25 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="false-padding-bottom-form form-group{{ $errors->has('department') ? ' has-error' : '' }}">
+                            @endif
+                                @if($user->role == 'teacher')
+                                    <div class="col-md-6">
+                                        <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
 
-                                        <div class="col-md-12">
-                                            <label for="department" class="control-label false-padding-bottom">Department</label>
-                                            <select id="department" class="form-control" name="department_id" >
-                                                @if (count($departments)) > 0)
-                                                @foreach ($departments as $d)
-                                                    <option value="{{$d['id']}}">{{$d['department_name']}}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
+                                            <div class="col-md-12">
+                                                <label for="address" class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+                                                <input id="address" type="text" class="form-control" name="address"
+                                                       value="{{ $user->address }}" required>
 
-                                            @if ($errors->has('department'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('department') }}</strong>
+                                                @if ($errors->has('address'))
+                                                    <span class="help-block">
+                                                    <strong>{{ $errors->first('address') }}</strong>
                                                 </span>
-                                            @endif
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @if($user->role == 'teacher')
                                 <div class="col-md-6">
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
@@ -355,12 +396,48 @@
                                 </div>
 
                                 <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
+                                        <label for="guardian_name" class="col-md-6 control-label">Guardian's Name <label class="text-danger">*</label></label>
+
+                                        <div class="col-md-12">
+                                            <input id="guardian_name" type="text" class="form-control" name="guardian_name"
+                                                   value="{{ $user->studentInfo['guardian_name'] }}" required>
+
+                                            @if ($errors->has('guardian_name'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('guardian_name') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
+                                        <label for="guardian_phone_number" class="col-md-8 control-label">Guardian's Phone
+                                            Number <label class="text-danger">*</label></label>
+
+                                        <div class="col-md-12">
+                                            <input id="guardian_phone_number" type="text" class="form-control"
+                                                   name="guardian_phone_number"
+                                                   required
+                                                   value="{{ $user->studentInfo['guardian_phone_number'] }}">
+
+                                            @if ($errors->has('guardian_phone_number'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('guardian_phone_number') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
-                                        <label for="father_name" class="col-md-6 control-label">Father's Name <label class="text-danger">*</label></label>
+                                        <label for="father_name" class="col-md-6 control-label">Father's Name</label>
 
                                         <div class="col-md-12">
                                             <input id="father_name" type="text" class="form-control" name="father_name"
-                                                   value="{{ $user->studentInfo['father_name'] }}" required>
+                                                   value="{{ $user->studentInfo['father_name'] }}">
 
                                             @if ($errors->has('father_name'))
                                                 <span class="help-block">
@@ -373,12 +450,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                         <label for="father_phone_number" class="col-md-8 control-label">Father's Phone
-                                            Number <label class="text-danger">*</label></label>
+                                            Number</label>
 
                                         <div class="col-md-12">
                                             <input id="father_phone_number" type="text" class="form-control"
                                                    name="father_phone_number"
-                                                   required
                                                    value="{{ $user->studentInfo['father_phone_number'] }}">
 
                                             @if ($errors->has('father_phone_number'))
@@ -468,9 +544,9 @@
                                     <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="mother_name" class="control-label false-padding-bottom">Mother's Name <label class="text-danger">*</label></label>
+                                            <label for="mother_name" class="control-label false-padding-bottom">Mother's Name</label>
                                             <input id="mother_name" type="text" class="form-control" name="mother_name"
-                                                   value="{{ $user->studentInfo['mother_name'] }}" required>
+                                                   value="{{ $user->studentInfo['mother_name'] }}">
 
                                             @if ($errors->has('mother_name'))
                                                 <span class="help-block">

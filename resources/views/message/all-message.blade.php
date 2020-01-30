@@ -43,7 +43,7 @@
                             <li class="notification">
                                 <div class="media">
                                     <div class="media-left">
-                                        <div class="media-object">
+                                        <div class="media-object mt-5">
                                             @if(!empty($message->teacher->pic_path))
                                                 <img src="{{url($message->teacher->pic_path)}}" data-src="{{url($message->teacher->pic_path)}}" style="border-radius: 50%;" width="50px" height="50px">
                                             @else
@@ -55,7 +55,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="media-body">
+                                    <div class="media-body border p-4 mt-5">
                                         <strong class="notification-title"><a href="{{url('user/'.$message->teacher->student_code)}}">
                                                 {{$message->teacher->name}}</a> . {{$message->teacher->department->department_name ?? null}}
                                             @if($message->active == 1)
@@ -63,6 +63,12 @@
                                         @else
                                             <span class="label label-default">Seen</span></strong>
                                         @endif
+
+                                        <button class="btn btn-danger btn-lg float-right text-white" type="button" onclick="deleteMsg({{ $message->id }})"><i class="fas fa-trash-alt"></i></button>
+                                        <form id="delete-form-{{ $message->id }}" action="{{ route('message.delete', $message->id) }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+                                        </form>
                                         <p class="notification-desc">{!!$message->message!!}</p>
 
                                         <div class="notification-meta">
@@ -84,3 +90,22 @@
     </div>
     <!-- Student Attendence Area End Here -->
 @endsection
+
+@push('customjs')
+    <script type="text/javascript">
+        function deleteMsg(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this user!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                    }
+                });
+        }
+    </script>
+@endpush

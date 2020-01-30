@@ -131,11 +131,6 @@
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="flaticon-multiple-users-silhouette"></i><span>Teachers</span></a>
                         <ul class="nav sub-group-menu {{ $teacher == 1 ? 'sub-group-active' : ''}}">
-                            <li class="nav-item">
-                                <a href="{{url('users/' .Auth::user()->school->code. '/0/1?teacher=1')}}"
-                                   class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
-                                    <i class="fas fa-angle-right"></i><span>All Teachers</span></a>
-                            </li>
                             @if($role == 'admin')
                                 <li class="nav-item">
                                     <a href="{{ route('new.teacher') }}"
@@ -143,11 +138,23 @@
                                         <i class="fas fa-angle-right"></i><span>Add Teacher</span></a>
                                 </li>
                             @endif
+                            <li class="nav-item">
+                                <a href="{{url('users/' .Auth::user()->school->code. '/0/1?teacher=1')}}"
+                                   class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
+                                    <i class="fas fa-angle-right"></i><span>All Teachers</span></a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="flaticon-classmates"></i><span>Students</span></a>
                         <ul class="nav sub-group-menu {{ $std == 1 ? 'sub-group-active' : '' }}">
+                            @if($role == 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('admin/new-student')) ? 'menu-active' : '' }}"
+                                       href="{{ url('admin/new-student') }}">
+                                        <i class="fas fa-angle-right"></i><span>Add Student</span></a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}"
                                    href="{{ url('users/' .Auth::user()->school->code. '/1/0?student=1') }}">
@@ -158,11 +165,6 @@
                                     <a class="nav-link {{ (request()->is('admin/student-message')) ? 'menu-active' : '' }}"
                                        href="{{ url('admin/student-message') }}">
                                         <i class="fas fa-angle-right"></i><span>Message Student</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('admin/new-student')) ? 'menu-active' : '' }}"
-                                       href="{{ url('admin/new-student') }}">
-                                        <i class="fas fa-angle-right"></i><span>Add Student</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('admin/import-student')) ? 'menu-active' : '' }}"
@@ -179,14 +181,14 @@
                         <a href="#" class="nav-link"><i class="fa fa-building"></i><span>Department</span></a>
                         <ul class="nav sub-group-menu {{ $department == 1 ? 'sub-group-active' : ''}}">
                             <li class="nav-item">
-                                <a href="{{ route('all.department') }}"
-                                   class="nav-link {{ (request()->routeIs('all.department')) ? 'menu-active' : '' }}">
-                                    <i class="fas fa-angle-right"></i><span>All Department</span></a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ route('create.department') }}"
                                    class="nav-link {{ (request()->routeIs('create.department')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>Add Department</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('all.department') }}"
+                                   class="nav-link {{ (request()->routeIs('all.department')) ? 'menu-active' : '' }}">
+                                    <i class="fas fa-angle-right"></i><span>All Department</span></a>
                             </li>
                         </ul>
                     </li>
@@ -246,13 +248,13 @@
                         <a href="#" class="nav-link"><i class="fas fa-poll-h"></i><span>Manage GPA</span></a>
                         <ul class="nav sub-group-menu {{ $gpa == 1 ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
+                                <a class="nav-link {{ (request()->is('admin/gpa/create-gpa')) ? 'menu-active' : '' }}"
+                                   href="{{ url('admin/gpa/create-gpa') }}"><i class="fas fa-angle-right"></i><span>Add New Grade System</span></a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link {{ (request()->is('admin/gpa/all-gpa')) ? 'menu-active' : '' }}"
                                    href="{{ url('admin/gpa/all-gpa') }}"><i
                                         class="fas fa-angle-right"></i><span>All GPA</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('admin/gpa/create-gpa')) ? 'menu-active' : '' }}"
-                                   href="{{ url('admin/gpa/create-gpa') }}"><i class="fas fa-angle-right"></i><span>Add New Grade System</span></a>
                             </li>
                         </ul>
                     </li>
@@ -346,7 +348,7 @@
                                 <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
                                     <li class="nav-item">
                                         <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"
-                                    href="{{ url($role.'/fee-types') }}">
+                                        href="{{ url($role.'/fee-types') }}">
                                         <i class="fas fa-angle-right"></i><span>Fee Types</span></a>
                                     </li>
                                     <li class="nav-item">
