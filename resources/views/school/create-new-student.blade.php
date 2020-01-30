@@ -769,11 +769,8 @@
 
             $('.student-name').focusout(function() {
                 let inputName = $('.student-name').val();
-                console.log('hello ', inputName);
                 if (inputName) {
                     let names = inputName.split(' ');
-
-                    console.log('names ', names);
 
                     let code = {!! $code !!};
 
@@ -785,7 +782,6 @@
 
                     $('.student-password, .confirm-password').val(username.toLowerCase());
 
-                    console.log('lastname ', lastName);
                 }
             });
 
