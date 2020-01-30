@@ -105,9 +105,10 @@
                                         <label for="password"
                                                class="control-label false-padding-bottom">Password<label
                                                 class="text-danger">*</label></label>
+                                        <button class="btn btn-primary btn-sm remove-pass float-right">Create Password</button>
                                         <input id="password" type="password"
-                                               class="form-control" name="password"
-                                               required>
+                                               class="form-control student-password" name="password"
+                                               required readonly>
 
                                         @if ($errors->has('password'))
                                             <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
@@ -125,8 +126,8 @@
                                                 class="text-danger">*</label></label>
 
                                         <input id="password-confirm" type="password"
-                                               class="form-control"
-                                               name="password_confirmation" required>
+                                               class="form-control student-password"
+                                               name="password_confirmation" required readonly>
                                     </div>
                                 </div>
                             </div>
@@ -768,14 +769,10 @@
 
             $('.student-name').focusout(function() {
                 let inputName = $('.student-name').val();
-                console.log('hello ', inputName);
                 if (inputName) {
                     let names = inputName.split(' ');
 
-                    console.log('names ', names);
-
                     let code = {!! $code !!};
-                    console.log('code', code);
 
                     let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
 
@@ -783,21 +780,30 @@
 
                     $('.student-username').val(username.toLowerCase());
 
-                    console.log('lastname ', lastName);
+                    $('.student-password, .confirm-password').val(username.toLowerCase());
+
                 }
             });
 
             $('.email-enable-button').click(function(event) {
                 event.preventDefault();
-                console.log('hello');
+
                 $('.student-username').remove();
                 $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
                            name="email" value="" placeholder="Enter email address"
                            required>`);
                 $('.email-enable-button').remove();
+
+                $('.student-username').remove();
             });
 
+            $('.remove-pass').click(function(event) {
+                event.preventDefault();
 
+                $('.student-password').val('').removeAttr('readonly');
+
+                $('.remove-pass').remove();
+            });
 
         });
     </script>
