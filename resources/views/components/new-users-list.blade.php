@@ -7,7 +7,9 @@
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">Inactive Teachers</a>
             @elseif($user->role == 'student')
                 <i class="fas fa-users mr-2 "></i>   All Students
+                <a class="btn btn-lg btn-secondary float-right font-bold ml-2" href="{{ route('student.export') }}">Export Students</a>
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
+                
             @elseif($user->role == 'accountant')
                 <i class="fas fa-users mr-2 "></i>  Accountants
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.accountants') }}">Inactive Accountants</a>
@@ -56,7 +58,7 @@
         @endif
         <form method='GET' action="">
         <div class="row border-bottom mb-3">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="Name" />
             </div>
             <div class="form-group col-md-3">
@@ -90,7 +92,7 @@
                             <option value="" disabled selected>Bulk Action</option>
                             <option value="enable_sms">Enable SMS</option>
                             <option value="disable_sms">Disable SMS</option>
-                            <option value="deactivate">Deactivate</option>
+                            <option value="deactivate">Inactive</option>
                         </select>
                     </div>
                 </div>
