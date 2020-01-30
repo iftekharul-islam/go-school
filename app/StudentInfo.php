@@ -29,7 +29,9 @@ class StudentInfo extends Model
         'user_id',
         'shift',
         'roll_number',
-        'student_indentification'
+        'student_indentification',
+        'guardian_name',
+        'guardian_phone_number'
     ];
 
     /**
