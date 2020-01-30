@@ -204,7 +204,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function storeStudent(CreateUserRequest $request)
     {
         $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date('Y'), $request->file('student_pic')) : null;
         $password = $request->password;
@@ -306,7 +306,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab' => 'tab13'])->with('status', 'Teacher Created');
+        return back()->with('status', 'Teacher Created');
     }
 
     /**
@@ -324,7 +324,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab' => 'tab10'])->with('status', 'Accountant created');
+        return back()->with('status', 'Accountant created');
     }
 
     /**
@@ -342,7 +342,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->withInput(['tab' => 'tab11'])->with('status', 'Librarian Created');
+        return back()->with('status', 'Librarian Created');
     }
 
     /**
@@ -459,8 +459,9 @@ class UserController extends Controller
             $tb->name = $request->name;
             $tb->email = (! empty($request->email)) ? $request->email : $tb->email;
             $tb->nationality = (! empty($request->nationality)) ? $request->nationality : $tb->nationality;
+            $tb->section_id = $request->section;
             $tb->phone_number = $request->phone_number;
-            $tb->address = $request->address;
+            $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
             $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
             $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
@@ -481,6 +482,8 @@ class UserController extends Controller
                     $info->group = $request->get('group');
                     $info->birthday = $request->get('birthday');
                     $info->religion = $request->get('religion');
+                    $info->guardian_name = $request->get('guardian_name');
+                    $info->guardian_phone_number = $request->get('guardian_phone_number');
                     $info->father_name = $request->get('father_name');
                     $info->father_phone_number = $request->get('father_phone_number');
                     $info->father_national_id = $request->get('father_national_id');

@@ -340,7 +340,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
 
         Route::prefix('register')->name('register.')->group(function () {
-            Route::post('student', 'UserController@store')->name('student.store');
+            Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant');
             Route::post('librarian', 'UserController@storeLibrarian');
