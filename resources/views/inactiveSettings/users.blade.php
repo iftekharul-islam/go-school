@@ -29,6 +29,7 @@
                     {{ session('error-status') }}
                 </div>
             @endif
+             @if (count($users) > 0)
             <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-2 col-sm-12">
@@ -68,6 +69,13 @@
                     </tbody>
                 </table>
             </form>
+            @else 
+                 <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <p class="text-center">No Data Found</p>
+                </div>
+            </div>
+            @endif
             </div>
         </div>
 
