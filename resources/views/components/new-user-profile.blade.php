@@ -266,7 +266,7 @@
             </div>
         </div>
     <div class="col-md-12">
-        <button  type="button" class="btn btn-secondary float-right mb-3 mt-2" id="get" ><i class="fa fa-print"></i> Print</button>
+        <button  type="button" class="btn btn-secondary float-right mb-3 mt-2" onclick="window.print()" ><i class="fa fa-print"></i> Print</button>
     </div>
     @endif
 </div>

@@ -13,6 +13,9 @@
             #scrollUp{
                 display: none;
             }
+            .copyright{
+                display: none;
+            }
             .user-profile-view {
                 display: none;
             }
@@ -71,7 +74,7 @@
                                             @endif
                                             <h2 class="mb-0">{{ $school->school['name'] ? $school->school['name'] : 'Sample School admit card'}}</h2>
                                             <small>{{ $school->school['school_address'] ? $school->school['school_address'] : '' }}</small>
-                                            <h2 class="mt-5 ">Student Information</h2>
+                                            <h3 class="mt-5 ">Student Information</h3>
                                                 <hr>
                                         </div>
                                     </div>
@@ -281,39 +284,3 @@
         </div>
     </div>
 @endsection
-@push('customjs')
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#takeImg')
-                        .attr('src', e.target.result)
-                        .width(100)
-                        .height(100);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        $("#get").click(function () {
-
-            var newSrc = $('.img1 img').attr('src');
-
-            $('.img2 img').attr("src", newSrc);
-            window.print();
-        });
-        $( document ).ready(function() {
-            var date = new Date();
-            var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
-            var optSimple1 = {
-                format: 'mm-dd-yyyy',
-                todayHighlight: true,
-                orientation: 'bottom right',
-                autoclose: true,
-                container: '#sandbox'
-            };
-        });
-    </script>
-@endpush
