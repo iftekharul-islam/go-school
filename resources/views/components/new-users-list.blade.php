@@ -113,6 +113,7 @@
                         <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
                         <th>Code</th>
                         <th>Full Name</th>
+                        <th>Roll No</th>
                         @foreach ($users as $user)
                             @if($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
@@ -160,6 +161,7 @@
                             <td>
                                 <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
                             </td>
+                            <td>{{ $user->studentInfo['roll_number'] }}</td>
                             @if($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
                                     <td>{{ $user->studentInfo['session'] }}</td>
