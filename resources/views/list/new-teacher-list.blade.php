@@ -8,7 +8,7 @@
                 <div class="panel panel-default">
                     @if(count($users) > 0)
                         <div class="panel-body">
-                            @component('components.new-users-list',['users'=>$users])
+                            @component('components.new-users-list',['users'=>$users, 'classes' => $classes, 'type' => $type])
                             @endcomponent
                         </div>
                     @else

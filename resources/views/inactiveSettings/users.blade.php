@@ -100,6 +100,7 @@
                         submitForm('userBulkAction');
                     } else {
                         showAlert();
+                        $('#action').prop('selectedIndex',0);
                     }
                 });
             });

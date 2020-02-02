@@ -34,12 +34,13 @@ class UserService
         return !empty($school_code) && 1 == $teacher_code;
     }
 
-    public function indexView($view, $users, $classes, $searchData)
+    public function indexView($view, $users, $classes, $searchData, $type)
     {
         return view($view, [
             'users' => $users,
             'classes' => $classes,
-            'searchData' => $searchData
+            'searchData' => $searchData,
+            'type' => $type
         ]);
     }
 
@@ -169,7 +170,7 @@ class UserService
             ->where('role', 'teacher')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(40);
 
         $teacherFilterByDepartments = $this->user->with(['section', 'school'])
             ->where('school_id', auth()->user()->school_id)
