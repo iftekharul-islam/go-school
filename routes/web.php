@@ -375,6 +375,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendance-time/edit/{id}', 'SectionMetaController@edit')->name('attendance.time.edit');
         Route::put('attendance-time/update/{id}', 'SectionMetaController@update')->name('attendance.time.update');
         Route::delete('attendance-time/delete/{id}', 'SectionMetaController@destroy')->name('attendance.time.delete');
+        
+        Route::get('shifts', 'ShiftController@index')->name('shifts');
+        Route::get('shift/create/', 'ShiftController@create')->name('shift.create');
+        Route::post('shift/store/', 'ShiftController@store')->name('shift.store');
+        Route::get('shift/edit/{id}', 'ShiftController@edit')->name('shift.edit');
+        Route::post('shift/update/{id}', 'ShiftController@update')->name('shift.update');
+        Route::delete('shift/delete/{id}', 'ShiftController@destroy')->name('shift.delete');
     });
 
 });
