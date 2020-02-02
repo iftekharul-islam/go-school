@@ -57,14 +57,16 @@ class UserController extends Controller
      */
     public function index($school_code, $student_code, $teacher_code, Request $request)
     {
-        session()->forget('section-attendance');
-        if ($this->userService->isListOfStudents($school_code, $student_code)) {
-            $searchData['section_id']= '';
-            $searchData['section_number']= '';
-            $searchData['class_id']= '';
-            $searchData['class_name']= '';
-            $searchData['student_name']= '';
+        $searchData['section_id']= '';
+        $searchData['section_number']= '';
+        $searchData['class_id']= '';
+        $searchData['class_name']= '';
+        $searchData['student_name']= '';
 
+        session()->forget('section-attendance');
+        $classes = Myclass::with('sections')->where('school_id', \auth::user()->school_id)->get();
+
+        if ($this->userService->isListOfStudents($school_code, $student_code)) {
             if($request->section_id){
                 $searchedSection = Section::with('class')->find($request->section_id);
                 $searchData['section_id'] =  $searchedSection->id;
@@ -72,15 +74,15 @@ class UserController extends Controller
                 $searchData['class_id'] =  $searchedSection->class->id;
                 $searchData['class_name'] =  $searchedSection->class->class_number;
             }
+
             if($request->student_name){
                 $searchData['student_name']= $request->student_name;
             }
 
-            $classes = Myclass::with('sections')->where('school_id', \auth::user()->school_id)->get();
             return $this->userService->indexView('list.new-student-list', $this->userService->getStudents($request->section_id, $request->student_name), $classes, $searchData,
              $type = 'Students');
         } elseif ($this->userService->isListOfTeachers($school_code, $teacher_code)) {
-            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers(),'','',  $type = 'Teachers');
+            return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers(), $classes,'',  $type = 'Teachers');
         } else {
             return view('home');
         }
@@ -375,8 +377,10 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
+        $school = Auth::user();
+        $school->load('school');
 
-        return view('profile.user-profile', compact('user'));
+        return view('profile.user-profile', compact('user', 'school'));
     }
 
     public function editUserInfo($user_code)
@@ -391,8 +395,6 @@ class UserController extends Controller
 
     public function updateUserInfo(Request $request, $user_code)
     {
-
-        // return $request->all();
         $tb = $this->user->findOrFail($user_code);
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : $tb->pic_path;
         $image_path = 'storage/'.$path;
@@ -416,7 +418,6 @@ class UserController extends Controller
             $info->user_id = auth()->user()->id;
             $info->save();
         }
-
         return back()->with('status', $request->name.' Information Updated');
 
     }

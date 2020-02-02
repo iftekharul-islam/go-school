@@ -14,7 +14,7 @@
             <div class="col-md-12" id="main-container">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        @component('components.new-users-list',['users'=>$users, 'classes' => $classes, 'searchData' => $searchData])
+                        @component('components.new-users-list',['users'=>$users, 'classes' => $classes, 'searchData' => $searchData, 'type' => $type])
                         @endcomponent
                     </div>
                 </div>

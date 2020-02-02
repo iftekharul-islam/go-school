@@ -1,7 +1,6 @@
-<div class="">
-    <div class="row">
+ <div class="row">
         <div class="col-md-4">
-            <div class="item-img-round">
+            <div class="item-img-round mt-5">
                 @if(!empty($user->pic_path))
                     <img src="{{url($user->pic_path)}}" data-src="{{url($user->pic_path)}}" class="" id="my-profile"
                          alt="Profile Picture" width="100%">
@@ -16,7 +15,6 @@
                 @endif
             </div>
             <div class="item-content">
-
             @if($user->role == "student")
 
                 <!-- <td>Student's Name:</td> -->
@@ -194,80 +192,81 @@
         </div>
     </div>
     <div class="row">
-            <div class="col-md-6">
-                <div class="table-responsive border-right">
-                    <table class="text-wrap table-borderless table">
-                        <th>Guardian's Information:</th>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Name:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['guardian_name']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
-                            <td>{{$user->studentInfo['guardian_phone_number']}}</td>
-                        </tr>
-                        <th>Father's Information:</th>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Name:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['father_name']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
-                            <td>{{$user->studentInfo['father_phone_number']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-dark-medium">National ID:</td>
-                            <td>{{$user->studentInfo['father_national_id']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Occupation:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['father_occupation']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Annual Income:</td>
-                            <td>{{$user->studentInfo['father_annual_income']}}</td>
-                        </tr>
-                    </table>
-                </div>
+        <div class="col-md-6">
+            <div class="table-responsive border-right">
+                <table class="text-wrap table-borderless table">
+                    <th>Guardian's Information:</th>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Name:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['guardian_name']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
+                        <td>{{$user->studentInfo['guardian_phone_number']}}</td>
+                    </tr>
+                    <th>Father's Information:</th>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Name:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['father_name']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
+                        <td>{{$user->studentInfo['father_phone_number']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-dark-medium">National ID:</td>
+                        <td>{{$user->studentInfo['father_national_id']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Occupation:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['father_occupation']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Annual Income:</td>
+                        <td>{{$user->studentInfo['father_annual_income']}}</td>
+                    </tr>
+                </table>
             </div>
-            <div class="col-md-6 ">
-                <div class="table-responsive">
-                    <table class="text-wrap table-borderless table">
-                        <tr>
-                            <td class="font-medium text-dark-medium">Designation:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['father_designation']}}</td>
-                        </tr>
-                        <th>Mother's Information:</th>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Name:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['mother_name']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
-                            <td>{{$user->studentInfo['mother_phone_number']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-nowrap text-dark-medium">National ID:</td>
-                            <td class="">{{$user->studentInfo['mother_national_id']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Occupation:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['mother_occupation']}}</td>
+        </div>
+        <div class="col-md-6 ">
+            <div class="table-responsive">
+                <table class="text-wrap table-borderless table">
+                    <tr>
+                        <td class="font-medium text-dark-medium">Designation:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['father_designation']}}</td>
+                    </tr>
+                    <th>Mother's Information:</th>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Name:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['mother_name']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-nowrap text-dark-medium">Phone Number:</td>
+                        <td>{{$user->studentInfo['mother_phone_number']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-nowrap text-dark-medium">National ID:</td>
+                        <td class="">{{$user->studentInfo['mother_national_id']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Occupation:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['mother_occupation']}}</td>
 
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-nowrap text-dark-medium">Annual Income:
-                            </td>
-                            <td>{{$user->studentInfo['mother_annual_income']}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-medium text-dark-medium">Designation:</td>
-                            <td class="text-capitalize">{{$user->studentInfo['mother_designation']}}</td>
-                        </tr>
-                    </table>
-                </div>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-nowrap text-dark-medium">Annual Income:
+                        </td>
+                        <td>{{$user->studentInfo['mother_annual_income']}}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-medium text-dark-medium">Designation:</td>
+                        <td class="text-capitalize">{{$user->studentInfo['mother_designation']}}</td>
+                    </tr>
+                </table>
             </div>
+        </div>
+    <div class="col-md-12">
+        <button  type="button" class="btn btn-secondary float-right mb-3 mt-2" onclick="window.print()" ><i class="fa fa-print"></i> Print</button>
     </div>
     @endif
-
 </div>
