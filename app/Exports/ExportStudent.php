@@ -29,7 +29,7 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
             isset($student['gender']) ?  $student['gender']  : '',
             isset($student['section']) ? $student->section['section_number'] : '',
             isset($student['section']) ? $student->section->class['class_number'] : '',
-            isset($student['section']) ? $student['roll_number'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['roll_number'] : '',
             isset($student['blood_group']) ? $student['blood_group'] : '',
             isset($student['address']) ? $student['address'] : '',
             isset($student['studentInfo']) ? $student->studentInfo['father_name'] : '',
