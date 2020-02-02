@@ -45,7 +45,7 @@ class UsersImport implements ToCollection, WithHeadingRow
                 continue;
             }
 
-            if ($this->checkDuplicate($row['name'], $row['father_name'], $row['birthday'])) {
+            if ($this->checkDuplicate($row['name'], $row['guardian_name'], $row['birthday'])) {
                 session()->put('duplicateWarning', true);
                 continue;
             }
