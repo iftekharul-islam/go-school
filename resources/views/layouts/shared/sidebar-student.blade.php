@@ -143,6 +143,23 @@
                                    class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
                                     <i class="fas fa-angle-right"></i><span>All Teachers</span></a>
                             </li>
+                            @if($role == 'admin')
+                                <li class="nav-item sidebar-nav-item second-lbl-menu">
+                                    <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>Shift</span></a>
+                                    <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('shift.create')) ? 'menu-active' : '' }}"
+                                            href="{{ route('shift.create') }}">
+                                            <i class="fas fa-angle-right"></i><span>Add Shift</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link {{ (request()->is('shifts')) ? 'menu-active' : '' }}"
+                                            href="{{ route('shifts') }}">
+                                                <i class="fas fa-angle-right"></i><span> All Shifts</span></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
