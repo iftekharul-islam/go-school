@@ -58,14 +58,12 @@
                                                 <option value="" >Select Class with Section</option>
                                             @foreach ($studentSections as $section)
                                                 <option class="sec-id" value="{{$section->id}}">
-                                                    Section: {{$section->section_number}}
                                                     Class:
-                                                    {{$section->class->class_number}}</option>
+                                                    {{$section->class->class_number}}
+                                                    Section: {{$section->section_number}}
+                                                </option>
                                             @endforeach
                                         </select>
-                                        @php
-                                            $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
-                                        @endphp
                                         @if ($errors->has('section'))
                                             <span class="help-block"><strong>{{ $errors->first('section') }}</strong></span>
                                         @endif
