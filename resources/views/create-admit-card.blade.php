@@ -104,80 +104,80 @@
                 </div>
             </div>
         </div>
-        <div class="comtainer example-print">
+        <div class="container example-print">
             <div class="card-body">
                 <div class="page-header text-center">
-                        <div class="fancy4">
-                            @if(!empty($school->school->logo))
-                                <div class="school-logo">
-                                    <img class="logo topbar-logo-mg float-left" src="{{ asset($school->logo) }}">
-                                </div>
-                            @else
-                                <div class="header-logo">
-                                    <img class="" src="{{ asset('/logos/header-logo.png') }}" alt="logo">
-                                </div>
-                            @endif
-                            <h2 class="mb-0">{{ $school->school['name'] ? $school->school['name'] : 'Sample School admit card'}}</h2>
-                            <small>{{ $school->school['school_address'] ? $school->school['school_address'] : '' }}</small>
-                            <h2 class="mt-5 ">Admit card</h2>
-                        </div>
+                    <div class="fancy4">
+                        @if(!empty($school->school->logo))
+                            <div class="school-logo">
+                                <img class="logo topbar-logo-mg float-left" src="{{ asset($school->logo) }}">
+                            </div>
+                        @else
+                            <div class="header-logo">
+                                <img class="" src="{{ asset('/logos/header-logo.png') }}" alt="logo">
+                            </div>
+                        @endif
+                        <h2 class="mb-0">{{ $school->school['name'] ? $school->school['name'] : 'Sample School admit card'}}</h2>
+                        <small>{{ $school->school['school_address'] ? $school->school['school_address'] : '' }}</small>
+                        <h2 class="mt-5 ">Admit card</h2>
                     </div>
-                    <div class="">
-                        <div class="col-md-12">
-                            <div class="row border">
-                                <div class="col-md-8">
-                                    <div class=" table-responsive">
-                                        <table class="text-wrap table-borderless table offset-2 mt-5">
-                                            <tr class="">
-                                                <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
-                                                <td><label for="" id="roll"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
-                                                <td><label for="" id="class"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Shift</td>
-                                                <td><label for="" id="shift"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Student name</td>
-                                                <td><label for="" id="name"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Mother's name</td>
-                                                <td><label for="" id="mother"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Father's name</td>
-                                                <td><label for="" id="father"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Exam Date</td>
-                                                <td><label for="" id="exam"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Exam type</td>
-                                                <td><label for="" id="type"></label></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-medium text-dark-medium text-nowrap">Exam Duration</td>
-                                                <td><label for="" id="duration"></label></td>
-                                            </tr>
+                </div>
+                <div class="">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class=" table-responsive">
+                                    <table class="text-wrap table-borderless table offset-2 mt-5">
+                                        <tr class="">
+                                            <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
+                                            <td><label for="" id="roll"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
+                                            <td><label for="" id="class"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Shift</td>
+                                            <td><label for="" id="shift"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Student name</td>
+                                            <td><label for="" id="name"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Mother's name</td>
+                                            <td><label for="" id="mother"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Father's name</td>
+                                            <td><label for="" id="father"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Exam Date</td>
+                                            <td><label for="" id="exam"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Exam type</td>
+                                            <td><label for="" id="type"></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-medium text-dark-medium text-nowrap">Exam Duration</td>
+                                            <td><label for="" id="duration"></label></td>
+                                        </tr>
 
-                                        </table>
-                                    </div>
+                                    </table>
                                 </div>
-                                <div class="col-md-4 img2 mt-5">
-                                    <img src="{{asset('template/img/user-default.png')}}"
-                                         class="img-thumbnail" width="80%">
-                                </div>
-                                <div class="col-md-4 text-center float-right offset-8">
-                                    <hr><strong>Signature of Principal</strong>
-                                </div>
+                            </div>
+                            <div class="col-md-4 img2 mt-5">
+                                <img src="{{asset('template/img/user-default.png')}}"
+                                     class="img-thumbnail" width="80%">
+                            </div>
+                            <div class="col-md-4 text-center float-right offset-8">
+                                <hr><strong>Signature of Principal</strong>
                             </div>
                         </div>
                     </div>
+                </div>
                 <div class="border mt-5">
                     <h4> General Instruction: </h4>
                     <ol class="ml-5" >
