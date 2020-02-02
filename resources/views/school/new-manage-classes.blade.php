@@ -48,8 +48,11 @@
                                                                 <li class="list-group-item">
                                                                     Section {{$section->section_number}}
                                                                     &nbsp
-                                                                    <a class="btn btn-lg btn-primary mr-2" id="edit-section-btn-{{$section->id}}" data-toggle="collapse" href="#collapseForEditSection{{$section->id}}"
-   aria-expanded="false" aria-controls="collapseForEditSection{{$section->id}}"><i class="far fa-edit"></i> Edit</a>
+                                                                    <a class="btn btn-lg btn-primary mr-2" id="edit-section-btn-{{$section->id}}"
+                                                                        data-toggle="collapse" href="#collapseForEditSection{{$section->id}}"
+                                                                        aria-expanded="false" aria-controls="collapseForEditSection{{$section->id}}">
+                                                                        <i class="far fa-edit"></i> Edit
+                                                                    </a>
                                                                     &nbsp
                                                                     <a class="btn btn-lg btn-warning mr-2"
                                                                        href="{{url('admin/courses/0/'.$section->id)}}">View
@@ -87,8 +90,6 @@
                                                             @endif
                                                         @endforeach
                                                     </ul>
-
-                                                   
 
                                                     @include('layouts.master.create-section-form')
                                                 </div>
