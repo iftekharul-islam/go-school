@@ -45,17 +45,18 @@ class UsersImport implements ToCollection, WithHeadingRow
                 continue;
             }
 
-            if ($this->checkDuplicate($row['name'], $row['father_name'], $row['birthday'])) {
+            if ($this->checkDuplicate($row['name'], $row['guardian_name'], $row['birthday'])) {
                 session()->put('duplicateWarning', true);
                 continue;
             }
 
-            $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+            $code = auth()->user()->school_id . date('y')
+                . substr(number_format(time() * mt_rand(), 0, '', ''), -4)
+                . substr(mt_rand(), -1);
             $name = explode(" ", $row['name']);
 
             $username = array_last($name) . $code;
             $pass = $username;
-
 
             $user = User::create([
                 'name' => $row['name'],
