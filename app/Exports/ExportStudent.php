@@ -14,30 +14,32 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
     */
     public function collection()
     {
-        $students = User::with(['studentInfo', 'section.class'])->where('role', 'student')->get();
+        $students = User::with(['studentInfo', 'section.class'])
+            ->where('role', 'student')
+            ->where('school_id', \auth::user()->school_id)
+            ->get();
         return $students;
     }
 
-    public function map($student): array
-    {
+    public function map($student): array {
         return [
-            $student->student_code,
-            $student->name,
-            $student->email,
-            $student->gender,
-            $student->section->section_number,
-            $student->section->class->class_number,
-            $student->roll_number,
-            $student->blood_group,
-            $student->address,
-            $student->studentInfo->father_name,
-            $student->studentInfo->father_phone_number,
-            $student->studentInfo->father_national_id,
-            $student->studentInfo->father_occupation,
-            $student->studentInfo->mother_name,
-            $student->studentInfo->mother_occupation,
-            $student->studentInfo->mother_phone_number,
-            $student->studentInfo->mother_national_id,
+            isset($student['student_code']) ? $student['student_code']  : '',
+            isset($student['name']) ?  $student['name'] : '',
+            isset($student['email']) ?  $student['email']  : '',
+            isset($student['gender']) ?  $student['gender']  : '',
+            isset($student['section']) ? $student->section['section_number'] : '',
+            isset($student['section']) ? $student->section->class['class_number'] : '',
+            isset($student['section']) ? $student['roll_number'] : '',
+            isset($student['blood_group']) ? $student['blood_group'] : '',
+            isset($student['address']) ? $student['address'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['father_name'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['father_phone_number'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['father_national_id'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['father_occupation'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['mother_name'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['mother_occupation'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['mother_phone_number'] : '',
+            isset($student['studentInfo']) ? $student->studentInfo['mother_national_id'] : '',
         ];
     }
 

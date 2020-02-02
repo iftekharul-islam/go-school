@@ -49,19 +49,18 @@
             @endforeach</li>
     </ul>
 </div>
-
+ @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@elseif(session('error-status'))
+    <div class="alert alert-success">
+        {{ session('error-status') }}
+    </div>
+@endif
 <div class="card height-auto">
     <div class="card-body">
-
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @elseif(session('error-status'))
-            <div class="alert alert-success">
-                {{ session('error-status') }}
-            </div>
-        @endif
+        @if($type == 'Students')
         <form method='GET' action="">
         <div class="row border-bottom mb-3">
             <div class="form-group col-md-4">
@@ -89,6 +88,8 @@
             </div>
         </div>
         </form>
+        @endif
+        
          @if(count($users) > 0)
             <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
@@ -96,8 +97,10 @@
                     <div class="form-group">
                         <select id='action' name="action" class="form-control form-control-sm">
                             <option value="" disabled selected>Bulk Action</option>
+                            @if($type == 'Students')
                             <option value="enable_sms">Enable SMS</option>
                             <option value="disable_sms">Disable SMS</option>
+                            @endif
                             <option value="deactivate">Inactive</option>
                         </select>
                     </div>
@@ -117,6 +120,7 @@
                                     <th>Version</th>
                                     <th>Class</th>
                                     <th>Section</th>
+                                    <th>SMS</th>
                                 @endif
                             @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                                 @if (!Session::has('section-attendance'))
@@ -158,10 +162,16 @@
                             </td>
                             @if($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
-                                    <td>{{$user->studentInfo['session']}}</td>
-                                    <td>{{ucfirst($user->studentInfo['version'])}}</td>
-                                    <td>{{$user->section['class']['class_number']}} {{!empty($user->group)? '- '.$user->group:''}}</td>
-                                    <td style="white-space: nowrap;">{{$user->section['section_number']}}
+                                    <td>{{ $user->studentInfo['session'] }}</td>
+                                    <td>{{ ucfirst($user->studentInfo['version']) }}</td>
+                                    <td>{{ $user->section['class']['class_number'] }} {{!empty($user->group)? '- '.$user->group:''}}</td>
+                                    <td style="white-space: nowrap;">{{$user->section['section_number'] }}</td>
+                                    <td>
+                                    @if($user->studentInfo['is_sms_enabled'] && $user->studentInfo['is_sms_enabled'] == true)
+                                        <span class="badge badge-info">Yes</span>
+                                    @else
+                                        <span class="badge badge-warning">No</span>
+                                    @endif
                                     </td>
                                 @endif
                             @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
@@ -233,6 +243,7 @@
                     submitForm('userBulkAction');
                 } else {
                     showAlert();
+                    $('#action').prop('selectedIndex',0);
                 }
            });
         });
