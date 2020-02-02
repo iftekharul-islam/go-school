@@ -374,8 +374,10 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
+        $school = Auth::user();
+        $school->load('school');
 
-        return view('profile.user-profile', compact('user'));
+        return view('profile.user-profile', compact('user', 'school'));
     }
 
     public function editUserInfo($user_code)
@@ -390,8 +392,6 @@ class UserController extends Controller
 
     public function updateUserInfo(Request $request, $user_code)
     {
-
-        // return $request->all();
         $tb = $this->user->findOrFail($user_code);
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : $tb->pic_path;
         $image_path = 'storage/'.$path;
@@ -415,7 +415,6 @@ class UserController extends Controller
             $info->user_id = auth()->user()->id;
             $info->save();
         }
-
         return back()->with('status', $request->name.' Information Updated');
 
     }
