@@ -32,7 +32,7 @@ class SchoolController extends Controller
         $user = Auth::user();
 
         $schools = School::all();
-        $classes = Myclass::all();
+        $classes = Myclass::orderBy('class_number','ASC')->get();
         $sections = Section::all();
 
         $teachers = User::where('role', 'teacher')
