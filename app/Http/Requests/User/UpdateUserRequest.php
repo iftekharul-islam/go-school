@@ -39,7 +39,7 @@ class UpdateUserRequest extends FormRequest
 
         if ($this->get('user_role') == 'teacher') {
             $rules['phone_number'] = 'required|numeric';
-            $rules['address'] = 'required|numeric';
+            $rules['address'] = 'required|string';
         }
 
         return $rules;
