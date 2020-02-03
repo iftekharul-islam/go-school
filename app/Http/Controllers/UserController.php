@@ -600,6 +600,14 @@ class UserController extends Controller
 
     public function inactiveAccount() 
     {
+        if (Auth::check()) {
+
+            $school = School::find(Auth::user()->school_id);
+            if(!empty($school) && $school['is_active'] == 1){
+                return redirect(Auth::user()->role.'/home');
+            }
+        }
+
         return view('inactive-account');
     }
     
