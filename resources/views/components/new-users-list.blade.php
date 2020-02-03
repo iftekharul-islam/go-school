@@ -60,7 +60,7 @@
 @endif
 <div class="card height-auto">
     <div class="card-body">
-        @if($type == 'Students')
+        @if(isset($type) && $type == 'Students')
         <form method='GET' action="">
         <div class="row border-bottom mb-3">
             <div class="form-group col-md-4">
@@ -83,7 +83,7 @@
                     @endif
                 </select>
             </div>
-            <div class="form-group col-md-1">
+            <div class="form-group col-md-2">
                 <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Filter" />
             </div>
         </div>

@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class, 'student_id');
     }
+
+    public function shift()
+    {
+        return $this->belongsTo('App\Shift');
+    }
 }

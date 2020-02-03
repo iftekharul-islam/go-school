@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Shift\CreateShiftRequest;
+use App\Http\Requests\Shift\UpdateShiftRequest;
 use App\Shift;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShiftController extends Controller
 {
@@ -15,7 +17,7 @@ class ShiftController extends Controller
      */
     public function index()
     {
-        $shifts = Shift::orderby('shift', 'asc')->paginate(30);
+        $shifts = Shift::orderby('shift', 'asc')->where('school_id', Auth::user()->school_id)->paginate(30);
         return view('shift.shifts', compact('shifts'));
     }
 
@@ -41,6 +43,7 @@ class ShiftController extends Controller
         $shift->shift = $request->get('shift');
         $shift->last_attendance_time = $request->get('last_attendance_time');
         $shift->exit_time = $request->get('exit_time');
+        $shift->school_id = Auth::user()->school_id;
         $shift->save();
 
         return redirect()->route('shifts')->with('status', 'Shift created');
@@ -63,9 +66,10 @@ class ShiftController extends Controller
      * @param  \App\Shift  $shift
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shift $shift)
+    public function edit($id)
     {
-        //
+        $shift = Shift::findOrFail($id);
+        return view('shift.edit-shift', compact('shift'));
     }
 
     /**
@@ -75,9 +79,15 @@ class ShiftController extends Controller
      * @param  \App\Shift  $shift
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shift $shift)
+    public function update(UpdateShiftRequest $request, $id)
     {
-        //
+        $shift = Shift::findOrFail($id);
+        $shift->shift = $request->get('shift');
+        $shift->last_attendance_time = $request->get('last_attendance_time');
+        $shift->exit_time = $request->get('exit_time');
+        $shift->save();
+
+        return redirect()->route('shifts')->with('status', 'Shift updated');
     }
 
     /**

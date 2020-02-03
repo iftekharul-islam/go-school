@@ -19,6 +19,7 @@
             $department = 0;
             $class = 0;
             $academic = 0;
+            $sht = 0;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
             if (strpos($add, 'exams'))
@@ -33,7 +34,7 @@
                 $std = 1;
             if (strpos($add, 'users/'))
                 $all_student = 1;
-            if ((strpos($add, 'users/') && Request::get('teacher'))  || strpos($add,'new-teacher'))
+            if ((strpos($add, 'users/') && Request::get('teacher'))  || strpos($add,'new-teacher') || strpos($add,'shifts') || strpos($add,'shift'))
                 $teacher = 1;
             if (strpos($add,'all-department')  || strpos($add,'create-department'))
                 $department = 1;
@@ -41,6 +42,8 @@
                 $class = 1;
             if (strpos($add, 'classes')  || (strpos($add, 'syllabus')) || strpos($add, 'notice') || (strpos($add, 'event')) || (strpos($add, 'create-admit-card')))
                 $academic = 1;
+            if (strpos($add, 'shift')  || (strpos($add, 'shifts')) )
+                $sht = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -144,16 +147,16 @@
                                     <i class="fas fa-angle-right"></i><span>All Teachers</span></a>
                             </li>
                             @if($role == 'admin')
-                                <li class="nav-item sidebar-nav-item second-lbl-menu">
+                                <li class="nav-item sidebar-nav-item second-lbl-menu {{ $sht == 1 ? 'active' : ''}}">
                                     <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>Shift</span></a>
-                                    <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
+                                    <ul class="nav sub-group-menu {{ $sht == 1 ? 'sub-group-active' : '' }}">
                                         <li class="nav-item">
-                                            <a class="nav-link {{ (request()->is('shift.create')) ? 'menu-active' : '' }}"
+                                            <a class="nav-link {{ (request()->is('admin/shift/create')) ? 'menu-active' : '' }}"
                                             href="{{ route('shift.create') }}">
                                             <i class="fas fa-angle-right"></i><span>Add Shift</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link {{ (request()->is('shifts')) ? 'menu-active' : '' }}"
+                                            <a class="nav-link {{ (request()->is('admin/shifts')) ? 'menu-active' : '' }}"
                                             href="{{ route('shifts') }}">
                                                 <i class="fas fa-angle-right"></i><span> All Shifts</span></a>
                                         </li>
