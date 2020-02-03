@@ -11,6 +11,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Account Suspended !</h5>
                         <p class="card-text"> Please contact <a href="https://shoroborno.com/">Shoroborno Support Team</a></p>
+                        <a href="{{url('/login')}}">Back to login</a>
                     </div>
                 </div>      
             </div>

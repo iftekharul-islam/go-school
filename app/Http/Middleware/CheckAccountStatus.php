@@ -19,7 +19,8 @@ class CheckAccountStatus
     {
         if ( Auth::user()->role != 'master' ) {
             $school = School::find(Auth::user()->school_id);
-            if ( empty($school) || $school->is_active == 0) {
+            if ( empty($school) || $school->is_active == 0 ) {
+                Auth::logout();
                 return redirect('/account-suspended');
             }
         }
