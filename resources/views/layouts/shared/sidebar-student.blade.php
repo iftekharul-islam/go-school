@@ -68,6 +68,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="fas fa-school"></i><span>Payment</span></a>
+                        <ul class="nav sub-group-menu {{ (request()->is('master/new*')) ? 'sub-group-active' : '' }}">
+                            <li class="nav-item">
+                                <a href="{{route('add.payment.info')}}"
+                                   class="nav-link {{ (request()->is('master/new/create-school')) ? 'menu-active' : '' }}"><i
+                                            class="fas fa-angle-right"></i>Add Payment</a>
+                                {{-- <a href="{{url('master/new/all-school')}}"
+                                   class="nav-link {{ (request()->is('master/new/all-school')) ? 'menu-active' : '' }}"><i
+                                            class="fas fa-angle-right"></i>All Schools</a> --}}
+                            </li>
+                        </ul>
+                    </li>
                 @endif
 
                 @if ($role == 'admin')

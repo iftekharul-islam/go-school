@@ -61,6 +61,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('edit/admin', 'AdminController@update');
         Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
+        Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
+        Route::get('add-payemnt-detail', 'SchoolMetaController@create')->name('add.payment.info');
+        Route::post('store-payemnt-detail', 'SchoolMetaController@store')->name('store.payment.info');
     });
 
     //Student role routes
