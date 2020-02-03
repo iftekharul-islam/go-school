@@ -10,7 +10,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Cache;
-use mysql_xdevapi\Session;
 
 class AppServiceProvider extends ServiceProvider
 {
