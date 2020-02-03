@@ -127,10 +127,12 @@ class UserService
         return 'librarian' == $role;
     }
 
-    public function indexOtherView($view, $users)
+    public function indexOtherView($view, $users, $classes, $type)
     {
         return view($view, [
             'users' => $users,
+            'type' => $type,
+            'classes' => $classes
         ]);
     }
 
@@ -193,7 +195,7 @@ class UserService
             ->where('role', 'accountant')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(40);
     }
 
     public function getLibrarians()
@@ -203,7 +205,7 @@ class UserService
             ->where('role', 'librarian')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(40);
     }
 
     public function getSectionStudentsWithSchool($section_id)
@@ -345,6 +347,7 @@ class UserService
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
+        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : '' ;
 
         if ('teacher' == $role) {
             $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;

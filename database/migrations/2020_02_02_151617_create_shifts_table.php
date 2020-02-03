@@ -18,6 +18,7 @@ class CreateShiftsTable extends Migration
             $table->string('shift');
             $table->time('last_attendance_time');
             $table->time('exit_time');
+            $table->integer('school_id');
             $table->timestamps();
         });
     }

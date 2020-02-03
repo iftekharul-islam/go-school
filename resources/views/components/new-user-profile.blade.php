@@ -174,6 +174,12 @@
                                 <td class="font-medium text-dark-medium">Phone</td>
                                 <td>{{$user->phone_number}}</td>
                             </tr>
+                            @if($user->role == 'teacher')
+                              <tr>
+                                <td class="font-medium text-dark-medium">Shift</td>
+                                <td>@if($user->shift){{ $user->shift['shift'] }}@endif</td>
+                            </tr>
+                            @endif
                             <tr>
                                 <td class="font-medium text-dark-medium">About</td>
                                 <td>{{$user->about}}</td>
