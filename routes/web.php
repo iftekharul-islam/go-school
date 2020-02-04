@@ -323,7 +323,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('section/details/attendance/{section_id}', 'AttendanceController@attendanceDetails');
         Route::get('section/details/student-attendance/{section_id}', 'AttendanceController@attendanceDetailsview')->name('student.attendance');
-
+        Route::get('students/export/{class_number}/{section_name}/{section_id}', 'AttendanceController@absentExport')->name('export.AbsentStudent');
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');

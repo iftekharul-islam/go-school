@@ -159,14 +159,11 @@ class AttendanceService {
             }
         }, $data);
 
-
-
         $students = array_filter($students);
-//        dd($students);
         $students = User::whereIn('id', $students)->get();
 
         foreach ($students as $key=>$student) {
-            $phone = $student->studentInfo['father_phone_number'];
+            $phone = !empty($student->studentInfo['guardian_phone_number']) ? $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
             $checked_digit = substr($phone, 0, 3);
             if ($checked_digit == '+88') {
                 $phone = ltrim($phone, '+');
