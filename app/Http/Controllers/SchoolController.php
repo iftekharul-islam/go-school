@@ -9,6 +9,7 @@ use App\Myclass;
 use App\Section;
 use App\Department;
 use App\Gradesystem;
+use App\SmsHistory;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -304,6 +305,13 @@ class SchoolController extends Controller
         $school->save();
         $schoolStatus = $status == 0 ? 'deactivated' : 'activated';
         return back()->with('status', $name.' '.$schoolStatus);
+    }
+
+    public function smsSummary(Request $request)
+    {
+        if($request)
+        $totalSMS = SmsHistory::whereDate('created_at', )->count();
+        return view('school.sms-summary');
     }
 
 }
