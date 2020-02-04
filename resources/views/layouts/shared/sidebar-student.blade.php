@@ -20,6 +20,7 @@
             $class = 0;
             $academic = 0;
             $sht = 0;
+            $payment = 0;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
             if (strpos($add, 'exams'))
@@ -44,6 +45,8 @@
                 $academic = 1;
             if (strpos($add, 'shift')  || (strpos($add, 'shifts')) )
                 $sht = 1;
+            if (strpos($add, 'add-payemnt-detail')  || (strpos($add, 'payemnt-detail')) || strpos($add, 'generate-invoice'))
+                $payment = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -68,16 +71,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-school"></i><span>Payment</span></a>
-                        <ul class="nav sub-group-menu {{ (request()->is('master/new*')) ? 'sub-group-active' : '' }}">
+                     <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link"><i class="fas fa-file-invoice"></i><span>Payment</span></a>
+                        <ul class="nav sub-group-menu {{ ($payment == 1) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="{{route('add.payment.info')}}"
-                                   class="nav-link {{ (request()->is('master/new/create-school')) ? 'menu-active' : '' }}"><i
+                                   class="nav-link {{ (request()->is('master/add-payemnt-detail')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>Add Payment</a>
-                                {{-- <a href="{{url('master/new/all-school')}}"
-                                   class="nav-link {{ (request()->is('master/new/all-school')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>All Schools</a> --}}
+                                <a href="{{route('payment.info')}}"
+                                   class="nav-link {{ (request()->is('master/payemnt-details')) ? 'menu-active' : '' }}"><i
+                                            class="fas fa-angle-right"></i>Payment Details</a>
+                                <a href="{{route('generate.invoice')}}"
+                                   class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i
+                                            class="fas fa-angle-right"></i>Generate Invoice</a>
                             </li>
                         </ul>
                     </li>

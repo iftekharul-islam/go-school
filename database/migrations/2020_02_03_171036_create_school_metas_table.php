@@ -18,7 +18,7 @@ class CreateSchoolMetasTable extends Migration
             $table->integer('school_id');
             $table->float('sms_charge', 8, 2);
             $table->float('per_student_charge', 8, 2);
-            $table->date('invoice_generation_date');
+            $table->integer('invoice_generation_date');
             $table->timestamps();
         });
     }

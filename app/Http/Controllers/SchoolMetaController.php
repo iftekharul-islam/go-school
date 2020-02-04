@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Payment\CreatePaymentRequest;
 use App\School;
 use App\SchoolMeta;
 use Illuminate\Http\Request;
@@ -15,8 +16,8 @@ class SchoolMetaController extends Controller
      */
     public function index()
     {
-        $
-        return view('payment.payment-info');
+        $schoolMetas = SchoolMeta::with('school')->paginate(40);
+        return view('payment.payment-details', compact('schoolMetas'));
     }
 
     /**
@@ -36,7 +37,7 @@ class SchoolMetaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreatePaymentRequest $request)
     {
         SchoolMeta::create($request->all());
         return back()->with('status', 'Payment Information Added');
@@ -82,8 +83,10 @@ class SchoolMetaController extends Controller
      * @param  \App\SchoolMeta  $schoolMeta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SchoolMeta $schoolMeta)
+    public function destroy($id)
     {
-        //
+        $schoolMeta = SchoolMeta::findOrFail($id);
+        $schoolMeta->delete();
+        return back()->with('status', 'Payment info deleted');
     }
 }
