@@ -502,7 +502,7 @@ class UserController extends Controller
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    if ($tb['id']) {
+                    if (!empty($tb['id'])) {
                         $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
                         $info->student_id = $tb->student_code;
                         $info->session = $request->get('session');
