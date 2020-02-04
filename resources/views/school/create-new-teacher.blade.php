@@ -16,8 +16,7 @@
             <li>Add Teacher</li>
         </ul>
     </div>
-    <div class="card height-auto mb-5">
-        @if (session('status'))
+    @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
@@ -36,6 +35,8 @@
                 </ul>
             </div>
         @endif
+    <div class="card height-auto mb-5">
+        
         <div class="card-body">
             <form class="new-added-form" method="POST" enctype="multipart/form-data"
                   id="registerForm" action="{{ route('register.teacher.store') }}">
@@ -324,14 +325,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-
-                    <div class="col-md-12">
-                        <label class="control-label">
-                            Upload Profile Picture
-                        </label>
-                        <br>
-                        <input type="file" id="picPath" name="teacher_pic">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label class="control-label">
+                                Upload Profile Picture
+                            </label>
+                            <br>
+                            <input type="file" id="picPath" name="teacher_pic">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label class="control-label">
+                                Shift <label class="text-danger">*</label>
+                            </label>
+                            <br>
+                            <select name="shift_id" class="form-control" required>
+                                <option value="" disabled selected>Select Shift</option>
+                                @if( count($shifts) > 0 )
+                                    @foreach ($shifts as $shift)
+                                        <option value="{{$shift->id}}" @if(old('shift_id') == $shift->id) selected @endif >{{ $shift->shift }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @if ($errors->has('shift_id'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('shift_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                     </div>
                 </div>
 

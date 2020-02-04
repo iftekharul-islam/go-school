@@ -15,28 +15,28 @@
             <li>Edit {{ ucfirst($user->role) }}</li>
         </ul>
     </div>
-
+     @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @elseif(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="card height-auto false-height">
         <div class="card-body">
             <div class="col-md-{{ (\Auth::user()->role == 'master')? 12 : 12 }}" id="main-container">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                    @elseif(session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
+               
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <form class="new-added-form" method="POST" action="{{ route('edit.user') }}" enctype='multipart/form-data'>
@@ -172,8 +172,8 @@
                                             <label for="shift" class="control-label false-padding-bottom">Shift</label>
                                             <select id="shift" class="form-control" name="shift">
                                                 <option @if($user->studentInfo['shift'] == 'N/A') selected="selected" @endif>N/A</option>
-                                                <option @if($user->studentInfo['shift'] == 'Morning') selected="selected" @endif>Morning</option>
-                                                <option @if($user->studentInfo['shift'] == 'Day') selected="selected" @endif>Day</option>
+                                                <option @if($user->studentInfo['shift'] == 'morning') selected="selected" @endif>Morning</option>
+                                                <option @if($user->studentInfo['shift'] == 'evening') selected="selected" @endif>Evening</option>
                                             </select>
 
                                             @if ($errors->has('shift'))
@@ -244,9 +244,11 @@
                                         <div class="col-md-12">
                                             <label for="class_teacher" class="control-label false-padding-bottom">Class Teacher</label>
                                             <select id="class_teacher" class="form-control" name="class_teacher_section_id">
+                                                @if(isset($user->section['id']))
                                                 <option selected="selected" value="{{$user->section['id']}}">Section:
                                                     {{$user->section['section_number']}} Class:
                                                     {{$user->section['class']['class_number']}}</option>
+                                                @endif
                                                 @foreach ($sections as $section)
                                                     <option value="{{$section['id']}}">Section: {{$section['section_number']}}
                                                         Class:
@@ -260,6 +262,18 @@
                                                 </span>
                                             @endif
                                         </div>
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                                    <div class="false-padding-bottom-form form-group{{ $errors->has('class_teacher') ? ' has-error' : '' }}">
+                                        <label for="class_teacher" class="control-label false-padding-bottom">Shift</label>
+                                        <select id="class_teacher" class="form-control" name="shift_id">
+                                           @if( count($shifts) > 0 )
+                                                @foreach ($shifts as $shift)
+                                                    <option value="{{$shift['id']}}" @if($shift->id == $user->shift_id) selected @endif>{{ $shift['shift'] }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
                             @endif

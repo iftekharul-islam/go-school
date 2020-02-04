@@ -34,6 +34,7 @@ class CreateTeacherRequest extends FormRequest
             'gender' => 'required',
             'address' => 'required|string',
             'teacher_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
+            'shift_id' => 'required|integer'
         ];
     }
     public function messages()
@@ -42,7 +43,9 @@ class CreateTeacherRequest extends FormRequest
             'name.required' => 'The name field cannot be empty',
             'teacher_pic.required' => 'Please provide and image for the profile',
             'teacher_pic.image' => 'Invalid image type',
-            'teacher_pic.max' => 'Image size cannot be larger than 800KB'
+            'teacher_pic.max' => 'Image size cannot be larger than 800KB',
+            'shift_id.required' => 'Select Shift',
+            'shift_id.integer' => 'Shift ID must be integer',
         ];
     }
 }

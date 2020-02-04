@@ -31,6 +31,7 @@ use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
+use App\Shift;
 
 /**
  * Class UserController.
@@ -95,11 +96,12 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function indexOther($school_code, $role)
-    {
+    {   
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->id)->get();
         if ($this->userService->isAccountant($role)) {
-            return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants());
+            return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants(), $classes, 'accountant');
         } elseif ($this->userService->isLibrarian($role)) {
-            return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians());
+            return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians(), $classes, 'librarian');
         } else {
             return view('home');
         }
@@ -289,6 +291,7 @@ class UserController extends Controller
         $schools = School::all();
         $classes = Myclass::all();
         $sections = Section::all();
+        $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
 
         $teacherDepartments = Department::where('school_id', $user->school_id)->get();
         $teacherClasses = Myclass::where('school_id', $user->school->id)->pluck('id');
@@ -302,7 +305,7 @@ class UserController extends Controller
 
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
 
-        return view('school.create-new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+        return view('school.create-new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections', 'shifts'));
     }
     public function createAccountant()
     {
@@ -377,6 +380,7 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
+        $user->load('shift');
         $school = Auth::user();
         $school->load('school');
 
@@ -446,6 +450,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user->findOrFail($id);
+        $user->load('shift');
         $classes = Myclass::query()
             ->where('school_id', Auth::user()->school_id)
             ->pluck('id')
@@ -459,10 +464,13 @@ class UserController extends Controller
             ->where('school_id', Auth::user()->school_id)
             ->get();
         
+        $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
+        
         return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,
+            'shifts' => $shifts
         ]);
     }
 
@@ -490,10 +498,11 @@ class UserController extends Controller
             if ('teacher' == $request->user_role) {
                 $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
                 $tb->section_id = $request->class_teacher_section_id;
+                $tb->shift_id = $request->shift_id;
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    if ($tb['id']) {
+                    if (!empty($tb['id'])) {
                         $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
                         $info->student_id = $tb->student_code;
                         $info->session = $request->get('session');

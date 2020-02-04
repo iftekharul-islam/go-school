@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -61,6 +62,15 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('edit/admin', 'AdminController@update');
         Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
+        Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
+        Route::get('add-payemnt-detail', 'SchoolMetaController@create')->name('add.payment.info');
+        Route::post('store-payemnt-detail', 'SchoolMetaController@store')->name('store.payment.info');
+        Route::get('edit-payemnt-detail/{id}', 'SchoolMetaController@edit')->name('edit.payment.info');
+        Route::post('update-payemnt-detail/{id}', 'SchoolMetaController@update')->name('update.payment.info');
+        Route::get('payemnt-details', 'SchoolMetaController@index')->name('payment.info');
+        Route::delete('delete/payemnt-details/{id}', 'SchoolMetaController@destroy')->name('delete.payment.info');
+        Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
+        Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
     });
 
     //Student role routes
@@ -375,6 +385,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendance-time/edit/{id}', 'SectionMetaController@edit')->name('attendance.time.edit');
         Route::put('attendance-time/update/{id}', 'SectionMetaController@update')->name('attendance.time.update');
         Route::delete('attendance-time/delete/{id}', 'SectionMetaController@destroy')->name('attendance.time.delete');
+        
+        Route::get('shifts', 'ShiftController@index')->name('shifts');
+        Route::get('shift/create/', 'ShiftController@create')->name('shift.create');
+        Route::post('shift/store/', 'ShiftController@store')->name('shift.store');
+        Route::get('shift/edit/{id}', 'ShiftController@edit')->name('shift.edit');
+        Route::post('shift/update/{id}', 'ShiftController@update')->name('shift.update');
+        Route::delete('shift/delete/{id}', 'ShiftController@destroy')->name('shift.delete');
     });
 
 });

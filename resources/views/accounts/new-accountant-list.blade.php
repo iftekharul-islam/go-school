@@ -6,7 +6,7 @@
 <div>
     @if(count($users) > 0)
         <div class="">
-            @component('components.new-users-list',['users'=>$users])@endcomponent
+            @component('components.new-users-list',['users'=>$users , 'classes' => $classes, 'type' => $type])@endcomponent
         </div>
     @else
         <div class="breadcrumbs-area">
