@@ -45,7 +45,6 @@
                         @endif
                         <div class="title mb-5" style="overflow: hidden" >
                             <div class="float-left">
-                                {{ $students[0]->section->id }}
                                 <a class="button button--save mr-2 float-left"
                                    href={{ route('attendance.summary', $students[0]->section->id) }}>
                                     View Summary</a>
