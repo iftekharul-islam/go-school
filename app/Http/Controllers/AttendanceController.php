@@ -297,6 +297,6 @@ class AttendanceController extends Controller
      public function absentExport($class_number, $section_number)
      {
          $date = carbon::today()->format('d_m_y');
-         return Excel::download(new AbsentExport, 'Absent_Report-' . $date .'-class-' .$class_number. '-section-' . $section_number.'.xlsx');
+         return Excel::download(new AbsentExport, 'Absent_Report-' . $date . '-class-' . $class_number . '-section-' . $section_number . '.xls');
      }
 }
