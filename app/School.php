@@ -34,4 +34,8 @@ class School extends Model
   {
     return $this->hasMany('App\Gradesystem');
   }
+  public function schoolMeta()
+  {
+    return $this->hasOne('App\SchoolMeta');
+  }
 }
