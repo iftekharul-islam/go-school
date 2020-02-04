@@ -502,32 +502,34 @@ class UserController extends Controller
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
-                    $info->student_id = $tb->student_code;
-                    $info->session = $request->get('session');
-                    $info->version =$request->get('version');
-                    $info->shift =$request->get('shift');
-                    $info->student_indentification =$request->get('student_indentification');
-                    $info->roll_number =$request->get('roll_number');
-                    $info->group = $request->get('group');
-                    $info->birthday = $request->get('birthday');
-                    $info->religion = $request->get('religion');
-                    $info->guardian_name = $request->get('guardian_name');
-                    $info->guardian_phone_number = $request->get('guardian_phone_number');
-                    $info->father_name = $request->get('father_name');
-                    $info->father_phone_number = $request->get('father_phone_number');
-                    $info->father_national_id = $request->get('father_national_id');
-                    $info->father_occupation = $request->get('father_occupation');
-                    $info->father_designation = $request->get('father_designation');
-                    $info->father_annual_income = $request->get('father_annual_income');
-                    $info->mother_phone_number = $request->get('mother_phone_number');
-                    $info->mother_national_id =$request->get('mother_national_id');
-                    $info->mother_occupation = $request->get('mother_occupation');
-                    $info->mother_designation = $request->get('mother_designation');
-                    $info->mother_annual_income = $request->get('mother_annual_income');
-                    $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
-                    $info->user_id = $tb->id;
-                    $info->save();
+                    if (!empty($tb['id'])) {
+                        $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
+                        $info->student_id = $tb->student_code;
+                        $info->session = $request->get('session');
+                        $info->version =$request->get('version');
+                        $info->shift =$request->get('shift');
+                        $info->student_indentification =$request->get('student_indentification');
+                        $info->roll_number =$request->get('roll_number');
+                        $info->group = $request->get('group');
+                        $info->birthday = $request->get('birthday');
+                        $info->religion = $request->get('religion');
+                        $info->guardian_name = $request->get('guardian_name');
+                        $info->guardian_phone_number = $request->get('guardian_phone_number');
+                        $info->father_name = $request->get('father_name');
+                        $info->father_phone_number = $request->get('father_phone_number');
+                        $info->father_national_id = $request->get('father_national_id');
+                        $info->father_occupation = $request->get('father_occupation');
+                        $info->father_designation = $request->get('father_designation');
+                        $info->father_annual_income = $request->get('father_annual_income');
+                        $info->mother_phone_number = $request->get('mother_phone_number');
+                        $info->mother_national_id =$request->get('mother_national_id');
+                        $info->mother_occupation = $request->get('mother_occupation');
+                        $info->mother_designation = $request->get('mother_designation');
+                        $info->mother_annual_income = $request->get('mother_annual_income');
+                        $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
+                        $info->user_id = $tb->id;
+                        $info->save();
+                    }
                 }
             }
             return back()->with('error', 'Something went wrong please try again!');
