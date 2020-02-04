@@ -294,9 +294,9 @@ class AttendanceController extends Controller
         return view('attendance.attandence-summary', compact('final', 'start_display', 'end_display', 'students', 'period'));
      }
 
-     public function absentExport($class_number, $section_number)
+     public function absentExport($class_number, $section_name, $section_id)
      {
          $date = carbon::today()->format('d_m_y');
-         return Excel::download(new AbsentExport, 'Absent_Report-' . $date . '-class-' . $class_number . '-section-' . $section_number . '.xls');
+         return Excel::download(new AbsentExport($section_id), 'Absent_Report-' . $date . '-class-' . $class_number . '-section-' . $section_name . '.xls');
      }
 }
