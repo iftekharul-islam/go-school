@@ -36,9 +36,9 @@ class AbsentExport implements FromCollection, WithMapping, WithHeadings
     {
         return [
             isset($student['name']) ?  $student->name : '',
+            isset($student['roll_number']) ? $student->roll_number : 'N/A',
             isset($student['guardian_name']) ? $student->guardian_name : $student->father_name,
             isset($student['guardian_phone_number']) ? $student->guardian_phone_number : $student->father_phone_number,
-            isset($student['roll_number']) ? $student->roll_number : 'N/A',
         ];
     }
 
@@ -46,9 +46,9 @@ class AbsentExport implements FromCollection, WithMapping, WithHeadings
     {
         return [
             'Student Name',
+            'Roll Number',
             'Guardian\'s Name',
-            'Guardian\'s Phone Number',
-            'Roll Number'
+            'Guardian\'s Phone Number'
         ];
     }
 }
