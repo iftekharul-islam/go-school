@@ -10,6 +10,12 @@ use Carbon\Carbon;
 
 class AbsentExport implements FromCollection, WithMapping, WithHeadings
 {
+    protected  $section_id ;
+    public  function __construct($section_id)
+    {
+        $this->section_id = $section_id;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -19,10 +25,12 @@ class AbsentExport implements FromCollection, WithMapping, WithHeadings
                     ->join('attendances', 'users.id', '=', 'attendances.student_id' )
                     ->whereDate('attendances.created_at', Carbon::today())
                     ->where('attendances.present', 0)
-                    ->select('users.name', 'student_infos.guardian_name', 'student_infos.guardian_phone_number', 'student_infos.roll_number')
+                    ->where('attendances.section_id', $this->section_id)
+                    ->select('users.name', 'student_infos.guardian_name', 'student_infos.father_name', 'student_infos.father_phone_number', 'student_infos.guardian_phone_number', 'student_infos.roll_number')
                     ->get();
          return $students;
     }
+
 
     public function map($student): array
     {
