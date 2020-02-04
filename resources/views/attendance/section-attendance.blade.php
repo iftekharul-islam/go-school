@@ -52,7 +52,7 @@
                                    href={{ route('student.attendance', $students[0]->section->id) }}>
                                     Take Attendance</a>
                                 <a class="button button--save float-left"
-                                   href={{ route('export.AbsentStudent', ['class_number'=>$class->class_number, 'id'=>$students[0]->section->id ]) }}>
+                                   href={{ route('export.AbsentStudent', ['class_number'=>$class->class_number, 'section_number'=>$students[0]->section->section_number ]) }}>
                                     Export Absent Students</a>
                             </div>
                         </div>

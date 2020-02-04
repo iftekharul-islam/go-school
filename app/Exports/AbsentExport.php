@@ -39,8 +39,8 @@ class AbsentExport implements FromCollection, WithMapping, WithHeadings
         return [
             'Student Name',
             'Guardian\'s Name',
-            'Guardian\'s Phone',
-            'Roll no'
+            'Guardian\'s Phone Number',
+            'Roll Number'
         ];
     }
 }
