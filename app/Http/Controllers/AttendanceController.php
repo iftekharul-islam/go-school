@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Exports\AbsentExport;
 use App\Myclass;
 use App\Section;
 use App\Attendance;
@@ -16,6 +17,7 @@ use App\Http\Traits\GradeTrait;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Attendance\AttendanceService;
 use App\Http\Requests\Attendance\StoreAttendanceRequest;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
@@ -172,6 +174,7 @@ class AttendanceController extends Controller
     public function attendanceDetails(Request $request, $section_id)
     {
         $course = Course::with('section')->where('section_id', $section_id)->first();
+        $class = Myclass::where('school_id', Auth::user()->school_id)->first();
         $examID = 0;
         if (! empty($course->exam_id)) {
             $examID = $course->exam_id;
@@ -184,6 +187,7 @@ class AttendanceController extends Controller
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
 
             return view('attendance.section-attendance', [
+                'class' => $class,
                 'users' => $users,
                 'current_page' => $users->currentPage(),
                 'per_page' => $users->perPage(),
@@ -276,8 +280,7 @@ class AttendanceController extends Controller
                $final[$student->id] = [
                  "name" => $student->name,
              ];
-
-             foreach ($period as $dt) {
+               foreach ($period as $dt) {
                  $attendance = null;
                  if (isset($student['attendances'])) {
                      $attendance = $student->attendances->filter(function ($att) use($dt) {
@@ -289,5 +292,11 @@ class AttendanceController extends Controller
          }
 
         return view('attendance.attandence-summary', compact('final', 'start_display', 'end_display', 'students', 'period'));
+     }
+
+     public function absentExport($class_number, $section_number)
+     {
+         $date = carbon::today()->format('d_m_y');
+         return Excel::download(new AbsentExport, 'Absent_Report-' . $date . '-class-' . $class_number . '-section-' . $section_number . '.xls');
      }
 }
