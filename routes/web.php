@@ -11,8 +11,6 @@
 |
 */
 
-use App\Mail\InvoiceMail;
-use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('welcome');

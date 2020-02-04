@@ -84,22 +84,3 @@
     </div>
         
 @endsection
-
-{{-- @push('customjs')
-    <script>   
-        function getSections(item) {
-            let selectedClass = item.value;
-            let classes = {!! json_encode($classes->toArray()) !!};
-            let sections = [];
-            classes.forEach((cls) => {
-                if (cls.id == selectedClass) {
-                    sections = cls.sections;
-                }
-            });
-            $('#section_id').empty();
-            sections.forEach((sec) => {
-                $('#section_id').append($("<option />").val(sec.id).text(sec.section_number));
-            });
-        }
-    </script>
-@endpush --}}
