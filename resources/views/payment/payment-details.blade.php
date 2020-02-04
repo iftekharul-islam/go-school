@@ -35,6 +35,7 @@
                         <th>SMS Charge</th>
                         <th>Per Student Charge</th>
                         <th>Invoicing Date</th>
+                        <th>Email To</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -45,8 +46,9 @@
                             <td>{{ $schoolMeta['sms_charge'] }}</td>
                             <td>{{ $schoolMeta['per_student_charge'] }}</td>
                             <td>{{ $schoolMeta['invoice_generation_date'] }}</td>
+                            <td>{{ $schoolMeta['email'] }}</td>
                             <td>
-                                <a class="btn btn-lg btn-primary mr-3" href="{{route('shift.edit',['id' => $schoolMeta->id])}}"><i class="far fa-edit"></i></a>
+                                <a class="btn btn-lg btn-primary mr-3" href="{{route('edit.payment.info',['id' => $schoolMeta->id])}}"><i class="far fa-edit"></i></a>
                                 <button class="btn btn-lg btn-danger mr-3" onclick="alertDialog({{ $schoolMeta->id }})"><i class="far fa-trash-alt"></i></button>
                                 <form id="delete-payment-{{$schoolMeta->id}}" action="{{route('delete.payment.info',['id' =>$schoolMeta->id ])}}" method="post" class="d-none">
                                     {{ csrf_field() }}

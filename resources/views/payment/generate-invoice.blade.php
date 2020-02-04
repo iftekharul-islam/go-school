@@ -27,10 +27,11 @@
     @endif
     <div class="card height-auto mb-5">
         <div class="card-body">
-            <form method='POST' action="">
+            <form method='POST' action="{{route('send.invoice')}}">
+                {{ csrf_field() }}
                 <div class="row border-bottom mb-3">
                     <div class="form-group col-md-3">
-                        <select name="month" id="section_id" class="form-control form-control-sm">
+                        <select name="month" id="section_id" class="form-control form-control-sm" required>
                             <option value="" disabled selected >Select Month</option>
                             <option value="1" @if(old('month') == 1) selected @endif>January</option>
                             <option value="2" @if(old('month') == 2) selected @endif>February</option>
