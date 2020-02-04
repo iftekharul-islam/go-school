@@ -64,7 +64,7 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'password' => bcrypt($pass),
                 'role' => 'student',
                 'active' => 1,
-                'blood_group'=> $row['blood_group'] ? $row['blood_group'] : 'N/A',
+                'blood_group'=> isset($row['blood_group']) ? $row['blood_group'] : 'N/A',
                 'school_id' => auth()->user()->school_id,
                 'code' => auth()->user()->code,
                 'student_code' => $code,
