@@ -51,7 +51,7 @@ class UsersImport implements ToCollection, WithHeadingRow
             }
 
             $code = auth()->user()->school_id . date('y')
-                . substr(number_format(time() * mt_rand(), 0, '', ''), -4)
+                . substr(time() * mt_rand() + pow(mt_rand(),2), -4)
                 . substr(mt_rand(), -1);
             $name = explode(" ", $row['name']);
 
