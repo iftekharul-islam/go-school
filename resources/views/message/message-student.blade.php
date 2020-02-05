@@ -119,10 +119,11 @@
                                             <input type="hidden" name="section_id" value="{{0}}">
                                             <div class="form-group">
                                                 <label for="msg">Write Message: </label>
-                                                <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
+                                                <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="20"></textarea>
+                                                <span id="limit"></span>
                                             </div>
                                             <div class="checkbox">
-                                                <input type="checkbox" id="sent-sms" name="sent_sms"  form="msgForm">
+                                                <input type="checkbox" onchange="limitCharacter()" id="sent-sms" name="sent_sms"  form="msgForm">
                                                 <label style="font-weight:bold; margin-left:10px">
                                                     Also Send as SMS
                                                 </label>
@@ -169,7 +170,27 @@
 
 @push('customjs')
     <script type="text/javascript">
-
+        function limitCharacter(){
+            if ($('#sent-sms'). prop("checked") == true) {
+                $('#msgForm .ck-editor').hide();
+                $('#msg').show();
+                $('#msg').attr('maxlength', 140);
+                let msg = $('#msg').val();
+                let remaning_char = 140 - msg.length;
+                if (msg.length > 140){
+                    $('#msg').val('');
+                    $('#limit').text('Maximum 140 Characters');
+                } else {
+                    $('#limit').text(msg.length + ' out of 140');
+                }
+                
+            } else {
+                $('#msgForm .ck-editor').show();
+                $('#msg').hide();
+                $('#limit').text('');
+                $('#msg').removeAttr('maxlength');
+            }
+        }
         function getSections(item) {
             let selectedClass = item.value;
             let classes = {!! json_encode($classes->toArray()) !!};

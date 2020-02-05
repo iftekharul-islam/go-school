@@ -56,8 +56,10 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <a href="{{route('sms.summary',['id' => $school->id])}}"
+                                       class="button button--save font-weight-bold float-right mt-3">SMS Summary</a>
                                     <a href="{{url('master/school/'.$school->id)}}"
-                                       class="button button--save font-weight-bold float-right mt-3">Details</a>
+                                       class="button button--save font-weight-bold float-right mr-2 mt-3">Details</a>
                                 </div>
                             </div>
                         </div>

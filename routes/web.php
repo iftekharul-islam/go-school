@@ -71,6 +71,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::delete('delete/payemnt-details/{id}', 'SchoolMetaController@destroy')->name('delete.payment.info');
         Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
         Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
+        Route::get('sms-summary/{id}', 'SchoolController@smsSummary')->name('sms.summary');
     });
 
     //Student role routes
