@@ -51,7 +51,6 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'section_id' => 'required|numeric',
             'teacher_id' => 'required|numeric',
