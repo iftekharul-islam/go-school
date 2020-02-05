@@ -10,7 +10,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
+
     protected $data;
+    
     /**
      * Create a new message instance.
      *
@@ -28,6 +30,10 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Invoice of '.$this->data['month'])->view('payment.invoice-template')->with('data', $this->data);
+        return $this->subject('Invoice of '.$this->data['month'])
+            ->cc(['roy.debashish.sj@gmail.com'])
+            ->from('roy.debashish.sj@gmail.com', 'Shoroborno')
+            ->replyTo('roy.debashish.sj@gmail.com', 'Shoroborno team')
+            ->view('payment.invoice-template')->with('data', $this->data);
     }
 }

@@ -5,7 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            <i class="fas fa-clock"></i>
+            <i class="fas fa-envelope"></i>
             SMS Summary
         </h3>
         <ul>
@@ -28,32 +28,35 @@
     <div class="card height-auto mb-5">
         <div class="card-body">
             <form method="GET" action="">
-            <div class="row border-bottom mb-3">
-                <div class="form-group col-md-4">
-                    <input type="date" name="from_date" value="" class="form-control form-control-sm" required>
+                <div class="row border-bottom mb-3">
+                    <div class="form-group col-md-4">
+                        <input type="text" name="from_date" value="@if( isset($data['from_date']) ){{$data['from_date']}}@endif" data-date-format="yyyy-mm-dd" placeholder="From Date" class="form-control date" autocomplete="off" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                    <input type="text" name="to_date" value="@if( isset($data['to_date']) ){{$data['to_date']}}@endif" data-date-format="yyyy-mm-dd" placeholder="To Date" class="form-control date" autocomplete="off" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Search">
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                  <input type="date" name="to_date" value="" class="form-control form-control-sm" required>
-                </div>
-                <div class="form-group col-md-2">
-                    <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Search">
-                </div>
-            </div>
             </form>
-            <table class="table table-bordered display text-wrap">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Total</th>
-                </tr>
-                </thead>
-                <tbody>
+            
+            @if(!empty($data))
+                <table class="table table-bordered display text-wrap">
+                    <thead>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <th>Date</th>
+                        <th>Total SMS</th>
                     </tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($data['from_date'])->format('d M Y').' To '.\Carbon\Carbon::parse($data['to_date'])->format('d M Y') }}</td>
+                            <td>{{ $data['totalSms'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
         
