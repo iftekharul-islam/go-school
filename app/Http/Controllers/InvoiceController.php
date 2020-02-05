@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendInvoice;
 use App\Mail\InvoiceMail;
 use App\School;
 use App\SchoolMeta;
@@ -22,9 +23,10 @@ class InvoiceController extends Controller
     {
         $now = Carbon::now();
         $schools = School::with('schoolMeta')->where('is_active', 1)->get();
+
         if ( count($schools) > 0 ) {
-            foreach ($schools as $school) {
-                if (!empty($school['schoolMeta'])) { 
+            foreach ( $schools as $school ) {
+                if ( !empty($school['schoolMeta']) ) { 
                     $data = [];
                     $totalStudent = User::where('school_id', $school->id)->where('active', 1)->count();
                     $totalSms = SmsHistory::where('school_id', $school->id)
@@ -42,12 +44,14 @@ class InvoiceController extends Controller
                     $data['serviceCharge'] =  $serviceCharge;
                     $data['month'] =  date("F", mktime(0, 0, 0, $request->month, 1)) .' '. $now->format('Y');
                     $data['schoolAddress'] =  $school->school_address;
-                    
-                    Mail::to($school['schoolMeta']['email'])->send(new InvoiceMail($data));
+                   
+                    SendInvoice::dispatch($school['schoolMeta']['email'], $data);
                 }
             }
+
             return back()->with('status', 'Invoice Sent!');
         }
+
         return back()->with('status', 'No School Found!');
     }
 }
