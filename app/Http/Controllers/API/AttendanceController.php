@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\AttendanceStoreRequest;
 use App\SectionMeta;
 use App\StudentInfo;
-
+use App\StuffAttendance;
 class AttendanceController extends Controller
 {
     /**
@@ -47,48 +47,38 @@ class AttendanceController extends Controller
         
         Logger("working: ");
         Logger($request->all());
-        $student = User::with('studentInfo')->where('student_code', $request->student_code)->first();
+        $user = User::with('studentInfo')->where('student_code', $request->student_code)->first();
 
-        $today = Carbon::today();
-
-        if (!$student) {
+        if (!$user) {
             return response([
                 'error' => true,
-                'massage' => 'No student found!'
+                'massage' => 'No user found!'
             ]);
         }
 
-        //for test
+        $today = Carbon::today();
 
-        // $attendance = Attendance::create([
-        //     'student_id' => $student->id,
-        //     'section_id' => $student->section->id,
-        //     'exam_id' => 0,
-        //     'present' => 1,
-        //     'user_id' => 0
-        // ]);
+        if ( $user->role == 'student' ) 
+        { 
+            return $this->studentAttendance($user);
+        } elseif( $user->role == 'teacher' ) {
+            return $this->teacherAttendance($user);
+        }
+    }
 
-        // event(new AttendanceCreated($attendance, 'create'));
-
-        // return response([
-        //     'error' => false,
-        //     'massage' => 'Attendance added successfully!'
-        // ]);
-
-        //end for test
-
-        $attendance = Attendance::whereDate('created_at', Carbon::today())
-                                ->where('student_id', $student->id)->first();
+    public function studentAttendance($student)
+    {
+        $attendance = Attendance::whereDate('created_at', Carbon::today())->where('student_id', $student->id)->first();
         $sectionMeta = SectionMeta::where('section_id', $student->section_id)->where('shift', $student->studentInfo->shift)->first();
         
         $exitTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'exit_time')->first();
         $entryTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'last_attendance_time')->first();
-            
-        if ($sectionMeta){
+         
+        if ($sectionMeta) {
             $exitTime = Carbon::parse($sectionMeta->exit_time);
             $last_attendance_time = Carbon::parse($sectionMeta->last_attendance_time);
             
-        }else {
+        } else {
             $exitTime = Carbon::parse($exitTimeConfig->value);
             $last_attendance_time = Carbon::parse($entryTimeConfig->value);
         }
@@ -112,7 +102,7 @@ class AttendanceController extends Controller
                 'error' => false,
                 'massage' => 'Attendance Already Added!'
             ]);
-        }else {
+        } else {
             if (Carbon::now()->lte($last_attendance_time)) {
                 $studentData = [
                     'student_id' => $student->id,
@@ -131,7 +121,7 @@ class AttendanceController extends Controller
                     'error' => false,
                     'massage' => 'Attendance added successfully!'
                 ]);
-            }elseif ( Carbon::now()->gte($exitTime) ) {
+            } elseif ( Carbon::now()->gte($exitTime) ) {
                 Logger('Student left for today!');
 
                 return response([
@@ -146,51 +136,60 @@ class AttendanceController extends Controller
                 'error' => true,
                 'massage' => 'Last Attendance Time Crossed!'
             ]);
-        } 
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function teacherAttendance($staff)
     {
-        //
+        $exitTimeConfig = Configuration::where('school_id', $staff->school_id)->where('key', 'exit_time')->first();
+        $entryTimeConfig = Configuration::where('school_id', $staff->school_id)->where('key', 'last_attendance_time')->first();
+        $exit_time = Carbon::parse($exitTimeConfig->value);
+        $last_attendance_time = Carbon::parse($entryTimeConfig->value);
+        
+        $attendance = StuffAttendance::whereDate('created_at', Carbon::today())->where('stuff_id', $staff->id)->first();
+       
+        if ($attendance) {
+            if ( Carbon::now()->gte($exit_time) ) {
+                Logger('Staff left for today!');
+
+                return response([
+                    'error' => false,
+                    'massage' => 'Staff left for today!'
+                ]);
+            }
+
+            Logger('Attendance Already Added!');
+    
+            return response([
+                'error' => false,
+                'massage' => 'Attendance Already Added!'
+            ]);
+        } elseif (Carbon::now()->lte($last_attendance_time)) {
+            $staffAttendance = new StuffAttendance();
+            $staffAttendance->school_id = $staff->school_id;
+            $staffAttendance->stuff_id = $staff->id;
+            $staffAttendance->present = 1;
+            $staffAttendance->role = $staff->role;
+            $staffAttendance->user_id = $staff->id;
+            $staffAttendance->save();
+    
+            return response([
+                'error' => false,
+                'massage' => 'Staff Attendance Added Sucessfully!'
+            ]);
+        } elseif ( Carbon::now()->gte($exit_time) ) {
+            Logger('Staff left for today!');
+
+            return response([
+                'error' => false,
+                'massage' => 'Staff left for today!'
+            ]);
+        }
+        
+        return response([
+            'error' => true,
+            'massage' => 'Attendance Time Crossed!'
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
