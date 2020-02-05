@@ -117,9 +117,9 @@
                                             {{ csrf_field() }}
                                             <input type="hidden" name="teacher_id" value="{{Auth::user()->id}}">
                                             <input type="hidden" name="section_id" value="{{0}}">
-                                            <div class="form-group">
+                                            <div class="mt-3 mb-3">
                                                 <label for="msg">Write Message: </label>
-                                                <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="20"></textarea>
+                                                <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="15" style="font-size:1.5rem"></textarea>
                                                 <span id="limit"></span>
                                             </div>
                                             <div class="checkbox">
@@ -143,13 +143,6 @@
                                                 r.prop('checked', false);
                                             }
                                         });
-                                        ClassicEditor
-                                            .create(document.querySelector('#msg'), {
-                                                toolbar: ['bold', 'italic','Heading', 'Link', 'bulletedList', 'numberedList', 'blockQuote']
-                                            })
-                                            .catch(error => {
-                                                console.error(error);
-                                            });
                                     });
 
                                 </script>
@@ -172,8 +165,7 @@
     <script type="text/javascript">
         function limitCharacter(){
             if ($('#sent-sms'). prop("checked") == true) {
-                $('#msgForm .ck-editor').hide();
-                $('#msg').show();
+               
                 $('#msg').attr('maxlength', 140);
                 let msg = $('#msg').val();
                 let remaning_char = 140 - msg.length;
@@ -185,12 +177,12 @@
                 }
                 
             } else {
-                $('#msgForm .ck-editor').show();
-                $('#msg').hide();
+                
                 $('#limit').text('');
                 $('#msg').removeAttr('maxlength');
             }
         }
+
         function getSections(item) {
             let selectedClass = item.value;
             let classes = {!! json_encode($classes->toArray()) !!};
