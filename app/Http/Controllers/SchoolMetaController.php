@@ -82,6 +82,7 @@ class SchoolMetaController extends Controller
         $schoolMeta->per_student_charge = $request->per_student_charge;
         $schoolMeta->invoice_generation_date = $request->invoice_generation_date;
         $schoolMeta->email = $request->email;
+        $schoolMeta->due_date = $request->due_date;
         $schoolMeta->save();
         
         return back()->with('status', 'Payment info updated');

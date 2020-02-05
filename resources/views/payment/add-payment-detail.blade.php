@@ -132,6 +132,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="false-padding-bottom-form form-group{{ $errors->has('due_date') ? ' has-error' : '' }}">
+                            <div class="col-md-12">
+                                <label for="due_date" class="control-label false-padding-bottom">Payment Due Date</label>
+                                <input id="due_date" type="text" data-date-format="yyyy-mm-dd" class="form-control date" name="due_date" value="{{old('due_date')}}" placeholder="Payment Due Date">
+                                @if ($errors->has('due_date'))
+                                    <span class="help-block">
+                                    <strong>{{ $errors->first('due_date') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">

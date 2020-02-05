@@ -35,6 +35,7 @@
                         <th>SMS Charge</th>
                         <th>Per Student Charge</th>
                         <th>Invoicing Date</th>
+                        <th>Due Date</th>
                         <th>Email To</th>
                         <th>Action</th>
                     </tr>
@@ -46,6 +47,7 @@
                             <td>{{ $schoolMeta['sms_charge'] }}</td>
                             <td>{{ $schoolMeta['per_student_charge'] }}</td>
                             <td>{{ $schoolMeta['invoice_generation_date'] }}</td>
+                            <td>{{ $schoolMeta['due_date'] }}</td>
                             <td>{{ $schoolMeta['email'] }}</td>
                             <td>
                                 <a class="btn btn-lg btn-primary mr-3" href="{{route('edit.payment.info',['id' => $schoolMeta->id])}}"><i class="far fa-edit"></i></a>
