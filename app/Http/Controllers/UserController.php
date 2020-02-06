@@ -32,6 +32,7 @@ use App\Http\Requests\User\CreateAccountantRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
 use App\Shift;
+use Carbon\Carbon;
 
 /**
  * Class UserController.
@@ -638,6 +639,7 @@ class UserController extends Controller
 
     public function exportStudent(Request $request){
         $keys = $request->get('keys')  ? unserialize($request->get('keys')) : [];
-        return Excel::download(new  ExportStudent($keys), 'students.xls');
+        $fileName = Carbon::now()->format('Y_m_d_g_i_s_a').'_students.xls';
+        return Excel::download(new  ExportStudent($keys), $fileName );
     }
 }

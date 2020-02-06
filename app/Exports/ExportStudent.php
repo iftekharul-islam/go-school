@@ -24,7 +24,7 @@ class ExportStudent implements FromCollection, WithMapping, WithHeadings
         $students = User::with(['studentInfo', 'section.class'])
             ->where( 'role', 'student' )
             ->where( 'school_id', Auth::user()->school_id )
-            ->when(!empty($this->keys['section_id']), function($query) {
+            ->when( !empty($this->keys['section_id']), function($query) {
                 return $query->where('section_id', $this->keys['section_id']);
             })
             ->when( !empty($this->keys['student_name']), function($query) {
