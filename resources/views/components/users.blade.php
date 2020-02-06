@@ -3,9 +3,9 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th>Code</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
+                    <th>{{ __('text.Code') }}</th>
+                    <th>{{ __('text.Name') }}</th>
+                    <th>{{ __('text.Email') }}</th>
                     @foreach ($users as $user)
                         @if($user->role == 'student')
                             @if (!Session::has('section-attendance'))
@@ -31,7 +31,7 @@
                     @endforeach
                     @foreach ($users as $user)
                         @if(Auth::user()->role == 'student' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                            @if($user->role === 'student')<th>Attendance</th>@endif
+                            @if($user->role === 'student')<th>{{ __('text.Attendance') }}</th>@endif
                         @endif
                         @break($loop->first)
                     @endforeach
@@ -106,7 +106,7 @@
                                 @php
                                     $role = \Illuminate\Support\Facades\Auth::user()->role;
                                 @endphp
-                                <a class="btn-link text-teal" role="button" href="{{url($role.'/attendances/0/'.$user->id.'/0')}}"><b>View Attendance</b></a></td>@endif
+                                <a class="btn-link text-teal" role="button" href="{{url($role.'/attendances/0/'.$user->id.'/0')}}"><b>{{ __('text.View Attendance') }}</b></a></td>@endif
                         @endif
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))

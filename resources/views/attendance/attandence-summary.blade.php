@@ -7,14 +7,14 @@
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
         <h3>
-            Attendance Summary
+            {{ __('text.Attendance Summary') }}
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>View Summary</li>
+            <li>{{ __('text.View Summary') }}</li>
         </ul>
         </div>
         <div class="false-height">
@@ -25,15 +25,15 @@
                     <input type="hidden" name="section_id" value="{{ $students[0]->section->id }}" >
                     <div class="row">
                         <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                            <label>Start Date</label>
+                            <label>{{ __('text.Start Date') }}</label>
                             <input name="start_date" type="date" class="form-control" value="{{ $start_display ?? $start_display }}">
                         </div>
                         <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                            <label>End Date</label>
+                            <label>{{ __('text.End Date') }}</label>
                             <input name="end_date" type="date" class="form-control" value="{{ $end_display ?? $end_display }}">
                         </div>
                         <div class="col-12 form-group mg-t-2 float-right">
-                            <button type="submit" class="button--save button float-right">Search</button>
+                            <button type="submit" class="button--save button float-right">{{ __('text.Search') }}</button>
                         </div>
                     </div>
                 </form>
@@ -41,16 +41,16 @@
             </div>
             <div class="card mb-5">
                 <div class="card-body">
-                    <h1 class="text-teal text-center">Student Attendance Summary</h1>
+                    <h1 class="text-teal text-center">{{ __('text.Student Attendance Summary') }}</h1>
                     <div class="card-header-title mt-5 ml-2">
-                        <b>Attendance:</b> {{ $start_display }}&nbsp; <b>to</b> &nbsp {{ $end_display }} &nbsp
+                        <b>{{ __('text.Attendance') }}:</b> {{ $start_display }}&nbsp; <b>{{ __('text.to') }}</b> &nbsp {{ $end_display }} &nbsp
                     </div>
                     <div class="table">
                         <div class="table-scroll">
                             <table class="table-main table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="fix-col">Name</th>
+                                        <th class="fix-col">{{ __('text.Name') }}</th>
                                         @foreach ($period as $dt)
                                             <th class="text-center">{{ $dt->format("d") }}</th>
                                         @endforeach
