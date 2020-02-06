@@ -112,10 +112,10 @@
                         <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
                         <th>Code</th>
                         <th>Full Name</th>
-                        <th>Roll No</th>
                         @foreach ($users as $user)
                             @if($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
+                                    <th>Roll No</th>
                                     <th>Session</th>
                                     <th>Version</th>
                                     <th>Class</th>
@@ -160,9 +160,9 @@
                             <td>
                                 <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
                             </td>
-                            <td>{{ $user->studentInfo['roll_number'] }}</td>
                             @if($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
+                                    <td>{{ $user->studentInfo['roll_number'] }}</td>
                                     <td>{{ $user->studentInfo['session'] }}</td>
                                     <td>{{ ucfirst($user->studentInfo['version']) }}</td>
                                     <td>{{ $user->section['class']['class_number'] }} {{!empty($user->group)? '- '.$user->group:''}}</td>
