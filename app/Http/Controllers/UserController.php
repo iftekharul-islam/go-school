@@ -646,7 +646,8 @@ class UserController extends Controller
         return back()->with('status' , $message);
     }
 
-    public function exportStudent(){
-        return Excel::download(new  ExportStudent, 'students.xls');
+    public function exportStudent(Request $request){
+        $keys = $request->get('keys')  ? unserialize($request->get('keys')) : [];
+        return Excel::download(new  ExportStudent($keys), 'students.xls');
     }
 }
