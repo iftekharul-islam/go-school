@@ -9,7 +9,10 @@ use App\Http\Requests\UpdateExamDetailsRequest;
 use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Http\Requests\Exam\CreateExamRequest;
+use App\Http\Requests\Exam\UploadExamResultRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ExamController extends Controller
 {
@@ -154,13 +157,51 @@ class ExamController extends Controller
         return redirect()->back()->with('status', 'Exam Deleted');
     }
 
-    /**uploaded exam result*/
-    public function uploadResults($exam_id) {
+    /**update exam result file*/
+    public function updateResultFile(UploadExamResultRequest $request, $exam_id) {
+        $exam = Exam::findOrFail($exam_id);
 
+        if (!empty($exam->result_file)) {
+            Storage::disk('public')->delete($exam->result_file);
+        }
+
+        $date = Carbon::now();
+        $fileName = Auth::user()->school_id.'_'.$date->format('Y_m_d').'_'.$date->format('g_i_a');
+        $path = Storage::disk('public')->put('result', $request->file('result_file'));
+        $exam->result_file = $path;
+        $exam->save();
+
+        return back()->with('status', 'Result file uploaded');
     }
 
-    /**uploaded exam result*/
+    /**edit exam result file*/
+    public function editResultFile($exam_id) {
+        $exam = Exam::findOrFail($exam_id);
+        return view('exams.result.upload-result', compact('exam'));
+    }
+
+    /**upload exam result file*/
     public function resultFiles() {
-        return view('exams.results', compact(''));
+        $exams = $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
+        return view('exams.result.results', compact('exams'));
+    }
+    /**download result */
+    public function downloadResultFile($exam_id) {
+        $exam = Exam::findOrFail($exam_id);
+        return Storage::disk('public')->download($exam->result_file);
+    }
+
+     /**remove exam result file*/
+     public function removeResultFile($exam_id) {
+        $exam = Exam::findOrFail($exam_id);
+
+        if (!empty($exam->result_file)) {
+            Storage::disk('public')->delete($exam->result_file);
+        }
+
+        $exam->result_file = '';
+        $exam->save();
+
+        return back()->with('status', 'Result file deleted');
     }
 }
