@@ -124,7 +124,7 @@ class AttendanceController extends Controller
         $exit_time = Carbon::parse($exitTimeConfig->value);
         $last_attendance_time = Carbon::parse($entryTimeConfig->value);
 
-        if($staff['shift']){
+        if ($staff['shift']) {
             $exit_time = Carbon::parse($staff->shift['exit_time']);
             $last_attendance_time = Carbon::parse($staff->shift['last_attendance_time']);
         }
