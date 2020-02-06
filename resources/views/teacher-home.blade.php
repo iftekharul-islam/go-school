@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
+        <h3>{{ __('text.Dashboard') }}</h3>
     </div>
     <!-- Breadcubs Area End Here -->
     <div class="false-height">
@@ -17,7 +17,7 @@
                             </div>
                             <div class="item-content">
                                 <div class="item-number"><span class="counter" data-num="{{ $students->count() }}"></span></div>
-                                <div class="item-title">Total Students</div>
+                                <div class="item-title">{{ __('text.Total Students') }}</div>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             </div>
                             <div class="item-content">
                                 <div class="item-number"><span class="counter" data-num="{{ $exams->count() }}"></span></div>
-                                <div class="item-title">Total Exams</div>
+                                <div class="item-title">{{ __('text.Total Exams') }}</div>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="item-content">
                                 <div class="item-number"><span class="counter" data-num="{{ $totalClasses }}"></span></div>
-                                <div class="item-title">Total Classes</div>
+                                <div class="item-title">{{ __('text.Total Classes') }}</div>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="item-content">
                                 <div class="item-number"><span class="counter" data-num="{{ $totalSections }}"></span></div>
-                                <div class="item-title">Total Sections</div>
+                                <div class="item-title">{{ __('text.Total Sections') }}</div>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Students</h3>
+                                <h3>{{ __('text.Students') }}</h3>
                             </div>
                         </div>
                         <div class="doughnut-chart-wrap">
@@ -69,11 +69,11 @@
                         </div>
                         <div class="student-report">
                             <div class="student-count pseudo-bg-blue">
-                                <h4 class="item-title">Female Students</h4>
+                                <h4 class="item-title">{{ __('text.Female Students') }}</h4>
                                 <div class="item-number">{{ $female }}</div>
                             </div>
                             <div class="student-count pseudo-bg-yellow">
-                                <h4 class="item-title">Male Students</h4>
+                                <h4 class="item-title">{{ __('text.Male Students') }}</h4>
                                 <div class="item-number">{{ $male }}</div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                     <div class="card-body">
                         <div class="heading-layout1 mg-b-17">
                             <div class="item-title">
-                                <h3>Notices</h3>
+                                <h3>{{ __('text.Notices') }}</h3>
                             </div>
                         </div>
                         <div class="notice-box-wrap">

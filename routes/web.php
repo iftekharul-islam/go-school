@@ -1,5 +1,5 @@
 <?php
-
+use \Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return back();
+});
+Route::get('/locale',function (){
+   return view('locale');
+});
 
 Route::get('/', function () {
     return view('welcome');

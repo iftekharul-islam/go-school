@@ -58,6 +58,17 @@
             </li>
         </ul>
         <ul class="navbar-nav">
+            <div class="mr-3">
+                @if(app()->getLocale() == 'en')
+                    <a class="btn btn-info text-white ml-2" href=" {{ url('locale/bn') }}">Bn</a>
+                @else
+                    <a class="btn btn-info text-white" href="{{ url('locale/en') }}">En</a>
+                @endif
+            </div>
+{{--            <div class="mr-3">--}}
+{{--                <a class="btn btn-info text-white" href="{{ url('locale/en') }}">En</a>--}}
+{{--                <a class="btn btn-info text-white ml-2" href=" {{ url('locale/bn') }}">Bn</a>--}}
+{{--            </div>--}}
             @guest
             @else
                 @if(Auth::user()->role === 'student')

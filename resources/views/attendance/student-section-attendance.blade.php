@@ -5,13 +5,13 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3>Students Attendance</h3>
+        <h3>{{ __("text.Students Attendance") }}</h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Take Attendance</li>
+            <li>{{ __("text.Take Attendance") }}</li>
         </ul>
     </div>
 
@@ -19,14 +19,14 @@
         <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h2 class="text-teal"><i class="far fa-chart-bar mr-2"></i>Attendance</h2>
+                        <h2 class="text-teal"><i class="far fa-chart-bar mr-2"></i>{{ __('text.Attendance') }}</h2>
                     </div>
                 </div>
 
             @if(count($students) > 0)
                 @foreach ($students as $student)
                     <div class="card-header-title mt-5 ml-2">
-                        <b>Section</b> - {{ $student->section->section_number}}&nbsp;&nbsp; <b>Class</b> - {{$student->section->class->class_number}} &nbsp;&nbsp;<b>Date</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
+                        <b>{{ __('text.Section') }}</b> - {{ $student->section->section_number}}&nbsp;&nbsp; <b>{{ __('text.Class') }}</b> - {{$student->section->class->class_number}} &nbsp;&nbsp;<b>{{ __('text.Date') }}</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
                     </div>
                     @break($loop->first)
                 @endforeach
@@ -83,9 +83,9 @@
             var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
 
             if ($(this).is(':checked')) {
-                attdState.addClass('badge-primary').text('Present');
+                attdState.addClass('badge-primary').text('{{ trans_choice('text.Present',2) }}');
             } else {
-                attdState.addClass('badge-danger').text('Absent');
+                attdState.addClass('badge-danger').text('{{ __('text.Absent') }}');
             }
         });
 

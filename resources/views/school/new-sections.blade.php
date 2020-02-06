@@ -7,14 +7,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class='fas fa-chalkboard'></i>
-            All Classes
+            {{ __('text.All Classes') }}
         </h3>
         <ul>
             <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>All Classes</li>
+            <li>{{ __('text.All Classes') }}</li>
         </ul>
     </div>
     <div class="card height-auto false-height">
@@ -30,7 +30,7 @@
                                         <i style="font-size:24px;margin-left:-20px;"
                                            class="flaticon-books text-teal"></i>
 
-                                        Class <strong class="text-capitalize">{{$class->class_number}}</strong>
+                                        {{ __('text.Class') }} <strong class="text-capitalize">{{$class->class_number}}</strong>
                                         @if($class ->group) | Group <strong
                                                 class="text-capitalize">{{ucfirst($class->group)}}</strong>
                                         @endif
@@ -43,9 +43,8 @@
                                         @endphp
                                     @endforeach
                                     <div>
-                                        <h5 class="card-title text-muted">Total
-                                            Section: {{ $class->sections->count() }}</h5>
-                                        <h5 class="card-title text-muted">Total Student: {{ $total_student }}</h5>
+                                        <h5 class="card-title text-muted">{{ _('text.sections') }}: {{ $class->sections->count() }}</h5>
+                                        <h5 class="card-title text-muted"> {{ _('text.Total Student') }}: {{ $total_student }}</h5>
                                     </div>
                                     <div class="">
                                         @if(isset($_GET['course']) && $_GET['course'] == 1)
@@ -57,14 +56,14 @@
                                                                 type="button" id="dropdownMenuButton"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
-                                                            Details
+                                                            {{ __('text.Details') }}
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
                                                         <div class="dropdown-content"
                                                              aria-labelledby="dropdownMenuButton">
                                                             @foreach($class->sections as $section)
                                                                 <a href="{{ url('admin/school/section/details/'.$section->id. '?course=1') }}">
-                                                                    Section: {{$section->section_number}}</a>
+                                                                    {{ __('text.Section') }}: {{$section->section_number}}</a>
                                                             @endforeach
                                                         </div>
 
@@ -89,7 +88,7 @@
                                                                 No Info Available
                                                             </button>                                               -->
                                                             <p class="text-center text-muted font-weight-bold">
-                                                                No Info Available
+                                                                {{ __('text.No Info Available') }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -120,7 +119,7 @@
                                                         <div class="dropdown-content"
                                                              aria-labelledby="dropdownMenuButton">
                                                             @foreach($class->sections as $section)
-                                                                <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                                <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">{{ __('text.Section') }}: {{$section->section_number}}</a>
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -140,7 +139,7 @@
                                                         <div class="dropdown-content"
                                                              aria-labelledby="dropdownMenuButton">
                                                             <p class="text-center text-muted font-weight-bold">
-                                                                No Info Available!
+                                                                {{ __('text.No Info Available') }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -165,7 +164,7 @@
                                             <i style="font-size:24px;margin-left:-20px;"
                                                class="flaticon-books text-teal"></i>
 
-                                            Class <strong class="text-capitalize">{{$class->class_number}}</strong>
+                                            {{ __('text.Class') }} <strong class="text-capitalize">{{$class->class_number}}</strong>
                                             @if($class ->group) | Group <strong
                                                     class="text-capitalize">{{ucfirst($class->group)}}</strong>
                                             @endif
@@ -178,9 +177,8 @@
                                             @endphp
                                         @endforeach
                                         <div>
-                                            <h5 class="card-title text-muted">Total
-                                                Section: {{ $class->sections->count() }}</h5>
-                                            <h5 class="card-title text-muted">Total Student: {{ $total_student }}</h5>
+                                            <h5 class="card-title text-muted">{{ __('text.Total Sections') }}: {{ $class->sections->count() }}</h5>
+                                            <h5 class="card-title text-muted">{{ __('text.Total Students') }}: {{ $total_student }}</h5>
                                         </div>
                                         <div class="">
                                             @if(isset($_GET['course']) && $_GET['course'] == 1)
@@ -199,7 +197,7 @@
                                                                  aria-labelledby="dropdownMenuButton">
                                                                 @foreach($class->sections as $section)
                                                                     <a href="{{ url('admin/school/section/details/'.$section->id. '?course=1') }}">
-                                                                        Section: {{$section->section_number}}</a>
+                                                                        {{ __('text.Section') }}: {{$section->section_number}}</a>
                                                                 @endforeach
                                                             </div>
 
@@ -213,7 +211,7 @@
                                                                     type="button" id="dropdownMenuButton"
                                                                     data-toggle="dropdown"
                                                                     aria-haspopup="true" aria-expanded="false">
-                                                                Details
+                                                                {{ __('text.Details') }}
                                                                 <i class="fa fa-caret-down"></i>
                                                             </button>
 
@@ -224,7 +222,7 @@
                                                                     No Info Available
                                                                 </button>                                               -->
                                                                 <p class="text-center text-muted font-weight-bold">
-                                                                    No Info Available
+                                                                    {{ __('text.No Info Available') }}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -250,13 +248,13 @@
                                                                     type="button" id="dropdownMenuButton"
                                                                     data-toggle="dropdown"
                                                                     aria-haspopup="true" aria-expanded="false">
-                                                                Details
+                                                                {{ __('text.Details') }}
                                                                 <i class="fa fa-caret-down"></i>
                                                             </button>
                                                             <div class="dropdown-content"
                                                                  aria-labelledby="dropdownMenuButton">
                                                                 @foreach($class->sections as $section)
-                                                                    <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">Section: {{$section->section_number}}</a>
+                                                                    <a href="{{ url('admin/section/details/attendance/'.$section->id.'?att=1') }}">{{ __('text.Section') }}: {{$section->section_number}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -269,14 +267,14 @@
                                                                     type="button" id="dropdownMenuButton"
                                                                     data-toggle="dropdown"
                                                                     aria-haspopup="true" aria-expanded="false">
-                                                                Details
+                                                                {{ __('text.Details') }}
                                                                 <i class="fa fa-caret-down"></i>
                                                             </button>
 
                                                             <div class="dropdown-content"
                                                                  aria-labelledby="dropdownMenuButton">
                                                                 <p class="text-center text-muted font-weight-bold">
-                                                                    No Info Available!
+                                                                    {{ __('text.No Info Available') }}
                                                                 </p>
                                                             </div>
                                                         </div>

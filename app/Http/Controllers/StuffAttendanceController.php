@@ -67,8 +67,9 @@ class StuffAttendanceController extends Controller
         } else {
             $this->teacherAttendanceService->storeStuffAttendance();
         }
+        $success =  __('text.Attendance record saved') ;
 
-        return redirect()->back()->with('status', 'Attendance record saved');
+        return redirect()->back()->with('status', $success);
     }
 
     public function adjustMissingAttendance($stuff_id)
