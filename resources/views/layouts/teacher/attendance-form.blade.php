@@ -16,13 +16,13 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Student_Code</th>
-                <th>Name</th>
-                <th>Present
+                <th>{{ __('text.Code') }}</th>
+                <th>{{ __('text.Name') }}</th>
+                <th>{{ trans_choice('text.Present',1) }}
                     <button type="button" id="over-ride" class="button button--primary badge btn-override" data-purpose="over" onclick="activeAttendance();">Over ride</button>
                 </th>
-                <th>Total Attended</th>
-                <th>Total Missed</th>
+                <th>{{ __('text.Total Attended') }}</th>
+                <th>{{ __('text.Total Missed') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -38,9 +38,9 @@
                         <td>{{$attendance->student->student_code}}</td>
                         <td>
                             @if($attendance->present === 1)
-                                <span class="badge-primary attdState badge">Present</span>
+                                <span class="badge-primary attdState badge">{{ trans_choice('text.Present',2) }}</span>
                             @else
-                                <span class="badge-danger attdState badge">Absent</span>
+                                <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
                             @endif
                             &nbsp;&nbsp;<a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
                         </td>
@@ -81,7 +81,7 @@
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
-                        <td><span class="badge badge-danger attdState">Absent</span>&nbsp;&nbsp;<a href="{{url('user/',$student->student_code)}}">{{$student->name}}</a></td>
+                        <td><span class="badge badge-danger attdState">{{ __('text.Absent') }}</span>&nbsp;&nbsp;<a href="{{url('user/',$student->student_code)}}">{{$student->name}}</a></td>
                         <td class="attendance-bar">
                             <div class="form-check ">
                                 <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="present" disabled="disabled">
@@ -112,9 +112,9 @@
     </div>
     <div class="attendance mt-5">
         @if (count($attendances) > 0)
-            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i> Update</button>
+            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i>{{ __('text.Update') }}</button>
         @else
-            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i>Submit</button>
+            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i>{{ __('text.Submit') }}</button>
         @endif
     </div>
 </form>

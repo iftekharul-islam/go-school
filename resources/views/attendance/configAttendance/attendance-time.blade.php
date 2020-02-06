@@ -10,15 +10,15 @@
 
                         <div class="breadcrumbs-area">
                             <h3>
-                                <i class='fas fa-clock'></i>  Attendance Time
+                                <i class='fas fa-clock'></i> {{ __('text.Attendance Time') }}
                             </h3>
                             <ul>
                                 <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                                        Back &nbsp;&nbsp;|</a>
-                                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                                 </li>
-                                <li>Attendance</li>
-                                <li>Configuration</li>
+                                <li>{{ __('text.Attendance') }}</li>
+                                <li>{{ __('text.Configuration') }}</li>
                             </ul>
                         </div>
 
@@ -35,7 +35,7 @@
                                     </div>
                                 @endif
 
-                                <a href="{{ route('attendance.time.add') }}" class="btn btn-secondary float-right btn-lg mb-3"><b>Create New Timing</b></a>
+                                <a href="{{ route('attendance.time.add') }}" class="btn btn-secondary float-right btn-lg mb-3"><b>{{ __('text.Create New Timing') }}</b></a>
                                 <div class="clearfix"></div>
                                 <div id="accordion">
                                     @if(!$classes->isEmpty())
@@ -44,7 +44,7 @@
                                     <div class="card-header" id="heading-{{$key}}">
                                             <h5 class="mb-0 d-inline ">
                                                 <button class="btn btn-link cls-title" data-toggle="collapse" data-target="#collapse-{{$class->id}}" aria-expanded="true" aria-controls="collapse-{{$class->id}}">
-                                                    Class {{ $class->class_number }}
+                                                    {{ __('text.Class') }} {{ $class->class_number }}
                                                 </button>
                                                 </h5>
                                             
@@ -55,7 +55,7 @@
                                                     @foreach($class->sections as $k => $section)
                                                         <div class="card">
                                                             <div class="card-header">
-                                                            <a href="#" data-toggle="collapse" class="sec-title" data-target="#collapseSection-{{$section->id}}">Section: {{ $section->section_number }}</a>
+                                                            <a href="#" data-toggle="collapse" class="sec-title" data-target="#collapseSection-{{$section->id}}">{{ __('text.Section') }}: {{ $section->section_number }}</a>
                                                             </div>
                                                             <div class="card-body collapse" data-parent="#child-{{$class->id}}" id="collapseSection-{{$section->id}}">
                                                                 @if(!$section->attendanceTimes->isEmpty())
@@ -72,21 +72,21 @@
                                                                         </button>
                                                                     </form>
                                                                 </span>
-                                                                <p class="mb-1"><b>Shift: </b>{{ ucfirst($timing->shift) }}  
+                                                                <p class="mb-1"><b>{{ __('text.Shift') }}: </b>{{ ucfirst($timing->shift) }}
                                                                     </p>
                                                                     
-                                                                <p class="mb-1"><b>Last Attendance Time: </b>{{ \Carbon\Carbon::parse($timing->last_attendance_time)->format('g:i A') }}</p>
-                                                                <p class="mb-1"><b>Exit Time: </b>{{ \Carbon\Carbon::parse($timing->exit_time)->format('g:i A') }}</p>
+                                                                <p class="mb-1"><b>{{ __('text.Last Attendance Time') }}: </b>{{ \Carbon\Carbon::parse($timing->last_attendance_time)->format('g:i A') }}</p>
+                                                                <p class="mb-1"><b>{{ __('text.Exit Time') }}: </b>{{ \Carbon\Carbon::parse($timing->exit_time)->format('g:i A') }}</p>
                                                                 <hr>
                                                                 @endforeach
                                                                 @else
-                                                                <p>No timing found</p>
+                                                                <p>{{ __('text.No timing found') }}</p>
                                                                 @endif
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 @else
-                                                    <p>No Section Found</p>
+                                                    <p>{{ __('text.No Section Found') }}</p>
                                                 @endif
                                             </div>
                                         </div>

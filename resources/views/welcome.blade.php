@@ -42,7 +42,7 @@
                                     {{ csrf_field() }}
                                     <div class="form__group">
                                         <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
-                                            <label for="email" class="form__label">Username/Email</label>
+                                            <label for="email" class="form__label">{{ __('text.userType') }}</label>
                                             <input type="text" class="form__input" placeholder="Email address" id="email" name="email" value="{{ old('email') }}" required>
                                         </div>
                                     </div>
