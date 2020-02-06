@@ -3,21 +3,35 @@
 namespace App\Exports;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
 class ExportStudent implements FromCollection, WithMapping, WithHeadings
 {
+    protected $keys;
+
+    public function __construct($keys)
+    {
+        $this->keys = $keys;
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
         $students = User::with(['studentInfo', 'section.class'])
-            ->where('role', 'student')
-            ->where('school_id', \auth::user()->school_id)
+            ->where( 'role', 'student' )
+            ->where( 'school_id', Auth::user()->school_id )
+            ->when(!empty($this->keys['section_id']), function($query) {
+                return $query->where('section_id', $this->keys['section_id']);
+            })
+            ->when( !empty($this->keys['student_name']), function($query) {
+                return $query->where('name', 'like',"%{$this->keys['student_name']}%");
+            })
             ->get();
+
         return $students;
     }
 
