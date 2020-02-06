@@ -26,7 +26,6 @@
         <i class="fas fa-users mr-2 "></i>   All Students
         <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
     @endif
-        {{-- {{ dd(\Request::query()) }} --}}
     </h3>
     <ul>
         <li>
