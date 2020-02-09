@@ -23,7 +23,7 @@ return [
     'Configuration' => 'কনফিগারেশন',
     'Teachers' => 'শিক্ষক বৃন্দ',
     'Add Teacher' => 'শিক্ষক সংযোজন',
-    'All Teachers' => 'সকল শিক্ষক',
+    'All Teacher' => 'সকল শিক্ষক',
     'Students' => 'শিক্ষার্থী বৃন্দ',
     'Add Student' => 'শিক্ষার্থী সংযোজন',
     'All Students' => 'সকল শিক্ষার্থী',
@@ -117,22 +117,22 @@ return [
     'Shift' => 'সময় কাল',
     'Create New Timing' => 'সময় তৈরি করুন',
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //Add teacher form
+    'e-mail_address' => 'ইমেইল',
+    'Password' => 'পাসওয়ার্ড',
+    'confirm_password' => 'পাসওয়ার্ড নিশ্চিত করুন',
+    'class_teacher' => 'শ্রেণী শিক্ষক',
+    'phone_number' => 'ফোন নম্বর',
+    'blood_group' => 'রক্তের গ্রুপ',
+    'nationality' => 'জাতীয়তা',
+    'gender' => 'লিঙ্গ',
+    'address' => 'ঠিকানা',
+    'about' => 'বিবরণ',
+    'upload_picture' => 'ছবি আপলোড',
+    'register' => 'নিবন্ধন করুন',
+    'add_shift' => 'সময়কাল সংযোজন',
+    'all_shifts' => 'সকল সময়কাল',
+    'course' => 'কোর্স',
+    'action' => 'আর্যকারিতা',
 
 ];

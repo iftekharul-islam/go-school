@@ -6,14 +6,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-user-plus"></i>
-            Add Teacher
+            {{ __('text.Add Teacher') }}
         </h3>
         <ul>
             <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Add Teacher</li>
+            <li>{{ __('text.Add Teacher') }}</li>
         </ul>
     </div>
     @if (session('status'))
@@ -47,8 +47,8 @@
 
                             <div class="col-md-12">
                                 <label for="name"
-                                       class="control-label false-padding-bottom">Full
-                                    Name <label class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">{{ __('text.Name') }}
+                                    <label class="text-danger">*</label></label>
 
                                 <input id="name" type="text" class="form-control teacher-name"
                                        name="name"
@@ -68,8 +68,8 @@
 
                             <div class="col-md-12">
                                 <label for="email"
-                                       class="control-label false-padding-bottom">E-Mail
-                                    Address<label
+                                       class="control-label false-padding-bottom">{{ __('text.Email') }}
+                                    <label
                                         class="text-danger">*</label></label>
                                 <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
@@ -98,8 +98,8 @@
 
                             <div class="col-md-12">
                                 <label for="password"
-                                       class="control-label false-padding-bottom">Password<label
-                                        class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">{{ __('text.Password') }}
+                                    <label class="text-danger">*</label></label>
                                 <input id="password" type="password"
                                        class="form-control" name="password"
                                        required>
@@ -117,9 +117,8 @@
 
                             <div class="col-md-12">
                                 <label for="password-confirm"
-                                       class=" control-label false-padding-bottom">Confirm
-                                    Password<label
-                                        class="text-danger">*</label></label>
+                                       class=" control-label false-padding-bottom">{{ __('text.confirm_password') }}
+                                    <label class="text-danger">*</label></label>
 
                                 <input id="password-confirm" type="password"
                                        class="form-control"
@@ -135,7 +134,7 @@
 
                             <div class="col-md-12">
                                 <label for="department"
-                                       class=" control-label false-padding-bottom">Department</label>
+                                       class=" control-label false-padding-bottom">{{ __('text.Department') }}</label>
 
                                 <select id="department" class="form-control"
                                         name="department_id"
@@ -162,8 +161,7 @@
 
                             <div class="col-md-12">
                                 <label for="class_teacher"
-                                       class=" control-label false-padding-bottom">Class
-                                    Teacher</label>
+                                       class=" control-label false-padding-bottom">{{ __('text.class_teacher') }}</label>
 
                                 <select id="class_teacher" class="form-control"
                                         name="class_teacher_section_id" value="{{ old('class_teacher') }}">
@@ -193,8 +191,7 @@
 
                             <div class="col-md-12">
                                 <label for="phone_number"
-                                       class="control-label false-padding-bottom">Phone
-                                    Number<label class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">{{ __('text.phone_number') }}<label class="text-danger">*</label></label>
 
                                 <input id="phone_number" type="text"
                                        class="form-control" name="phone_number"
@@ -213,8 +210,7 @@
 
                             <div class="col-md-12">
                                 <label for="blood_group"
-                                       class=" control-label false-padding-bottom">Blood
-                                    Group</label>
+                                       class=" control-label false-padding-bottom">{{ __('text.blood_group') }}</label>
 
                                 <select id="blood_group" class="form-control"
                                         name="blood_group"
@@ -245,7 +241,7 @@
 
                             <div class="col-md-12">
                                 <label for="nationality"
-                                       class="control-label false-padding-bottom">Nationality</label>
+                                       class="control-label false-padding-bottom">{{ __('text.nationality') }}</label>
 
                                 <input id="nationality" type="text"
                                        class="form-control" name="nationality"
@@ -264,7 +260,7 @@
 
                             <div class="col-md-12">
                                 <label for="gender"
-                                       class="control-label false-padding-bottom">Gender<label
+                                       class="control-label false-padding-bottom">{{ __('text.gender') }}<label
                                         class="text-danger">*</label></label>
 
                                 <select id="gender" class="form-control"
@@ -291,7 +287,7 @@
                         <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                             <div class="col-md-12">
                                 <label for="name"
-                                       class="control-label false-padding-bottom">Address<label class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">{{ __('text.address') }}<label class="text-danger">*</label></label>
                                 <input id="address" type="text" class="form-control"
                                        name="address"
                                        value="{{ old('address') }}"
@@ -310,7 +306,7 @@
 
                             <div class="col-md-12">
                                 <label for="email"
-                                       class="control-label false-padding-bottom">About</label>
+                                       class="control-label false-padding-bottom">{{ __('text.about') }}</label>
 
                                 <input id="about" type="text" class="form-control"
                                        name="about"
@@ -327,33 +323,37 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label class="control-label">
-                                Upload Profile Picture
-                            </label>
-                            <br>
-                            <input type="file" id="picPath" name="teacher_pic">
+                        <div class="col-md-12">
+                            <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                <label class="control-label">
+                                    {{ __('text.upload_picture') }}
+                                </label>
+                                <br>
+                                <input type="file" id="picPath" name="teacher_pic">
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label class="control-label">
-                                Shift <label class="text-danger">*</label>
-                            </label>
-                            <br>
-                            <select name="shift_id" class="form-control" required>
-                                <option value="" disabled selected>Select Shift</option>
-                                @if( count($shifts) > 0 )
-                                    @foreach ($shifts as $shift)
-                                        <option value="{{$shift->id}}" @if(old('shift_id') == $shift->id) selected @endif >{{ $shift->shift }}</option>
-                                    @endforeach
+                            <div class="col-md-12">
+                                <label class="control-label">
+                                    {{ __('text.Shift') }} <label class="text-danger">*</label>
+                                </label>
+                                <br>
+                                <select name="shift_id" class="form-control" required>
+                                    <option value="" disabled selected>Select Shift</option>
+                                    @if( count($shifts) > 0 )
+                                        @foreach ($shifts as $shift)
+                                            <option value="{{$shift->id}}" @if(old('shift_id') == $shift->id) selected @endif >{{ $shift->shift }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if ($errors->has('shift_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('shift_id') }}</strong>
+                                    </span>
                                 @endif
-                            </select>
-                            @if ($errors->has('shift_id'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('shift_id') }}</strong>
-                                </span>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -362,12 +362,13 @@
                     <div class="col-md-12 col-md-offset-4">
                         <button type="submit" id="registerBtn"
                                 class="button button--save float-right">
-                            Register
+                            {{ __('text.register') }}
                         </button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
 
 @endsection
 
