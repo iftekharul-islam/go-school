@@ -162,21 +162,21 @@
                             <li class="nav-item">
                                 <a href="{{url('users/' .Auth::user()->school->code. '/0/1?teacher=1')}}"
                                    class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
-                                    <i class="fas fa-angle-right"></i><span>{{ __('text.All Teachers') }}</span></a>
+                                    <i class="fas fa-angle-right"></i><span>{{ __('text.All Teacher') }}</span></a>
                             </li>
                             @if($role == 'admin')
                                 <li class="nav-item sidebar-nav-item second-lbl-menu {{ $sht == 1 ? 'active' : ''}}">
-                                    <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>Shift</span></a>
+                                    <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>{{ __('text.Shift') }}</span></a>
                                     <ul class="nav sub-group-menu {{ $sht == 1 ? 'sub-group-active' : '' }}">
                                         <li class="nav-item">
                                             <a class="nav-link {{ (request()->is('admin/shift/create')) ? 'menu-active' : '' }}"
                                             href="{{ route('shift.create') }}">
-                                            <i class="fas fa-angle-right"></i><span>Add Shift</span></a>
+                                            <i class="fas fa-angle-right"></i><span>{{ __('text.add_shift') }}</span></a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link {{ (request()->is('admin/shifts')) ? 'menu-active' : '' }}"
                                             href="{{ route('shifts') }}">
-                                                <i class="fas fa-angle-right"></i><span> All Shifts</span></a>
+                                                <i class="fas fa-angle-right"></i><span>{{ __('text.all_shifts') }}</span></a>
                                         </li>
                                     </ul>
                                 </li>

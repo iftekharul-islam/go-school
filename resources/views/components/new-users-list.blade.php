@@ -4,7 +4,7 @@
     @if(count($users) > 0)
         @foreach($users as $user)
             @if($user->role == 'teacher')
-                <i class='fas fa-chalkboard-teacher'></i>  All Teachers
+                <i class='fas fa-chalkboard-teacher'></i>  {{ __('text.All Teacher') }}
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">Inactive Teachers</a>
             @elseif($user->role == 'student')
                 <i class="fas fa-users mr-2 "></i>   All Students
@@ -30,11 +30,11 @@
     <ul>
         <li>
             <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
         </li>
         <li>   @foreach($users as $user)
                 @if($user->role == 'teacher')
-                    All Teachers
+                    {{ __('text.All Teacher') }}
                 @elseif($user->role == 'student')
                     All Students
                 @elseif($user->role == 'accountant')
@@ -110,8 +110,8 @@
                     <thead>
                     <tr>
                         <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
-                        <th>Code</th>
-                        <th>Full Name</th>
+                        <th>{{ __('text.Code') }}</th>
+                        <th>{{ __('text.Name') }}</th>
                         @foreach ($users as $user)
                             @if($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
@@ -125,7 +125,7 @@
                             @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                                 @if (!Session::has('section-attendance'))
                                     @if($user->role == 'teacher')
-                                        <th>Courses</th>
+                                        <th>{{ __('text.course') }}</th>
                                     @endif
                                 @endif
                             @elseif($user->role == 'accountant' || $user->role == 'librarian')
@@ -145,9 +145,9 @@
                         @if(Auth::user()->role == 'admin')
                             @if (!Session::has('section-attendance'))
                                 @if($user->role != 'student')
-                                    <th>Attendance</th>
+                                    <th>{{ __('text.Attendance') }}</th>
                                 @endif
-                                <th>Action</th>
+                                <th>{{ __('text.action') }}</th>
                             @endif
                         @endif
                     </tr>
