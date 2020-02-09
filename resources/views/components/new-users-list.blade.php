@@ -202,7 +202,10 @@
                                         </td>
                                     @endif
                                     <td>
-                                        <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
+                                        <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}" title="Update"><i class="far fa-edit"></i></a>
+                                        @if($user->role == 'student')
+                                            <a class="btn btn-lg btn-secondary mr-3" href="#" data-toggle="modal" data-target="#uploadImage" title="Upload Profile Picture"><i class="fas fa-upload"></i></a>
+                                        @endif
                                     </td>
                                 @endif
                             @endif
@@ -219,8 +222,34 @@
             <p class="text-center">No Related Data Found.</p>
         @endif
     </div>
-    
+</div>
 
+<div class="modal fade" id="uploadImage" role="dialog" aria-labelledby="uploadImage">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Student Profile</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <form class="new-added-form" action="" method="post">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="password" class="col-sm-12 control-label">Select Image</label>
+                        <div class="col-sm-12">
+                            <input type="file" name="image" onchange="readURL(this);" class="form-control" id="image" accept=".jpg,.png,.jpeg" required>
+                             <img id="takeImg" src="#" alt="Select image" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group modal-footer pb-">
+                    <div class="col-md-12">
+                        <button type="submit" class="button button--save float-right">Confirm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @push('customjs')
@@ -296,6 +325,19 @@
                     document.getElementById(formId).submit();
                 }
             });
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#takeImg')
+                        .attr('src', e.target.result)
+                        .width(200)
+                        .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
     </script>
 @endpush
