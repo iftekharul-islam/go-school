@@ -23,6 +23,7 @@ return[
     'Configuration' => 'Configuration',
     'Teachers' => 'Teachers',
     'Add Teacher' => 'Add Teacher',
+    'All Teacher' => 'All Teacher',
     'Add Student' => 'Add Student',
     'All Students' => 'All Students',
     'Message Student' => 'Message Student',
@@ -112,31 +113,22 @@ return[
     'Shift' => 'Shift',
     'Create New Timing' => 'Create New Timing',
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // Add teacher form
+    'Password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'class_teacher' => 'Class Teacher',
+    'phone_number' => 'Phone Number',
+    'blood_group' => 'Blood Group',
+    'nationality' => 'Nationality',
+    'gender' => 'Gender',
+    'address' => 'Address',
+    'about' => 'About',
+    'upload_picture' => 'Upload Profile Picture',
+    'register' => 'Register',
+    'add_shift' => 'Add Shift',
+    'all_shifts' => 'All Shifts',
+    'course' => 'Course',
+    'action' => 'Action',
 
 
 ];

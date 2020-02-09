@@ -14,19 +14,19 @@
                     @else
                         <div class="breadcrumbs-area">
                             <ul>
-                                <h3>All Teachers</h3>
+                                <h3>{{ __('text.All Teacher') }}</h3>
                                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">Inactive Teachers</a>
                                 <li>
-                                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                                    <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role. '.home') }}">&nbsp;&nbsp;Home</a>
+                                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">{{ __('text.Back') }} &nbsp;|</a>
+                                    <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                                 </li>
-                                <li>All Teachers</li>
+                                <li>{{ __('text.All Teacher') }}</li>
                             </ul>
                         </div>
                         <div class="card mt-5 false-height">
                             <div class="card-body">
                                 <div class="card-body-body mt-5 text-center">
-                                    No Related Data Found.
+                                    {{ __('text.No Related Data Found') }}
                                 </div>
                             </div>
                         </div>
