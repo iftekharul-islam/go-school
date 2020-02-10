@@ -17,9 +17,12 @@ class CheckAccountStatus
      */
     public function handle($request, Closure $next)
     {
-        $school = School::findOrFail(Auth::user()->school_id)->first();
-        if ( $school->is_active == 0 && Auth::user()->role != 'master') {
-            return redirect('/account-suspended');
+        if ( Auth::user()->role != 'master' ) {
+            $school = School::find(Auth::user()->school_id);
+            if ( empty($school) || $school->is_active == 0 ) {
+                Auth::logout();
+                return redirect('/account-suspended');
+            }
         }
 
         return $next($request);

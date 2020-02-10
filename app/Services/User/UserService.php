@@ -127,14 +127,16 @@ class UserService
         return 'librarian' == $role;
     }
 
-    public function indexOtherView($view, $users)
+    public function indexOtherView($view, $users, $classes, $type)
     {
         return view($view, [
             'users' => $users,
+            'type' => $type,
+            'classes' => $classes
         ]);
     }
 
-    public function getStudents($section_id = null, $name = null)
+    public function getStudents($section_id = null, $name = null, $show = 30)
     {
         $students = $this->user->with(['section.class', 'school', 'studentInfo'])
             ->where('school_id', Auth::user()->school_id)
@@ -147,14 +149,14 @@ class UserService
                 return $query->where('name', 'like', "%{$name}%");
             })
             ->orderBy('name', 'asc')
-            ->paginate(30);
+            ->paginate($show);
         $studentFilterByDepartments = $this->user->with(['section.class', 'school', 'studentInfo'])
             ->where('school_id', auth()->user()->school_id)
             ->student()
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->orderBy('name', 'asc')
-            ->paginate(30);
+            ->paginate($show);
 
         if ($studentFilterByDepartments->count() > 0) {
             $students = $studentFilterByDepartments;
@@ -193,7 +195,7 @@ class UserService
             ->where('role', 'accountant')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(40);
     }
 
     public function getLibrarians()
@@ -203,7 +205,7 @@ class UserService
             ->where('role', 'librarian')
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(40);
     }
 
     public function getSectionStudentsWithSchool($section_id)
@@ -345,6 +347,7 @@ class UserService
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
+        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : '' ;
 
         if ('teacher' == $role) {
             $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;

@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'role', 'address', 'nationality', 'code',/* school code*/
-        'student_code', 'active', 'gender', 'verified', 'school_id', 'section_id','advance_amount'
+        'student_code', 'active', 'gender', 'verified', 'school_id', 'section_id','advance_amount','blood_group'
     ];
 
     /**
@@ -78,5 +78,10 @@ class User extends Authenticatable
     public function attendances()
     {
         return $this->hasMany(Attendance::class, 'student_id');
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo('App\Shift');
     }
 }

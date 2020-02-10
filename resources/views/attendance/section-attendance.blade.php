@@ -5,13 +5,13 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3>All Students</h3>
+        <h3>{{ __('text.All Students') }}</h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Students Attendance</li>
+            <li>{{ __('text.Students Attendance') }}</li>
         </ul>
     </div>
     <div class="section-students">
@@ -43,14 +43,20 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <div class="title" style="overflow: hidden" >
+                        <div class="title mb-5" style="overflow: hidden" >
                             <div class="float-left">
                                 <a class="button button--save mr-2 float-left"
                                    href={{ route('attendance.summary', $students[0]->section->id) }}>
-                                    View Summary</a>
-                                <a class="button button--save float-left"
+                                    {{ __('text.View Summary') }}</a>
+                                <a class="button button--save mr-2 float-left"
                                    href={{ route('student.attendance', $students[0]->section->id) }}>
-                                    Take Attendance</a>
+                                    {{ __('text.Take Attendance') }}</a>
+                                <a class="button button--save float-left"
+                                   href={{ route('export.AbsentStudent',
+                                   ['class_number'=>$class->class_number,
+                                    'section_name'=>$students[0]->section->section_number,
+                                     'section_id'=>$students[0]->section->id ]) }}>
+                                    {{ __('text.Export Absent Students') }}</a>
                             </div>
                         </div>
                         @component('components.users',['users'=>$users,'current_page'=>$current_page,'per_page'=>$per_page])
@@ -63,7 +69,7 @@
                 <div class="card mt-5 false-height">
                     <div class="card-body">
                         <div class="card-body-body mt-5 text-center">
-                            No Related Data Found.
+                            {{ __('text.No Related Data Found') }}
                         </div>
                     </div>
                 </div>

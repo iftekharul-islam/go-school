@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Myclass as Myclass;
+use App\Myclass;
+use App\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ClassResource;
@@ -113,10 +114,10 @@ class MyClassController extends Controller
      */
     public function destroy($id)
     {
-        return (Myclass::destroy($id)) ? response()->json([
-            'status' => 'success',
-        ]) : response()->json([
-            'status' => 'error',
-        ]);
+        $section = Section::where('class_id', $id)->delete();
+        $class = Myclass::findOrfail($id);
+        $class->delete();
+
+        return back()->with('status', 'Class successfully  deleted');
     }
 }

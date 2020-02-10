@@ -48,20 +48,33 @@
                                                                 <li class="list-group-item">
                                                                     Section {{$section->section_number}}
                                                                     &nbsp
-                                                                    <a class="btn btn-lg btn-primary mr-2" id="edit-section-btn-{{$section->id}}" data-toggle="collapse" href="#collapseForEditSection{{$section->id}}"
-   aria-expanded="false" aria-controls="collapseForEditSection{{$section->id}}"><i class="far fa-edit"></i> Edit</a>
-                                                                    &nbsp
                                                                     <a class="btn btn-lg btn-warning mr-2"
                                                                        href="{{url('admin/courses/0/'.$section->id)}}">View
                                                                         All
                                                                         Assigned
                                                                         Courses</a>
-                                                                    <span class="pull-right"> &nbsp;&nbsp
+                                                                    <span class=""> &nbsp;&nbsp
                                                                         <a class="btn btn-lg btn-success mr-2" href="{{url('admin/school/promote-students/'.$section->id)}}">+ Promote Students</a>
                                                                     </span>
-                                                    
+                                                                    &nbsp
+                                                                    <a class="btn btn-lg btn-info pull-right mr-2" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}"
+                                                                       aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">+ Add New Course</a>
+                                                                    &nbsp
+                                                                    <a class="btn btn-lg btn-primary mr-2" id="edit-section-btn-{{$section->id}}"
+                                                                       data-toggle="collapse" href="#collapseForEditSection{{$section->id}}"
+                                                                       aria-expanded="false" aria-controls="collapseForEditSection{{$section->id}}">
+                                                                        <i class="far fa-edit"></i> Edit
+                                                                    </a>
+                                                                    &nbsp
+                                                                    <button class='btn btn-lg btn-danger mr-2' type="button" onclick="removeSection({{ $section->id }})"><i class="far fa-trash-alt mr-2"></i>Delete</button>
+                                                                    <form id="delete-form-{{ $section->id }}" action="{{ route('delete.section', $section->id) }}"
+                                                                          method="post" style="display: none;">
+                                                                        {{ csrf_field() }}
+                                                                        {{ method_field('delete') }}
+                                                                    </form>
+
                                                                     @include('layouts.master.add-course-form')
-                                                                    
+
                                                                     <div class="collapse" id="collapseForEditSection{{$section->id}}" style="margin-top:1%;">
                                                                         <div class="panel panel-default">
                                                                             <div class="panel-body">
@@ -87,10 +100,16 @@
                                                             @endif
                                                         @endforeach
                                                     </ul>
-
-                                                   
-
+                                                    <button class="btn btn-info btn-lg mt-5 mb-4" id="create-section-btn-class-{{$class->id}}">+ Create a New Section</button>
+                                                    <button class="btn btn-lg btn-primary ml-3 btn-lg mt-5 mb-4" id="edit-class-info-{{$class->id}}"><i class="far fa-edit"></i> Edit Class Info</button>
+                                                    <button class="btn btn-danger btn-lg mt-5 mb-4 ml-3" type="button" onclick="removeClass({{ $class->id }})"><i class="far fa-trash-alt mr-2"> </i>Delete Class
+                                                    </button>
                                                     @include('layouts.master.create-section-form')
+                                                    <form id="delete-form-{{ $class->id }}" action="{{ route('delete.class', $class->id) }}"
+                                                          method="post" style="display: none;">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('delete') }}
+                                                    </form>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button"

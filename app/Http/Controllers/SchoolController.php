@@ -9,6 +9,8 @@ use App\Myclass;
 use App\Section;
 use App\Department;
 use App\Gradesystem;
+use App\SmsHistory;
+use Carbon\Carbon;
 //use App\Http\Resources\SchoolResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +34,7 @@ class SchoolController extends Controller
         $user = Auth::user();
 
         $schools = School::all();
-        $classes = Myclass::all();
+        $classes = Myclass::orderBy('class_number','ASC')->get();
         $sections = Section::all();
 
         $teachers = User::where('role', 'teacher')
@@ -304,6 +306,25 @@ class SchoolController extends Controller
         $school->save();
         $schoolStatus = $status == 0 ? 'deactivated' : 'activated';
         return back()->with('status', $name.' '.$schoolStatus);
+    }
+
+    public function smsSummary(Request $request)
+    {
+        $data = [];
+        if ( $request->get('from_date') && $request->get('to_date') ) {
+            if ( Carbon::parse($request->get('from_date'))->gt(Carbon::parse($request->get('to_date'))) )
+            {
+                return back()->with('status', '"From date" must be smaller than "To date"');
+            }
+            $totalSMS = SmsHistory::whereDate('created_at', '>=', $request->get('from_date') )
+                ->whereDate('created_at', '<=', $request->get('to_date'))
+                ->count();
+            $data['totalSms'] = $totalSMS;
+            $data['from_date'] = $request->get('from_date');
+            $data['to_date'] = $request->get('to_date');
+        }
+        
+        return view('school.sms-summary', compact('data'));
     }
 
 }

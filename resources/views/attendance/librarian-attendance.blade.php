@@ -5,15 +5,15 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Staff Attendance
+           {{ __('text.Staff Attendance') }}
         </h3>
         <ul>
             <li>
                 <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }}&nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Staff Attendance</li>
+            <li>{{ __('text.Staff Attendance') }}</li>
         </ul>
     </div>
 
@@ -21,7 +21,7 @@
         <div class="card-body">
                 @if(count($librarians) > 0)
                 <div class="card-header-title mt-5 ml-2">
-                    <b>Date</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
+                    <b>{{ __('text.Date') }}</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
                 </div>
                 <div class="card-body">
                     @if (session('status'))

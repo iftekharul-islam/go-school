@@ -31,6 +31,8 @@ use App\Http\Requests\User\ImpersonateUserRequest;
 use App\Http\Requests\User\CreateAccountantRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UsersImport;
+use App\Shift;
+use Carbon\Carbon;
 
 /**
  * Class UserController.
@@ -78,8 +80,8 @@ class UserController extends Controller
             if($request->student_name){
                 $searchData['student_name']= $request->student_name;
             }
-
-            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents($request->section_id, $request->student_name), $classes, $searchData,
+            $show = $request->show ? $request->show : 20;
+            return $this->userService->indexView('list.new-student-list', $this->userService->getStudents($request->section_id, $request->student_name, $show), $classes, $searchData,
              $type = 'Students');
         } elseif ($this->userService->isListOfTeachers($school_code, $teacher_code)) {
             return $this->userService->indexView('list.new-teacher-list',$this->userService->getTeachers(), $classes,'',  $type = 'Teachers');
@@ -95,11 +97,12 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function indexOther($school_code, $role)
-    {
+    {   
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->id)->get();
         if ($this->userService->isAccountant($role)) {
-            return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants());
+            return $this->userService->indexOtherView('accounts.new-accountant-list', $this->userService->getAccountants(), $classes, 'accountant');
         } elseif ($this->userService->isLibrarian($role)) {
-            return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians());
+            return $this->userService->indexOtherView('library.new-librarian-list', $this->userService->getLibrarians(), $classes, 'librarian');
         } else {
             return view('home');
         }
@@ -289,6 +292,7 @@ class UserController extends Controller
         $schools = School::all();
         $classes = Myclass::all();
         $sections = Section::all();
+        $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
 
         $teacherDepartments = Department::where('school_id', $user->school_id)->get();
         $teacherClasses = Myclass::where('school_id', $user->school->id)->pluck('id');
@@ -302,7 +306,7 @@ class UserController extends Controller
 
         $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
 
-        return view('school.create-new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections'));
+        return view('school.create-new-teacher', compact('schools', 'classes', 'sections', 'teachers', 'departments', 'adminAccessDepartment', 'teacherClasses', 'teacherDepartments', 'teacherSections', 'shifts'));
     }
     public function createAccountant()
     {
@@ -377,6 +381,7 @@ class UserController extends Controller
     public function show($user_code)
     {
         $user = $this->userService->getUserByUserCode($user_code);
+        $user->load('shift');
         $school = Auth::user();
         $school->load('school');
 
@@ -446,6 +451,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user->findOrFail($id);
+        $user->load('shift');
         $classes = Myclass::query()
             ->where('school_id', Auth::user()->school_id)
             ->pluck('id')
@@ -459,10 +465,13 @@ class UserController extends Controller
             ->where('school_id', Auth::user()->school_id)
             ->get();
         
+        $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
+        
         return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,
+            'shifts' => $shifts
         ]);
     }
 
@@ -490,35 +499,38 @@ class UserController extends Controller
             if ('teacher' == $request->user_role) {
                 $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
                 $tb->section_id = $request->class_teacher_section_id;
+                $tb->shift_id = $request->shift_id;
             }
             if ($tb->save()) {
                 if ($request->user_role == 'student') {
-                    $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
-                    $info->student_id = $tb->student_code;
-                    $info->session = $request->get('session');
-                    $info->version =$request->get('version');
-                    $info->shift =$request->get('shift');
-                    $info->student_indentification =$request->get('student_indentification');
-                    $info->roll_number =$request->get('roll_number');
-                    $info->group = $request->get('group');
-                    $info->birthday = $request->get('birthday');
-                    $info->religion = $request->get('religion');
-                    $info->guardian_name = $request->get('guardian_name');
-                    $info->guardian_phone_number = $request->get('guardian_phone_number');
-                    $info->father_name = $request->get('father_name');
-                    $info->father_phone_number = $request->get('father_phone_number');
-                    $info->father_national_id = $request->get('father_national_id');
-                    $info->father_occupation = $request->get('father_occupation');
-                    $info->father_designation = $request->get('father_designation');
-                    $info->father_annual_income = $request->get('father_annual_income');
-                    $info->mother_phone_number = $request->get('mother_phone_number');
-                    $info->mother_national_id =$request->get('mother_national_id');
-                    $info->mother_occupation = $request->get('mother_occupation');
-                    $info->mother_designation = $request->get('mother_designation');
-                    $info->mother_annual_income = $request->get('mother_annual_income');
-                    $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
-                    $info->user_id = $tb->id;
-                    $info->save();
+                    if (!empty($tb['id'])) {
+                        $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
+                        $info->student_id = $tb->student_code;
+                        $info->session = $request->get('session');
+                        $info->version =$request->get('version');
+                        $info->shift =$request->get('shift');
+                        $info->student_indentification =$request->get('student_indentification');
+                        $info->roll_number =$request->get('roll_number');
+                        $info->group = $request->get('group');
+                        $info->birthday = $request->get('birthday');
+                        $info->religion = $request->get('religion');
+                        $info->guardian_name = $request->get('guardian_name');
+                        $info->guardian_phone_number = $request->get('guardian_phone_number');
+                        $info->father_name = $request->get('father_name');
+                        $info->father_phone_number = $request->get('father_phone_number');
+                        $info->father_national_id = $request->get('father_national_id');
+                        $info->father_occupation = $request->get('father_occupation');
+                        $info->father_designation = $request->get('father_designation');
+                        $info->father_annual_income = $request->get('father_annual_income');
+                        $info->mother_phone_number = $request->get('mother_phone_number');
+                        $info->mother_national_id =$request->get('mother_national_id');
+                        $info->mother_occupation = $request->get('mother_occupation');
+                        $info->mother_designation = $request->get('mother_designation');
+                        $info->mother_annual_income = $request->get('mother_annual_income');
+                        $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
+                        $info->user_id = $tb->id;
+                        $info->save();
+                    }
                 }
             }
             return back()->with('error', 'Something went wrong please try again!');
@@ -600,6 +612,14 @@ class UserController extends Controller
 
     public function inactiveAccount() 
     {
+        if (Auth::check()) {
+
+            $school = School::find(Auth::user()->school_id);
+            if(!empty($school) && $school['is_active'] == 1){
+                return redirect(Auth::user()->role.'/home');
+            }
+        }
+
         return view('inactive-account');
     }
     
@@ -627,7 +647,29 @@ class UserController extends Controller
         return back()->with('status' , $message);
     }
 
-    public function exportStudent(){
-        return Excel::download(new  ExportStudent, 'students.xls');
+    public function exportStudent(Request $request){
+        $keys = $request->get('keys')  ? unserialize($request->get('keys')) : [];
+        $fileName = Carbon::now()->format('Y_m_d_g_i_s_a').'_students.xls';
+        return Excel::download(new  ExportStudent($keys), $fileName );
+    }
+
+    public function uploadStudentPic(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png|max:500',
+        ]);
+        $user = User::findOrfail($request->user_id);
+
+        if($request->hasFile('image')){
+            if(!empty($user->pic_path)){
+                Storage::disk('public')->delete($user->pic_path);
+            }
+            $path =  Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('image'));
+            $user->pic_path = 'storage/'.$path;
+        }
+        $user->save();
+
+        return back()->with('status', 'Student Image Uploaded');
     }
 }

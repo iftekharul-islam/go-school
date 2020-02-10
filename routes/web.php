@@ -1,5 +1,5 @@
 <?php
-
+use \Illuminate\Support\Facades\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return back();
+});
+Route::get('/locale',function (){
+   return view('locale');
+});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +27,7 @@ Auth::routes(['login' => false]);
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','check.account.status'])->group(function () {
 
     if (config('app.env') != 'production') {
         Route::get('user/config/impersonate', 'UserController@impersonateGet');
@@ -61,6 +69,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('edit/admin', 'AdminController@update');
         Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
+        Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
+        Route::get('add-payemnt-detail', 'SchoolMetaController@create')->name('add.payment.info');
+        Route::post('store-payemnt-detail', 'SchoolMetaController@store')->name('store.payment.info');
+        Route::get('edit-payemnt-detail/{id}', 'SchoolMetaController@edit')->name('edit.payment.info');
+        Route::post('update-payemnt-detail/{id}', 'SchoolMetaController@update')->name('update.payment.info');
+        Route::get('payemnt-details', 'SchoolMetaController@index')->name('payment.info');
+        Route::delete('delete/payemnt-details/{id}', 'SchoolMetaController@destroy')->name('delete.payment.info');
+        Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
+        Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
+        Route::get('sms-summary/{id}', 'SchoolController@smsSummary')->name('sms.summary');
     });
 
     //Student role routes
@@ -214,6 +232,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('edit/{id}', 'ExamController@updateExam');
             Route::get('active', 'ExamController@indexActive')->name('exams.active');
             Route::get('results', 'ExamController@resultFiles')->name('exams.results');
+            Route::get('edit/results/{exam_id}', 'ExamController@editResultFile')->name('exams.edit.result');
+            Route::post('update/results/{exam_id}', 'ExamController@updateResultFile')->name('exams.update.result');
+            Route::post('remove/result/{exam_id}', 'ExamController@removeResultFile')->name('exams.remove.result');
         });
 
         Route::prefix('inactive')->group(function () {
@@ -311,7 +332,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('section/details/attendance/{section_id}', 'AttendanceController@attendanceDetails');
         Route::get('section/details/student-attendance/{section_id}', 'AttendanceController@attendanceDetailsview')->name('student.attendance');
-
+        Route::get('students/export/{class_number}/{section_name}/{section_id}', 'AttendanceController@absentExport')->name('export.AbsentStudent');
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
@@ -321,6 +342,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('create-department', 'SchoolController@createDepartment')->name('create.department');
         Route::get('manage-class', 'SchoolController@manageClasses')->name('manage.class');
+        Route::delete('delete-section/{id}', 'SectionController@destroy')->name('delete.section');
+        Route::delete('delete-class/{class}', 'MyClassController@destroy')->name('delete.class');
 
         Route::get('import-student','UserController@importStudent');
 
@@ -358,6 +381,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('courses/store', 'CourseController@store');
         Route::post('user/bulk-action', 'UserController@bulkAction')->name('user.bulk.action');
         Route::get('student/export', 'UserController@exportStudent')->name('student.export');
+        Route::post('upload/student/pic', 'UserController@uploadStudentPic')->name('upload.student.pic');
        
         Route::delete('user/{id}', 'UserController@destroy')->name('delete-user');
 
@@ -375,7 +399,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('attendance-time/edit/{id}', 'SectionMetaController@edit')->name('attendance.time.edit');
         Route::put('attendance-time/update/{id}', 'SectionMetaController@update')->name('attendance.time.update');
         Route::delete('attendance-time/delete/{id}', 'SectionMetaController@destroy')->name('attendance.time.delete');
+        
+        Route::get('shifts', 'ShiftController@index')->name('shifts');
+        Route::get('shift/create/', 'ShiftController@create')->name('shift.create');
+        Route::post('shift/store/', 'ShiftController@store')->name('shift.store');
+        Route::get('shift/edit/{id}', 'ShiftController@edit')->name('shift.edit');
+        Route::post('shift/update/{id}', 'ShiftController@update')->name('shift.update');
+        Route::delete('shift/delete/{id}', 'ShiftController@destroy')->name('shift.delete');
     });
+    Route::get('/exams/download/result/{exam_id}', 'ExamController@downloadResultFile')->name('exams.download.result');
 
 });
 
