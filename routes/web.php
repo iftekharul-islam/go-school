@@ -379,6 +379,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('courses/store', 'CourseController@store');
         Route::post('user/bulk-action', 'UserController@bulkAction')->name('user.bulk.action');
         Route::get('student/export', 'UserController@exportStudent')->name('student.export');
+        Route::post('upload/student/pic', 'UserController@uploadStudentPic')->name('upload.student.pic');
        
         Route::delete('user/{id}', 'UserController@destroy')->name('delete-user');
 
