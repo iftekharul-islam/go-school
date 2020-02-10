@@ -57,6 +57,15 @@
         {{ session('error-status') }}
     </div>
 @endif
+ @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="card height-auto">
     <div class="card-body">
         @if(isset($type) && $type == 'Students')
@@ -66,17 +75,27 @@
                 <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="Name" />
             </div>
             <div class="form-group col-md-3">
-                <select name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
+                <select id="class_id" name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
                     <option value="" disabled selected>Class</option>
-                     @foreach ($classes as $class)
+                    @foreach ($classes as $class)
                         <option value="{{$class->id}}" @if($class->id == $searchData['class_id']) selected @endif>{{$class->class_number}}</option>    
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-md-3">
                 <select name="section_id" id="section_id" class="form-control form-control-sm">
-                    @if($searchData['section_id'])
-                        <option value="{{$searchData['section_id']}}" >{{$searchData['section_number']}}</option>
+                    @if($searchData['class_id'])
+                        @if($classes)
+                            @foreach ($classes as $class)
+                                @if($class->id == $searchData['class_id'])
+                                    @if($class->sections)
+                                        @foreach ( $class->sections as $section)
+                                            <option value="{{$section['id']}}" @if($searchData['section_id'] == $section['id']) selected @endif>{{$section['section_number']}}</option>
+                                        @endforeach
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
                     @else 
                         <option value="" disabled selected >Section</option>
                     @endif
@@ -202,7 +221,10 @@
                                         </td>
                                     @endif
                                     <td>
-                                        <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}"><i class="far fa-edit"></i></a>
+                                        <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}" title="Update"><i class="far fa-edit"></i></a>
+                                        @if($user->role == 'student')
+                                            <a class="btn btn-lg btn-secondary mr-3 open-modal" data-id="{{$user->id}}" href="#" data-toggle="modal" data-target="#uploadImage" title="Upload Profile Picture"><i class="fas fa-upload"></i></a>
+                                        @endif
                                     </td>
                                 @endif
                             @endif
@@ -219,8 +241,35 @@
             <p class="text-center">No Related Data Found.</p>
         @endif
     </div>
-    
+</div>
 
+<div class="modal fade" id="uploadImage" role="dialog" aria-labelledby="uploadImage">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Student Profile</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <form id ="user_pic_upload" class="new-added-form" action="{{ route('upload.student.pic') }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="password" class="col-sm-12 control-label">Select Image</label>
+                        <div class="col-sm-12 text-center">
+                            <input type="hidden" name="user_id" value="">
+                            <input type="file" name="image" onchange="readURL(this);" class="form-control" id="image" accept=".jpg,.png,.jpeg" required>
+                            <img id="takeImg" class="d-none" style="max-width:200px;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group modal-footer pb-">
+                    <div class="col-md-12">
+                        <button type="submit" class="button button--save float-right">Upload</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @push('customjs')
@@ -246,22 +295,28 @@
                     showAlert();
                     $('#action').prop('selectedIndex',0);
                 }
-           });
+            });
+
+            $('.open-modal').click(function(){
+               $('#user_pic_upload input[name=user_id]').val($(this).data('id'));
+            });
         });
 
        function getSections(item) {
             let selectedClass = item.value;
-            let classes = {!! json_encode($classes->toArray()) !!};
-            let sections = [];
-            classes.forEach((cls) => {
-                if (cls.id == selectedClass) {
-                    sections = cls.sections;
-                }
-            });
-            $('#section_id').empty();
-            sections.forEach((sec) => {
-                $('#section_id').append($("<option />").val(sec.id).text(sec.section_number));
-            });
+            if(selectedClass != ''){
+                let classes = {!! json_encode($classes->toArray()) !!};
+                let sections = [];
+                classes.forEach((cls) => {
+                    if (cls.id == selectedClass) {
+                        sections = cls.sections;
+                    }
+                });
+                $('#section_id').empty();
+                sections.forEach((sec) => {
+                    $('#section_id').append($("<option />").val(sec.id).text(sec.section_number));
+                });
+            }
         }
 
         function submitForm(formId) {
@@ -296,6 +351,18 @@
                     document.getElementById(formId).submit();
                 }
             });
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#takeImg')
+                        .attr('src', e.target.result)
+                        .removeClass('d-none');
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
         }
     </script>
 @endpush
