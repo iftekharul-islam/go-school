@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Http\Requests\SectionsRequest;
+use App\Section;
 use App\User;
 use App\Course;
 use App\Myclass;
 use App\Routine;
 use App\ExamForClass;
-use App\Section as Section;
 use Illuminate\Http\Request;
 use App\Services\User\UserService;
 use Illuminate\Support\Facades\Auth;
@@ -192,10 +193,9 @@ class SectionController extends Controller
      */
     public function destroy($id)
     {
-        return (Section::destroy($id)) ? response()->json([
-            'status' => 'success',
-        ]) : response()->json([
-            'status' => 'error',
-        ]);
+        $section = Section::findOrFail($id);
+        $section->delete();
+
+        return back()->with('status', 'Section successfully  deleted');
     }
 }
