@@ -57,6 +57,15 @@
         {{ session('error-status') }}
     </div>
 @endif
+ @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="card height-auto">
     <div class="card-body">
         @if(isset($type) && $type == 'Students')
@@ -204,7 +213,7 @@
                                     <td>
                                         <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}" title="Update"><i class="far fa-edit"></i></a>
                                         @if($user->role == 'student')
-                                            <a class="btn btn-lg btn-secondary mr-3" href="#" data-toggle="modal" data-target="#uploadImage" title="Upload Profile Picture"><i class="fas fa-upload"></i></a>
+                                            <a class="btn btn-lg btn-secondary mr-3 open-modal" data-id="{{$user->id}}" href="#" data-toggle="modal" data-target="#uploadImage" title="Upload Profile Picture"><i class="fas fa-upload"></i></a>
                                         @endif
                                     </td>
                                 @endif
@@ -231,20 +240,21 @@
                 <h4 class="modal-title" id="myModalLabel">Student Profile</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
-            <form class="new-added-form" action="" method="post">
+            <form id ="user_pic_upload" class="new-added-form" action="{{ route('upload.student.pic') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="password" class="col-sm-12 control-label">Select Image</label>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 text-center">
+                            <input type="hidden" name="user_id" value="">
                             <input type="file" name="image" onchange="readURL(this);" class="form-control" id="image" accept=".jpg,.png,.jpeg" required>
-                             <img id="takeImg" src="#" alt="Select image" />
+                            <img id="takeImg" class="d-none" style="max-width:200px;"/>
                         </div>
                     </div>
                 </div>
                 <div class="form-group modal-footer pb-">
                     <div class="col-md-12">
-                        <button type="submit" class="button button--save float-right">Confirm</button>
+                        <button type="submit" class="button button--save float-right">Upload</button>
                     </div>
                 </div>
             </form>
@@ -275,6 +285,9 @@
                     showAlert();
                     $('#action').prop('selectedIndex',0);
                 }
+           });
+           $('.open-modal').click(function(){
+               $('#user_pic_upload input[name=user_id]').val($(this).data('id'));
            });
         });
 
@@ -329,13 +342,12 @@
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     $('#takeImg')
                         .attr('src', e.target.result)
-                        .width(200)
-                        .height(200);
+                        .removeClass('d-none');
                 };
+
                 reader.readAsDataURL(input.files[0]);
             }
         }

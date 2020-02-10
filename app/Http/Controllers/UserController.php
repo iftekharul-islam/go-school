@@ -652,4 +652,24 @@ class UserController extends Controller
         $fileName = Carbon::now()->format('Y_m_d_g_i_s_a').'_students.xls';
         return Excel::download(new  ExportStudent($keys), $fileName );
     }
+
+    public function uploadStudentPic(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png|max:500',
+        ]);
+        $user = User::findOrfail($request->user_id);
+
+        if($request->hasFile('image')){
+            if(!empty($user->pic_path)){
+                Storage::disk('public')->delete($user->pic_path);
+            }
+            $path =  Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('image'));
+            $user->pic_path = 'storage/'.$path;
+        }
+        $user->save();
+
+        return back()->with('status', 'Student Image Uploaded');
+    }
 }
