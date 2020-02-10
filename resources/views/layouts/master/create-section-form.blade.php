@@ -45,8 +45,8 @@
                     <select class="form-control" name="group" id="classRoomNumber{{$school->id}}">
                         <option value="">None</option>
                         <option value="Science">Science</option>
-                        <option value="Arts">Arts</option>
-                        <option value="Commerce">Commerce</option>
+                        <option value="Humanities">Humanities</option>
+                        <option value="Business Studies">Business Studies</option>
                     </select>
                     <span id="helpBlock" class="help-block">Select none if this Class belongs to no Group</span>
                 </div>
