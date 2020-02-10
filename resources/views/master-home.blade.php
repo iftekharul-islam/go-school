@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 @section('content')
 <div class="breadcrumbs-area">
-    <h3>Dashboard</h3>
+    <h3>{{ __("text.Dashboard") }}</h3>
 </div>
 
 <div class="height-auto false-height">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="item-content">
                     <div class="item-number"><span class="counter" data-num="{{ $school }}">{{ $school }}</span></div>
-                    <div class="item-title">Total School</div>
+                    <div class="item-title">{{ __("text.schools") }}</div>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="item-content">
                     <div class="item-number"><span class="counter" data-num="{{ $total_student }}">{{ $total_student }}</span></div>
-                    <div class="item-title">Total Student</div>
+                    <div class="item-title">{{ __("text.Total Students") }}</div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="item-content">
                     <div class="item-number"><span class="counter" data-num="{{ $total_admin }}">{{ $total_admin }}</span></div>
-                    <div class="item-title">Total Admin</div>
+                    <div class="item-title">{{ __('text.total_admin') }}</div>
                 </div>
             </div>
         </div>
