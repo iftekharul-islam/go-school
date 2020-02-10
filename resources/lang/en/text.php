@@ -131,5 +131,18 @@ return[
     'course' => 'Course',
     'action' => 'Action',
 
-
+    //Master sidebar
+    'schools' => 'Schools',
+    'create_school' => 'Create School',
+    'all_school' => 'All Schools',
+    'payment' => 'Payment',
+    'add_payment' => 'Add Payment',
+    'payment_details' => 'Payment Details',
+    'generate_invoice' => 'Generate Invoice',
+    'total_admin' => 'Total Admin',
+    'change_password' => 'Change Password',
+    'impersonate' => 'Impersonate',
+    'leave_impersonation' => 'Leave Impersonation',
+    'logout' => 'Logout',
+    'my_profile' => 'My Profile',
 ];

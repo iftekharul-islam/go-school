@@ -135,4 +135,18 @@ return [
     'course' => 'কোর্স',
     'action' => 'আর্যকারিতা',
 
+    //Master
+    'schools' => 'বিদ্যালয় সমূহ',
+    'create_school' => 'স্কুল তৈরি করণ',
+    'all_school' => 'সকল বিদ্যালয়',
+    'payment' => 'পেমেন্ট',
+    'add_payment' => 'পেমেন্ট সংযোজন',
+    'payment_details' => 'পেমেন্টের বিস্তারিত',
+    'generate_invoice' => 'চালান তৈরি করণ',
+    'total_admin' => 'অ্যাডমিন সংখ্যা',
+    'change_password' => 'পাসওয়ার্ড পরিবর্তন',
+    'impersonate' => 'ইমপারসোনেট',
+    'leave_impersonation' => 'ইমপারসোনেট পরিবর্তন',
+    'logout' => 'প্রস্থান',
+    'my_profile' => 'আমার প্রোফাইল'
 ];
