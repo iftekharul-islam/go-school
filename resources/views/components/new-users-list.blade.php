@@ -75,17 +75,27 @@
                 <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="Name" />
             </div>
             <div class="form-group col-md-3">
-                <select name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
+                <select id="class_id" name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
                     <option value="" disabled selected>Class</option>
-                     @foreach ($classes as $class)
+                    @foreach ($classes as $class)
                         <option value="{{$class->id}}" @if($class->id == $searchData['class_id']) selected @endif>{{$class->class_number}}</option>    
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-md-3">
                 <select name="section_id" id="section_id" class="form-control form-control-sm">
-                    @if($searchData['section_id'])
-                        <option value="{{$searchData['section_id']}}" >{{$searchData['section_number']}}</option>
+                    @if($searchData['class_id'])
+                        @if($classes)
+                            @foreach ($classes as $class)
+                                @if($class->id == $searchData['class_id'])
+                                    @if($class->sections)
+                                        @foreach ( $class->sections as $section)
+                                            <option value="{{$section['id']}}" @if($searchData['section_id'] == $section['id']) selected @endif>{{$section['section_number']}}</option>
+                                        @endforeach
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
                     @else 
                         <option value="" disabled selected >Section</option>
                     @endif
@@ -285,25 +295,30 @@
                     showAlert();
                     $('#action').prop('selectedIndex',0);
                 }
-           });
-           $('.open-modal').click(function(){
+            });
+
+            $('.open-modal').click(function(){
                $('#user_pic_upload input[name=user_id]').val($(this).data('id'));
-           });
+            });
+
+
         });
 
        function getSections(item) {
             let selectedClass = item.value;
-            let classes = {!! json_encode($classes->toArray()) !!};
-            let sections = [];
-            classes.forEach((cls) => {
-                if (cls.id == selectedClass) {
-                    sections = cls.sections;
-                }
-            });
-            $('#section_id').empty();
-            sections.forEach((sec) => {
-                $('#section_id').append($("<option />").val(sec.id).text(sec.section_number));
-            });
+            if(selectedClass != ''){
+                let classes = {!! json_encode($classes->toArray()) !!};
+                let sections = [];
+                classes.forEach((cls) => {
+                    if (cls.id == selectedClass) {
+                        sections = cls.sections;
+                    }
+                });
+                $('#section_id').empty();
+                sections.forEach((sec) => {
+                    $('#section_id').append($("<option />").val(sec.id).text(sec.section_number));
+                });
+            }
         }
 
         function submitForm(formId) {
