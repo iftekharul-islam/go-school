@@ -300,8 +300,6 @@
             $('.open-modal').click(function(){
                $('#user_pic_upload input[name=user_id]').val($(this).data('id'));
             });
-
-
         });
 
        function getSections(item) {
