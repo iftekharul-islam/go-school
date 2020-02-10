@@ -123,6 +123,20 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-2 col-sm-12 offset-md-8">
+                    <div class="form-group">
+                        <select id='records' name="records" class="form-control form-control-sm">
+                            <option value="" disabled selected>Show</option>
+                            <option value="20" @if(request()->get('show') == 20) selected @endif>20</option>
+                            <option value="25" @if(request()->get('show') == 25) selected @endif>25</option>
+                            <option value="30" @if(request()->get('show') == 30) selected @endif>30</option>
+                            <option value="35" @if(request()->get('show') == 35) selected @endif>35</option>
+                            <option value="40" @if(request()->get('show') == 40) selected @endif>40</option>
+                            <option value="45" @if(request()->get('show') == 45) selected @endif>45</option>
+                            <option value="50" @if(request()->get('show') == 50) selected @endif>50</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="mb-5">
                 <table class="table table-bordered display text-wrap">
@@ -300,9 +314,44 @@
             $('.open-modal').click(function(){
                $('#user_pic_upload input[name=user_id]').val($(this).data('id'));
             });
+
+            $('#records').change(function(){
+                let records = $(this).val();
+                updateQueryStringParam('show', records);
+                let url = window.location.href;
+                window.location.replace(url);
+            });
         });
 
-       function getSections(item) {
+        var updateQueryStringParam = function (key, value) {
+
+        var baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
+            urlQueryString = document.location.search,
+            newParam = key + '=' + value,
+            params = '?' + newParam;
+
+            if (urlQueryString) {
+                var updateRegex = new RegExp('([\?&])' + key + '[^&]*');
+                var removeRegex = new RegExp('([\?&])' + key + '=[^&;]+[&;]?');
+
+                if( typeof value == 'undefined' || value == null || value == '' ) { 
+                    params = urlQueryString.replace(removeRegex, "$1");
+                    params = params.replace( /[&;]$/, "" );
+
+                } else if (urlQueryString.match(updateRegex) !== null) { 
+                    params = urlQueryString.replace(updateRegex, "$1" + newParam);
+
+                } else { 
+                    params = urlQueryString + '&' + newParam;
+                }
+            }
+
+            params = params == '?' ? '' : params;
+
+            window.history.replaceState({}, "", baseUrl + params);
+        };
+        
+        function getSections(item) {
             let selectedClass = item.value;
             if(selectedClass != ''){
                 let classes = {!! json_encode($classes->toArray()) !!};

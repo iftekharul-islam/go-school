@@ -136,7 +136,7 @@ class UserService
         ]);
     }
 
-    public function getStudents($section_id = null, $name = null)
+    public function getStudents($section_id = null, $name = null, $show = 30)
     {
         $students = $this->user->with(['section.class', 'school', 'studentInfo'])
             ->where('school_id', Auth::user()->school_id)
@@ -149,14 +149,14 @@ class UserService
                 return $query->where('name', 'like', "%{$name}%");
             })
             ->orderBy('name', 'asc')
-            ->paginate(30);
+            ->paginate($show);
         $studentFilterByDepartments = $this->user->with(['section.class', 'school', 'studentInfo'])
             ->where('school_id', auth()->user()->school_id)
             ->student()
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->orderBy('name', 'asc')
-            ->paginate(30);
+            ->paginate($show);
 
         if ($studentFilterByDepartments->count() > 0) {
             $students = $studentFilterByDepartments;
