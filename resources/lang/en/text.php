@@ -63,6 +63,7 @@ return[
     'Collect Fee' => 'Collect Fee',
     'Manage Library' => 'Manage Library',
     'Add Librarian' => 'Add Librarian',
+    'Librarian List' => 'Librarian List',
     'All Books' => 'All Books',
     'All Issued Books' => 'All Issued Books',
     'Issue Book' => 'Issue Book',

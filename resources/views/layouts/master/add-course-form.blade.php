@@ -1,5 +1,3 @@
-<a class="btn btn-lg btn-info pull-right ml-5" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}"
-   aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">+ Add New Course</a>
 <div class="collapse" id="collapseForNewCourse{{$section->id}}" style="margin-top:1%;">
     <div class="panel panel-default">
         <div class="panel-body">
