@@ -131,9 +131,9 @@
                             <option value="25" @if(request()->get('show') == 25) selected @endif>25</option>
                             <option value="30" @if(request()->get('show') == 30) selected @endif>30</option>
                             <option value="35" @if(request()->get('show') == 35) selected @endif>35</option>
-                            <option value="35" @if(request()->get('show') == 40) selected @endif>40</option>
-                            <option value="35" @if(request()->get('show') == 45) selected @endif>45</option>
-                            <option value="35" @if(request()->get('show') == 50) selected @endif>50</option>
+                            <option value="40" @if(request()->get('show') == 40) selected @endif>40</option>
+                            <option value="45" @if(request()->get('show') == 45) selected @endif>45</option>
+                            <option value="50" @if(request()->get('show') == 50) selected @endif>50</option>
                         </select>
                     </div>
                 </div>
