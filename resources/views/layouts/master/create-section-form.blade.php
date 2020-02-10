@@ -1,7 +1,3 @@
-<button class="btn btn-info btn-lg mt-5 mb-4" id="create-section-btn-class-{{$class->id}}">+ Create a New Section
-</button>
-<button class="btn btn-lg btn-primary ml-3 btn-lg mt-5 mb-4" id="edit-class-info-{{$class->id}}"><i class="far fa-edit"></i> Edit Class Info</button>
-<br/>
 <div class="panel panel-default" id="create-section-btn-panel-class-{{$class->id}}" style="display:none;">
     <div class="panel-body">
         <form class="form-horizontal" action="{{url('admin/school/add-section')}}" method="post">

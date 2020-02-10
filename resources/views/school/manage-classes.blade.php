@@ -44,3 +44,36 @@
         </div>
     </div>
 @endsection
+@push('customjs')
+    <script type="text/javascript">
+        function removeSection(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+        }
+
+        function removeClass(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Class along with Section!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+        }
+    </script>
+@endpush
