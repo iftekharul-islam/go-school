@@ -320,7 +320,6 @@
                 updateQueryStringParam('show', records);
                 let url = window.location.href;
                 window.location.replace(url);
-                
             });
         });
 
