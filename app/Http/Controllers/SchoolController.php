@@ -310,6 +310,15 @@ class SchoolController extends Controller
 
     public function smsSummary(Request $request, $school_id)
     {
+        $this->validate($request, [
+            'from_date' => 'nullable|before_or_equal:'.$request->to_date,
+            'to_date' => 'nullable|after_or_equal:'.$request->from_date,
+        ],[
+            'from_date.before_or_equal' => 'From date must be a date before or equal "To date"',
+            'to_date.after_or_equal' => 'To date must be a date after or equal to "From date"',
+            
+        ]);
+
         $now = Carbon::now();
         $from = $request->from_date ? $request->from_date : $now->firstOfMonth()->format('Y-m-d');
         $to = $request->to_date ? $request->to_date : $now->today()->format('Y-m-d');
