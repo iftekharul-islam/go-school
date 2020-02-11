@@ -96,7 +96,7 @@
         function deleteMsg(id) {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this user!",
+                text: "Once deleted, you will not be able to recover this Message!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
