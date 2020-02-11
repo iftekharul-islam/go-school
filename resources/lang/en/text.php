@@ -80,6 +80,7 @@ return[
     'Total Attended' => 'Total Attended',
     'Total Missed' => 'Total Missed',
     'Adjust Missed Attendance' => 'Adjust Missed Attendance',
+    'Adjust Attendance' => 'Adjust Attendance',
     'Submit' => 'Submit',
     'Update' => 'Update',
     'Cancel' => 'Cancel',
