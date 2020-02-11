@@ -3,13 +3,8 @@
 @section('title', 'Course')
 
 @section('content')
-
-    {{--    <div class="dashboard-content-one">--}}
-    <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
-        <h3>
-            </a>Student Courses
-        </h3>
+        <h3>Student Courses</h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
@@ -18,8 +13,7 @@
             <li>Student Courses</li>
         </ul>
     </div>
-    <!-- Breadcubs Area End Here -->
-    <!-- All Subjects Area Start Here -->
+
     <div class="row">
         <div class="col-12-xxxl col-12">
             <div class="card height-auto false-height">
@@ -60,7 +54,4 @@
             </div>
         </div>
     </div>
-    <!-- All Subjects Area End Here -->
-    {{--    </div>--}}
-
 @endsection

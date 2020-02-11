@@ -59,31 +59,31 @@
                     $schools = \App\School::all();
                     ?>
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-school"></i><span>Schools</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-school"></i><span>{{ __('text.schools') }}</span></a>
                         <ul class="nav sub-group-menu {{ (request()->is('master/new*')) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="{{url('master/new/create-school')}}"
                                    class="nav-link {{ (request()->is('master/new/create-school')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>Create School</a>
+                                            class="fas fa-angle-right"></i>{{ __('text.create_school') }}</a>
                                 <a href="{{url('master/new/all-school')}}"
                                    class="nav-link {{ (request()->is('master/new/all-school')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>All Schools</a>
+                                            class="fas fa-angle-right"></i>{{ __('text.all_school') }}</a>
                             </li>
                         </ul>
                     </li>
                      <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-file-invoice"></i><span>Payment</span></a>
+                        <a href="#" class="nav-link"><i class="fas fa-file-invoice"></i><span>{{ __('text.payment') }}</span></a>
                         <ul class="nav sub-group-menu {{ ($payment == 1) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
                                 <a href="{{route('add.payment.info')}}"
                                    class="nav-link {{ (request()->is('master/add-payemnt-detail')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>Add Payment</a>
+                                            class="fas fa-angle-right"></i>{{ __('text.add_payment') }}</a>
                                 <a href="{{route('payment.info')}}"
                                    class="nav-link {{ (request()->is('master/payemnt-details')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>Payment Details</a>
+                                            class="fas fa-angle-right"></i>{{ __("text.payment_details") }}</a>
                                 <a href="{{route('generate.invoice')}}"
                                    class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>Generate Invoice</a>
+                                            class="fas fa-angle-right"></i>{{ __("text.generate_invoice") }}</a>
                             </li>
                         </ul>
                     </li>

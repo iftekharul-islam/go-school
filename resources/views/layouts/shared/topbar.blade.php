@@ -117,22 +117,21 @@
                             <ul class="settings-list">
                                 @if(Auth::user()->role != 'master')
                                     <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i
-                                                    class="flaticon-user"></i>My Profile</a></li>
+                                                    class="flaticon-user"></i>{{ __('text.my_profile') }}</a></li>
                                 @endif
-                                <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>Change
-                                        Password</a></li>
+                                <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>{{ __('text.change_password') }}</a></li>
                                 @if(env('APP_ENV') != 'production')
                                     <li>
                                         <a href="{{url('user/config/impersonate')}}"><i
                                                     class="flaticon-gear-loading"></i>
-                                            {{ app('impersonate')->isImpersonating() ? 'Leave Impersonation' : 'Impersonate' }}
+                                            {{ app('impersonate')->isImpersonating() ? __('text.leave_impersonation') : __('text.impersonate') }}
                                         </a>
                                     </li>
                                 @endif
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                        <i class="flaticon-turn-off"></i>Logout
+                                        <i class="flaticon-turn-off"></i>{{ __('text.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
