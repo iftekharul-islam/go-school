@@ -19,7 +19,7 @@
       <td>{{ $course->section->room_number }}</td>
       <td>{{ $course->course_time }}</td>
       <td>
-        @if ( !empty($course->teacher['student_code'])) )
+        @if ( !empty($course->teacher['student_code']) )
           <a class="text-teal" href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher['name'] }}</a>
         @else
             {{ $course->teacher['name'] }} 
