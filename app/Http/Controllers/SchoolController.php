@@ -308,23 +308,27 @@ class SchoolController extends Controller
         return back()->with('status', $name.' '.$schoolStatus);
     }
 
-    public function smsSummary(Request $request)
+    public function smsSummary(Request $request, $school_id)
     {
-        $data = [];
-        if ( $request->get('from_date') && $request->get('to_date') ) {
-            if ( Carbon::parse($request->get('from_date'))->gt(Carbon::parse($request->get('to_date'))) )
-            {
-                return back()->with('status', '"From date" must be smaller than "To date"');
-            }
-            $totalSMS = SmsHistory::whereDate('created_at', '>=', $request->get('from_date') )
-                ->whereDate('created_at', '<=', $request->get('to_date'))
-                ->count();
-            $data['totalSms'] = $totalSMS;
-            $data['from_date'] = $request->get('from_date');
-            $data['to_date'] = $request->get('to_date');
-        }
+        $now = Carbon::now();
+        $from = $request->from_date ? $request->from_date : $now->firstOfMonth()->format('Y-m-d');
+        $to = $request->to_date ? $request->to_date : $now->today()->format('Y-m-d');
         
-        return view('school.sms-summary', compact('data'));
+        if ($request->last_month == 1) {
+            $firstDay = new Carbon('first day of last month');
+            $lastDay = new Carbon('last day of last month');
+            $from = $firstDay->format('Y-m-d');
+            $to = $lastDay->format('Y-m-d');
+        }
+
+        $school = School::findOrFail($school_id);
+        $sms = SmsHistory::with('user.section.class')->whereDate('created_at', '>=', $from)
+            ->whereDate('created_at', '<=', $to)
+            ->where('school_id', $school_id)
+            ->orderby('created_at', 'asc')
+            ->paginate(30);
+
+        return view('school.sms-summary', compact('sms', 'from', 'to','school'));
     }
 
 }
