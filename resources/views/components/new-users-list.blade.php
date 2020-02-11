@@ -246,9 +246,17 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="paginate123 mt-5 float-right">
-                    {{ $users->appends(request()->query())->links() }}
+                <div class="row mt-5">
+                    <div class="col-md-2 col-sm-12">
+                        Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }}
+                    </div>
+                    <div class="col-md-10 col-sm-12 text-right">
+                        <div class="paginate123 float-right">
+                            {{ $users->appends(request()->query())->links() }}
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </form>
          @else
