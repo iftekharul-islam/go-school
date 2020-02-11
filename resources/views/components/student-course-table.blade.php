@@ -22,7 +22,7 @@
         @if ( !empty($course->teacher['student_code']) )
           <a class="text-teal" href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher['name'] }}</a>
         @else
-            {{ $course->teacher['name'] }} 
+          {{ $course->teacher['name'] }} 
         @endif
       </td>
     </tr>
