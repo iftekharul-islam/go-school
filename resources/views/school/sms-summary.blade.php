@@ -13,6 +13,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
+            <li><a href="{{ route('all.school') }}">All School</a></li>
             <li>SMS Summary</li>
         </ul>
     </div>
@@ -27,36 +28,58 @@
     @endif
     <div class="card height-auto mb-5">
         <div class="card-body">
+            <h3 class="border-bottom">{{ $school->name }}</h3>
             <form method="GET" action="">
-                <div class="row border-bottom mb-3">
+                <div class="row mb-3">
                     <div class="form-group col-md-4">
-                        <input type="text" name="from_date" value="@if( isset($data['from_date']) ){{$data['from_date']}}@endif" data-date-format="yyyy-mm-dd" placeholder="From Date" class="form-control date" autocomplete="off" required>
+                        <input type="text" name="from_date" value="{{ $from }}" data-date-format="yyyy-mm-dd" placeholder="From Date" class="form-control date" autocomplete="off" required>
                     </div>
                     <div class="form-group col-md-3">
-                    <input type="text" name="to_date" value="@if( isset($data['to_date']) ){{$data['to_date']}}@endif" data-date-format="yyyy-mm-dd" placeholder="To Date" class="form-control date" autocomplete="off" required>
+                        <input type="text" name="to_date" value="{{ $to }}" data-date-format="yyyy-mm-dd" placeholder="To Date" class="form-control date" autocomplete="off" required>
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Search">
+                        <button type="submit" class="button button--save font-weight-bold">Search</button>
+                        <a href="{{Request::url().'?last_month=1'}}" class="button button--edit font-weight-bold ml-md-2">Last Month</a>
+                        
                     </div>
                 </div>
             </form>
-            
-            @if(!empty($data))
-                <table class="table table-bordered display text-wrap">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Total SMS</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ \Carbon\Carbon::parse($data['from_date'])->format('d M Y').' To '.\Carbon\Carbon::parse($data['to_date'])->format('d M Y') }}</td>
-                            <td>{{ $data['totalSms'] }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            @endif
+            <table class="table table-bordered display text-wrap">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>To</th>
+                    <th>Code</th>
+                    <th>Class</th>
+                    <th>SMS Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @if( !$sms->isEmpty() )
+                        @foreach ($sms as $item)
+                            <tr>
+                                <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                                <td><a href="{{route('user.show',['user_code' => $item->user['student_code']]) }}">{{ $item->user['name'] }}</a></td>
+                                <td>{{ $item->user['student_code'] }}</td>
+                                <td>{{$item['user']['section']['class']['class_number']}} ({{ $item['user']['section']['section_number'] }})</td>
+                                <td>{{ ucfirst($item->type) }}</td>
+                            </tr>
+                        @endforeach
+                    @else 
+                        <tr><td colspan="3" class="text-center">No data Found</td></tr>
+                    @endif
+                </tbody>
+            </table>
+            <div class="row mt-5">
+                <div class="col-md-2 col-sm-12">
+                    Showing {{ $sms->firstItem() ?? 0 }} to {{ $sms->lastItem() ?? 0 }} of {{ $sms->total() }}
+                </div>
+                <div class="col-md-10 col-sm-12 text-right">
+                    <div class="paginate123 float-right">
+                        {{ $sms->appends(request()->query())->links() }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
         
