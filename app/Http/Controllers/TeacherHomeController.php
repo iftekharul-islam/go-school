@@ -64,7 +64,6 @@ class TeacherHomeController extends Controller
                     ->get();
             });
         }
-
         $courses_student = $this->courseService->getCoursesByTeacher($teacher->id);
         return view('teacher-home', [
             'students' => $students,
