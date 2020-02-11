@@ -314,15 +314,15 @@ class SchoolController extends Controller
         $from = $request->from_date ? $request->from_date : $now->firstOfMonth()->format('Y-m-d');
         $to = $request->to_date ? $request->to_date : $now->today()->format('Y-m-d');
         
-        if($request->last_month == 1){
+        if ($request->last_month == 1) {
             $firstDay = new Carbon('first day of last month');
             $lastDay = new Carbon('last day of last month');
             $from = $firstDay->format('Y-m-d');
             $to = $lastDay->format('Y-m-d');
         }
-        
+
         $school = School::findOrFail($school_id);
-        $sms = SmsHistory::with('user.section.class')->whereDate('created_at', '>=', $from )
+        $sms = SmsHistory::with('user.section.class')->whereDate('created_at', '>=', $from)
             ->whereDate('created_at', '<=', $to)
             ->where('school_id', $school_id)
             ->orderby('created_at', 'asc')
