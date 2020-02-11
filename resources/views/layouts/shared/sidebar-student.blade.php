@@ -21,6 +21,9 @@
             $academic = 0;
             $sht = 0;
             $payment = 0;
+            $att = 0;
+            if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || strpos($add, 'sections') || strpos($add, 'attendance-time'))
+                $att = 1;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
             if (strpos($add, 'exams'))
@@ -92,23 +95,23 @@
                 @if ($role == 'admin')
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>{{ __('text.Attendance') }}</span></a>
-                        <ul class="nav sub-group-menu {{ Request::get('att') ? 'sub-group-active' : '' }}">
+                        <ul class="nav sub-group-menu {{ ($att == 1) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a href="{{ url('admin/staff/teacher-attendance?att=2') }}"
+                                <a href="{{ url('admin/staff/teacher-attendance') }}"
                                    class="nav-link {{ (request()->is('admin/staff/teacher-attendance')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.Teachers Attendance') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/staff/attendance?att=3') }}"
+                                <a href="{{ url('admin/staff/attendance') }}"
                                    class="nav-link {{ (request()->is('admin/staff/attendance')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.Staff Attendance') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::get('att') == 1 ? 'menu-active' : '' }}"
-                                   href="{{ url('admin/school/sections?att=1') }}"><i class="fas fa-angle-right"></i>{{ __('text.Students Attendance') }}</a>
+                                <a class="nav-link {{ (request()->is('admin/school/sections'))  ? 'menu-active' : '' }}"
+                                   href="{{ url('admin/school/sections') }}"><i class="fas fa-angle-right"></i>{{ __('text.Students Attendance') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::get('att') == 1 ? 'menu-active' : '' }}"
+                                <a class="nav-link {{ (request()->is('admin/attendance-time')) ? 'menu-active' : '' }}"
                                    href="{{ route('configure.attendance.time') }}"><i class="fas fa-angle-right"></i>{{ __('text.Configuration') }}</a>
                             </li>
                         </ul>
