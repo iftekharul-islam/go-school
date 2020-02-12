@@ -29,8 +29,8 @@ class AddStudentIdentificationToStudentInfos extends Migration
     {
         Schema::table('student_infos', function(Blueprint $table)
         {
-            $table->DropColumn('student_indentification');
-            $table->DropIndex(['student_indentification']);
+            $table->dropIndex(['student_indentification']);
+            $table->dropColumn('student_indentification');
         });
     }
 }
