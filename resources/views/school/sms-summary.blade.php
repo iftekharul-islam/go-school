@@ -26,6 +26,15 @@
             {{ session('error') }}
         </div>
     @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card height-auto mb-5">
         <div class="card-body">
             <h3 class="border-bottom">{{ $school->name }}</h3>
@@ -40,7 +49,6 @@
                     <div class="form-group col-md-2">
                         <button type="submit" class="button button--save font-weight-bold">Search</button>
                         <a href="{{Request::url().'?last_month=1'}}" class="button button--edit font-weight-bold ml-md-2">Last Month</a>
-                        
                     </div>
                 </div>
             </form>
@@ -66,7 +74,7 @@
                             </tr>
                         @endforeach
                     @else 
-                        <tr><td colspan="3" class="text-center">No data Found</td></tr>
+                        <tr><td colspan="5" class="text-center">No data Found</td></tr>
                     @endif
                 </tbody>
             </table>
