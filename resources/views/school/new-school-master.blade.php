@@ -12,6 +12,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
+            <li><a href="{{ route('all.school') }}">All School</a></li>
             <li>Manage Academy</li>
         </ul>
     </div>
@@ -132,20 +133,17 @@
                                             <button type="button" class="button button--cancel mb-1" data-toggle="modal" data-target="#confirmPassword"><i class="fas fa-trash"></i> Delete</button> 
                                         </div>
                                     </div>
-                                    @if ( $school->logo )
+                                   
                                     <div class="row">
-                                        <div class="col-6">
-                                            <img class="details-page-logo" src="{{ asset($school->logo) }}">
-                                        </div>
-                                    </div>
-                                    @endif
-                                    <div class="user-details-box">
-                                        <div class="item-content">
+                                        <div class="col-md-6 col-sm-12">
+                                            @if ( $school->logo )
+                                                <img class="details-page-logo" src="{{ asset($school->logo) }}">
+                                            @endif
                                             <div class="table-responsive">
-                                                <table class="table text-wrap table-borderless">
+                                                <table class="table text-wrap table-bordered">
                                                     <tbody>
                                                     <tr>
-                                                        <td width="20%" class="">Name:</td>
+                                                        <td width="30%" class="">Name:</td>
                                                         <td class="font-medium text-dark-medium">{{ $school->name }}</td>
                                                     </tr>
                                                     <tr>
@@ -160,6 +158,14 @@
                                                         <td class="">Established:</td>
                                                         <td class="font-medium text-dark-medium">{{ $school->established }}</td>
                                                     </tr>
+                                                     <tr>
+                                                        <td class="">District:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->district }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="">Address:</td>
+                                                        <td class="font-medium text-dark-medium">{{ $school->school_address }}</td>
+                                                    </tr>
                                                     <tr>
                                                         <td class="">Details:</td>
                                                         <td class="font-medium text-dark-medium">{{ $school->about }}</td>
@@ -168,6 +174,49 @@
                                                         <td class="">Total Admin:</td>
                                                         <td class="font-medium text-dark-medium">{{ $admins->count() }}</td>
                                                     </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="table-responsive item-title">
+                                            <caption><h3 class="">Configuration</h3></caption>
+                                                <table class="table text-wrap table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="30%" class="">SMS:</td>
+                                                            <td class="font-medium text-dark-medium">
+                                                                @if($school->is_sms_enable == 1)
+                                                                    <span class="badge badge-info"><i class="fa fa-check"></i> Enabled</span>
+                                                                @else 
+                                                                    <span class="badge badge-warning"><i class="fa fa-ban"></i> Disabled</span>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="">Per SMS Charge:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->sms_charge }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="">Per Student Charge:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->per_student_charge }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="">E-Mail:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->email }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="">Invoice Generation Date:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->invoice_generation_date }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="">Sign Up Date:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->signup_date }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="">Payment Due Date:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->due_date }}</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

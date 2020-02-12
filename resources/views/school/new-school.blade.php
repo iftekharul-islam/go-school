@@ -79,7 +79,7 @@
                                         <option value="">Select District</option> 
                                         @if(config('districts.districts'))
                                             @foreach ( config('districts.districts') as $district)
-                                                <option value="{{$district}}">{{ $district }}</option>
+                                                <option value="{{$district}}" @if(old('district') == $district) selected @endif>{{ $district }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -89,10 +89,10 @@
                                 </div>
                                  <div class="mb-4 form-group{{ $errors->has('is_sms_enable') ? ' has-error' : '' }}">
                                     <label for="is_sms_enable" class="control-label">SMS Option <label class="text-danger">*</label></label>
-                                    <select id="is_sms_enable" class="form-control select2" name="is_sms_enable" required>
-                                        <option value="">SMS Option</option> 
-                                        <option value="1">Enable</option> 
-                                        <option value="0">Disable</option> 
+                                    <select id="is_sms_enable" class="form-control" name="is_sms_enable" required>
+                                        <option value="" disasble selected>SMS Option</option> 
+                                        <option value="1") selected @endif>Enable</option> 
+                                        <option value="0") selected @endif>Disable</option> 
                                     </select>
                                     @if ($errors->has('is_sms_enable'))
                                         <span class="help-block"><strong>{{ $errors->first('is_sms_enable') }}</strong></span>
@@ -109,7 +109,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
-                                    <label for="logo" class="control-label">School Logo</label>
+                                    <label for="logo" class="control-label">School Logo <label class="text-danger">*</label></label>
 
                                     <input id="logo" type="file" class="form-control" name="logo" required>
 
