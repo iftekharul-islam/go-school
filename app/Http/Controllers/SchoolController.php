@@ -76,7 +76,12 @@ class SchoolController extends Controller
             'school_about' => 'required',
             'school_established' => 'required',
             'school_address' => 'required',
+            'school_address' => 'required',
+            'district' => 'required',
+            'is_sms_enable' => 'required',
             'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg'
+        ],[
+            'is_sms_enable.required' => 'Select SMS Option'
         ]);
         $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
         $path = 'storage/'.$path;
@@ -89,6 +94,8 @@ class SchoolController extends Controller
         $tb->theme = 'flatly';
         $tb->logo = $path;
         $tb->school_address = $request->school_address;
+        $tb->district = $request->district;
+        $tb->is_sms_enable = $request->is_sms_enable;
         $tb->save();
         return redirect()->route('school-details', $tb->id)->with('status', $tb->name.' created successfully');
     }
@@ -246,8 +253,12 @@ class SchoolController extends Controller
             'school_medium' => 'required',
             'school_about' => 'required',
             'school_established' => 'required',
+            'school_address' => 'required',
+            'district' => 'required',
+            'is_sms_enable' => 'required',
             'logo' => 'max:1024|mimes:jpeg,png,jpg,gif,svg'
-
+        ],[
+            'is_sms_enable.required' => 'Select SMS Option'
         ]);
 
         $tb = School::findOrFail($id);
@@ -262,6 +273,10 @@ class SchoolController extends Controller
         $tb->medium = $request->school_medium;
         $tb->established = $request->school_established;
         $tb->logo = $path;
+        $tb->district = $request->district;
+        $tb->is_sms_enable = $request->is_sms_enable;
+        $tb->school_address = $request->school_address;
+        //dd($request->is_sms_enable);
         $tb->save();
 
         return redirect()->back()->with('status', 'School Information Updated');

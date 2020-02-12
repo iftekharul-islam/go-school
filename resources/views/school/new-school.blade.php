@@ -30,7 +30,7 @@
                             <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ url('master/create-school') }}">
                                 {{ csrf_field() }}
                                 <div class="mb-4 form-group{{ $errors->has('school_name') ? ' has-error' : '' }}">
-                                    <label for="school_name" class="control-label">School Name</label>
+                                    <label for="school_name" class="control-label">School Name <label class="text-danger">*</label></label>
 
                                     <input id="school_name" type="text" class="form-control" name="school_name" value="{{ old('school_name') }}" placeholder="School Name" required>
 
@@ -39,7 +39,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_medium') ? ' has-error' : '' }}">
-                                    <label for="school_medium" class="control-label">School Medium</label>
+                                    <label for="school_medium" class="control-label">School Medium <label class="text-danger">*</label></label>
 
                                     <select id="school_medium" class="select2" name="school_medium">
                                         <option selected="selected">Bangla</option>
@@ -52,7 +52,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_established') ? ' has-error' : '' }}">
-                                    <label for="school_established" class="control-label">School Established</label>
+                                    <label for="school_established" class="control-label">School Established <label class="text-danger">*</label></label>
                                     <input readonly="readonly" data-date-format="yyyy-mm-dd" id="birthday"
                                            class="form-control date" name="school_established"
                                            placeholder="School Established" required
@@ -64,7 +64,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_about') ? ' has-error' : '' }}">
-                                    <label for="school_about" class="control-label">About</label>
+                                    <label for="school_about" class="control-label">About <label class="text-danger">*</label></label>
 
                                     <textarea id="school_about" class="form-control" rows="3" name="school_about"
                                               placeholder="About School" required>{{ old('school_about') }}</textarea>
@@ -73,8 +73,33 @@
                                         <span class="help-block"><strong>{{ $errors->first('school_about') }}</strong></span>
                                     @endif
                                 </div>
+                                <div class="mb-4 form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                                    <label for="district" class="control-label">District <label class="text-danger">*</label></label>
+                                    <select id="district" class="form-control select2" name="district" required>
+                                        <option value="">Select District</option> 
+                                        @if(config('districts.districts'))
+                                            @foreach ( config('districts.districts') as $district)
+                                                <option value="{{$district}}" @if(old('district') == $district) selected @endif>{{ $district }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('district'))
+                                        <span class="help-block"><strong>{{ $errors->first('district') }}</strong></span>
+                                    @endif
+                                </div>
+                                 <div class="mb-4 form-group{{ $errors->has('is_sms_enable') ? ' has-error' : '' }}">
+                                    <label for="is_sms_enable" class="control-label">SMS Option <label class="text-danger">*</label></label>
+                                    <select id="is_sms_enable" class="form-control" name="is_sms_enable" required>
+                                        <option value="" disasble selected>SMS Option</option> 
+                                        <option value="1") selected @endif>Enable</option> 
+                                        <option value="0") selected @endif>Disable</option> 
+                                    </select>
+                                    @if ($errors->has('is_sms_enable'))
+                                        <span class="help-block"><strong>{{ $errors->first('is_sms_enable') }}</strong></span>
+                                    @endif
+                                </div>
                                 <div class="mb-4 form-group{{ $errors->has('school_address') ? ' has-error' : '' }}">
-                                    <label for="school_address" class="control-label">Address</label>
+                                    <label for="school_address" class="control-label">Address <label class="text-danger">*</label></label>
 
                                     <textarea id="school_address" class="form-control" rows="3" name="school_address"
                                               placeholder="School Address" required>{{ old('school_address') }}</textarea>
@@ -84,7 +109,7 @@
                                     @endif
                                 </div>
                                 <div class="mb-4 form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
-                                    <label for="logo" class="control-label">School Logo</label>
+                                    <label for="logo" class="control-label">School Logo <label class="text-danger">*</label></label>
 
                                     <input id="logo" type="file" class="form-control" name="logo" required>
 
