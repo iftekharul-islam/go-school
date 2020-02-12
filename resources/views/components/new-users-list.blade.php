@@ -69,14 +69,14 @@
 <div class="card height-auto">
     <div class="card-body">
         @if(isset($type) && $type == 'Students')
-        <form method='GET' action="">
+        <form id="filter" method='GET' action="">
         <div class="row border-bottom mb-3">
             <div class="form-group col-md-4">
                 <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="Name" />
             </div>
             <div class="form-group col-md-3">
                 <select id="class_id" name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
-                    <option value="" disabled selected>Class</option>
+                    <option value="" selected>Class</option>
                     @foreach ($classes as $class)
                         <option value="{{$class->id}}" @if($class->id == $searchData['class_id']) selected @endif>{{$class->class_number}}</option>    
                     @endforeach
@@ -102,7 +102,8 @@
                 </select>
             </div>
             <div class="form-group col-md-2">
-                <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Filter" />
+                <button type="submit" class="button button--save font-weight-bold">Search</button>
+                <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">Reset</button>
             </div>
         </div>
         </form>
@@ -420,6 +421,11 @@
 
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+        function resetFilter() {
+            $('#filter input[name=student_name]').val('');
+            $("#filter select").empty();
+            $("#filter").submit();
         }
     </script>
 @endpush
