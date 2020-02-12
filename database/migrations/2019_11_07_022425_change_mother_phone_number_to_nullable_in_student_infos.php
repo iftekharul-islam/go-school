@@ -26,10 +26,7 @@ class ChangeMotherPhoneNumberToNullableInStudentInfos extends Migration
     public function down()
     {
         Schema::table('student_infos', function (Blueprint $table) {
-            $table->dropColumn('mother_phone_number')->nullable();
-            $table->string('mother_phone_number');
-
-
+            $table->string('mother_phone_number')->nullable(false)->change();
         });
     }
 }
