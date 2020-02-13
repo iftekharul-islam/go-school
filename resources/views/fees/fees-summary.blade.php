@@ -34,18 +34,20 @@
                             <table class="table table-bordered ">
                                 <thead>
                                 <tr>
-                                    <th colspan="2">Students info</th>
-                                    <th colspan="3">Payment Condition</th>
+                                    <th colspan="2">Fee Details</th>
+                                    <th colspan="5">Payment Condition</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 <tr>
-                                    <td>Fee Name</td>
-                                    <td>Amount</td>
-                                    <td>Status</td>
-                                    <td>Paid</td>
-                                    <td>Balance</td>
+                                    <th>Fee Name</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Paid Date</th>
+                                    <th>Last Date</th>
+                                    <th>Paid</th>
+                                    <th>Balance</th>
                                 </tr>
                                     @php
                                         $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
@@ -79,6 +81,20 @@
                                                 <span class="badge-danger badge unpaid">Unpaid</span>
                                             @endif
                                         </td>
+                                        <td>
+                                            @if(count($feeMaster->transactions) != 0)
+                                                @foreach($feeMaster->transactions as $transaction)
+                                                    @if($student->id === $transaction->student_id)
+                                                       {{ \Carbon\Carbon::parse($transaction->created_at)->format('d-m-Y') }}
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                           {{ ($feeMaster->due) }}
+                                        </td>
                                             <td>
                                                 @php
                                                     $paid_amount = 0;
@@ -107,6 +123,8 @@
                                 <tr class="grand-total">
                                     <td class="tex text-left"><b>Grand Total</b></td>
                                     <td><b>{{number_format((float)($totalAmount), 2, '.', '')}}</b></td>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td><b>{{number_format((float)($totalPaid), 2, '.', '')}}</b></td>
                                     <td><b> {{number_format((float)((int)($totalAmount - $totalDiscount + $totalFine - $totalPaid)), 2, '.', '')}}</b></td>
