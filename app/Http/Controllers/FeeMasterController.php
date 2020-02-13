@@ -53,7 +53,7 @@ class FeeMasterController extends Controller
 //          return $feeTypes;
             $string = $request->dueDate;
             $timestamp = strtotime($string);
-            $dueDate =  date("d", $timestamp);
+            $dueDate =  date("d-m-Y", $timestamp);
             foreach ($feeTypes as $feeType) {
                 $feeMaster = new FeeMaster();
                 $feeMaster->class_id = $request->get('class_id');
