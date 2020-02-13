@@ -51,13 +51,34 @@
                         <div class="col-md-8">
                             <div class=" table-responsive">
                                 <table class="text-wrap table-borderless table offset-2 mt-5">
-                                    <tr class="">
-                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
-                                        <td><input type="text" id="inputRoll"></td>
-                                    </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
-                                        <td><input type="text" id="inputClass"></td>
+                                        <td>
+                                            <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                                <option>Select Class</option>
+                                                @foreach($classes as $class)
+                                                    <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Sections</td>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="section" name="section" ></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Student ID</td>
+                                        <td>
+                                            <select class="form-control" id="student" name="student" ></select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
+                                        <td><input type="text" id="inputRoll"></td>
                                     </tr>
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Shift</td>
@@ -234,5 +255,22 @@
                 container: '#sandbox'
             };
         });
+
+        function getSections(item) {
+            let selectedClass = item.value;
+            let classes = {!! json_encode($classes->toArray()) !!};
+            let sections = [];
+            let
+            classes.forEach((cls) => {
+                if (cls.id == selectedClass) {
+                    sections = cls.sections;
+                }
+            });
+
+            $('#section').empty();
+            sections.forEach((sec) => {
+                $('#section').append($("<option />").val(sec.id).text(sec.section_number));
+            });
+        }
     </script>
 @endpush
