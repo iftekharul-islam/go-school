@@ -5,13 +5,14 @@
   </div>
 </div>
 {{$exams->links()}}
+
 <div class="table-responsive">
   @foreach ($exams as $exam)
     <form id="form{{$exam->id}}" action="{{url('admin/exams/activate-exam')}}" method="POST">
       {{csrf_field()}}
     </form>
-  @endforeach'
-  <table class="table display text-nowrap">
+  @endforeach
+  <table class="table display text-nowrap mt-3">
     <thead>
     <tr>
       <th>#</th>
@@ -93,7 +94,7 @@
           <a href="{{ url('admin/exams/edit', ['id' => $exam->id]) }}">
             <button class="btn btn-info btn-lg ml-3"><i class="far fa-edit"></i></button>
           </a>
-
+          <a href="{{ route('exams.attendees',['exam_id' => $exam->id]) }}" class="btn btn-lg btn-primary text-white ml-3" title="Attendees"><i class="fas fa-users"></i></a>
         </td>
       </tr>
     @endforeach
@@ -111,11 +112,11 @@
         buttons: true,
         dangerMode: true,
       })
-              .then((willDelete) => {
-                if (willDelete) {
-                  document.getElementById('delete-form-'+id).submit();
-                }
-              });
+      .then((willDelete) => {
+        if (willDelete) {
+          document.getElementById('delete-form-'+id).submit();
+        }
+      });
     }
   </script>
 @endpush
