@@ -325,13 +325,10 @@ class UserController extends Controller
         $path = $request->hasFile('teacher_pic') ? Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date('Y'), $request->file('teacher_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
-        try {
-            // Fire event to send welcome email
+        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) 
+        {
             event(new UserRegistered($tb, $password));
-        } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
         }
-
         return back()->with('status', 'Teacher Created');
     }
 
@@ -633,15 +630,15 @@ class UserController extends Controller
         }
         elseif ($request->action == 'deactivate') {
             User::whereIn('id', $request->user_ids)->update(['active' => 0]);
-            $message = 'Student(s) deactivated';
+            $message = 'User(s) deactivated';
         }
         elseif ($request->action == 'activate') {
             User::whereIn('id', $request->user_ids)->update(['active' => 1]);
-            $message = 'Student(s) activated';
+            $message = 'User(s) activated';
         }
         elseif ($request->action == 'delete') {
             User::whereIn('id', $request->user_ids)->delete();
-            $message = 'Student(s) deleted';
+            $message = 'User(s) deleted';
         }
 
         return back()->with('status' , $message);
