@@ -1384,8 +1384,8 @@ card-sub-header:first-child {
 
 /*=============== 3.3 Select 2 ==================*/
 .select2-container .select2-selection--single {
-  background-color: #f0f1f3;
-  border-color: #f0f1f3;
+  background-color: #f8f8f8;
+  border-color: #f8f8f8;
   height: 45px;
 }
 
