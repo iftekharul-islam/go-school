@@ -77,9 +77,9 @@
                                     <label for="district" class="control-label">District <label class="text-danger">*</label></label>
                                     <select id="district" class="form-control select2" name="district" required>
                                         <option value="">Select District</option> 
-                                        @if(config('districts.districts'))
+                                        @if (config('districts.districts'))
                                             @foreach ( config('districts.districts') as $district)
-                                                <option value="{{$district}}" @if(old('district') == $district) selected @endif>{{ $district }}</option>
+                                                <option value="{{$district}}" @if (old('district') == $district) selected @endif>{{ $district }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -91,8 +91,8 @@
                                     <label for="is_sms_enable" class="control-label">SMS Option <label class="text-danger">*</label></label>
                                     <select id="is_sms_enable" class="form-control" name="is_sms_enable" required>
                                         <option value="" disasble selected>SMS Option</option> 
-                                        <option value="1") selected @endif>Enable</option> 
-                                        <option value="0") selected @endif>Disable</option> 
+                                        <option value="1"  @if (old('is_sms_enable') == 1) selected @endif>Enable</option> 
+                                        <option value="0"  @if (old('is_sms_enable') == 0) selected @endif>Disable</option> 
                                     </select>
                                     @if ($errors->has('is_sms_enable'))
                                         <span class="help-block"><strong>{{ $errors->first('is_sms_enable') }}</strong></span>
