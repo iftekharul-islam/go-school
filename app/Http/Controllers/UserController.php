@@ -633,15 +633,15 @@ class UserController extends Controller
         }
         elseif ($request->action == 'deactivate') {
             User::whereIn('id', $request->user_ids)->update(['active' => 0]);
-            $message = 'Student(s) deactivated';
+            $message = 'User(s) deactivated';
         }
         elseif ($request->action == 'activate') {
             User::whereIn('id', $request->user_ids)->update(['active' => 1]);
-            $message = 'Student(s) activated';
+            $message = 'User(s) activated';
         }
         elseif ($request->action == 'delete') {
             User::whereIn('id', $request->user_ids)->delete();
-            $message = 'Student(s) deleted';
+            $message = 'User(s) deleted';
         }
 
         return back()->with('status' , $message);
