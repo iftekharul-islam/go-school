@@ -41,8 +41,8 @@ class MasterHomeController extends Controller
                 return $query->where('is_sms_enable', $status);
             })
             ->orderby('name', 'asc')
-            ->paginate(9);
-        
+            ->paginate(30);
+        // dd($schools);
         return view('school.all-school', [
             'schools' => $schools,
             'searchData' => $searchData
