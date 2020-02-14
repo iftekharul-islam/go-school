@@ -325,13 +325,10 @@ class UserController extends Controller
         $path = $request->hasFile('teacher_pic') ? Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date('Y'), $request->file('teacher_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
-        try {
-            // Fire event to send welcome email
+        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) 
+        {
             event(new UserRegistered($tb, $password));
-        } catch (\Exception $ex) {
-            Log::info('Email failed to send to this address: '.$tb->email);
         }
-
         return back()->with('status', 'Teacher Created');
     }
 

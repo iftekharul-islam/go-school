@@ -28,8 +28,6 @@ class SendWelcomeEmail
      */
     public function handle(UserRegistered $event)
     {
-        if ( filter_var( $event->user['email'], FILTER_VALIDATE_EMAIL ) ) {
-            Mail::to($event->user)->send(new SendWelcomeEmailToUser($event->user, $event->password));
-        }
+        Mail::to($event->user)->send(new SendWelcomeEmailToUser($event->user, $event->password));
     }
 }
