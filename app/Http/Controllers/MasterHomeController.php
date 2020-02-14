@@ -42,7 +42,7 @@ class MasterHomeController extends Controller
             })
             ->orderby('name', 'asc')
             ->paginate(30);
-        // dd($schools);
+
         return view('school.all-school', [
             'schools' => $schools,
             'searchData' => $searchData
