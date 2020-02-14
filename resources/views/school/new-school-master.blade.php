@@ -217,6 +217,16 @@
                                                             <td class="">Payment Due Date:</td>
                                                             <td class="font-medium text-dark-medium">{{ $school->due_date }}</td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="">Account Status:</td>
+                                                            <td class="font-medium text-dark-medium">
+                                                                @if ($school->is_active == 1)
+                                                                    <span class="badge badge-info"><i class="fa fa-check"></i> Active</span>
+                                                                @else 
+                                                                    <span class="badge badge-warning"><i class="fa fa-ban"></i> Inactive</span>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
