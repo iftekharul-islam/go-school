@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Services\Exam\ExamService;
 use App\Http\Requests\Exam\CreateExamRequest;
 use App\Http\Requests\Exam\UploadExamResultRequest;
+use App\Myclass;
+use App\Section;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -191,8 +194,8 @@ class ExamController extends Controller
         return Storage::disk('public')->download($exam->result_file);
     }
 
-     /**remove exam result file*/
-     public function removeResultFile($exam_id) {
+    /**remove exam result file*/
+    public function removeResultFile($exam_id) {
         $exam = Exam::findOrFail($exam_id);
 
         if (!empty($exam->result_file)) {
@@ -203,5 +206,65 @@ class ExamController extends Controller
         $exam->save();
 
         return back()->with('status', 'Result file deleted');
+    }
+
+    /**Add exam attendees
+     * 
+    * @param int $exam_id
+    * @return \Illuminate\Http\Response
+    */
+    public function addAttendee(Request $request, $exam_id) {
+        $exam = Exam::findOrFail($exam_id);
+        $search = $request->class_id ? $request->class_id : '';
+        
+        $relatedClassIds = ExamForClass::where('exam_id', $exam->id)->groupBy('class_id')->pluck('class_id')->toArray();
+        $relatedClasses = Myclass::whereIn('id', $relatedClassIds)->get();
+       
+        if ($request->class_id){
+            $students = User::join('sections', 'sections.id', 'users.section_id')
+                ->where('sections.class_id', $request->class_id)
+                ->paginate(30);
+        }
+        else{
+            $students = User::join('sections', 'sections.id', 'users.section_id')
+                ->whereIn('sections.class_id', $relatedClassIds)
+                ->select('users.*')
+                ->paginate(30);
+        }
+        
+        return view('exams.attendee.addAttendees', compact('exam', 'students','relatedClasses', 'search'));
+    }
+
+    /**Attendees
+     * 
+    * @param int $exam_id
+    * @return \Illuminate\Http\Response
+    */
+    public function attendees($exam_id) {
+        $exam = Exam::findOrFail($exam_id);
+        $students = User::with('section.class')->whereIn('id', unserialize($exam->attendees))->paginate(30);
+       
+        return view('exams.attendee.attendees', compact('exam', 'students'));
+    }
+    /**Store Attendees
+     * 
+    * @param int $exam_id
+    * @return \Illuminate\Http\Response
+    */
+    public function storeAttendees(Request $request, $exam_id) {
+        $exam = Exam::findOrFail($exam_id);
+        
+        if (empty($request->user_ids)) {
+            return back()->with('status', 'No Student Selected');
+        }
+
+        $oldAttendees = unserialize($exam->attendees);
+        $newAttendees =  $request->user_ids;
+        $newAttendees =  array_merge($newAttendees, $oldAttendees);
+        $newAttendees = array_unique($newAttendees);
+        $exam->attendees = serialize($newAttendees);
+        $exam->save();
+        
+        return back()->with('status', 'Attendee(s) Added');
     }
 }

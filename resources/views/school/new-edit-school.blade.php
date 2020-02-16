@@ -89,6 +89,41 @@
                                           </span>
                                     @endif
                                 </div>
+                                 <div class="mb-4 form-group{{ $errors->has('district') ? ' has-error' : '' }}">
+                                    <label for="district" class="control-label">District <label class="text-danger">*</label></label>
+                                    <select id="district" class="form-control select2" name="district" required>
+                                        <option value="">Select District</option> 
+                                        @if(config('districts.districts'))
+                                            @foreach ( config('districts.districts') as $district)
+                                                <option value="{{$district}}" @if($school->district == $district) selected @endif>{{ $district }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('district'))
+                                        <span class="help-block"><strong>{{ $errors->first('district') }}</strong></span>
+                                    @endif
+                                </div>
+                                 <div class="mb-4 form-group{{ $errors->has('is_sms_enable') ? ' has-error' : '' }}">
+                                    <label for="is_sms_enable" class="control-label">SMS Option <label class="text-danger">*</label></label>
+                                    <select id="is_sms_enable" class="form-control" name="is_sms_enable" required>
+                                        <option value="" disabled>SMS Option</option> 
+                                        <option value="1" @if($school->is_sms_enable == 1) selected @endif>Enable</option> 
+                                        <option value="0" @if($school->is_sms_enable == 0) selected @endif>Disable</option> 
+                                    </select>
+                                    @if ($errors->has('is_sms_enable'))
+                                        <span class="help-block"><strong>{{ $errors->first('is_sms_enable') }}</strong></span>
+                                    @endif
+                                </div>
+                                <div class="mb-4 form-group{{ $errors->has('school_address') ? ' has-error' : '' }}">
+                                    <label for="school_address" class="control-label">Address <label class="text-danger">*</label></label>
+
+                                    <textarea id="school_address" class="form-control" rows="3" name="school_address"
+                                              placeholder="School Address" required>{{ $school->school_address }}</textarea>
+
+                                    @if ($errors->has('school_about'))
+                                        <span class="help-block"><strong>{{ $errors->first('school_address') }}</strong></span>
+                                    @endif
+                                </div>
                                 <div class="mb-4 form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
                                     <label for="logo" class="control-label">School Logo</label>
 

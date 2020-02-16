@@ -201,7 +201,7 @@
                                     <div class="col-md-12">
                                         <label for="roll_number"
                                                class="control-label false-padding-bottom">Roll Number:</label>
-                                        <input id="roll_number"  type="number"
+                                        <input id="roll_number"  type="text"
                                                class="form-control"
                                                name="roll_number">
 

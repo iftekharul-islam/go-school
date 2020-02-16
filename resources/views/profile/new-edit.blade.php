@@ -154,7 +154,7 @@
 
                                         <div class="col-md-12">
                                             <label for="roll_number" class="control-label false-padding-bottom">Roll Number</label>
-                                            <input id="roll_number" type="number" class="form-control" name="roll_number" value="{{ $user->studentInfo['roll_number'] }}">
+                                            <input id="roll_number" type="text" class="form-control" name="roll_number" value="{{ $user->studentInfo['roll_number'] }}">
 
                                             @if ($errors->has('roll_number'))
                                                 <span class="help-block">

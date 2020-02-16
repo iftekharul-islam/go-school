@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeMotherPhoneNumberToNullableInStudentInfos extends Migration
+class AddAttendeesToExams extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class ChangeMotherPhoneNumberToNullableInStudentInfos extends Migration
      */
     public function up()
     {
-        Schema::table('student_infos', function (Blueprint $table) {
-            $table->string('mother_phone_number')->nullable()->change();
+        Schema::table('exams', function(Blueprint $table)
+        {
+            $table->string('attendees')->nullable();
         });
     }
 
@@ -25,8 +26,9 @@ class ChangeMotherPhoneNumberToNullableInStudentInfos extends Migration
      */
     public function down()
     {
-        Schema::table('student_infos', function (Blueprint $table) {
-            $table->string('mother_phone_number')->nullable(false)->change();
+        Schema::table('exams', function(Blueprint $table)
+        {
+            $table->dropColumn('attendees');
         });
     }
 }
