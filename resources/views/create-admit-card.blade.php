@@ -49,12 +49,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <div class=" table-responsive">
-                                <table class="text-wrap table-borderless table offset-2 mt-5">
+                            <div class=" table">
+                                <table class="text-wrap table-borderless table ml-5 mt-5">
                                     <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
+                                        <td class="font-medium text-dark-medium text-nowrap mr-4">Class</td>
                                         <td>
-                                            <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                            <select name="class" id="inputClass" class="select2 "onchange="getSections(this)">
                                                 <option>Select Class</option>
                                                 @foreach($classes as $class)
                                                     <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
@@ -63,21 +63,23 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Sections</td>
                                         <td>
-                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Sections</td>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" id="section" name="section" ></select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Student ID</td>
-                                        <td>
-                                            <select class="form-control" id="student" name="student" ></select>
+                                            <select class="select2" id="section" name="section">
+                                                <option>Select section</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
+                                        <td class="font-medium text-dark-medium text-nowrap" >Student ID</td>
+                                        <td>
+                                            <select class="select2" id="student" name="student">
+                                                <option>Select Student</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap" >Roll number</td>
                                         <td><input type="text" id="inputRoll"></td>
                                     </tr>
                                     <tr>
@@ -88,6 +90,11 @@
                                         <td class="font-medium text-dark-medium text-nowrap">Student name</td>
                                         <td><input type="text" id="inputName"></td>
                                     </tr>
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap">Guardian's name</td>
+                                        <td><input type="text" id="inputGname"></td>
+                                    </tr>
+
                                     <tr>
                                         <td class="font-medium text-dark-medium text-nowrap">Mother's name</td>
                                         <td><input type="text" id="inputMname"></td>
@@ -112,9 +119,10 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-4 img1 mt-5">
+                        <div class="col-md-4 mt-5 img">
                             <img id="takeImg" src="#" alt="Select image" />
-                            <input type='file' onchange="readURL(this);" />
+                            <br>
+                            <input type='file'  onchange="readURL(this);" />
                         </div>
                     </div>
                 </div>
@@ -154,7 +162,7 @@
                                             <td><label for="" id="roll"></label></td>
                                         </tr>
                                         <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
+                                            <td class="font-medium text-dark-medium text-nowrap">Class</td>
                                             <td><label for="" id="class"></label></td>
                                         </tr>
                                         <tr>
@@ -254,23 +262,83 @@
                 autoclose: true,
                 container: '#sandbox'
             };
+            $("#student").change(function(){
+                var selectedStudent = $(this).children("option:selected").val();
+
+            });
         });
+        var users = [];
 
         function getSections(item) {
             let selectedClass = item.value;
             let classes = {!! json_encode($classes->toArray()) !!};
             let sections = [];
-            let
+            let us = [];
             classes.forEach((cls) => {
                 if (cls.id == selectedClass) {
                     sections = cls.sections;
                 }
             });
-
             $('#section').empty();
             sections.forEach((sec) => {
                 $('#section').append($("<option />").val(sec.id).text(sec.section_number));
+                users = sec.users;
+            });
+
+            $('#student').empty();
+            users.forEach((user)=> {
+                $('#student').append($("<option />").val(user.id).text(user.id. .'user.name'.));
             });
         }
+
+
+            $("#student").change(function(){
+                var selectedStudent;
+                selectedStudent = $(this).children("option:selected").val();
+                console.log("selected student", selectedStudent);
+
+                let userss;
+                let user_info;
+                users.forEach((user) => {
+                    if (selectedStudent == user.id) {
+                        userss = user;
+                        user_info = user.student_info;
+                    }
+                });
+
+                console.log(userss);
+                if(user_info.roll_number !== null){
+                    $('#inputRoll').val(user_info.roll_number).attr("readOnly", true);
+                }else{
+                    $('#inputRoll').val('').attr("readOnly",false);
+                }
+
+                if(user_info.shift !== null){
+                    $('#inputShift').val(user_info.shift).attr("readOnly", true);
+                }else{
+                    $('#inputShift').val('').attr("readOnly",false);
+                }
+
+                $('#inputName').val(userss.name).attr("readOnly", true);
+
+                if(user_info.mother_name !== null){
+                    $('#inputMname').val(user_info.mother_name).attr("readOnly", true);
+                }else{
+                    $('#inputMname').val('').attr("readOnly",false);
+                }
+
+                if(user_info.father_name !== null){
+                    $('#inputFname').val(user_info.father_name).attr("readOnly", true);
+                }else{
+                    $('#inputFname').val('').attr("readOnly",false);
+                }
+
+                if(user_info.guardian_name !== null){
+                    $('#inputFname').val(user_info.guardian_name).attr("readOnly", true);
+                }else{
+                    $('#inputFname').val('').attr("readOnly",false);
+                }
+            });
+
     </script>
 @endpush

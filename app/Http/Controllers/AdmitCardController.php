@@ -12,8 +12,9 @@ class AdmitCardController extends Controller
     {
         $school = Auth::user();
         $school->load('school');
-
-        $classes = Myclass::with('sections.users')->where('school_id', Auth::user()->school_id)->get();
+        $classes = Myclass::with('sections.users.studentInfo')
+            ->where('school_id', Auth::user()->school_id)
+            ->get();
 
 //        $students = $this->userService->getSectionStudentsWithSchool($request->section);
         $students = User::query()
