@@ -347,7 +347,7 @@ class UserService
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
-        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : '' ;
+        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : null ;
 
         if ('teacher' == $role) {
             $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;
