@@ -106,6 +106,7 @@ return[
     'Student Attendance Summary' => 'Student Attendance Summary',
     'to' => 'to',
     'Attendance Time' => 'Attendance Time',
+    'Absent' => 'Absent',
 
     ////Configuration
     'No Section Found' => 'No Section Found !',
