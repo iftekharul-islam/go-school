@@ -15,7 +15,6 @@ use App\User;
 use App\Services\User\UserService;
 use Alert;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Response;
 
 
 class HomeController extends Controller
