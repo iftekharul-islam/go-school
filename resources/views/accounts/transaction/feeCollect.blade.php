@@ -284,12 +284,12 @@
                                             </div>
                                             <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                                 <label class="font-bold">Advance Balance</label>
-                                                <input type="number" id="balance" readonly class="form-control" value="{{$student->studentInfo->advance_amount}}">
+                                                <input type="number" id="balance" readonly class="form-control" value="{{$student->studentInfo['advance_amount']}}">
                                             </div>
 
                                             <div class="col-12-xxxl col-lg-12 col-12 form-group text-left">
                                                 <label class="font-bold">Pay from Advance Balance &nbsp;
-                                                <input type="checkbox" @if($student->studentInfo->advance_amount <= 0) title="Balance: 0.00" onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" onchange="makeAdvancePayment()" >
+                                                <input type="checkbox" @if($student->studentInfo['advance_amount'] <= 0) title="Balance: 0.00" onclick="return false;" @endif id="pay_from_advance_blnc" name="pay_from_advance_blnc" value="1" onchange="makeAdvancePayment()" >
                                                 </label>
                                             </div>
 
