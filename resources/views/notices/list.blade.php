@@ -25,7 +25,7 @@
                 </div>
             @endif
                 <a href="{{ route('create.notice') }}" class="button button--save mr-2">Create Notice</a>
-            @component('components.uploaded-files-list',['files'=>$files,'upload_type'=>'notice'])
+            @component('components.uploaded-notices-list',['files'=>$files,'upload_type'=>'notice'])
                 @endcomponent
         </div>
     </div>
