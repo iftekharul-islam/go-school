@@ -349,6 +349,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::delete('delete-class/{class}', 'MyClassController@destroy')->name('delete.class');
 
         Route::get('import-student','UserController@importStudent');
+        Route::get('/download', 'UserController@getDownload')->name('download');
 
         Route::get('new-student','UserController@createStudent');
         Route::get('new-teacher','UserController@createTeacher')->name('new.teacher');

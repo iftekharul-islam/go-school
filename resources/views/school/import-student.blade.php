@@ -72,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-
+                                <a href="{{ route('download') }}" class="btn button--save mt-3"><i class="fas fa-download"></i> Excel Sample </a>
                                 <button type="submit" id="" class="button float-right mt-3 button--save" onclick="confirmImportForm(event)">
                                     Import
                                 </button>
@@ -83,7 +83,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('customjs')
