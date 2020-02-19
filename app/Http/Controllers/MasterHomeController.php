@@ -25,6 +25,7 @@ class MasterHomeController extends Controller
         $searchData['name'] = $request->name ?? '';
         $searchData['district'] = $request->district ?? '';
         $searchData['is_sms_enable'] = '';
+        $searchData['status'] = $request->status ?? '';
 
         if ($request->is_sms_enable){
             $searchData['is_sms_enable'] = $request->is_sms_enable;
@@ -39,6 +40,10 @@ class MasterHomeController extends Controller
             ->when($request->is_sms_enable, function($query) use ($request){
                 $status = $request->is_sms_enable == 'yes' ? 1 : 0;
                 return $query->where('is_sms_enable', $status);
+            })
+            ->when($request->status, function($query) use ($request){
+                $status = $request->status == 'active' ? 1 : 0;
+                return $query->where('is_active', $status);
             })
             ->orderby('name', 'asc')
             ->paginate(30);

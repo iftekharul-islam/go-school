@@ -20,10 +20,10 @@
         <div class="card-body-entire">
         <form id="filter" method='GET' action="">
             <div class="row mb-3 mt-3">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <input type="text" name="name" value="{{$searchData['name']}}" class="form-control form-control-sm" placeholder="School Name" />
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <select name="district" id="district" class="form-control form-control-sm select2">
                         <option value="">Select District</option> 
                         @if (config('districts.districts'))
@@ -33,7 +33,7 @@
                         @endif
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <select id="is_sms_enable" name="is_sms_enable" class="form-control form-control-sm">
                         <option value="" selected>SMS Option</option>
                         <option value="yes" @if($searchData['is_sms_enable'] == 'yes') selected @endif >Enabled</option>
@@ -41,6 +41,13 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
+                    <select id="is_sms_enable" name="status" class="form-control form-control-sm">
+                        <option value="" selected>Status</option>
+                        <option value="active" @if($searchData['status'] == 'active') selected @endif >Active</option>
+                        <option value="inactive" @if($searchData['status'] == 'inactive') selected @endif >Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
                     <button type="submit" class="button button--save font-weight-bold">Search</button>
                     <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">Reset</button>
                 </div>
@@ -60,6 +67,7 @@
                                     <th>Departments</th>
                                     <th>District</th>
                                     <th>SMS</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -74,6 +82,9 @@
                                             <td>{{ $school->district }}</td>
                                             <td>
                                                {!! $school->is_sms_enable == 1 ? "<span class=\"badge badge-info\">Enabled</span>" : "<span class=\"badge badge-warning\">Disabled</span>" !!}
+                                            </td>
+                                            <td>
+                                               {!! $school->is_active == 1 ? "<span class=\"badge badge-info\">Active</span>" : "<span class=\"badge badge-warning\">Inactive</span>" !!}
                                             </td>
                                             <td>
                                                 <a href="{{route('sms.summary',['id' => $school->id])}}" class="button button--save" title="SMS Summary"> <i class="fas fa-sms"></i></a>&nbsp;
