@@ -52,7 +52,7 @@
                     <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">Reset</button>
                 </div>
             </div>
-            </form>
+            </form> 
             @if (!$schools->isEmpty() )
                 <div class="row">
                     <div class="col-sm-12 school col-md-12 col-lg-12 ">
@@ -60,6 +60,7 @@
                             <table class="table table-bordered display text-wrap">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Code</th>
                                     <th>School Name</th>
                                     <th>Medium</th>
@@ -72,8 +73,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($schools as $school)
+                                    @foreach($schools as $index => $school)
                                         <tr>
+                                            <td>{{ $index + $schools->firstItem() }}</td>
                                             <td>{{ $school->code }}</td>
                                             <td><a href="{{url('master/school/'.$school->id)}}" class="text-teal"> {{ $school->name }} </a></td>
                                             <td>{{ ucfirst($school->medium) }}</td>
