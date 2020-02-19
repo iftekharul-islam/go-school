@@ -35,7 +35,7 @@
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$attendance->stuff->student_code}}</td>
                         <td>
-                            @if($attendance->present === 1)
+                            @if($attendance->present === 1 || $attendance->present === 3)
                                 <span class= "badge-primary attdState badge">{{ trans_choice('text.Present',2) }}</span>
                             @else
                                 <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
@@ -45,7 +45,7 @@
                         <td>{{ ucfirst($attendance->role) }}</td>
                         <td>
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
-                            @if($attendance->present === 1)
+                            @if($attendance->present === 1 || $attendance->present === 3)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" aria-label="Present" name="isPresent{{$loop->index}}" checked>
                                     <label for="">&nbsp;</label>
