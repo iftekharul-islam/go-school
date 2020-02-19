@@ -28,7 +28,6 @@ class StuffAttendanceController extends Controller
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
-
         if ($teachersFilterByAdmin->count() > 0) {
             $teachers = $teachersFilterByAdmin;
         }

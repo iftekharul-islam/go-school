@@ -58,6 +58,8 @@
                                 <td>
                                     @if($user->present === 1)
                                         <span class="badge-primary attdState badge">{{ trans_choice('text.Present',2) }}</span>
+                                    @elseif($user->present === 3)
+                                        <span class="badge-danger attdState badge">{{ __('text.late') }}</span>
                                     @else
                                         <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
                                     @endif

@@ -156,4 +156,5 @@ return[
     'enter_time' => 'Enter Time',
     'exit_time' => 'Exit Time',
     'attendance_date' => 'Attendance Date',
+    'late' => 'Late Present',
 ];
