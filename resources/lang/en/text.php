@@ -147,4 +147,13 @@ return[
     'leave_impersonation' => 'Leave Impersonation',
     'logout' => 'Logout',
     'my_profile' => 'My Profile',
+
+    //Search bar
+    "search" => 'Search here',
+
+    //Teacher attendance summary
+    'status' => 'Status',
+    'enter_time' => 'Enter Time',
+    'exit_time' => 'Exit Time',
+    'attendance_date' => 'Attendance Date',
 ];

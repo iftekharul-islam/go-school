@@ -42,7 +42,7 @@
                             @else
                                 <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
                             @endif
-                            &nbsp;&nbsp;<a href="{{url('user/'.$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
+                            &nbsp;&nbsp
                         </td>
                         <td class="attendance-bar">
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">

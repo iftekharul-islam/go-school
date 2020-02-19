@@ -148,5 +148,14 @@ return [
     'impersonate' => 'ইমপারসোনেট',
     'leave_impersonation' => 'ইমপারসোনেট পরিবর্তন',
     'logout' => 'প্রস্থান',
-    'my_profile' => 'আমার প্রোফাইল'
+    'my_profile' => 'আমার প্রোফাইল',
+
+    //Search bar
+    "search" => 'এখানে অনুসন্ধান করুন...',
+
+    //Teacher attendance summary
+    'status' => 'স্ট্যাটাস',
+    'enter_time' => 'প্রবেশ সময়',
+    'exit_time' => 'প্রস্থান',
+    'attendance_date' => 'উপস্থিতি তারিখ',
 ];

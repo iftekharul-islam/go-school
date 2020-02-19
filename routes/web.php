@@ -206,11 +206,12 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
 
         Route::prefix('staff')->group(function () {
-            Route::get('teacher-attendance', 'StuffAttendanceController@index');
+            Route::get('all-teachers', 'StuffAttendanceController@allTeacher');
+            Route::get('teacher-attendance', 'StuffAttendanceController@index')->name('teacher.attendance');
             Route::post('teacher-attendance/store', 'StuffAttendanceController@store');
             Route::get('teacher-attendance/adjust/{teacher_id}', 'StuffAttendanceController@adjustMissingAttendance');
             Route::post('teacher-attendance/adjust/post', 'StuffAttendanceController@adjustMissingAttendancePost');
-            Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+            Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details')->name('staff.attendance');
 
             Route::get('attendance', 'StuffAttendanceController@stuffAttendance');
             Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore');
@@ -340,6 +341,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
         Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary');
+        Route::get('teacher-attendance-summary', 'AttendanceController@teacherAttendance')->name('teacher.summary');
         Route::get('grades/classes', 'GradeController@allExamsGrade')->name('grades.classes');
         Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
 

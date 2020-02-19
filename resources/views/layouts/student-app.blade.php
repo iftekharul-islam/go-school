@@ -126,7 +126,7 @@
             bSort : false,
             language: {
                 search: '',
-                searchPlaceholder: "Search here"
+                searchPlaceholder: "{{ __('text.search') }}"
             }
         });
 
