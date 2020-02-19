@@ -5,7 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            <i class="fas fa-clock"></i>
+            <i class="fas fa-file-invoice"></i>
             Generate Invoice
         </h3>
         <ul>
@@ -31,7 +31,7 @@
                 {{ csrf_field() }}
                 <div class="row border-bottom mb-3">
                     <div class="form-group col-md-3">
-                        <select name="month" id="section_id" class="form-control form-control-sm" required>
+                        <select name="month" id="section_id" class="form-control form-control-sm select2" required>
                             <option value="" disabled selected >Select Month</option>
                             <option value="1" @if(old('month') == 1) selected @endif>January</option>
                             <option value="2" @if(old('month') == 2) selected @endif>February</option>
