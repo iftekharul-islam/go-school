@@ -97,8 +97,8 @@
                         <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>{{ __('text.Attendance') }}</span></a>
                         <ul class="nav sub-group-menu {{ ($att == 1) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a href="{{ url('admin/staff/teacher-attendance') }}"
-                                   class="nav-link {{ (request()->is('admin/staff/teacher-attendance')) ? 'menu-active' : '' }}"><i
+                                <a href="{{ url('admin/staff/all-teachers') }}"
+                                   class="nav-link {{ (request()->is('admin/staff/all-teachers')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.Teachers Attendance') }}</a>
                             </li>
                             <li class="nav-item">

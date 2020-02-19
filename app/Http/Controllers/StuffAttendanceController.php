@@ -38,6 +38,16 @@ class StuffAttendanceController extends Controller
         return view('attendance.teacher-attendance', compact('teachers', 'attendances', 'attCount'));
     }
 
+    public function allTeacher()
+    {
+        $teachers = User::where('school_id', Auth::user()->school_id)
+            ->where('role', 'teacher')
+            ->orderBy('name', 'ASC')
+            ->where('active', 1)
+            ->get();
+        return view('attendance.all-teachers', compact('teachers'));
+    }
+
     public function stuffAttendance()
     {
         $librarians = User::where('school_id', Auth::user()->school_id)->whereIn('role', ['librarian', 'accountant'])->get();
