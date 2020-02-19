@@ -53,41 +53,32 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                                <table class="table table-data-div table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Attendance</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($teachers as $key=>$teacher)
-                                        <td>{{ $key+1 }}</td>
-                                        <td>{{ $teacher->student_code }}</td>
-                                        <td>{{ $teacher->name }}</td>
-                                        <td>
-                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $teacher->id)}}">
-                                                <b>{{ __('text.View Attendance') }}</b>
-                                            </a>
-                                        </td>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-data-div table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Attendance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($teachers as $key=>$teacher)
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $teacher->student_code }}</td>
+                                    <td>{{ $teacher->name }}</td>
+                                    <td>
+                                        <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $teacher->id)}}">
+                                            <b>{{ __('text.View Attendance') }}</b>
+                                        </a>
+                                    </td>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-{{--            @else--}}
-{{--                <div class="card mt-5 false-height">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <div class="card-body-body mt-5 text-center">--}}
-{{--                            {{ __('text.No Related Data Found') }}--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
         </div>
     </div>
 @endsection
