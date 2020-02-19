@@ -62,8 +62,8 @@
                                     <th>Attendance</th>
                                 </tr>
                                 </thead>
-                                <tbody>
                                 @foreach($teachers as $key=>$teacher)
+                                <tbody>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $teacher->student_code }}</td>
                                     <td>{{ $teacher->name }}</td>
@@ -72,8 +72,8 @@
                                             <b>{{ __('text.View Attendance') }}</b>
                                         </a>
                                     </td>
-                                @endforeach
                                 </tbody>
+                                @endforeach
                             </table>
                         </div>
                     </div>
