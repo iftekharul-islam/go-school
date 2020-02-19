@@ -71,10 +71,10 @@
         @if(isset($type) && $type == 'Students')
         <form id="filter" method='GET' action="">
         <div class="row border-bottom mb-3">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-5">
                 <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="Name" />
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <select id="class_id" name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
                     <option value="" selected>Class</option>
                     @foreach ($classes as $class)
@@ -82,7 +82,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <select name="section_id" id="section_id" class="form-control form-control-sm">
                     @if($searchData['class_id'])
                         @if($classes)
@@ -101,7 +101,7 @@
                     @endif
                 </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
                 <button type="submit" class="button button--save font-weight-bold">Search</button>
                 <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">Reset</button>
             </div>
@@ -239,6 +239,15 @@
                                         <a class="btn btn-lg btn-primary mr-3" href="{{url('admin/edit/user/'.$user->id)}}" title="Update"><i class="far fa-edit"></i></a>
                                         @if($user->role == 'student')
                                             <a class="btn btn-lg btn-secondary mr-3 open-modal" data-id="{{$user->id}}" href="#" data-toggle="modal" data-target="#uploadImage" title="Upload Profile Picture"><i class="fas fa-upload"></i></a>
+                                            @if(!empty($user->pic_path))
+                                                <img src="{{ asset($user->pic_path) }}" data-src="{{url($user->pic_path)}}" class="rounded-circle border border-dark" style="max-width:31px">
+                                            @else
+                                                @if(strtolower($user->gender) == 'male')
+                                                    <img src="{{asset('user/user-male.png')}}" class="rounded-circle border border-primary" width="23%">
+                                                @else
+                                                    <img src="{{asset('user/user-female.png')}}"  class="rounded-circle border border-success" width="23%">
+                                                @endif
+                                            @endif
                                         @endif
                                     </td>
                                 @endif
