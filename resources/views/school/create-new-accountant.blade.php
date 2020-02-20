@@ -42,7 +42,7 @@
                     <div class="tab-pane fade show active border-0" id="tab10" role="tabpanel">
                         <form enctype="multipart/form-data" class="new-added-form" method="POST"
                               id="registerForm"
-                              action="{{ url('admin/register/accountant') }}">
+                              action="{{ route('register.accountant.store') }}">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6">
@@ -52,7 +52,7 @@
                                                    class="control-label false-padding-bottom">Full
                                                 Name <label
                                                     class="text-danger">*</label></label>
-                                            <input id="name" type="text" class="form-control"
+                                            <input id="name" type="text" class="form-control accountant-name"
                                                    name="name"
                                                    value=""
                                                    required>
@@ -70,18 +70,25 @@
 
                                         <div class="col-md-12">
                                             <label for="email"
-                                                   class="control-label false-padding-bottom">E-Mail
-                                                Address <label
+                                                   class="control-label false-padding-bottom">{{ __('text.Email') }}
+                                                <label
                                                     class="text-danger">*</label></label>
+                                            <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
-                                            <input id="email" type="email" class="form-control"
+                                            @php
+                                                $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
+                                            @endphp
+
+                                            <input id="email" type="email" class="form-control accountant-username"
                                                    name="email"
-                                                   value="" required>
+                                                   value="{{ old('email') }}"
+                                                   required readonly>
+                                            <div class="email-visible"></div>
 
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
@@ -154,7 +161,8 @@
 
                                             <select id="blood_group" class="form-control"
                                                     name="blood_group">
-                                                <option selected="selected">A+</option>
+                                                <option selected="selected">N/A</option>
+                                                <option>A+</option>
                                                 <option>A-</option>
                                                 <option>B+</option>
                                                 <option>B-</option>
@@ -213,8 +221,8 @@
 
                                             @if ($errors->has('gender'))
                                                 <span class="help-block">
-                                    <strong>{{ $errors->first('gender') }}</strong>
-                                </span>
+                                                    <strong>{{ $errors->first('gender') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
@@ -286,6 +294,36 @@
             </div>
         </div>
     </div>
-
 @endsection
+@push('customjs')
+    <script>
+        $(document).ready(function() {
+
+            $('.accountant-name').focusout(function() {
+                let inputName = $('.accountant-name').val();
+
+                if (inputName) {
+                    let names = inputName.split(' ');
+
+
+                    let code = {!! $code !!};
+
+                    let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
+
+                    let username = lastName + code;
+
+                    $('.accountant-username').val(username.toLowerCase());
+                }
+            });
+            $('.email-enable-button').click(function(event) {
+                event.preventDefault();
+                $('.accountant-username').remove();
+                $('.email-visible').html(`<input id="email" type="email" class="form-control accountant-email"
+                           name="email" value="" placeholder="Enter email address"
+                           required>`);
+                $('.email-enable-button').remove();
+            });
+        });
+    </script>
+@endpush
 
