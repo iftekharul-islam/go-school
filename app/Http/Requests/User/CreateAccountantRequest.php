@@ -32,6 +32,7 @@ class CreateAccountantRequest extends FormRequest
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
             'blood_group' => 'required',
+            'email' => 'nullable|max:255|unique:users,email',
             'address' => 'required|string',
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
         ];
@@ -43,6 +44,7 @@ class CreateAccountantRequest extends FormRequest
             'pic_path.required' => 'Please provide and image for the profile',
             'pic_path.image' => 'Invalid image type',
             'pic_path.max' => 'Image size cannot be larger than 800KB',
+            'email' => 'Please provide a valid email address',
         ];
     }
 }
