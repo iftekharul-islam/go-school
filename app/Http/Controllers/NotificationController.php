@@ -7,7 +7,7 @@ use App\Notification as Notification;
 use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class NotificationController extends Controller
@@ -59,12 +59,14 @@ class NotificationController extends Controller
         ]);
         DB::transaction(function ( ) use ($request) {
             for($i=0; $i < count($request->recipients); $i++){
+                $path = $request->hasFile('file_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('file_path')) : null;
                 $tb = new Notification;
                 $tb->sent_status = 1;
                 $tb->active = 1;
                 $tb->message = $request->msg;
                 $tb->student_id = $request->recipients[$i];
                 $tb->user_id = $request->teacher_id;
+                $tb->file_path = $path ? 'storage/' . $path : '';
                 $tb->created_at = date('Y-m-d H:i:s');
                 $tb->updated_at = date('Y-m-d H:i:s');
                 $n[] = $tb->attributesToArray();
