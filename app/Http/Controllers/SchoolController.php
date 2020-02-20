@@ -70,7 +70,6 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $request->validate([
             'school_name' => 'required|string|max:255',
             'school_medium' => 'required',
@@ -196,7 +195,6 @@ class SchoolController extends Controller
 
     public function departmentDestroy($id)
     {
-
         $department = Department::findOrFail($id);
         $department->delete();
 
