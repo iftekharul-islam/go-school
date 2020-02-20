@@ -366,7 +366,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
-            Route::post('accountant', 'UserController@storeAccountant');
+            Route::post('accountant', 'UserController@storeAccountant')->name('accountant.store');
             Route::post('librarian', 'UserController@storeLibrarian');
         });
         Route::get('edit/course/{id}', 'CourseController@edit');

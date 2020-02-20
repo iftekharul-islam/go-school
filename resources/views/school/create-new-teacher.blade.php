@@ -395,7 +395,7 @@
             $('.email-enable-button').click(function(event) {
                 event.preventDefault();
                 $('.teacher-username').remove();
-                $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
+                $('.email-visible').html(`<input id="email" type="email" class="form-control teacher-email"
                            name="email" value="" placeholder="Enter email address"
                            required>`);
                 $('.email-enable-button').remove();
