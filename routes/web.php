@@ -70,12 +70,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
-        Route::get('add-payemnt-detail', 'SchoolMetaController@create')->name('add.payment.info');
-        Route::post('store-payemnt-detail', 'SchoolMetaController@store')->name('store.payment.info');
-        Route::get('edit-payemnt-detail/{id}', 'SchoolMetaController@edit')->name('edit.payment.info');
-        Route::post('update-payemnt-detail/{id}', 'SchoolMetaController@update')->name('update.payment.info');
-        Route::get('payemnt-details', 'SchoolMetaController@index')->name('payment.info');
-        Route::delete('delete/payemnt-details/{id}', 'SchoolMetaController@destroy')->name('delete.payment.info');
         Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
         Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
         Route::get('sms-summary/{school_id}', 'SchoolController@smsSummary')->name('sms.summary');
