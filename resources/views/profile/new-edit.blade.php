@@ -171,9 +171,9 @@
                                         <div class="col-md-12">
                                             <label for="shift" class="control-label false-padding-bottom">Shift</label>
                                             <select id="shift" class="form-control" name="shift">
-                                                <option @if($user->studentInfo['shift'] == 'N/A') selected="selected" @endif>N/A</option>
-                                                <option @if($user->studentInfo['shift'] == 'morning') selected="selected" @endif>Morning</option>
-                                                <option @if($user->studentInfo['shift'] == 'evening') selected="selected" @endif>Evening</option>
+                                                <option @if(strtolower($user->studentInfo['shift']) == 'N/A') selected="selected" @endif>N/A</option>
+                                                <option @if(strtolower($user->studentInfo['shift']) == 'morning') selected="selected" @endif>Morning</option>
+                                                <option @if(strtolower($user->studentInfo['shift']) == 'evening') selected="selected" @endif>Evening</option>
                                             </select>
 
                                             @if ($errors->has('shift'))
