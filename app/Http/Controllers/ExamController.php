@@ -242,7 +242,10 @@ class ExamController extends Controller
     */
     public function attendees($exam_id) {
         $exam = Exam::findOrFail($exam_id);
-        $students = User::with('section.class')->whereIn('id', unserialize($exam->attendees))->paginate(30);
+        $students = '';
+        if($exam->attendees) { 
+            $students = User::with('section.class')->whereIn('id', unserialize($exam->attendees))->paginate(30);
+        }
        
         return view('exams.attendee.attendees', compact('exam', 'students'));
     }
@@ -258,7 +261,7 @@ class ExamController extends Controller
             return back()->with('status', 'No Student Selected');
         }
 
-        $oldAttendees = unserialize($exam->attendees);
+        $oldAttendees = !empty($exam->attendees) ? unserialize($exam->attendees) : [];
         $newAttendees =  $request->user_ids;
         $newAttendees =  array_merge($newAttendees, $oldAttendees);
         $newAttendees = array_unique($newAttendees);

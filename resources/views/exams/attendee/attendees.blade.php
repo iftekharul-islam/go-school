@@ -28,7 +28,7 @@
                     <a href="{{ route('exams.add.attendee', [ 'exam_id' => $exam->id ]) }}" class="button button--save font-weight-bold ml-md-3 float-right"><i class="fas fa-plus-circle"></i> Add Attendee</a>
                 </div>
             </div>
-            @if(!$students->isEmpty())
+            @if(!empty($students))
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
