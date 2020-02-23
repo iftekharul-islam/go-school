@@ -72,7 +72,7 @@
                         </ul>
                     </li>
                      <li class="nav-item sidebar-nav-item">
-                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.payment') }}</span></a>
+                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.invoice') }}</span></a>
                     </li>
                 @endif
 

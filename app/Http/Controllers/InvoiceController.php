@@ -21,34 +21,12 @@ class InvoiceController extends Controller
 
     public function send(Request $request)
     {
-        $now = Carbon::now();
-        $schools = School::with('schoolMeta')->where('is_active', 1)->get();
-
-        if ( count($schools) > 0 ) {
-            foreach ( $schools as $school ) {
-                if ( !empty($school['schoolMeta']) ) { 
-                    $data = [];
-                    $totalStudent = User::where('school_id', $school->id)->where('active', 1)->count();
-                    $totalSms = SmsHistory::where('school_id', $school->id)
-                        ->whereMonth('created_at', $request->get('month'))    
-                        ->whereYear('created_at', $now->year)    
-                        ->count();
-                    $smsCost = $school['schoolMeta']['sms_charge'] * $totalSms;
-                    $serviceCharge = $school['schoolMeta']['per_student_charge'] * $totalStudent;
-                    $data['totalStudent'] =  $totalStudent;
-                    $data['totalSms'] =  $totalSms;
-                    $data['per_sms_cost'] =   $school['schoolMeta']['sms_charge'];
-                    $data['per_student_cost'] =   $school['schoolMeta']['per_student_charge'];
-                    $data['schoolName'] =  $school->name;
-                    $data['smsCost'] =  $smsCost;
-                    $data['serviceCharge'] =  $serviceCharge;
-                    $data['month'] =  date("F", mktime(0, 0, 0, $request->month, 1)) .' '. $now->format('Y');
-                    $data['schoolAddress'] =  $school->school_address;
-                   
-                    SendInvoice::dispatch($school['schoolMeta']['email'], $data);
-                }
-            }
-
+        $request->validate(['month' => 'required']);
+        
+        $count = School::where('is_active', 1)->count();
+        
+        if($count > 0) {
+            SendInvoice::dispatch($request->month);
             return back()->with('status', 'Invoice Sent!');
         }
 

@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Payment Details')
+@section('title', 'Invoice')
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -46,6 +46,11 @@
                             <option value="11" @if(old('month') == 11) selected @endif>Novenber</option>
                             <option value="12" @if(old('month') == 12) selected @endif>December</option>
                         </select>
+                         @if ($errors->has('month'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('month') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group col-md-2">
                         <input type="submit" class="form-control form-control-sm btn bg-primary text-white" value="Generate" />
