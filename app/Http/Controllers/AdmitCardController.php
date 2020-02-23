@@ -33,23 +33,28 @@ class AdmitCardController extends Controller
             'section.required' => 'Select section',
             'exam.required' => 'Select exam',
         ]);
-        $found =  $students = User::where('section_id', $request->section)->count();
+       
+        $found = User::where('section_id', $request->section)->where('active', 1)->where('role', 'student')->count();
         if ($found == 0) {
             return back()->with('status', 'No Student Found');
         }
+
         $school = School::find(Auth::user()->id);
         $date = Carbon::now()->format('Y-m-d_g-i-s-a');
         $path = public_path('admits/'.$school->id);
         if(!File::isDirectory($path)){
-            File::makeDirectory($path);
+            File::makeDirectory($path, 0777, true);
         }
         File::cleanDirectory($path);
         $exam = Exam::find($request->exam);
         $students = User::with('studentInfo', 'section.class')
             ->where('section_id', $request->section)
+            ->where('role', 'student')
+            ->where('active', 1)
             ->chunk(50, function($users) use ($school, $exam, $path, $date) {
                 $this->generatePdf($users, $school, $exam, $path, $date);
             });
+       
         #download zip file
         $zipfile = $school->id.'_'.$date.'.zip';
         $files = glob($path.'/*');
