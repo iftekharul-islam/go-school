@@ -42,8 +42,9 @@ class AdmitCardController extends Controller
         $school = School::find(Auth::user()->id);
         $date = Carbon::now()->format('Y-m-d_g-i-s-a');
         $path = public_path('admits/'.$school->id);
+
         if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true);
+            File::makeDirectory($path, 0777, true, true);
         }
         File::cleanDirectory($path);
         $exam = Exam::find($request->exam);
