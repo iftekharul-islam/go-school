@@ -262,11 +262,11 @@
                                    class="nav-link {{ (request()->routeIs('academic.event')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Events') }}</span></a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('create.admit') }}"
                                    class="nav-link {{ (request()->routeIs('create.admit')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Admit Card') }}</span></a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
