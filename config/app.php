@@ -186,7 +186,10 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
 
         //Generate PDF
-        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+
+        //zipper
+        Chumper\Zipper\ZipperServiceProvider::class
 
     ],
 
@@ -239,7 +242,8 @@ return [
         'Batch' => Mavinoo\LaravelBatch\LaravelBatchFacade::class,
         'DingoApi' => Dingo\Api\Facade\API::class,
         'DingoRoute' => Dingo\Api\Facade\Route::class,
-        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
+        'Zipper' => Chumper\Zipper\Zipper::class
     ],
 
 ];
