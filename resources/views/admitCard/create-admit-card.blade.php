@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                            <select name="class_id" id="inputClass" class="select2" onchange="getSections(this)" required>
-                                <option>Select Class</option>
+                                <option value="">Select Class</option>
                                 @foreach($classes as $class)
                                     <option value="{{ $class->id }}">{{ $class->class_number }}</option>
                                 @endforeach
@@ -37,8 +37,28 @@
                         </div>
                         <div class="form-group col-md-3">
                             <select class="select2" id="section" name="section" required>
-                                <option>Select section</option>
+                                <option value="">Select section</option>
                             </select>
+                            @if ($errors->has('section'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('section') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                         <div class="form-group col-md-3">
+                            <select class="select2" id="exam" name="exam" required>
+                                <option value="">Select exam</option>
+                                @if(!empty($exams))
+                                    @foreach ($exams as $exam)
+                                        <option value="{{$exam->id}}">{{ $exam->exam_name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            @if ($errors->has('exam'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('exam') }}</strong>
+                            </span>
+                            @endif
                         </div>
                         <div class="form-group col-md-2">
                             <button type="submit" class="button button--save font-weight-bold mt-md-2">Generate</button>

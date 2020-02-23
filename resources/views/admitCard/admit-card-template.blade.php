@@ -107,20 +107,20 @@
                                 <td>{{ $class.'('.$section.')' }}</td>
                             </tr>
                             <tr>
-                                <th>Exam Type</th>
-                                <td>04 February 2020</td>
-                            </tr>
-                            <tr>
-                                <th>Exam Date</th>
-                                <td>04 February 2020</td>
-                            </tr>
-                            <tr>
                                 <th>Father's Name</th>
                                 <td>{{ $father_name }}</td>
                             </tr>
                             <tr>
                                 <th>Mother's Name</th>
                                 <td>{{ $mother_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Examination</th>
+                                <td>{{ $exam['exam_name'] }}</td>
+                            </tr>
+                            <tr>
+                                <th>Exam Date</th>
+                                <td>{{ date('d m Y', strtotime($exam['start_date'])) }}</td>
                             </tr>
                         </table>
                     </td>
