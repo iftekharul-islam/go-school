@@ -243,9 +243,9 @@
                                                 <img src="{{ asset($user->pic_path) }}" data-src="{{url($user->pic_path)}}" class="rounded-circle border border-dark" style="max-width:31px">
                                             @else
                                                 @if(strtolower($user->gender) == 'male')
-                                                    <img src="{{asset('user/user-male.png')}}" class="rounded-circle border border-primary" width="23%">
+                                                    <img src="{{asset('user/user-male.png')}}" class="rounded-circle border border-primary" style="width:30px">
                                                 @else
-                                                    <img src="{{asset('user/user-female.png')}}"  class="rounded-circle border border-success" width="23%">
+                                                    <img src="{{asset('user/user-female.png')}}"  class="rounded-circle border border-success" style="width:30px">
                                                 @endif
                                             @endif
                                         @endif
