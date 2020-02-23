@@ -26,7 +26,7 @@
             @if(!$students->isEmpty())
                 <div class="row mb-3">
                     <div class="form-group col-md-2">
-                        <button onclick="addAttendee()" type="button" class="button button--save font-weight-bold"><i class="fas fa-plus"></i> Add</button>
+                        <button onclick="addAttendee()" type="button" class="button button--save font-weight-bold"><i class="fas fa-plus-circle"></i> Add</button>
                     </div>
                 </div>
                 <form id="attendeesForm" method="POST" action="{{ route('exams.store.attendees', ['exam_id' => $exam->id]) }}">
@@ -37,6 +37,7 @@
                             <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
                             <th>Student Code</th>
                             <th>Name</th>
+                            <th>Class</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +46,7 @@
                             <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$student->id}}" /></th>
                             <td class="text-capitalize">{{ $student->student_code }}</td>
                             <td><a href="{{ route('user.show', ['user_code' => $student->student_code]) }}" class="text-teal">{{ $student->name }}</a></td>
+                            <td>{{ $student['class_number'] }}({{ $student['section_number']}})</td>
                         </tr>
                     @endforeach
                     </tbody>
