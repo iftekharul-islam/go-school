@@ -64,7 +64,10 @@
                                             <span class="label label-default">Seen</span></strong>
                                         @endif
 
-                                        <button class="btn btn-danger btn-lg float-right text-white" type="button" onclick="deleteMsg({{ $message->id }})"><i class="fas fa-trash-alt"></i></button>
+                                        <a class="btn btn-danger btn-lg float-right text-white ml-2" type="button" onclick="deleteMsg({{ $message->id }})"><i class="fas fa-trash-alt"></i></a>
+                                        @if(!empty($message->file_path) && ($message->file_path) !== null)
+                                            <a class="btn btn-info btn-lg float-right" href="{{asset($message->file_path)}}" target="_blank">Show Attachment</a>
+                                        @endif
                                         <form id="delete-form-{{ $message->id }}" action="{{ route('message.delete', $message->id) }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                             {{ method_field('delete') }}

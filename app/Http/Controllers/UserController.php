@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\User\CreateUserRequest;
@@ -668,5 +669,23 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('status', 'Student Image Uploaded');
+    }
+
+    public function getDownload(){
+
+        //excel file is stored under project/public/download/Import_sample.xlsx
+        $file= public_path(). "/download/Import_sample.xlsx";
+
+        if (file_exists($file))
+        {
+            $headers = array(
+                'Content-Type: application/xlsx',
+            );
+            return Response::download($file, 'Import_sample.xlsx', $headers);
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Requested file does not exist on our server!');
+        }
     }
 }

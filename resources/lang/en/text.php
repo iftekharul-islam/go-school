@@ -106,6 +106,7 @@ return[
     'Student Attendance Summary' => 'Student Attendance Summary',
     'to' => 'to',
     'Attendance Time' => 'Attendance Time',
+    'Absent' => 'Absent',
 
     ////Configuration
     'No Section Found' => 'No Section Found !',
@@ -146,4 +147,14 @@ return[
     'leave_impersonation' => 'Leave Impersonation',
     'logout' => 'Logout',
     'my_profile' => 'My Profile',
+
+    //Search bar
+    "search" => 'Search here',
+
+    //Teacher attendance summary
+    'status' => 'Status',
+    'enter_time' => 'Enter Time',
+    'exit_time' => 'Exit Time',
+    'attendance_date' => 'Attendance Date',
+    'late' => 'Late Present',
 ];

@@ -211,7 +211,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="">Sign Up Date:</td>
-                                                            <td class="font-medium text-dark-medium">{{ $school->signup_date }}</td>
+                                                            <td class="font-medium text-dark-medium">@if($school->singup_date) {{ date('d F Y', strtotime($school->singup_date)) }}@endif </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="">Payment Due Date:</td>

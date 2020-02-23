@@ -62,57 +62,46 @@ class AttendanceController extends Controller
         }
 
         if ($attendance) {
-            if ( Carbon::now()->gte($exitTime) ) {
-                if (!$attendance->is_exit_message_sent) {
-                    event(new AttendanceCreated($attendance, 'update'));
+            if ( empty($attendance->exit_time) ) {
+                $attendance->exit_time = Carbon::now()->format('Y-m-d H:i:s');
+                $attendance->save();
+                
+                #send SMS
+                event(new AttendanceCreated($attendance, 'update'));
+                
+                Logger('Student left for today!');
 
-                    Logger('Student left for today!');
-
-                    return response([
-                        'error' => false,
-                        'massage' => 'Student left for today!'
-                    ]);
-                }
+                return response([
+                    'error' => false,
+                    'massage' => 'Student left for today!'
+                ]);
             }
-            Logger('Attendance Already Added!');
+            Logger('Student Attendance Already Added!');
     
             return response([
                 'error' => false,
-                'massage' => 'Attendance Already Added!'
+                'massage' => 'Student Attendance Already Added!'
             ]);
-        } else if (Carbon::now()->lte($last_attendance_time)) {
+        } else {
             $studentData = [
                 'student_id' => $student->id,
                 'section_id' => $student->section->id,
                 'exam_id' => 0,
-                'present' => 1,
-                'user_id' => 0
+                'present' => Carbon::now()->lte($last_attendance_time) ? 1 : 3,
+                'user_id' => $student->id
             ];
-            $attendance = Attendance::create($studentData);
 
+            $attendance = Attendance::create($studentData);
+            #send SMS
             event(new AttendanceCreated($attendance, 'create'));
 
-            Logger('Attendance added successfully!');
+            Logger('Student atendance added successfully!');
 
             return response([
                 'error' => false,
-                'massage' => 'Attendance added successfully!'
-            ]);
-        } elseif (Carbon::now()->gte($exitTime)) {
-            Logger('Student left for today!');
-
-            return response([
-                'error' => false,
-                'massage' => 'Student left for today!'
+                'massage' => 'Student attendance added successfully!'
             ]);
         }
-
-        Logger('Last Attendance Time Crossed!');
-
-        return response([
-            'error' => true,
-            'massage' => 'Last Attendance Time Crossed!'
-        ]);
     }
 
     public function teacherAttendance($staff)
@@ -130,9 +119,12 @@ class AttendanceController extends Controller
         }
 
         if ($attendance) {
-            if ( Carbon::now()->gte($exit_time) ) {
+            if ( empty($attendance->exit_time) ) {
                 Logger('Staff left for today!');
-
+                
+                $attendance->exit_time = Carbon::now()->format('Y-m-d H:i:s');
+                $attendance->save();
+                
                 return response([
                     'error' => false,
                     'massage' => 'Staff left for today!'
@@ -145,11 +137,11 @@ class AttendanceController extends Controller
                 'error' => false,
                 'massage' => 'Attendance Already Added!'
             ]);
-        } elseif (Carbon::now()->lte($last_attendance_time)) {
+        } else {
             $staffAttendance = new StuffAttendance();
             $staffAttendance->school_id = $staff->school_id;
             $staffAttendance->stuff_id = $staff->id;
-            $staffAttendance->present = 1;
+            $staffAttendance->present = Carbon::now()->lte($last_attendance_time) ? 1 : 3;
             $staffAttendance->role = $staff->role;
             $staffAttendance->user_id = $staff->id;
             $staffAttendance->save();
@@ -158,19 +150,6 @@ class AttendanceController extends Controller
                 'error' => false,
                 'massage' => 'Staff Attendance Added Sucessfully!'
             ]);
-        } elseif (Carbon::now()->gte($exit_time)) {
-            Logger('Staff left for today!');
-
-            return response([
-                'error' => false,
-                'massage' => 'Staff left for today!'
-            ]);
         }
-
-        return response([
-            'error' => true,
-            'massage' => 'Attendance Time Crossed!'
-        ]);
     }
-
 }

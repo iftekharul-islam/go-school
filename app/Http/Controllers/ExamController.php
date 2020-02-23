@@ -220,17 +220,15 @@ class ExamController extends Controller
         $relatedClassIds = ExamForClass::where('exam_id', $exam->id)->groupBy('class_id')->pluck('class_id')->toArray();
         $relatedClasses = Myclass::whereIn('id', $relatedClassIds)->get();
        
-        if ($request->class_id){
-            $students = User::join('sections', 'sections.id', 'users.section_id')
-                ->where('sections.class_id', $request->class_id)
-                ->paginate(30);
-        }
-        else{
-            $students = User::join('sections', 'sections.id', 'users.section_id')
-                ->whereIn('sections.class_id', $relatedClassIds)
-                ->select('users.*')
-                ->paginate(30);
-        }
+        $students = User::join('sections', 'sections.id', 'users.section_id')
+            ->join('classes', 'sections.class_id', 'classes.id')
+            ->whereIn('sections.class_id', $relatedClassIds)
+            ->where('users.role', 'student')
+            ->when($exam->attendees, function($query) use ($exam){
+                $query->whereNotIn('users.id', unserialize($exam->attendees));
+            })
+            ->select('users.id','users.name', 'users.student_code', 'sections.section_number', 'sections.id as section_id', 'classes.class_number')
+            ->paginate(30);
         
         return view('exams.attendee.addAttendees', compact('exam', 'students','relatedClasses', 'search'));
     }
@@ -242,7 +240,10 @@ class ExamController extends Controller
     */
     public function attendees($exam_id) {
         $exam = Exam::findOrFail($exam_id);
-        $students = User::with('section.class')->whereIn('id', unserialize($exam->attendees))->paginate(30);
+        $students = '';
+        if($exam->attendees) { 
+            $students = User::with('section.class')->whereIn('id', unserialize($exam->attendees))->paginate(30);
+        }
        
         return view('exams.attendee.attendees', compact('exam', 'students'));
     }
@@ -257,8 +258,8 @@ class ExamController extends Controller
         if (empty($request->user_ids)) {
             return back()->with('status', 'No Student Selected');
         }
-
-        $oldAttendees = unserialize($exam->attendees);
+        
+        $oldAttendees = !empty($exam->attendees) ? unserialize($exam->attendees) : [];
         $newAttendees =  $request->user_ids;
         $newAttendees =  array_merge($newAttendees, $oldAttendees);
         $newAttendees = array_unique($newAttendees);

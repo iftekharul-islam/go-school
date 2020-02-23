@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\StuffAttendance;
 use App\Exports\AbsentExport;
 use App\Myclass;
 use App\Section;
@@ -170,7 +171,6 @@ class AttendanceController extends Controller
             'per_page' => $users->perPage(),
         ]);
     }
-
     public function attendanceDetails(Request $request, $section_id)
     {
         $course = Course::with('section')->where('section_id', $section_id)->first();
@@ -292,6 +292,19 @@ class AttendanceController extends Controller
          }
 
         return view('attendance.attandence-summary', compact('final', 'start_display', 'end_display', 'students', 'period'));
+     }
+
+     public function teacherAttendance(Request $request)
+     {
+         $date = $request->start_date;
+
+         $users = StuffAttendance::with('stuff')
+             ->where('role', 'teacher')
+             ->where('school_id', Auth::user()->school_id)
+             ->whereDate('created_at', '=', $date ? $date : Carbon::now())
+             ->get();
+
+        return view('attendance.teacher-attendance-summary', compact('users','date'));
      }
 
      public function absentExport($class_number, $section_name, $section_id)

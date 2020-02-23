@@ -66,10 +66,9 @@ class SendAttendanceSms implements ShouldQueue
             $type = "exit";
             $event->attendance->is_exit_message_sent = true;
             $event->attendance->save();
-            
         }
 
-        $phone = $student->studentInfo['father_phone_number'];
+        $phone = !empty($student->studentInfo['guardian_phone_number']) ? $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
 
         $checked_digit = substr($phone, 0, 3);
         if ($checked_digit == '+88') {

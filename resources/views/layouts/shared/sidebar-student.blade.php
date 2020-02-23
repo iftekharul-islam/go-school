@@ -20,7 +20,6 @@
             $class = 0;
             $academic = 0;
             $sht = 0;
-            $payment = 0;
             $att = 0;
             if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || strpos($add, 'sections') || strpos($add, 'attendance-time'))
                 $att = 1;
@@ -48,8 +47,6 @@
                 $academic = 1;
             if (strpos($add, 'shift')  || (strpos($add, 'shifts')) )
                 $sht = 1;
-            if (strpos($add, 'add-payemnt-detail')  || (strpos($add, 'payemnt-detail')) || strpos($add, 'generate-invoice'))
-                $payment = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -75,20 +72,7 @@
                         </ul>
                     </li>
                      <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-file-invoice"></i><span>{{ __('text.payment') }}</span></a>
-                        <ul class="nav sub-group-menu {{ ($payment == 1) ? 'sub-group-active' : '' }}">
-                            <li class="nav-item">
-                                <a href="{{route('add.payment.info')}}"
-                                   class="nav-link {{ (request()->is('master/add-payemnt-detail')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>{{ __('text.add_payment') }}</a>
-                                <a href="{{route('payment.info')}}"
-                                   class="nav-link {{ (request()->is('master/payemnt-details')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>{{ __("text.payment_details") }}</a>
-                                <a href="{{route('generate.invoice')}}"
-                                   class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i
-                                            class="fas fa-angle-right"></i>{{ __("text.generate_invoice") }}</a>
-                            </li>
-                        </ul>
+                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.payment') }}</span></a>
                     </li>
                 @endif
 
@@ -97,8 +81,8 @@
                         <a href="#" class="nav-link"><i class="fas fa-user-plus"></i><span>{{ __('text.Attendance') }}</span></a>
                         <ul class="nav sub-group-menu {{ ($att == 1) ? 'sub-group-active' : '' }}">
                             <li class="nav-item">
-                                <a href="{{ url('admin/staff/teacher-attendance') }}"
-                                   class="nav-link {{ (request()->is('admin/staff/teacher-attendance')) ? 'menu-active' : '' }}"><i
+                                <a href="{{ url('admin/staff/all-teachers') }}"
+                                   class="nav-link {{ (request()->is('admin/staff/all-teachers')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.Teachers Attendance') }}</a>
                             </li>
                             <li class="nav-item">
@@ -278,11 +262,11 @@
                                    class="nav-link {{ (request()->routeIs('academic.event')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Events') }}</span></a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('create.admit') }}"
                                    class="nav-link {{ (request()->routeIs('create.admit')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Admit Card') }}</span></a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">

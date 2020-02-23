@@ -79,10 +79,17 @@ class SchoolController extends Controller
             'school_address' => 'required',
             'district' => 'required',
             'is_sms_enable' => 'required',
-            'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg'
+            'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg',
+            'sms_charge' => 'required|numeric',
+            'per_student_charge'    => 'required|numeric',
+            'invoice_generation_date'  => 'required|integer',
+            'due_date'  => 'required|integer',
+            'signup_date'  => 'required|date_format:Y-m-d',
+            'email'  => 'required|email|max:191',
         ],[
             'is_sms_enable.required' => 'Select SMS Option'
         ]);
+
         $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
         $path = 'storage/'.$path;
         $tb = new School();
@@ -96,7 +103,14 @@ class SchoolController extends Controller
         $tb->school_address = $request->school_address;
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
+        $tb->sms_charge = $request->sms_charge;
+        $tb->per_student_charge = $request->per_student_charge;
+        $tb->invoice_generation_date = $request->invoice_generation_date;
+        $tb->due_date = $request->due_date;
+        $tb->email = $request->email;
+        $tb->singup_date = $request->signup_date;
         $tb->save();
+
         return redirect()->route('school-details', $tb->id)->with('status', $tb->name.' created successfully');
     }
 
@@ -181,7 +195,6 @@ class SchoolController extends Controller
 
     public function departmentDestroy($id)
     {
-
         $department = Department::findOrFail($id);
         $department->delete();
 
@@ -256,7 +269,13 @@ class SchoolController extends Controller
             'school_address' => 'required',
             'district' => 'required',
             'is_sms_enable' => 'required',
-            'logo' => 'max:1024|mimes:jpeg,png,jpg,gif,svg'
+            'logo' => 'max:1024|mimes:jpeg,png,jpg,gif,svg',
+            'sms_charge' => 'required|numeric',
+            'per_student_charge'    => 'required|numeric',
+            'invoice_generation_date'  => 'required|integer',
+            'due_date'  => 'required|integer',
+            'signup_date'  => 'required|date_format:Y-m-d',
+            'email'  => 'required|email|max:191',
         ],[
             'is_sms_enable.required' => 'Select SMS Option'
         ]);
@@ -268,6 +287,7 @@ class SchoolController extends Controller
             $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
             $path = 'storage/'.$path;
         }
+        
         $tb->name = $request->school_name;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
@@ -276,7 +296,12 @@ class SchoolController extends Controller
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
         $tb->school_address = $request->school_address;
-        //dd($request->is_sms_enable);
+        $tb->sms_charge = $request->sms_charge;
+        $tb->per_student_charge = $request->per_student_charge;
+        $tb->invoice_generation_date = $request->invoice_generation_date;
+        $tb->due_date = $request->due_date;
+        $tb->email = $request->email;
+        $tb->singup_date = $request->signup_date;
         $tb->save();
 
         return redirect()->back()->with('status', 'School Information Updated');

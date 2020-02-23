@@ -49,52 +49,33 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <div class=" table-responsive">
-                                <table class="text-wrap table-borderless table offset-2 mt-5">
-                                    <tr class="">
-                                        <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
-                                        <td><input type="text" id="inputRoll"></td>
+                            <div class=" table">
+                                <table class="text-wrap table-borderless table ml-5 mt-5">
+                                    <tr>
+                                        <td class="font-medium text-dark-medium text-nowrap mr-4">Class</td>
+                                        <td>
+                                            <select name="class" id="inputClass" class="select2 "onchange="getSections(this)">
+                                                <option>Select Class</option>
+                                                @foreach($classes as $class)
+                                                    <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
-                                        <td><input type="text" id="inputClass"></td>
+                                        <td class="font-medium text-dark-medium text-nowrap">Sections</td>
+                                        <td>
+                                            <select class="select2" id="section" name="section">
+                                                <option>Select section</option>
+                                            </select>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Shift</td>
-                                        <td><input type="text" id="inputShift"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Student name</td>
-                                        <td><input type="text" id="inputName"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Mother's name</td>
-                                        <td><input type="text" id="inputMname"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Father's name</td>
-                                        <td><input type="text" id="inputFname"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Exam Date</td>
-                                        <td><input type="text" id="inputExam"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Exam type</td>
-                                        <td><input type="text" id="inputType"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-medium text-dark-medium text-nowrap">Exam Duration</td>
-                                        <td><input type="text" id="inputDuration"></td>
-                                    </tr>
+                                   
 
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-4 img1 mt-5">
-                            <img id="takeImg" src="#" alt="Select image" />
-                            <input type='file' onchange="readURL(this);" />
-                        </div>
+                     
                     </div>
                 </div>
                 <div class="row">
@@ -104,90 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="container example-print">
-            <div class="card-body">
-                <div class="page-header text-center">
-                    <div class="fancy4">
-                        @if(!empty($school->school->logo))
-                            <div class="school-logo">
-                                <img class="logo topbar-logo-mg float-left" src="{{ asset($school->logo) }}">
-                            </div>
-                        @else
-                            <div class="header-logo">
-                                <img class="" src="{{ asset('/logos/header-logo.png') }}" alt="logo">
-                            </div>
-                        @endif
-                        <h2 class="mb-0">{{ $school->school['name'] ? $school->school['name'] : 'Sample School admit card'}}</h2>
-                        <small>{{ $school->school['school_address'] ? $school->school['school_address'] : '' }}</small>
-                        <h2 class="mt-5 ">Admit card</h2>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class=" table-responsive">
-                                    <table class="text-wrap table-borderless table offset-2 mt-5">
-                                        <tr class="">
-                                            <td class="font-medium text-dark-medium text-nowrap" width="200">Roll number</td>
-                                            <td><label for="" id="roll"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Class & Section</td>
-                                            <td><label for="" id="class"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Shift</td>
-                                            <td><label for="" id="shift"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Student name</td>
-                                            <td><label for="" id="name"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Mother's name</td>
-                                            <td><label for="" id="mother"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Father's name</td>
-                                            <td><label for="" id="father"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Exam Date</td>
-                                            <td><label for="" id="exam"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Exam type</td>
-                                            <td><label for="" id="type"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="font-medium text-dark-medium text-nowrap">Exam Duration</td>
-                                            <td><label for="" id="duration"></label></td>
-                                        </tr>
-
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-md-4 img2 mt-5">
-                                <img src="{{asset('template/img/user-default.png')}}"
-                                     class="img-thumbnail" width="80%">
-                            </div>
-                            <div class="col-md-4 text-center float-right offset-8">
-                                <hr><strong>Signature of Principal</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border mt-5">
-                    <h4> General Instruction: </h4>
-                    <ol class="ml-5" >
-                        <li>Each candidate must bring printed copy of this admit card into the exam hall.</li>
-                        <li>Candidate should be present in the concerned center in 30(thirty) minute before the exam starts.</li>
-                        <li>Carring any kind of electronic device like the mobile phone is strongly prohibited.</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+      
     </div>
 
 @endsection
@@ -233,6 +131,82 @@
                 autoclose: true,
                 container: '#sandbox'
             };
+            $("#student").change(function(){
+                var selectedStudent = $(this).children("option:selected").val();
+
+            });
         });
+        var users = [];
+
+        function getSections(item) {
+            let selectedClass = item.value;
+            let classes = {!! json_encode($classes->toArray()) !!};
+            let sections = [];
+            let us = [];
+            classes.forEach((cls) => {
+                if (cls.id == selectedClass) {
+                    sections = cls.sections;
+                }
+            });
+            $('#section').empty();
+            sections.forEach((sec) => {
+                $('#section').append($("<option />").val(sec.id).text(sec.section_number));
+                users = sec.users;
+            });
+
+            $('#student').empty();
+            users.forEach((user)=> {
+                $('#student').append($("<option />").val(user.id).text(user.id. .'user.name'.));
+            });
+        }
+
+        $("#student").change(function(){
+            var selectedStudent;
+            selectedStudent = $(this).children("option:selected").val();
+            console.log("selected student", selectedStudent);
+
+            let userss;
+            let user_info;
+            users.forEach((user) => {
+                if (selectedStudent == user.id) {
+                    userss = user;
+                    user_info = user.student_info;
+                }
+            });
+
+            console.log(userss);
+            if(user_info.roll_number !== null){
+                $('#inputRoll').val(user_info.roll_number).attr("readOnly", true);
+            }else{
+                $('#inputRoll').val('').attr("readOnly",false);
+            }
+
+            if(user_info.shift !== null){
+                $('#inputShift').val(user_info.shift).attr("readOnly", true);
+            }else{
+                $('#inputShift').val('').attr("readOnly",false);
+            }
+
+            $('#inputName').val(userss.name).attr("readOnly", true);
+
+            if(user_info.mother_name !== null){
+                $('#inputMname').val(user_info.mother_name).attr("readOnly", true);
+            }else{
+                $('#inputMname').val('').attr("readOnly",false);
+            }
+
+            if(user_info.father_name !== null){
+                $('#inputFname').val(user_info.father_name).attr("readOnly", true);
+            }else{
+                $('#inputFname').val('').attr("readOnly",false);
+            }
+
+            if(user_info.guardian_name !== null){
+                $('#inputFname').val(user_info.guardian_name).attr("readOnly", true);
+            }else{
+                $('#inputFname').val('').attr("readOnly",false);
+            }
+        });
+
     </script>
 @endpush

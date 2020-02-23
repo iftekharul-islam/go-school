@@ -70,12 +70,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('new/all-school', 'MasterHomeController@allSchool')->name('all.school');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
         Route::get('school/status/{school_id}/{status}', 'SchoolController@updateStatusSchool')->name('school.status.update');
-        Route::get('add-payemnt-detail', 'SchoolMetaController@create')->name('add.payment.info');
-        Route::post('store-payemnt-detail', 'SchoolMetaController@store')->name('store.payment.info');
-        Route::get('edit-payemnt-detail/{id}', 'SchoolMetaController@edit')->name('edit.payment.info');
-        Route::post('update-payemnt-detail/{id}', 'SchoolMetaController@update')->name('update.payment.info');
-        Route::get('payemnt-details', 'SchoolMetaController@index')->name('payment.info');
-        Route::delete('delete/payemnt-details/{id}', 'SchoolMetaController@destroy')->name('delete.payment.info');
         Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
         Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
         Route::get('sms-summary/{school_id}', 'SchoolController@smsSummary')->name('sms.summary');
@@ -206,11 +200,12 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
 
         Route::prefix('staff')->group(function () {
-            Route::get('teacher-attendance', 'StuffAttendanceController@index');
+            Route::get('all-teachers', 'StuffAttendanceController@allTeacher');
+            Route::get('teacher-attendance', 'StuffAttendanceController@index')->name('teacher.attendance');
             Route::post('teacher-attendance/store', 'StuffAttendanceController@store');
             Route::get('teacher-attendance/adjust/{teacher_id}', 'StuffAttendanceController@adjustMissingAttendance');
             Route::post('teacher-attendance/adjust/post', 'StuffAttendanceController@adjustMissingAttendancePost');
-            Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+            Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details')->name('staff.attendance');
 
             Route::get('attendance', 'StuffAttendanceController@stuffAttendance');
             Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore');
@@ -307,7 +302,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         //Librarian Route End
 
         Route::prefix('academic')->group(function () {
-            Route::get("create-admit-card","AdmitCardController@createAdmit")->name('create.admit');
+            Route::get("create-admit-card","AdmitCardController@create")->name('create.admit');
+            Route::post("generate-admit-card","AdmitCardController@generate")->name('generate.admit');
             Route::get('upload-syllabus', 'SyllabusController@upload')->name('upload-syllabus');
             Route::post('upload-syllabus', 'SyllabusController@storeSyllabus')->name('store-syllabus');
             Route::get('syllabus', 'SyllabusController@index')->name('academic.syllabus');
@@ -340,6 +336,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
         Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary');
+        Route::get('teacher-attendance-summary', 'AttendanceController@teacherAttendance')->name('teacher.summary');
         Route::get('grades/classes', 'GradeController@allExamsGrade')->name('grades.classes');
         Route::get('grades/section/{section_id}', 'GradeController@gradesOfSection');
 
@@ -349,6 +346,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::delete('delete-class/{class}', 'MyClassController@destroy')->name('delete.class');
 
         Route::get('import-student','UserController@importStudent');
+        Route::get('/download', 'UserController@getDownload')->name('download');
 
         Route::get('new-student','UserController@createStudent');
         Route::get('new-teacher','UserController@createTeacher')->name('new.teacher');
@@ -369,7 +367,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
-            Route::post('accountant', 'UserController@storeAccountant');
+            Route::post('accountant', 'UserController@storeAccountant')->name('accountant.store');
             Route::post('librarian', 'UserController@storeLibrarian');
         });
         Route::get('edit/course/{id}', 'CourseController@edit');

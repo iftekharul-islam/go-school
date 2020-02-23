@@ -28,7 +28,6 @@ class StuffAttendanceController extends Controller
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
-
         if ($teachersFilterByAdmin->count() > 0) {
             $teachers = $teachersFilterByAdmin;
         }
@@ -36,6 +35,16 @@ class StuffAttendanceController extends Controller
         $attCount = $this->teacherAttendanceService->getTeacherTotalAttendance();
 
         return view('attendance.teacher-attendance', compact('teachers', 'attendances', 'attCount'));
+    }
+
+    public function allTeacher()
+    {
+        $teachers = User::where('school_id', Auth::user()->school_id)
+            ->where('role', 'teacher')
+            ->orderBy('name', 'ASC')
+            ->where('active', 1)
+            ->get();
+        return view('attendance.all-teachers', compact('teachers'));
     }
 
     public function stuffAttendance()

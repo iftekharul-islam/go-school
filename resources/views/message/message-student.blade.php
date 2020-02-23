@@ -72,7 +72,6 @@
                                 <h4>Students of <b>Class:</b> {{$student->section['class']['class_number']}} <b>Section:</b> {{$student->section['section_number']}}</h4>
                                 @break
                             @endforeach
-                            <h4>Select Students to send message</h4>
                         @endif
                         <div class="panel panel-default">
                             @if(count($students) > 0)
@@ -113,14 +112,16 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <form action="{{url('teacher/message/students')}}" method="POST" id="msgForm" class="new-added-form">
+                                        <form action="{{url('teacher/message/students')}}" method="POST" id="msgForm" enctype="multipart/form-data" class="new-added-form">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="teacher_id" value="{{Auth::user()->id}}">
                                             <input type="hidden" name="section_id" value="{{0}}">
                                             <div class="mt-3 mb-3">
                                                 <label for="msg">Write Message: </label>
-                                                <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="15" style="font-size:1.5rem"></textarea>
+                                                <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="8" style="font-size:1.5rem"></textarea>
                                                 <span id="limit"></span>
+                                                <label for="">Attach file here :</label>
+                                                <br><input type="file" name="file_path">
                                             </div>
                                             <div class="checkbox">
                                                 <input type="checkbox" onchange="limitCharacter()" id="sent-sms" name="sent_sms"  form="msgForm">
@@ -133,19 +134,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <script>
-                                    $(function () {
-                                        var r = $(':checkbox[name="recipients[]"]');
-                                        $('#selectAll').on('change', function () {
-                                            if ($(this).is(':checked')) {
-                                                r.prop('checked', true);
-                                            } else {
-                                                r.prop('checked', false);
-                                            }
-                                        });
-                                    });
-
-                                </script>
                             @else
                                 <div class="card-body ">
                                     <div class="card-body-body pb-5 text-center">
@@ -163,6 +151,17 @@
 
 @push('customjs')
     <script type="text/javascript">
+        $(function () {
+            var r = $(':checkbox[name="recipients[]"]');
+            $('#selectAll').on('change', function () {
+                if ($(this).is(':checked')) {
+                    r.prop('checked', true);
+                } else {
+                    r.prop('checked', false);
+                }
+            });
+        });
+
         function limitCharacter(){
             if ($('#sent-sms'). prop("checked") == true) {
                
