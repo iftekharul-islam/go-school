@@ -426,6 +426,3 @@ Route::get('/account-suspended', 'UserController@inactiveAccount')->name('accoun
 Route::get('/debug-sentry', function () {
 	throw new Exception('My first Sentry error!');
 });
-Route::get('/card', function () {
-	return view('admitCard.admit-card-template');
-});
