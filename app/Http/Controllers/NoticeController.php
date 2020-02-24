@@ -96,8 +96,6 @@ class NoticeController extends Controller
         }
 
         return view('notices.show',compact('notices','notice'));
-
-//        return new NoticeResource(Notice::findOrFail($id));
     }
 
     /**
@@ -141,5 +139,16 @@ class NoticeController extends Controller
         ]);
     }
 
+    public function deleteNotice($id)
+    {
+        $notice = Notice::findOrFail($id);
+       
+        if ($notice->file_path) {
+            Storage::disk('public')->delete($notice->file_path);
+        }
+        $notice->delete();
+
+        return back()->with('status', 'Notice Deleted');
+    }
 
 }

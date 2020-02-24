@@ -13,26 +13,27 @@
             <tr>
                 <td>{{($loop->index + 1)}}</td>
                 <td><a class="text-teal" href="{{ route('show.notice', $file->id) }}">{{$file->title}}</a></td>
-                <td>{{($file->active === 1)?'Yes':'No'}}</td>
-                @if($file->active ===1)
-                    <td>
-                        <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
-                            Deactivate</button>
+                <td>{{ ($file->active === 1)?'Yes':'No' }}</td>
+                
+                <td>
+                    @if($file->active ===1)
+                        <button class="button button--edit" type="button" onclick="removeFile({{ $file->id }})">Deactivate</button>
                         <form id="delete-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
                             @csrf
                             @method('GET')
                         </form>
-                    </td>
-                @else
-                    <td>
-                        <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
-                            Activate</button>
+                    @else
+                        <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">Activate</button>
                         <form id="active-file-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
                             @csrf
                             @method('GET')
                         </form>
-                    </td>
-                @endif
+                    @endif
+                    <button class="button button--cancel ml-2" type="button" onclick="deleteNotice({{ $file->id }})"><i class="fas fa-trash"></i></button>
+                    <form id="delete-file-{{ $file->id }}" action="{{ route('notice.delete',['id' => $file->id]) }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>
@@ -44,7 +45,7 @@
         function removeFile(id) {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                text: "Are you sure, you want to deactivate this item!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -67,6 +68,22 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         document.getElementById('active-file-form-'+id).submit();
+                    }
+                });
+        }
+
+         function deleteNotice(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Are you sure, you want to delete this item!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        console.log(id);
+                        document.getElementById('delete-file-'+id).submit();
                     }
                 });
         }

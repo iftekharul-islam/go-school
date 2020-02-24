@@ -35,7 +35,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     }
     //Access for All authentic user
     Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
-
+    Route::get('syllabus-list', 'SyllabusController@syllabusForStudentTeaher')->name('syllabus');
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
     Route::get('user/{user_code}', 'UserController@show')->name('user.show');
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
@@ -314,6 +314,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('event', 'EventController@create')->name('academic.event');
             Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');
+            Route::post('notice/delete/{id}', 'NoticeController@deleteNotice')->name('notice.delete');
             Route::get('syllabus/update/{id}', 'SyllabusController@update');
             Route::get('routine/{section_id}', 'RoutineController@create');
             Route::get('routine/update/{id}', 'RoutineController@update');

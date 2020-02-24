@@ -1,5 +1,7 @@
 @extends('layouts.student-app')
 
+@section('title', 'Notices & Events')
+
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
@@ -29,16 +31,13 @@
                             <div class="notice-list">
                                 <div class="row">
                                     <div class="col-9">
-
                                         <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
-                                            <a href="{{ url($notice->file_path) }}"> {{$notice->title}} </a>
+                                            <a href="{{ route('show.notice', $notice->id) }}"> {{$notice->title}} </a>
                                         </h6>
                                     </div>
                                     <div class="col-3">
-
                                         <div  style="display: inline-block;">{{ date('d-m-Y', strtotime($notice->created_at)) }}</div>
                                     </div>
-
                                 </div>
                             </div>
                         @endforeach
@@ -64,7 +63,6 @@
                                         </h6>
                                     </div>
                                     <div class="col-3">
-
                                         <div class="" style="display: inline-block;">{{ date('d-m-Y', strtotime($event->created_at)) }}</div>
                                     </div>
                                 </div>

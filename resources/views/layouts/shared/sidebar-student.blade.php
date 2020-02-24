@@ -318,6 +318,14 @@
                             <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
                     </li>
                 @endif
+
+                @if ($role == 'teacher' || $role == 'student')
+                    <li class="nav-item">
+                        <a href="{{ route('syllabus') }}" class="nav-link {{ (request()->routeIs('academic.syllabus')) ? 'menu-active' : '' }}">
+                            <i class="fas fa-list"></i><span>{{ __('text.Syllabus') }}</span>
+                        </a>
+                    </li>
+                @endif
                 @if ($role == 'admin' || $role == 'accountant')
 
 {{--                    <li class="nav-item">--}}
