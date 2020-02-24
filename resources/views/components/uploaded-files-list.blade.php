@@ -56,7 +56,7 @@
     function removeFile(id) {
       swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this file!",
+        text: "Are you sure, you want deactivate this!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -71,7 +71,7 @@
     function activeFile(id) {
       swal({
         title: "Are you sure?",
-        text: "You are about to activated this syllabus",
+        text: "You are about to activate this item",
         icon: "warning",
         buttons: true,
         dangerMode: true,

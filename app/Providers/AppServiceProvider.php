@@ -61,6 +61,12 @@ class AppServiceProvider extends ServiceProvider
         Event::deleting(function (){
             Cache::flush();
         });
+        Notice::updating(function (){
+            Cache::flush();
+        });
+        Event::updating(function (){
+            Cache::flush();
+        });
     }
 
     /**

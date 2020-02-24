@@ -155,4 +155,26 @@ class SyllabusController extends Controller
         Syllabus::create($data);
         return back()->with('status', 'Syllabus created successfully');
     }
+
+    public function syllabusForStudentTeaher()
+    {
+        $syllabuses  = '';
+        $class_id = null;
+        $user = Auth::user();
+        if ($user->role == 'student') {
+            $user->load('section.class');
+            $class_id = !empty($user['section']['class']) ? $user['section']['class']['id'] : null;
+        }
+
+        $syllabuses = Syllabus::with('myclass')
+            ->where('school_id', Auth::user()->school_id)
+            ->where('active', 1)
+            ->when($class_id, function($query) use ($class_id) {
+                return $query->where('class_id', $class_id);
+            })
+            ->orderBy('created_at', 'DESC')
+            ->paginate(30);
+            
+        return view('syllabus.syallabus-for-student-teacher', compact('syllabuses'));
+    }
 }

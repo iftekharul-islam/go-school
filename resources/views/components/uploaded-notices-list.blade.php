@@ -44,7 +44,7 @@
         function removeFile(id) {
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                text: "Are you sure, you want to deactivate this item!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

@@ -35,7 +35,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     }
     //Access for All authentic user
     Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
-
+    Route::get('syllabus-list', 'SyllabusController@syllabusForStudentTeaher')->name('syllabus');
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
     Route::get('user/{user_code}', 'UserController@show')->name('user.show');
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
