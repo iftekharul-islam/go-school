@@ -314,6 +314,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('event', 'EventController@create')->name('academic.event');
             Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');
+            Route::post('notice/delete/{id}', 'NoticeController@deleteNotice')->name('notice.delete');
             Route::get('syllabus/update/{id}', 'SyllabusController@update');
             Route::get('routine/{section_id}', 'RoutineController@create');
             Route::get('routine/update/{id}', 'RoutineController@update');

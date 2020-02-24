@@ -25,8 +25,7 @@
     <div class="card height-auto false-height">
         <div class="card-body">
             <a href="{{ route('create.notice') }}" class="button button--save mr-2">Create Notice</a>
-            @component('components.uploaded-notices-list',['files'=>$files,'upload_type'=>'notice'])
-                @endcomponent
+            @component('components.uploaded-notices-list',['files'=>$files,'upload_type'=>'notice'])@endcomponent
         </div>
     </div>
 @endsection
