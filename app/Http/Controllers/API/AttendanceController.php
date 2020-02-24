@@ -59,7 +59,6 @@ class AttendanceController extends Controller
         if ($sectionMeta) {
             $exitTime = Carbon::parse($sectionMeta->exit_time);
             $last_attendance_time = Carbon::parse($sectionMeta->last_attendance_time);
-            
         } else {
             $exitTime = !empty($exitTimeConfig['value']) ? Carbon::parse($exitTimeConfig['value']) : '15:00';
             $last_attendance_time = !empty($entryTimeConfig['value']) ? Carbon::parse($entryTimeConfig['value']) : '10:30';
