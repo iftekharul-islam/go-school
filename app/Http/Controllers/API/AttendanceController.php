@@ -49,16 +49,19 @@ class AttendanceController extends Controller
     public function studentAttendance($student)
     {
         $attendance = Attendance::whereDate('created_at', Carbon::today())->where('student_id', $student->id)->first();
-        $sectionMeta = SectionMeta::where('section_id', $student->section_id)->where('shift', $student->studentInfo->shift)->first();
+        $studentShift = $student->studentInfo['shift'] ? strtolower($student->studentInfo['shift']) : '';
+        $sectionMeta = SectionMeta::where('section_id', $student->section_id)->where('shift', $studentShift)->first();
         $exitTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'exit_time')->first();
         $entryTimeConfig = Configuration::where('school_id', $student->school_id)->where('key', 'last_attendance_time')->first();
+        $exitTime = '';
+        $last_attendance_time = '';
 
         if ($sectionMeta) {
             $exitTime = Carbon::parse($sectionMeta->exit_time);
             $last_attendance_time = Carbon::parse($sectionMeta->last_attendance_time);
         } else {
-            $exitTime = Carbon::parse($exitTimeConfig->value);
-            $last_attendance_time = Carbon::parse($entryTimeConfig->value);
+            $exitTime = !empty($exitTimeConfig['value']) ? Carbon::parse($exitTimeConfig['value']) : '15:00';
+            $last_attendance_time = !empty($entryTimeConfig['value']) ? Carbon::parse($entryTimeConfig['value']) : '10:30';
         }
 
         if ($attendance) {
@@ -110,14 +113,14 @@ class AttendanceController extends Controller
         $attendance = StuffAttendance::whereDate('created_at', Carbon::today())->where('stuff_id', $staff->id)->first();
         $exitTimeConfig = Configuration::where('school_id', $staff->school_id)->where('key', 'exit_time')->first();
         $entryTimeConfig = Configuration::where('school_id', $staff->school_id)->where('key', 'last_attendance_time')->first();
-        $exit_time = Carbon::parse($exitTimeConfig->value);
-        $last_attendance_time = Carbon::parse($entryTimeConfig->value);
+        $exit_time = !empty($exitTimeConfig['value']) ? Carbon::parse($exitTimeConfig['value']) : '15:00';
+        $last_attendance_time = !empty($entryTimeConfig['value']) ? Carbon::parse($entryTimeConfig['value']) : '10:30';
 
         if ($staff['shift']) {
             $exit_time = Carbon::parse($staff->shift['exit_time']);
             $last_attendance_time = Carbon::parse($staff->shift['last_attendance_time']);
         }
-
+        
         if ($attendance) {
             if ( empty($attendance->exit_time) ) {
                 Logger('Staff left for today!');
