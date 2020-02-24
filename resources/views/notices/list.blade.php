@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Add Notice')
+@section('title', 'Notices')
 
 @section('content')
     <div class="breadcrumbs-area">

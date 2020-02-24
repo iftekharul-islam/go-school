@@ -1,5 +1,5 @@
 @extends('layouts.student-app')
-@section('title', 'Notice view')
+@section('title', $notice->title)
 @section('content')
     <div class="container-fluid">
         <div class="breadcrumbs-area">
@@ -22,10 +22,10 @@
                     <div class="col-lg-8">
                         <div class="card dashboard-card-three equal-size-body" >
                             <div class="card-body" >
-                                <div class="heading-sub fancy4">{{$notice->title}}</div>
+                                <div class="heading-sub fancy4">{{ $notice->title }}</div>
                                 <small>{{  $notice->created_at->format('d M Y') }}</small>
                                 <h3 class="text-center">
-                                    {{$notice->title}}
+                                    {{ $notice->title }}
                                 </h3>
                                 <div class="">
                                     {!! $notice->description ? $notice->description : Null !!}
@@ -53,7 +53,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h6 class="notice-title"><a href="{{ route('show.notice', $notice->id) }}">{{ $notice->title }}</a></h6>
-                                                    <small>{{  $notice->created_at->format('d M Y') }}</small>
+                                                    <small>{{ $notice->created_at->format('d M Y') }}</small>
                                                 </div>
                                             </div>
                                         </div>
