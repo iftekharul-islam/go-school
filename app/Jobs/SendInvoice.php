@@ -38,7 +38,7 @@ class SendInvoice implements ShouldQueue
     public function handle()
     {
         $now = Carbon::now();
-        $schools = School::with('schoolMeta')->where('is_active', 1)->get();
+        $schools = School::whereNotNull('email')->where('is_active', 1)->get();
        
         foreach ( $schools as $school ) {
             $data = [];
