@@ -21,7 +21,7 @@
             $academic = 0;
             $sht = 0;
             $att = 0;
-            if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || strpos($add, 'sections') || strpos($add, 'attendance-time'))
+            if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || Request::get('course') == 0 || strpos($add, 'attendance-time'))
                 $att = 1;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
@@ -91,8 +91,8 @@
                                             class="fas fa-angle-right"></i>{{ __('text.Staff Attendance') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('admin/school/sections'))  ? 'menu-active' : '' }}"
-                                   href="{{ url('admin/school/sections') }}"><i class="fas fa-angle-right"></i>{{ __('text.Students Attendance') }}</a>
+                                <a class="nav-link {{ Request::get('course') == 0  ? 'menu-active' : '' }}"
+                                   href="{{ url('admin/school/sections?course=0') }}"><i class="fas fa-angle-right"></i>{{ __('text.Students Attendance') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->is('admin/attendance-time')) ? 'menu-active' : '' }}"
