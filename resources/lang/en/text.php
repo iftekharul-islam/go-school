@@ -137,7 +137,7 @@ return[
     'schools' => 'Schools',
     'create_school' => 'Create School',
     'all_school' => 'All Schools',
-    'payment' => 'Payment',
+    'invoice' => 'Invoice',
     'add_payment' => 'Add Payment',
     'payment_details' => 'Payment Details',
     'generate_invoice' => 'Generate Invoice',

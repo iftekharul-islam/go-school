@@ -72,7 +72,7 @@
                         </ul>
                     </li>
                      <li class="nav-item sidebar-nav-item">
-                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.payment') }}</span></a>
+                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.invoice') }}</span></a>
                     </li>
                      <li class="nav-item sidebar-nav-item">
                         <a href="{{route('default.fee.types')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-money-check-alt"></i><span>{{ __('text.default_fee_types') }}</span></a>
