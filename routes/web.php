@@ -73,6 +73,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
         Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
         Route::get('sms-summary/{school_id}', 'SchoolController@smsSummary')->name('sms.summary');
+        Route::get('default/fee-types', 'FeeTypesController@defaultFeeTypes')->name('default.fee.types');
+        Route::get('create/fee-types', 'FeeTypesController@create')->name('create.fee.type');
+        Route::post('store/fee-types', 'FeeTypesController@store')->name('store.fee.type');
+        Route::delete('delete/fee-types/{id}', 'FeeTypesController@destroy')->name('delete.fee.type');
+        Route::delete('delete/fee-types/{id}', 'FeeTypesController@destroy')->name('delete.fee.type');
+        Route::get('edit/fee-types/{id}', 'FeeTypesController@edit')->name('edit.fee.type');
+        Route::patch('update/fee-types/{id}', 'FeeTypesController@update')->name('update.fee.type');
     });
 
     //Student role routes

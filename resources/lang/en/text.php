@@ -157,4 +157,5 @@ return[
     'exit_time' => 'Exit Time',
     'attendance_date' => 'Attendance Date',
     'late' => 'Late Present',
+    'default_fee_types' => 'Defalut Fee Types'
 ];
