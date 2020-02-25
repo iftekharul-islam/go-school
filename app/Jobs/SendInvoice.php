@@ -59,9 +59,7 @@ class SendInvoice implements ShouldQueue
             $data['month'] =  date("F", mktime(0, 0, 0, $this->month, 1)) .' '. $now->format('Y');
             $data['schoolAddress'] =  $school->school_address;
 
-            if ($school['email']) {
-                Mail::to($school['email'])->send(new InvoiceMail($data));
-            }
+            Mail::to($school['email'])->send(new InvoiceMail($data));
         }
     }
 }
