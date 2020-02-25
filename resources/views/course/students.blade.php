@@ -25,6 +25,20 @@
                         <li>Message Student</li>
                     </ul>
                 </div>
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card height-auto false-height">
                     <div class="card-body">
                         @if(count($students) > 0)
@@ -73,27 +87,15 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        @if (session('status'))
-                                            <div class="alert alert-success">
-                                                {{ session('status') }}
-                                            </div>
-                                        @endif
-                                        @if ($errors->any())
-                                            <div class="alert alert-danger">
-                                                <ul>
-                                                    @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
-                                        <form action="{{url('teacher/message/students')}}" method="POST" id="msgForm" class="new-added-form">
+                                        <form action="{{url('teacher/message/students')}}" method="POST" enctype="multipart/form-data" id="msgForm" class="new-added-form">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="teacher_id" value="{{$teacher_id}}">
                                             <input type="hidden" name="section_id" value="{{$section_id}}">
                                             <div class="form-group">
                                                 <label for="msg">Write Message: </label>
                                                 <textarea name="msg" class="form-control" id="msg" cols="30" rows="10"></textarea>
+                                                <label for="">Attach file here :</label>
+                                                <br><input type="file" name="file_path">
                                             </div>
                                             <button type="submit" class="button button--save float-right">Message</button>
                                         </form>
