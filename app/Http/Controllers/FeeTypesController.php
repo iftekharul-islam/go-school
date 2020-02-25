@@ -16,7 +16,7 @@ class FeeTypesController extends Controller
      */
     public function index()
     {
-        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->get();
+        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->orWhere('is_default', 1)->get();
         return view('accounts.feeTypes.index', compact('feeTypes'));
     }
 
@@ -49,11 +49,14 @@ class FeeTypesController extends Controller
         $feeType->name = $request->get('name');
         $feeType->code = $request->get('code');
         $feeType->description = $request->get('desc');
-        $feeType->school_id = Auth::user()->school_id;
         $feeType->type = 'onetime';
         $feeType->year = $today->year;
+        $feeType->school_id = Auth::user()->school_id;
+        if (Auth::user()->role == 'master') {
+            $feeType->is_default = 1;
+        } 
         $feeType->save();
-        return redirect(\auth()->user()->role.'/fee-types')->with('status', 'Fee types Created');
+        return back()->with('status', 'Fee types Created');
     }
 
     /**
@@ -99,7 +102,7 @@ class FeeTypesController extends Controller
         $feeType->code = $request->get('code');
         $feeType->description = $request->get('desc');
         $feeType->save();
-        return redirect(\auth()->user()->role.'/fee-types')->with('status', 'Fee types Updated');
+        return back()->with('status', 'Fee Type Updated');
     }
 
     /**
@@ -112,6 +115,12 @@ class FeeTypesController extends Controller
     {
         $feeType = FeeType::findOrFail($id);
         $feeType->delete();
-        return redirect(\auth()->user()->role.'/fee-types')->with('status', 'Fee types Deleted');
+        return back()->with('status', 'Fee Type Deleted');
+    }
+
+    public function defaultFeeTypes()
+    {
+        $feeTypes = FeeType::where('is_default', 1)->get();
+        return view('accounts.feeTypes.default', compact('feeTypes'));
     }
 }

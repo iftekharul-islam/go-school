@@ -4,14 +4,12 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Fee Types</h3>
+            <h3>Default Fee Types</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Manage Accounts</li>
-                <li>Fee Collection</li>
-                <li>Fee Types</li>
+                <li>Default Fee Types</li>
             </ul>
         </div>
         @if (session('status'))
@@ -23,8 +21,8 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3 class="float-left mb-5">Fee Types</h3>
-                        <a href="{{ url(auth()->user()->role.'/fee-types/create') }}" class="button button--save float-right"><i class="fas fa-plus-circle"></i> Add Fee Type</a>
+                        {{-- <h3 class="float-left mb-5">Default Fee Types</h3> --}}
+                        <a href="{{ route('create.fee.type') }}" class="button btn-sm button--save float-right mb-2"><i class="fas fa-plus-circle"></i> Create Fee Type</a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -48,14 +46,12 @@
                                 <td>{{ $feeType->code }}</td>
                                 <td>{{ $feeType->description }}</td>
                                 <td>
-                                    @if($feeType->is_default == 0)
-                                    <a href="{{ url(auth()->user()->role.'/fee-types/'.$feeType->id.'/edit') }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
+                                    <a href="{{ route('edit.fee.type',['id' => $feeType->id]) }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
                                     <button class="button button--cancel" onclick="feeTypes({{ $feeType->id }})"><i class="far fa-trash-alt"></i></button>
-                                    <form id="delete-form-{{ $feeType->id }}" action="{{ url(auth()->user()->role.'/fee-types', $feeType->id) }}" method="POST">
+                                    <form id="delete-form-{{ $feeType->id }}" action="{{ route('delete.fee.type', ['id' => $feeType->id]) }}" method="POST">
                                         {!! method_field('delete') !!}
                                         {!! csrf_field() !!}
                                     </form>
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

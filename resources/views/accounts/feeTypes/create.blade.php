@@ -4,14 +4,35 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Dashboard</h3>
+            <h3>Create Fee Type</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Fee Types</li>
+                @if(Auth::user()->role != 'master')
+                <li>Manage Accounts</li>
+                <li>Fee Collection</li>
+                <li> <a href="{{ route('fee-types.index') }}">Fee Types</a></li>
+                @else 
+                <li>Default Fee Types</li>
+                @endif
+                <li>Create Fee Type</li>
             </ul>
         </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
             <div class="col-12 col-lg-8 col-xl-8 col-md-10">
                 <div class="card false-height">
@@ -21,16 +42,7 @@
                                 <h3>Create Fee Types</h3>
                             </div>
                         </div>
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form class="mg-b-20" action="{{ url(auth()->user()->role.'/fee-types')  }}" method="post">
+                        <form class="mg-b-20" action="@if(auth()->user()->role == 'master') {{ route('store.fee.type')}} @else {{ url(auth()->user()->role.'/fee-types')  }} @endif" method="post">
                             {{ csrf_field() }}
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
@@ -51,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="form-group mr-4 float-right mt-3">
-                                <button type="submit" class="button button--save">Add</button>
+                                <button type="submit" class="button button--save">Add Fee Type</button>
                             </div>
                         </form>
                     </div>
@@ -59,5 +71,4 @@
             </div>
         </div>
     </div>
-
 @endsection

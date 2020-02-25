@@ -4,12 +4,14 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
-            <h3>Dashboard</h3>
+            <h3>Create Fee Master</h3>
             <ul>
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Fee Master </li>
+                <li>Manage Accounts</li>
+                <li><a href="{{  url(auth()->user()->role.'/fee-master') }}">Fee Master</a></li>
+                <li>Add Fee Master </li>
             </ul>
         </div>
         <div class="row">
