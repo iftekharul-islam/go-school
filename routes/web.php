@@ -144,7 +144,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-income', 'AccountController@postIncome');
         Route::get('edit-income/{id}', 'AccountController@editIncome');
         Route::post('update-income', 'AccountController@updateIncome');
-        Route::get('delete-income/{id}', 'AccountController@deleteIncome');
+        Route::delete('delete-income/{id}', 'AccountController@deleteIncome');
 
         Route::get('expense', 'AccountController@expense');
         Route::post('create-expense', 'AccountController@storeExpense');
@@ -152,7 +152,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-expense', 'AccountController@postExpense');
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
-        Route::get('delete-expense/{id}', 'AccountController@deleteExpense');
+        Route::delete('delete-expense/{id}', 'AccountController@deleteExpense');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
     });
 
@@ -265,7 +265,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-income', 'AccountController@postIncome');
         Route::get('edit-income/{id}', 'AccountController@editIncome');
         Route::post('update-income', 'AccountController@updateIncome');
-        Route::get('delete-income/{id}', 'AccountController@deleteIncome');
+        Route::delete('delete-income/{id}', 'AccountController@deleteIncome');
 
         Route::get('expense', 'AccountController@expense');
         Route::post('create-expense', 'AccountController@storeExpense');
@@ -273,7 +273,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-expense', 'AccountController@postExpense');
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
-        Route::get('delete-expense/{id}', 'AccountController@deleteExpense');
+        Route::delete('delete-expense/{id}', 'AccountController@deleteExpense');
 
         Route::resource('fee-types', 'FeeTypesController');
         Route::resource('fee-discount', 'FeeDiscountController');

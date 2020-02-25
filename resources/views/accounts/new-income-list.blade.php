@@ -111,7 +111,14 @@
                                             <td>{{$income->description}}</td>
                                             <td>{{ $income->date }}</td>
                                             <td>{{$income->amount}}</td>
-                                            <td><a title='Edit' class='button button--edit float-left' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-income")}}/{{$income->id}}'><i class="fa-edit fa"></i></a></td>
+                                            <td>
+                                                <a title='Edit' class='btn btn-success btn-lg' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-income")}}/{{$income->id}}'><i class="fa-edit fa"></i></a>
+                                                <a class="btn btn-danger btn-lg text-white ml-2" type="button" onclick="deleteMsg({{ $income->id }})"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                            <form id="delete-form-{{ $income->id }}" action="{{ url( \Illuminate\Support\Facades\Auth::user()->role . '/delete-income/' . $income->id) }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                                {{ method_field('delete') }}
+                                            </form>
                                         </tr>
                                     @endforeach
                                     @if(isset($student_total))
@@ -230,5 +237,20 @@
                 container: '#sandbox'
             };
         });
+
+        function deleteMsg(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Expense!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-'+id).submit();
+                    }
+                });
+        }
     </script>
 @endpush
