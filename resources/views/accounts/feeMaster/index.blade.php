@@ -31,7 +31,7 @@
                                         <select name="class" id="class_number" class="select2">
                                             <option value="0">Select class</option>
                                             @foreach($classes as $class)
-                                                <option value="{{ $class->id }}">Class - {{ $class->class_number }}</option>
+                                                <option value="{{ $class->id }}" @if( request()->class == $class->id ) selected @endif>Class - {{ $class->class_number }}</option>
                                             @endforeach
                                         </select>
                                     </div>
