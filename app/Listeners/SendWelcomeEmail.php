@@ -4,11 +4,8 @@ namespace App\Listeners;
 
 use App\Events\UserRegistered;
 use App\Mail\SendWelcomeEmailToUser;
-use App\StuffAttendance;
-use Carbon\Carbon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class SendWelcomeEmail
