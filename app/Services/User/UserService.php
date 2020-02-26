@@ -3,6 +3,8 @@
 namespace App\Services\User;
 
 use App\Myclass;
+use App\Attendance;
+use App\StuffAttendance;
 use App\User;
 use App\StudentInfo;
 use Mavinoo\LaravelBatch\Batch;
@@ -289,6 +291,15 @@ class UserService
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
         $tb->save();
 
+        $Attendance = new Attendance();
+        $Attendance->student_id = $tb->id;
+        $Attendance->section_id = $tb->section_id;
+        $Attendance->exam_id = 0;
+        $Attendance->user_id = Auth::user()->id;
+        $Attendance->present = '0';
+        $Attendance->save();
+
+
         return $tb;
     }
 
@@ -323,7 +334,6 @@ class UserService
         ];
 
         $info = StudentInfo::create($data);
-
         return $info;
     }
 
@@ -352,8 +362,15 @@ class UserService
         if ('teacher' == $role) {
             $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;
         }
-
         $tb->save();
+
+        $staffAttendance = new StuffAttendance();
+        $staffAttendance->school_id = Auth::user()->school_id;
+        $staffAttendance->stuff_id = $tb->id;
+        $staffAttendance->present = '0';
+        $staffAttendance->role = $tb->role;
+        $staffAttendance->user_id = Auth::user()->id;
+        $staffAttendance->save();
 
         return $tb;
     }
