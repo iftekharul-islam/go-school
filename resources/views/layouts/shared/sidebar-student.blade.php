@@ -457,6 +457,28 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link">
+                            <i class="far fa-question-circle">
+                            </i><span>Help</span>
+                        </a>
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{{ url('https://www.youtube.com/channel/UCN8SOrFD4WvHftsrpfn1jyw?view_as=subscriber') }}" target="_blank">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Online Training</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{{ url('https://drive.google.com/drive/folders/1sMq3BY7R5aUhzJ1DfM8-_6if0vTIIC8o') }}" target="_blank">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>User Manual</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
             </ul>
         </div>
