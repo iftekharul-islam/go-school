@@ -45,9 +45,6 @@ class FeeMasterController extends Controller
      */
     public function store(Request $request)
     {
-        // echo $request->recurrent == true ? 'h' : 'no';
-        //dd($request->all());
-
         $request->validate([
             'class_id' => 'required',
             'fee_type' => 'required',
@@ -149,7 +146,7 @@ class FeeMasterController extends Controller
     {
         $feeMaster = FeeMaster::findOrFail($id);
         $feeMaster->delete();
-        return redirect(auth()->user()->role.'/fee-master')->with('status', 'Fee Master Deleted');
+        return back()->with('status', 'Fee Master Deleted');
     }
 
     public function classFee(Request $request)
