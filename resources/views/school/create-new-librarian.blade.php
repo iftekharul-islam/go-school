@@ -50,8 +50,8 @@
                                         <label for="name"
                                                class="control-label false-padding-bottom">Full
                                             Name<label class="text-danger">*</label></label>
-                                        <input id="name" type="text" class="form-control"
-                                               name="name"
+                                        <input id="name" type="text" class="form-control librarian-name"
+                                               name="name" value="{{ old('name') }}"
                                                required>
 
                                         @if ($errors->has('name'))
@@ -64,20 +64,26 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+
                                     <div class="col-md-12">
                                         <label for="email"
-                                               class="control-label false-padding-bottom">E-Mail
-                                            Address<label
+                                               class="control-label false-padding-bottom">E-Mail/Username<label
                                                 class="text-danger">*</label></label>
+                                        <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
-                                        <input id="email" type="email" class="form-control"
-                                               name="email"
-                                               required>
+                                        @php
+                                            $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
+                                        @endphp
+
+                                        <input type="hidden" name="student_code" value="{{ $code }}">
+
+                                        <input id="email" type="email" class="form-control librarian-username"
+                                               name="email" value="{{ old('email') }}"
+                                               required readonly>
+                                        <div class="email-visible"></div>
 
                                         @if ($errors->has('email'))
-                                            <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                                            <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
                                         @endif
                                     </div>
                                 </div>
@@ -129,7 +135,7 @@
                                             Number</label>
                                         <input id="phone_number" type="text"
                                                class="form-control" name="phone_number"
-                                               value="" >
+                                               value="{{ old('phone_number') }}" >
 
                                         @if ($errors->has('phone_number'))
                                             <span class="help-block">
@@ -149,7 +155,8 @@
 
                                         <select id="blood_group" class="form-control"
                                                 name="blood_group">
-                                            <option selected="selected">A+</option>
+                                            <option selected="selected">N/A</option>
+                                            <option>A+</option>
                                             <option>A-</option>
                                             <option>B+</option>
                                             <option>B-</option>
@@ -162,7 +169,7 @@
                                         @if ($errors->has('blood_group'))
                                             <span class="help-block">
                                     <strong>{{ $errors->first('blood_group') }}</strong>
-                                </span>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -174,13 +181,11 @@
 
                                     <div class="col-md-12">
                                         <label for="nationality"
-                                               class="control-label false-padding-bottom">Nationality<label
-                                                class="text-danger">*</label></label>
+                                               class="control-label false-padding-bottom">Nationality</label>
 
                                         <input id="nationality" type="text"
                                                class="form-control" name="nationality"
-                                               value=""
-                                               required>
+                                               value="{{ old('nationality') }}">
 
                                         @if ($errors->has('nationality'))
                                             <span class="help-block">
@@ -226,7 +231,7 @@
                                                 class="text-danger">*</label></label>
                                         <input id="address" type="text" class="form-control"
                                                name="address"
-                                               value=""
+                                               value="{{ old('address') }}"
                                                required>
 
                                         @if ($errors->has('address'))
@@ -242,12 +247,11 @@
 
                                     <div class="col-md-12">
                                         <label for="email"
-                                               class="control-label false-padding-bottom">About<label
-                                                class="text-danger">*</label></label>
+                                               class="control-label false-padding-bottom">About</label>
 
                                         <input id="about" type="text" class="form-control"
                                                name="about"
-                                               value="" required>
+                                               value="{{ old('about') }}">
 
                                         @if ($errors->has('about'))
                                             <span class="help-block">
@@ -283,4 +287,37 @@
     </div>
 
 @endsection
+@push('customjs')
+    <script>
+        $(document).ready(function() {
+
+            $('.librarian-name').focusout(function() {
+                let inputName = $('.librarian-name').val();
+                if (inputName) {
+                    let names = inputName.split(' ');
+
+                    let code = {!! $code !!};
+
+                    let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
+
+                    let username = lastName + code;
+
+                    $('.librarian-username').val(username.toLowerCase());
+
+                }
+            });
+
+            $('.email-enable-button').click(function(event) {
+                event.preventDefault();
+
+                $('.librarian-username').remove();
+                $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
+                           name="email" value="" placeholder="Enter email address"
+                           required>`);
+                $('.email-enable-button').remove();
+            });
+
+        });
+    </script>
+@endpush
 
