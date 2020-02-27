@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\SchoolCreated' => [
             'App\Listeners\CreateDefaultConfigurations',
+        ],
+        'App\Events\ReceiptGenerate' => [
+            'App\Listeners\ReceiptDownload',
         ]
     ];
 

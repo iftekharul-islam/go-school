@@ -4,13 +4,18 @@
     <title>Money Receipt-{{$student_name}}</title>
     <style>
         body{
-            font-size:16px;
+            font-size:14px;
             color: #000;
         }
-        .content{
+        .main
+        .main{
             width:100%;
             margin:0 auto;
            
+        }
+        .content{
+            width: 45%;
+            
         }
         table{
             width:100%;
@@ -28,7 +33,7 @@
         }
         #heading address{
             padding-bottom: 15px;
-            font-size: 14px;
+            font-size: 12px;
         }
         #heading h1{margin: 10px}
         #billing td{padding-left:0}
@@ -51,16 +56,7 @@
         .student-info th, .student-info td {
             border: 1px solid black;
         }
-        .instruction{
-            border: 1px solid #eee;
-            padding: 0 10px;
-            margin-top: 30px;
-            overflow: hidden;
-        }
-        .instruction ol{
-            font-size: 14px;
-            line-height: 2;
-        }
+       
         .signature{text-align:right;}
         .signature span{
             font-weight:bold;
@@ -83,7 +79,8 @@
 </head>
 
 <body>
-    <div class="content">
+    <div id="main">
+    <div class="content" style="display:inline-block; width: 48%; float:left;">
         <table id="heading">
             <tr>
                 <td>
@@ -102,9 +99,9 @@
                 <td>Date: {{ $transaction['created_at']->format('d-m-Y') }}</td>
             </tr>
             <tr class="align-left">
-                <td>Student Name: {{ $student_name }}</td>
-                <td></td>
-                <td></td>
+                <td>Name: </td>
+                <td>{{ $student_name }}</td>
+                
             </tr>
             <tr class="align-left">
                 <td>Class: {{ $class }}</td>
@@ -164,8 +161,8 @@
             </tr>
         </table>
     </div>
-    <div style="page-break-before:always">&nbsp;</div> 
-    <div class="content">
+    {{-- <div style="page-break-before:always">&nbsp;</div>  --}}
+    <div class="content" style="display:inline-block; width: 48%; float:right">
         <table id="heading">
             <tr>
                 <td>
@@ -184,9 +181,8 @@
                 <td>Date: {{ $transaction['created_at']->format('d-m-Y') }}</td>
             </tr>
             <tr class="align-left">
-                <td>Student Name: {{ $student_name }}</td>
-                <td></td>
-                <td></td>
+                <td>Name: </td>
+                <td>{{ $student_name }}</td>
             </tr>
             <tr class="align-left">
                 <td>Class: {{ $class }}</td>
@@ -245,6 +241,7 @@
                 </td>
             </tr>
         </table>
+    </div>
     </div>
 </body>
 

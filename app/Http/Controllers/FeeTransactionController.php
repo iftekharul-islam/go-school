@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App;
+use App\Events\ReceiptGenerate;
 use PDF;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -240,7 +241,9 @@ class FeeTransactionController extends Controller
         foreach ($myArray as $value) {
             $ft->feeMasters()->attach($value);
         }
-        $this->generateReceipt($ft->id);
+        
+        event(new ReceiptGenerate($ft->id));
+        
         return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
     }
     public function studentFeeDetails()
@@ -250,9 +253,9 @@ class FeeTransactionController extends Controller
         return view('fees.fees-summary', compact('student','discounts'));
     }
 
-    public function generateReceipt($trasaction_id)
+    public function generateReceipt($transaction_id)
     {
-        $transaction = FeeTransaction::with('feeMasters.feeType')->findOrFail($trasaction_id);
+        $transaction = FeeTransaction::with('feeMasters.feeType')->findOrFail($transaction_id);
         $student = User::with('section.class','studentInfo')->findOrFail($transaction->student_id);
        
         $data = ['student_name' => $student['name'],
@@ -261,9 +264,9 @@ class FeeTransactionController extends Controller
             'class' => $student['section']['class']['class_number'],
             'transaction' => $transaction
         ];
-        $pdf = PDF::loadView('accounts.transaction.receipt-template', $data, ['format' => 'A4-L',  'orientation' => 'L']);
+        $pdf = PDF::loadView('accounts.transaction.receipt-template', $data);
         $date = Carbon::now();
-        $pdfName = $student->school_id.'_'.$student->student_code.$date->format('Y-m-d_g-i-a').'_receipt.pdf';
-        $pdf->download($pdfName);
+        $pdfName = $student->student_code.'_'.$student->name.'_'.$date->format('Y-m-d_g-i-a').'_receipt.pdf';
+        $pdf->stream($pdfName);
     }
 }
