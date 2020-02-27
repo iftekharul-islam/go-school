@@ -24,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\SchoolCreated' => [
             'App\Listeners\CreateDefaultConfigurations',
-        ]
+        ],
+        'App\Events\ImportStudentAttendance' => [
+           'App\Listeners\AttendanceInfoStore',
+        ],
     ];
 
     /**
