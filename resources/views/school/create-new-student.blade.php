@@ -105,7 +105,7 @@
                                         <label for="password"
                                                class="control-label false-padding-bottom">Password<label
                                                 class="text-danger">*</label></label>
-                                        <button class="btn btn-primary btn-sm remove-pass float-right">Create Password</button>
+                                        <button class="btn btn-primary btn-sm password-btn float-right">Create Password</button>
                                         <input id="password" type="password"
                                                class="form-control student-password" name="password"
                                                required readonly>
@@ -781,7 +781,7 @@
 
                     $('.student-username').val(username.toLowerCase());
 
-                    $('.student-password, .confirm-password').val(username.toLowerCase());
+                    $('.student-password').val(username.toLowerCase());
 
                 }
             });
@@ -794,16 +794,16 @@
                            name="email" value="" placeholder="Enter email address"
                            required>`);
                 $('.email-enable-button').remove();
-
-                $('.student-username').remove();
+                $('.student-password').val('').removeAttr('readonly');
+                $('.password-btn').remove();
             });
 
-            $('.remove-pass').click(function(event) {
+            $('.password-btn').click(function(event) {
                 event.preventDefault();
 
                 $('.student-password').val('').removeAttr('readonly');
 
-                $('.remove-pass').remove();
+                $('.password-btn').remove();
             });
 
         });
