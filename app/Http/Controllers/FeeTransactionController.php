@@ -11,11 +11,10 @@ use App\StudentInfo;
 use App\Services\User\UserService;
 use App\User;
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App;
-
+use PDF;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -241,7 +240,7 @@ class FeeTransactionController extends Controller
         foreach ($myArray as $value) {
             $ft->feeMasters()->attach($value);
         }
-        
+        $this->generateReceipt($ft->id);
         return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
     }
     public function studentFeeDetails()
@@ -260,9 +259,11 @@ class FeeTransactionController extends Controller
             'roll_number' => $student['studentInfo']['roll_number'],
             'section' => $student['section']['section_number'],
             'class' => $student['section']['class']['class_number'],
+            'transaction' => $transaction
         ];
-       
-        $pdf = PDF::loadView('accounts.transaction.receipt-template', [],['format' => 'A4-L']);
-        $pdf->stream('money-receipt.pdf');
+        $pdf = PDF::loadView('accounts.transaction.receipt-template', $data, ['format' => 'A4-L',  'orientation' => 'L']);
+        $date = Carbon::now();
+        $pdfName = $student->school_id.'_'.$student->student_code.$date->format('Y-m-d_g-i-a').'_receipt.pdf';
+        $pdf->download($pdfName);
     }
 }
