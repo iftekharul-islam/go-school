@@ -226,7 +226,7 @@
                             <li class="nav-item">
                                 <a href="{{ route('school.section','course=1') }}"
                                    class="nav-link {{ Request::get('course') == 1 ? 'menu-active' : '' }}">
-                                    <i class="fas fa-angle-right"></i><span>{{ __('text.Class Details') }}</span></a>
+                                    <i class="fas fa-angle-right"></i><span>{{ __('text.all_classes') }}</span></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('manage.class') }}"
@@ -326,6 +326,11 @@
                     <li class="nav-item">
                         <a href="{{ route('syllabus') }}" class="nav-link {{ (request()->routeIs('academic.syllabus')) ? 'menu-active' : '' }}">
                             <i class="fas fa-list"></i><span>{{ __('text.Syllabus') }}</span>
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                        <a href="@if($role == 'teacher') {{ route('routines') }} @else {{ route('class.routines') }} @endif" class="nav-link {{ (request()->routeIs('routines')) ? 'menu-active' : '' }}">
+                            <i class="fas fa-calendar"></i><span>{{ __('text.Class Routine') }}</span>
                         </a>
                     </li>
                 @endif

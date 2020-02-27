@@ -21,9 +21,14 @@ class RoutineController extends Controller
      */
     public function index()
     {
-        $files = Routine::with('section')
+        $user = Auth::user();
+        $section_id = $user->role == 'student' ? $user->section_id : '';
+        $files = Routine::with('section.class')
             ->where('school_id', Auth::user()->school_id)
             ->where('active', 1)
+            ->when($section_id, function($query) use ($section_id){
+                $query->where('section_id', $section_id);
+            })
             ->orderBy('created_at', 'DESC')
             ->get();
 

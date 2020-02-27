@@ -69,6 +69,7 @@ return [
     'All Issued Books' => 'প্রদানকৃত গ্রন্থসমূহ',
     'Issue Book' => 'গ্রন্থ প্রদান',
     'Add Book' => 'গ্রন্থ সংযোজন',
+    'all_classes' => 'সকল শ্রেণী',
 
     //Attendance section
     'Back' => 'পিছনে',

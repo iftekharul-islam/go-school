@@ -68,6 +68,7 @@ return[
     'All Issued Books' => 'All Issued Books',
     'Issue Book' => 'Issue Book',
     'Add Book' => 'Add Book',
+    'all_classes' => 'All Classes',
 
     //Attendance section
     'Back' => 'Back',
