@@ -137,7 +137,7 @@ return[
     'schools' => 'Schools',
     'create_school' => 'Create School',
     'all_school' => 'All Schools',
-    'payment' => 'Payment',
+    'invoice' => 'Invoice',
     'add_payment' => 'Add Payment',
     'payment_details' => 'Payment Details',
     'generate_invoice' => 'Generate Invoice',
@@ -157,4 +157,5 @@ return[
     'exit_time' => 'Exit Time',
     'attendance_date' => 'Attendance Date',
     'late' => 'Late Present',
+    'default_fee_types' => 'Defalut Fee Types'
 ];

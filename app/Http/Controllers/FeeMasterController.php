@@ -33,7 +33,7 @@ class FeeMasterController extends Controller
             $query->where('school_id', Auth::user()->school_id)
                 ->orWhere('is_default', 1);
         })->get();
-        
+
         return view('accounts.feeMaster.create', compact('classes', 'feeTypes'));
     }
 

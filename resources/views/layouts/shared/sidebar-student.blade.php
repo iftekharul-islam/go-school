@@ -21,7 +21,7 @@
             $academic = 0;
             $sht = 0;
             $att = 0;
-            if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || strpos($add, 'sections') || strpos($add, 'attendance-time'))
+            if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || Request::get('course') == 2 || strpos($add, 'attendance-time') || strpos($add, 'all-teachers'))
                 $att = 1;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
@@ -72,7 +72,10 @@
                         </ul>
                     </li>
                      <li class="nav-item sidebar-nav-item">
-                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.payment') }}</span></a>
+                        <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.invoice') }}</span></a>
+                    </li>
+                     <li class="nav-item sidebar-nav-item">
+                        <a href="{{route('default.fee.types')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-money-check-alt"></i><span>{{ __('text.default_fee_types') }}</span></a>
                     </li>
                 @endif
 
@@ -91,8 +94,8 @@
                                             class="fas fa-angle-right"></i>{{ __('text.Staff Attendance') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ (request()->is('admin/school/sections'))  ? 'menu-active' : '' }}"
-                                   href="{{ url('admin/school/sections') }}"><i class="fas fa-angle-right"></i>{{ __('text.Students Attendance') }}</a>
+                                <a class="nav-link {{ Request::get('course') == 2  ? 'menu-active' : '' }}"
+                                   href="{{ url('admin/school/sections?course=2') }}"><i class="fas fa-angle-right"></i>{{ __('text.Students Attendance') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->is('admin/attendance-time')) ? 'menu-active' : '' }}"
@@ -451,6 +454,28 @@
                                 <a href="{{ url($role.'/create/book') }}"
                                    class="nav-link {{ (request()->is($role.'/create/book')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.Add Book') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link">
+                            <i class="far fa-question-circle">
+                            </i><span>Help</span>
+                        </a>
+                        <ul class="nav sub-group-menu">
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{{ url('https://www.youtube.com/channel/UCN8SOrFD4WvHftsrpfn1jyw?view_as=subscriber') }}" target="_blank">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Online Training</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{{ url('https://drive.google.com/drive/folders/1sMq3BY7R5aUhzJ1DfM8-_6if0vTIIC8o') }}" target="_blank">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>User Manual</span>
+                                </a>
                             </li>
                         </ul>
                     </li>

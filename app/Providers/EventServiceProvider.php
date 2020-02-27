@@ -28,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ReceiptGenerate' => [
             'App\Listeners\ReceiptDownload',
         ]
+        'App\Events\ImportStudentAttendance' => [
+           'App\Listeners\AttendanceInfoStore',
+        ],
+
     ];
 
     /**

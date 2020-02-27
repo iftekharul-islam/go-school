@@ -139,7 +139,7 @@ return [
     'schools' => 'বিদ্যালয় সমূহ',
     'create_school' => 'স্কুল তৈরি করণ',
     'all_school' => 'সকল বিদ্যালয়',
-    'payment' => 'পেমেন্ট',
+    'invoice' => 'চালান',
     'add_payment' => 'পেমেন্ট সংযোজন',
     'payment_details' => 'পেমেন্টের বিস্তারিত',
     'generate_invoice' => 'চালান তৈরি করণ',
@@ -159,4 +159,5 @@ return [
     'exit_time' => 'প্রস্থান',
     'attendance_date' => 'উপস্থিতি তারিখ',
     'late' => 'বিলম্বিত উপস্থিত',
+    'default_fee_types' => 'ডিফল্ট ফির প্রকার'
 ];

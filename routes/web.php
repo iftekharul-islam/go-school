@@ -73,6 +73,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('generate-invoice', 'InvoiceController@create')->name('generate.invoice');
         Route::post('send-invoice', 'InvoiceController@send')->name('send.invoice');
         Route::get('sms-summary/{school_id}', 'SchoolController@smsSummary')->name('sms.summary');
+        Route::get('default/fee-types', 'FeeTypesController@defaultFeeTypes')->name('default.fee.types');
+        Route::get('create/fee-types', 'FeeTypesController@create')->name('create.fee.type');
+        Route::post('store/fee-types', 'FeeTypesController@store')->name('store.fee.type');
+        Route::delete('delete/fee-types/{id}', 'FeeTypesController@destroy')->name('delete.fee.type');
+        Route::delete('delete/fee-types/{id}', 'FeeTypesController@destroy')->name('delete.fee.type');
+        Route::get('edit/fee-types/{id}', 'FeeTypesController@edit')->name('edit.fee.type');
+        Route::patch('update/fee-types/{id}', 'FeeTypesController@update')->name('update.fee.type');
     });
 
     //Student role routes
@@ -144,7 +151,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-income', 'AccountController@postIncome');
         Route::get('edit-income/{id}', 'AccountController@editIncome');
         Route::post('update-income', 'AccountController@updateIncome');
-        Route::get('delete-income/{id}', 'AccountController@deleteIncome');
+        Route::delete('delete-income/{id}', 'AccountController@deleteIncome');
 
         Route::get('expense', 'AccountController@expense');
         Route::post('create-expense', 'AccountController@storeExpense');
@@ -152,7 +159,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-expense', 'AccountController@postExpense');
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
-        Route::get('delete-expense/{id}', 'AccountController@deleteExpense');
+        Route::delete('delete-expense/{id}', 'AccountController@deleteExpense');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
     });
 
@@ -265,7 +272,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-income', 'AccountController@postIncome');
         Route::get('edit-income/{id}', 'AccountController@editIncome');
         Route::post('update-income', 'AccountController@updateIncome');
-        Route::get('delete-income/{id}', 'AccountController@deleteIncome');
+        Route::delete('delete-income/{id}', 'AccountController@deleteIncome');
 
         Route::get('expense', 'AccountController@expense');
         Route::post('create-expense', 'AccountController@storeExpense');
@@ -273,7 +280,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('list-expense', 'AccountController@postExpense');
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
-        Route::get('delete-expense/{id}', 'AccountController@deleteExpense');
+        Route::delete('delete-expense/{id}', 'AccountController@deleteExpense');
 
         Route::resource('fee-types', 'FeeTypesController');
         Route::resource('fee-discount', 'FeeDiscountController');
