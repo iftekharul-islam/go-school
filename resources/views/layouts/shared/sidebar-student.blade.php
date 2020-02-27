@@ -458,7 +458,7 @@
                         </ul>
                     </li>
                     <li class="nav-item sidebar-nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" href="#">
                             <i class="far fa-question-circle">
                             </i><span>Help</span>
                         </a>
