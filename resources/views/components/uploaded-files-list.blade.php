@@ -10,40 +10,44 @@
         <th>Class</th>
         <th>Section</th>
       @endif
+      @if(Auth::user()->role == 'admin')
       <th>Is Active</th>
       <th>Action</th>
+      @endif
     </tr>
     </thead>
     <tbody>
     @foreach($files as $file)
       <tr>
         <td>{{($loop->index + 1)}}</td>
-          <td><a class="text-teal" href="{{url($file->file_path)}}" target="_blank">{{$file->title}}</a></td>
+          <td><a class="text-teal" href="{{url($file->file_path)}}" target="_blank">{{ $file->title }}</a></td>
         @if($upload_type == 'syllabus' && $parent == 'class')
-          <td>{{$file->myclass['class_number']}}</td>
-        @elseif($upload_type == 'routine' && $parent == 'section')
-          <td>{{$file->section['class_id']}}</td>
-          <td>{{$file->section['section_number']}}</td>
+          <td>{{ $file->myclass['class_number'] }}</td>
+        @elseif( $upload_type == 'routine' && $parent == 'section')
+          <td>{{ $file->section['class']['class_number'] }}</td>
+          <td>{{ $file->section['section_number'] }}</td>
         @endif
-        <td>{{($file->active === 1)?'Yes':'No'}}</td>
-        @if($file->active ===1)
-          <td>
-            <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
-              Deactivate</button>
-            <form id="delete-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
-              @csrf
-              @method('GET')
-            </form>
-          </td>
-        @else
-          <td>
-            <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
-              Activate</button>
-            <form id="active-file-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
-              @csrf
-              @method('GET')
-            </form>
-          </td>
+        @if(Auth::user()->role == 'admin')
+          <td>{{($file->active === 1)?'Yes':'No'}}</td>
+          @if($file->active ===1)
+            <td>
+              <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
+                Deactivate</button>
+              <form id="delete-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
+                @csrf
+                @method('GET')
+              </form>
+            </td>
+          @else
+            <td>
+              <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
+                Activate</button>
+              <form id="active-file-form-{{ $file->id }}" action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}" method="GET" style="display: none;">
+                @csrf
+                @method('GET')
+              </form>
+            </td>
+          @endif
         @endif
       </tr>
     @endforeach

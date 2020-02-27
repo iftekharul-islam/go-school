@@ -92,6 +92,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('user/notifications/{id}', 'NotificationController@index');
         Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
+        Route::get('class-routine', 'RoutineController@index')->name('class.routines');
     });
 
     //Librarian role routes
@@ -187,6 +188,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('grades/save-grade', 'GradeController@update');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::post('message/students', 'NotificationController@store');
+        Route::get('routine', 'RoutineController@index')->name('routines');
     });
 
     // Admin role routes
