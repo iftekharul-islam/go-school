@@ -260,7 +260,7 @@ class FeeTransactionController extends Controller
             'class' => $student['section']['class']['class_number'],
             'transaction' => $transaction
         ];
-        $pdf = PDF::loadView('accounts.transaction.receipt-template', $data, ['format' => 'A4-L', 'orientation' => 'L']);
+        $pdf = PDF::loadView('accounts.transaction.receipt-template', $data,[], ['format' => 'A4-L', 'orientation' => 'L']);
         $date = Carbon::now();
         $pdfName = $student['student_code'].'_'.$student['name'].'_'.$date->format('Y-m-d_g-i-a').'_receipt.pdf';
         $pdf->stream($pdfName);
