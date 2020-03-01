@@ -240,7 +240,7 @@ class FeeTransactionController extends Controller
         foreach ($myArray as $value) {
             $ft->feeMasters()->attach($value);
         }
-        $this->generateReceipt($ft->id);
+        return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
     }
     public function studentFeeDetails()
     {
