@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\UserRegistered' => [
             'App\Listeners\SendWelcomeEmail',
+            'App\Listeners\AttendanceStore',
         ],
         'App\Events\StudentInfoUpdateRequested' => [
             'App\Listeners\UpdateStudentInfo',
@@ -24,7 +25,16 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\SchoolCreated' => [
             'App\Listeners\CreateDefaultConfigurations',
-        ]
+        ],
+        'App\Events\ReceiptGenerate' => [
+            'App\Listeners\ReceiptDownload',
+        ],
+        'App\Events\ImportStudentAttendance' => [
+           'App\Listeners\AttendanceInfoStore',
+        ],
+        'App\Events\NewUserRegistered' => [
+            'App\Listeners\AttendanceStore',
+        ],
     ];
 
     /**

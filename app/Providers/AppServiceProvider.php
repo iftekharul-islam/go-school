@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Event;
 use App\Exam;
 use App\Myclass;
+use App\Notice;
 use App\Section;
 use App\User;
 use Illuminate\Support\ServiceProvider;
@@ -45,6 +47,24 @@ class AppServiceProvider extends ServiceProvider
             Cache::flush();
         });
         Exam::deleting(function (){
+            Cache::flush();
+        });
+        Notice::creating(function (){
+            Cache::flush();
+        });
+        Event::creating(function (){
+            Cache::flush();
+        });
+        Notice::deleting(function (){
+            Cache::flush();
+        });
+        Event::deleting(function (){
+            Cache::flush();
+        });
+        Notice::updating(function (){
+            Cache::flush();
+        });
+        Event::updating(function (){
             Cache::flush();
         });
     }

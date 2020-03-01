@@ -1,6 +1,6 @@
 @extends('layouts.student-app')
 
-@section('title', 'Add Notice')
+@section('title', 'Notices')
 
 @section('content')
     <div class="breadcrumbs-area">
@@ -17,16 +17,15 @@
             <li>Notices</li>
         </ul>
     </div>
+     @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="card height-auto false-height">
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-                <a href="{{ route('create.notice') }}" class="button button--save mr-2">Create Notice</a>
-            @component('components.uploaded-notices-list',['files'=>$files,'upload_type'=>'notice'])
-                @endcomponent
+            <a href="{{ route('create.notice') }}" class="button button--save mr-2">Create Notice</a>
+            @component('components.uploaded-notices-list',['files'=>$files,'upload_type'=>'notice'])@endcomponent
         </div>
     </div>
 @endsection

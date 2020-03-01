@@ -3,10 +3,12 @@
 @section('content')
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area example-screen">
-            <h3>Dashboard</h3>
+            <h3>Multiple Fee Collection</h3>
             <ul>
                 <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        Back &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
                 </li>
                 <li>Multiple Fee Collection</li>
             </ul>

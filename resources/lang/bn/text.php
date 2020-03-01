@@ -69,6 +69,7 @@ return [
     'All Issued Books' => 'প্রদানকৃত গ্রন্থসমূহ',
     'Issue Book' => 'গ্রন্থ প্রদান',
     'Add Book' => 'গ্রন্থ সংযোজন',
+    'all_classes' => 'সকল শ্রেণী',
 
     //Attendance section
     'Back' => 'পিছনে',
@@ -139,7 +140,7 @@ return [
     'schools' => 'বিদ্যালয় সমূহ',
     'create_school' => 'স্কুল তৈরি করণ',
     'all_school' => 'সকল বিদ্যালয়',
-    'payment' => 'পেমেন্ট',
+    'invoice' => 'চালান',
     'add_payment' => 'পেমেন্ট সংযোজন',
     'payment_details' => 'পেমেন্টের বিস্তারিত',
     'generate_invoice' => 'চালান তৈরি করণ',
@@ -159,4 +160,5 @@ return [
     'exit_time' => 'প্রস্থান',
     'attendance_date' => 'উপস্থিতি তারিখ',
     'late' => 'বিলম্বিত উপস্থিত',
+    'default_fee_types' => 'ডিফল্ট ফির প্রকার'
 ];

@@ -8,6 +8,8 @@
                 <li>
                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
+                <li>Manage Accounts</li>
+                <li><a href="{{  url(auth()->user()->role.'/fee-master') }}">Fee Master</a></li>
                 <li>Edit Fee Master</li>
             </ul>
         </div>

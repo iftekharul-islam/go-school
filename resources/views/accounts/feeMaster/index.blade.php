@@ -12,6 +12,11 @@
                 <li>Fee Master</li>
             </ul>
         </div>
+         @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="false-height">
             <div class="card mb-3">
                 <div class="card-body">
@@ -31,7 +36,7 @@
                                         <select name="class" id="class_number" class="select2">
                                             <option value="0">Select class</option>
                                             @foreach($classes as $class)
-                                                <option value="{{ $class->id }}">Class - {{ $class->class_number }}</option>
+                                                <option value="{{ $class->id }}" @if( request()->class == $class->id ) selected @endif>Class - {{ $class->class_number }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -53,10 +58,7 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-{{--                            <div class="item-title">--}}
-                                <h3 class="float-left mb-5">Fee Master</h3>
-{{--                                <a href="{{ route('fee-master.create') }}" class="button button--save float-right">Add Fee Master</a>--}}
-{{--                            </div>--}}
+                            <h3 class="float-left mb-5">Fee Master</h3>
                         </div>
                         <div class="table-responsive">
                             <table class="table display text-wrap">
@@ -76,12 +78,12 @@
                                 @foreach($feeMasters as $feeMaster)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $feeMaster->myclass->class_number }}</td>
-                                        <td>{{ $feeMaster->feeType['name'] }}</td>
-                                        <td>{{ $feeMaster->amount }}</td>
+                                        <td>{{ $feeMaster['myclass']['class_number'] }}</td>
+                                        <td>{{ @$feeMaster['feeType']['name'] }}</td>
+                                        <td>{{ $feeMaster['amount'] }}</td>
                                         <td>{{ now()->year }}</td>
-                                        <td>{{ $feeMaster->due }}</td>
-                                        <td class="text-capitalize">{{ $feeMaster->format }}</td>
+                                        <td>{{ $feeMaster['due'] }}</td>
+                                        <td class="text-capitalize">{{ $feeMaster['format'] }}</td>
                                         <td>
                                             <a href="{{ url(auth()->user()->role.'/fee-master/'.$feeMaster->id.'/edit') }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
                                             <button class="button button--cancel" onclick="feeMaster({{ $feeMaster->id }})"><i class="far fa-trash-alt"></i></button>
@@ -100,7 +102,7 @@
                 @else
                 <div class="card height-auto">
                     <div class="card-body text-center">
-                        No Fees are assigned for this class!
+                        No Fees Found!
                     </div>
                 </div>
             @endif

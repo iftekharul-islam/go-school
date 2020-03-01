@@ -90,7 +90,6 @@ class AccountController extends Controller
         return view('accounts.new-income',[
             'sectors'=>$sectors,
         ]);
-
     }
     public function storeIncome(StoreAccountRequest $request){
         $this->accountSectors->request = $request;
@@ -205,13 +204,13 @@ class AccountController extends Controller
         $this->accountSectors->request = $request;
         $this->accountSectors->updateAccount();
 
-        return back()->with("status","expense Updated Successfully.");
+        return back()->with("status","Expense Updated Successfully.");
     }
 
     public function deleteExpense($id)
     {
         $expense = Account::findOrFail($id);
         $expense->delete();
-        return back()->with("status","expense Deleted Successfully.");
+        return back()->with("status","Expense Deleted Successfully.");
     }
 }

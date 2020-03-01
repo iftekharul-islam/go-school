@@ -3,8 +3,8 @@
         <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
 
             <div class="">
-                <label for="about" class="control-label">About Book<label class="text-danger">*</label></label>
-                <textarea rows="3" id="about" type="text" class="form-control" name="about" value="{{ old('about') }}" placeholder="About Book" required></textarea>
+                <label for="about" class="control-label">About Book</label>
+                <textarea rows="3" id="about" type="text" class="form-control" name="about" value="{{ old('about') }}" placeholder="About Book" ></textarea>
 
                 @if ($errors->has('about'))
                     <span class="help-block">
@@ -34,7 +34,7 @@
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
             <div class="">
-                <label for="type" class="control-label">Book Type<label class="text-danger">*</label></label>
+                <label for="type" class="control-label">Book Type</label>
                 <select id="type" class="select2 book-type" name="type">
                     <option value="" disabled selected>Select Book Type</option>
                     <option value="Academic">Academic</option>
@@ -54,8 +54,8 @@
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('book_code') ? ' has-error' : '' }}">
             <div class="">
-                <label for="book_code" class="control-label">Book Code<label class="text-danger">*</label></label>
-                <input id="book_code" type="text" class="form-control" name="book_code" value="{{ old('book_code') }}" placeholder="Book Code" required>
+                <label for="book_code" class="control-label">Book Code</label>
+                <input id="book_code" type="text" class="form-control" name="book_code" value="{{ old('book_code') }}" placeholder="Book Code">
 
                 @if ($errors->has('book_code'))
                     <span class="help-block">
@@ -86,8 +86,8 @@
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
             <div class="">
-                <label for="price" class=" control-label">Book Price<label class="text-danger">*</label></label>
-                <input id="price" type="number" class="form-control" name="price" value="{{ old('price') }}" placeholder="Book Price" required>
+                <label for="price" class=" control-label">Book Price</label>
+                <input id="price" type="number" class="form-control" name="price" value="{{ old('price') }}" placeholder="Book Price">
 
                 @if ($errors->has('price'))
                     <span class="help-block">
@@ -105,8 +105,8 @@
 
 
             <div class="">
-                <label for="quantity" class="control-label">Book Quantity<label class="text-danger">*</label></label>
-                <input id="quantity" type="number" class="form-control" name="quantity" value="{{ old('quantity') }}" placeholder="Book Quantity" required>
+                <label for="quantity" class="control-label">Book Quantity</label>
+                <input id="quantity" type="number" class="form-control" name="quantity" value="{{ old('quantity') }}" placeholder="Book Quantity">
 
                 @if ($errors->has('quantity'))
                     <span class="help-block">
@@ -120,8 +120,8 @@
         <div class="form-group{{ $errors->has('rackNo') ? ' has-error' : '' }}">
 
             <div class="">
-                <label for="rackNo" class=" control-label">Book Rack Number<label class="text-danger">*</label></label>
-                <input id="rackNo" type="number" class="form-control" name="rackNo" value="{{ old('rackNo') }}" placeholder="Book Rack Number" required>
+                <label for="rackNo" class=" control-label">Book Rack Number</label>
+                <input id="rackNo" type="number" class="form-control" name="rackNo" value="{{ old('rackNo') }}" placeholder="Book Rack Number">
 
                 @if ($errors->has('rackNo'))
                     <span class="help-block">
@@ -139,8 +139,8 @@
 
 
             <div class="">
-                <label for="rowNo" class="control-label">Book Row Number<label class="text-danger">*</label></label>
-                <input id="rowNo" type="number" class="form-control" name="rowNo" value="{{ old('rowNo') }}" placeholder="Book Row Number" required>
+                <label for="rowNo" class="control-label">Book Row Number</label>
+                <input id="rowNo" type="number" class="form-control" name="rowNo" value="{{ old('rowNo') }}" placeholder="Book Row Number">
 
                 @if ($errors->has('rowNo'))
                     <span class="help-block">

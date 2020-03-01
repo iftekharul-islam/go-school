@@ -2,7 +2,10 @@
 
 namespace App\Services\User;
 
+use App\Events\NewUserRegistered;
 use App\Myclass;
+use App\Attendance;
+use App\StuffAttendance;
 use App\User;
 use App\StudentInfo;
 use Mavinoo\LaravelBatch\Batch;
@@ -289,6 +292,9 @@ class UserService
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
         $tb->save();
 
+        // Store default data on attendance table for a new user
+        event(new NewUserRegistered($tb));
+
         return $tb;
     }
 
@@ -323,7 +329,6 @@ class UserService
         ];
 
         $info = StudentInfo::create($data);
-
         return $info;
     }
 
@@ -352,8 +357,10 @@ class UserService
         if ('teacher' == $role) {
             $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;
         }
-
         $tb->save();
+
+        // Store default data on attendance table for a new user
+        event(new NewUserRegistered($tb));
 
         return $tb;
     }

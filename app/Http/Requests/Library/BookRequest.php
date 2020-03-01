@@ -25,14 +25,7 @@ class BookRequest extends FormRequest
     {
         return [
             'title'     => 'required',
-            'book_code' => 'required|unique:books,book_code',
             'author'    => 'required',
-            'quantity'  => 'required',
-            'rackNo'    => 'required',
-            'rowNo'     => 'required',
-            'type'      => 'required',
-            'about'     => 'required',
-            'price'     => 'required',
         ];
     }
 }

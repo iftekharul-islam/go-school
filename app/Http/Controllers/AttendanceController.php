@@ -201,12 +201,6 @@ class AttendanceController extends Controller
     }
     public function attendanceDetailsview(Request $request, $section_id)
     {
-        $course = Course::with('section')->where('section_id', $section_id)->first();
-        if (!$course)
-        {
-           return back()->with('error','No course is assigned for this section, Please assign a course first');
-        }
-
         $examID = 0;
         if (! empty($course->exam_id)) {
             $examID = $course->exam_id;

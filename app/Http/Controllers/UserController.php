@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewUserRegistered;
 use App\Http\Requests\ImportStudentRequest;
 use App\Http\Requests\user\UpdateStaffProfileRequest;
 use App\School;

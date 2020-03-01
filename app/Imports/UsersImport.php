@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Events\ImportStudentAttendance;
 use App\StudentInfo;
 use App\User;
 use Carbon\Carbon;
@@ -96,6 +97,7 @@ class UsersImport implements ToCollection, WithHeadingRow
 
         }
         session()->put('error_rows', $error_rows);
+        event(new ImportStudentAttendance($user));
     }
 
     public function validateHeaderRow($row)
