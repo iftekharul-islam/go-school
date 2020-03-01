@@ -2,6 +2,7 @@
 
 namespace App\Services\User;
 
+use App\Events\NewUserRegistered;
 use App\Myclass;
 use App\Attendance;
 use App\StuffAttendance;
@@ -291,14 +292,8 @@ class UserService
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
         $tb->save();
 
-        $Attendance = new Attendance();
-        $Attendance->student_id = $tb->id;
-        $Attendance->section_id = $tb->section_id;
-        $Attendance->exam_id = 0;
-        $Attendance->user_id = Auth::user()->id;
-        $Attendance->present = '0';
-        $Attendance->save();
-
+        // Store default data on attendance table for a new user
+        event(new NewUserRegistered($tb));
 
         return $tb;
     }
@@ -364,13 +359,8 @@ class UserService
         }
         $tb->save();
 
-        $staffAttendance = new StuffAttendance();
-        $staffAttendance->school_id = Auth::user()->school_id;
-        $staffAttendance->stuff_id = $tb->id;
-        $staffAttendance->present = '0';
-        $staffAttendance->role = $tb->role;
-        $staffAttendance->user_id = Auth::user()->id;
-        $staffAttendance->save();
+        // Store default data on attendance table for a new user
+        event(new NewUserRegistered($tb));
 
         return $tb;
     }
