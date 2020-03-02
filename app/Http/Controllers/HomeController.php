@@ -78,11 +78,6 @@ class HomeController extends Controller
                     ->where('active', 1)
                     ->get();
             });
-            $exams = Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
-                return Exam::where('school_id', $school_id)
-                    ->where('active', 1)
-                    ->get();
-            });
         }
 
         $allStudents = $this->userService->getStudents();
@@ -90,7 +85,6 @@ class HomeController extends Controller
             'students' => $students,
             'allStudents' => $allStudents,
             'notices' => $notices,
-            'exams' => $exams,
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
             'male' => $male,

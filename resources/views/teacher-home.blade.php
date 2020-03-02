@@ -21,17 +21,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-two">
-                            <div class="item-icon bg-light-teal-transparent">
-                                <i class="flaticon-shopping-list text-light"></i>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-number"><span class="counter" data-num="{{ $teachers->count() }}"></span></div>
-                                <div class="item-title">{{ __('text.total_teacher') }}</div>
+                    @if(auth()->user()->role == 'admin')
+                        <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-teal-transparent">
+                                    <i class="flaticon-shopping-list text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $teachers->count() }}"></span></div>
+                                    <div class="item-title">{{ __('text.total_teacher') }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @elseif(auth()->user()->role == 'teacher')
+                        <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-teal-transparent">
+                                    <i class="flaticon-shopping-list text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $exams->count() }}"></span></div>
+                                    <div class="item-title">{{ __('text.Total Exams') }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                         <div class="dashboard-summery-two">
                             <div class="item-icon bg-light-teal-transparent">
