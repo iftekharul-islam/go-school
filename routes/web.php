@@ -156,7 +156,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
         Route::get('expense', 'AccountController@expense');
         Route::post('create-expense', 'AccountController@storeExpense');
-        Route::get('expense-list', 'AccountController@listExpense');
+        Route::get('expense-list', 'AccountController@listExpense')->name('expenseList');
         Route::post('list-expense', 'AccountController@postExpense');
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');

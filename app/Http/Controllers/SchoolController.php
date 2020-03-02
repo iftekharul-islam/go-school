@@ -32,10 +32,9 @@ class SchoolController extends Controller
     public function manageClasses()
     {
         $user = Auth::user();
-
         $schools = School::all();
-        $classes = Myclass::orderBy('class_number','ASC')->get();
-        $sections = Section::all();
+        $classes = Myclass::orderBy('class_number', 'ASC')->get();
+        $sections = Section::orderBy('section_number', 'ASC')->get();
 
         $teachers = User::where('role', 'teacher')
             ->orderBy('name', 'ASC')

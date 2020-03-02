@@ -86,6 +86,7 @@ class AccountController extends Controller
         $sectors = AccountSector::where('school_id', \Auth::user()->school_id)
             ->where('type','income')
             ->whereYear('created_at', date('Y'))
+            ->orderby('name', 'ASC')
             ->get();
         return view('accounts.new-income',[
             'sectors'=>$sectors,
@@ -160,6 +161,7 @@ class AccountController extends Controller
         $sectors = AccountSector::where('school_id', \Auth::user()->school_id)
             ->where('type','expense')
             ->whereYear('created_at', date('Y'))
+            ->orderby('name', 'ASC')
             ->get();
         return view('accounts.new-expense',['sectors'=>$sectors]);
 

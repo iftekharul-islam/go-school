@@ -3,16 +3,13 @@ namespace App\Services\Account;
 
 use App\AccountSector;
 use App\Account;
-// use App\Myclass;
-// use App\Section;
-// use App\User;
 
 class AccountService {
     public $account_type;
     public $request;
 
     public function getSectorsBySchoolId(){
-        return AccountSector::where('school_id', auth()->user()->school_id)->orderBy('created_at', 'DESC')->get();
+        return AccountSector::where('school_id', auth()->user()->school_id)->orderBy('name', 'ASC')->get();
     }
 
     public function getAccountsBySchoolId(){
