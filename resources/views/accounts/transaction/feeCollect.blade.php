@@ -68,7 +68,7 @@
                                     <th>Class & Section</th>
                                     <td> Class {{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</td>
                                 </tr>
-                                @if($student->studentInfo)
+                                @if($student['studentInfo'])
                                     <tr>
                                         <th>Father's Name</th>
                                         <td>{{ $student->studentInfo['father_name'] }}</td>
