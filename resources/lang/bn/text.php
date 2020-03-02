@@ -160,5 +160,6 @@ return [
     'exit_time' => 'প্রস্থান',
     'attendance_date' => 'উপস্থিতি তারিখ',
     'late' => 'বিলম্বিত উপস্থিত',
-    'default_fee_types' => 'ডিফল্ট ফির প্রকার'
+    'default_fee_types' => 'ডিফল্ট ফির প্রকার',
+    'total_teacher' => 'মোট শিক্ষক',
 ];
