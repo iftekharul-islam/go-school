@@ -292,11 +292,11 @@ class UserController extends Controller
         $user = Auth::user();
 
         $schools = School::all();
-        $classes = Myclass::all();
-        $sections = Section::all();
-        $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
+        $classes = Myclass::orderby('class_number', 'ASC')->get();
+        $sections = Section::orderby('section_number', 'ASC')->get();
+        $shifts = Shift::where('school_id', Auth::user()->school_id)->orderby('shift', 'ASC')->get();
 
-        $teacherDepartments = Department::where('school_id', $user->school_id)->get();
+        $teacherDepartments = Department::where('school_id', $user->school_id)->orderby('department_name', 'ASC')->get();
         $teacherClasses = Myclass::where('school_id', $user->school->id)->pluck('id');
         $teacherSections = Section::with('class')->whereIn('class_id', $teacherClasses)->get();
 

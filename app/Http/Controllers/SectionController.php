@@ -36,7 +36,7 @@ class SectionController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $classes = Myclass::where('school_id', $user->school_id)->get();
+        $classes = Myclass::where('school_id', $user->school_id)->orderby('class_number', 'ASC')->get();
         $classFilterByDepartments = Myclass::where('school_id', $user->school_id)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();

@@ -20,7 +20,7 @@
                         <label for="classNumber{{$school->id}}" class="col-sm-12 control-label">Class
                             Number/Name</label>
                         <div class="col-sm-12">
-                            <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}"
+                            <input type="number" name="class_number" class="form-control" id="classNumber{{$school->id}}"
                                    placeholder="Class Number/Name" required>
                         </div>
                     </div>
