@@ -417,6 +417,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('shift/edit/{id}', 'ShiftController@edit')->name('shift.edit');
         Route::post('shift/update/{id}', 'ShiftController@update')->name('shift.update');
         Route::delete('shift/delete/{id}', 'ShiftController@destroy')->name('shift.delete');
+        Route::get('school-settings/', 'SchoolController@schoolSetup')->name('school.setting');
+        Route::post('school-settings/{school_id}', 'SchoolController@updateSchoolSetting')->name('school.update');
+
     });
     Route::get('/exams/download/result/{exam_id}', 'ExamController@downloadResultFile')->name('exams.download.result');
 
