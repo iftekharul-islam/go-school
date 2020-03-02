@@ -68,7 +68,7 @@ class CourseService {
         $tb->course_name = $request->course_name;
         $tb->class_id = $request->class_id;
         $tb->course_type = $request->course_type;
-        $tb->course_time = $request->course_time;
+        $tb->course_time = $request->course_time ? $request->course_time : 'N/A';
         $tb->section_id = $request->section_id;
         $tb->teacher_id = $request->teacher_id;
         $tb->grade_system_name = $grade_system->grade_system_name;
