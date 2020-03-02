@@ -112,7 +112,7 @@
          @if(count($users) > 0)
                 <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
-                @if(auth()->user()->role == 'admin')
+                @if (auth()->user()->role == 'admin')
                     <div class="col-md-2 col-sm-12">
                         <div class="form-group">
                             <select id='action' name="action" class="form-control form-control-sm">
@@ -145,13 +145,13 @@
                 <table class="table table-bordered display text-wrap">
                     <thead>
                     <tr>
-                        @if(auth()->user()->role == 'admin')
+                        @if (auth()->user()->role == 'admin')
                             <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
                         @endif
                         <th>{{ __('text.Code') }}</th>
                         <th>{{ __('text.Name') }}</th>
                         @foreach ($users as $user)
-                            @if($user->role == 'student')
+                            @if ($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
                                     <th>Roll No</th>
                                     <th>Session</th>
@@ -193,7 +193,7 @@
                     <tbody>
                     @foreach ($users as $key=>$user)
                         <tr>
-                            @if(auth()->user()->role == 'admin')
+                            @if (auth()->user()->role == 'admin')
                                 <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
                             @endif
                             <td>{{$user->student_code}}</td>
