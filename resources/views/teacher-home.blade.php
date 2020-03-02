@@ -27,8 +27,8 @@
                                 <i class="flaticon-shopping-list text-light"></i>
                             </div>
                             <div class="item-content">
-                                <div class="item-number"><span class="counter" data-num="{{ $exams->count() }}"></span></div>
-                                <div class="item-title">{{ __('text.Total Exams') }}</div>
+                                <div class="item-number"><span class="counter" data-num="{{ $teachers->count() }}"></span></div>
+                                <div class="item-title">{{ __('text.total_teacher') }}</div>
                             </div>
                         </div>
                     </div>

@@ -56,6 +56,7 @@ class HomeController extends Controller
             });
 
             $students = User::where('role', 'student')->where('school_id', $admin->school_id)->where('active',1)->get();
+            $teachers = User::where('role', 'teacher')->where('school_id', $admin->school_id)->where('active',1)->get();
             $male = 0;
             $female = 0;
             foreach($students as $std)
@@ -93,7 +94,8 @@ class HomeController extends Controller
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
             'male' => $male,
-            'female' => $female
+            'female' => $female,
+            'teachers' => $teachers,
         ]);
     }
 }
