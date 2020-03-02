@@ -110,44 +110,48 @@
         @endif
         
          @if(count($users) > 0)
-            <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
+                <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
-                <div class="col-md-2 col-sm-12">
-                    <div class="form-group">
-                        <select id='action' name="action" class="form-control form-control-sm">
-                            <option value="" disabled selected>Bulk Action</option>
-                            @if($type == 'Students')
-                            <option value="enable_sms">Enable SMS</option>
-                            <option value="disable_sms">Disable SMS</option>
-                            @endif
-                            <option value="deactivate">Inactive</option>
-                        </select>
+                @if (auth()->user()->role == 'admin')
+                    <div class="col-md-2 col-sm-12">
+                        <div class="form-group">
+                            <select id='action' name="action" class="form-control form-control-sm">
+                                <option value="" disabled selected>Bulk Action</option>
+                                @if($type == 'Students')
+                                <option value="enable_sms">Enable SMS</option>
+                                <option value="disable_sms">Disable SMS</option>
+                                @endif
+                                <option value="deactivate">Inactive</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2 col-sm-12 offset-md-8">
-                    <div class="form-group">
-                        <select id='records' name="records" class="form-control form-control-sm">
-                            <option value="" disabled selected>Show</option>
-                            <option value="20" @if(request()->get('show') == 20) selected @endif>20</option>
-                            <option value="25" @if(request()->get('show') == 25) selected @endif>25</option>
-                            <option value="30" @if(request()->get('show') == 30) selected @endif>30</option>
-                            <option value="35" @if(request()->get('show') == 35) selected @endif>35</option>
-                            <option value="40" @if(request()->get('show') == 40) selected @endif>40</option>
-                            <option value="45" @if(request()->get('show') == 45) selected @endif>45</option>
-                            <option value="50" @if(request()->get('show') == 50) selected @endif>50</option>
-                        </select>
+                    <div class="col-md-2 col-sm-12 offset-md-8">
+                        <div class="form-group">
+                            <select id='records' name="records" class="form-control form-control-sm">
+                                <option value="" disabled selected>Show</option>
+                                <option value="20" @if(request()->get('show') == 20) selected @endif>20</option>
+                                <option value="25" @if(request()->get('show') == 25) selected @endif>25</option>
+                                <option value="30" @if(request()->get('show') == 30) selected @endif>30</option>
+                                <option value="35" @if(request()->get('show') == 35) selected @endif>35</option>
+                                <option value="40" @if(request()->get('show') == 40) selected @endif>40</option>
+                                <option value="45" @if(request()->get('show') == 45) selected @endif>45</option>
+                                <option value="50" @if(request()->get('show') == 50) selected @endif>50</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
             <div class="mb-5">
                 <table class="table table-bordered display text-wrap">
                     <thead>
                     <tr>
-                        <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
+                        @if (auth()->user()->role == 'admin')
+                            <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
+                        @endif
                         <th>{{ __('text.Code') }}</th>
                         <th>{{ __('text.Name') }}</th>
                         @foreach ($users as $user)
-                            @if($user->role == 'student')
+                            @if ($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
                                     <th>Roll No</th>
                                     <th>Session</th>
@@ -189,7 +193,9 @@
                     <tbody>
                     @foreach ($users as $key=>$user)
                         <tr>
-                            <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
+                            @if (auth()->user()->role == 'admin')
+                                <th scope="row"><input type="checkbox" name="user_ids[]" value="{{$user->id}}" /></th>
+                            @endif
                             <td>{{$user->student_code}}</td>
                             <td>
                                 <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a>
@@ -257,10 +263,10 @@
                     </tbody>
                 </table>
                 <div class="row mt-5">
-                    <div class="col-md-2 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
                         Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }}
                     </div>
-                    <div class="col-md-10 col-sm-12 text-right">
+                    <div class="col-md-9 col-sm-12 text-right">
                         <div class="paginate123 float-right">
                             {{ $users->appends(request()->query())->links() }}
                         </div>
