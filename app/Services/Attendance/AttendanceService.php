@@ -116,14 +116,15 @@ class AttendanceService {
     public function updateAttendance(){
         $i = 0;
         $at = [];
+        //dd($this->request->attendances);
         foreach ($this->request->attendances as $key => $attendance) {
             $tb = Attendance::findOrFail($attendance);
-            if( !isset($this->request["isPresent$i"]) && $tb->present == 1){
+            if( !isset($this->request["isPresent$i"]) && $tb->present != 0){
                 $tb->present = 0;
                 $tb->updated_at = date('Y-m-d H:i:s');
                 $tb->save();
             }
-            elseif(isset($this->request["isPresent$i"]) && $tb->present == 0){
+            elseif(isset($this->request["isPresent$i"]) && in_array($tb->present, [0,2,3])){
                 $tb->present = 1;
                 $tb->updated_at = date('Y-m-d H:i:s');
                 $tb->save();
@@ -163,7 +164,8 @@ class AttendanceService {
         $students = User::whereIn('id', $students)->get();
 
         foreach ($students as $key=>$student) {
-            $phone = !empty($student->studentInfo['guardian_phone_number']) ? $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
+            $phone = !empty($student->studentInfo['guardian_phone_number']) ?
+                $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
             $checked_digit = substr($phone, 0, 3);
             if ($checked_digit == '+88') {
                 $phone = ltrim($phone, '+');
