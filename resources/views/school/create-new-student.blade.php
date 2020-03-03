@@ -431,7 +431,7 @@
                                                class=" control-label false-padding-bottom">Guardian's Name<label class="text-danger">*</label></label>
 
                                         <input id="guardian_name" type="text"
-                                               class="form-control" name="guardian_name"
+                                               class="form-control guardian-name" name="guardian_name"
                                                value="{{ old('guardian_name') }}"
                                                required>
 
@@ -465,12 +465,14 @@
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
+                                        <input type="checkbox" class="f-name" onclick="myfunction();">Is Guardian
+                                        <br>
                                         <label for="father_name"
                                                class=" control-label false-padding-bottom">Father's
                                             Name</label>
 
                                         <input id="father_name" type="text"
-                                               class="form-control" name="father_name"
+                                               class="form-control father-name" name="father_name"
                                                value="{{ old('father_name') }}">
 
                                         @if ($errors->has('father_name'))
@@ -482,6 +484,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <br>
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="father_phone_number" class="control-label false-padding-bottom">Father's Phone Number</label>
@@ -806,6 +809,19 @@
                 $('.password-btn').remove();
             });
 
+            $('.f-name').click(function(){
+                if($(this).prop("checked") == true){
+                     $('.father-name').keyup(function () {
+                        console.log($('.father-name').val());
+                         $('.guardian-name').val($('.father-name').val());
+                    });
+
+                }
+                else if($(this).prop("checked") == false){
+
+                    $('.guardian-name').val('');
+                }
+            });
         });
     </script>
 @endpush
