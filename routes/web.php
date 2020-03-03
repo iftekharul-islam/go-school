@@ -440,13 +440,4 @@ Route::get('/debug-sentry', function () {
 	throw new Exception('My first Sentry error!');
 });
 
-Route::get('/receipt', function () {
-    //return view('accounts.transaction.receipt-template');
-    $pdf = \PDF::loadView('accounts.transaction.receipt-template', [],[
-        'format' => 'A4-L',
-        'orientation' => 'L'
-    ]);
-    $pdf->stream('money-receipt.pdf');
-
-});
 Route::get('/ch-trans/{trasaction_id}', 'FeeTransactionController@generateReceipt');
