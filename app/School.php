@@ -13,8 +13,7 @@ class School extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'about', 'medium', 'code', 'theme','district', 'sms_charge','per_student_charge','invoice_generation_date',
-        'email','singup_date','due_date','is_sms_enable', 'absent_msg', 'present_msg'
+        'name', 'about', 'medium', 'code', 'theme','district', 'sms_charge','per_student_charge','invoice_generation_date','email','singup_date','due_date','is_sms_enable'
     ];
 
     protected $dispatchesEvents = [
