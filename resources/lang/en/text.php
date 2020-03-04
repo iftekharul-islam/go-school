@@ -163,5 +163,6 @@ return[
     'school_setting' => 'School Setting',
     'total_teacher' => 'Total Teacher',
 
+    //course
     'add_course' => 'Add Course'
 ];
