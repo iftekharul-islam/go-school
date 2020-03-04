@@ -36,7 +36,12 @@ class AbsentMessageProcess implements ShouldQueue
      */
     public function handle()
     {
-        //$school = School::where('id', $this->school_id)->first();
+        $school = School::where('id', $this->school_id)->first();
+        $msg = !empty($school->absent_msg) ? $school->absent_msg : null;
+        if ($school->is_sms_enable != 1) {
+            Logger('SMS not enabled for the school');
+            return;
+        }
 
         $students = User::where('school_id', $this->school_id)->where('role', 'student')->get();
 
@@ -47,7 +52,7 @@ class AbsentMessageProcess implements ShouldQueue
         foreach($students as $student) {
             if(!in_array($student->id, $attendedStudentIds->toArray())) {
                 Logger('Absent ' . $student->id);
-                $this->sendSms($student);
+                $this->sendSms($student, $msg);
                 continue;
             }
             Logger('Present' . $student->id);
@@ -57,13 +62,10 @@ class AbsentMessageProcess implements ShouldQueue
             'school_id' => $this->school_id,
             'status'    => true
         ]);
-
     }
 
-
-    public function sendSms($student)
+    public function sendSms($student, $msg = null)
     {
-
         Logger('SMS sent');
         return;
 
@@ -72,7 +74,8 @@ class AbsentMessageProcess implements ShouldQueue
           return;
         }
         
-        $phone = $student->studentInfo['father_phone_number'];
+        $phone = !empty($student->studentInfo['guardian_phone_number']) ?
+            $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
 
         $checked_digit = substr($phone, 0, 3);
         if ($checked_digit == '+88') {
@@ -88,7 +91,7 @@ class AbsentMessageProcess implements ShouldQueue
         $pass = config("message.sms_pass");
         $sid = config("message.sms_sid");
         $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
-        $message = $student->name . " is absent in today's (" . Carbon::now()->toFormattedDateString() . ") class.";
+        $message = !empty($msg) ? str_replace('[name]',$student->name, $msg)  : $student->name . " is absent in today's (" . Carbon::now()->toFormattedDateString() . ") class.";
         $client = new Client();
         $response = $client->request('POST', $url, [
             'form_params' => [

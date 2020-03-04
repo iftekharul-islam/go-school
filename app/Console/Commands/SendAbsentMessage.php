@@ -43,15 +43,8 @@ class SendAbsentMessage extends Command
     {
         Logger('Command run');
 
-        $configs = Configuration::where('key', 'last_attendance_time')->get();
-
-        // Logger($configs[0]->value);
-
+        $configs = Configuration::where('key', 'exit_time')->get();
         $now = Carbon::now();
-
-        // Logger('carbon ' . $parsedTime);
-
-        // return;
 
         foreach($configs as $config) {
 
