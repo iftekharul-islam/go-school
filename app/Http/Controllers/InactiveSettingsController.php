@@ -74,4 +74,13 @@ class InactiveSettingsController extends Controller
         return view('inactiveSettings.routines', compact( 'files','section_id'));
 
     }
+    public function staffs()
+    {
+        $users = User::where('school_id', Auth::user()->school_id)
+        ->where('active', 0)
+        ->whereNotIn('role', ['librarian', 'accountant', 'student', 'admin', 'master'])
+        ->get();
+
+        return view('inactiveSettings.staffs', compact( 'users'));
+    }
 }

@@ -318,6 +318,21 @@ class UserController extends Controller
     {
         return view('school.create-new-librarian');
     }
+    public function createStaff()
+    {
+        return view('school.create-new-staff');
+    }
+    public function staffList(Request $request)
+    {
+        $users = User::with('school')
+            ->where('school_id', auth()->user()->school_id)
+            ->whereNotIn('role', ['teacher', 'student', 'admin', 'master'])
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(40);
+
+        return view('staff.list',compact('users'));
+    }
 
     /**
      * @return \Illuminate\Http\RedirectResponse
@@ -368,6 +383,43 @@ class UserController extends Controller
         }
 
         return back()->with('status', 'Librarian Created');
+    }
+
+    public function storeStaff(Request $request)
+    {
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
+
+        $tb = new $this->user();
+        $tb->name = $request->name;
+        $tb->email = $request->email;
+        $tb->password = 'secret';
+        $tb->role = $request->designation;
+        $tb->active = 1;
+        $tb->about = (!empty($request->about)) ? $request->about : '';
+        $tb->address = $request->address;
+        $tb->school_id = auth()->user()->school_id;
+        $tb->code = auth()->user()->code;
+        $tb->student_code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+        $tb->gender = $request->gender;
+        $tb->blood_group = $request->blood_group;
+        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : 'Bangladeshi';
+        $tb->phone_number = $request->phone_number;
+        $tb->pic_path = $path ? 'storage/' . $path : '';
+        $tb->verified = 1;
+        $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
+        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : null ;
+        $tb->save();
+
+        // Store default data on attendance table for a new user
+        event(new NewUserRegistered($tb));
+        try {
+            // Fire event to send welcome email
+            event(new UserRegistered($tb));
+        } catch (\Exception $ex) {
+            Log::info('Email failed to send to this address: '.$tb->email);
+        }
+
+        return back()->with('status', 'New Staff Created');
     }
 
     /**

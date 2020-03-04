@@ -21,6 +21,7 @@
             $academic = 0;
             $sht = 0;
             $att = 0;
+            $staff = 0;
             if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || Request::get('course') == 2 || strpos($add, 'attendance-time') || strpos($add, 'all-teachers'))
                 $att = 1;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
@@ -47,6 +48,8 @@
                 $academic = 1;
             if (strpos($add, 'shift')  || (strpos($add, 'shifts')) )
                 $sht = 1;
+             if (strpos($add, 'new-staff') || strpos($add, 'Staff-list'))
+                $staff = 1;
         @endphp
         <div class="sidebar-menu-content">
             <ul class="nav nav-sidebar-menu sidebar-toggle-view">
@@ -459,6 +462,24 @@
                                 <a href="{{ url($role.'/create/book') }}"
                                    class="nav-link {{ (request()->is($role.'/create/book')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.Add Book') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fab fa-pied-piper-alt"></i>
+                            </i><span>Staff Management</span>
+                        </a>
+                        <ul class="nav sub-group-menu {{ ($staff == 1) ? 'sub-group-active' : '' }}">
+                            <li class="nav-item">
+                                <a href="{{ route('new.staff') }}"
+                                   class="nav-link {{ (request()->routeIs('new.staff')) ? 'menu-active' : '' }}"><i
+                                        class="fas fa-angle-right"></i>Add Staff</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/Staff-list') }}"
+                                   class="nav-link {{ (request()->is('admin/Staff-list')) ? 'menu-active' : '' }}"><i
+                                        class="fas fa-angle-right"></i>Staff List</a>
                             </li>
                         </ul>
                     </li>
