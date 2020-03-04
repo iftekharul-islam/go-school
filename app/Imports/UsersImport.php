@@ -94,10 +94,9 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'religion' => $row['religion'],
                 'user_id' => $user->id,
             ]);
-
+            event(new ImportStudentAttendance($user));
         }
         session()->put('error_rows', $error_rows);
-        event(new ImportStudentAttendance($user));
     }
 
     public function validateHeaderRow($row)
