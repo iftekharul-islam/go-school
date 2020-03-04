@@ -160,6 +160,6 @@ return[
     'late' => 'Late Present',
     'default_fee_types' => 'Defalut Fee Types',
 
-    'school_setting' => 'School Setting'
+    'school_setting' => 'School Setting',
     'total_teacher' => 'Total Teacher',
 ];
