@@ -49,7 +49,7 @@ class StuffAttendanceController extends Controller
 
     public function stuffAttendance()
     {
-        $librarians = User::where('school_id', Auth::user()->school_id)->whereIn('role', ['librarian', 'accountant'])->get();
+        $librarians = User::where('school_id', Auth::user()->school_id)->whereNotIn('role', ['student','teacher','admin','master'])->get();
         $attendances = $this->teacherAttendanceService->getLibrariansTodayAttendance();
         $attCount = $this->teacherAttendanceService->getLibrarianTotalAttendance();
 

@@ -19,9 +19,11 @@
 if(count($attendances) > 0){
 $events = array();
 foreach ($attendances as $attendance){
-  if($attendance->present == 1){
+  if($attendance->present == 1 ){
     $events[] = \Calendar::event("Present",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'blue']);
-  } else if($attendance->present == 2){
+  }else if($attendance->present == 3){
+      $events[] = \Calendar::event("Late Present",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'salmon']);
+  }else if($attendance->present == 2){
     $events[] = \Calendar::event("Escaped",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'orange']);
   } else {
     $events[] = \Calendar::event("Absent",false,$attendance->created_at,$attendance->updated_at,0,['color'=>'red']);

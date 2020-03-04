@@ -253,6 +253,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('/teachers', 'InactiveSettingsController@teachers')->name('inactive.teachers');
             Route::get('/librarians', 'InactiveSettingsController@librarians')->name('inactive.librarians');
             Route::get('/accountants', 'InactiveSettingsController@accountants')->name('inactive.accountants');
+            Route::get('/staffs', 'InactiveSettingsController@staffs')->name('inactive.staffs');
         });
 
         //Accountant Routes
@@ -362,6 +363,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('new-teacher','UserController@createTeacher')->name('new.teacher');
         Route::get('new-librarian','UserController@createLibrarian');
         Route::get('new-accountant','UserController@createAccountant')->name('new.accountant');
+        Route::get('new-staff','UserController@createStaff')->name('new.staff');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');
@@ -373,11 +375,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         });
 
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
+        Route::get('Staff-list', 'UserController@staffList');
 
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant')->name('accountant.store');
+            Route::post('staff', 'UserController@storeStaff')->name('staff.store');
             Route::post('librarian', 'UserController@storeLibrarian');
         });
         Route::get('edit/course/{id}', 'CourseController@edit');
