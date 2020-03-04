@@ -229,6 +229,7 @@ class AttendanceController extends Controller
      */
     public function store(StoreAttendanceRequest $request)
     {
+        //dd($request->all());
         $this->attendanceService->request = $request;
         if (1 == $request->update) {
           $at = $this->attendanceService->updateAttendance();

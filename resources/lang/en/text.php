@@ -159,5 +159,7 @@ return[
     'attendance_date' => 'Attendance Date',
     'late' => 'Late Present',
     'default_fee_types' => 'Defalut Fee Types',
+
+    'school_setting' => 'School Setting'
     'total_teacher' => 'Total Teacher',
 ];
