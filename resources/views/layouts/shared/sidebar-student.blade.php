@@ -234,6 +234,11 @@
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Manage Classes') }}</span></a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('add.course') }}"
+                                   class="nav-link {{ (request()->routeIs('add.course')) ? 'menu-active' : '' }}">
+                                    <i class="fas fa-angle-right"></i><span>{{ __('text.add_course') }}</span></a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('academic.routines') }}"
                                    class="nav-link {{ (request()->routeIs('academic.routines')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Class Routine') }}</span></a>

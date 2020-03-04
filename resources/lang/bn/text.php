@@ -165,4 +165,7 @@ return [
 
     'school_setting' => 'স্কুল সেটিং'
     'total_teacher' => 'মোট শিক্ষক',
+
+    //course
+    'add_course' => 'কোর্স যুক্ত করুন'
 ];

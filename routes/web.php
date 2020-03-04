@@ -352,6 +352,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
         Route::get('create-department', 'SchoolController@createDepartment')->name('create.department');
         Route::get('manage-class', 'SchoolController@manageClasses')->name('manage.class');
+        Route::get('add-course', 'CourseController@create')->name('add.course');
         Route::delete('delete-section/{id}', 'SectionController@destroy')->name('delete.section');
         Route::delete('delete-class/{class}', 'MyClassController@destroy')->name('delete.class');
 
