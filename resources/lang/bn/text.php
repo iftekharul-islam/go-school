@@ -162,5 +162,7 @@ return [
     'late' => 'বিলম্বিত উপস্থিত',
     'default_fee_types' => 'ডিফল্ট ফির প্রকার',
 
+
     'school_setting' => 'স্কুল সেটিং'
+    'total_teacher' => 'মোট শিক্ষক',
 ];
