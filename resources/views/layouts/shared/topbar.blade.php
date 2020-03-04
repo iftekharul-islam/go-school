@@ -65,6 +65,10 @@
                     <a class="btn btn-info text-white" href="{{ url('locale/en') }}">En</a>
                 @endif
             </div>
+{{--            <div class="mr-3">--}}
+{{--                <a class="btn btn-info text-white" href="{{ url('locale/en') }}">En</a>--}}
+{{--                <a class="btn btn-info text-white ml-2" href=" {{ url('locale/bn') }}">Bn</a>--}}
+{{--            </div>--}}
             @guest
             @else
                 @if(Auth::user()->role === 'student')
@@ -116,13 +120,6 @@
                                                     class="flaticon-user"></i>{{ __('text.my_profile') }}</a></li>
                                 @endif
                                 <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>{{ __('text.change_password') }}</a></li>
-                                @if(Auth::user()->role == 'admin')
-                                    <li>
-                                        <a href="{{ route('school.setting') }}"><i class="fas fa-cogs"></i>
-                                            {{  __('text.school_setting') }}
-                                        </a>
-                                    </li>
-                                @endif
                                 @if(env('APP_ENV') != 'production')
                                     <li>
                                         <a href="{{url('user/config/impersonate')}}"><i
