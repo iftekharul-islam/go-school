@@ -74,7 +74,8 @@ class SendAttendanceSms implements ShouldQueue
             $event->attendance->save();
         }
 
-        $phone = !empty($student->studentInfo['guardian_phone_number']) ? $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
+        $phone = !empty($student->studentInfo['guardian_phone_number']) ?
+            $student->studentInfo['guardian_phone_number'] : $student->studentInfo['father_phone_number'];
 
         $checked_digit = substr($phone, 0, 3);
         if ($checked_digit == '+88') {
