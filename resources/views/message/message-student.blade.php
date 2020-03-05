@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                     <label>Section</label>
-                                    <select class="form-control" id="section" name="section" ></select>
+                                    <select class="select2" id="section" name="section" ></select>
                                 </div>
                                 <div class="col-12 form-group mg-t-2 float-right">
                                     <button type="submit" class="button--save button float-right">Search</button>

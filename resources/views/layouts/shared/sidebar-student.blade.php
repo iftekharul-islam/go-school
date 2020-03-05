@@ -34,7 +34,7 @@
                 $acc = 1;
             if (strpos($add, 'fee-types') || strpos($add, 'fee-discount') || strpos($add, 'fee-master') || strpos($add, 'fee-collection') || strpos($add, 'fees-summary'))
                 $ac = 1;
-            if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message') || strpos($add, 'new-student') || strpos($add, 'import-student'))
+            if (( strpos($add, 'users/') &&  Request::get('student') == 1 )   || strpos($add, 'student-message') || strpos($add, 'new-student') || strpos($add, 'import-student') || strpos($add, 'my-students'))
                 $std = 1;
             if (strpos($add, 'users/'))
                 $all_student = 1;
@@ -191,6 +191,13 @@
                                    href="{{ url('users/' .Auth::user()->school->code. '/1/0?student=1') }}">
                                     <i class="fas fa-angle-right"></i> <span>{{ __('text.All Students') }}</span></a>
                             </li>
+                            @if(\Auth::user()->role == 'teacher')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->is('teacher/my-students')) == 1 ? 'menu-active' : '' }}"
+                                       href="{{ route('student.list') }}">
+                                        <i class="fas fa-angle-right"></i> <span>My Students</span></a>
+                                </li>
+                            @endif
                             @if($role == 'admin')
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('admin/student-message')) ? 'menu-active' : '' }}"

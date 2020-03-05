@@ -167,6 +167,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     // Teacher role routes
     Route::group(['prefix' => 'teacher', 'middleware' => 'teacher'], function () {
         Route::get('/home', 'TeacherHomeController@index')->name('teacher.home');
+        Route::get('/my-students', 'TeacherHomeController@myStudent')->name('student.list');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
 
