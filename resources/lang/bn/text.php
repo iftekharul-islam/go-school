@@ -163,6 +163,9 @@ return [
     'default_fee_types' => 'ডিফল্ট ফির প্রকার',
 
 
-    'school_setting' => 'স্কুল সেটিং'
+    'school_setting' => 'স্কুল সেটিং',
     'total_teacher' => 'মোট শিক্ষক',
+
+    //course
+    'add_course' => 'কোর্স যুক্ত করুন'
 ];
