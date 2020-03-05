@@ -326,12 +326,12 @@ class UserController extends Controller
     {
         $users = User::with('school')
             ->where('school_id', auth()->user()->school_id)
-            ->whereNotIn('role', ['teacher', 'student', 'admin', 'master'])
+            ->whereNotIn('role', ['teacher', 'student', 'admin', 'master', 'librarian', 'accountant'])
             ->where('active', 1)
             ->orderBy('name', 'asc')
             ->paginate(40);
 
-        return view('staff.list',compact('users'));
+        return view('list.new-staff-list',compact('users'));
     }
 
     /**

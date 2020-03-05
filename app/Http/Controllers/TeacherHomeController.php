@@ -64,7 +64,6 @@ class TeacherHomeController extends Controller
                     ->get();
             });
         }
-        $courses_student = $this->courseService->getCoursesByTeacher($teacher->id);
         return view('teacher-home', [
             'students' => $students,
             'notices' => $notices,
@@ -73,7 +72,13 @@ class TeacherHomeController extends Controller
             'totalSections' => $totalSections,
             'male' => $male,
             'female' => $female,
-            'courses_student' => $courses_student,
         ]);
+    }
+    public function myStudent()
+    {
+        $teacher = Auth::user();
+        $courses_student = $this->courseService->getCoursesByTeacher($teacher->id);
+
+        return view('school.teachers-student-list', compact('courses_student'));
     }
 }
