@@ -28,25 +28,37 @@
                     @endif
                     <div class="card height-auto false-height">
                         <div class="card-body">
-                            <table class="table display table-borderless text-wrap table-sm ml-4">
-                                <thead>
-                                    <tr>
-                                        <th>Fee Name</th>
-                                        <th>Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Admission Fee
-                                            <input type="hidden" name="fee_type[]">
-                                        </td>
-                                        <td>
-                                            <input type="number" name="amount[]" class="form-control">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <p>Student: <b>{{ $student['name'] }}</b>, Class: <b>{{ $student->section['class']['class_number'].' ('. $student['section']['section_number'] .')' }}</b> </p>
+                            <div class="table-responsive ">
+                                <table id="fees" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Fee Name</th>
+                                            <th>Amount</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(count($feeTypes) > 0)
+                                            @foreach($feeTypes as $ft)
+                                            <tr>
+                                                <td>
+                                                    {{ $ft->name }}
+                                                    <input type="hidden" value="{{$ft->id}}" name="fee_type_id[]">
+                                                </td>
+                                                <td><input type="number" name="amount[]" class="form-control"></td>
+                                                <td>
+                                                    <button type="button"  class="btn btn-danger delete-row" title="Remove this row">
+                                                        <i class="fas fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#addFeeType"><i class="fas fa-plus-circle"></i> </button>
+
                         </div>
                     </div>
                 </div>
@@ -104,10 +116,88 @@
             </div>
         </form>
     </div>
+    <!--Modal-->
+    <div class="modal fade" id="addFeeType" role="dialog" aria-labelledby="addFeeType">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Add Fee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="feeType" class=" sr-only control-label">Select Fee Type</label>
+                            <select name="feeType" class="form-control select2" id="feeType" required>
+                                <option value="" disabled selected>Select Fee Type</option>
+                                @if(count($feeTypes) > 0)
+                                    @foreach($feeTypes as $ft)
+                                        <option value="{{$ft->id}}">{{$ft->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <span id="typeError" class="text-warning"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label for="feeAmount" class="control-label sr-only">Amount</label>
+                            <input type="number" name="feeAmount" class="form-control" id="feeAmount" placeholder="Amount" required>
+                            <span id="amountError" class="text-warning"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group modal-footer pb-">
+                    <div class="col-md-12">
+                        <button type="button" onclick="addFee()" class="button button--save float-right"><i class="fas fa-plus-circle"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('customjs')
     <script>
+        $(document).on('click', '.delete-row', function(){
+            $(this).closest('tr').remove();
+        });
+
+        function addFee() {
+            let fee_name = $('#addFeeType #feeType option:selected').text();
+            let fee_type_id = $('#addFeeType #feeType').val();
+            let amount = $('#addFeeType #feeAmount').val();
+
+            if (validateField(fee_type_id, amount)) {
+                $('#fees tbody').append('<tr>' +
+                    '<td>' +fee_name+'<input type="hidden" value="'+fee_type_id+'" name="fee_type_id[]"></td>'+
+                    '<td><input type="number" name="amount[]" value="'+amount+'" class="form-control"></td>' +
+                    '<td><button type="button"  class="btn btn-danger delete-row" title="Remove this row"><i class="fas fa-trash"></i></button></td>'+
+                    '</tr>');
+                $('#addFeeType input').val('');
+                $("#addFeeType option:selected").prop("selected", false)
+            }
+        }
+
+        function validateField(fee_type_id, amount){
+            $('#addFeeType .text-warning').empty();
+            let errCounter = 0;
+            let addedFees = $("#fees input[name='fee_type_id[]']").map(function(){ return $(this).val() }).get();
+
+            if (amount == '') {
+                errCounter += 1;
+                $('#amountError').text('Enter Fee Amount');
+            }
+
+            if ($.inArray(fee_type_id, addedFees) == -1) {
+                errCounter += 1;
+                $('#typeError').text('Already Added');
+            }else if (fee_type_id == ''){
+                errCounter += 1;
+                $('#typeError').text('Select A Type');
+            }
+
+            return  (errCounter > 0) ? false : true;
+        }
+
         window.total = $("#amount").val();
         window.i = 0;
         window.feeMasterId = [];
