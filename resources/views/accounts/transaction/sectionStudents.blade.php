@@ -60,13 +60,24 @@
                                 <select name="class" id="class_number" class="select2" onchange="getSections(this)">
                                     <option>Select Class</option>
                                     @foreach($classes as $class)
-                                        <option value="{{ $class->id }}">class - {{ $class->class_number }}</option>
+                                        <option value="{{ $class->id }}" @if(request('class') == $class->id) selected @endif>class - {{ $class->class_number }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                 <label>Section</label>
-                                <select class="form-control" id="section" name="section" ></select>
+                                <select class="form-control" id="section" name="section" >
+                                    @if(!empty(request('class')))
+                                        @php
+                                          $selectedClass = $classes->first( function( $item ) { return $item->id == request('class'); } );
+                                        @endphp
+                                        @if(!empty($selectedClass['sections']))
+                                            @foreach($selectedClass['sections'] as $section)
+                                                <option value="{{ $section->id }}" @if(request('section') == $section->id) selected @endif>{{ $section->section_number }}</option>
+                                            @endforeach
+                                        @endif
+                                    @endif
+                                </select>
                             </div>
                             <div class="col-12 form-group mg-t-2 float-right">
                                 <button type="submit" class="button--save button float-right">Search</button>
@@ -108,98 +119,13 @@
                                         <td>{{ $student->email }}</td>
                                         <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
-                                            <a class="button--save button" href="{{ url(auth()->user()->role.'/fee-collection/get-fee',$student->id) }}">Collect</a>
+{{--                                            <a class="button--save button" href="{{ url(auth()->user()->role.'/fee-collection/get-fee',$student->id) }}">Collect</a>--}}
+                                            <a href="{{ route('multiple.fee', [ 'id' => $student->id]) }}" class="button--save button"> <b>Collect</b></a>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-            @endif
-            @if(count($students)>0)
-                <div class="card mt-5">
-                    <div class="card-body">
-                        <div class="card-body-body mb-5 text-center">
-                            <div class="heading-layout1">
-                                <div class="item-title">
-                                    <h3>Students Payment Summary</h3>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table data-table-paginate-section table-bordered display text-wrap">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="2">Students info</th>
-                                        <th colspan="3">Payment Condition</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                        <td>Name</td>
-                                        <td>code</td>
-                                        <td>Total Amount</td>
-                                        <td>Partial Paid</td>
-                                        <td>Due</td>
-
-                                        </tr>
-
-                                        @php
-                                            $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
-                                            $totalAmount = 0;
-                                            $totalFine = 0;
-                                            $totalDiscount = 0;
-                                            $totalDue = 0;
-                                            $total_paid = 0;
-                                            $paid_amount = 0;
-                                            $paid_amount1 = 0;
-                                            $test = '';
-                                        @endphp
-
-                                        @foreach($studentWithFees as $student)
-                                            <tr>
-                                                <td class="text-left">{{ $student->name  }}</td>
-                                                <td class="text-left">{{ $student->student_code  }}</td>
-                                                <td>{{ $student->section->class->feeMasters->sum('amount')  }}</td>
-
-                                                @php $totalPaid = 0; $total_amount = 0; @endphp
-                                                @foreach($student->section->class->feeMasters as $feeMaster)
-
-                                                    @foreach($feeMaster->transactions as $transaction)
-                                                        @if($student->id === $transaction->student_id)
-                                                            @php
-                                                                $total_amount = (float)$totalPaid + (float)$transaction['amount']+$transaction['discount'];
-                                                                $totalPaid = $transaction['discount'];
-                                                            @endphp
-                                                        @endif
-                                                    @endforeach
-
-                                                @endforeach
-
-                                                <td>
-                                                    {{ $total_amount}}
-                                                </td>
-                                                <td>
-                                                    {{ $student->section->class->feeMasters->sum('amount') - $totalPaid }}
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
-                                     </tbody>
-
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @else
-                <div class="card mt-5 ">
-                    <div class="card-body">
-                        <div class="card-body-body mt-5 text-center">
-                            No Related Data Found.
                         </div>
                     </div>
                 </div>

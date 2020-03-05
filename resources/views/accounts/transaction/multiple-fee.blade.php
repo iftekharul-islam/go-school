@@ -17,78 +17,34 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-6">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card height-auto false-height">
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <table class="table display table-borderless text-wrap table-sm ml-4">
                                 <thead>
-                                <tr>
-                                    <th>Fee Name</th>
-                                    <th>Year</th>
-                                    <th>Due Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                </tr>
+                                    <tr>
+                                        <th>Fee Name</th>
+                                        <th>Amount</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @php
-                                    $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
-                                    $totalAmount = 0;
-                                    $totalFine = 0;
-                                    $totalDiscount = 0;
-                                    $totalDue = 0;
-                                    $totalPaid = 0;
-                                @endphp
-                                @foreach($student->section->class->feeMasters as $feeMaster)
-                                    @php
-                                        $total_paid = 0;
-                                        $totalAmount = $totalAmount + $feeMaster->amount;
-                                    @endphp
                                     <tr>
-                                        @foreach($feeMaster->transactions as $transaction)
-                                            @if($student->id === $transaction->student_id)
-                                                @php
-                                                    $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        @if($total_paid < $feeMaster->amount && $total_paid === 0)
-                                            <td class="text-capitalize">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" value="" id="chktype" onclick="calculateTotal({{ $feeMaster->amount }}, $(this), {{ $feeMaster->id }})">
-                                                    <label class="form-check-label"><span class="badge-success badge"></span> {{ $feeMaster->feeType['name'] }}</label>
-                                                </div>
-                                            </td>
-                                            <td>{{ now()->year }}</td>
-                                            <td>{{ $feeMaster->due }}</td>
-                                            <td>{{ $feeMaster->amount }}</td>
-                                            <td>
-                                                @foreach($feeMaster->transactions as $transaction)
-                                                    @if($student->id === $transaction->student_id)
-                                                        @php
-                                                            $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
-                                                        @endphp
-                                                    @endif
-                                                @endforeach
-                                                @if($total_paid >= $feeMaster->amount)
-                                                    <span class="badge-primary badge">Paid</span>
-                                                @elseif($total_paid > 0 && $total_paid < $feeMaster->amount)
-                                                    <span class="badge-warning badge">Partial</span>
-                                                @else
-                                                    <span class="badge-danger badge">Unpaid</span>
-                                                @endif
-                                            </td>
-                                        @endif
+                                        <td>
+                                            Admission Fee
+                                            <input type="hidden" name="fee_type[]">
+                                        </td>
+                                        <td>
+                                            <input type="number" name="amount[]" class="form-control">
+                                        </td>
                                     </tr>
-                                @endforeach
                                 </tbody>
                             </table>
                         </div>

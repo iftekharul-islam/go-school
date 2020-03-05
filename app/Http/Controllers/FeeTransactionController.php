@@ -10,6 +10,7 @@ use App\Section;
 use App\StudentInfo;
 use App\Services\User\UserService;
 use App\User;
+use App\FeeType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -189,7 +190,7 @@ class FeeTransactionController extends Controller
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
-
+        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->orWhere('is_default', 1)->get();
         return view('accounts.transaction.feeCollect', compact('student', 'discounts'));
     }
 
