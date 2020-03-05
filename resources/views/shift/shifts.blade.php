@@ -6,14 +6,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-clock"></i>
-            All Shift
+            {{ __('text.all_shift') }}
         </h3>
         <ul>
             <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Shifts</li>
+            <li>{{ __('text.shift') }}</li>
         </ul>
     </div>
      @if (session('status'))
@@ -32,10 +32,10 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th>Shift</th>
-                        <th>Last Attendance Time</th>
-                        <th>Exit Time</th>
-                        <th>Action</th>
+                        <th>{{ __('text.shift') }}</th>
+                        <th>{{ __('text.last_attendance') }}</th>
+                        <th>{{ __('text.Exit Time') }}</th>
+                        <th>{{ __('text.action') }}</th>
                     </tr>
                     </thead>
                     <tbody>

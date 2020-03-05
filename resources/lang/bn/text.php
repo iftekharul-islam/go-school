@@ -134,7 +134,7 @@ return [
     'add_shift' => 'সময়কাল সংযোজন',
     'all_shifts' => 'সকল সময়কাল',
     'course' => 'কোর্স',
-    'action' => 'আর্যকারিতা',
+    'action' => 'কার্যকারিতা',
 
     //Master
     'schools' => 'বিদ্যালয় সমূহ',
@@ -167,5 +167,12 @@ return [
     'total_teacher' => 'মোট শিক্ষক',
 
     //course
-    'add_course' => 'কোর্স যুক্ত করুন'
+    'add_course' => 'কোর্স যুক্ত করুন',
+
+    //shift
+    'create_shift' => 'শিফট তৈরী',
+    'shift' => 'শিফট',
+    'last_attendance' => 'উপস্থিতির শেষ সময়',
+    'create' => 'তৈরি করুন',
+    'all_shift' => 'সকল শিফট',
 ];
