@@ -164,5 +164,12 @@ return[
     'total_teacher' => 'Total Teacher',
 
     //course
-    'add_course' => 'Add Course'
+    'add_course' => 'Add Course',
+
+    //shift
+    'create_shift' => 'Create Shift',
+    'shift' => 'Shift',
+    'last_attendance' => 'Last Attendance',
+    'create' => 'Create',
+    'all_shift' => 'All Shift',
 ];
