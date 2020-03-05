@@ -6,7 +6,7 @@
                 <i class='fas fa-chalkboard-teacher'></i>  {{ __('text.All Teacher') }}
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.teachers') }}">Inactive Teachers</a>
             @elseif($user->role == 'student')
-                <i class="fas fa-users mr-2 "></i>   All Students
+                <i class="fas fa-users mr-2 "></i>   {{ __('text.All Students') }}
                 <a class="btn btn-lg btn-secondary float-right font-bold ml-2" href="{{ route('student.export',['keys' => serialize(\Request::query())]) }}">Export Students</a>
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
                 
@@ -22,20 +22,20 @@
             @break
         @endforeach 
     @else
-        <i class="fas fa-users mr-2 "></i>   All Students
+        <i class="fas fa-users mr-2 "></i>   {{ __('text.All Students') }}
         <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
     @endif
     </h3>
     <ul>
         <li>
-            <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
+            <a href="{{ URL::previous() }}" style="color: #32998f!important;">{{ __('text.Back') }} &nbsp;|</a>
             <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
         </li>
         <li>   @foreach($users as $user)
                 @if($user->role == 'teacher')
                     {{ __('text.All Teacher') }}
                 @elseif($user->role == 'student')
-                    All Students
+                    {{ __('text.All Students') }}
                 @elseif($user->role == 'accountant')
                     Accountants
                 @elseif($user->role == 'librarian')
@@ -101,8 +101,8 @@
                 </select>
             </div>
             <div class="form-group col-md-3">
-                <button type="submit" class="button button--save font-weight-bold">Search</button>
-                <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">Reset</button>
+                <button type="submit" class="button button--save font-weight-bold">{{ __('text.Search') }}</button>
+                <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">{{ __('text.reset') }}</button>
             </div>
         </div>
         </form>
@@ -152,12 +152,12 @@
                         @foreach ($users as $user)
                             @if ($user->role == 'student')
                                 @if (!Session::has('section-attendance'))
-                                    <th>Roll No</th>
-                                    <th>Session</th>
-                                    <th>Version</th>
-                                    <th>Class</th>
-                                    <th>Section</th>
-                                    <th>SMS</th>
+                                    <th>{{ __('text.roll_number') }}</th>
+                                    <th>{{ __('text.session') }}</th>
+                                    <th>{{ __('text.version') }}</th>
+                                    <th>{{ __('text.Class') }}</th>
+                                    <th>{{ __('text.Section') }}</th>
+                                    <th>{{ __('text.sms') }}</th>
                                 @endif
                             @elseif(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                                 @if (!Session::has('section-attendance'))
@@ -175,7 +175,7 @@
                         @endforeach
                         @foreach ($users as $user)
                             @if(Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
-                                @if($user->role === 'student')<th>Attendance</th>@endif
+                                @if($user->role === 'student')<th>{{ __('text.Attendance') }}</th>@endif
                             @endif
                             @break($loop->first)
                         @endforeach
