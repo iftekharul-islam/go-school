@@ -10,14 +10,17 @@ use App\Section;
 use App\StudentInfo;
 use App\Services\User\UserService;
 use App\User;
+use App\FeeType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App;
 use App\Events\ReceiptGenerate;
+use App\TransactionItem;
 use PDF;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class FeeTransactionController extends Controller
 {
@@ -154,13 +157,14 @@ class FeeTransactionController extends Controller
     {
         $ft = FeeTransaction::findOrFail($id);
         $studentInfo = StudentInfo::where('user_id', $ft->student_id)->first();
-        if (empty($studentInfo)){
+        if (empty($studentInfo)) {
             return redirect()->back()->with('status', 'Student information not found');
         }
         $studentInfo->advance_amount += $ft->deducted_advance_amount;
         $studentInfo->save();
+        $transaction_items = TransactionItem::where('fee_transaction_id', $id)->delete();
         $ft->delete();
-        DB::table('fee_master_fee_transaction')->where('fee_transaction_id', $ft->id)->delete();
+
         return redirect()->back();
     }
 
@@ -197,8 +201,14 @@ class FeeTransactionController extends Controller
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
-        
-        return view('accounts.transaction.multiple-fee', compact('student', 'discounts'));
+        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->orWhere('is_default', 1)->get();
+        return view('accounts.transaction.multiple-fee', compact('student', 'discounts', 'feeTypes'));
+    }
+
+    public function feeCollections($id) {
+        $student = User::with(['school','studentInfo','section.class'])->findOrFail($id);
+        $fees = FeeTransaction::with('transaction_items.fee_type')->where('student_id', $id)->get();
+        return view('accounts.transaction.feeCollections', compact('fees', 'student'));
     }
 
     public function multipleFeeStore(Request $request)
@@ -207,46 +217,48 @@ class FeeTransactionController extends Controller
             'amount' => 'required',
             'discountAmount' => 'required',
             'fine' => 'required',
+            'amounts' => 'required'
         ]);
-        foreach ($request->feeMasterId as $item) {
-            $myArray = explode(',', $item);
-        }
-
-        if (in_array("", $myArray)) {
-            return redirect()->back();
-        }
-
-        $discount = Discount::find($request->discount);
-        $total_discount = 0;
-        if ($discount) {
-            if ($discount->type === 'recurrent') {
-                $total_discount = count($myArray) * $request->discountAmount;
-            } else {
-                $total_discount = $request->discountAmount;
-            }
-        }
+    
+        $fee_type_ids = $request->fee_type_id;
+        $feeAmounts = $request->amounts;
 
         $ft = new FeeTransaction();
         $ft->student_id = $request->student_id;
         $ft->school_id = \auth()->user()->school_id;
         $ft->amount = $request->amount;
         $ft->discount_id = $request->discount;
-        $ft->discount = $total_discount;
+        $ft->discount = $request->discountAmount;
         $ft->fine = $request->fine;
         $ft->mode = $request->mode;
         $ft->accountant_id = \auth()->id();
         $ft->status = 'paid';
         $ft->save();
-        foreach ($myArray as $value) {
-            $ft->feeMasters()->attach($value);
+        #save fee types & amount
+        for($i = 0; $i < count($feeAmounts); $i++){
+            TransactionItem::create([
+                'fee_transaction_id' => $ft->id,
+                'fee_type_id' => $fee_type_ids[$i],
+                'fee_amount' => $feeAmounts[$i]
+            ]);
         }
-        return redirect()->to(\auth()->user()->role.'/fee-collection/get-fee/'.$request->student_id);
+        $studentData = User::with('section')->where('id', $request->student_id)->first();
+        
+        return redirect()->route('accountant.all-student', ['class' => $studentData['section']['class_id'], 'section' => $studentData['section_id']])
+            ->with('status', 'Fee collected successfully');
     }
     public function studentFeeDetails()
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', Auth::id())->first();
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
         return view('fees.fees-summary', compact('student','discounts'));
+    }
+    public function transactionDetail($id)
+    {
+        $fee_transaction = FeeTransaction::findOrFail($id);
+        $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
+        $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
+        return view('accounts.transaction.transaction-detail', compact('transactionItems','student', 'fee_transaction'));
     }
 
     public function generateReceipt($transaction_id)

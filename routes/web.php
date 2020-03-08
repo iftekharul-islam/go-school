@@ -134,6 +134,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::resource('fee-transaction', 'FeeTransactionController');
         Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
         Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
+        Route::get('fee-collections/{id}', 'FeeTransactionController@feeCollections')->name('student.fee.collections');
         Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
         Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
 
@@ -295,6 +296,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
         Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
         Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
+        Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail')->name('transaction.detail');
         //Accountant Routes End
 
         //Librarian Route
