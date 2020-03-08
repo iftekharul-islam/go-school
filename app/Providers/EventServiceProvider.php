@@ -15,7 +15,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\UserRegistered' => [
             'App\Listeners\SendWelcomeEmail',
-            'App\Listeners\AttendanceStore',
         ],
         'App\Events\StudentInfoUpdateRequested' => [
             'App\Listeners\UpdateStudentInfo',
