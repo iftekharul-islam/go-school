@@ -170,9 +170,9 @@
                                     </option>
                                     @foreach ($teacherSections as $section)
                                         <option value="{{$section->id}}">
-                                            Section: {{$section->section_number}}
                                             Class:
-                                            {{$section->class->class_number}}</option>
+                                            {{$section->class->class_number}} Section: {{$section->section_number}}
+                                            </option>
                                     @endforeach
                                 </select>
 

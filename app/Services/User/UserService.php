@@ -116,7 +116,7 @@ class UserService
                 }
             }
 
-            return back()->withInput(['tab' => 'tab8'])->with('status', 'All Student Promoted !');
+            return back()->with('status', 'All Student Promoted !');
         }
     }
 

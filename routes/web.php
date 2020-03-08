@@ -134,6 +134,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::resource('fee-transaction', 'FeeTransactionController');
         Route::get('fee-collection/section/student', 'FeeTransactionController@sectionsStudent')->name('accountant.all-student');
         Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
+        Route::get('fee-collections/{id}', 'FeeTransactionController@feeCollections')->name('student.fee.collections');
         Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
         Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
 
@@ -156,7 +157,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
         Route::get('expense', 'AccountController@expense');
         Route::post('create-expense', 'AccountController@storeExpense');
-        Route::get('expense-list', 'AccountController@listExpense');
+        Route::get('expense-list', 'AccountController@listExpense')->name('expenseList');
         Route::post('list-expense', 'AccountController@postExpense');
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
@@ -167,6 +168,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     // Teacher role routes
     Route::group(['prefix' => 'teacher', 'middleware' => 'teacher'], function () {
         Route::get('/home', 'TeacherHomeController@index')->name('teacher.home');
+        Route::get('/my-students', 'TeacherHomeController@myStudent')->name('student.list');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
 
@@ -253,6 +255,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('/teachers', 'InactiveSettingsController@teachers')->name('inactive.teachers');
             Route::get('/librarians', 'InactiveSettingsController@librarians')->name('inactive.librarians');
             Route::get('/accountants', 'InactiveSettingsController@accountants')->name('inactive.accountants');
+            Route::get('/staffs', 'InactiveSettingsController@staffs')->name('inactive.staffs');
         });
 
         //Accountant Routes
@@ -293,6 +296,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('fee-collection/get-fee/{id}', 'FeeTransactionController@collectFee')->name('student.fee');
         Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
         Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
+        Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail')->name('transaction.detail');
         //Accountant Routes End
 
         //Librarian Route
@@ -352,6 +356,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
         Route::get('create-department', 'SchoolController@createDepartment')->name('create.department');
         Route::get('manage-class', 'SchoolController@manageClasses')->name('manage.class');
+        Route::get('add-course', 'CourseController@create')->name('add.course');
         Route::delete('delete-section/{id}', 'SectionController@destroy')->name('delete.section');
         Route::delete('delete-class/{class}', 'MyClassController@destroy')->name('delete.class');
 
@@ -362,6 +367,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('new-teacher','UserController@createTeacher')->name('new.teacher');
         Route::get('new-librarian','UserController@createLibrarian');
         Route::get('new-accountant','UserController@createAccountant')->name('new.accountant');
+        Route::get('new-staff','UserController@createStaff')->name('new.staff');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');
@@ -373,11 +379,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         });
 
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
+        Route::get('Staff-list', 'UserController@staffList');
 
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@storeStudent')->name('student.store');
             Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant')->name('accountant.store');
+            Route::post('staff', 'UserController@storeStaff')->name('staff.store');
             Route::post('librarian', 'UserController@storeLibrarian');
         });
         Route::get('edit/course/{id}', 'CourseController@edit');
@@ -417,6 +425,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('shift/edit/{id}', 'ShiftController@edit')->name('shift.edit');
         Route::post('shift/update/{id}', 'ShiftController@update')->name('shift.update');
         Route::delete('shift/delete/{id}', 'ShiftController@destroy')->name('shift.delete');
+        Route::get('school-settings/', 'SchoolController@schoolSetup')->name('school.setting');
+        Route::post('school-settings/{school_id}', 'SchoolController@updateSchoolSetting')->name('school.update');
+
     });
     Route::get('/exams/download/result/{exam_id}', 'ExamController@downloadResultFile')->name('exams.download.result');
 
@@ -437,13 +448,4 @@ Route::get('/debug-sentry', function () {
 	throw new Exception('My first Sentry error!');
 });
 
-Route::get('/receipt', function () {
-    //return view('accounts.transaction.receipt-template');
-    $pdf = \PDF::loadView('accounts.transaction.receipt-template', [],[
-        'format' => 'A4-L',
-        'orientation' => 'L'
-    ]);
-    $pdf->stream('money-receipt.pdf');
-
-});
 Route::get('/ch-trans/{trasaction_id}', 'FeeTransactionController@generateReceipt');

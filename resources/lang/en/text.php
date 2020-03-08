@@ -158,6 +158,44 @@ return[
     'exit_time' => 'Exit Time',
     'attendance_date' => 'Attendance Date',
     'late' => 'Late Present',
-    'default_fee_types' => 'Defalut Fee Types',
+    'default_fee_types' => 'Default Fee Types',
+
+    'school_setting' => 'School Setting',
     'total_teacher' => 'Total Teacher',
+
+    //course
+    'add_course' => 'Add Course',
+
+    //shift
+    'create_shift' => 'Create Shift',
+    'shift' => 'Shift',
+    'last_attendance' => 'Last Attendance',
+    'create' => 'Create',
+    'all_shift' => 'All Shift',
+
+    //student
+    'class_section' => 'Class and Section',
+    'student_id' => 'Student ID',
+    'roll_number' => 'Roll Number',
+    'version' => 'Version',
+    'session' => 'Session',
+    'group' => 'Group',
+    'Birthday' => 'Birthday',
+    'religion' => 'Religion',
+    'guardian_name' => "Guardian's name",
+    'guardian_phone_number' => "Guardian's Phone Number",
+    'father_name' => 'Father\'s Name',
+    'father_nid' => 'Father NID',
+    'father_occupation' => 'Father\'s Occupation',
+    'father_income' => 'Father\'s Annual Income',
+    'father_designation' => 'Father\'s Designation',
+    'mother_name' => 'Mother\'s Name',
+    'mother_occupation' => 'Mother Occupation',
+    'mother_nid' => 'Mother\'s NID',
+    'mother_designation' => 'Mother\'s Designation',
+    'mother_income' => 'Mother\'s Annual Income',
+    'sms' => 'SMS',
+    'reset' => "Reset",
+    'import' => 'Import',
+    'select_excel' => 'Select excel/csv file',
 ];

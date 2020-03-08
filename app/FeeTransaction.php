@@ -14,4 +14,9 @@ class FeeTransaction extends Model
     {
         return $this->belongsToMany('App\FeeMaster', 'fee_master_fee_transaction');
     }
+
+    public function transaction_items()
+    {
+        return $this->hasMany('App\TransactionItem');
+    }
 }

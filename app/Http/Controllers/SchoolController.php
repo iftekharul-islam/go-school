@@ -32,10 +32,9 @@ class SchoolController extends Controller
     public function manageClasses()
     {
         $user = Auth::user();
-
         $schools = School::all();
-        $classes = Myclass::orderBy('class_number','ASC')->get();
-        $sections = Section::all();
+        $classes = Myclass::orderBy('class_number', 'ASC')->get();
+        $sections = Section::orderBy('section_number', 'ASC')->get();
 
         $teachers = User::where('role', 'teacher')
             ->orderBy('name', 'ASC')
@@ -380,4 +379,38 @@ class SchoolController extends Controller
         return view('school.sms-summary', compact('sms', 'from', 'to','school'));
     }
 
+    public function schoolSetup()
+    {
+        $school = School::findOrFail(Auth::user()->school_id);
+        return view('school.school-setting', compact('school'));
+    }
+    public function updateSchoolSetting(Request $request, $school_id)
+    {
+        $this->validate($request, [
+            'school_address' => 'required|max:200',
+            'about' => 'required|max:500',
+            'medium' => 'required|max:200',
+            'absent_msg' => 'required|max:140',
+            'present_msg' => 'required|max:140',
+        ],[
+            'school_address.required' => 'Enter School Address',
+            'school_address.max' => 'Maximum 200 characters',
+            'about.required' => 'Enter short description',
+            'about.max' => 'Maximum 500 characters',
+            'absent_msg.required' => 'Enter student absent message',
+            'absent_msg.max' => 'Maximum 140 characters',
+            'present_msg.required' => 'Enter student present message',
+            'present_msg.max' => 'Maximum 140 characters',
+        ]);
+
+        $school = School::findOrFail($school_id);
+        $school->school_address = $request->school_address;
+        $school->about = $request->about;
+        $school->medium = $request->medium;
+        $school->absent_msg = $request->absent_msg;
+        $school->present_msg = $request->present_msg;
+        $school->save();
+
+        return back()->with('status', 'School Setting Updated');
+    }
 }

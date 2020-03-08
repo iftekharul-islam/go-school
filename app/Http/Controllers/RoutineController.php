@@ -140,7 +140,10 @@ class RoutineController extends Controller
     }
     public function upload()
     {
-        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
+        $classes = Myclass::with('sections')
+            ->where('school_id', Auth::user()->school_id)
+            ->orderBy('class_number', 'ASC')
+            ->get();
         return view('routines.upload', compact('classes'));
     }
 

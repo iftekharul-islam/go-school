@@ -24,20 +24,20 @@
             <li>Add New Expense</li>
         </ul>
     </div>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-8">
             <div class="card height-auto false-height">
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     <form class="new-added-form justify-content-md-center" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-expense')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="name" class=" mt-5">Sector Name</label>
+                                <label for="name" class=" mt-5">Sector Name <label class="text-danger">*</label></label>
 
                                 <select  class="select2" name="name">
                                     @foreach($sectors as $sector)
@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="amount">Amount</label>
+                                <label for="amount">Amount <label class="text-danger">*</label></label>
                                 <input id="amount" type="number" class="form-control" name="amount" value="{{ old('amount') }}" placeholder="Amount" required>
 
                                 @if ($errors->has('amount'))
@@ -65,11 +65,10 @@
                             </div>
                         </div>
 
-
                         <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
 
                             <div class="col-md-12">
-                                <label for="date">Expense For Date</label>
+                                <label for="date">Expense For Date <label class="text-danger">*</label></label>
 
                                 <input data-date-format="yyyy-mm-dd" id="date" class="form-control date" name="date" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
                                 @if ($errors->has('date'))
@@ -79,11 +78,9 @@
                                 @endif
                             </div>
                         </div>
-
-
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="description">Description</label>
+                                <label for="description">Description <label class="text-danger">*</label></label>
                                 <textarea rows="3" id="description" class="form-control" name="description" placeholder="Description" required>{{ old('description') }}</textarea>
 
                                 @if ($errors->has('description'))
