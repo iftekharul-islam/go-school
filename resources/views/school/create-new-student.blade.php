@@ -418,6 +418,10 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <input type="checkbox" class="f-name ml-4"><span class="f-name ml-2">Is Guardian</span>
+                            </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
@@ -460,10 +464,15 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="father_name"
+
+                                               class=" control-label false-padding-bottom">Father's
+                                            Name <label class="father-n"></label></label>
+
                                                class=" control-label false-padding-bottom">{{ __('text.father_name') }}</label>
 
+
                                         <input id="father_name" type="text"
-                                               class="form-control" name="father_name"
+                                               class="form-control father-name" name="father_name"
                                                value="{{ old('father_name') }}">
 
                                         @if ($errors->has('father_name'))
@@ -477,9 +486,11 @@
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
+
                                         <label for="father_phone_number" class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
+
                                         <input id="father_phone_number"  type="text"
-                                               class="form-control"
+                                               class="form-control f-phone-number"
                                                name="father_phone_number"
                                                value="{{ old('father_phone_number') }}">
 
@@ -566,15 +577,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <input type="checkbox" class="m-name ml-4"><span class="m-name ml-2">Is Guardian</span>
+                            </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
 
                                     <div class="col-md-12">
+
                                         <label for="mother_name"
+
                                                class=" control-label false-padding-bottom">{{ __('text.mother_name') }}</label>
 
                                         <input id="mother_name" type="text"
-                                               class="form-control" name="mother_name"
+                                               class="form-control mother-name" name="mother_name"
                                                value="{{ old('mother_name') }}">
 
                                         @if ($errors->has('mother_name'))
@@ -592,8 +608,9 @@
                                         <label for="mother_phone_number"
                                                class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
 
+
                                         <input id="mother_phone_number" type="text"
-                                               class="form-control"
+                                               class="form-control m-phone-number"
                                                name="mother_phone_number"
                                                value="{{ old('mother_phone_number') }}">
 
@@ -680,6 +697,44 @@
                                             <span class="help-block">
                                     <strong>{{ $errors->first('mother_annual_income') }}</strong>
                                 </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 guardian-field">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="guardian_name"
+                                               class=" control-label false-padding-bottom">Guardian's Name<label class="text-danger">*</label></label>
+
+                                        <input id="guardian_name" type="text"
+                                               class="form-control guardian-name" name="guardian_name"
+                                               value="{{ old('guardian_name') }}"
+                                               required>
+
+                                        @if ($errors->has('guardian_name'))
+                                            <span class="help-block">
+                                    <strong>{{ $errors->first('guardian_name') }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 guardian-field">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="guardian_phone_number"
+                                               class="control-label false-padding-bottom">Guardian's Phone Number<label
+                                                class="text-danger">*</label></label>
+                                        <input id="guardian_phone_number"  type="text"
+                                               class="form-control g-phone-number"
+                                               name="guardian_phone_number"
+                                               value="{{ old('guardian_phone_number') }}"required>
+
+                                        @if ($errors->has('guardian_phone_number'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('guardian_phone_number') }}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                 </div>
@@ -787,6 +842,77 @@
                 $('.password-btn').remove();
             });
 
+
+            $('.f-name').on('click', function(){
+                if($(this).prop("checked") == true){
+                    $('.guardian-name').val($('.father-name').val());
+                    $('.g-phone-number').val($('.f-phone-number').val());
+                    $('.father-n').addClass('text-danger').text('*');
+                    $(".father-name, .f-phone-number").prop('required', true);
+
+                     $('.father-name').keyup(function () {
+                         $('.guardian-name').val($('.father-name').val());
+                    });
+
+                    $('.f-phone-number').keyup(function () {
+                        $('.g-phone-number').val($('.f-phone-number').val());
+                    });
+                    $('.guardian-field').hide();
+                    $('.m-name').hide();
+
+                }
+                else if($(this).prop("checked") == false){
+                    $('.guardian-name').val('');
+                    $('.g-phone-number').val('');
+                    $('.father-n').removeClass('text-danger').text('');
+                    $('.father-name, .f-phone-number').prop('required', false);
+
+                    $('.father-name').keyup(function () {
+                        $('.guardian-name').val('');
+                    });
+                    $('.f-phone-number').keyup(function () {
+                        $('.g-phone-number').val('');
+                    });
+                    $('.guardian-field').show();
+                    $('.m-name').show();
+                }
+            });
+
+            $('.m-name').on('click',function(){
+                if($(this).prop("checked") == true){
+                    $('.guardian-name').val($('.mother-name').val());
+                    $('.g-phone-number').val($('.m-phone-number').val());
+                    $('.mother-n').addClass('text-danger').text('*');
+                    $(".mother-name, .f-phone-number").prop('required', true);
+
+                    $('.mother-name').keyup(function () {
+                        $('.guardian-name').val($('.mother-name').val());
+                    });
+
+                    $('.m-phone-number').keyup(function () {
+                        $('.g-phone-number').val($('.m-phone-number').val());
+                    });
+                    $('.guardian-field').hide();
+                    $('.f-name').hide();
+
+
+                }
+                else if($(this).prop("checked") == false){
+                    $('.guardian-name').val('');
+                    $('.g-phone-number').val('');
+                    $('.mother-n').removeClass('text-danger').text('');
+                    $(".mother-name, .f-phone-number").prop('required', false);
+
+                    $('.mother-name').keyup(function () {
+                        $('.guardian-name').val('');
+                    });
+                    $('.m-phone-number').keyup(function () {
+                        $('.g-phone-number').val('');
+                    });
+                    $('.guardian-field').show();
+                    $('.f-name').show();
+                }
+            });
         });
     </script>
 @endpush
