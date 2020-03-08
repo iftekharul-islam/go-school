@@ -49,6 +49,11 @@
                 <li>Collect Fee</li>
             </ul>
         </div>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="false-height">
             <div class="card mb-3">
                 <div class="card-body">
@@ -98,12 +103,12 @@
                             <table class="data-table-paginate table-bordered display text-wrap">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Class</th>
-                                    <th>Section</th>
+                                    <th>SL</th>
                                     <th>Code</th>
                                     <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Class</th>
+                                    <th>Section</th>
+
                                     <th>Gender</th>
                                     <th>Action</th>
                                 </tr>
@@ -112,15 +117,14 @@
                                 @foreach($students as $student)
                                     <tr>
                                         <td>{{ $loop->index }}</td>
-                                        <td>{{ $student->section->class->class_number }}</td>
-                                        <td>{{ $student->section->section_number }}</td>
                                         <td>{{ $student->student_code }}</td>
                                         <td>{{ $student->name }}</td>
-                                        <td>{{ $student->email }}</td>
+                                        <td>{{ $student->section->class->class_number }}</td>
+                                        <td>{{ $student->section->section_number }}</td>
                                         <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
-{{--                                            <a class="button--save button" href="{{ url(auth()->user()->role.'/fee-collection/get-fee',$student->id) }}">Collect</a>--}}
-                                            <a href="{{ route('multiple.fee', [ 'id' => $student->id]) }}" class="button--save button"> <b>Collect</b></a>
+                                            <a href="{{ route('multiple.fee', [ 'id' => $student->id]) }}" class="button--edit button" title="Collect Fee"><i class="fas fa-plus"></i></a>&nbsp;
+                                            <a class="button--save button" href="{{ route('student.fee.collections',['id' => $student->id]) }}" title="Fee Collections"><i class="fas fa-clipboard-list"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

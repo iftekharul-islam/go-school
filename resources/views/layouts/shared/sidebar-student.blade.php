@@ -399,11 +399,11 @@
                                         href="{{ url($role.'/fee-types') }}">
                                         <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Types') }}</span></a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ (request()->is($role.'/fee-master*')) ? 'menu-active' : '' }}"
-                                        href="{{ url($role.'/fee-master') }}">
-                                            <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Master') }}</span></a>
-                                    </li>
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="nav-link {{ (request()->is($role.'/fee-master*')) ? 'menu-active' : '' }}"--}}
+{{--                                        href="{{ url($role.'/fee-master') }}">--}}
+{{--                                            <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Master') }}</span></a>--}}
+{{--                                    </li>--}}
                                     <li class="nav-item">
                                         <a class="nav-link {{ (request()->is($role.'/fee-discount*')) ? 'menu-active' : '' }}"
                                         href="{{ url($role.'/fee-discount') }}">

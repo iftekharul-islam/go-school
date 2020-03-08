@@ -46,7 +46,7 @@
                                                     {{ $ft->name }}
                                                     <input type="hidden" value="{{$ft->id}}" name="fee_type_id[]">
                                                 </td>
-                                                <td><input type="number" name="amount[]" class="form-control"></td>
+                                                <td><input type="number" name="amounts[]" class="form-control fee-amount" required></td>
                                                 <td>
                                                     <button type="button"  class="btn btn-danger delete-row" title="Remove this row">
                                                         <i class="fas fa-trash"></i></button>
@@ -73,7 +73,7 @@
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                     <label>Fine <span class="text-danger">*</span></label>
-                                    <input type="number" step="0.01" placeholder="" class="form-control fineInput fine" name="fine" value="0" required>
+                                    <input type="number" class="form-control fineInput fine" name="fine" value="0" required>
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
@@ -108,8 +108,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="student_id" value="{{ $student->id }}">
-                            <input type="hidden" name="feeMasterId[]" value="" id="feeMasterId">
-                            <button class="button button--save float-right mt-4" style="max-width: 400px !important;">Save</button>
+                            <button  class="button button--save float-right mt-4" style="max-width: 400px !important;">Save</button>
                         </div>
                     </div>
                 </div>
@@ -118,7 +117,7 @@
     </div>
     <!--Modal-->
     <div class="modal fade" id="addFeeType" role="dialog" aria-labelledby="addFeeType">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Add Fee</h4>
@@ -128,8 +127,8 @@
                     <div class="row">
                         <div class="form-group col-md-6 col-sm-12">
                             <label for="feeType" class=" sr-only control-label">Select Fee Type</label>
-                            <select name="feeType" class="form-control select2" id="feeType" required>
-                                <option value="" disabled selected>Select Fee Type</option>
+                            <select name="feeType" class="form-control" id="feeType" required>
+                                <option value="">Select Fee Type</option>
                                 @if(count($feeTypes) > 0)
                                     @foreach($feeTypes as $ft)
                                         <option value="{{$ft->id}}">{{$ft->name}}</option>
@@ -147,7 +146,7 @@
                 </div>
                 <div class="form-group modal-footer pb-">
                     <div class="col-md-12">
-                        <button type="button" onclick="addFee()" class="button button--save float-right"><i class="fas fa-plus-circle"></i> Add</button>
+                        <button onclick="addFee()" class="button button--save float-right"><i class="fas fa-plus-circle"></i> Add</button>
                     </div>
                 </div>
             </div>
@@ -159,6 +158,10 @@
     <script>
         $(document).on('click', '.delete-row', function(){
             $(this).closest('tr').remove();
+            calculateTotal();
+        });
+        $(document).on('keyup change', '.fee-amount, .fine', function(){
+            calculateTotal();
         });
 
         function addFee() {
@@ -169,12 +172,13 @@
             if (validateField(fee_type_id, amount)) {
                 $('#fees tbody').append('<tr>' +
                     '<td>' +fee_name+'<input type="hidden" value="'+fee_type_id+'" name="fee_type_id[]"></td>'+
-                    '<td><input type="number" name="amount[]" value="'+amount+'" class="form-control"></td>' +
+                    '<td><input type="number" name="amounts[]" value="'+amount+'" class="form-control fee-amount" required></td>' +
                     '<td><button type="button"  class="btn btn-danger delete-row" title="Remove this row"><i class="fas fa-trash"></i></button></td>'+
                     '</tr>');
                 $('#addFeeType input').val('');
-                $("#addFeeType option:selected").prop("selected", false)
+                $("#addFeeType select option:selected").prop("selected", false);
             }
+            calculateTotal();
         }
 
         function validateField(fee_type_id, amount){
@@ -186,92 +190,53 @@
                 errCounter += 1;
                 $('#amountError').text('Enter Fee Amount');
             }
-
-            if ($.inArray(fee_type_id, addedFees) == -1) {
-                errCounter += 1;
-                $('#typeError').text('Already Added');
-            }else if (fee_type_id == ''){
+            if (fee_type_id == null || fee_type_id == undefined || fee_type_id == '') {
                 errCounter += 1;
                 $('#typeError').text('Select A Type');
+            } else if ($.inArray(fee_type_id, addedFees) != -1) {
+                errCounter += 1;
+                $('#typeError').text('Already Added');
             }
 
             return  (errCounter > 0) ? false : true;
         }
 
         window.total = $("#amount").val();
-        window.i = 0;
-        window.feeMasterId = [];
         window.selectedDiscount = 0;
         window.discounts = {!! json_encode($discounts->toArray()) !!};
-        $(document).ready(function(){
-            $(".fine").change(function(){
-                let grandTotal = 0;
-                let fine = $(".fine").val();
-                if (fine != '') {
-                    grandTotal = parseFloat(total) + parseFloat(fine);
-                } else {
-                    $(".fine").val(0)
-                }
-                let value;
-                let type;
-                discounts.forEach((cls) => {
-                    if (cls.id == selectedDiscount) {
-                        value = cls.amount;
-                        type = cls.type;
-                    }
-                });
-                let dis_tot = feeMasterId.length;
-                let dis = $(".discount").val();
-                if (type == 'recurrent') {
-                    grandTotal = grandTotal - (dis * dis_tot);
-                } else {
-                    grandTotal = grandTotal - dis ;
-                }
-                $("#amount").val(grandTotal);
-            });
-        });
+       
+        function calculateTotal() {
+            let fine = parseFloat($(".fine").val());
+            let discountAmount =  parseFloat($('#discountValue').val());
+            let grandTotal = 0;
+            let totalFee = 0;
 
-        function calculateTotal(e, t, id) {
-            let dis = $(".discount").val();
-            if (t.is(':checked')) {
-                total = parseFloat($("#amount").val()) + parseFloat(e);
-                feeMasterId.push(id);
-            } else {
-                total = parseFloat($("#amount").val()) - parseFloat(e);
-                var idx = feeMasterId.indexOf(id);
-                feeMasterId.splice(idx, 1);
-            }
-            $("#amount").val(total);
-            $("#feeMasterId").val(feeMasterId);
+            $("#fees .fee-amount").each(
+                function() {
+                    let amount =  $(this).val();
+                    if (amount != '') { 
+                        totalFee = totalFee + parseFloat(amount); 
+                    }
+                }
+            );
+            grandTotal = totalFee + fine - discountAmount;
+            $('#amount').val(grandTotal);
         }
 
         function getDiscount(item) {
             selectedDiscount = item.value;
-            console.log("Inner Side", selectedDiscount);
-            let value;
-            let type;
-            discounts.forEach((cls) => {
-                if (cls.id == selectedDiscount) {
-                    value = cls.amount;
-                    type = cls.type;
-                }
-            });
-            $('#discountValue').val(value);
-            let grandTotal = 0;
-            let fine = $(".fine").val();
-            if (fine != '') {
-                grandTotal = parseFloat(total) + parseFloat(fine);
+            if (selectedDiscount == '' || selectedDiscount == null) {
+                $('#discountValue').val(0);
             } else {
-                $(".fine").val(0)
+                let value;
+                discounts.forEach((cls) => {
+                    if (cls.id == selectedDiscount) {
+                        value = cls.amount;
+                    }
+                });
+                $('#discountValue').val(value);
             }
-            let dis = $(".discount").val();
-            if (type == 'recurrent') {
-                let dis_total = feeMasterId.length;
-                grandTotal = grandTotal - (dis * dis_total);
-            } else {
-                grandTotal = grandTotal - dis ;
-            }
-            $("#amount").val(grandTotal);
+            calculateTotal();
         }
 
     </script>
