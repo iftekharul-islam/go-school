@@ -224,7 +224,7 @@
         }
 
         function getDiscount(item) {
-            selectedDiscount = item.value;
+            let selectedDiscount = item.value;
             if (selectedDiscount == '' || selectedDiscount == null) {
                 $('#discountValue').val(0);
             } else {

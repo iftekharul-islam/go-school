@@ -164,7 +164,7 @@ class FeeTransactionController extends Controller
         $studentInfo->save();
         $transaction_items = TransactionItem::where('fee_transaction_id', $id)->delete();
         $ft->delete();
-        #DB::table('fee_master_fee_transaction')->where('fee_transaction_id', $ft->id)->delete();
+
         return redirect()->back();
     }
 
@@ -258,7 +258,6 @@ class FeeTransactionController extends Controller
         $fee_transaction = FeeTransaction::findOrFail($id);
         $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
         $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
-//        dd($transactionItems);
         return view('accounts.transaction.transaction-detail', compact('transactionItems','student', 'fee_transaction'));
     }
 
