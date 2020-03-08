@@ -207,7 +207,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('admin/import-student')) ? 'menu-active' : '' }}"
                                        href="{{ url('admin/import-student') }}">
-                                        <i class="fas fa-angle-right"></i><span>{{ __('text.Import Student') }}</span></a>
+                                        <i class="fas fa-angle-right"></i><span>{{ __('text.Import Student') }} (By Excel)</span></a>
                                 </li>
                             @endif
                         </ul>

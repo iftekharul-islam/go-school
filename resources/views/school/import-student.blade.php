@@ -7,14 +7,15 @@
         <div class="breadcrumbs-area">
             <h3>
                 <i class="fas fa-user-plus"></i>
-                Import Student
+                {{ __('text.Import Student') }}
             </h3>
             <ul>
-                <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <li>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Import Student</li>
+                <li>{{ __('text.Import Student') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -44,14 +45,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="file"
-                                       class="control-label false-padding-bottom">Select excel/csv file<label class="text-danger">*</label></label>
+                                       class="control-label false-padding-bottom">{{ __('text.select_excel') }}<label class="text-danger">*</label></label>
                                 <input id="import-file" type="file" name="users" accept=".xlsx,.csv,.xls" required>
                             </div>
                             <div class="col-md-6">
                                 <div class=" form-group{{ $errors->has('section') ? ' has-error' : '' }}">
                                         <label for="section"
-                                               class="control-label false-padding-bottom">Class
-                                            and Section<label class="text-danger">*</label></label>
+                                               class="control-label false-padding-bottom">{{ __('text.class_section') }}<label class="text-danger">*</label></label>
 
                                         <select id="section" class="form-control"
                                                 name="section" required>
@@ -74,7 +74,7 @@
                             <div class="col-md-12">
                                 <a href="{{ route('download') }}" class="btn button--save mt-3"><i class="fas fa-download"></i> Excel Sample </a>
                                 <button type="submit" id="" class="button float-right mt-3 button--save" onclick="confirmImportForm(event)">
-                                    Import
+                                    {{ __('text.import') }}
                                 </button>
                             </div>
                         </div>
