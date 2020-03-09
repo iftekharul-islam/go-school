@@ -53,14 +53,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-
                                     <label for="type"> <input type="checkbox" value="1" name="type" id="type" @if( old('type') == 1) checked @endif> Is Monthly Fee</label>&nbsp;
-
-{{--                                    <select class="form-control" name="type">--}}
-{{--                                        --}}
-{{--                                        <option value="onetime" @if( old('type') == 'onetime') selected @endif>One Time</option>--}}
-{{--                                        <option value="monthly" @if( old('type') == 'monthly') selected @endif>Monthly</option>--}}
-{{--                                    </select>--}}
                                 </div>
                             </div>
                             <div class="col-md-12">
