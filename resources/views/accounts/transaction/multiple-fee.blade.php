@@ -102,8 +102,12 @@
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group mt-5">
                                     <label>Payment Method</label>
-                                    <input class="ml-5" type="radio" name="mode" value="cash" checked> Cash
-                                    <input class="" type="radio" name="mode" value="cheque"> Cheque
+                                    <label for="cash" class="mr-2">
+                                        <input class="ml-5" type="radio" name="mode" value="cash" id="cash" checked> Cash
+                                    </label>
+                                    <label for="cheque">
+                                    <input class="" type="radio" name="mode" id="cheque" value="cheque"> Cheque
+                                    </label>
                                 </div>
                                 <div class="col-12-xxxl col-lg-6 col-12 form-group">
                                     <label>Note</label>

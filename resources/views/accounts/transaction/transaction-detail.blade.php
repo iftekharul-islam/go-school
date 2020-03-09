@@ -99,8 +99,8 @@
                 <div class="heading-layout1">
                     <div class="item-title">
                         <h3 class="float-left mb-5 float-left">Items</h3>
-                        <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>
-
+{{--                        <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>--}}
+                        <a href="?print=1" class="btn-secondary btn float-right btn-lg" target="_blank"> <i class="fa-print fa"></i> Print</a>
                     </div>
                 </div>
                 @php $totalAmount = 0; @endphp

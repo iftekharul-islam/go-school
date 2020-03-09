@@ -85,17 +85,17 @@
             <tr>
                 <td>
                     <small>Student Copy</small>
-                    <h3>Maritime International School</h3>
+                    <h3>{{ $school_name }}</h3>
                     <address>
-                        House 941, Road 14, Avenue 2, Mirpur DOHS, Dhaka-1207
+                        {{ $school_address }}
                     </address>
                 </td>
             </tr>
         </table>
-
+        @php $totalAmount = 0 @endphp
         <table>
             <tr class="align-left">
-                <td>No: {{ $transaction['id'] }}</td>
+                <td>No: {{ $transaction['transaction_serial'] }}</td>
                 <td>Date: {{ $transaction['created_at']->format('d-m-Y') }}</td>
             </tr>
             <tr class="align-left">
@@ -117,24 +117,25 @@
                     <td width="20%" class="align-right">Taka</td>
                 </thead>
                 <tbody>
-                    @if ( !empty($transaction['feeMasters']) )
-                        @foreach ( $transaction['feeMasters'] as $index => $item )
+                    @if ( !empty($transaction['transaction_items']) )
+                        @foreach ( $transaction['transaction_items'] as $index => $item )
+                            @php $totalAmount += $item['fee_amount'] @endphp
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $item['feeType']['name'] }}</td>
-                                <td style="text-align:right">{{ number_format($item['amount'], 2) }}</td>
+                                <td>{{ $item['fee_type']['name'] }}</td>
+                                <td style="text-align:right">{{ number_format($item['fee_amount'], 2) }}</td>
                             </tr>
                         @endforeach
                     @endif
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Sub Total</td>
-                        <td style="text-align:right">{{ number_format($transaction['amount'], 2) }}</td>
+                        <td style="text-align:right">Fine</td>
+                        <td style="text-align:right">{{ number_format($transaction['fine'], 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Fine</td>
-                        <td style="text-align:right">{{ number_format($transaction['fine'], 2) }}</td>
+                        <td style="text-align:right">Sub Total</td>
+                        <td style="text-align:right">{{ number_format(($totalAmount + $transaction['fine']), 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
@@ -144,7 +145,7 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td style="text-align:right"><b>Total</b></td>
-                        <td style="text-align:right"><b>{{ number_format($transaction['amount'] + $transaction['fine'] - $transaction['discount'], 2) }}</b></td>
+                        <td style="text-align:right"><b>{{ number_format($totalAmount + $transaction['fine'] - $transaction['discount'], 2) }}</b></td>
                     </tr>
                 </tbody>
             </table>
@@ -161,15 +162,15 @@
             </tr>
         </table>
     </div>
-    {{-- <div style="page-break-before:always">&nbsp;</div>  --}}
+
     <div class="content" style="display:inline-block; width: 48%; float:right">
         <table id="heading">
             <tr>
                 <td>
                     <small>Office Copy</small>
-                    <h3>Maritime International School</h3>
+                    <h3>{{ $school_name }}</h3>
                     <address>
-                        House 941, Road 14, Avenue 2, Mirpur DOHS, Dhaka-1207
+                        {{ $school_address }}
                     </address>
                 </td>
             </tr>
@@ -177,7 +178,7 @@
 
         <table>
             <tr class="align-left">
-                <td>No: {{ $transaction['id'] }}</td>
+                <td>No: {{ $transaction['transaction_serial'] }}</td>
                 <td>Date: {{ $transaction['created_at']->format('d-m-Y') }}</td>
             </tr>
             <tr class="align-left">
@@ -198,25 +199,26 @@
                     <td width="20%" class="align-right">Taka</td>
                 </thead>
                 <tbody>
-                    @if ( !empty($transaction['feeMasters']) )
-                        @foreach ( $transaction['feeMasters'] as $index => $item )
+                    @if ( !empty($transaction['transaction_items']) )
+                        @foreach ( $transaction['transaction_items'] as $index => $item )
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $item['feeType']['name'] }}</td>
-                                <td style="text-align:right">{{ number_format($item['amount'], 2) }}</td>
+                                <td>{{ $item['fee_type']['name'] }}</td>
+                                <td style="text-align:right">{{ number_format($item['fee_amount'], 2) }}</td>
                             </tr>
                         @endforeach
                     @endif
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Sub Total</td>
-                        <td style="text-align:right">{{ number_format($transaction['amount'], 2) }}</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
                         <td style="text-align:right">Fine</td>
                         <td style="text-align:right">{{ number_format($transaction['fine'], 2) }}</td>
                     </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="text-align:right">Sub Total</td>
+                        <td style="text-align:right">{{ number_format(($totalAmount + $transaction['fine']), 2) }}</td>
+                    </tr>
+
                     <tr>
                         <td>&nbsp;</td>
                         <td style="text-align:right">Discount</td>
@@ -225,7 +227,7 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td style="text-align:right"><b>Total</b></td>
-                        <td style="text-align:right"><b>{{ number_format($transaction['amount'] + $transaction['fine'] - $transaction['discount'], 2) }}</b></td>
+                        <td style="text-align:right"><b>{{ number_format($totalAmount + $transaction['fine'] - $transaction['discount'], 2) }}</b></td>
                     </tr>
                 </tbody>
             </table>

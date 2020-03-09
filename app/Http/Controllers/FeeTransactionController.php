@@ -264,7 +264,7 @@ class FeeTransactionController extends Controller
         }
         $studentData = User::with('section')->where('id', $request->student_id)->first();
         
-        return redirect()->route('accountant.all-student', ['class' => $studentData['section']['class_id'], 'section' => $studentData['section_id']])
+        return redirect()->route('transaction.detail', ['transaction_id' => $ft->id])
             ->with('status', 'Fee collected successfully');
     }
     public function studentFeeDetails()
@@ -273,8 +273,11 @@ class FeeTransactionController extends Controller
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
         return view('fees.fees-summary', compact('student','discounts'));
     }
-    public function transactionDetail($id)
+    public function transactionDetail(Request $request, $id)
     {
+        if($request->print == 1){
+            $this->generateReceipt($id);
+        }
         $fee_transaction = FeeTransaction::findOrFail($id);
         $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
         $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
@@ -283,14 +286,16 @@ class FeeTransactionController extends Controller
 
     public function generateReceipt($transaction_id)
     {
-        $transaction = FeeTransaction::with('feeMasters.feeType')->findOrFail($transaction_id);
-        $student = User::with('section.class','studentInfo')->findOrFail($transaction['student_id']);
+        $transaction = FeeTransaction::with('transaction_items.fee_type')->findOrFail($transaction_id);
+        $student = User::with('school', 'section.class', 'studentInfo')->findOrFail($transaction['student_id']);
 
         $data = ['student_name' => $student['name'],
             'roll_number' => $student['studentInfo']['roll_number'],
             'section' => $student['section']['section_number'],
             'class' => $student['section']['class']['class_number'],
-            'transaction' => $transaction
+            'transaction' => $transaction,
+            'school_name' => $student['school']['name'],
+            'school_address' => $student['school']['school_address']
         ];
         $pdf = PDF::loadView('accounts.transaction.receipt-template', $data,[], ['format' => 'A4-L', 'orientation' => 'L']);
         $date = Carbon::now();

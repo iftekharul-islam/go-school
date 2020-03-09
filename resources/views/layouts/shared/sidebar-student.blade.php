@@ -394,11 +394,11 @@
                             <li class="nav-item sidebar-nav-item second-lbl-menu">
                                 <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Collection') }}</span></a>
                                 <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"
-                                        href="{{ url($role.'/fee-types') }}">
-                                        <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Types') }}</span></a>
-                                    </li>
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"--}}
+{{--                                        href="{{ url($role.'/fee-types') }}">--}}
+{{--                                        <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Types') }}</span></a>--}}
+{{--                                    </li>--}}
                                     <li class="nav-item">
                                         <a class="nav-link {{ (request()->is($role.'/fee-discount*')) ? 'menu-active' : '' }}"
                                         href="{{ url($role.'/fee-discount') }}">
