@@ -33,7 +33,7 @@ class InvoiceMail extends Mailable
         return $this->subject('Invoice of '.$this->data['month'])
             ->cc(['roy.debashish.sj@gmail.com'])
             ->from('roy.debashish.sj@gmail.com', 'Shoroborno')
-            ->replyTo('roy.debashish.sj@gmail.com', 'Shoroborno team')
+            ->replyTo('roy.debashish.sj@gmail.com', 'Shoroborno Team')
             ->view('payment.invoice-template')->with('data', $this->data);
     }
 }
