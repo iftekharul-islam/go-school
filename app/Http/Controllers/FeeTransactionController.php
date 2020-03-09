@@ -8,6 +8,7 @@ use App\FeeTransaction;
 use App\Myclass;
 use App\Section;
 use App\StudentInfo;
+use App\Configuration;
 use App\Services\User\UserService;
 use App\User;
 use App\FeeType;
@@ -222,8 +223,27 @@ class FeeTransactionController extends Controller
     
         $fee_type_ids = $request->fee_type_id;
         $feeAmounts = $request->amounts;
+        $school_id = Auth::user()->school_id;
+        $serial = '';
+
+        #transaction serial
+        $transaction_serial = Configuration::where('key', 'transaction_serial')
+            ->where('school_id', $school_id)->first();
+        if ( !empty($transaction_serial) ) {
+            $serial = $transaction_serial->value + 1;
+            $transaction_serial->value = $serial;
+            $transaction_serial->save();
+        } else {
+            $config = new Configuration();
+            $config->key = 'transaction_serial';
+            $config->value = 0001;
+            $config->school_id = $school_id;
+            $config->save();
+            $serial = 1;
+        }
 
         $ft = new FeeTransaction();
+        $ft->transaction_serial = $serial;
         $ft->student_id = $request->student_id;
         $ft->school_id = \auth()->user()->school_id;
         $ft->amount = $request->amount;

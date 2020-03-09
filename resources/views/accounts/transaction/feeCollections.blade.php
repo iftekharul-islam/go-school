@@ -129,7 +129,7 @@
                                     $totalAmount += $fee->amount;
                                 @endphp
                                 <tr>
-                                    <td>{{ $fee->id }}</td>
+                                    <td>{{ $fee->transaction_serial }}</td>
                                     <td>{{ $fee->fine }}</td>
                                     <td>{{ $fee->discount }}</td>
                                     <td>{{ $fee->amount }}</td>
@@ -192,7 +192,7 @@
                             @if(!$fees->isEmpty())
                                 @foreach($fees as $fee)
                                     <tr>
-                                        <td>{{ $fee->id }}</td>
+                                        <td>{{ $fee->transaction_serial }}</td>
                                         <td>{{ $fee->fine }}</td>
                                         <td>{{ $fee->discount }}</td>
                                         <td>{{ $fee->amount }}</td>
