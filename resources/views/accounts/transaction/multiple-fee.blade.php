@@ -132,7 +132,6 @@
                             <label for="feeType" class=" sr-only control-label">Select Fee Type</label>
                             <select name="feeType" class="form-control" id="feeType" onchange="toggleMonthField()" required>
                                 <option value="">Select Fee Type</option>
-                                <option value="monthly">Monthly Fee</option>
                                 @if(count($feeTypes) > 0)
                                     @foreach($feeTypes as $ft)
                                         <option value="{{$ft->id}}">{{$ft->name}}</option>
@@ -198,6 +197,12 @@
 
 @push('customjs')
     <script>
+        window.total = $("#amount").val();
+        window.selectedDiscount = 0;
+        window.discounts = {!! json_encode($discounts->toArray()) !!};
+        window.allFees = {!! json_encode($feeTypes->toArray()) !!};
+
+
         $(document).on('click', '.delete-row', function(){
             $(this).closest('tr').remove();
             calculateTotal();
@@ -211,7 +216,14 @@
             let fee_type_id = $('#addFeeType #feeType').val();
             let amount = $('#addFeeType #feeAmount').val();
             let month = '';
-            if (fee_type_id == 'monthly') {
+            let typeOfFee;
+            allFees.forEach((fee) => {
+                if (fee.id == fee_type_id) {
+                    typeOfFee = fee.type;
+                }
+            });
+
+            if (typeOfFee == 'monthly') {
                 month = '('+$('#fromMonth').val()+' To '+$('#toMonth').val()+')';
             }
 
@@ -227,10 +239,18 @@
             calculateTotal();
         }
 
+
         function validateField(fee_type_id, amount){
             $('#addFeeType .text-warning').empty();
             let errCounter = 0;
             let addedFees = $("#fees input[name='fee_type_id[]']").map(function(){ return $(this).val() }).get();
+            let typeOfFee;
+
+            allFees.forEach((fee) => {
+                if (fee.id == fee_type_id) {
+                    typeOfFee = fee.type;
+                }
+            });
 
             if (amount == '') {
                 errCounter += 1;
@@ -242,7 +262,8 @@
             } else if ($.inArray(fee_type_id, addedFees) != -1) {
                 errCounter += 1;
                 $('#typeError').text('Already Added');
-            } else if (fee_type_id == 'monthly') {
+            } else if (typeOfFee == 'monthly') {
+                console.log(typeOfFee);
                 if ($('#fromMonth').val() == '' || $('#fromMonth').val() == null) {
                     errCounter += 1;
                     $('#fromMonthError').text('Select From Month');
@@ -255,10 +276,6 @@
 
             return  (errCounter > 0) ? false : true;
         }
-
-        window.total = $("#amount").val();
-        window.selectedDiscount = 0;
-        window.discounts = {!! json_encode($discounts->toArray()) !!};
        
         function calculateTotal() {
             let fine = parseFloat($(".fine").val());
@@ -296,11 +313,22 @@
 
         function toggleMonthField(){
             let fee_type = $('#addFeeType #feeType').val();
-            if (fee_type == 'monthly') {
+            let typeOfFee;
+
+            allFees.forEach((fee) => {
+                if (fee.id == fee_type) {
+                    typeOfFee = fee.type;
+                }
+            });
+
+            if (typeOfFee == 'monthly') {
                 $('#addFeeType .month').show();
             } else {
                 $('#addFeeType .month').hide();
             }
         }
+
+
+
     </script>
 @endpush
