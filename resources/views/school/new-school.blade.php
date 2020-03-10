@@ -12,6 +12,7 @@
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
+            <li>Schools</li>
             <li>Create School</li>
         </ul>
     </div>
