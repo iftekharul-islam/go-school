@@ -201,7 +201,7 @@ class FeeTransactionController extends Controller
     {
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
-        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->orWhere('is_default', 1)->get();
+        $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->orWhere('is_default', 1)->orderBy('name', 'asc')->get();
         return view('accounts.transaction.multiple-fee', compact('student', 'discounts', 'feeTypes'));
     }
 
