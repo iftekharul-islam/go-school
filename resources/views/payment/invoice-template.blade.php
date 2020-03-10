@@ -39,7 +39,7 @@
                     <h2>Shoroborno</h2>
                     <address>
                         H# 941, Road 14, Avenue 2, Mirpur DOHS, Dhaka 1212.<br/>
-                        Contact: 01521245788
+                        Contact: +8801886614533
                     </address>
                 </td>
                 <td ><h3>Invoice</h3><p>{{ date('d F Y') }}</p></td>
