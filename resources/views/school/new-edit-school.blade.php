@@ -163,7 +163,7 @@
                                         </div>
                                         <div class="mb-4 col-md-6 form-group{{ $errors->has('sms_charge') ? ' has-error' : '' }}">
                                             <label for="sms_charge" class="control-label false-padding-bottom">SMS Charge(Per SMS) <label class="text-danger">*</label></label>
-                                            <input id="sms_charge" type="text" class="form-control" name="sms_charge" value="{{$school->sms_charge}}" placeholder="0.35" required>
+                                            <input id="sms_charge" type="text" class="form-control" name="sms_charge" value="{{$school->sms_charge}}" placeholder="0.35" @if($school->is_sms_enable == 1) required @endif>
                                             @if ($errors->has('sms_charge'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('sms_charge') }}</strong>
