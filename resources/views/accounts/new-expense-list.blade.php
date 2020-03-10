@@ -33,14 +33,13 @@
         <li>List of Expenses</li>
     </ul>
 </div>
-
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 <div class="card height-auto">
     <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
         <div class="example-screen">
             <div class="row">
                 <div class="col-md-6">
@@ -53,8 +52,8 @@
                                     <input data-date-format="yyyy-mm-dd" id="datePicker" class="form-control date" name="from_date" value="{{ $from ?? \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="" required>
                                     @if ($errors->has('from_date'))
                                         <span class="help-block">
-                                      <strong>{{ $errors->first('from_date') }}</strong>
-                                  </span>
+                                          <strong>{{ $errors->first('from_date') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -109,7 +108,7 @@
                                         <td>{{ $expense->date }}</td>
                                         <td>{{$expense->amount}}</td>
                                         <td>
-                                            <a title='Edit' class='btn btn-success btn-lg' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-expense")}}/{{$expense->id}}'><i class="fa fa-edit"></i></a>
+                                            <a title='Edit' class='btn btn-primary btn-lg' href='{{url(\Illuminate\Support\Facades\Auth::user()->role."/edit-expense")}}/{{$expense->id}}'><i class="fa fa-edit"></i></a>
                                             <a class="btn btn-danger btn-lg text-white ml-2" type="button" onclick="deleteMsg({{ $expense->id }})"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                         <form id="delete-form-{{ $expense->id }}" action="{{ url( \Illuminate\Support\Facades\Auth::user()->role . '/delete-expense/' . $expense->id) }}" method="POST" style="display: none;">

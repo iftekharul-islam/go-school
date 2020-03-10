@@ -19,51 +19,46 @@
     <div class="card height-auto">
         <div class="card-body">
             <form class="new-added-form mb-5" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-sector')}}" method="post">
-                        {{ csrf_field() }}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label for="name">Sector Name</label>
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label for="name">Sector Name <label class="text-danger">*</label></label>
 
-                                    <div class="">
-                                        <input id="name" type="text" class="form-control" name="name" value="{{ (!empty($sector->name))?$sector->name:old('name') }}" placeholder="Sector Name" required>
+                                <div class="">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ (!empty($sector->name))?$sector->name:old('name') }}" placeholder="Sector Name" required>
 
-                                        @if ($errors->has('name'))
-                                            <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                                    <label for="type">Sector Type</label>
-
-                                    <div class="">
-                                        <select  class="select2" name="type">
-                                            <option value="income">Income</option>
-                                            <option value="expense">Expense</option>
-                                        </select>
-
-                                        @if ($errors->has('type'))
-                                            <span class="help-block">
-                                            <strong>{{ $errors->first('type') }}</strong>
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mg-t-8">
-                                <button type="submit" class="button button--save ml-4 mt-4">Save</button>
                             </div>
                         </div>
-                    </form>
-{{--                <div class="col-md-6">--}}
-{{--                    <div style="width:100%;">--}}
-{{--                        <canvas id="canvas"></canvas>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                        <div class="col-md-6">
+                            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                <label for="type">Sector Type <label class="text-danger">*</label></label>
+
+                                <div class="">
+                                    <select  class="select2" name="type">
+                                        <option value="expense">Expense</option>
+                                        <option value="income">Income</option>
+                                    </select>
+
+                                    @if ($errors->has('type'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mg-t-8">
+                            <button type="submit" class="button button--save ml-4 mt-4">Save</button>
+                        </div>
+                    </div>
+                </form>
             <div class="row mt-5">
                 <div class="col-md-12">
                     <div class="height-auto">

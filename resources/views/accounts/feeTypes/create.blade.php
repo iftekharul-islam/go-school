@@ -19,22 +19,23 @@
                 <li>Create Fee Type</li>
             </ul>
         </div>
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
         <div class="row">
-            <div class="col-12 col-lg-8 col-xl-8 col-md-10">
+            <div class="col-12 col-lg-8 col-xl-8 col-md-12">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card false-height">
                     <div class="card-body">
                         <div class="heading-layout1">
@@ -48,6 +49,11 @@
                                 <div class="form-group mb-4">
                                     <label for="name">Name</label>
                                     <input type="text" placeholder="Name" class="form-control" name="name" value="{{ old('name') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-4">
+                                    <label for="type"> <input type="checkbox" value="1" name="type" id="type" @if( old('type') == 1) checked @endif> Is Monthly Fee</label>&nbsp;
                                 </div>
                             </div>
                             <div class="col-md-12">

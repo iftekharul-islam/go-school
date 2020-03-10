@@ -38,6 +38,11 @@ class CreateDefaultConfigurations implements ShouldQueue
                 'value' => '15:00',
                 'school_id' => $event->school->id
             ],
+            [
+                'key' => 'transaction_serial',
+                'value' => 1,
+                'school_id' => $event->school->id
+            ]
         ];
         
         Configuration::insert($data);

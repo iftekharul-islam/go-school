@@ -39,10 +39,10 @@ class SendInvoice implements ShouldQueue
     {
         $now = Carbon::now();
         $schools = School::whereNotNull('email')->where('is_active', 1)->get();
-       
+
         foreach ( $schools as $school ) {
             $data = [];
-            $totalStudent = User::where('school_id', $school->id)->where('active', 1)->count();
+            $totalStudent = User::where('school_id', $school->id)->where('active', 1)->where('role', 'student')->count();
             $totalSms = SmsHistory::where('school_id', $school->id)
                 ->whereMonth('created_at', $this->month)    
                 ->whereYear('created_at', $now->year)    
