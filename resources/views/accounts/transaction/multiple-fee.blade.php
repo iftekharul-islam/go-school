@@ -206,7 +206,6 @@
         window.discounts = {!! json_encode($discounts->toArray()) !!};
         window.allFees = {!! json_encode($feeTypes->toArray()) !!};
 
-
         $(document).on('click', '.delete-row', function(){
             $(this).closest('tr').remove();
             calculateTotal();
@@ -331,8 +330,5 @@
                 $('#addFeeType .month').hide();
             }
         }
-
-
-
     </script>
 @endpush
