@@ -225,7 +225,9 @@ class FeeTransactionController extends Controller
         $feeAmounts = $request->amounts;
         $school_id = Auth::user()->school_id;
         $serial = '';
-
+        #monthly fee types
+        $monthly_fee_types = FeeType::where('type', 'monthly')->pluck('id');
+        dd($monthly_fee_types);
         #transaction serial
         $transaction_serial = Configuration::where('key', 'transaction_serial')
             ->where('school_id', $school_id)->first();

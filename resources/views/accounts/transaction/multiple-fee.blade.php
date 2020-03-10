@@ -47,6 +47,17 @@
                                             <tr>
                                                 <td>
                                                     {{ $ft->name }}
+                                                    @if($ft->type == 'monthly')
+
+                                                        <select name="a" class="form-control">
+                                                            <option value="">From Month</option>
+                                                            <option value="">January</option>
+                                                        </select> -
+                                                        <select name="b"  class="form-control">
+                                                            <option value="">To Month</option>
+                                                            <option value="">January</option>
+                                                        </select>
+                                                    @endif
                                                     <input type="hidden" value="{{$ft->id}}" name="fee_type_id[]">
                                                 </td>
                                                 <td><input type="number" name="amounts[]" class="form-control fee-amount" required></td>
@@ -61,7 +72,6 @@
                                 </table>
                             </div>
                             <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#addFeeType"><i class="fas fa-plus-circle"></i> </button>
-
                         </div>
                     </div>
                 </div>

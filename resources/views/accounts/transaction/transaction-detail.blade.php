@@ -43,7 +43,7 @@
             <h3>Transaction Details</h3>
             <ul>
                 <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back</a> | <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
                 <li>Fee Collection</li>
                 <li>Transaction Details</li>
