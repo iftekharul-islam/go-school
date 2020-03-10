@@ -160,4 +160,7 @@ return[
     'late' => 'Late Present',
     'default_fee_types' => 'Defalut Fee Types',
     'total_teacher' => 'Total Teacher',
+    'department_name' => 'Department Name',
+    'teacher_list' => 'List of Teachers',
+    'student_list' => 'List of Students',
 ];

@@ -162,4 +162,7 @@ return [
     'late' => 'বিলম্বিত উপস্থিত',
     'default_fee_types' => 'ডিফল্ট ফির প্রকার',
     'total_teacher' => 'মোট শিক্ষক',
+    'department_name' => 'বিভাগের নাম',
+    'teacher_list' => 'শিক্ষকদের তালিকা',
+    'student_list' => 'শিক্ষার্থীদের তালিকা',
 ];
