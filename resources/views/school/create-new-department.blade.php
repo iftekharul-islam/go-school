@@ -7,14 +7,14 @@
         <div class="breadcrumbs-area">
             <h3>
                 <i class="fas fa-cog fa-fw"></i>
-                Add Department
+               {{ __('text.Add Department') }}
             </h3>
             <ul>
                 <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role.'.home') }}">&nbsp;&nbsp;Home</a>
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Add Department</li>
+                <li> {{ __('text.Add Department') }}</li>
             </ul>
         </div>
             @if (session('status'))
@@ -42,8 +42,7 @@
                         {{csrf_field()}}
                         <div class="false-padding-bottom-form form-group">
                             <label for="department_name"
-                                   class="col-sm-12 control-label false-padding-bottom">Department
-                                Name<label class="text-danger">*</label></label>
+                                   class="col-sm-12 control-label false-padding-bottom">{{ __('text.department_name') }}<label class="text-danger">*</label></label>
                             <div class="col-sm-12">
                                 <input type="text" required class="form-control"
                                        id="department_name"
@@ -52,10 +51,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-2 col-sm-12">
                                 <button type="submit"
-                                        class="button button--save float-left">
-                                    Submit
+                                        class="button button--save float-right">
+                                    {{ __('text.Submit') }}
                                 </button>
                             </div>
                         </div>

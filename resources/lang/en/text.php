@@ -162,6 +162,9 @@ return[
 
     'school_setting' => 'School Setting',
     'total_teacher' => 'Total Teacher',
+    'department_name' => 'Department Name',
+    'teacher_list' => 'List of Teachers',
+    'student_list' => 'List of Students',
 
     //course
     'add_course' => 'Add Course',
@@ -198,4 +201,5 @@ return[
     'reset' => "Reset",
     'import' => 'Import',
     'select_excel' => 'Select excel/csv file',
+
 ];

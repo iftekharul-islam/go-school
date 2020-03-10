@@ -166,6 +166,10 @@ return [
     'school_setting' => 'স্কুল সেটিং',
     'total_teacher' => 'মোট শিক্ষক',
 
+    'department_name' => 'বিভাগের নাম',
+    'teacher_list' => 'শিক্ষকদের তালিকা',
+    'student_list' => 'শিক্ষার্থীদের তালিকা',
+
     //course
     'add_course' => 'কোর্স যুক্ত করুন',
 
@@ -201,5 +205,6 @@ return [
     'reset' => "রিসেট",
     'import' => 'ইম্পোর্ট',
     'select_excel' => 'সিলেক্ট excel/csv',
+
 
 ];
