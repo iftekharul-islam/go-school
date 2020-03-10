@@ -66,17 +66,32 @@
                 <th>Cost/ Item</th>
                 <th>Total Cost</th>
             </tr>
-            <tr>
-                <td>Student</td>
-                <td>{{ $data['totalStudent'] }}</td>
-                <td>{{ $data['per_student_cost'] }}</td>
-                <td class="align-right">{{ number_format($data['serviceCharge'], 2) }}</td>
-            </tr>
+            @if($data['payment_type'] == 'monthly')
+                <tr>
+                    <td>Service Charge</td>
+                    <td>--</td>
+                    <td>{{ $data['charge'] }}</td>
+                    <td class="align-right">{{ number_format($data['charge'], 2) }}</td>
+                </tr>
+            @else
+                <tr>
+                    <td>Student</td>
+                    <td>{{ $data['totalStudent'] }}</td>
+                    <td>@empty($data['charge']) 0.00 @else {{ $data['charge'] }} @endif</td>
+                    <td class="align-right">{{ number_format($data['serviceCharge'], 2) }}</td>
+                </tr>
+            @endif
             <tr>
                 <td>SMS</td>
                 <td>{{ $data['totalSms'] }}</td>
-                <td>{{ $data['per_sms_cost'] }}</td>
+                <td>@empty($data['per_sms_cost']) 0.00 @else {{ $data['per_sms_cost'] }} @endif</td>
                 <td class="align-right">{{ number_format($data['smsCost'], 2) }}</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" @if($data['is_sms_enable'] == 1) checked @endif style="pointer-events: none"/> SMS</td>
+                <td></td>
+                <td></td>
+                <td class="align-right"></td>
             </tr>
             <tr>
                 <td class="align-right" colspan="3"><b>Total (BDT) = </b></td>
