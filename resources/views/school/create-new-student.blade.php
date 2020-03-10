@@ -418,57 +418,16 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <input type="checkbox" class="f-name ml-4"><span class="f-name ml-2">Is Guardian</span>
                             </div>
                             <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
-                                        <label for="guardian_name"
-                                               class=" control-label false-padding-bottom">{{ __('text.guardian_name') }}<label class="text-danger">*</label></label>
-
-                                        <input id="guardian_name" type="text"
-                                               class="form-control" name="guardian_name"
-                                               value="{{ old('guardian_name') }}"
-                                               required>
-
-                                        @if ($errors->has('guardian_name'))
-                                            <span class="help-block">
-                                    <strong>{{ $errors->first('guardian_name') }}</strong>
-                                </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
-                                        <label for="guardian_phone_number"
-                                               class="control-label false-padding-bottom">{{ __('text.guardian_phone_number') }}<label
-                                                class="text-danger">*</label></label>
-                                        <input id="guardian_phone_number"  type="text"
-                                               class="form-control"
-                                               name="guardian_phone_number"
-                                               value="{{ old('guardian_phone_number') }}"required>
-
-                                        @if ($errors->has('guardian_phone_number'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('guardian_phone_number') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
-                                        <label for="father_name"
-
-                                               class=" control-label false-padding-bottom">Father's
-                                            Name <label class="father-n"></label></label>
-
-                                               class=" control-label false-padding-bottom">{{ __('text.father_name') }}</label>
+                                        <label for="father_name" class=" control-label false-padding-bottom">
+                                            {{ __('text.father_name') }}
+                                            <label class="father-n"></label>
+                                        </label>
 
 
                                         <input id="father_name" type="text"
@@ -487,7 +446,10 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
 
-                                        <label for="father_phone_number" class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
+                                        <label for="father_phone_number" class="control-label false-padding-bottom">
+                                            {{ __('text.phone_number') }}
+                                            <label class="father-n"></label>
+                                        </label>
 
                                         <input id="father_phone_number"  type="text"
                                                class="form-control f-phone-number"
@@ -585,9 +547,10 @@
 
                                     <div class="col-md-12">
 
-                                        <label for="mother_name"
-
-                                               class=" control-label false-padding-bottom">{{ __('text.mother_name') }}</label>
+                                        <label for="mother_name" class=" control-label false-padding-bottom">
+                                            {{ __('text.mother_name') }}
+                                            <label class="mother-n"></label>
+                                        </label>
 
                                         <input id="mother_name" type="text"
                                                class="form-control mother-name" name="mother_name"
@@ -605,8 +568,10 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
 
                                     <div class="col-md-12">
-                                        <label for="mother_phone_number"
-                                               class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
+                                        <label for="mother_phone_number" class="control-label false-padding-bottom">
+                                            {{ __('text.phone_number') }}
+                                            <label class="mother-n"></label>
+                                        </label>
 
 
                                         <input id="mother_phone_number" type="text"
