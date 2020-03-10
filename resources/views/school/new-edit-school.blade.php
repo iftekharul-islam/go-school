@@ -195,7 +195,7 @@
                                     </div>
                                      <div class="form-group{{ $errors->has('signup_date') ? ' has-error' : '' }}">
                                         <label for="signup_date" class="control-label false-padding-bottom">Signup Date <label class="text-danger">*</label></label>
-                                        <input id="signup_date" data-date-format="yyyy-mm-dd" type="text" class="form-control date" name="signup_date" value="{{$school->singup_date}}" required>
+                                        <input id="signup_date" data-date-format="yyyy-mm-dd" type="text" class="form-control date" name="signup_date" value="{{$school->singup_date}}" required autocomplete="off">
                                         @if ($errors->has('signup_date'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('signup_date') }}</strong>

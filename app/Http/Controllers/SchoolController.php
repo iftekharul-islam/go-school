@@ -69,6 +69,7 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
+        $smsEnable = $request->sms_charge;
         $request->validate([
             'school_name' => 'required|string|max:255',
             'school_medium' => 'required',
@@ -79,8 +80,9 @@ class SchoolController extends Controller
             'district' => 'required',
             'is_sms_enable' => 'required',
             'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg',
-            'sms_charge' => 'required|numeric',
-            'per_student_charge'    => 'required|numeric',
+            'payment_type' => 'required',
+            'sms_charge' => 'nullable|numeric',
+            'charge'    => 'required|numeric',
             'invoice_generation_date'  => 'required|integer',
             'due_date'  => 'required|integer',
             'signup_date'  => 'required|date_format:Y-m-d',
@@ -103,7 +105,8 @@ class SchoolController extends Controller
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
         $tb->sms_charge = $request->sms_charge;
-        $tb->per_student_charge = $request->per_student_charge;
+        $tb->payment_type = $request->payment_type;
+        $tb->charge = $request->charge;
         $tb->invoice_generation_date = $request->invoice_generation_date;
         $tb->due_date = $request->due_date;
         $tb->email = $request->email;

@@ -47,17 +47,18 @@ class SendInvoice implements ShouldQueue
                 ->whereMonth('created_at', $this->month)    
                 ->whereYear('created_at', $now->year)    
                 ->count();
-            $smsCost = $school['sms_charge'] * $totalSms;
-            $serviceCharge = $school['per_student_charge'] * $totalStudent;
+
             $data['totalStudent'] =  $totalStudent;
             $data['totalSms'] =  $totalSms;
             $data['per_sms_cost'] =   $school['sms_charge'];
-            $data['per_student_cost'] =   $school['per_student_charge'];
+            $data['charge'] =   $school['charge'];
             $data['schoolName'] =  $school->name;
-            $data['smsCost'] =  $smsCost;
-            $data['serviceCharge'] =  $serviceCharge;
+            $data['smsCost'] =  $school['sms_charge'] * $totalSms;
+            $data['serviceCharge'] =  $school['charge'] * $totalStudent;
             $data['month'] =  date("F", mktime(0, 0, 0, $this->month, 1)) .' '. $now->format('Y');
             $data['schoolAddress'] =  $school->school_address;
+            $data['payment_type'] = $school->payment_type;
+            $data['is_sms_enable'] = $school->is_sms_enable;
 
             Mail::to($school['email'])->send(new InvoiceMail($data));
         }
