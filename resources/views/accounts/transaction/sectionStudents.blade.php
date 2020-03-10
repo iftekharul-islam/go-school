@@ -108,7 +108,6 @@
                                     <th>Name</th>
                                     <th>Class</th>
                                     <th>Section</th>
-
                                     <th>Gender</th>
                                     <th>Action</th>
                                 </tr>
@@ -123,7 +122,7 @@
                                         <td>{{ $student->section->section_number }}</td>
                                         <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
-                                            <a href="{{ route('multiple.fee', [ 'id' => $student->id]) }}" class="button--edit button" title="Collect Fee"><i class="fas fa-plus"></i></a>&nbsp;
+                                            <a href="{{ route('multiple.fee', [ 'id' => $student->id]) }}" class="button--edit button" target="_blank" title="Collect Fee"><i class="fas fa-plus"></i></a>&nbsp;
                                             <a class="button--save button" href="{{ route('student.fee.collections',['id' => $student->id]) }}" title="Fee Collections"><i class="fas fa-clipboard-list"></i></a>
                                         </td>
                                     </tr>

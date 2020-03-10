@@ -78,7 +78,7 @@
                         <a href="{{route('generate.invoice')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-file-invoice"></i><span>{{ __('text.invoice') }}</span></a>
                     </li>
                      <li class="nav-item sidebar-nav-item">
-                        <a href="{{route('default.fee.types')}}" class="nav-link {{ (request()->is('master/generate-invoice')) ? 'menu-active' : '' }}"><i class="fas fa-money-check-alt"></i><span>{{ __('text.default_fee_types') }}</span></a>
+                        <a href="{{route('default.fee.types')}}" class="nav-link {{ (request()->is('master/default/fee-types')) ? 'menu-active' : '' }}"><i class="fas fa-money-check-alt"></i><span>{{ __('text.default_fee_types') }}</span></a>
                     </li>
                 @endif
 
@@ -406,11 +406,11 @@
                             <li class="nav-item sidebar-nav-item second-lbl-menu">
                                 <a href="#" class="nav-link "> <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Collection') }}</span></a>
                                 <ul class="nav sub-group-menu {{ $acc == 1 ? 'sub-group-active' : '' }}">
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"
-                                        href="{{ url($role.'/fee-types') }}">
-                                        <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Types') }}</span></a>
-                                    </li>
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="nav-link {{ (request()->is($role.'/fee-types*')) ? 'menu-active' : '' }}"--}}
+{{--                                        href="{{ url($role.'/fee-types') }}">--}}
+{{--                                        <i class="fas fa-angle-right"></i><span>{{ __('text.Fee Types') }}</span></a>--}}
+{{--                                    </li>--}}
                                     <li class="nav-item">
                                         <a class="nav-link {{ (request()->is($role.'/fee-discount*')) ? 'menu-active' : '' }}"
                                         href="{{ url($role.'/fee-discount') }}">

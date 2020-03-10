@@ -85,7 +85,7 @@
                                 </tr>
                                 <tr>
                                     <th>Transaction No.</th>
-                                    <td colspan="3">{{ $fee_transaction->id }}</td>
+                                    <td colspan="3">{{ $fee_transaction->transaction_serial }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -99,8 +99,8 @@
                 <div class="heading-layout1">
                     <div class="item-title">
                         <h3 class="float-left mb-5 float-left">Items</h3>
-                        <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>
-
+{{--                        <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>--}}
+                        <a href="?print=1" class="btn-secondary btn float-right btn-lg" target="_blank"> <i class="fa-print fa"></i> Print</a>
                     </div>
                 </div>
                 @php $totalAmount = 0; @endphp
@@ -156,7 +156,7 @@
                         <h5 class="text-center">{{ $student->school->school_address }}</h5>
                         <h5 class="text-center"><strong>Date:</strong> {{ date('d-M-Y') }}</h5>
                     </div>
-                    <h4><span><strong>Transaction No :</strong> {{ $fee_transaction->id }}</h4>
+                    <h4><span><strong>Transaction No :</strong> {{ $fee_transaction->transaction_serial }}</h4>
                     <h4 class="float-left mr-5"><span><strong>Student Name :</strong> {{ $student->name }}</span></h4>
                     <h4 class="float-left mr-5"><span><strong>Student ID :</strong> {{ $student->student_code }}</span></h4>
                     <h4 class="ml-5"><span><strong>Class :</strong> Class{{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</span></h4>
