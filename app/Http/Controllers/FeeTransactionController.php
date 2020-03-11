@@ -214,6 +214,7 @@ class FeeTransactionController extends Controller
 
     public function multipleFeeStore(Request $request)
     {
+//        dd($request->all());
         $request->validate([
             'amount' => 'required',
             'discountAmount' => 'required',
@@ -225,9 +226,7 @@ class FeeTransactionController extends Controller
         $feeAmounts = $request->amounts;
         $school_id = Auth::user()->school_id;
         $serial = '';
-        #monthly fee types
-        $monthly_fee_types = FeeType::where('type', 'monthly')->pluck('id');
-        dd($monthly_fee_types);
+
         #transaction serial
         $transaction_serial = Configuration::where('key', 'transaction_serial')
             ->where('school_id', $school_id)->first();
@@ -256,13 +255,25 @@ class FeeTransactionController extends Controller
         $ft->accountant_id = \auth()->id();
         $ft->status = 'paid';
         $ft->save();
+
         #save fee types & amount
-        for($i = 0; $i < count($feeAmounts); $i++){
-            TransactionItem::create([
-                'fee_transaction_id' => $ft->id,
-                'fee_type_id' => $fee_type_ids[$i],
-                'fee_amount' => $feeAmounts[$i]
-            ]);
+        for ($i = 0; $i < count($feeAmounts); $i++) {
+            $fee_type_id = $fee_type_ids[$i];
+            $transactionItem = new TransactionItem();
+
+            $from = $request->get($fee_type_id.'_from') != null ? $request->get($fee_type_id.'_from') : '';
+
+            $to = $request->get($fee_type_id.'_to') != null ? $request->get($fee_type_id.'_to') : '';
+
+            if ( !empty($from) && !empty($to) ) {
+                $transactionItem->note = $from.' - '.$to;
+            }
+
+            $transactionItem->fee_transaction_id = $ft->id;
+            $transactionItem->fee_type_id = $fee_type_ids[$i];
+            $transactionItem->fee_amount = $feeAmounts[$i];
+
+            $transactionItem->save();
         }
         $studentData = User::with('section')->where('id', $request->student_id)->first();
         

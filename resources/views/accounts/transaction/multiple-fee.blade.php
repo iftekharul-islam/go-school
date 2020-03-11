@@ -3,6 +3,7 @@
 @section('content')
     <style type="text/css">
         .month{display: none}
+        .month_dropdown{}
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area example-screen">
@@ -16,6 +17,18 @@
                 <li>Multiple Fee Collection</li>
             </ul>
         </div>
+        @php  $options = '<option value="January">January</option>'
+                        .'<option value="February">February</option>'
+                        .'<option value="March">March</option>'
+                        .'<option value="April">April</option>'
+                        .'<option value="May">May</option>'
+                        .'<option value="June">June</option>'
+                        .'<option value="July">July</option>'
+                        .'<option value="August">August</option>'
+                        .'<option value="September">September</option>'
+                        .'<option value="October">October</option>'
+                        .'<option value="November">November</option>'
+                        .'<option value="December">December</option>'; @endphp
         <form class="new-added-form fee-transaction" id="fee-transaction" action="{{ url(auth()->user()->role.'/multiple-fee') }}" method="post">
             {{ csrf_field() }}
             <div class="row">
@@ -36,9 +49,9 @@
                                 <table id="fees" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Fee Name</th>
-                                            <th>Amount</th>
-                                            <th>Action</th>
+                                            <th><input type="checkbox" id="checkAll" class="fee_types" title="Select All" /></th>
+                                            <th width="60%">Fee Name</th>
+                                            <th width="30%">Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,32 +59,32 @@
                                             @foreach($feeTypes as $ft)
                                             <tr>
                                                 <td>
+                                                    <input type="checkbox" id="{{$ft->id}}" class="fee_types" />
+                                                </td>
+                                                <td>
                                                     {{ $ft->name }}
                                                     @if($ft->type == 'monthly')
 
-                                                        <select name="a" class="form-control">
+                                                        <select name="{{$ft->id}}_from" class="form-control d-inline-block w-auto " >
                                                             <option value="">From Month</option>
-                                                            <option value="">January</option>
+                                                            {!!  $options !!}
                                                         </select> -
-                                                        <select name="b"  class="form-control">
+                                                        <select name="{{$ft->id}}_to"  class="form-control month_dropdown d-inline-block w-auto" >
                                                             <option value="">To Month</option>
-                                                            <option value="">January</option>
+                                                            {!!  $options !!}
                                                         </select>
                                                     @endif
                                                     <input type="hidden" value="{{$ft->id}}" name="fee_type_id[]">
                                                 </td>
-                                                <td><input type="number" name="amounts[]" class="form-control fee-amount" required></td>
-                                                <td>
-                                                    <button type="button"  class="btn btn-danger delete-row" title="Remove this row">
-                                                        <i class="fas fa-trash"></i></button>
-                                                </td>
+                                                <td><input type="number" name="amounts[]" class="form-control fee-amount"></td>
+
                                             </tr>
                                             @endforeach
                                         @endif
                                     </tbody>
                                 </table>
                             </div>
-                            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#addFeeType"><i class="fas fa-plus-circle"></i> </button>
+{{--                            <button type="button" class="btn btn-secondary float-right" data-toggle="modal" data-target="#addFeeType"><i class="fas fa-plus-circle"></i> </button>--}}
                         </div>
                     </div>
                 </div>
@@ -158,18 +171,7 @@
                             <label for="fromMonth" class="control-label sr-only">From Month</label>
                             <select name="from_month" class="form-control" id="fromMonth" >
                                 <option value="">From Month</option>
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
+                                {!!  $options !!}
                             </select>
                             <span id="fromMonthError" class="text-warning"></span>
                         </div>
@@ -177,18 +179,7 @@
                             <label for="toMonth" class="control-label sr-only">To Month</label>
                             <select name="to_month" class="form-control" id="toMonth" >
                                 <option value="">To Month</option>
-                                <option value="January">January</option>
-                                <option value="February">February</option>
-                                <option value="March">March</option>
-                                <option value="April">April</option>
-                                <option value="May">May</option>
-                                <option value="June">June</option>
-                                <option value="July">July</option>
-                                <option value="August">August</option>
-                                <option value="September">September</option>
-                                <option value="October">October</option>
-                                <option value="November">November</option>
-                                <option value="December">December</option>
+                                {!!  $options !!}
                             </select>
                             <span id="toMonthError" class="text-warning"></span>
                         </div>
@@ -211,6 +202,22 @@
 
 @push('customjs')
     <script>
+        jQuery(document).ready(function(){
+            $("#checkAll").click(function(){
+                $('#fees input:checkbox').not(this).prop('checked', this.checked);
+            });
+            $('.fee_types').change(function(){
+                if ($(this).prop("checked") == true) {
+                    console.log('checked');
+                    $(this).closest('tr .fee-amount').attr('required', 'required');
+                } else {
+                    console.log('unchecked');
+                    $(this).closest(' .fee-amount').removeAttr('required');
+                }
+            });
+
+        });
+
         window.total = $("#amount").val();
         window.selectedDiscount = 0;
         window.discounts = {!! json_encode($discounts->toArray()) !!};
