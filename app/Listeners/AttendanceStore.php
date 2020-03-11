@@ -38,7 +38,7 @@ class AttendanceStore
             $Attendance->user_id = Auth::user()->id;
             $Attendance->present = '0';
             $Attendance->save();
-        } elseif ($event->user->role == 'teacher' || 'accountant' || 'librarian' )
+        } elseif ($event->user->role != 'master' || 'admin' || 'student' || 'teacher' )
         {
             $staffAttendance = new StuffAttendance();
             $staffAttendance->school_id = Auth::user()->school_id;
