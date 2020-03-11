@@ -87,12 +87,12 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'birthday' => is_string($row['birthday']) ? Carbon::createFromFormat('d/m/Y', $row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
                 'guardian_name' => $row['guardian_name'],
                 'guardian_phone_number' => $row['guardian_phone_number'],
-                'father_name' => $row['father_name'],
-                'father_phone_number' => $row['father_phone_number'],
-                'father_national_id' => $row['father_national_id'],
-                'father_occupation' => $row['father_occupation'],
-                'mother_name' => $row['mother_name'],
-                'religion' => $row['religion'],
+                'father_name' => isset($row['father_name']) ? $row['father_name'] : '',
+                'father_phone_number' => isset($row['father_phone_number']) ? $row['father_phone_number'] : '',
+                'father_national_id' => isset($row['father_national_id']) ? $row['father_national_id'] : '',
+                'father_occupation' => isset($row['father_occupation']) ? $row['father_occupation'] : '',
+                'mother_name' => isset($row['mother_name']) ? $row['mother_name'] : '',
+                'religion' => isset($row['religion']) ? $row['religion'] : '',
                 'user_id' => $user->id,
             ]);
             event(new ImportStudentAttendance($user));
