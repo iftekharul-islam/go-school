@@ -202,4 +202,7 @@ return[
     'import' => 'Import',
     'select_excel' => 'Select excel/csv file',
 
+    'default_fee_types' => 'Defalut Fee Types',
+
+    'school_setting' => 'School Setting'
 ];
