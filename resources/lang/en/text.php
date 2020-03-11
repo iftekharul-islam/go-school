@@ -158,6 +158,7 @@ return[
     'exit_time' => 'Exit Time',
     'attendance_date' => 'Attendance Date',
     'late' => 'Late Present',
+<<<<<<< HEAD
     'default_fee_types' => 'Default Fee Types',
 
     'school_setting' => 'School Setting',
@@ -202,6 +203,8 @@ return[
     'import' => 'Import',
     'select_excel' => 'Select excel/csv file',
 
+=======
+>>>>>>> master
     'default_fee_types' => 'Defalut Fee Types',
 
     'school_setting' => 'School Setting'
