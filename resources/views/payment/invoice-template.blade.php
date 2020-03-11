@@ -95,7 +95,17 @@
             </tr>
             <tr>
                 <td class="align-right" colspan="3"><b>Total (BDT) = </b></td>
-                <td class="align-right"><b>{{ number_format($data['smsCost'] + $data['serviceCharge'], 2) }}</b></td>
+                <td class="align-right">
+                    @php
+                        $grandTotal = 0;
+                        if ($data['payment_type'] == 'monthly') {
+                            $grandTotal = $data['smsCost'] +  $data['charge'];
+                        } else {
+                            $grandTotal = $data['smsCost'] +  $data['serviceCharge'];
+                        }
+                    @endphp
+                    <b>{{ number_format($grandTotal, 2) }}</b>
+                </td>
             </tr>
            
         </table>
