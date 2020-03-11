@@ -56,7 +56,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course.create-course');
     }
 
     /**
@@ -83,7 +83,6 @@ class CourseController extends Controller
             'course_name' => 'required|max:255',
             'teacher_id' => 'required',
             'course_type' => 'required',
-            'course_time' => 'required',
         ]);
         $grade_system = Gradesystem::where('school_id', Auth::user()->school_id)->first();
         try{

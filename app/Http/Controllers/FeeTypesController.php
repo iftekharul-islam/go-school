@@ -40,8 +40,7 @@ class FeeTypesController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'code' => 'required',
-            'desc' => 'required',
+            'code' => 'required'
         ]);
 
         $today = Carbon::now();
@@ -49,12 +48,12 @@ class FeeTypesController extends Controller
         $feeType->name = $request->get('name');
         $feeType->code = $request->get('code');
         $feeType->description = $request->get('desc');
-        $feeType->type = 'onetime';
+        $feeType->type = $request->get('type') == 1 ? 'monthly' : 'onetime';
         $feeType->year = $today->year;
         $feeType->school_id = Auth::user()->school_id;
         if (Auth::user()->role == 'master') {
             $feeType->is_default = 1;
-        } 
+        }
         $feeType->save();
         return back()->with('status', 'Fee types Created');
     }

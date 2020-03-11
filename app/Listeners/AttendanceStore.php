@@ -38,14 +38,15 @@ class AttendanceStore
             $Attendance->user_id = Auth::user()->id;
             $Attendance->present = '0';
             $Attendance->save();
+        } elseif ($event->user->role != 'master' || 'admin' || 'student' || 'teacher' )
+        {
+            $staffAttendance = new StuffAttendance();
+            $staffAttendance->school_id = Auth::user()->school_id;
+            $staffAttendance->stuff_id = $event->user->id;
+            $staffAttendance->present = '0';
+            $staffAttendance->role = $event->user->role;
+            $staffAttendance->user_id = Auth::user()->id;
+            $staffAttendance->save();
         }
-
-        $staffAttendance = new StuffAttendance();
-        $staffAttendance->school_id = Auth::user()->school_id;
-        $staffAttendance->stuff_id = $event->user->id;
-        $staffAttendance->present = '0';
-        $staffAttendance->role = $event->user->role;
-        $staffAttendance->user_id = Auth::user()->id;
-        $staffAttendance->save();
     }
 }

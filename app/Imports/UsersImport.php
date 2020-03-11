@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use Illuminate\Support\Facades\Auth;
 use App\Events\ImportStudentAttendance;
 use App\StudentInfo;
 use App\User;
@@ -149,6 +150,7 @@ class UsersImport implements ToCollection, WithHeadingRow
         $count = User::join('student_infos', 'users.id', '=', 'student_infos.user_id')
             ->where('users.name', $student_name)
             ->where('student_infos.guardian_name', $guardian_name)
+            ->where('users.school_id', Auth::user()->school_id)
             ->whereDate('student_infos.birthday', $birth)
             ->count();
         if ($count > 0) {

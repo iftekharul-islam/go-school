@@ -28,7 +28,7 @@ return [
     'Add Student' => 'শিক্ষার্থী সংযোজন',
     'All Students' => 'সকল শিক্ষার্থী',
     'Message Student' => 'বার্তা পাঠান',
-    'Import Student' => 'শিক্ষার্থী সংযোজন (By Excel)',
+    'Import Student' => 'শিক্ষার্থী সংযোজন',
     'Department' => 'বিভাগ সমূহ',
     'Add Department' => 'বিভাগ সংযোজন',
     'All Department' => 'সকল বিভাগ',
@@ -134,7 +134,7 @@ return [
     'add_shift' => 'সময়কাল সংযোজন',
     'all_shifts' => 'সকল সময়কাল',
     'course' => 'কোর্স',
-    'action' => 'আর্যকারিতা',
+    'action' => 'কার্যকারিতা',
 
     //Master
     'schools' => 'বিদ্যালয় সমূহ',
@@ -161,6 +161,50 @@ return [
     'attendance_date' => 'উপস্থিতি তারিখ',
     'late' => 'বিলম্বিত উপস্থিত',
     'default_fee_types' => 'ডিফল্ট ফির প্রকার',
+
+
+    'school_setting' => 'স্কুল সেটিং',
+    'total_teacher' => 'মোট শিক্ষক',
+
+    'department_name' => 'বিভাগের নাম',
+    'teacher_list' => 'শিক্ষকদের তালিকা',
+    'student_list' => 'শিক্ষার্থীদের তালিকা',
+
+    //course
+    'add_course' => 'কোর্স যুক্ত করুন',
+
+    //shift
+    'create_shift' => 'শিফট তৈরী',
+    'shift' => 'শিফট',
+    'last_attendance' => 'উপস্থিতির শেষ সময়',
+    'create' => 'তৈরি করুন',
+    'all_shift' => 'সকল শিফট',
+
+    //student
+    'class_section' => 'ক্লাস এবং সেকশন',
+    'student_id' => 'শিক্ষার্থী আইডি',
+    'roll_number' => 'রোল নম্বর',
+    'version' => 'ভার্শন',
+    'session' => 'সেশন',
+    'group' => 'গ্রুপ',
+    'birthday' => 'জন্মদিন',
+    'religion' => 'ধর্ম',
+    'guardian_name' => 'অভিভাবকের নাম',
+    'guardian_phone_number' => "অভিভাবকের ফোন নম্বর",
+    'father_name' => 'পিতার নাম',
+    'father_nid' => 'বাবার এনআইডি নম্বর' ,
+    'father_occupation' => 'পিতার পেশা',
+    'father_income' => 'বাবার বার্ষিক আয়',
+    'father_designation' => 'বাবার পেশা',
+    'mother_name' => 'মায়ের নাম',
+    'mother_occupation' => 'মায়ের পেশা',
+    'mother_nid' => 'মায়ের এনআইডি নম্বর',
+    'mother_designation' => 'মায়ের পেশা',
+    'mother_income' => 'মায়ের বার্ষিক আয়',
+    'sms' => 'এসএমএস',
+    'reset' => "রিসেট",
+    'import' => 'ইম্পোর্ট',
+    'select_excel' => 'সিলেক্ট excel/csv',
 
     'school_setting' => 'স্কুল সেটিং'
 ];

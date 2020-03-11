@@ -21,17 +21,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
-                        <div class="dashboard-summery-two">
-                            <div class="item-icon bg-light-teal-transparent">
-                                <i class="flaticon-shopping-list text-light"></i>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-number"><span class="counter" data-num="{{ $exams->count() }}"></span></div>
-                                <div class="item-title">{{ __('text.Total Exams') }}</div>
+                    @if(auth()->user()->role == 'admin')
+                        <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-teal-transparent">
+                                    <i class="flaticon-shopping-list text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $teachers->count() }}"></span></div>
+                                    <div class="item-title">{{ __('text.total_teacher') }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @elseif(auth()->user()->role == 'teacher')
+                        <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
+                            <div class="dashboard-summery-two">
+                                <div class="item-icon bg-light-teal-transparent">
+                                    <i class="flaticon-shopping-list text-light"></i>
+                                </div>
+                                <div class="item-content">
+                                    <div class="item-number"><span class="counter" data-num="{{ $exams->count() }}"></span></div>
+                                    <div class="item-title">{{ __('text.Total Exams') }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                         <div class="dashboard-summery-two">
                             <div class="item-icon bg-light-teal-transparent">
@@ -106,54 +120,6 @@
                 </div>
             </div>
         </div>
-
-        @if(\Auth::user()->role == 'teacher')
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card dashboard-card-eleven">
-                        <div class="card-body">
-                            <div class="heading-layout1">
-                                <div class="item-title">
-                                    <h3>All Students Under My Classes</h3>
-                                </div>
-                            </div>
-                            <div class="table-box-wrap">
-                                <div class="table-responsive student-table-box">
-                                    <table class="table data-table-paginate table-bordered display text-wrap" id="myStudent">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Version</th>
-                                            <th>Section</th>
-                                            <th>Class</th>
-                                            <th>Phone</th>
-                                            <th>Attendance</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($courses_student as $c)
-                                            @if($c['section']['users'] !== null)
-                                                @foreach($c['section']['users'] as $user)
-                                                    <tr>
-                                                        <td> <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a></td>
-                                                        <td>{{ ucfirst($user['school']['medium']) }}</td>
-                                                        <td>{{ ucfirst($user['section']['section_number']) }} </td>
-                                                        <td>{{ ucfirst($user['section']['class']['class_number']) }} </td>
-                                                        <td>{{ ucfirst($user['phone_number']) }}</td>
-                                                        <td><b><a class="btn-link text-teal" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View</a></b></td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
         @if(\Auth::user()->role == 'librarian')
             <div class="card false-height">
                 <div class="card-body">

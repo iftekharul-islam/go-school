@@ -39,7 +39,7 @@
                     <h2>Shoroborno</h2>
                     <address>
                         H# 941, Road 14, Avenue 2, Mirpur DOHS, Dhaka 1212.<br/>
-                        Contact: 01521245788
+                        Contact: +8801886614533
                     </address>
                 </td>
                 <td ><h3>Invoice</h3><p>{{ date('d F Y') }}</p></td>
@@ -66,21 +66,46 @@
                 <th>Cost/ Item</th>
                 <th>Total Cost</th>
             </tr>
-            <tr>
-                <td>Student</td>
-                <td>{{ $data['totalStudent'] }}</td>
-                <td>{{ $data['per_student_cost'] }}</td>
-                <td class="align-right">{{ number_format($data['serviceCharge'], 2) }}</td>
-            </tr>
+            @if($data['payment_type'] == 'monthly')
+                <tr>
+                    <td>Service Charge</td>
+                    <td>--</td>
+                    <td>{{ $data['charge'] }}</td>
+                    <td class="align-right">{{ number_format($data['charge'], 2) }}</td>
+                </tr>
+            @else
+                <tr>
+                    <td>Student</td>
+                    <td>{{ $data['totalStudent'] }}</td>
+                    <td>@empty($data['charge']) 0.00 @else {{ $data['charge'] }} @endif</td>
+                    <td class="align-right">{{ number_format($data['serviceCharge'], 2) }}</td>
+                </tr>
+            @endif
             <tr>
                 <td>SMS</td>
                 <td>{{ $data['totalSms'] }}</td>
-                <td>{{ $data['per_sms_cost'] }}</td>
+                <td>@empty($data['per_sms_cost']) 0.00 @else {{ $data['per_sms_cost'] }} @endif</td>
                 <td class="align-right">{{ number_format($data['smsCost'], 2) }}</td>
             </tr>
             <tr>
+                <td><input type="checkbox" @if($data['is_sms_enable'] == 1) checked @endif style="pointer-events: none"/> SMS</td>
+                <td></td>
+                <td></td>
+                <td class="align-right"></td>
+            </tr>
+            <tr>
                 <td class="align-right" colspan="3"><b>Total (BDT) = </b></td>
-                <td class="align-right"><b>{{ number_format($data['smsCost'] + $data['serviceCharge'], 2) }}</b></td>
+                <td class="align-right">
+                    @php
+                        $grandTotal = 0;
+                        if ($data['payment_type'] == 'monthly') {
+                            $grandTotal = $data['smsCost'] +  $data['charge'];
+                        } else {
+                            $grandTotal = $data['smsCost'] +  $data['serviceCharge'];
+                        }
+                    @endphp
+                    <b>{{ number_format($grandTotal, 2) }}</b>
+                </td>
             </tr>
            
         </table>

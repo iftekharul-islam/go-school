@@ -32,10 +32,9 @@ class SchoolController extends Controller
     public function manageClasses()
     {
         $user = Auth::user();
-
         $schools = School::all();
-        $classes = Myclass::orderBy('class_number','ASC')->get();
-        $sections = Section::all();
+        $classes = Myclass::orderBy('class_number', 'ASC')->get();
+        $sections = Section::orderBy('section_number', 'ASC')->get();
 
         $teachers = User::where('role', 'teacher')
             ->orderBy('name', 'ASC')
@@ -80,8 +79,9 @@ class SchoolController extends Controller
             'district' => 'required',
             'is_sms_enable' => 'required',
             'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg',
-            'sms_charge' => 'required|numeric',
-            'per_student_charge'    => 'required|numeric',
+            'payment_type' => 'required',
+            'sms_charge' => 'nullable|numeric',
+            'charge'    => 'required|numeric',
             'invoice_generation_date'  => 'required|integer',
             'due_date'  => 'required|integer',
             'signup_date'  => 'required|date_format:Y-m-d',
@@ -104,7 +104,8 @@ class SchoolController extends Controller
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
         $tb->sms_charge = $request->sms_charge;
-        $tb->per_student_charge = $request->per_student_charge;
+        $tb->payment_type = $request->payment_type;
+        $tb->charge = $request->charge;
         $tb->invoice_generation_date = $request->invoice_generation_date;
         $tb->due_date = $request->due_date;
         $tb->email = $request->email;
@@ -262,16 +263,18 @@ class SchoolController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'school_name' => 'required',
+            'school_name' => 'required|string|max:255',
             'school_medium' => 'required',
             'school_about' => 'required',
             'school_established' => 'required',
             'school_address' => 'required',
+            'school_address' => 'required',
             'district' => 'required',
             'is_sms_enable' => 'required',
-            'logo' => 'max:1024|mimes:jpeg,png,jpg,gif,svg',
-            'sms_charge' => 'required|numeric',
-            'per_student_charge'    => 'required|numeric',
+            'logo' => 'nullable|max:1024|mimes:jpeg,png,jpg,gif,svg',
+            'payment_type' => 'required',
+            'sms_charge' => 'nullable|numeric',
+            'charge'    => 'required|numeric',
             'invoice_generation_date'  => 'required|integer',
             'due_date'  => 'required|integer',
             'signup_date'  => 'required|date_format:Y-m-d',
@@ -297,7 +300,8 @@ class SchoolController extends Controller
         $tb->is_sms_enable = $request->is_sms_enable;
         $tb->school_address = $request->school_address;
         $tb->sms_charge = $request->sms_charge;
-        $tb->per_student_charge = $request->per_student_charge;
+        $tb->payment_type = $request->payment_type;
+        $tb->charge = $request->charge;
         $tb->invoice_generation_date = $request->invoice_generation_date;
         $tb->due_date = $request->due_date;
         $tb->email = $request->email;

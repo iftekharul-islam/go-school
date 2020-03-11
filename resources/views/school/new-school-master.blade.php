@@ -195,18 +195,26 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="">Per SMS Charge:</td>
-                                                            <td class="font-medium text-dark-medium">{{ $school->sms_charge }}</td>
+                                                            <td class="font-medium text-dark-medium">@empty($school->sms_charge) 0.00 @else {{ $school->sms_charge }} @endempty</td>
                                                         </tr>
+                                                        @if($school->payment_type == 'monthly')
                                                         <tr>
-                                                            <td class="">Per Student Charge:</td>
-                                                            <td class="font-medium text-dark-medium">{{ $school->per_student_charge }}</td>
+                                                            <td class="">Payment Type:</td>
+                                                            <td class="font-medium text-dark-medium">{{ ucfirst($school->payment_type) }}</td>
                                                         </tr>
+                                                        @endif
+
+                                                        <tr>
+                                                            <td class="">@if($school->payment_type == 'monthly') Charge @else Per Student Charge @endif:</td>
+                                                            <td class="font-medium text-dark-medium">{{ $school->charge }}</td>
+                                                        </tr>
+
                                                         <tr>
                                                             <td class="">E-Mail:</td>
                                                             <td class="font-medium text-dark-medium">{{ $school->email }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="">Invoice Generation Date:</td>
+                                                            <td class="">Inv. Generation Date:</td>
                                                             <td class="font-medium text-dark-medium">{{ $school->invoice_generation_date }}</td>
                                                         </tr>
                                                         <tr>

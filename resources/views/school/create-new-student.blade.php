@@ -7,15 +7,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-user-plus"></i>
-            Add Student
+            {{ __('text.Add Student') }}
         </h3>
         <ul>
             <li>
                 <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Add Student</li>
+            <li>{{ __('text.Add Student') }}</li>
         </ul>
     </div>
         @if (session('status'))
@@ -59,8 +59,7 @@
 
                                     <div class="col-md-12">
                                         <label for="name"
-                                               class="control-label false-padding-bottom">Full
-                                            Name<label class="text-danger">*</label></label>
+                                               class="control-label false-padding-bottom">{{ __('text.Name') }}<label class="text-danger">*</label></label>
                                         <input id="name" type="text" class="form-control student-name"
                                                name="name" value="{{ old('name') }}"
                                                required>
@@ -76,7 +75,7 @@
 
                                     <div class="col-md-12">
                                         <label for="email"
-                                               class="control-label false-padding-bottom">E-Mail/Username<label
+                                               class="control-label false-padding-bottom">{{ __('text.Email') }}<label
                                                 class="text-danger">*</label></label>
                                         <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
@@ -103,7 +102,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="password"
-                                               class="control-label false-padding-bottom">Password<label
+                                               class="control-label false-padding-bottom">{{ __('text.Password') }}<label
                                                 class="text-danger">*</label></label>
                                         <button class="btn btn-primary btn-sm password-btn float-right">Create Password</button>
                                         <input id="password" type="password"
@@ -121,8 +120,7 @@
 
                                     <div class="col-md-12">
                                         <label for="password-confirm"
-                                               class="control-label false-padding-bottom">Confirm
-                                            Password<label
+                                               class="control-label false-padding-bottom">{{ __('text.confirm_password') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <input id="password-confirm" type="password"
@@ -135,7 +133,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('department') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="department"
-                                               class=" control-label false-padding-bottom">Department</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.Department') }}</label>
 
                                         <select id="department" class="form-control"
                                                 name="department_id">
@@ -159,8 +157,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('section') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="section"
-                                               class="control-label false-padding-bottom">Class
-                                            and Section<label class="text-danger">*</label></label>
+                                               class="control-label false-padding-bottom">{{ __('text.class_section') }}<label class="text-danger">*</label></label>
 
                                         <select id="section" class="form-control"
                                                 name="section" required>
@@ -183,7 +180,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('student_indentification') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="student_indentification"
-                                               class="control-label false-padding-bottom">Student ID:</label>
+                                               class="control-label false-padding-bottom">{{ __('text.student_id') }}:</label>
                                         <input id="student_indentification"  type="text"
                                                class="form-control"
                                                name="student_indentification">
@@ -200,7 +197,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('roll_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="roll_number"
-                                               class="control-label false-padding-bottom">Roll Number:</label>
+                                               class="control-label false-padding-bottom">{{ __('text.roll_number') }}:</label>
                                         <input id="roll_number"  type="text"
                                                class="form-control"
                                                name="roll_number">
@@ -217,7 +214,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('shift') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="shift"
-                                               class="control-label false-padding-bottom">Shift</label>
+                                               class="control-label false-padding-bottom">{{ __('text.shift') }}</label>
 
                                         <select id="shift" class="form-control"
                                                 name="shift">
@@ -238,7 +235,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('version') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="version"
-                                               class="control-label false-padding-bottom">Version<label
+                                               class="control-label false-padding-bottom">{{ __('text.version') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <select id="version" class="form-control"
@@ -259,7 +256,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('session') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="session"
-                                               class="control-label false-padding-bottom">Session<label
+                                               class="control-label false-padding-bottom">{{ __('text.session') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <input id="session" type="text" class="form-control"
@@ -279,8 +276,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="group"
-                                               class=" control-label false-padding-bottom">Group
-                                            (Optional)</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.group') }} (Optional)</label>
 
                                         <input id="group" type="text" class="form-control"
                                                name="group"
@@ -299,8 +295,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="phone_number"
-                                               class="control-label false-padding-bottom">Phone
-                                            Number</label>
+                                               class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
 
                                         <input id="phone_number" type="text"
                                                class="form-control"  name="phone_number"
@@ -316,7 +311,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="birthday"
-                                               class="control-label false-padding-bottom">Birthday<label
+                                               class="control-label false-padding-bottom">{{ __('text.birthday') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <input data-date-format="yyyy-mm-dd" id="birthday"
@@ -335,8 +330,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="blood_group"
-                                               class=" control-label false-padding-bottom">Blood
-                                            Group<label
+                                               class=" control-label false-padding-bottom">{{ __('text.blood_group') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <select id="blood_group" class="form-control"
@@ -362,7 +356,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('nationality') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="nationality"
-                                               class=" control-label false-padding-bottom">Nationality</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.nationality') }}</label>
 
                                         <input id="nationality" type="text"
                                                class="form-control" name="nationality"
@@ -380,7 +374,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="gender"
-                                               class="control-label false-padding-bottom">Gender</label>
+                                               class="control-label false-padding-bottom">{{ __('text.gender') }}</label>
 
                                         <select id="gender" class="form-control"
                                                 name="gender">
@@ -404,7 +398,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('religion') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="religion"
-                                               class=" control-label false-padding-bottom">Religion<label
+                                               class=" control-label false-padding-bottom">{{ __('text.religion') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <select id="religion" class="form-control"
@@ -424,53 +418,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
-                                        <label for="guardian_name"
-                                               class=" control-label false-padding-bottom">Guardian's Name<label class="text-danger">*</label></label>
-
-                                        <input id="guardian_name" type="text"
-                                               class="form-control" name="guardian_name"
-                                               value="{{ old('guardian_name') }}"
-                                               required>
-
-                                        @if ($errors->has('guardian_name'))
-                                            <span class="help-block">
-                                    <strong>{{ $errors->first('guardian_name') }}</strong>
-                                </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
-                                        <label for="guardian_phone_number"
-                                               class="control-label false-padding-bottom">Guardian's Phone Number<label
-                                                class="text-danger">*</label></label>
-                                        <input id="guardian_phone_number"  type="text"
-                                               class="form-control"
-                                               name="guardian_phone_number"
-                                               value="{{ old('guardian_phone_number') }}"required>
-
-                                        @if ($errors->has('guardian_phone_number'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('guardian_phone_number') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
+                            <div class="col-md-12">
+                                <input type="checkbox" class="f-name ml-4"><span class="f-name ml-2">Is Guardian</span>
                             </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
-                                        <label for="father_name"
-                                               class=" control-label false-padding-bottom">Father's
-                                            Name</label>
+                                        <label for="father_name" class=" control-label false-padding-bottom">
+                                            {{ __('text.father_name') }}
+                                            <label class="father-n"></label>
+                                        </label>
+
 
                                         <input id="father_name" type="text"
-                                               class="form-control" name="father_name"
+                                               class="form-control father-name" name="father_name"
                                                value="{{ old('father_name') }}">
 
                                         @if ($errors->has('father_name'))
@@ -484,9 +445,14 @@
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
-                                        <label for="father_phone_number" class="control-label false-padding-bottom">Father's Phone Number</label>
+
+                                        <label for="father_phone_number" class="control-label false-padding-bottom">
+                                            {{ __('text.phone_number') }}
+                                            <label class="father-n"></label>
+                                        </label>
+
                                         <input id="father_phone_number"  type="text"
-                                               class="form-control"
+                                               class="form-control f-phone-number"
                                                name="father_phone_number"
                                                value="{{ old('father_phone_number') }}">
 
@@ -502,8 +468,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_national_id') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="father_national_id"
-                                               class="control-label false-padding-bottom">Father's
-                                            National ID</label>
+                                               class="control-label false-padding-bottom">{{ __('text.father_nid') }}</label>
                                         <input id="father_national_id" type="text"
                                                class="form-control"
                                                name="father_national_id"
@@ -521,8 +486,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('father_occupation') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="father_occupation"
-                                               class=" control-label false-padding-bottom">Father's
-                                            Occupation</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.father_occupation') }}</label>
                                         <input id="father_occupation" type="text"
                                                class="form-control"
                                                name="father_occupation"
@@ -541,9 +505,7 @@
 
                                     <div class="col-md-12">
                                         <label for="father_annual_income"
-                                               class="control-label false-padding-bottom">Father's
-                                            Annual
-                                            Income</label>
+                                               class="control-label false-padding-bottom">{{ __('text.father_income') }}</label>
                                         <input id="father_annual_income" type="number"
                                                class="form-control"
                                                name="father_annual_income"
@@ -562,8 +524,7 @@
 
                                     <div class="col-md-12">
                                         <label for="father_designation"
-                                               class=" control-label false-padding-bottom">Father's
-                                            Designation</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.father_designation') }}</label>
 
                                         <input id="father_designation" type="text"
                                                class="form-control"
@@ -578,16 +539,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <input type="checkbox" class="m-name ml-4"><span class="m-name ml-2">Is Guardian</span>
+                            </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_name') ? ' has-error' : '' }}">
 
                                     <div class="col-md-12">
-                                        <label for="mother_name"
-                                               class=" control-label false-padding-bottom">Mother's
-                                            Name</label>
+
+                                        <label for="mother_name" class=" control-label false-padding-bottom">
+                                            {{ __('text.mother_name') }}
+                                            <label class="mother-n"></label>
+                                        </label>
 
                                         <input id="mother_name" type="text"
-                                               class="form-control" name="mother_name"
+                                               class="form-control mother-name" name="mother_name"
                                                value="{{ old('mother_name') }}">
 
                                         @if ($errors->has('mother_name'))
@@ -602,13 +568,14 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
 
                                     <div class="col-md-12">
-                                        <label for="mother_phone_number"
-                                               class="control-label false-padding-bottom">Mother's
-                                            Phone
-                                            Number</label>
+                                        <label for="mother_phone_number" class="control-label false-padding-bottom">
+                                            {{ __('text.phone_number') }}
+                                            <label class="mother-n"></label>
+                                        </label>
+
 
                                         <input id="mother_phone_number" type="text"
-                                               class="form-control"
+                                               class="form-control m-phone-number"
                                                name="mother_phone_number"
                                                value="{{ old('mother_phone_number') }}">
 
@@ -624,8 +591,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_occupation') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="mother_occupation"
-                                               class="control-label false-padding-bottom">Mother's
-                                            Occupation</label>
+                                               class="control-label false-padding-bottom">{{ __('text.mother_occupation') }}</label>
 
                                         <input id="mother_occupation" type="text"
                                                class="form-control"
@@ -645,7 +611,7 @@
 
                                     <div class="col-md-12">
                                         <label for="mother_national_id"
-                                               class=" control-label false-padding-bottom">Mother's National ID</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.mother_nid') }}</label>
 
                                         <input id="mother_national_id"  type="text"
                                                class="form-control"
@@ -665,8 +631,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('mother_designation') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="mother_designation"
-                                               class="control-label false-padding-bottom">Mother's
-                                            Designation</label>
+                                               class="control-label false-padding-bottom">{{ __('text.mother_designation') }}</label>
                                         <input id="mother_designation" type="text"
                                                class="form-control"
                                                name="mother_designation"
@@ -686,9 +651,7 @@
 
                                     <div class="col-md-12">
                                         <label for="mother_annual_income"
-                                               class=" control-label false-padding-bottom">Mother's
-                                            Annual
-                                            Income</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.mother_income') }}</label>
                                         <input id="mother_annual_income" type="number"
                                                class="form-control"
                                                name="mother_annual_income"
@@ -703,11 +666,49 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 guardian-field">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="guardian_name"
+                                               class=" control-label false-padding-bottom">Guardian's Name<label class="text-danger">*</label></label>
+
+                                        <input id="guardian_name" type="text"
+                                               class="form-control guardian-name" name="guardian_name"
+                                               value="{{ old('guardian_name') }}"
+                                               required>
+
+                                        @if ($errors->has('guardian_name'))
+                                            <span class="help-block">
+                                    <strong>{{ $errors->first('guardian_name') }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 guardian-field">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="guardian_phone_number"
+                                               class="control-label false-padding-bottom">Guardian's Phone Number<label
+                                                class="text-danger">*</label></label>
+                                        <input id="guardian_phone_number"  type="text"
+                                               class="form-control g-phone-number"
+                                               name="guardian_phone_number"
+                                               value="{{ old('guardian_phone_number') }}"required>
+
+                                        @if ($errors->has('guardian_phone_number'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('guardian_phone_number') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="address"
-                                               class="control-label false-padding-bottom">Address</label>
+                                               class="control-label false-padding-bottom">{{ __('text.address') }}</label>
 
                                         <input id="address" type="text" class="form-control"
                                                name="address"
@@ -726,7 +727,7 @@
 
                                     <div class="col-md-12">
                                         <label for="about"
-                                               class=" control-label false-padding-bottom">About</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.about') }}</label>
 
                                         <textarea id="about" class="form-control"
                                                   name="about">{{ old('about') }}</textarea>
@@ -743,7 +744,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <label class=" control-label">Upload Profile Picture</label>
+                                <label class=" control-label">{{ __('text.upload_picture') }}</label>
                                 <br> <input type="file"  id="picPath" name="student_pic">
                             </div>
                         </div>
@@ -752,7 +753,7 @@
                             <div class="col-md-12 col-md-offset-4">
                                 <button type="submit" id="registerBtn"
                                         class="button button--save float-right">
-                                    Register
+                                    {{ __('text.register') }}
                                 </button>
                             </div>
                         </div>
@@ -806,6 +807,77 @@
                 $('.password-btn').remove();
             });
 
+
+            $('.f-name').on('click', function(){
+                if($(this).prop("checked") == true){
+                    $('.guardian-name').val($('.father-name').val());
+                    $('.g-phone-number').val($('.f-phone-number').val());
+                    $('.father-n').addClass('text-danger').text('*');
+                    $(".father-name, .f-phone-number").prop('required', true);
+
+                     $('.father-name').keyup(function () {
+                         $('.guardian-name').val($('.father-name').val());
+                    });
+
+                    $('.f-phone-number').keyup(function () {
+                        $('.g-phone-number').val($('.f-phone-number').val());
+                    });
+                    $('.guardian-field').hide();
+                    $('.m-name').hide();
+
+                }
+                else if($(this).prop("checked") == false){
+                    $('.guardian-name').val('');
+                    $('.g-phone-number').val('');
+                    $('.father-n').removeClass('text-danger').text('');
+                    $('.father-name, .f-phone-number').prop('required', false);
+
+                    $('.father-name').keyup(function () {
+                        $('.guardian-name').val('');
+                    });
+                    $('.f-phone-number').keyup(function () {
+                        $('.g-phone-number').val('');
+                    });
+                    $('.guardian-field').show();
+                    $('.m-name').show();
+                }
+            });
+
+            $('.m-name').on('click',function(){
+                if($(this).prop("checked") == true){
+                    $('.guardian-name').val($('.mother-name').val());
+                    $('.g-phone-number').val($('.m-phone-number').val());
+                    $('.mother-n').addClass('text-danger').text('*');
+                    $(".mother-name, .f-phone-number").prop('required', true);
+
+                    $('.mother-name').keyup(function () {
+                        $('.guardian-name').val($('.mother-name').val());
+                    });
+
+                    $('.m-phone-number').keyup(function () {
+                        $('.g-phone-number').val($('.m-phone-number').val());
+                    });
+                    $('.guardian-field').hide();
+                    $('.f-name').hide();
+
+
+                }
+                else if($(this).prop("checked") == false){
+                    $('.guardian-name').val('');
+                    $('.g-phone-number').val('');
+                    $('.mother-n').removeClass('text-danger').text('');
+                    $(".mother-name, .f-phone-number").prop('required', false);
+
+                    $('.mother-name').keyup(function () {
+                        $('.guardian-name').val('');
+                    });
+                    $('.m-phone-number').keyup(function () {
+                        $('.g-phone-number').val('');
+                    });
+                    $('.guardian-field').show();
+                    $('.f-name').show();
+                }
+            });
         });
     </script>
 @endpush

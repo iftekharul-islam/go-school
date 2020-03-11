@@ -24,7 +24,7 @@ class InvoiceController extends Controller
         $request->validate(['month' => 'required']);
         
         $count = School::whereNotNull('email')->where('is_active', 1)->count();
-        
+
         if($count > 0) {
             SendInvoice::dispatch($request->month);
             return back()->with('status', 'Invoice Sent!');
