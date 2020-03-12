@@ -284,6 +284,7 @@ class FeeTransactionController extends Controller
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
         return view('fees.fees-summary', compact('student','discounts'));
     }
+
     public function transactionDetail(Request $request, $id)
     {
         if ($request->print == 1) {
@@ -296,6 +297,40 @@ class FeeTransactionController extends Controller
         return view('accounts.transaction.transaction-detail', compact('transactionItems','student', 'fee_transaction'));
     }
 
+    public function advanceCollection(Request $request)
+    {
+        $searchData['student_name'] = $request->student_name;
+        $searchData['class_id'] = $request->class_id;
+        $searchData['section_id'] = $request->section_id;
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
+        $students = User::with('studentInfo', 'section.class')
+            ->where('role', 'student')
+            ->where('school_id', Auth::user()->school_id)
+            ->where('active', 1)
+            ->when($request->section_id, function($query) use ($request){
+                return $query->where('section_id', $request->section_id);
+            })
+            ->when($request->student_name, function($query) use ($request){
+                return $query->where('name', 'like', "%{$request->student_name}%");
+            })
+            ->orderBy( 'name', 'asc')
+            ->paginate(30);
+
+        return view('accounts.advance-collections', compact('students', 'classes', 'searchData'));
+    }
+
+    public function updateAdvanceAmount(Request $request)
+    {
+        $request->validate([
+            'student_code' => 'required',
+            'advanceAmount' => 'required|numeric'
+        ]);
+        $student = StudentInfo::where('student_id', $request->student_code)->first();
+        $student->advance_amount =  $student->advance_amount + $request->advanceAmount;
+        $student->save();
+
+        return back()->with('status', 'Advance Amount Updated');
+    }
     public function generateReceipt($transaction_id)
     {
         $transaction = FeeTransaction::with('transaction_items.fee_type')->findOrFail($transaction_id);

@@ -138,6 +138,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
         Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
         Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail');
+        Route::get('/advance-collection','FeeTransactionController@advanceCollection');
+        Route::post('/update-advance-collection','FeeTransactionController@updateAdvanceAmount');
 
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
         Route::get('grades/{student_id}', 'GradeController@index');
@@ -298,6 +300,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('fee-collection/multiple-fee/{id}', 'FeeTransactionController@multipleFee')->name('multiple.fee');
         Route::post('multiple-fee', 'FeeTransactionController@multipleFeeStore')->name('multiple.fee.store');
         Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail')->name('transaction.detail');
+        Route::get('/advance-collection','FeeTransactionController@advanceCollection');
+        Route::post('/update-advance-collection','FeeTransactionController@updateAdvanceAmount');
+
         //Accountant Routes End
 
         //Librarian Route

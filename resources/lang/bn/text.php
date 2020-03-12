@@ -206,5 +206,7 @@ return [
     'import' => 'ইম্পোর্ট',
     'select_excel' => 'সিলেক্ট excel/csv',
 
-    'school_setting' => 'স্কুল সেটিং'
+    'school_setting' => 'স্কুল সেটিং',
+    'advance_collection' => 'অগ্রিম সংগ্রহ',
+    'amount' => 'পরিমান'
 ];
