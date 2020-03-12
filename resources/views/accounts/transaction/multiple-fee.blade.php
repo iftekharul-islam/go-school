@@ -49,7 +49,7 @@
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" id="checkAll" class="fee_types" title="Select All" /></th>
-                                            <th width="60%">Fee Name</th>
+                                            <th width="65%">Fee Name</th>
                                             <th width="30%">Amount</th>
                                         </tr>
                                     </thead>
