@@ -58,24 +58,22 @@
                                             @foreach($feeTypes as $ft)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}"  class="fee_types" />
+                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types" />
                                                 </td>
                                                 <td>
                                                     {{ $ft->name }}
                                                     @if($ft->type == 'monthly')
-
-                                                        <select name="{{$ft->id}}_from" class="form-control d-inline-block w-auto " >
+                                                        <select name="{{$ft->id}}_from" id="{{$ft->id}}_from"  class="form-control d-inline-block w-auto " >
                                                             <option value="">From Month</option>
                                                             {!!  $options !!}
                                                         </select> -
-                                                        <select name="{{$ft->id}}_to"  class="form-control month_dropdown d-inline-block w-auto" >
+                                                        <select name="{{$ft->id}}_to" id="{{$ft->id}}_to" class="form-control month_dropdown d-inline-block w-auto" >
                                                             <option value="">To Month</option>
                                                             {!!  $options !!}
                                                         </select>
                                                     @endif
-                                                    <input type="hidden" value="{{$ft->id}}" name="fee_type_id[]">
                                                 </td>
-                                                <td><input type="number" name="amounts[]" class="form-control fee-amount"></td>
+                                                <td><input type="number" name="{{$ft->id}}_amount" value="{{old($ft->id.'_amount')}}" class="form-control fee-amount"></td>
                                             </tr>
                                             @endforeach
                                         @endif
@@ -203,19 +201,14 @@
             $("#checkAll").click(function(){
                 $('#fees input:checkbox').not(this).prop('checked', this.checked);
             });
-            $('.fee_types').change(function(){
-                if ($(this).prop("checked") == true) {
-                    $(this).closest('tr').find('td .fee-amount').attr('required', 'required');
-                } else {
-                    $(this).closest('tr').find('td .fee-amount').removeAttr('required');
-                }
-            });
         });
 
         $('#submit-form').click(function(e) {
             e.preventDefault();
             let selectedFees = [];
             $('.fee-amount').removeClass('warning');
+            $("[id$='_from'], [id$='_to']").removeClass('warning');
+
             $("input[name='selectedFees[]']").each(function () {
                 if($(this).is(":checked")){
                     selectedFees.push($(this).val());
@@ -229,21 +222,38 @@
 
                 $.each(selectedFees, function (index, value) {
                     let chkbox = $('#ft_'+value).closest('tr').find('.fee-amount');
+                    let from_month = $('#'+value+'_from');
+                    let to_month = $('#'+value+'_to');
                     let fee_amount =  chkbox.val();
-                    chkbox.removeClass('warning');
+
                     if (fee_amount == null || fee_amount == '') {
                         feeError += 1;
                         chkbox.addClass('warning');
+                    }
+
+                    if (from_month.length > 0) {
+                        if (from_month.val() == null || from_month.val() == '') {
+                            monthError += 1;
+                            from_month.addClass('warning');
+                        }
+
+                    }
+                    if (to_month.length > 0) {
+                        console.warn('To month: '+to_month.val());
+                        if (to_month.val() == null || to_month.val() == '') {
+                            monthError += 1;
+                            to_month.addClass('warning');
+                        }
                     }
                 });
 
                 let totalError = feeError + monthError;
                 if (totalError > 0) {
-                    let msg = feeError > 0 ? 'Fill up all fee amount(s)' : '';
-                    msg += monthError > 0 ? ' & Select months' : '';
+                    let msg = feeError > 0 ? 'Fill up all fee amount(s). ' : '';
+                    msg += monthError > 0 ? ' Select month(s).' : '';
                     showAlert('Invalid Field', msg);
                 } else {
-                    showAlert('Passed', 'Validation Passed');
+                    $('#fee-transaction').submit();
                 }
 
             } else {
@@ -257,6 +267,7 @@
                 title: title,
                 text: message,
                 icon: "warning",
+                html: true,
                 buttons: true,
                 dangerMode: true,
                 buttons: {
