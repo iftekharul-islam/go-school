@@ -170,40 +170,6 @@
             }
         }
 
-        function submitForm(formId) {
-            swal({
-                title: "Are you sure?",
-                text: " You want to perform this action!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    document.getElementById(formId).submit();
-                }
-            });
-        }
-
-        function showAlert() {
-            swal({
-                title: "No Student Selected",
-                text: "Please select at least one student",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                buttons: {
-                    cancel: false,
-                    confirm: true,
-                },
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    document.getElementById(formId).submit();
-                }
-            });
-        }
-
         function resetFilter() {
             $('#filter input[name=student_name]').val('');
             $("#filter select").empty();
