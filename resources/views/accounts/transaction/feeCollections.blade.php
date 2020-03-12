@@ -42,10 +42,15 @@
         <div class="breadcrumbs-area example-screen">
             <h3>Fee Collections</h3>
             <ul>
+
                 <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back</a> | <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Fee Collection</li>
+
+                <li>
+                    <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> Collect Fee</a>
+                </li>
+                <li>Fee Collections</li>
             </ul>
         </div>
         @if (session('status'))
