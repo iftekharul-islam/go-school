@@ -24,49 +24,46 @@
 @endif
 <div class="card height-auto">
     <div class="card-body">
-
         <form id="filter" method='GET' action="">
-        <div class="row mb-3">
-            <div class="form-group col-md-5">
-                <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="{{ __('text.Name') }}" />
-            </div>
-            <div class="form-group col-md-2">
-                <select id="class_id" name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
-                    <option value="" selected>{{ __('text.Class') }}</option>
-                    @foreach ($classes as $class)
-                        <option value="{{$class->id}}" @if($class->id == $searchData['class_id']) selected @endif>{{$class->class_number}}</option>    
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <select name="section_id" id="section_id" class="form-control form-control-sm">
-                    @if($searchData['class_id'])
-                        @if($classes)
-                            @foreach ($classes as $class)
-                                @if($class->id == $searchData['class_id'])
-                                    @if($class->sections)
-                                        @foreach ( $class->sections as $section)
-                                            <option value="{{$section['id']}}" @if($searchData['section_id'] == $section['id']) selected @endif>{{$section['section_number']}}</option>
-                                        @endforeach
+            <div class="row mb-3">
+                <div class="form-group col-md-5">
+                    <input type="text" name="student_name" value="{{$searchData['student_name']}}" class="form-control form-control-sm" placeholder="{{ __('text.Name') }}" />
+                </div>
+                <div class="form-group col-md-2">
+                    <select id="class_id" name="class_id" onchange="getSections(this)" class="form-control form-control-sm">
+                        <option value="" selected>{{ __('text.Class') }}</option>
+                        @foreach ($classes as $class)
+                            <option value="{{$class->id}}" @if($class->id == $searchData['class_id']) selected @endif>{{$class->class_number}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <select name="section_id" id="section_id" class="form-control form-control-sm">
+                        @if($searchData['class_id'])
+                            @if($classes)
+                                @foreach ($classes as $class)
+                                    @if($class->id == $searchData['class_id'])
+                                        @if($class->sections)
+                                            @foreach ( $class->sections as $section)
+                                                <option value="{{$section['id']}}" @if($searchData['section_id'] == $section['id']) selected @endif>{{$section['section_number']}}</option>
+                                            @endforeach
+                                        @endif
                                     @endif
-                                @endif
-                            @endforeach
+                                @endforeach
+                            @endif
+                        @else
+                            <option value="" disabled selected >{{ __('text.Section') }}</option>
                         @endif
-                    @else 
-                        <option value="" disabled selected >{{ __('text.Section') }}</option>
-                    @endif
-                </select>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <button type="submit" class="button button--save font-weight-bold">{{ __('text.Search') }}</button>
+                    <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">{{ __('text.reset') }}</button>
+                </div>
             </div>
-            <div class="form-group col-md-3">
-                <button type="submit" class="button button--save font-weight-bold">{{ __('text.Search') }}</button>
-                <button type="button" onclick="resetFilter()" class="button button--cancel font-weight-bold ml-md-3">{{ __('text.reset') }}</button>
-            </div>
-        </div>
         </form>
 
-        
          @if(count($students) > 0)
-
             <div class="mb-5">
                 <table class="table table-bordered display text-wrap">
                     <thead>
@@ -112,7 +109,6 @@
                 </div>
                 
             </div>
-
          @else
             <p class="text-center">No Student Found.</p>
         @endif
