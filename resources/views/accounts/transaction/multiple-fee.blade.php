@@ -6,14 +6,17 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area example-screen">
-            <h3>Multiple Fee Collection</h3>
+            <h3>Student Fee Collection</h3>
             <ul>
                 <li>
                     <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                         Back &nbsp;&nbsp;|</a>
                     <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
                 </li>
-                <li>Multiple Fee Collection</li>
+                <li>
+                    <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> Collect Fee</a>
+                </li>
+                <li>Student Fee Collection</li>
             </ul>
         </div>
         @php  $options = '<option value="January">January</option>'
