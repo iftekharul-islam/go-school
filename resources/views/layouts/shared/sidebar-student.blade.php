@@ -414,6 +414,7 @@
                                         href="{{ url($role.'/fee-discount') }}">
                                             <i class="fas fa-angle-right"></i><span>{{ __('text.Discount') }}</span></a>
                                     </li>
+
                                     <li class="nav-item">
                                         <a class="nav-link {{ (request()->is($role.'/advance-collection')) ? 'menu-active' : '' }}"
                                            href="{{ url($role.'/advance-collection') }}">

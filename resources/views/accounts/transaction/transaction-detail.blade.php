@@ -46,7 +46,7 @@
                     <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back</a> | <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
                 <li>
-                    <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> Collect Fee</a>
+                    <a href="{{ url(auth()->user()->role.'/fee-collection/section/student?class='.$student->section->class['id'].'&section='.$student['section']['id']) }}"> Collect Fee</a>
                 </li>
                 <li><a href="{{ route('student.fee.collections',['id' =>  $student->id]) }}">Fee Collections</a></li>
                 <li>Transaction Details</li>
