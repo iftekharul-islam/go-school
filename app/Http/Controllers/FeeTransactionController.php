@@ -156,6 +156,7 @@ class FeeTransactionController extends Controller
      */
     public function destroy($id)
     {
+
         $ft = FeeTransaction::findOrFail($id);
         $studentInfo = StudentInfo::where('user_id', $ft->student_id)->first();
         if (empty($studentInfo)) {
@@ -274,7 +275,7 @@ class FeeTransactionController extends Controller
             $transactionItem->save();
         }
         
-        return redirect()->route('transaction.detail', ['transaction_id' => $ft->id])
+        return redirect(Auth::user()->role.'/transaction-detail/'. $ft->id)
             ->with('status', 'Fee collected successfully');
     }
     public function studentFeeDetails()

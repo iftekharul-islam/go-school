@@ -42,13 +42,11 @@
         <div class="breadcrumbs-area example-screen">
             <h3>Fee Collections</h3>
             <ul>
-
                 <li>
                     <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back</a> | <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-
                 <li>
-                    <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> Collect Fee</a>
+                    <a href="{{ url(auth()->user()->role.'/fee-collection/section/student?class='.$student->section->class['id'].'&section='.$student['section']['id']) }}"> Collect Fee</a>
                 </li>
                 <li>Fee Collections</li>
             </ul>
@@ -142,7 +140,7 @@
                                     <td>{{ $fee->created_at->format('Y-m-d') }}</td>
                                     <td>
                                         <button title="Cancel Transaction" class="btn btn-secondary" onclick="feeTransaction({{ $fee->id }})"><i class="fas fa-history"></i></button>&nbsp;
-                                        <a  title="View Transaction Details" class="btn btn-primary" href="{{ route('transaction.detail',['id' => $fee->id]) }}"><i class="fas fa-eye"></i></a>
+                                        <a  title="View Transaction Details" class="btn btn-primary" href="{{ url(auth()->user()->role.'/transaction-detail/'.$fee->id) }}"><i class="fas fa-eye"></i></a>
                                         <form id="delete-form-{{ $fee->id }}" action="{{ url(auth()->user()->role.'/fee-transaction', $fee->id) }}" method="POST">
                                             {!! method_field('delete') !!}
                                             {!! csrf_field() !!}
