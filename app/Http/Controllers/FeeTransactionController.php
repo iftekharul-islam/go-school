@@ -214,7 +214,6 @@ class FeeTransactionController extends Controller
 
     public function multipleFeeStore(Request $request)
     {
-//        dd($request->all());
         $request->validate([
             'amount' => 'required',
             'discountAmount' => 'required',
