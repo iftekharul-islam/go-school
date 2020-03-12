@@ -320,12 +320,10 @@ class FeeTransactionController extends Controller
 
     public function updateAdvanceAmount(Request $request)
     {
-
         $request->validate([
             'student_code' => 'required',
             'advanceAmount' => 'required|numeric'
         ]);
-
         $student = StudentInfo::where('student_id', $request->student_code)->first();
         $student->advance_amount =  $student->advance_amount + $request->advanceAmount;
         $student->save();
