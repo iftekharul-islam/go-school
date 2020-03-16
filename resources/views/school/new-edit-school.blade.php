@@ -171,8 +171,8 @@
                                             @endif
                                         </div>
                                         <div class="mb-4 col-md-12 form-group{{ $errors->has('invoice_generation_date') ? ' has-error' : '' }}">
-                                            <label for="invoice_generation_date" class="control-label false-padding-bottom">Invoice Generation Date <label class="text-danger">*</label></label>
-                                            <select id="invoice_generation_date" class="form-control select2" name="invoice_generation_date" required>
+                                            <label for="invoice_generation_date" class="control-label false-padding-bottom">Invoice Generation Date</label>
+                                            <select id="invoice_generation_date" class="form-control select2" name="invoice_generation_date">
                                                 <option disabled selected>Select Date</option>
                                                 @for($i = 1; $i <= 31; $i++)
                                                     <option value="{{$i}}" @if($school->invoice_generation_date == $i) selected @endif>{{ $i }}</option>
@@ -185,8 +185,8 @@
                                             @endif
                                         </div>
                                         <div class="mb-4 col-md-12 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                            <label for="email" class="control-label false-padding-bottom">Email <label class="text-danger">*</label></label>
-                                            <input id="email" type="text" class="form-control" name="email" value="{{$school->email}}" placeholder="Email" required>
+                                            <label for="email" class="control-label false-padding-bottom">Email</label>
+                                            <input id="email" type="text" class="form-control" name="email" value="{{$school->email}}" placeholder="Email">
                                             @if ($errors->has('email'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('email') }}</strong>
@@ -194,8 +194,8 @@
                                             @endif
                                         </div>
                                         <div class="mb-4 col-md-12 form-group{{ $errors->has('due_date') ? ' has-error' : '' }}">
-                                            <label for="due_date" class="control-label false-padding-bottom">Payment Due Date <label class="text-danger">*</label></label>
-                                            <select id="due_date" class="form-control select2" name="due_date" required>
+                                            <label for="due_date" class="control-label false-padding-bottom">Payment Due Date</label>
+                                            <select id="due_date" class="form-control select2" name="due_date">
                                                 <option disabled selected>Due Date</option>
                                                 @for($i = 1; $i <= 31; $i++)
                                                     <option value="{{$i}}" @if($school->due_date == $i) selected @endif>{{ $i }}</option>
@@ -208,8 +208,8 @@
                                             @endif
                                         </div>
                                          <div class=" col-md-12 form-group{{ $errors->has('signup_date') ? ' has-error' : '' }}">
-                                            <label for="signup_date" class="control-label false-padding-bottom">Signup Date <label class="text-danger">*</label></label>
-                                            <input id="signup_date" data-date-format="yyyy-mm-dd" type="text" class="form-control date" name="signup_date" value="{{$school->singup_date}}" required autocomplete="off">
+                                            <label for="signup_date" class="control-label false-padding-bottom">Signup Date</label>
+                                            <input id="signup_date" data-date-format="yyyy-mm-dd" type="text" class="form-control date" name="signup_date" value="{{$school->singup_date}}" autocomplete="off">
                                             @if ($errors->has('signup_date'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('signup_date') }}</strong>

@@ -82,10 +82,10 @@ class SchoolController extends Controller
             'payment_type' => 'required',
             'sms_charge' => 'nullable|numeric',
             'charge'    => 'required|numeric',
-            'invoice_generation_date'  => 'required|integer',
-            'due_date'  => 'required|integer',
-            'signup_date'  => 'required|date_format:Y-m-d',
-            'email'  => 'required|email|max:191',
+            'invoice_generation_date'  => 'nullable|integer',
+            'due_date'  => 'nullable|integer',
+            'signup_date'  => 'nullable|date_format:Y-m-d',
+            'email'  => 'nullable|email|max:191',
         ],[
             'is_sms_enable.required' => 'Select SMS Option'
         ]);
@@ -275,10 +275,10 @@ class SchoolController extends Controller
             'payment_type' => 'required',
             'sms_charge' => 'nullable|numeric',
             'charge'    => 'required|numeric',
-            'invoice_generation_date'  => 'required|integer',
-            'due_date'  => 'required|integer',
-            'signup_date'  => 'required|date_format:Y-m-d',
-            'email'  => 'required|email|max:191',
+            'invoice_generation_date'  => 'nullable|integer',
+            'due_date'  => 'nullable|integer',
+            'signup_date'  => 'nullable|date_format:Y-m-d',
+            'email'  => 'nullable|email|max:191',
         ],[
             'is_sms_enable.required' => 'Select SMS Option'
         ]);
