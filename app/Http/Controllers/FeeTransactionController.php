@@ -221,8 +221,7 @@ class FeeTransactionController extends Controller
             'fine' => 'required',
             'selectedFees.*' => 'required|distinct|integer'
         ]);
-//        var_dump($request->get('selectedFees'));
-        //dd($request->all());
+
         $serial = '';
         $school_id = Auth::user()->school_id;
         $amount = $request->amount;
@@ -257,7 +256,7 @@ class FeeTransactionController extends Controller
             $config->save();
             $serial = 1;
         }
-        //dd($payable);
+
         #save transaction
         $ft = new FeeTransaction();
         $ft->transaction_serial = $serial;
