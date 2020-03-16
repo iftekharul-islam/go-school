@@ -46,7 +46,8 @@ class CourseService {
     public function updateCourseInfo($id, $request){
         $tb = Course::findOrFail($id);
         $tb->course_name = $request->course_name;
-        $tb->course_time = $request->course_time;
+        $tb->teacher_id = $request->teacher_id;
+        $tb->course_time = $request->course_time ? $request->course_time : '' ;
         $tb->save();
     }
 

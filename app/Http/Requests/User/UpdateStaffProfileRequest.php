@@ -33,6 +33,9 @@ class UpdateStaffProfileRequest extends FormRequest
         if ($this->get('user_role') == 'teacher') {
             $rules['department_id'] = 'required|numeric';
         }
+//        if ($this->get('user_role') != 'master' || 'admin' || 'student' || 'teacher') {
+//            $rules['pic_path'] = 'required|numeric';
+//        }
 
         return $rules;
     }

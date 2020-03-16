@@ -478,7 +478,7 @@
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a class="nav-link" href="#">
-                            <i class="fab fa-pied-piper-alt"></i>
+                            <i class="fas fa-users"></i>
                             </i><span>Staff Management</span>
                         </a>
                         <ul class="nav sub-group-menu {{ ($staff == 1) ? 'sub-group-active' : '' }}">

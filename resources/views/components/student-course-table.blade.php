@@ -6,6 +6,7 @@
     <th>Room Number</th>
     <th>Class Time</th>
     <th>Class Teacher</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
@@ -22,9 +23,12 @@
         @if ( !empty($course->teacher['student_code']) )
           <a class="text-teal" href="{{url('user/'.$course->teacher['student_code'])}}">{{ $course->teacher['name'] }}</a>
         @else
-          {{ $course->teacher['name'] }} 
+          {{ $course->teacher['name'] }}
         @endif
       </td>
+        <td>
+            <a href="{{url('admin/edit/course/'.$course->id)}}" role="button" class="btn btn-primary btn-lg"><i class="far fa-edit"></i></a>
+        </td>
     </tr>
   @endforeach
   </tbody>

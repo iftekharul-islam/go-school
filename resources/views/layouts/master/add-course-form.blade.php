@@ -26,7 +26,8 @@
                                 })}}
                                 @foreach($teachers_of_this_school as $teacher)
                                     <option value="{{$teacher->id}}"
-                                            data-department="{{$teacher->department_name}}">{{$teacher->name}} {{$teacher->department_name}}</option>
+                                            data-department="{{$teacher->department_name}}">{{$teacher->name}} {{$teacher->department_name}}
+                                    </option>
                                 @endforeach
                             @endif
                         </select>
