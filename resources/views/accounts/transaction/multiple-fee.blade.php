@@ -31,6 +31,47 @@
                         .'<option value="October">October</option>'
                         .'<option value="November">November</option>'
                         .'<option value="December">December</option>'; @endphp
+
+        <div class="card height-auto mb-3 example-screen">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="{{url($student->pic_path)}}" style="height: 130px;" alt="">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <td>{{ $student->name }}</td>
+                                    <th>Class & Section</th>
+                                    <td> Class {{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</td>
+                                </tr>
+                                @if($student['studentInfo'])
+                                    <tr>
+                                        <th>Father's Name</th>
+                                        <td>{{ $student->studentInfo['father_name'] }}</td>
+                                        <th>Phone</th>
+                                        <td>{{ $student->studentInfo['father_phone_number'] }}</td>
+                                    </tr>
+                                @endif
+                                <tr>
+                                    <th>Version</th>
+                                    <td>@if($student->studentInfo){{ $student->studentInfo['version'] }}@endif </td>
+                                    <th>Student Code</th>
+                                    <td>{{ $student->student_code }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Advance Balance</th>
+                                    <td colspan="3">{{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <form class="new-added-form fee-transaction" id="fee-transaction" action="{{ url(auth()->user()->role.'/multiple-fee') }}" method="post">
             {{ csrf_field() }}
             <div class="row">
@@ -121,16 +162,23 @@
                                     <div class="error text-danger"></div>
                                 </div>
 
-                                <div class="col-6-xxxl col-lg-6 col-6 form-group mt-5">
+                                <div class="col-12-xxxl col-lg-12 col-12 form-group">
+                                    <label @if($student['studentInfo']['advance_amount'] == 0) style="pointer-events: none; touch-action: none;" @endif>
+                                        <input type="checkbox" name="payFromAdv" value="1" onclick="calculateTotal()" id="payFromAdv">
+                                        Pay From Advance
+                                    </label>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 form-group">
                                     <label>Payment Method</label>
                                     <label for="cash" class="mr-2">
                                         <input class="ml-5" type="radio" name="mode" value="cash" id="cash" checked> Cash
                                     </label>
                                     <label for="cheque">
-                                    <input class="" type="radio" name="mode" id="cheque" value="cheque"> Cheque
+                                        <input class="" type="radio" name="mode" id="cheque" value="cheque"> Cheque
                                     </label>
                                 </div>
-                                <div class="col-12-xxxl col-lg-6 col-12 form-group">
+                                <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                     <label>Note</label>
                                     <textarea name="note" id="" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
@@ -143,63 +191,14 @@
             </div>
         </form>
     </div>
-    <!--Modal-->
-    <div class="modal fade" id="addFeeType" role="dialog" aria-labelledby="addFeeType">
-        <div class="modal-dialog " role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Add Fee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group col-md-6 col-sm-12">
-                            <label for="feeType" class=" sr-only control-label">Select Fee Type</label>
-                            <select name="feeType" class="form-control" id="feeType" onchange="toggleMonthField()" required>
-                                <option value="">Select Fee Type</option>
-                                @if(count($feeTypes) > 0)
-                                    @foreach($feeTypes as $ft)
-                                        <option value="{{$ft->id}}">{{$ft->name}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            <span id="typeError" class="text-warning"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-sm-12 month">
-                            <label for="fromMonth" class="control-label sr-only">From Month</label>
-                            <select name="from_month" class="form-control" id="fromMonth" >
-                                <option value="">From Month</option>
-                                {!!  $options !!}
-                            </select>
-                            <span id="fromMonthError" class="text-warning"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-sm-12 month">
-                            <label for="toMonth" class="control-label sr-only">To Month</label>
-                            <select name="to_month" class="form-control" id="toMonth" >
-                                <option value="">To Month</option>
-                                {!!  $options !!}
-                            </select>
-                            <span id="toMonthError" class="text-warning"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-sm-12">
-                            <label for="feeAmount" class="control-label sr-only">Amount</label>
-                            <input type="number" name="feeAmount" class="form-control" id="feeAmount" placeholder="Amount" required>
-                            <span id="amountError" class="text-warning"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group modal-footer pb-">
-                    <div class="col-md-12">
-                        <button onclick="addFee()" class="button button--save float-right"><i class="fas fa-plus-circle"></i> Add</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @push('customjs')
     <script>
+        window.advanceAmount = {!! json_encode($student['studentInfo']['advance_amount']) !!};
+        window.selectedDiscount = 0;
+        window.discounts = {!! json_encode($discounts->toArray()) !!};
+
         jQuery(document).ready(function(){
             $("#checkAll").click(function(){
                 $('#fees input:checkbox').not(this).prop('checked', this.checked);
@@ -280,85 +279,15 @@
             })
         }
 
-        window.total = $("#amount").val();
-        window.selectedDiscount = 0;
-        window.discounts = {!! json_encode($discounts->toArray()) !!};
-        window.allFees = {!! json_encode($feeTypes->toArray()) !!};
-
         $(document).on('click', '.delete-row', function(){
             $(this).closest('tr').remove();
             calculateTotal();
         });
+
         $(document).on('keyup change', '.fee-amount, .fine', function(){
             calculateTotal();
         });
 
-        function addFee() {
-            let fee_name = $('#addFeeType #feeType option:selected').text();
-            let fee_type_id = $('#addFeeType #feeType').val();
-            let amount = $('#addFeeType #feeAmount').val();
-            let month = '';
-            let typeOfFee;
-            allFees.forEach((fee) => {
-                if (fee.id == fee_type_id) {
-                    typeOfFee = fee.type;
-                }
-            });
-
-            if (typeOfFee == 'monthly') {
-                month = '('+$('#fromMonth').val()+' To '+$('#toMonth').val()+')';
-            }
-
-            if (validateField(fee_type_id, amount)) {
-                $('#fees tbody').append('<tr>' +
-                    '<td>' + fee_name + month + '<input type="hidden" value="'+fee_type_id+'" name="fee_type_id[]"></td>'+
-                    '<td><input type="number" name="amounts[]" value="'+amount+'" class="form-control fee-amount" required></td>' +
-                    '<td><button type="button"  class="btn btn-danger delete-row" title="Remove this row"><i class="fas fa-trash"></i></button></td>'+
-                    '</tr>');
-                $('#addFeeType input').val('');
-                $("#addFeeType select option:selected").prop("selected", false);
-            }
-            calculateTotal();
-        }
-
-
-        function validateField(fee_type_id, amount){
-            $('#addFeeType .text-warning').empty();
-            let errCounter = 0;
-            let addedFees = $("#fees input[name='fee_type_id[]']").map(function(){ return $(this).val() }).get();
-            let typeOfFee;
-
-            allFees.forEach((fee) => {
-                if (fee.id == fee_type_id) {
-                    typeOfFee = fee.type;
-                }
-            });
-
-            if (amount == '') {
-                errCounter += 1;
-                $('#amountError').text('Enter Fee Amount');
-            }
-            if (fee_type_id == null || fee_type_id == undefined || fee_type_id == '') {
-                errCounter += 1;
-                $('#typeError').text('Select A Type');
-            } else if ($.inArray(fee_type_id, addedFees) != -1) {
-                errCounter += 1;
-                $('#typeError').text('Already Added');
-            } else if (typeOfFee == 'monthly') {
-                console.log(typeOfFee);
-                if ($('#fromMonth').val() == '' || $('#fromMonth').val() == null) {
-                    errCounter += 1;
-                    $('#fromMonthError').text('Select From Month');
-                }
-                if ($('#toMonth').val() == '' || $('#toMonth').val() == null) {
-                    errCounter += 1;
-                    $('#toMonthError').text('Select To Month');
-                }
-            }
-
-            return  (errCounter > 0) ? false : true;
-        }
-       
         function calculateTotal() {
             let fine = parseFloat($(".fine").val());
             let discountAmount =  parseFloat($('#discountValue').val());
@@ -373,7 +302,18 @@
                     }
                 }
             );
+
             grandTotal = totalFee + fine - discountAmount;
+
+            if ($('#payFromAdv').is(":checked")) {
+                console.log('checked');
+                if (grandTotal >= advanceAmount) {
+                    grandTotal = grandTotal - advanceAmount;
+                } else {
+                    grandTotal = 0 ;
+                }
+            }
+
             $('#amount').val(grandTotal);
         }
 
@@ -391,23 +331,6 @@
                 $('#discountValue').val(value);
             }
             calculateTotal();
-        }
-
-        function toggleMonthField(){
-            let fee_type = $('#addFeeType #feeType').val();
-            let typeOfFee;
-
-            allFees.forEach((fee) => {
-                if (fee.id == fee_type) {
-                    typeOfFee = fee.type;
-                }
-            });
-
-            if (typeOfFee == 'monthly') {
-                $('#addFeeType .month').show();
-            } else {
-                $('#addFeeType .month').hide();
-            }
         }
     </script>
 @endpush

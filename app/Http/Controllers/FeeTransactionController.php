@@ -221,10 +221,29 @@ class FeeTransactionController extends Controller
             'fine' => 'required',
             'selectedFees.*' => 'required|distinct|integer'
         ]);
-
+//        var_dump($request->get('selectedFees'));
+//        dd($request->all());
         $serial = '';
         $school_id = Auth::user()->school_id;
-        $studentData = User::with('section')->where('id', $request->student_id)->first();
+        $amount = $request->amount;
+        $deducted_advance_amount = 0;
+        $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
+
+        #update advance balance
+        if ($request->get('payFromAdv') == 1){
+            $totalAmount =  $amount + $request->get('fine') - $request->get('discountAmount');
+            if ($totalAmount < $studentInfo->advance_amount) {
+                $studentInfo->advance_amount = $studentInfo->advance_amount - $totalAmount;
+                $amount =  $totalAmount;
+                $deducted_advance_amount = $totalAmount;
+            } else {
+                $collectiveAmount =  $studentInfo->advance_amount + $request->get('amount');
+                $amount = $collectiveAmount;
+                $deducted_advance_amount = $studentInfo->advance_amount;
+                $studentInfo->advance_amount = 0;
+            }
+            $studentInfo->save();
+        }
 
         #transaction serial
         $transaction_serial = Configuration::where('key', 'transaction_serial')
@@ -247,13 +266,14 @@ class FeeTransactionController extends Controller
         $ft->transaction_serial = $serial;
         $ft->student_id = $request->student_id;
         $ft->school_id = \auth()->user()->school_id;
-        $ft->amount = $request->amount;
+        $ft->amount = $amount;
         $ft->discount_id = $request->discount;
         $ft->discount = $request->discountAmount;
         $ft->fine = $request->fine;
         $ft->mode = $request->mode;
         $ft->accountant_id = \auth()->id();
         $ft->status = 'paid';
+        $ft->deducted_advance_amount = $deducted_advance_amount ;
         $ft->save();
 
         #save fee types & amount
@@ -326,7 +346,7 @@ class FeeTransactionController extends Controller
             'advanceAmount' => 'required|numeric'
         ]);
         $student = StudentInfo::where('student_id', $request->student_code)->first();
-        $student->advance_amount =  $student->advance_amount + $request->advanceAmount;
+        $student->advance_amount = $request->advanceAmount;
         $student->save();
 
         return back()->with('status', 'Advance Amount Updated');

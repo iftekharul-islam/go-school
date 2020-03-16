@@ -87,8 +87,10 @@
                                     <td>{{ $student->student_code }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Advance Balance</th>
+                                    <td>{{ $student->studentInfo['advance_amount'] }}</td>
                                     <th>Transaction No.</th>
-                                    <td colspan="3">{{ $fee_transaction->transaction_serial }}</td>
+                                    <td>{{ $fee_transaction->transaction_serial }}</td>
                                 </tr>
                             </table>
                         </div>
