@@ -128,13 +128,12 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::with('teacher')->findOrFail($id);
-        $sections = Section::orderBy('section_number', 'ASC')->get();
 
         $teachers = User::where('role', 'teacher')
             ->orderBy('name', 'ASC')
             ->where('active', 1)
             ->get();
-        return view('course.edit', ['course'=>$course, 'sections' =>$sections, 'teachers'=>$teachers]);
+        return view('course.edit', ['course'=>$course, 'teachers'=>$teachers]);
     }
 
     /**
