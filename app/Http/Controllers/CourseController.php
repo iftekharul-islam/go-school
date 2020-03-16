@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Gradesystem;
 use App\Http\Resources\CourseResource;
+use App\School;
+use App\Section;
 use App\Services\User\UserService;
 use App\User;
 use Illuminate\Http\Request;
@@ -125,8 +127,14 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        $course = Course::findOrFail($id);
-        return view('course.edit', ['course'=>$course]);
+        $course = Course::with('teacher')->findOrFail($id);
+        $sections = Section::orderBy('section_number', 'ASC')->get();
+
+        $teachers = User::where('role', 'teacher')
+            ->orderBy('name', 'ASC')
+            ->where('active', 1)
+            ->get();
+        return view('course.edit', ['course'=>$course, 'sections' =>$sections, 'teachers'=>$teachers]);
     }
 
     /**
@@ -140,10 +148,11 @@ class CourseController extends Controller
     {
         $request->validate([
             'course_name' => 'required|string',
-            'course_time' => 'required|string',
+            'teacher_id' => 'required|string',
+            'course_time' => 'nullable|string',
         ]);
         $this->courseService->updateCourseInfo($id, $request);
-        return back()->with('status', 'Course time & title updated');
+        return back()->with('status', 'Course updated');
     }
 
     /**

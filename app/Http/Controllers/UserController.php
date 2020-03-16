@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewUserRegistered;
 use App\Http\Requests\ImportStudentRequest;
+use App\Http\Requests\UpdateStaffRequest;
 use App\Http\Requests\user\UpdateStaffProfileRequest;
 use App\School;
 use App\StudentInfo;
@@ -385,7 +386,7 @@ class UserController extends Controller
         return back()->with('status', 'Librarian Created');
     }
 
-    public function storeStaff(Request $request)
+    public function storeStaff(UpdateStaffRequest $request)
     {
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
 

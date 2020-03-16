@@ -162,7 +162,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
         Route::delete('delete-expense/{id}', 'AccountController@deleteExpense');
-        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
+        Route::get('courses/{teacher_id}/{section_id}', 'new.staff@index');
     });
 
     // Teacher role routes
@@ -389,7 +389,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::post('librarian', 'UserController@storeLibrarian');
         });
         Route::get('edit/course/{id}', 'CourseController@edit');
-        Route::post('edit/course/{id}', 'CourseController@updateNameAndTime');
+        Route::post('edit/course/{id}', 'CourseController@updateNameAndTime')->name('course.update');
 
         Route::get('edit/user/{id}', 'UserController@edit');
         Route::patch('edit/user', 'UserController@update')->name('edit.user');

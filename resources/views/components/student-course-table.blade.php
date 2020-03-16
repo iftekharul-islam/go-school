@@ -27,7 +27,7 @@
         @endif
       </td>
         <td>
-            <a href="#"></a>
+            <a href="{{url('admin/edit/course/'.$course->id)}}" role="button" class="btn btn-primary btn-lg"><i class="far fa-edit"></i></a>
         </td>
     </tr>
   @endforeach
