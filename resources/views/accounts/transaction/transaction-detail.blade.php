@@ -43,9 +43,12 @@
             <h3>Transaction Details</h3>
             <ul>
                 <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back</a> | <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
                 </li>
-                <li>Fee Collection</li>
+                <li>
+                    <a href="{{ url(auth()->user()->role.'/fee-collection/section/student?class='.$student->section->class['id'].'&section='.$student['section']['id']) }}"> Collect Fee</a>
+                </li>
+                <li><a href="{{ route('student.fee.collections',['id' =>  $student->id]) }}">Fee Collections</a></li>
                 <li>Transaction Details</li>
             </ul>
         </div>
@@ -79,7 +82,7 @@
                                 @endif
                                 <tr>
                                     <th>Version</th>
-                                    <td>@if($student->studentInfo){{ $student->studentInfo['version'] }}@endif </td>
+                                    <td>@if($student->studentInfo) {{ $student->studentInfo['version'] }} @endif </td>
                                     <th>Student Code</th>
                                     <td>{{ $student->student_code }}</td>
                                 </tr>
@@ -98,8 +101,7 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3 class="float-left mb-5 float-left">Items</h3>
-{{--                        <button class="btn-secondary btn float-right btn-lg" onclick="window.print()"> <i class="fa-print fa"></i> Print pdf</button>--}}
+                        <h3 class="float-left mb-5 float-left">Fees</h3>
                         <a href="?print=1" class="btn-secondary btn float-right btn-lg" target="_blank"> <i class="fa-print fa"></i> Print</a>
                     </div>
                 </div>
@@ -119,7 +121,7 @@
                                 @php $totalAmount += $item->fee_amount; @endphp
                                 <tr>
                                     <td>{{ $key + 1}}</td>
-                                    <td>{{ $item['fee_type']['name'] }}</td>
+                                    <td>{{ $item['fee_type']['name'] }} @if($item['note']) ({{ $item['note'] }}) @endif</td>
                                     <td class="text-right">{{ number_format($item->fee_amount, 2) }}</td>
                                 </tr>
                             @endforeach
@@ -135,74 +137,13 @@
                             </tr>
                             <tr style="background-color: #eee">
                                 <td></td>
-                                <td><b>Total</b></td>
+                                <td class="text-right"><b>Total</b></td>
                                 <td class="text-right"><b>{{ number_format(($totalAmount + $fee_transaction->fine - $fee_transaction->discount), 2) }}</b></td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-
-{{--        Printing Page--}}
-
-        <div class="card height-auto false-height example-print">
-            <div class="card-body">
-                <div class="report" style="overflow: hidden;">
-                    <div class="school-property mb-5">
-                        <h2 class="text-center mb-0">{{ $student->school->name }}</h2>
-                        <h5 class="text-center">{{ $student->school->school_address }}</h5>
-                        <h5 class="text-center"><strong>Date:</strong> {{ date('d-M-Y') }}</h5>
-                    </div>
-                    <h4><span><strong>Transaction No :</strong> {{ $fee_transaction->transaction_serial }}</h4>
-                    <h4 class="float-left mr-5"><span><strong>Student Name :</strong> {{ $student->name }}</span></h4>
-                    <h4 class="float-left mr-5"><span><strong>Student ID :</strong> {{ $student->student_code }}</span></h4>
-                    <h4 class="ml-5"><span><strong>Class :</strong> Class{{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</span></h4>
-                </div>
-                <div class="table-responsive print-div">
-                    <table class="table display text-wrap table-bordered">
-                        <thead>
-                            <tr>
-                                <th>SL</th>
-                                <th>Fee Name</th>
-                                <th class="text-right">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if(!$transactionItems->isEmpty())
-
-                            @foreach($transactionItems as $key => $item)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item['fee_type']['name'] }}</td>
-                                    <td class="text-right">{{ number_format($item->fee_amount, 2) }}</td>
-                                </tr>
-                            @endforeach
-                            <tr>
-                                <td></td>
-                                <td>Fine</td>
-                                <td class="text-right">{{ number_format($fee_transaction->fine, 2) }}</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>Discount</td>
-                                <td class="text-right">{{ number_format($fee_transaction->discount, 2) }}</td>
-                            </tr>
-                            <tr style="background-color: #eee">
-                                <td></td>
-                                <td><b>Total</b></td>
-                                <td class="text-right"><b>{{ number_format($fee_transaction->amount, 2) }}</b></td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="signature" style="margin: 100px 0 0 40px;">
-                <hr style="width: 30%; margin-left: -10px; display: block;border-width: 1.4px; border-color: #000000">
-                <p style="margin-left: 50px;">Signature of Accountant</p>
             </div>
         </div>
     </div>
