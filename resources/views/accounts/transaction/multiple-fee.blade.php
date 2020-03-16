@@ -159,13 +159,13 @@
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                     <label>Amount <span class="text-danger">*</span></label>
                                     <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="{{ 0 }}" id="amount" style="pointer-events: none; touch-action: none;">
+                                    <input type="hidden" name="payable" id="payable" >
                                     <div class="error text-danger"></div>
                                 </div>
 
                                 <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                     <label @if($student['studentInfo']['advance_amount'] == 0) style="pointer-events: none; touch-action: none;" @endif>
-                                        <input type="checkbox" name="payFromAdv" value="1" onclick="calculateTotal()" id="payFromAdv">
-                                        Pay From Advance
+                                        <input type="checkbox" name="payFromAdv" value="1" onclick="calculateTotal()" id="payFromAdv"> Pay From Advance
                                     </label>
                                 </div>
 
@@ -304,7 +304,7 @@
             );
 
             grandTotal = totalFee + fine - discountAmount;
-
+            $('#payable').val(grandTotal);
             if ($('#payFromAdv').is(":checked")) {
                 console.log('checked');
                 if (grandTotal >= advanceAmount) {

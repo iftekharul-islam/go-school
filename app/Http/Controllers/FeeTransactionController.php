@@ -73,13 +73,13 @@ class FeeTransactionController extends Controller
         $amount = $request->amount;
         $deducted_advance_amount = 0;
         
-        if ($request->get('pay_from_advance_blnc') == 1){
+        if ($request->get('pay_from_advance_blnc') == 1) {
             $totalAmount =  $request->get('totalAmount') + $request->get('fine') - $request->get('discountAmount');
-            if ($totalAmount < $studentInfo->advance_amount){
+            if ($totalAmount < $studentInfo->advance_amount) {
                 $studentInfo->advance_amount = $studentInfo->advance_amount - $totalAmount;
                 $amount =  $totalAmount;
                 $deducted_advance_amount = $totalAmount;
-            }else {
+            } else {
                 $collectiveAmount =  $studentInfo->advance_amount + $request->get('amount');
                 $amount = $collectiveAmount;
                 $deducted_advance_amount = $studentInfo->advance_amount;
@@ -222,23 +222,20 @@ class FeeTransactionController extends Controller
             'selectedFees.*' => 'required|distinct|integer'
         ]);
 //        var_dump($request->get('selectedFees'));
-//        dd($request->all());
+        //dd($request->all());
         $serial = '';
         $school_id = Auth::user()->school_id;
         $amount = $request->amount;
+        $payable = $request->payable;
         $deducted_advance_amount = 0;
         $studentInfo = StudentInfo::where('user_id', $request->get('student_id'))->first();
 
         #update advance balance
-        if ($request->get('payFromAdv') == 1){
-            $totalAmount =  $amount + $request->get('fine') - $request->get('discountAmount');
-            if ($totalAmount < $studentInfo->advance_amount) {
-                $studentInfo->advance_amount = $studentInfo->advance_amount - $totalAmount;
-                $amount =  $totalAmount;
-                $deducted_advance_amount = $totalAmount;
+        if ($request->get('payFromAdv') == 1) {
+            if ($payable < $studentInfo->advance_amount) {
+                $studentInfo->advance_amount = $studentInfo->advance_amount - $payable;
+                $deducted_advance_amount = $payable;
             } else {
-                $collectiveAmount =  $studentInfo->advance_amount + $request->get('amount');
-                $amount = $collectiveAmount;
                 $deducted_advance_amount = $studentInfo->advance_amount;
                 $studentInfo->advance_amount = 0;
             }
@@ -260,13 +257,13 @@ class FeeTransactionController extends Controller
             $config->save();
             $serial = 1;
         }
-
+        //dd($payable);
         #save transaction
         $ft = new FeeTransaction();
         $ft->transaction_serial = $serial;
         $ft->student_id = $request->student_id;
         $ft->school_id = \auth()->user()->school_id;
-        $ft->amount = $amount;
+        $ft->amount = $payable;
         $ft->discount_id = $request->discount;
         $ft->discount = $request->discountAmount;
         $ft->fine = $request->fine;
