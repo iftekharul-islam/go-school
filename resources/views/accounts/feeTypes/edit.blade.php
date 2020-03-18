@@ -53,6 +53,12 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
+                                    <label for="code">Order no</label>
+                                    <input type="number" class="form-control" name="order" value="{{ $feeType->order }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-4">
                                     <label for="code">Code</label>
                                     <input type="text" placeholder="Code" class="form-control" name="code" value="{{ $feeType->code }}">
                                 </div>
