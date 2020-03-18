@@ -102,7 +102,7 @@
                                             @foreach($feeTypes as $ft)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types" />
+                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types chk" />
                                                 </td>
                                                 <td>
                                                     {{ $ft->name }}
@@ -117,7 +117,7 @@
                                                         </select>
                                                     @endif
                                                 </td>
-                                                <td><input type="number" name="{{$ft->id}}_amount" value="{{old($ft->id.'_amount')}}" class="form-control fee-amount"></td>
+                                                <td><input type="number" name="{{$ft->id}}_amount" value="{{old($ft->id.'_amount')}}" class="form-control fee-amount tbody"></td>
                                             </tr>
                                             @endforeach
                                         @endif
@@ -201,7 +201,28 @@
 
         jQuery(document).ready(function(){
             $("#checkAll").click(function(){
+                $(".tbody").attr('disabled', false);
                 $('#fees input:checkbox').not(this).prop('checked', this.checked);
+
+                $('#checkAll').click(function(){
+                    if($(this).prop("checked") == true){
+                        $(".tbody").attr('disabled', false);
+                    }
+                    else if($(this).prop("checked") == false){
+                        $(".tbody").attr('disabled', true).val('');
+                    }
+                });
+            });
+            $(".tbody").attr('disabled', true);
+
+            $('.chk').click(function () {
+                let chkbox = $(this).closest('tr').find('.fee-amount');
+                if($(this).prop("checked") == true){
+                    chkbox.attr('disabled', false);
+                }
+                else if($(this).prop("checked") == false){
+                    chkbox.attr('disabled', true).val('');
+                }
             });
         });
 
@@ -227,6 +248,10 @@
                     let from_month = $('#'+value+'_from');
                     let to_month = $('#'+value+'_to');
                     let fee_amount =  chkbox.val();
+
+                    chkbox.click(function () {
+                        console.log('hi');
+                    });
 
                     if (fee_amount == null || fee_amount == '') {
                         feeError += 1;
