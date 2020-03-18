@@ -40,12 +40,14 @@ class FeeTypesController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'order' => 'required',
             'code' => 'required'
         ]);
 
         $today = Carbon::now();
         $feeType = new FeeType();
         $feeType->name = $request->get('name');
+        $feeType->order = $request->get('order');
         $feeType->code = $request->get('code');
         $feeType->description = $request->get('desc');
         $feeType->type = $request->get('type') == 1 ? 'monthly' : 'onetime';
@@ -92,6 +94,7 @@ class FeeTypesController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'order' => 'required',
             'code' => 'required',
             'desc' => 'required',
         ]);
@@ -100,6 +103,7 @@ class FeeTypesController extends Controller
         $feeType->name = $request->get('name');
         $feeType->code = $request->get('code');
         $feeType->description = $request->get('desc');
+        $feeType->order = $request->get('order');
         $feeType->save();
         return back()->with('status', 'Fee Type Updated');
     }
@@ -119,7 +123,9 @@ class FeeTypesController extends Controller
 
     public function defaultFeeTypes()
     {
-        $feeTypes = FeeType::where('is_default', 1)->get();
+        $feeTypes = FeeType::where('is_default', 1)
+            ->orderBy('order', 'asc')
+            ->get();
         return view('accounts.feeTypes.default', compact('feeTypes'));
     }
 }
