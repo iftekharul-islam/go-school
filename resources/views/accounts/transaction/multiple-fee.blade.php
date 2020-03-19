@@ -102,7 +102,7 @@
                                             @foreach($feeTypes as $ft)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types chk" />
+                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types" />
                                                 </td>
                                                 <td>
                                                     {{ $ft->name }}
@@ -215,7 +215,7 @@
             });
             $(".tbody").attr('disabled', true);
 
-            $('.chk').click(function () {
+            $('.fee_types').click(function () {
                 let chkbox = $(this).closest('tr').find('.fee-amount');
                 if($(this).prop("checked") == true){
                     chkbox.attr('disabled', false);
