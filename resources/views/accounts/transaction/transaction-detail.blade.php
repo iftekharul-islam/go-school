@@ -139,9 +139,39 @@
                             </tr>
                             <tr style="background-color: #eee">
                                 <td></td>
-                                <td class="text-right"><b>Total</b></td>
+                                <td class="text-right"><b>Total Amount</b></td>
                                 <td class="text-right"><b>{{ number_format(($totalAmount + $fee_transaction->fine - $fee_transaction->discount), 2) }}</b></td>
                             </tr>
+                            @php
+                                $total_amount =$totalAmount + $fee_transaction->fine - $fee_transaction->discount;
+                                $partial = $total_amount - ($fee_transaction->amount + $fee_transaction->deducted_advance_amount) ;
+                            @endphp
+                            @if($partial != '0' || $partial != null)
+                            <tr style="background-color: #eee">
+                                <td></td>
+                                <td class="text-right"><b>Partial payment</b></td>
+                                <td class="text-right"><b>{{ number_format(( $total_amount - ($fee_transaction->amount + $fee_transaction->deducted_advance_amount) ), 2) }}</b></td>
+                            </tr>
+                            @endif
+                            @if($fee_transaction->deducted_advance_amount != '0')
+                                <tr style="background-color: #eee">
+                                    <td></td>
+                                    <td class="text-right"><b>Advanced payment</b></td>
+                                    <td class="text-right"><b>{{ number_format(($fee_transaction->deducted_advance_amount), 2) }}</b></td>
+                                </tr>
+                            @endif
+                            @if( $total_amount > ($partial + $fee_transaction->deducted_advance_amount))
+                                <tr style="background-color: #eee">
+                                        <td></td>
+                                        <td class="text-right"><b>Due</b></td>
+                                        <td class="text-right"><b>{{ number_format(($total_amount - ($partial + $fee_transaction->deducted_advance_amount) ), 2) }}</b></td>
+                            @else
+                                <tr style="background-color: #eee">
+                                        <td></td>
+                                        <td class="text-right"><b>Paid</b></td>
+                                        <td class="text-right"><b>{{ number_format(($total_amount), 2) }}</b></td>
+                                </tr>
+                            @endif
                         @endif
                         </tbody>
                     </table>
