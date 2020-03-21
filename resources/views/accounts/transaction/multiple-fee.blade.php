@@ -157,7 +157,12 @@
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Amount <span class="text-danger">*</span></label>
+                                    <label>Partial Payment</label>
+                                    <input type="number" step="0.01" placeholder="" class="form-control partial" value="0">
+                                </div>
+
+                                <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                                    <label>Payable Amount <span class="text-danger">*</span></label>
                                     <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="{{ 0 }}" id="amount" style="pointer-events: none; touch-action: none;">
                                     <input type="hidden" name="payable" id="payable" >
                                     <div class="error text-danger"></div>
@@ -249,10 +254,6 @@
                     let to_month = $('#'+value+'_to');
                     let fee_amount =  chkbox.val();
 
-                    chkbox.click(function () {
-                        console.log('hi');
-                    });
-
                     if (fee_amount == null || fee_amount == '') {
                         feeError += 1;
                         chkbox.addClass('warning');
@@ -309,12 +310,13 @@
             calculateTotal();
         });
 
-        $(document).on('keyup change', '.fee-amount, .fine', function(){
+        $(document).on('keyup change', '.fee-amount, .fine, .partial', function(){
             calculateTotal();
         });
 
         function calculateTotal() {
             let fine = parseFloat($(".fine").val());
+            let partial = parseFloat($(".partial").val());
             let discountAmount =  parseFloat($('#discountValue').val());
             let grandTotal = 0;
             let totalFee = 0;
@@ -328,7 +330,7 @@
                 }
             );
 
-            grandTotal = totalFee + fine - discountAmount;
+            grandTotal = totalFee + fine - ( discountAmount + partial ) ;
             $('#payable').val(grandTotal);
             if ($('#payFromAdv').is(":checked")) {
                 console.log('checked');

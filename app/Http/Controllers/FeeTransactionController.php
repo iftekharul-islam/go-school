@@ -215,6 +215,7 @@ class FeeTransactionController extends Controller
 
     public function multipleFeeStore(Request $request)
     {
+//        return $request;
         $request->validate([
             'amount' => 'required',
             'discountAmount' => 'required',
@@ -262,7 +263,7 @@ class FeeTransactionController extends Controller
         $ft->transaction_serial = $serial;
         $ft->student_id = $request->student_id;
         $ft->school_id = \auth()->user()->school_id;
-        $ft->amount = $payable;
+        $ft->amount = $amount;
         $ft->discount_id = $request->discount;
         $ft->discount = $request->discountAmount;
         $ft->fine = $request->fine;
@@ -307,10 +308,12 @@ class FeeTransactionController extends Controller
             $this->generateReceipt($id);
         }
         $fee_transaction = FeeTransaction::findOrFail($id);
+//        dd($fee_transaction->deducted_advance_amount);
+        $advance_amount = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
         $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
 
-        return view('accounts.transaction.transaction-detail', compact('transactionItems','student', 'fee_transaction'));
+        return view('accounts.transaction.transaction-detail', compact('transactionItems','student', 'fee_transaction', 'advance_amount'));
     }
 
     public function advanceCollection(Request $request)
