@@ -84,4 +84,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Shift');
     }
+    public function feeTranscation()
+    {
+        return $this->hasMany('App\FeeTransaction','student_id');
+    }
 }

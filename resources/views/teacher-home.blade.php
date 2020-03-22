@@ -25,7 +25,7 @@
                         <div class="col-6-xxxl col-lg-3 col-sm-6 col-12">
                             <div class="dashboard-summery-two">
                                 <div class="item-icon bg-light-teal-transparent">
-                                    <i class="flaticon-shopping-list text-light"></i>
+                                    <i class="flaticon-multiple-users-silhouette text-light"></i>
                                 </div>
                                 <div class="item-content">
                                     <div class="item-number"><span class="counter" data-num="{{ $teachers->count() }}"></span></div>
