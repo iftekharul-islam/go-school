@@ -308,7 +308,6 @@ class FeeTransactionController extends Controller
             $this->generateReceipt($id);
         }
         $fee_transaction = FeeTransaction::findOrFail($id);
-//        dd($fee_transaction->deducted_advance_amount);
         $advance_amount = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
         $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
@@ -322,7 +321,8 @@ class FeeTransactionController extends Controller
         $searchData['class_id'] = $request->class_id;
         $searchData['section_id'] = $request->section_id;
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
-        $students = User::with('studentInfo', 'section.class')
+
+        $students = User::with('feeTranscation','studentInfo', 'section.class')
             ->where('role', 'student')
             ->where('school_id', Auth::user()->school_id)
             ->where('active', 1)
@@ -334,6 +334,7 @@ class FeeTransactionController extends Controller
             })
             ->orderBy( 'name', 'asc')
             ->paginate(30);
+//        dd($students);
 
         return view('accounts.advance-collections', compact('students', 'classes', 'searchData'));
     }

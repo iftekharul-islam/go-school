@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 @endif
-                @if($user->role == "teacher" || $user->role == "accountant" || $user->role == "librarian" || $user->role == "admin" )
+                @if($user->role != 'student' || $user->role != 'master'  )
 
                     <div class="info-table table-responsive">
                         <table class="table text-wrap">

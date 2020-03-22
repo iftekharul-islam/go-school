@@ -65,16 +65,16 @@
 
          @if(count($students) > 0)
             <div class="mb-5">
+                @php $totalAmount = 0; @endphp
                 <table class="table table-bordered display text-wrap">
                     <thead>
                     <tr>
                         <th>{{ __('text.Code') }}</th>
                         <th>{{ __('text.Name') }}</th>
                         <th>{{ __('text.roll_number') }}</th>
-                        <th>{{ __('text.session') }}</th>
                         <th>{{ __('text.Class') }}</th>
                         <th>{{ __('text.Section') }}</th>
-                        <th>{{ __('text.amount') }}</th>
+                        <th>{{ __('text.adv_amount') }}</th>
                         <th>{{ __('text.action') }}</th>
                     </tr>
                     </thead>
@@ -86,12 +86,11 @@
                                 <a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{ $student->name }}</a>
                             </td>
                             <td>{{ $student->studentInfo['roll_number'] }}</td>
-                            <td>{{ $student->studentInfo['session'] }}</td>
                             <td>{{ $student->section['class']['class_number'] }} {{ !empty($student->group)? '- '.$student->group:' '}}</td>
                             <td style="white-space: nowrap;">{{ $student->section['section_number'] }}</td>
                             <td> {{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
-                            <td>
-                                <a class="btn btn-lg btn-secondary mr-3 open-modal" data-id="{{$student->student_code}}" data-current-amount="{{$student['studentInfo']['advance_amount']}}" data-name="{{$student->name}}" href="#" data-toggle="modal" data-target="#updateAmount" title="Update Advance Amount"><i class="far fa-edit"></i></a>
+                           <td>
+                                <a class="btn btn-lg btn-primary mr-3 open-modal" data-id="{{$student->student_code}}" data-current-amount="{{$student['studentInfo']['advance_amount']}}" data-name="{{$student->name}}" href="#" data-toggle="modal" data-target="#updateAmount" title="Update Advance Amount"><i class="fas fa-plus "></i></a>
                             </td>
                         </tr>
                     @endforeach
