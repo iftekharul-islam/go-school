@@ -44,7 +44,7 @@ class TeacherAttendanceService {
         return StuffAttendance::whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
             ->orderBy('stuff_id', 'desc')
-            ->whereIn('role', ['librarian', 'accountant'])
+            ->whereNotIn('role', ['student','teacher','admin','master'])
             ->get()
             ->unique('stuff_id');
     }
@@ -70,7 +70,7 @@ class TeacherAttendanceService {
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
             ))
             ->where('school_id', Auth::user()->school_id)
-            ->whereIn('role', ['accountant', 'librarian'])
+            ->whereNotIn('role', ['student','teacher','admin','master'])
             ->groupBy('stuff_id')
             ->get();
     }
