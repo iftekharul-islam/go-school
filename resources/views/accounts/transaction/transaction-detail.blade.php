@@ -123,7 +123,11 @@
                                 @php $totalAmount += $item->fee_amount; @endphp
                                 <tr>
                                     <td>{{ $key + 1}}</td>
-                                    <td>{{ $item['fee_type']['name'] }} @if($item['note']) ({{ $item['note'] }}) @endif</td>
+                                    <td>{{ $item['fee_type']['name'] }}
+                                        @if
+                                            ($item['note']) ({{ $item['note'] }})
+                                        @endif
+                                    </td>
                                     <td class="text-right">{{ number_format($item->fee_amount, 2) }}</td>
                                 </tr>
                             @endforeach
