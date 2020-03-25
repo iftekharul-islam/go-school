@@ -62,8 +62,8 @@
             <caption><h3>{{ $data['month'] }}</h3></caption>
             <tr>
                 <th>Service</th>
-                <th>Total</th>
-                <th>Cost/ Item</th>
+                <th>Quantity</th>
+                <th>Cost / Item</th>
                 <th>Total Cost</th>
             </tr>
             @if($data['payment_type'] == 'monthly')

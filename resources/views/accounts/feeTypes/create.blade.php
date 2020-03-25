@@ -53,6 +53,12 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
+                                    <label for="code">Order No</label>
+                                    <input type="number" class="form-control" name="order" value="{{ old('order') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-4">
                                     <label for="type"> <input type="checkbox" value="1" name="type" id="type" @if( old('type') == 1) checked @endif> Enable Date Selection</label>
                                     <small class="form-text text-muted">If checked, this will enable <i>Month Selection Dropdown</i> in Fee Collection Form</small>
                                 </div>

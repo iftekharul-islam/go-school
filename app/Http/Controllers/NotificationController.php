@@ -67,6 +67,7 @@ class NotificationController extends Controller
                 $tb->student_id = $request->recipients[$i];
                 $tb->user_id = $request->teacher_id;
                 $tb->file_path = $path ? 'storage/' . $path : '';
+                $tb->sms_count = $request->sms_count;
                 $tb->created_at = date('Y-m-d H:i:s');
                 $tb->updated_at = date('Y-m-d H:i:s');
                 $n[] = $tb->attributesToArray();

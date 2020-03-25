@@ -43,12 +43,16 @@
                     <div class="form-group col-md-4">
                         <input type="text" name="from_date" value="{{ $from }}" data-date-format="yyyy-mm-dd" placeholder="From Date" class="form-control date" autocomplete="off" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <input type="text" name="to_date" value="{{ $to }}" data-date-format="yyyy-mm-dd" placeholder="To Date" class="form-control date" autocomplete="off" required>
                     </div>
-                    <div class="form-group col-md-2">
-                        <button type="submit" class="button button--save font-weight-bold">Search</button>
-                        <a href="{{Request::url().'?last_month=1'}}" class="button button--edit font-weight-bold ml-md-2">Last Month</a>
+                    <div class="form-group col-md-4">
+                        <a href="{{Request::url().'?last_month=1'}}" class="button button--edit font-weight-bold float-right ml-md-2">Last Month</a>
+                        <button type="submit" class="button button--save font-weight-bold float-right ">Search</button>
+                    </div>
+                    <div class="form-group col-md-4 mt-5">
+                        <strong for="">Total sent SMS :  </strong>
+                        <label for="">{{ $total_sum }}</label>
                     </div>
                 </div>
             </form>

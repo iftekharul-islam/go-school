@@ -121,6 +121,8 @@
                                                 <label for="msg">Write Message: </label>
                                                 <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="8" style="font-size:1.5rem"></textarea>
                                                 <span id="limit"></span>
+                                                <input type="text" name="sms_count" id="sms_count" class="sms_count d-none" value="">
+                                                <br>
                                                 <label for="">Attach file here :</label>
                                                 <br><input type="file" name="file_path">
                                             </div>
@@ -166,18 +168,16 @@
         function limitCharacter(){
             if ($('#sent-sms'). prop("checked") == true) {
                
-                $('#msg').attr('maxlength', 140);
+                $('#msg').attr('maxlength', 1000);
                 let msg = $('#msg').val();
-                let remaning_char = 140 - msg.length;
+                let count = msg.length / 140 ;
                 if (msg.length > 140){
-                    $('#msg').val('');
-                    $('#limit').text('Maximum 140 Characters');
+                    $('#limit').text(msg.length + '/' +Math.ceil(count)+ ' ( 140 Characters for 1 sms )');
                 } else {
-                    $('#limit').text(msg.length + ' out of 140');
+                    $('#limit').text(msg.length + '/' +Math.ceil(count));
                 }
-                
+                $('#sms_count').val(Math.ceil(count));
             } else {
-                
                 $('#limit').text('');
                 $('#msg').removeAttr('maxlength');
             }

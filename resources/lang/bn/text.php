@@ -208,5 +208,7 @@ return [
 
     'school_setting' => 'স্কুল সেটিং',
     'advance_collection' => 'অগ্রিম সংগ্রহ',
-    'amount' => 'পরিমান'
+    'amount' => 'পরিমান',
+    'adv_amount' => 'অগ্রিম পরিমাণ',
+    'due_amount' => 'বাকি টাকা',
 ];

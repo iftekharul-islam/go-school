@@ -31,7 +31,17 @@
                     </div>
                 @endif
                 <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
-
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12">
+                            <div class="form-group">
+                                <select id='action' name="action" class="form-control form-control-sm">
+                                    <option value="" disabled selected>Bulk Action</option>
+                                    <option value="activate">Activate</option>
+                                    <option value="delete">Delete Permanently</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered display text-wrap">
                             <thead>

@@ -207,5 +207,7 @@ return[
 
     'school_setting' => 'School Setting',
     'advance_collection' => 'Advance Collection',
-    'amount' => 'Amount'
+    'amount' => 'Amount',
+    'adv_amount' => 'Adv Amount',
+    'due_amount' => 'Due Amount',
 ];
