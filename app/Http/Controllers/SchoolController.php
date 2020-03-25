@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\Notification;
 use App\User;
 use App\School;
 use App\Myclass;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Matcher\Not;
 
 class SchoolController extends Controller
 {
@@ -360,7 +362,7 @@ class SchoolController extends Controller
         ],[
             'from_date.before_or_equal' => 'From date must be a date before or equal "To date"',
             'to_date.after_or_equal' => 'To date must be a date after or equal to "From date"',
-            
+
         ]);
 
         $now = Carbon::now();
@@ -381,7 +383,29 @@ class SchoolController extends Controller
             ->orderby('created_at', 'asc')
             ->paginate(30);
 
-        return view('school.sms-summary', compact('sms', 'from', 'to','school'));
+        $sms_count = 0;
+        foreach ($sms as $key => $item)
+        {
+            $sms_count += ceil(strlen($item->content)/140) ;
+        }
+
+        $count = Notification::with('student')
+            ->whereHas('student', function($query) use ($school_id) {
+                $query->where('school_id', $school_id);
+            })
+            ->whereDate('created_at', '>=', $from)
+            ->whereDate('created_at', '<=', $to)
+            ->pluck('sms_count')
+            ->toArray();
+
+        $total_count = 0;
+        foreach ($count as $key => $item)
+        {
+            $total_count += $item;
+        }
+        $total_sum = $sms_count + $total_count ;
+
+        return view('school.sms-summary', compact('sms', 'from', 'to','school', 'total_sum'));
     }
 
     public function schoolSetup()
