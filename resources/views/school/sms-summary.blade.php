@@ -51,7 +51,7 @@
                         <button type="submit" class="button button--save font-weight-bold float-right ">Search</button>
                     </div>
                     <div class="form-group col-md-4 mt-5">
-                        <strong for="">Total sent SMS :</strong>
+                        <strong for="">Total sent SMS :  </strong>
                         <label for="">{{ $total_sum }}</label>
                     </div>
                 </div>
