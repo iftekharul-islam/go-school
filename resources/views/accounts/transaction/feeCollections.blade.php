@@ -115,6 +115,7 @@
                         <thead>
                         <tr>
                             <th>Transaction No.</th>
+                            <th>Fee Amount</th>
                             <th>Fine</th>
                             <th>Discount</th>
                             <th>Amount</th>
@@ -130,17 +131,25 @@
                                     $totalFine += $fee->fine;
                                     $totalDiscount +=  $fee->discount;
                                     $totalAmount += $fee->amount;
+                                    $fee_amount = $fee->transaction_items;
+                                    $total = 0;
                                 @endphp
                                 <tr>
                                     <td>{{ $fee->transaction_serial }}</td>
+                                    @foreach($fee_amount as $item)
+                                        @php
+                                             $total += $item->fee_amount;
+                                         @endphp
+                                    @endforeach
+                                    <td>{{ $total }}</td>
                                     <td>{{ $fee->fine }}</td>
                                     <td>{{ $fee->discount }}</td>
                                     <td>{{ $fee->amount }}</td>
                                     <td>{{ $fee->mode }}</td>
                                     <td>{{ $fee->created_at->format('Y-m-d') }}</td>
                                     <td>
-                                        <button title="Cancel Transaction" class="btn btn-secondary" onclick="feeTransaction({{ $fee->id }})"><i class="fas fa-history"></i></button>&nbsp;
-                                        <a  title="View Transaction Details" class="btn btn-primary" href="{{ url(auth()->user()->role.'/transaction-detail/'.$fee->id) }}"><i class="fas fa-eye"></i></a>
+                                        <button title="Cancel Transaction" class="btn btn-danger" onclick="feeTransaction({{ $fee->id }})"><i class="far fa-trash-alt"></i></button>&nbsp;
+                                        <a  title="View Transaction Details" class="btn btn-info" href="{{ url(auth()->user()->role.'/transaction-detail/'.$fee->id) }}"><i class="fas fa-clipboard-list"></i></a>
                                         <form id="delete-form-{{ $fee->id }}" action="{{ url(auth()->user()->role.'/fee-transaction', $fee->id) }}" method="POST">
                                             {!! method_field('delete') !!}
                                             {!! csrf_field() !!}
@@ -150,9 +159,10 @@
                             @endforeach
                             <tr style="background-color: #eee">
                                 <td>Total</td>
+                                <td></td>
                                 <td>{{ number_format($totalFine, 2) }}</td>
                                 <td>{{ number_format($totalDiscount, 2) }}</td>
-                                <td>{{ number_format(($totalAmount + $totalFine - $totalDiscount), 2) }}</td>
+                                <td>{{ number_format(($totalAmount), 2) }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
