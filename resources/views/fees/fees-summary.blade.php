@@ -30,71 +30,106 @@
                                 <h3>Payment Summary</h3>
                             </div>
                         </div>
-                        @php
-                            $totalFine = 0;
-                            $totalDiscount = 0;
-                            $totalAmount = 0;
-                        @endphp
                         <div class="table-responsive">
-                            <table class="table display table-bordered table-hover  text-wrap table-sm">
+                            <table class="table table-bordered ">
                                 <thead>
                                 <tr>
-                                    <th>Transaction No.</th>
-                                    <th>Fee Amount</th>
-                                    <th>Fine</th>
-                                    <th>Discount</th>
-                                    <th>Amount</th>
-                                    <th>Mode</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th colspan="2">Fee Details</th>
+                                    <th colspan="5">Payment Condition</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
-                                @if(!$fees->isEmpty())
-                                    @foreach($fees as $fee)
-                                        @php
-                                            $totalFine += $fee->fine;
-                                            $totalDiscount +=  $fee->discount;
-                                            $totalAmount += $fee->amount;
-                                            $t = $fee->transaction_items;
-                                            $total = 0;
-                                            $ff = 0;
-                                        @endphp
-                                        <tr>
-                                            <td>{{ $fee->transaction_serial }}</td>
-                                            <td>
-                                                @foreach($t as $item)
+                                <tr>
+                                    <th>Fee Name</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Paid Date</th>
+                                    <th>Last Date</th>
+                                    <th>Paid</th>
+                                    <th>Balance</th>
+                                </tr>
+                                    @php
+                                        $months = ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
+                                        $totalAmount = 0;
+                                        $totalFine = 0;
+                                        $totalDiscount = 0;
+                                        $totalDue = 0;
+                                        $totalPaid = 0;
+                                    @endphp
+                                @foreach($student->section->class->feeMasters as $feeMaster)
+                                    @php
+                                        $total_paid = 0;
+                                        $totalAmount = $totalAmount + $feeMaster->amount;
+                                    @endphp
+                                    <tr>
+                                        <td class="text-capitalize"> <span class="badge-success badge month"></span> {{ $feeMaster->feeType['name'] }}</td>
+                                        <td>{{ $feeMaster->amount }}</td>
+                                        <td>
+                                            @foreach($feeMaster->transactions as $transaction)
+                                                @if($student->id === $transaction->student_id)
                                                     @php
-                                                        $total +=$item->fee_amount;
+                                                        $total_paid = $total_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine']
                                                     @endphp
+                                                @endif
+                                            @endforeach
+                                            @if($total_paid >= $feeMaster->amount)
+                                                <span class="badge-primary badge paid">Paid</span>
+                                            @elseif($total_paid > 0 && $total_paid < $feeMaster->amount)
+                                                <span class="badge-warning badge partial">Partial</span>
+                                            @else
+                                                <span class="badge-danger badge unpaid">Unpaid</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(count($feeMaster->transactions) != 0)
+                                                @foreach($feeMaster->transactions as $transaction)
+                                                    @if($student->id === $transaction->student_id)
+                                                       {{ \Carbon\Carbon::parse($transaction->created_at)->format('d-m-Y') }}
+                                                    @endif
                                                 @endforeach
-                                                {{ $total }}
-                                            </td>
-                                            <td>{{ $fee->fine }}</td>
-                                            <td>{{ $fee->discount }}</td>
-                                            <td>{{ $fee->amount }}</td>
-                                            <td>{{ $fee->mode }}</td>
-                                            <td>{{ $fee->created_at->format('Y-m-d') }}</td>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                           {{ ($feeMaster->due) }}
+                                        </td>
                                             <td>
-                                                <a  title="View Transaction Details" class="btn btn-info" href="{{ url(auth()->user()->role.'/transaction-detail/'.$fee->id) }}"><i class="fas fa-clipboard-list"></i></a>
-                                                <form id="delete-form-{{ $fee->id }}" action="{{ url(auth()->user()->role.'/fee-transaction', $fee->id) }}" method="POST">
-                                                    {!! method_field('delete') !!}
-                                                    {!! csrf_field() !!}
-                                                </form>
+                                                @php
+                                                    $paid_amount = 0;
+                                                    if(count($feeMaster->transactions) != 0)
+                                                       foreach($feeMaster->transactions as $transaction) {
+                                                        $count = count($transaction->feeMasters);
+                                                        if($student->id === $transaction->student_id)
+                                                           if ( $count == 1 ) {
+                                                               $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
+                                                               $totalFine = $totalFine + $transaction['fine'];
+                                                               $totalDiscount = $totalDiscount + $transaction['discount'];
+                                                               $totalPaid = $totalPaid + $transaction['amount'];
+                                                           } else {
+                                                               $paid_amount = $paid_amount + ($transaction['amount']/$count) + ($transaction['discount']/$count) - ($transaction['fine']/$count);
+                                                               $totalFine = $totalFine + $transaction['fine'] / $count;
+                                                               $totalDiscount = $totalDiscount + $transaction['discount'] / $count;
+                                                               $totalPaid = $totalPaid + $transaction['amount'] / $count;
+                                                           }
+                                                       }
+                                                @endphp
+                                                {{number_format((float)($paid_amount), 2, '.', '')}}
                                             </td>
-                                        </tr>
-                                    @endforeach
-                                    <tr style="background-color: #eee">
-                                        <td>Total</td>
-                                        <td></td>
-                                        <td>{{ number_format($totalFine, 2) }}</td>
-                                        <td>{{ number_format($totalDiscount, 2) }}</td>
-                                        <td>{{ number_format(($totalAmount), 2) }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                            <td>{{number_format((float)($feeMaster->amount - $paid_amount), 2, '.', '')}}</td>
                                     </tr>
-                                @endif
+                                @endforeach
+                                <tr class="grand-total">
+                                    <td class="tex text-left"><b>Grand Total</b></td>
+                                    <td><b>{{number_format((float)($totalAmount), 2, '.', '')}}</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>{{number_format((float)($totalPaid), 2, '.', '')}}</b></td>
+                                    <td><b> {{number_format((float)((int)($totalAmount - $totalDiscount + $totalFine - $totalPaid)), 2, '.', '')}}</b></td>
+                                </tr>
+
                                 </tbody>
                             </table>
                         </div>

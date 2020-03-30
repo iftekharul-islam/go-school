@@ -168,8 +168,6 @@
                                     <div class="error text-danger"></div>
                                 </div>
 
-                                <input type="hidden" name="status" id="status" value="">
-
                                 <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                     <label @if($student['studentInfo']['advance_amount'] == 0) style="pointer-events: none; touch-action: none;" @endif>
                                         <input type="checkbox" name="payFromAdv" value="1" onclick="calculateTotal()" id="payFromAdv"> Pay From Advance
@@ -342,17 +340,10 @@
                     grandTotal = 0 ;
                 }
             }
-            $('#amount').val(grandTotal);
 
-            let status = '';
-            if (grandTotal == 0)
-            {
-                status = 'Paid';
-            } else {
-                status = 'Due';
-            }
-            $('#status').val(status);
+            $('#amount').val(grandTotal);
         }
+
         function getDiscount(item) {
             let selectedDiscount = item.value;
             if (selectedDiscount == '' || selectedDiscount == null) {
