@@ -210,14 +210,11 @@ class FeeTransactionController extends Controller
     public function feeCollections($id) {
         $student = User::with(['school','studentInfo','section.class'])->findOrFail($id);
         $fees = FeeTransaction::with('transaction_items.fee_type')->where('student_id', $id)->get();
-
-
         return view('accounts.transaction.feeCollections', compact('fees', 'student'));
     }
 
     public function multipleFeeStore(Request $request)
     {
-//        return $request->all();
         $request->validate([
             'amount' => 'required',
             'discountAmount' => 'required',
@@ -271,7 +268,7 @@ class FeeTransactionController extends Controller
         $ft->fine = $request->fine;
         $ft->mode = $request->mode;
         $ft->accountant_id = \auth()->id();
-        $ft->status = $request->status;
+        $ft->status = 'paid';
         $ft->deducted_advance_amount = $deducted_advance_amount ;
         $ft->save();
 
@@ -299,13 +296,9 @@ class FeeTransactionController extends Controller
     }
     public function studentFeeDetails()
     {
-        $id = Auth::user()->id;
-        $student = User::with(['school','studentInfo','section.class'])->findOrFail($id);
-        $fees = FeeTransaction::with('transaction_items.fee_type')->where('student_id', $id)->get();
-
-//        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', Auth::id())->first();
-//        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
-        return view('fees.fees-summary', compact('student','fees'));
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', Auth::id())->first();
+        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
+        return view('fees.fees-summary', compact('student','discounts'));
     }
 
     public function transactionDetail(Request $request, $id)
@@ -317,7 +310,7 @@ class FeeTransactionController extends Controller
         $advance_amount = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
         $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
-//        dd($transactionItems);
+
         return view('accounts.transaction.transaction-detail', compact('transactionItems','student', 'fee_transaction', 'advance_amount'));
     }
 
@@ -340,6 +333,7 @@ class FeeTransactionController extends Controller
             })
             ->orderBy( 'name', 'asc')
             ->paginate(30);
+//        dd($students);
 
         return view('accounts.advance-collections', compact('students', 'classes', 'searchData'));
     }
