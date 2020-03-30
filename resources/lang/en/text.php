@@ -184,7 +184,7 @@ return[
     'version' => 'Version',
     'session' => 'Session',
     'group' => 'Group',
-    'Birthday' => 'Birthday',
+    'birthday' => 'Birthday',
     'religion' => 'Religion',
     'guardian_name' => "Guardian's name",
     'guardian_phone_number' => "Guardian's Phone Number",
