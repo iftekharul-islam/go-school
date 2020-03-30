@@ -93,6 +93,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
         Route::get('class-routine', 'RoutineController@index')->name('class.routines');
+        Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail');
     });
 
     //Librarian role routes
