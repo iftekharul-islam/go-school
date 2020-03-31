@@ -4,16 +4,14 @@
             {{csrf_field()}}
             <input type="hidden" name="class_id" value="{{$class->id}}"/>
             <div class="form-group false-padding-bottom-form">
-                <label for="section_number{{$class->class_number}}" class="col-sm-6 control-label false-padding-bottom">Section
-                    Name</label>
+                <label for="section_number{{$class->class_number}}" class="col-sm-6 control-label false-padding-bottom">{{ __('text.section_name') }}</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="section_number{{$class->class_number}}"
                            name="section_number" placeholder="A, B, C etc..">
                 </div>
             </div>
             <div class="form-group false-padding-bottom-form">
-                <label for="room_number{{$class->class_number}}" class="col-sm-6 control-label false-padding-bottom">Room
-                    Number</label>
+                <label for="room_number{{$class->class_number}}" class="col-sm-6 control-label false-padding-bottom">{{ __('text.room_number') }}</label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control" id="room_number{{$class->class_number}}"
                            name="room_number" placeholder="Room Number">
@@ -21,7 +19,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="button button--save float-right">Submit</button>
+                    <button type="submit" class="button button--save float-right">{{ __('text.Submit') }}</button>
                 </div>
             </div>
         </form>
@@ -34,13 +32,13 @@
             {{csrf_field()}}
             {{ method_field('PATCH') }}
             <div class="form-group">
-                <label for="classNumber{{$school->id}}" class="col-sm-12 control-label">Class Number/Name</label>
+                <label for="classNumber{{$school->id}}" class="col-sm-12 control-label">{{ __('text.class_name') }}</label>
                 <div class="col-sm-12">
                     <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}" value="{{ $class->class_number }}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="classRoomNumber{{$school->id}}" class="col-md-12 control-label">Class Group (If Any)</label>
+                <label for="classRoomNumber{{$school->id}}" class="col-md-12 control-label">{{ __('text.class_group') }} (If Any)</label>
                 <div class="col-sm-12">
                     <select class="form-control" name="group" id="classRoomNumber{{$school->id}}">
                         <option value="">None</option>
@@ -53,7 +51,7 @@
             </div>
 
             <div class="form-group">
-                <label for="classWithDepartment{{$school->id}}" class="col-md-12 control-label">Department</label>
+                <label for="classWithDepartment{{$school->id}}" class="col-md-12 control-label">{{ __('text.Department') }}</label>
                 <div class="col-sm-12">
                     <select class="form-control" name="department" id="classWithDepartment">
                         <option value="" selected>None</option>
@@ -72,7 +70,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-12">
-                    <button type="submit" class="button button--save float-right">Submit</button>
+                    <button type="submit" class="button button--save float-right">{{ __('text.Submit') }}</button>
                 </div>
             </div>
         </form>

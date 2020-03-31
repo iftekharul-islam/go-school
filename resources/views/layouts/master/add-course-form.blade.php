@@ -6,8 +6,7 @@
                 <input type="hidden" name="class_id" value="{{$class->id}}"/>
                 <input type="hidden" name="section_id" value="{{$section->id}}"/>
                 <div class="false-padding-bottom-form form-group">
-                    <label for="courseName{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Course
-                        Name</label>
+                    <label for="courseName{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">{{ __('text.course_name') }}</label>
                     <div class="col-sm-12">
                         <input type="text" class="form-control" id="courseName{{$section->id}}" name="course_name"
                                placeholder="Course Name">
@@ -15,8 +14,7 @@
                 </div>
 
                 <div class="form-group false-padding-bottom-form">
-                    <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Assign
-                        Course Teacher</label>
+                    <label for="assignTeacher{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">{{ __('text.course_teacher') }}</label>
                     <div class="col-sm-12">
                         <select class="form-control" id="assignTeacher{{$section->id}}" name="teacher_id">
                             <option value="0" selected disabled>Select Teacher</option>
@@ -35,8 +33,7 @@
                 </div>
 
                 <div class="form-group false-padding-bottom-form">
-                    <label for="course_type{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">Course
-                        Type</label>
+                    <label for="course_type{{$section->id}}" class="col-sm-12 control-label false-padding-bottom">{{ __('text.course_type') }}</label>
                     <div class="col-sm-12">
                         <select class="form-control" id="course_type{{$section->id}}" name="course_type">
                             <option value="core">Core</option>
@@ -46,8 +43,7 @@
                     </div>
                 </div>
                 <div class="form-group false-padding-bottom-form">
-                    <label for="courseTime{{$section->id}}" class="col-sm-2 control-label false-padding-bottom">Course
-                        Time</label>
+                    <label for="courseTime{{$section->id}}" class="col-sm-2 control-label false-padding-bottom">{{ __('text.course_time') }}</label>
                     <div class="col-sm-12">
                         <input type="text" class="form-control" id="courseTime{{$section->id}}" name="course_time"
                                placeholder="Course Time">
@@ -56,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <button type="submit" class="button button--save float-right">Submit</button>
+                        <button type="submit" class="button button--save float-right">{{ __('text.Submit') }}</button>
                     </div>
                 </div>
             </form>

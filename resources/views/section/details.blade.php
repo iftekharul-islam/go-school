@@ -5,19 +5,20 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Section Details
+            {{ __('text.section_details') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" class="text-color">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ route(Auth::user()->role. '.home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             @if(isset($_GET['grade']) && $_GET['grade'] == 1)
-                <li><a href="{{url('grades/all-exams-grade')}}">Grades</a></li>
+                <li><a href="{{url('grades/all-exams-grade')}}">{{ __('text.Grades') }}</a></li>
             @else
-                <li><a href="{{url('school/sections?course=1')}}">Section</a></li>
+                <li><a href="{{url('school/sections?course=1')}}">{{ __('text.Section') }}</a></li>
             @endif
-            <li class="active">Section Details</li>
+            <li class="active">{{ __('text.section_details') }}</li>
         </ul>
     </div>
 

@@ -7,7 +7,7 @@
                 <td colspan="12">
                     @include('layouts.master.add-class-form')
                     <div>
-                        <small>Click Class to View All Sections</small>
+                        <small>{{ __('text.click_class') }}</small>
                     </div>
                     <div class="row">
                         @foreach($classes as $class)
@@ -18,7 +18,7 @@
                                             data-toggle="modal"
                                             data-target="#myModal{{$class->id}}"
                                             style="margin-top: 5%;">
-                                        Manage Class
+                                        {{ __('text.manage_class') }}
                                         : {{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
                                     <!-- Modal -->
                                     <div class="modal fade"
@@ -31,9 +31,7 @@
                                                 <div class="modal-header">
                                                     <h4 class="modal-title"
                                                         id="myModalLabel">
-                                                        All
-                                                        Sections of
-                                                        Class {{$class->class_number}}</h4>
+                                                        {{ __('text.all_section') }} {{$class->class_number}} </h4>
                                                     <button type="button"
                                                             class="close"
                                                             data-dismiss="modal"
@@ -46,27 +44,25 @@
                                                         @foreach($sections as $section)
                                                             @if($section->class_id == $class->id)
                                                                 <li class="list-group-item">
-                                                                    Section {{$section->section_number}}
+                                                                    {{ __('text.Section') }} {{$section->section_number}}
                                                                     &nbsp
                                                                     <a class="btn btn-lg btn-warning mr-2"
-                                                                       href="{{url('admin/courses/0/'.$section->id)}}">View
-                                                                        All
-                                                                        Assigned
-                                                                        Courses</a>
+                                                                       href="{{url('admin/courses/0/'.$section->id)}}">
+                                                                        {{ __('text.view_course') }}</a>
                                                                     <span class=""> &nbsp;&nbsp
-                                                                        <a class="btn btn-lg btn-success mr-2" href="{{url('admin/school/promote-students/'.$section->id)}}">+ Promote Students</a>
+                                                                        <a class="btn btn-lg btn-success mr-2" href="{{url('admin/school/promote-students/'.$section->id)}}">+ {{ __('text.promote_students') }}</a>
                                                                     </span>
                                                                     &nbsp
                                                                     <a class="btn btn-lg btn-info pull-right mr-2" data-toggle="collapse" href="#collapseForNewCourse{{$section->id}}"
-                                                                       aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">+ Add New Course</a>
+                                                                       aria-expanded="false" aria-controls="collapseForNewCourse{{$section->id}}">+ {{ __('text.add_course') }}</a>
                                                                     &nbsp
                                                                     <a class="btn btn-lg btn-primary mr-2" id="edit-section-btn-{{$section->id}}"
                                                                        data-toggle="collapse" href="#collapseForEditSection{{$section->id}}"
                                                                        aria-expanded="false" aria-controls="collapseForEditSection{{$section->id}}">
-                                                                        <i class="far fa-edit"></i> Edit
+                                                                        <i class="far fa-edit"></i> {{ __('text.edit') }}
                                                                     </a>
                                                                     &nbsp
-                                                                    <button class='btn btn-lg btn-danger mr-2' type="button" onclick="removeSection({{ $section->id }})"><i class="far fa-trash-alt mr-2"></i>Delete</button>
+                                                                    <button class='btn btn-lg btn-danger mr-2' type="button" onclick="removeSection({{ $section->id }})"><i class="far fa-trash-alt mr-2"></i>{{ __('text.delete') }}</button>
                                                                     <form id="delete-form-{{ $section->id }}" action="{{ route('delete.section', $section->id) }}"
                                                                           method="post" style="display: none;">
                                                                         {{ csrf_field() }}
@@ -81,7 +77,7 @@
                                                                                 <form id="EditSectionForm{{$section->id}}" class="form-horizontal" action="{{route('edit.section', ['id' => $section->id])}}" method="post">
                                                                                     {{csrf_field()}}
                                                                                     <div class="false-padding-bottom-form form-group">
-                                                                                        <label for="" class="col-sm-12 control-label false-padding-bottom">Section Number</label>
+                                                                                        <label for="" class="col-sm-12 control-label false-padding-bottom">{{ __('text.section_name') }}</label>
                                                                                         <div class="col-sm-12">
                                                                                             <input type="text" class="form-control" name="section_number" value="{{$section->section_number}}" required>
                                                                                         </div>
@@ -89,7 +85,7 @@
 
                                                                                     <div class="form-group">
                                                                                         <div class="col-sm-12">
-                                                                                            <button type="submit" class="button button--save float-right">Update Section</button>
+                                                                                            <button type="submit" class="button button--save float-right">{{ __('text.Update') }}</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </form>
@@ -100,9 +96,9 @@
                                                             @endif
                                                         @endforeach
                                                     </ul>
-                                                    <button class="btn btn-info btn-lg mt-5 mb-4" id="create-section-btn-class-{{$class->id}}">+ Create a New Section</button>
-                                                    <button class="btn btn-lg btn-primary ml-3 btn-lg mt-5 mb-4" id="edit-class-info-{{$class->id}}"><i class="far fa-edit"></i> Edit Class Info</button>
-                                                    <button class="btn btn-danger btn-lg mt-5 mb-4 ml-3" type="button" onclick="removeClass({{ $class->id }})"><i class="far fa-trash-alt mr-2"> </i>Delete Class
+                                                    <button class="btn btn-info btn-lg mt-5 mb-4" id="create-section-btn-class-{{$class->id}}">+ {{ __('text.create_section') }}</button>
+                                                    <button class="btn btn-lg btn-primary ml-3 btn-lg mt-5 mb-4" id="edit-class-info-{{$class->id}}"><i class="far fa-edit"></i>{{ __('text.edit_class_info') }}</button>
+                                                    <button class="btn btn-danger btn-lg mt-5 mb-4 ml-3" type="button" onclick="removeClass({{ $class->id }})"><i class="far fa-trash-alt mr-2"> </i>{{ __('text.delete_class') }}
                                                     </button>
                                                     @include('layouts.master.create-section-form')
                                                     <form id="delete-form-{{ $class->id }}" action="{{ route('delete.class', $class->id) }}"
@@ -115,7 +111,7 @@
                                                     <button type="button"
                                                             class="button button--cancel"
                                                             data-dismiss="modal">
-                                                        Close
+                                                        {{ __('text.close') }}
                                                     </button>
                                                 </div>
                                             </div>

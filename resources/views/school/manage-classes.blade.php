@@ -7,14 +7,15 @@
         <div class="breadcrumbs-area">
             <h3>
                 <i class="fas fa-cog fa-fw"></i>
-                All Classes
+                {{ __('text.all_classes') }}
             </h3>
             <ul>
-                <li><a href="{{ URL::previous() }}" class="text-color">
-                        Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role.'.home') }}">&nbsp;&nbsp;Home</a>
+                <li>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>All Classes</li>
+                <li>{{ __('text.all_classes') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -48,8 +49,8 @@
     <script type="text/javascript">
         function removeSection(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -63,8 +64,8 @@
 
         function removeClass(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Class along with Section!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info_class') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
