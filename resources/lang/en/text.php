@@ -235,7 +235,8 @@ return[
     'room_number' => 'Room Number',
     'close' => 'Close',
     'conform_msg' => 'Are you sure ?',
-    'conform_msg' => 'Once deleted, you will not be able to recover !',
-    'conform_info_class' => 'Once deleted, you will not be able to recover this Class along with Section!'
+    'conform_info' => 'Once deleted, you will not be able to recover !',
+    'conform_info_class' => 'Once deleted, you will not be able to recover this Class along with Section!',
+    'sms_count' => 'Total Sent SMS'
 
 ];

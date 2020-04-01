@@ -203,6 +203,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('find-user/{query}', 'AdminController@findUser')->name('admin.search');
         Route::get('search-user/', 'AdminController@index')->name('admin.search-user');
         Route::get('search-result/{id}', 'AdminController@search')->name('admin.search.result');
+        Route::get('/sms-history/{school_id}', 'SchoolController@smsSummary')->name('admin.sms.summary');
 
         Route::get('gpa/create-gpa', 'GradesystemController@create');
         Route::post('store-grade-system', 'GradesystemController@store');
