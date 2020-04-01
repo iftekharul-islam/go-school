@@ -3,16 +3,16 @@
     <thead>
     <tr>
       <th>#</th>
-      <th>File Name</th>
+      <th>{{ __('text.file_name') }}</th>
       @if($upload_type == 'syllabus' && $parent == 'class')
-        <th>Class</th>
+        <th>{{ __('text.Class') }}</th>
       @elseif($upload_type == 'routine' && $parent == 'section')
-        <th>Class</th>
-        <th>Section</th>
+        <th>{{ __('text.Class') }}</th>
+        <th>{{ __('text.Section') }}</th>
       @endif
       @if(Auth::user()->role == 'admin')
-      <th>Is Active</th>
-      <th>Action</th>
+      <th>{{ __('text.is_active') }}</th>
+      <th>{{ __('text.action') }}</th>
       @endif
     </tr>
     </thead>

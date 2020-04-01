@@ -6,17 +6,18 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fa fa-calendar"></i>
-            Class Routines
+            {{ __('text.Class Routine') }}
             @if(Auth::user()->role == 'admin')
             <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.routines')}}">Inactive Routines</a>
             @endif
         </h3>
         <ul>
             <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Class Routine</li>
+            <li>{{ __('text.Class Routine') }}</li>
         </ul>
     </div>
     <div class="card height-auto false-height">

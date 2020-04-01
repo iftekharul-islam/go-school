@@ -3,9 +3,9 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>File Name</th>
-            <th>Is Active</th>
-            <th>Action</th>
+            <th>{{ __('text.file_name') }}</th>
+            <th>{{ __('text.is_active') }}</th>
+            <th>{{ __('text.action') }}</th>
         </tr>
         </thead>
         <tbody>

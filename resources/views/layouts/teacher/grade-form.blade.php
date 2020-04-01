@@ -124,8 +124,8 @@
         <input type="hidden" name="grade_ids[]" value="{{$grade->id}}">
         <tr>
           <th scope="row">{{($loop->index + 1)}}</th>
-          <td>{{$grade->student->student_code}}</td>
-          <td>{{$grade->student->name}}</td>
+          <td>{{$grade->student['student_code']}}</td>
+          <td>{{$grade->student['name']}}</td>
           <td>
             <input type="number" name="attendance[]" class="form-control input-sm" placeholder="Attendance" value="{{$grade->attendance}}">
           </td>

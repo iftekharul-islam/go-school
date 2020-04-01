@@ -6,15 +6,16 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-exclamation-circle"></i>
-            Notices
+            {{ __('text.Notices') }}
             <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.notices')}}">Inactive Notices</a>
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Notices</li>
+            <li>{{ __('text.Notices') }}</li>
         </ul>
     </div>
      @if (session('status'))

@@ -10,7 +10,7 @@
                 Add New {{ucfirst($upload_type)}}
             </h4>
         </div>
-        <label>File Title: </label>
+        <label>{{ __('text.file_title') }} :</label>
         <div class="form-group">
             <input type="text" name="upload-title" id="upload-title" placeholder="File title here..." required class="form-control">
         </div>
