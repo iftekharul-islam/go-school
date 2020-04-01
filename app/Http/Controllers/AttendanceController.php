@@ -247,8 +247,6 @@ class AttendanceController extends Controller
 
      public function attendancesSummaryDate(Request $request, $section_id)
      {
-//         return $request->all();
-
          $s_date = $request->start_date;
          $start_display = date("d-m-Y", strtotime($s_date));
          $date = $request->end_date;

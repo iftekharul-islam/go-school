@@ -78,6 +78,7 @@ class HomeController extends Controller
                     ->where('active', 1)
                     ->get();
             });
+
         }
 
         $allStudents = $this->userService->getStudents();

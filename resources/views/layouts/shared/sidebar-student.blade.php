@@ -188,12 +188,12 @@
                                        href="{{ url('admin/new-student') }}">
                                         <i class="fas fa-angle-right"></i><span>{{ __('text.Add Student') }}</span></a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}"
+                                       href="{{ url('users/' .Auth::user()->school->code. '/1/0?student=1') }}">
+                                        <i class="fas fa-angle-right"></i> <span>{{ __('text.All Students') }}</span></a>
+                                </li>
                             @endif
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::get('student') == 1 ? 'menu-active' : '' }}"
-                                   href="{{ url('users/' .Auth::user()->school->code. '/1/0?student=1') }}">
-                                    <i class="fas fa-angle-right"></i> <span>{{ __('text.All Students') }}</span></a>
-                            </li>
                             @if(\Auth::user()->role == 'teacher')
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('teacher/my-students')) == 1 ? 'menu-active' : '' }}"
@@ -493,6 +493,11 @@
                                         class="fas fa-angle-right"></i>Staff List</a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.sms.summary' ,auth::user()->school_id) }}"
+                           class="nav-link {{ (request()->routeIs('admin.sms.summary' ,auth::user()->school_id)) ? 'menu-active' : '' }}">
+                            <i class="fas fa-book-open"></i><span>SMS Summary</span></a>
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a class="nav-link" href="#">

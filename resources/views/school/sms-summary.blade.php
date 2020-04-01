@@ -56,42 +56,44 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-bordered display text-wrap">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>To</th>
-                    <th>Code</th>
-                    <th>Class</th>
-                    <th>SMS Type</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @if( !$sms->isEmpty() )
-                        @foreach ($sms as $item)
-                            <tr>
-                                <td>{{ $item->created_at->format('Y-m-d') }}</td>
-                                <td><a href="{{route('user.show',['user_code' => $item->user['student_code']]) }}">{{ $item->user['name'] }}</a></td>
-                                <td>{{ $item->user['student_code'] }}</td>
-                                <td>{{$item['user']['section']['class']['class_number']}} ({{ $item['user']['section']['section_number'] }})</td>
-                                <td>{{ ucfirst($item->type) }}</td>
-                            </tr>
-                        @endforeach
-                    @else 
-                        <tr><td colspan="5" class="text-center">No data Found</td></tr>
-                    @endif
-                </tbody>
-            </table>
-            <div class="row mt-5">
-                <div class="col-md-2 col-sm-12">
-                    Showing {{ $sms->firstItem() ?? 0 }} to {{ $sms->lastItem() ?? 0 }} of {{ $sms->total() }}
-                </div>
-                <div class="col-md-10 col-sm-12 text-right">
-                    <div class="paginate123 float-right">
-                        {{ $sms->appends(request()->query())->links() }}
+            @if(auth()->user()->role == 'master')
+                <table class="table table-bordered display text-wrap">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>To</th>
+                        <th>Code</th>
+                        <th>Class</th>
+                        <th>SMS Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @if( !$sms->isEmpty() )
+                            @foreach ($sms as $item)
+                                <tr>
+                                    <td>{{ $item->created_at->format('Y-m-d') }}</td>
+                                    <td><a href="{{route('user.show',['user_code' => $item->user['student_code']]) }}">{{ $item->user['name'] }}</a></td>
+                                    <td>{{ $item->user['student_code'] }}</td>
+                                    <td>{{$item['user']['section']['class']['class_number']}} ({{ $item['user']['section']['section_number'] }})</td>
+                                    <td>{{ ucfirst($item->type) }}</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr><td colspan="5" class="text-center">No data Found</td></tr>
+                        @endif
+                    </tbody>
+                </table>
+                <div class="row mt-5">
+                    <div class="col-md-2 col-sm-12">
+                        Showing {{ $sms->firstItem() ?? 0 }} to {{ $sms->lastItem() ?? 0 }} of {{ $sms->total() }}
+                    </div>
+                    <div class="col-md-10 col-sm-12 text-right">
+                        <div class="paginate123 float-right">
+                            {{ $sms->appends(request()->query())->links() }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
         
