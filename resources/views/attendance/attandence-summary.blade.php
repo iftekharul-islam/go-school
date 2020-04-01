@@ -17,10 +17,15 @@
             <li>{{ __('text.View Summary') }}</li>
         </ul>
         </div>
+        @if(isset($students[0]->section->id))
         <div class="false-height">
             <div class="card mb-3">
                 <div class="card-body">
+                    @if(auth()->user()->role == 'teacher')
+                <form class="new-added-form" action="{{ route('attendance.summary.teacher', $students[0]->section->id) }}" method="get">
+                    @else
                 <form class="new-added-form" action="{{ route('attendance.summary', $students[0]->section->id) }}" method="get">
+                    @endif
                     {{ csrf_field() }}
                     <input type="hidden" name="section_id" value="{{ $students[0]->section->id }}" >
                     <div class="row">
@@ -88,5 +93,16 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="false-height">
+            <div class="card mb-3">
+                <div class="card-body ">
+                    <div class="card-body-body pb-5 text-center">
+                        {{ __('text.No Related Data Found') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection

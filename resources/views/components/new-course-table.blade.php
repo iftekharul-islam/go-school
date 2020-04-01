@@ -20,6 +20,7 @@
                     <th>Submit Grade</th>
                     <th>View Marks</th>
                     <th>Take Attendance</th>
+                    <th>View Attendance</th>
                 @endif
                 @break
             @endforeach
@@ -85,6 +86,14 @@
                     @if(!$student && ($course->teacher_id == Auth::user()->id))
                         <td>
                             <a href="{{url('teacher/attendances/students/'.$course->teacher_id.'/'.$course->id.'/'.$course->exam_id.'/'.$course->section->id)}}" role="button" class="btn btn-info btn-lg">Take Attendance</a>
+                        </td>
+                    @else
+
+                    @endif
+
+                    @if(!$student && ($course->teacher_id == Auth::user()->id))
+                        <td>
+                            <a href="{{route('attendance.summary.teacher' ,$course->section->id)}}" role="button" class="btn btn-info btn-lg">Attendance Summary</a>
                         </td>
                     @else
 
