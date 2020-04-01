@@ -174,6 +174,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('/my-students', 'TeacherHomeController@myStudent')->name('student.list');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+        Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary.teacher');
 
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
