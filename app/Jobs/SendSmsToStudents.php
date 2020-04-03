@@ -36,10 +36,19 @@ class SendSmsToStudents implements ShouldQueue
     public function handle()
     {
         $message = strip_tags($this->message);
-        $students = User::whereIn('id', $this->data)->get();
+        $students = User::with('studentInfo')->whereIn('id', $this->data)->get();
+        
         foreach ( $students as $student)
         {
-            $phone = $student->phone_number;
+            $phone = '';
+            
+            if (!empty($student['studentInfo']['guardian_phone_number'])) {
+                $phone = $student['studentInfo']['guardian_phone_number'];
+            } else {
+                $phone = $student['studentInfo']['father_phone_number'];
+            }
+
+            
             $checked_digit = substr($phone, 0, 3);
             if ($checked_digit == '+88') {
                 $phone = ltrim($phone, '+');
