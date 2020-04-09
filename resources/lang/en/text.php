@@ -237,6 +237,10 @@ return[
     'conform_msg' => 'Are you sure ?',
     'conform_info' => 'Once deleted, you will not be able to recover !',
     'conform_info_class' => 'Once deleted, you will not be able to recover this Class along with Section!',
-    'sms_count' => 'Total Sent SMS'
+    'sms_count' => 'Total Sent SMS',
+    'create_grade' => 'Create new Grade System',
+    'grade_name' => 'Grade System Name',
+    'save' => 'Save',
+    'grade_point' => 'Grade Point',
 
 ];
