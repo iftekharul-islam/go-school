@@ -4,14 +4,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-poll-h"></i>
-            Grade System
+            {{ __("text.grade_system") }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Grade System</li>
+            <li>{{ __("text.grade_system") }}</li>
         </ul>
     </div>
 
@@ -29,11 +30,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Grade</th>
-                            <th>Point</th>
-                            <th>From Mark</th>
-                            <th>To Mark</th>
-                            <th width="15%">Action</th>
+                            <th>{{ __('text.Grades') }}</th>
+                            <th>{{ __('text.grade_point') }}</th>
+                            <th>{{ __('text.from_mark') }}</th>
+                            <th>{{ __('text.to_mark') }}</th>
+                            <th width="15%">{{ __('text.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>

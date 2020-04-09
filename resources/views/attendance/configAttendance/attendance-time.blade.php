@@ -49,13 +49,13 @@
                                                 </h5>
                                             
                                         </div>
-                                        <div id="collapse-{{$class->id}}" class="collapse @if($key == 0) show @endif" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div id="collapse-{{$class->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                             <div class="card-body" id="child-{{$class->id}}">
                                                 @if(!$class->sections->isEmpty())
                                                     @foreach($class->sections as $k => $section)
                                                         <div class="card">
                                                             <div class="card-header">
-                                                            <a href="#" data-toggle="collapse" class="sec-title" data-target="#collapseSection-{{$section->id}}">{{ __('text.Section') }}: {{ $section->section_number }}</a>
+                                                            <a href="#" data-toggle="collapse" class="sec-title " data-target="#collapseSection-{{$section->id}}">{{ __('text.Section') }}: {{ $section->section_number }}</a>
                                                             </div>
                                                             <div class="card-body collapse" data-parent="#child-{{$class->id}}" id="collapseSection-{{$section->id}}">
                                                                 @if(!$section->attendanceTimes->isEmpty())
