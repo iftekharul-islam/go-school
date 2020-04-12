@@ -4,14 +4,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-file-alt"></i>
-           Results
+            {{ __('text.result') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Results</li>
+            <li>{{ __('text.result') }}</li>
         </ul>
     </div>
 
@@ -22,67 +23,68 @@
                     {{ session('status') }}
                 </div>
             @endif
-            @if(!$exams->isEmpty())
-           <div class="table-responsive">
-                
-                <table class="table display text-nowrap">
-                    <thead>
-                        <tr>
-                            <th>Term</th>
-                            <th>Examination Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Publish</th>
-                            <th>Active</th>
-                            <th>File</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($exams as $exam)
-                        <tr>
-                            <td class="text-capitalize">{{ $exam->term }}</td>
-                            <td>{{ $exam->exam_name }}</td>
-                            <td>{{ Carbon\Carbon::parse($exam->start_date)->format('d/m/Y') }}</td>
-                            <td>{{ Carbon\Carbon::parse($exam->end_date)->format('d/m/Y') }}</td>
-                            <td>
-                                @if($exam->result_published == 1)
-                                   <span class="badge badge-info">Yes</span>
-                                @else
-                                    <span class="badge badge-warning">No</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($exam->active == 1)
-                                   <span class="badge badge-info">Yes</span>
-                                @else
-                                    <span class="badge badge-warning">No</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if ($exam->result_file)
-                                    <a href="{{route('exams.download.result',['exam_id' => $exam->id])}}" title="Download" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>
-                                @else
-                                    N/A
-                                @endif
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-lg" type="button" onclick="removeExam({{ $exam->id }})"><i class="far fa-trash-alt"></i></button>
-                                <form id="delete-form-{{ $exam->id }}" action="{{ route('exams.remove.result', ['exam_id' => $exam->id]) }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                                <a href="{{ route('exams.edit.result', ['exam_id' => $exam->id]) }}">
-                                    <button class="btn btn-info btn-lg ml-3"><i class="fa fa-upload"></i></button>
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                
-                <div class="float-right">{{ $exams->links() }}</div>
-                
-            @endif
+                @if(!$exams->isEmpty())
+               <div class="table-responsive">
+
+                    <table class="table display text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>{{ __('text.term') }}</th>
+                                <th>{{ __('text.exam_name') }}</th>
+                                <th>{{ __('text.Start Date') }}</th>
+                                <th>{{ __('text.End Date') }}</th>
+                                <th>{{ __('text.publish') }}</th>
+                                <th>{{ __('text.active') }}</th>
+                                <th>{{ __('text.file') }}</th>
+                                <th>{{ __('text.action') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($exams as $exam)
+                            <tr>
+                                <td class="text-capitalize">{{ $exam->term }}</td>
+                                <td>{{ $exam->exam_name }}</td>
+                                <td>{{ Carbon\Carbon::parse($exam->start_date)->format('d/m/Y') }}</td>
+                                <td>{{ Carbon\Carbon::parse($exam->end_date)->format('d/m/Y') }}</td>
+                                <td>
+                                    @if($exam->result_published == 1)
+                                       <span class="badge badge-info">Yes</span>
+                                    @else
+                                        <span class="badge badge-warning">No</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($exam->active == 1)
+                                       <span class="badge badge-info">Yes</span>
+                                    @else
+                                        <span class="badge badge-warning">No</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($exam->result_file)
+                                        <a href="{{route('exams.download.result',['exam_id' => $exam->id])}}" title="Download" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-lg" type="button" onclick="removeExam({{ $exam->id }})"><i class="far fa-trash-alt"></i></button>
+                                    <form id="delete-form-{{ $exam->id }}" action="{{ route('exams.remove.result', ['exam_id' => $exam->id]) }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                    <a href="{{ route('exams.edit.result', ['exam_id' => $exam->id]) }}">
+                                        <button class="btn btn-info btn-lg ml-3"><i class="fa fa-upload"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                    <div class="float-right">{{ $exams->links() }}</div>
+
+                @endif
+            </div>
         </div>
     </div>
 @endsection

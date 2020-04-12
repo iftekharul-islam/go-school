@@ -4,15 +4,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-file-alt"></i>
-            Add Exam
+            {{ __('text.Add Examination') }}
         </h3>
         <ul>
             <li>
                 <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Add Exams</li>
+            <li> {{ __('text.Add Examination') }}</li>
         </ul>
     </div>
     <div class="row">

@@ -1,7 +1,7 @@
 <div class="card mb-3" style="border-radius: 0 !important;">
-  <div class="card-header" style="background-color: #28978B; color: white">Information</div>
+  <div class="card-header" style="background-color: #28978B; color: white">{{ __('text.information') }}</div>
   <div class="card-body">
-    An Examination represents a term. All Courses of a term belong to an Examination. So, all Quiz, Class Test, Assignment, Attendance, Written, Practical, etc. in a Course are subjected to that specific Examination.
+    {{ __('text.exam_manage_info') }}
   </div>
 </div>
 {{$exams->links()}}
@@ -16,14 +16,14 @@
     <thead>
     <tr>
       <th>#</th>
-      <th>Term</th>
-      <th>Examination Name</th>
-      <th>Notice Published</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Result Published</th>
-      <th>Set Active</th>
-      <th>Action</th>
+      <th>{{ __('text.term') }}</th>
+      <th>{{ __('text.exam_name') }}</th>
+      <th>{{ __('text.notice_published') }}</th>
+      <th>{{ __('text.Start Date') }}</th>
+      <th>{{ __('text.End Date') }}</th>
+      <th>{{ __('text.result_published') }}</th>
+      <th>{{ __('text.is_active') }}</th>
+      <th>{{ __('text.action') }}</th>
     </tr>
     </thead>
     <tbody>
