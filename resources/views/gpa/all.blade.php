@@ -24,7 +24,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <h4><i class="fas fa-poll text-teal"></i> Grade Title: <strong>{{$gpa->grade_system_name   }}</strong></h4>
+                <h4><i class="fas fa-poll text-teal"></i> {{ __('text.grade_title') }}: <strong>{{$gpa->grade_system_name   }}</strong></h4>
                 <div class="table-responsive">
                     <table class="table display table-bordered  text-nowraps">
                         <thead>

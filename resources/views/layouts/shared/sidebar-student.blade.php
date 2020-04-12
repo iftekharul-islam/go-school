@@ -316,7 +316,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->routeIs('exams.results')) ? 'menu-active' : '' }}"
-                                   href="{{ route('exams.results') }}"><i class="fas fa-angle-right"></i><span>Results</span></a>
+                                   href="{{ route('exams.results') }}"><i class="fas fa-angle-right"></i><span>{{ __('text.result') }}</span></a>
                             </li>
                         </ul>
                     </li>

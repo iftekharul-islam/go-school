@@ -3,15 +3,16 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Exams Details
+            {{ __('text.exam_details') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li> <a style="margin-left: 8px;" href="{{ url('/exams/active') }}">All Active Exams</a></li>
-            <li>Exams Details</li>
+            <li> <a style="margin-left: 8px;" href="{{ url('/exams/active') }}">{{ __('text.Active Exams') }}</a></li>
+            <li>{{ __('text.exam_details') }}</li>
         </ul>
     </div>
 
@@ -20,11 +21,11 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Class</th>
-                    <th>Course Name</th>
-                    <th>Course Type</th>
-                    <th>Course Time</th>
-                    <th>Course Teacher</th>
+                    <th>{{ __('text.Class') }}</th>
+                    <th>{{ __('text.course_name') }}</th>
+                    <th>{{ __('text.course_type') }}</th>
+                    <th>{{ __('text.course_time') }}</th>
+                    <th>{{ __('text.course_teacher') }}</th>
                 </tr>
                 </thead>
                 <tbody>
