@@ -14,14 +14,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-file-invoice-dollar"></i>
-            Add New Expense
+            {{ __('text.add_expense') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Add New Expense</li>
+            <li>{{ __('text.add_expense') }}</li>
         </ul>
     </div>
     @if (session('status'))
@@ -37,7 +38,7 @@
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="name" class=" mt-5">Sector Name <label class="text-danger">*</label></label>
+                                <label for="name" class=" mt-5">{{ __('text.expense_name') }} <label class="text-danger">*</label></label>
 
                                 <select  class="select2" name="name">
                                     @foreach($sectors as $sector)
@@ -54,7 +55,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="amount">Amount <label class="text-danger">*</label></label>
+                                <label for="amount">{{ __('amount') }} <label class="text-danger">*</label></label>
                                 <input id="amount" type="number" class="form-control" name="amount" value="{{ old('amount') }}" placeholder="Amount" required>
 
                                 @if ($errors->has('amount'))
@@ -68,7 +69,7 @@
                         <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
 
                             <div class="col-md-12">
-                                <label for="date">Expense For Date <label class="text-danger">*</label></label>
+                                <label for="date">{{ __('text.expense_date') }}<label class="text-danger">*</label></label>
 
                                 <input data-date-format="yyyy-mm-dd" id="date" class="form-control date" name="date" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
                                 @if ($errors->has('date'))
@@ -80,7 +81,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="description">Description <label class="text-danger">*</label></label>
+                                <label for="description">{{ __('text.description') }} <label class="text-danger">*</label></label>
                                 <textarea rows="3" id="description" class="form-control" name="description" placeholder="Description" required>{{ old('description') }}</textarea>
 
                                 @if ($errors->has('description'))
@@ -91,7 +92,7 @@
                             </div>
                         </div>
                         <div class="col-12 form-group mg-t-8">
-                            <button type="submit" class="button button--save float-right"><b>Save</b></button>
+                            <button type="submit" class="button button--save float-right"><b>{{ __('text.save') }}</b></button>
                         </div>
                     </form>
                 </div>

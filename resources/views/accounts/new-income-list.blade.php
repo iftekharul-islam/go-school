@@ -22,14 +22,15 @@
 <div class="breadcrumbs-area example-screen">
     <h3>
         <i class="fas fa-file-invoice-dollar"></i>
-        Income List
+        {{ __('text.Income List') }}
     </h3>
     <ul>
-        <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                Back &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+        <li>
+            <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
         </li>
-        <li>Income List</li>
+        <li>{{ __('text.Income List') }}</li>
     </ul>
 </div>
 
@@ -49,7 +50,7 @@
                             <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
 
                                 <div class="col-md-12">
-                                    <label for="from_date">From Date</label>
+                                    <label for="from_date">{{ __('text.Start Date') }}</label>
                                     <input data-date-format="yyyy-mm-dd" id="datePicker1" class="form-control date" name="from_date" value="{{ $from ?? \Carbon\Carbon::now()->format('Y-m-d') }}" required>
                                     @if ($errors->has('from_date'))
                                         <span class="help-block">
@@ -60,7 +61,7 @@
                             </div>
                             <div class="form-group{{ $errors->has('month') ? ' has-error' : '' }}">
                                 <div class="col-md-12">
-                                    <label for="year">To Date</label>
+                                    <label for="year">{{ __('text.End Date') }}</label>
                                     <input data-date-format="yyyy-mm-dd" id="datePicker1" class="form-control date" name="to_date" value="{{ $to ??  \Carbon\Carbon::now()->format('Y-m-d') }}" required>
                                     @if ($errors->has('to_date'))
                                         <span class="help-block">
@@ -72,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
-                                <button type="submit" class="button button--save float-left">Get Income List</button>
+                                <button type="submit" class="button button--save float-left">{{ __('text.Income List') }}</button>
                             </div>
                         </div>
                     </form>
@@ -88,11 +89,11 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Sector Name</th>
-                                        <th style="width: 40%">Description</th>
-                                        <th>Date</th>
-                                        <th>Amount</th>
-                                        <th>Action</th>
+                                        <th>{{ __('text.sector_name') }}</th>
+                                        <th style="width: 40%">{{ __('text.amount') }}</th>
+                                        <th>{{ __('text.Date') }}</th>
+                                        <th>{{ __('text.amount') }}</th>
+                                        <th>{{ __('text.action') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -137,7 +138,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td><b>Grand Total</b></td>
+                                        <td><b>{{ __('text.grand_total') }}</b></td>
                                         <td><b>{{ $grand_total }}</b></td>
                                     </tr>
                                     </tbody>

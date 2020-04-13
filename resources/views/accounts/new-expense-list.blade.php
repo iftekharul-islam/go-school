@@ -23,14 +23,15 @@
 <div class="breadcrumbs-area example-screen">
     <h3>
         <i class="fas fa-file-invoice-dollar"></i>
-        List of Expenses
+        {{ __('text.expense_list') }}
     </h3>
     <ul>
-        <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                Back &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+        <li>
+            <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
         </li>
-        <li>List of Expenses</li>
+        <li>{{ __('text.expense_list') }}</li>
     </ul>
 </div>
 @if (session('status'))
@@ -47,7 +48,7 @@
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="form-group{{ $errors->has('from_date') ? ' has-error' : '' }}">
-                                <label for="year" class="col-md-12">From Date</label>
+                                <label for="year" class="col-md-12">{{ __('text.From Date') }}</label>
                                 <div class="col-md-12">
                                     <input data-date-format="yyyy-mm-dd" id="datePicker" class="form-control date" name="from_date" value="{{ $from ?? \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="" required>
                                     @if ($errors->has('from_date'))
@@ -58,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('to_date') ? ' has-error' : '' }}">
-                                <label for="year" class="col-md-12">To Date</label>
+                                <label for="year" class="col-md-12">{{ __('text.End Date') }}</label>
                                 <div class="col-md-12">
                                     <input data-date-format="yyyy-mm-dd" id="datePicker" class="form-control date" name="to_date" value="{{ $to ?? \Carbon\Carbon::now()->format('Y-m-d') }}" placeholder="From Date" required>
                                     @if ($errors->has('to_date'))
@@ -71,7 +72,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8" style="margin-left: -12px;">
-                                <button type="submit" class="button button--save float-left mb-5 mt-4">Expense List</button>
+                                <button type="submit" class="button button--save float-left mb-5 mt-4">{{ __('text.expense_list') }}</button>
                             </div>
                         </div>
                     </form>
@@ -86,11 +87,11 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Sector Name</th>
-                                    <th style="width: 40%">Description</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Action</th>
+                                    <th>{{ __('text.sector_name') }}</th>
+                                    <th style="width: 40%">{{ __('text.description') }}</th>
+                                    <th>{{ __('text.Date') }}</th>
+                                    <th>{{ __('text.amount') }}</th>
+                                    <th>{{ __('text.active') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

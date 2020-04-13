@@ -3,13 +3,14 @@
 @section('content')
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
-            <h3>Discounts</h3>
+            <h3>{{ __('text.discounts') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Discounts</li>
+                <li>{{ __('text.discounts') }}</li>
             </ul>
         </div>
         <div class="card height-auto false-height">
@@ -21,8 +22,8 @@
                         </div>
                     @endif
                     <div class="item-title">
-                        <h3 class="float-left mb-5">Fee Discounts</h3>
-                        <a href="{{ url(auth()->user()->role.'/fee-discount/create') }}" class="button button--save float-right">Add discount</a>
+                        <h3 class="float-left mb-5">{{ __('text.fee_discount') }}</h3>
+                        <a href="{{ url(auth()->user()->role.'/fee-discount/create') }}" class="button button--save float-right">{{ __('text.add_discount') }}</a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -30,12 +31,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>Amount</th>
-                            <th>Type</th>
-                            <th width="40%">Description</th>
-                            <th>Action</th>
+                            <th>{{ __('text.Name') }}</th>
+                            <th>{{ __('text.Code') }}</th>
+                            <th>{{ __('text.amount') }}</th>
+                            <th>{{ __('text.type') }}</th>
+                            <th width="40%">{{ __('text.description') }}</th>
+                            <th>{{ __('text.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>

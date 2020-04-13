@@ -40,13 +40,14 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
-            <h3>Collect Fee</h3>
+            <h3>{{ __('text.Collect Fee') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Collect Fee</li>
+                <li>{{ __('text.Collect Fee') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -61,7 +62,7 @@
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                <label>Class</label>
+                                <label>{{ __('text.Class') }}</label>
                                 <select name="class" id="class_number" class="select2" onchange="getSections(this)">
                                     <option>Select Class</option>
                                     @foreach($classes as $class)
@@ -70,7 +71,7 @@
                                 </select>
                             </div>
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                <label>Section</label>
+                                <label>{{ __('text.Section') }}</label>
                                 <select class="form-control" id="section" name="section" >
                                     @if(!empty(request('class')))
                                         @php
@@ -85,7 +86,7 @@
                                 </select>
                             </div>
                             <div class="col-12 form-group mg-t-2 float-right">
-                                <button type="submit" class="button--save button float-right">Search</button>
+                                <button type="submit" class="button--save button float-right">{{ __('text.Search') }}</button>
                             </div>
                         </div>
                     </form>
@@ -94,22 +95,17 @@
             @if(count($students) > 0)
                 <div class="card height-auto">
                     <div class="card-body text-center">
-                        <div class="heading-layout1">
-                            <div class="item-title">
-                                <h3>All Students</h3>
-                            </div>
-                        </div>
                         <div class="table-responsive">
-                            <table class="data-table-paginate table-bordered display text-wrap">
+                            <table class="table-data-div table-bordered display text-wrap">
                                 <thead>
                                 <tr>
                                     <th>SL</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Class</th>
-                                    <th>Section</th>
-                                    <th>Gender</th>
-                                    <th>Action</th>
+                                    <th>{{ __('text.Code') }}</th>
+                                    <th>{{ __('text.Name') }}</th>
+                                    <th>{{ __('text.Class') }}</th>
+                                    <th>{{ __('text.Section') }}</th>
+                                    <th>{{ __('text.gender') }}</th>
+                                    <th>{{ __('text.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

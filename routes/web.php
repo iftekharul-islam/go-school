@@ -144,7 +144,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
-        Route::get('sectors', 'AccountController@sectors');
+        Route::get('sectors', 'expense@sectors');
         Route::post('create-sector', 'AccountController@storeSector');
         Route::get('edit-sector/{id}', 'AccountController@editSector');
         Route::post('update-sector', 'AccountController@updateSector');
