@@ -384,7 +384,7 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->is($role.'/expense')) ? 'menu-active' : '' }}"
                                    href="{{ url($role.'/expense') }}">
-                                    <i class="fas fa-angle-right"></i><span>{{ __('text.Add New Expense') }}</span></a>
+                                    <i class="fas fa-angle-right"></i><span>{{ __('text.add_expense') }}</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->is($role.'/expense-list')) ? 'menu-active' : '' }}"

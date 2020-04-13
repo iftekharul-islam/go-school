@@ -118,7 +118,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Update Advance Balance</h4>
+                <h4 class="modal-title">{{ __('text.update_adv_balance') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <form id ="form_update_amount" class="new-added-form" action="{{ url(auth()->user()->role.'/update-advance-collection') }}" method="post">
@@ -134,7 +134,7 @@
                 </div>
                 <div class="form-group modal-footer pb-">
                     <div class="col-md-12">
-                        <button type="submit" class="button button--save float-right">Update</button>
+                        <button type="submit" class="button button--save float-right">{{ __('text.Update') }}</button>
                     </div>
                 </div>
             </form>

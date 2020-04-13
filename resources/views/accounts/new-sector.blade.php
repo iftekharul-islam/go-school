@@ -4,14 +4,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-file-invoice-dollar"></i>
-            Add New Account Sector
+            {{ __('text.add_account_sector') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Add New Account Sector</li>
+            <li>{{ __('text.add_account_sector') }}</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
@@ -23,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name">Sector Name <label class="text-danger">*</label></label>
+                                <label for="name">{{ __('text.sector_name') }}<label class="text-danger">*</label></label>
 
                                 <div class="">
                                     <input id="name" type="text" class="form-control" name="name" value="{{ (!empty($sector->name))?$sector->name:old('name') }}" placeholder="Sector Name" required>
@@ -38,7 +39,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
-                                <label for="type">Sector Type <label class="text-danger">*</label></label>
+                                <label for="type">{{ __('text.sector_type') }}<label class="text-danger">*</label></label>
 
                                 <div class="">
                                     <select  class="select2" name="type">
@@ -55,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group mg-t-8">
-                            <button type="submit" class="button button--save ml-4 mt-4">Save</button>
+                            <button type="submit" class="button button--save ml-4 mt-4">{{ __('text.save') }}</button>
                         </div>
                     </div>
                 </form>
@@ -70,16 +71,16 @@
                             @endif
                             <div class="heading-layout1">
                                 <div class="item-title">
-                                    <h3>All Account Sectors</h3>
+                                    <h3>{{ __('text.account_sector') }}</h3>
                                 </div>
                             </div>
                             <table class="table table-bordered table-striped table-data-div">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Sector Name</th>
-                                    <th>Type</th>
-                                    <th>Action</th>
+                                    <th>{{ __('text.sector_name') }}</th>
+                                    <th>{{ __('text.type') }}</th>
+                                    <th>{{ __('text.action') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

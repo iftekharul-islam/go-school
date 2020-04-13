@@ -6,14 +6,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class='fas fa-book'></i>
-            Add New Book
+            {{ __('text.add_book') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Add New Book</li>
+            <li>{{ __('text.add_book') }}</li>
         </ul>
     </div>
 
@@ -28,7 +29,7 @@
                 {{ csrf_field() }}
                 @include('library.books.form')
                 <div class="col-12 form-group mt-5">
-                    <button type="submit" class="button button--save float-right">Save</button>
+                    <button type="submit" class="button button--save float-right">{{ __('text.save') }}</button>
                 </div>
             </form>
         </div>

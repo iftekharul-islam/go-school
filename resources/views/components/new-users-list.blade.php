@@ -11,10 +11,10 @@
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive Students</a>
                 
             @elseif($user->role == 'accountant')
-                <i class="fas fa-users mr-2 "></i>  Accountants
+                <i class="fas fa-users mr-2 "></i>  {{ __('text.accountant') }}
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.accountants') }}">Inactive Accountants</a>
             @elseif($user->role == 'librarian')
-                <i class="fas fa-users mr-2 "></i>   All Librarians
+                <i class="fas fa-users mr-2 "></i>   {{ __('text.librarian') }}
                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.librarians') }}">Inactive Librarians</a>
             @else
                 <i class="fas fa-users mr-2 "></i>    All Users
@@ -37,9 +37,9 @@
                 @elseif($user->role == 'student')
                     {{ __('text.All Students') }}
                 @elseif($user->role == 'accountant')
-                    Accountants
+                    {{ __('text.accountant') }}
                 @elseif($user->role == 'librarian')
-                    All Librarians
+                    {{ __('text.librarian') }}
                 @else
                     All Users
                 @endif

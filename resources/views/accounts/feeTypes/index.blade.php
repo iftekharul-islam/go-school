@@ -4,15 +4,16 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Fee Types</h3>
+            <h3>{{ __('text.Fee Types') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Manage Accounts</li>
-                <li>Fee Collection</li>
-                <li>Fee Types</li>
+                <li>{{ __('text.Manage Accounts') }}</li>
+                <li>{{ __('text.Fee Collection') }}</li>
+                <li>{{ __('text.Fee Types') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -24,20 +25,20 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3 class="float-left mb-5">Fee Types</h3>
-                        <a href="{{ url(auth()->user()->role.'/fee-types/create') }}" class="button button--save float-right"><i class="fas fa-plus-circle"></i> Add Fee Type</a>
+                        <h3 class="float-left mb-5">{{ __('text.Fee Types') }}</h3>
+                        <a href="{{ url(auth()->user()->role.'/fee-types/create') }}" class="button button--save float-right"><i class="fas fa-plus-circle"></i> {{ __('text.add_fee_type') }}</a>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table display text-wrap">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Year</th>
-                            <th>Code</th>
-                            <th width="40%">Description</th>
-                            <th>Action</th>
+                            <th>{{ __('text.id') }}</th>
+                            <th>{{ __('text.Name') }}</th>
+                            <th>{{ __('text.year') }}</th>
+                            <th>{{ __('text.Code') }}</th>
+                            <th width="40%">{{ __('text.description') }}</th>
+                            <th>{{ __('text.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>

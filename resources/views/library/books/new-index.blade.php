@@ -6,14 +6,15 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class='fas fa-book'></i>
-            All Books
+            {{ __('text.All Books') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>All Books</li>
+            <li>{{ __('text.All Books') }}</li>
         </ul>
     </div>
     <?php $role = \Illuminate\Support\Facades\Auth::user()->role ?>
@@ -29,12 +30,12 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Type</th>
-                        <th>Quantity</th>
-                        <th>Details</th>
-                        <th>Action</th>
+                        <th>{{ __('text.title') }}</th>
+                        <th>{{ __('text.author') }}</th>
+                        <th>{{ __('text.type') }}</th>
+                        <th>{{ __('text.quantity') }}</th>
+                        <th>{{ __('text.Details') }}</th>
+                        <th>{{ __('text.action') }}</th>
                     </tr>
                     </thead>
                     @foreach($books as $book)

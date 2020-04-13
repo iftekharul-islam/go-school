@@ -6,17 +6,17 @@
     </style>
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area example-screen">
-            <h3>Student Fee Collection</h3>
+            <h3>{{ __('text.Fee Collection') }}</h3>
             <ul>
                 <li>
                     <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
                 <li>
-                    <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> Collect Fee</a>
+                    <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> {{ __('text.Collect Fee') }}</a>
                 </li>
-                <li>Student Fee Collection</li>
+                <li>{{ __('text.Fee Collection') }}</li>
             </ul>
         </div>
         @php  $options = '<option value="January">January</option>'
@@ -42,27 +42,27 @@
                         <div class="row">
                             <table class="table">
                                 <tr>
-                                    <th>Name</th>
+                                    <th>{{ __('text.Name') }}</th>
                                     <td>{{ $student->name }}</td>
-                                    <th>Class & Section</th>
+                                    <th>{{ __('text.class_section') }}</th>
                                     <td> Class {{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</td>
                                 </tr>
                                 @if($student['studentInfo'])
                                     <tr>
-                                        <th>Father's Name</th>
+                                        <th>{{ __('text.father_name') }}</th>
                                         <td>{{ $student->studentInfo['father_name'] }}</td>
-                                        <th>Phone</th>
+                                        <th>{{ __('text.phone_number') }}</th>
                                         <td>{{ $student->studentInfo['father_phone_number'] }}</td>
                                     </tr>
                                 @endif
                                 <tr>
-                                    <th>Version</th>
+                                    <th>{{ __('text.version') }}</th>
                                     <td>@if($student->studentInfo){{ $student->studentInfo['version'] }}@endif </td>
-                                    <th>Student Code</th>
+                                    <th>{{ __('text.student_code') }}</th>
                                     <td>{{ $student->student_code }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Advance Balance</th>
+                                    <th>{{ __('text.adv_balance') }}</th>
                                     <td colspan="3">{{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
                                 </tr>
                             </table>
@@ -87,14 +87,14 @@
                     @endif
                     <div class="card height-auto false-height">
                         <div class="card-body">
-                            <p>Student: <b>{{ $student['name'] }}</b>, Class: <b>{{ $student->section['class']['class_number'].' ('. $student['section']['section_number'] .')' }}</b> </p>
+                            <p>{{ __('text.Name') }}: <b>{{ $student['name'] }}</b>, {{ __('text.Class') }}: <b>{{ $student->section['class']['class_number'].' ('. $student['section']['section_number'] .')' }}</b> </p>
                             <div class="table-responsive ">
                                 <table id="fees" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" id="checkAll" class="fee_types" title="Select All" /></th>
-                                            <th width="65%">Fee Name</th>
-                                            <th width="30%">Amount</th>
+                                            <th width="65%">{{ __('text.fee_name') }}</th>
+                                            <th width="30%">{{ __('text.Name') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,17 +132,17 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Date</label>
+                                    <label>{{ __('text.Date') }}</label>
                                     <input type="text" placeholder="" class="form-control" value="{{  \Carbon\Carbon::today()->toDateString() }}" name="month" disabled>
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Fine <span class="text-danger">*</span></label>
+                                    <label>{{ __('text.fine') }} <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control fineInput fine" name="fine" value="0" required>
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Discount Group</label>
+                                    <label>{{ __('text.discounts') }}</label>
                                     <select class="select2" id="discount" name="discount" onchange="getDiscount(this)">
                                         <option value="">Please Select</option>
                                         @foreach($discounts as $discount)
@@ -152,17 +152,17 @@
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Discount <span class="text-danger">*</span></label>
+                                    <label>{{ __('text.discount_group') }} <span class="text-danger">*</span></label>
                                     <input type="number" step="0.01" placeholder="" class="form-control discountInput discount" name="discountAmount" value="0" id="discountValue" style="pointer-events: none; touch-action: none;">
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Partial Payment</label>
+                                    <label>{{ __('text.partial_payment') }}</label>
                                     <input type="number" step="0.01" placeholder="" class="form-control partial" value="0">
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>Payable Amount <span class="text-danger">*</span></label>
+                                    <label>{{ __('text.payable_amount') }}<span class="text-danger">*</span></label>
                                     <input type="number" step="0.01" placeholder="" class="form-control" name="amount" value="{{ 0 }}" id="amount" style="pointer-events: none; touch-action: none;">
                                     <input type="hidden" name="payable" id="payable" >
                                     <div class="error text-danger"></div>
@@ -170,26 +170,26 @@
 
                                 <div class="col-12-xxxl col-lg-12 col-12 form-group">
                                     <label @if($student['studentInfo']['advance_amount'] == 0) style="pointer-events: none; touch-action: none;" @endif>
-                                        <input type="checkbox" name="payFromAdv" value="1" onclick="calculateTotal()" id="payFromAdv"> Pay From Advance
+                                        <input type="checkbox" name="payFromAdv" value="1" onclick="calculateTotal()" id="payFromAdv"> {{ __('text.pay_from_adv') }}
                                     </label>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 form-group">
-                                    <label>Payment Method</label>
+                                    <label>{{ __('text.pay_method') }}</label>
                                     <label for="cash" class="mr-2">
-                                        <input class="ml-5" type="radio" name="mode" value="cash" id="cash" checked> Cash
+                                        <input class="ml-5" type="radio" name="mode" value="cash" id="cash" checked> {{ __('text.cash') }}
                                     </label>
                                     <label for="cheque">
-                                        <input class="" type="radio" name="mode" id="cheque" value="cheque"> Cheque
+                                        <input class="" type="radio" name="mode" id="cheque" value="cheque">{{ __('text.cheque') }}
                                     </label>
                                 </div>
                                 <div class="col-12-xxxl col-lg-12 col-12 form-group">
-                                    <label>Note</label>
+                                    <label>{{ __('text.note') }}</label>
                                     <textarea name="note" id="" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
                             </div>
                             <input type="hidden" name="student_id" value="{{ $student->id }}">
-                            <button id="submit-form" class="button button--save float-right mt-4 " style="max-width: 400px !important;">Save</button>
+                            <button id="submit-form" class="button button--save float-right mt-4 " style="max-width: 400px !important;">{{ __('text.save') }}</button>
                         </div>
                     </div>
                 </div>
