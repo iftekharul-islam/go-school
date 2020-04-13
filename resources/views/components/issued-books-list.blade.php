@@ -4,14 +4,14 @@
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Book Title</th>
-      <th scope="col">Book Code</th>
-      <th scope="col">Type</th>
-      <th scope="col">Borrower Name</th>
-      <th scope="col">Borrower Code</th>
-      <th scope="col">Issue Date</th>
-      <th scope="col">Return Date</th>
-      <th scope="col">Action</th>
+      <th scope="col">{{ __('text.book_title') }}</th>
+      <th scope="col">{{ __('text.book_code') }}</th>
+      <th scope="col">{{ __('text.type') }}</th>
+      <th scope="col">{{ __('text.borrower_name') }}</th>
+      <th scope="col">{{ __('text.borrower_code') }}</th>
+      <th scope="col">{{ __('text.issued_date') }}</th>
+      <th scope="col">{{ __('text.return_date') }}</th>
+      <th scope="col">{{ __('text.action') }}</th>
     </tr>
     </thead>
     <tbody>
