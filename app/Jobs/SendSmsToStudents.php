@@ -35,9 +35,11 @@ class SendSmsToStudents implements ShouldQueue
      */
     public function handle()
     {
+        $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
+        $base_url_non_masking = 'http://smscp.datasoftbd.com/smsapi/non-masking';
         $message = strip_tags($this->message);
         $students = User::with('studentInfo')->whereIn('id', $this->data)->get();
-        
+
         foreach ( $students as $student)
         {
             $phone = '';
@@ -62,18 +64,21 @@ class SendSmsToStudents implements ShouldQueue
             $user = config("message.sms_user");
             $pass = config("message.sms_pass");
             $sid = config("message.sms_sid");
-            $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+            $url =$base_url_non_masking."?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
             $client = new Client();
-            $response = $client->request('POST', $url, [
-                'form_params' => [
-                    'user' => $user,
-                    'pass' => $pass,
-                    'sid'  => $sid,
-                    'sms'  => [
-                        [$phone, $message],
-                    ],
-                ],
-            ]);
+            $request = $client->get($url);
+
+//          $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+//          $response = $client->request('POST', $url, [
+//                'form_params' => [
+//                    'user' => $user,
+//                    'pass' => $pass,
+//                    'sid'  => $sid,
+//                    'sms'  => [
+//                        [$phone, $message],
+//                    ],
+//                ],
+//            ]);
         }
     }
 }
