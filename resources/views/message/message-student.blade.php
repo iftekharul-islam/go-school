@@ -166,17 +166,32 @@
         });
 
         function limitCharacter(){
+            var english = /^[A-Za-z0-9-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/#!|±@ ]*$/;
             if ($('#sent-sms'). prop("checked") == true) {
-               
                 $('#msg').attr('maxlength', 1000);
                 let msg = $('#msg').val();
-                let count = msg.length / 140 ;
-                if (msg.length > 140){
-                    $('#limit').text(msg.length + '/' +Math.ceil(count)+ ' ( 140 Characters for 1 sms )');
-                } else {
-                    $('#limit').text(msg.length + '/' +Math.ceil(count));
+                if (!english.test(msg))
+                {
+                    console.log('its not english');
+                    let count = msg.length / 70 ;
+                    if (msg.length > 70){
+                        $('#limit').text(msg.length + '/' +Math.ceil(count)+ ' ( 70 Characters for 1 Bangla sms )');
+                    } else {
+                        $('#limit').text(msg.length + '/' +Math.ceil(count));
+                    }
+                    $('#sms_count').val(Math.ceil(count));
                 }
-                $('#sms_count').val(Math.ceil(count));
+                else
+                {
+                    console.log('its english');
+                    let count = msg.length / 160 ;
+                    if (msg.length > 160){
+                        $('#limit').text(msg.length + '/' +Math.ceil(count)+ ' ( 160 Characters for 1 English sms )');
+                    } else {
+                        $('#limit').text(msg.length + '/' +Math.ceil(count));
+                    }
+                    $('#sms_count').val(Math.ceil(count));
+                }
             } else {
                 $('#limit').text('');
                 $('#msg').removeAttr('maxlength');
