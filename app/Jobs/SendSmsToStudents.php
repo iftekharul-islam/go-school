@@ -39,7 +39,7 @@ class SendSmsToStudents implements ShouldQueue
         $base_url_non_masking = 'http://smscp.datasoftbd.com/smsapi/non-masking';
         $message = strip_tags($this->message);
         $students = User::with('studentInfo')->whereIn('id', $this->data)->get();
-//        dd($message);
+
         foreach ( $students as $student)
         {
             $phone = '';
