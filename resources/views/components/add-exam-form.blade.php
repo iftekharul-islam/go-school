@@ -77,7 +77,7 @@
         </div>
         <div class="col-12 form-group mg-t-8" style="text-align: right">
             <a href="{{ URL::previous() }}" class="button button--cancel mr-2" style="margin-left: 1%;" role="button"><b>{{ __('text.Cancel') }}</b></a>
-            <button type="submit" class="button button--save"><b>{{ __('text.Save') }}</b></button>
+            <button type="submit" class="button button--save"><b>{{ __('text.save') }}</b></button>
         </div>
     </div>
 </form>
