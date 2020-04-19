@@ -309,5 +309,15 @@ return[
     'book_price' => 'Book Price',
     'book_rack_number' => 'Book Rack Number',
     'book_row_number' => 'Book Row Number',
-    'book_image_URL' => 'Book Image URL'
+    'book_image_URL' => 'Book Image URL',
+    'staff_management' => 'Staff Management',
+    'add_staff' => 'Add Staff',
+    'staff_list' => 'Staff List',
+    'sms_history' => 'SMS Summary',
+    'help' => 'Help',
+    'online_training' => 'Online Traning',
+    'user_manual' => 'User Manual',
+    'total_sms' => 'Total sent SMS',
+    'last_month' => 'Last Month',
+    'designation' => 'Designation',
 ];

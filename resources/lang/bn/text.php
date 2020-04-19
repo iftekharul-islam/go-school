@@ -312,5 +312,14 @@ return [
     'book_rack_number' => 'বুক র্যাক নম্বর',
     'book_row_number' => 'বই সারি নম্বর',
     'book_image_URL' => 'বুক ইমেজ ইউআরএল',
-
+    'staff_management' => 'স্টাফ ব্যবস্থাপনা',
+    'add_staff' => 'স্টাফ সংযোজন',
+    'staff_list' => 'স্টাফ লিস্ট',
+    'sms_history' => 'এসএমএস সামারি',
+    'help' => 'হেল্প সেকশন',
+    'online_training' => 'অনলাইন ট্রেনিং',
+    'user_manual' => 'ইউজার ম্যানুয়াল',
+    'total_sms' => 'মোট প্রেরিত এসএমএস',
+    'last_month' => 'সর্বশেষ মাস',
+    'designation' => 'পেশা',
 ];

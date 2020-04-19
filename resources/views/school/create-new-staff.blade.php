@@ -7,14 +7,15 @@
         <div class="breadcrumbs-area">
             <h3>
                 <i class="fas fa-user-plus"></i>
-                Add Staff
+                {{ __('text.add_staff') }}
             </h3>
             <ul>
-                <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <li>
+                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Add Staff</li>
+                <li>{{ __('text.add_staff') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -48,8 +49,7 @@
 
                                     <div class="col-md-12">
                                         <label for="name"
-                                               class="control-label false-padding-bottom">Full
-                                            Name<label class="text-danger">*</label></label>
+                                               class="control-label false-padding-bottom">{{ __('text.Name') }}<label class="text-danger">*</label></label>
                                         <input id="name" type="text" class="form-control staff-name"
                                                name="name" value="{{ old('name') }}"
                                                required>
@@ -67,7 +67,7 @@
 
                                     <div class="col-md-12">
                                         <label for="email"
-                                               class="control-label false-padding-bottom">E-Mail/Username<label
+                                               class="control-label false-padding-bottom">{{ __('text.email_username') }}<label
                                                 class="text-danger">*</label></label>
                                         <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
@@ -93,8 +93,7 @@
 
                                     <div class="col-md-12">
                                         <label for="phone_number"
-                                               class="control-label false-padding-bottom">Phone
-                                            Number</label>
+                                               class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
                                         <input id="phone_number" type="text"
                                                class="form-control" name="phone_number"
                                                value="{{ old('phone_number') }}" >
@@ -111,7 +110,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('designation') ? 'designation' : '' }}">
                                     <div class="col-md-12">
                                         <label for="designation"
-                                               class="control-label false-padding-bottom">Designation<label
+                                               class="control-label false-padding-bottom">{{ __('text.designation') }}<label
                                                 class="text-danger">*</label></label>
                                         <input id="designation" type="text"
                                                class="form-control" name="designation"
@@ -130,7 +129,7 @@
 
                                     <div class="col-md-12">
                                         <label for="gender"
-                                               class="control-label false-padding-bottom">Gender<label
+                                               class="control-label false-padding-bottom">{{ __('text.gender') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <select id="gender" class="form-control"
@@ -155,8 +154,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('blood_group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="blood_group"
-                                               class="control-label false-padding-bottom">Blood
-                                            Group<label
+                                               class="control-label false-padding-bottom">{{ __('text.blood_group') }}<label
                                                 class="text-danger">*</label></label>
 
                                         <select id="blood_group" class="form-control"
@@ -185,7 +183,7 @@
 
                                     <div class="col-md-12">
                                         <label for="nationality"
-                                               class="control-label false-padding-bottom">Nationality</label>
+                                               class="control-label false-padding-bottom">{{ __('text.nationality') }}</label>
 
                                         <input id="nationality" type="text"
                                                class="form-control" name="nationality"
@@ -203,7 +201,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="name"
-                                               class="control-label false-padding-bottom">Address<label
+                                               class="control-label false-padding-bottom">{{ __('text.address') }}<label
                                                 class="text-danger">*</label></label>
                                         <input id="address" type="text" class="form-control"
                                                name="address"
@@ -223,7 +221,7 @@
 
                                     <div class="col-md-12">
                                         <label for="email"
-                                               class="control-label false-padding-bottom">About</label>
+                                               class="control-label false-padding-bottom">{{ __('text.about') }}</label>
 
                                         <input id="about" type="text" class="form-control"
                                                name="about"
@@ -240,7 +238,7 @@
                             <div class="col-md-6">
                                 <div class="col-md-12 mt-4">
                                     <label class="control-label">
-                                        Upload Profile Picture
+                                        {{ __('text.upload_picture') }}
                                         <br>
                                         <input type="file" id="picPath" name="pic_path">
                                 </div>
@@ -251,7 +249,7 @@
                             <div class="col-md-12 col-md-offset-4">
                                 <button type="submit" id="registerBtn"
                                         class="button button--save float-right">
-                                    Register
+                                    {{ __('text.register') }}
                                 </button>
                             </div>
                         </div>

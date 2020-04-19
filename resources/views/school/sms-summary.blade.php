@@ -6,15 +6,16 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-envelope"></i>
-            SMS Summary
+            {{ __('text.sms_history') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li><a href="{{ route('all.school') }}">All School</a></li>
-            <li>SMS Summary</li>
+            <li><a href="{{ route('all.school') }}">{{ __('text.all_school') }}</a></li>
+            <li>{{ __('text.sms_history') }}</li>
         </ul>
     </div>
     @if (session('status'))
@@ -47,11 +48,11 @@
                         <input type="text" name="to_date" value="{{ $to }}" data-date-format="yyyy-mm-dd" placeholder="To Date" class="form-control date" autocomplete="off" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <a href="{{Request::url().'?last_month=1'}}" class="button button--edit font-weight-bold float-right ml-md-2">Last Month</a>
-                        <button type="submit" class="button button--save font-weight-bold float-right ">Search</button>
+                        <a href="{{Request::url().'?last_month=1'}}" class="button button--edit font-weight-bold float-right ml-md-2">{{ __('text.last_month') }}</a>
+                        <button type="submit" class="button button--save font-weight-bold float-right ">{{ __('text.Search') }}</button>
                     </div>
                     <div class="form-group col-md-4 mt-5">
-                        <strong for="">Total sent SMS :  </strong>
+                        <strong for="">{{ __('text.total_sms') }} :  </strong>
                         <label for="">{{ $total_sum }}</label>
                     </div>
                 </div>
