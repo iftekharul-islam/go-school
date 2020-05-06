@@ -42,31 +42,33 @@ class SendSmsToStudents implements ShouldQueue
 
         foreach ( $students as $student)
         {
-            $phone = '';
-            
-            if (!empty($student['studentInfo']['guardian_phone_number'])) {
-                $phone = $student['studentInfo']['guardian_phone_number'];
-            } else {
-                $phone = $student['studentInfo']['father_phone_number'];
-            }
+            if ($student['studentInfo']['is_sms_enabled'] == 1)
+            {
+                $phone = '';
 
-            
-            $checked_digit = substr($phone, 0, 3);
-            if ($checked_digit == '+88') {
-                $phone = ltrim($phone, '+');
-            } else {
-                if ($checked_digit == '880') {
-                    $phone = $phone;
+                if (!empty($student['studentInfo']['guardian_phone_number'])) {
+                    $phone = $student['studentInfo']['guardian_phone_number'];
                 } else {
-                    $phone = '88' . $phone;
+                    $phone = $student['studentInfo']['father_phone_number'];
                 }
-            }
-            $user = config("message.sms_user");
-            $pass = config("message.sms_pass");
-            $sid = config("message.sms_sid");
-            $url =$base_url_non_masking."?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
-            $client = new Client();
-            $request = $client->get($url);
+
+
+                $checked_digit = substr($phone, 0, 3);
+                if ($checked_digit == '+88') {
+                    $phone = ltrim($phone, '+');
+                } else {
+                    if ($checked_digit == '880') {
+                        $phone = $phone;
+                    } else {
+                        $phone = '88' . $phone;
+                    }
+                }
+                $user = config("message.sms_user");
+                $pass = config("message.sms_pass");
+                $sid = config("message.sms_sid");
+                $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
+                $client = new Client();
+                $request = $client->get($url);
 
 //          $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
 //          $response = $client->request('POST', $url, [
@@ -79,6 +81,7 @@ class SendSmsToStudents implements ShouldQueue
 //                    ],
 //                ],
 //            ]);
+            }
         }
     }
 }

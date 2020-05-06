@@ -8,6 +8,7 @@ use App\Http\Resources\NotificationResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 
 class NotificationController extends Controller
@@ -74,8 +75,9 @@ class NotificationController extends Controller
             }
             Notification::insert($n);
         });
-//        return $request->msg;
-        if (isset($request->sent_sms))
+       $school = Auth::user()->school;
+
+        if (isset($request->sent_sms) && $school->is_sms_enable == 1 )
         {
             SendSmsToStudents::dispatch($request->recipients, $request->msg);
         }
