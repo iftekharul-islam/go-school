@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Mavinoo\Batch\BatchServiceProvider::class,
+        Mavinoo\LaravelBatch\LaravelBatchServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
 
@@ -239,7 +239,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Batch' => Mavinoo\Batch\BatchFacade::class,
+        'Batch' => Mavinoo\LaravelBatch\LaravelBatchFacade::class,
         'DingoApi' => Dingo\Api\Facade\API::class,
         'DingoRoute' => Dingo\Api\Facade\Route::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
