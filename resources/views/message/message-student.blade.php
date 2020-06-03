@@ -166,7 +166,7 @@
         });
 
         function limitCharacter(){
-            var english = /^[A-Za-z0-9-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/#!|±@ ]*$/;
+            var english = /^[A-Za-z0-9-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/#!|±@ \n]*$/;
             if ($('#sent-sms'). prop("checked") == true) {
                 $('#msg').attr('maxlength', 1000);
                 let msg = $('#msg').val();
