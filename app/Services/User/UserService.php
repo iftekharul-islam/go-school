@@ -3,12 +3,8 @@
 namespace App\Services\User;
 
 use App\Events\NewUserRegistered;
-use App\Myclass;
-use App\Attendance;
-use App\StuffAttendance;
 use App\User;
 use App\StudentInfo;
-use Mavinoo\LaravelBatch\Batch;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,15 +12,13 @@ class UserService
 {
     protected $user;
     protected $db;
-    protected $batch;
     protected $st;
     protected $st2;
 
-    public function __construct(User $user, DB $db, Batch $batch)
+    public function __construct(User $user, DB $db)
     {
         $this->user = $user;
         $this->db = $db;
-        $this->batch = $batch;
     }
 
     public function isListOfStudents($school_code, $student_code)
