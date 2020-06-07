@@ -59,6 +59,7 @@ class NotificationController extends Controller
             'msg' => 'required|string',
         ]);
         DB::transaction(function ( ) use ($request) {
+            $n = [];
             for($i=0; $i < count($request->recipients); $i++){
                 $path = $request->hasFile('file_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('file_path')) : null;
                 $tb = new Notification;
@@ -79,7 +80,10 @@ class NotificationController extends Controller
 
         if (isset($request->sent_sms) && $school->is_sms_enable == 1 )
         {
-            SendSmsToStudents::dispatch($request->recipients, $request->msg);
+            foreach ($request->recipients as $student_id)
+            {
+                SendSmsToStudents::dispatch($student_id, $request->msg);
+            }
         }
         return back()->with('status','Message Sent');
     }

@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\User;
-use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -38,38 +37,41 @@ class SendSmsToStudents implements ShouldQueue
         $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
         $base_url_non_masking = 'http://smscp.datasoftbd.com/smsapi/non-masking';
         $message = strip_tags($this->message);
-        $students = User::with('studentInfo')->whereIn('id', $this->data)->get();
+        $student = User::with('studentInfo')->where('id', $this->data)->first();
 
-        foreach ( $students as $student)
+
+        if ($student['studentInfo']['is_sms_enabled'] == 1)
         {
-            if ($student['studentInfo']['is_sms_enabled'] == 1)
-            {
-                $phone = '';
+            $phone = $student['studentInfo']['father_phone_number'];
+            if (!empty($student['studentInfo']['guardian_phone_number'])) {
+                $phone = $student['studentInfo']['guardian_phone_number'];
+            }
 
-                if (!empty($student['studentInfo']['guardian_phone_number'])) {
-                    $phone = $student['studentInfo']['guardian_phone_number'];
-                } else {
-                    $phone = $student['studentInfo']['father_phone_number'];
-                }
+            $checked_digit = substr($phone, 0, 3);
+            if ($checked_digit == '+88') {
+                $phone = ltrim($phone, '+');
+            }
 
+            $checked_zero = substr($phone, 0, 1);
+            if ( $checked_zero == 0 ) {
+                    $phone = '88' . $phone;
+            }
 
-                $checked_digit = substr($phone, 0, 3);
-                if ($checked_digit == '+88') {
-                    $phone = ltrim($phone, '+');
-                } else {
-                    if ($checked_digit == '880') {
-                        $phone = $phone;
-                    } else {
-                        $phone = '88' . $phone;
-                    }
-                }
-                $user = config("message.sms_user");
-                $pass = config("message.sms_pass");
-                $sid = config("message.sms_sid");
-                $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
-                $client = new Client();
-                $request = $client->get($url);
+            $checked_lastest = substr($phone, 0, 3);
+            if ( $checked_lastest !== '880') {
+                $phone = ltrim($phone, '88');
+                $phone = '880' . $phone;
+            }
 
+            $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
+            $client = new Client();
+            $request = $client->get($url);
+
+            // sslwireless sms configuration
+
+//            $user = config("message.sms_user");
+//            $pass = config("message.sms_pass");
+//            $sid = config("message.sms_sid");
 //          $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
 //          $response = $client->request('POST', $url, [
 //                'form_params' => [
@@ -81,7 +83,7 @@ class SendSmsToStudents implements ShouldQueue
 //                    ],
 //                ],
 //            ]);
-            }
+
         }
     }
 }
