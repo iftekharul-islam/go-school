@@ -39,7 +39,6 @@ class SendSmsToStudents implements ShouldQueue
         $message = strip_tags($this->message);
         $student = User::with('studentInfo')->where('id', $this->data)->first();
 
-
         if ($student['studentInfo']['is_sms_enabled'] == 1)
         {
             $phone = $student['studentInfo']['father_phone_number'];

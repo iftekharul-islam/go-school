@@ -76,7 +76,7 @@ class NotificationController extends Controller
             }
             Notification::insert($n);
         });
-       $school = Auth::user()->school;
+        $school = Auth::user()->school;
 
         if (isset($request->sent_sms) && $school->is_sms_enable == 1 )
         {
