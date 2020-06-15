@@ -35,7 +35,7 @@ class SendSmsToStudents implements ShouldQueue
     public function handle()
     {
         $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
-        $base_url_non_masking = 'http://smscp.datasoftbd.com/smsapi/non-masking';
+        $base_url_non_masking = 'https://smscp.datasoftbd.com/smsapi/non-masking';
         $message = strip_tags($this->message);
         $student = User::with('studentInfo')->where('id', $this->data)->first();
 
@@ -64,7 +64,13 @@ class SendSmsToStudents implements ShouldQueue
 
             $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
             $client = new Client();
-            $request = $client->get($url);
+            try {
+                $request = $client->get($url);
+            } catch (\Exception $exception) {
+                logger($exception);
+            }
+
+
 
             // sslwireless sms configuration
 
