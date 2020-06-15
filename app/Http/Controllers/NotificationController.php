@@ -82,7 +82,7 @@ class NotificationController extends Controller
         {
             foreach ($request->recipients as $student_id)
             {
-                SendSmsToStudents::dispatch($student_id, $request->msg);
+                SendSmsToStudents::dispatch($student_id, $request->msg)->delay(5);
             }
         }
         return back()->with('status','Message Sent');
