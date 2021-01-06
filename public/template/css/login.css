@@ -152,6 +152,10 @@ body {
     text-transform: uppercase;
 }
 
+.button-reset{
+    position: initial;
+}
+
 .button--primary {
     text-transform: capitalize;
     font-size: 14px;
