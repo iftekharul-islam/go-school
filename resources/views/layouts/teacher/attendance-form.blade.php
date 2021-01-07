@@ -43,7 +43,7 @@
                                 <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
                             @endif
                             &nbsp;&nbsp
-                                <a href="{{url('user/',$attendance->student->student_code)}}">{{$attendance->student->name}}</a>
+                                <a href="{{route('user.show', $attendance->student->student_code)}}">{{$attendance->student->name}}</a>
                         </td>
                         <td class="attendance-bar">
                             <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
@@ -84,7 +84,7 @@
                         <td>{{$student->student_code}}</td>
                         <td>
                             <span class="badge badge-danger attdState">{{ __('text.Absent') }}</span>&nbsp;&nbsp;
-                            <a href="{{url('user/',$student->student_code)}}">{{$student->name}}</a>
+                            <a href="{{route('user.show', $student->student_code)}}">{{$student->name}}</a>
                         </td>
                         <td class="attendance-bar">
                             <div class="form-check ">

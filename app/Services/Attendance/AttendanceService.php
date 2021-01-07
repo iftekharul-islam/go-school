@@ -81,14 +81,18 @@ class AttendanceService {
     }
 
     public function getAllAttendanceByStudentId( $student_id ){
-        return \DB::table('attendances')
+        $section_id = User::find($student_id)->pluck('section_id')->first();
+        $data = \DB::table('attendances')
             ->select('student_id', \DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS total_present,
                       COUNT(CASE WHEN present=0 THEN present END) AS total_absent,
                       COUNT(CASE WHEN present=2 THEN present END) AS total_escaped'
             ))
             ->groupBy('student_id')->where('student_id', $student_id)
+            ->where('section_id', $section_id)
             ->get();
+
+        return $data;
     }
 
     public function getStudent($student_id){
