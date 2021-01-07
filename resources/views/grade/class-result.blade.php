@@ -8,7 +8,7 @@
             Marks and Grades
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role.'.home') }}">&nbsp;&nbsp;Home</a>
             </li>
@@ -23,7 +23,8 @@
             <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
-                        <h3><i class="fas fa-users mr-2"></i>Students of Section: <strong> {{$section->section_number}}</strong></h3>
+                        <h3><i class="fas fa-users mr-2"></i>Students of Section:
+                            <strong> {{$section->section_number}}</strong></h3>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -42,9 +43,12 @@
                             <tr>
                                 <td>{{ ($loop->index+1) }}</td>
                                 <td>{{ $student['student_code'] }}</td>
-                                <td><a class="text-teal" href="{{ route('user.show',$student->student_code) }}">{{$student->name}}</a></td>
+                                <td><a class="text-teal"
+                                       href="{{ route('user.show',$student->student_code) }}">{{$student->name}}</a>
+                                </td>
                                 <td>{{ $student->email }}</td>
-                                <td><a class="btn-link text-teal" role="button" href="{{ route('student.grades',$student->id) }}">View Grade History</a></td>
+                                <td><a class="btn-link text-teal" role="button"
+                                       href="{{ route('student.grades',$student->id) }}">View Grade History</a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -60,7 +64,7 @@
                     <h3>Marks and Grades</h3>
                 </div>
             </div>
-            @if(count($grades) > 0)
+            @if(count($grades) > 10)
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -69,7 +73,7 @@
                 <div class="mb-5">
                     @foreach($grades as $grade)
                         <b>Class:</b> {{$grade->course->class->class_number}} &nbsp;
-                        <b>Section:</b> {{$grade->student->section->section_number}}
+                        <b>Section:</b> {{$grade->student ? $grade->student->section->section_number : ''}}
                         @break
                     @endforeach
                 </div>
@@ -88,24 +92,25 @@
                         <tbody>
                         @foreach($grades as $grade)
                             <tr>
-                                <td>@if (isset($grade->exam->exam_name)){{$grade->exam->exam_name}} @endif</td>
-                                <td>@if (isset($grade->course->course_name)){{$grade->course->course_name}} @endif</td>
-                                <td>@if (isset($grade->student['student_code'])){{$grade->student['student_code']}} @endif</td>
-                                <td><a class="text-teal btn-link" href="{{ url('user/'.$grade->student['student_code'])}}">{{$grade->student['name']}}</a></td>
-                                <td>@if (isset($grade->marks)){{$grade->marks}} @endif</td>
-                                <td>@if (isset($grade->gpa)){{$grade->gpa}} @endif</td>
+                                <td>{{$grade->exam->exam_name ?? ''}}</td>
+                                <td>{{$grade->course->course_name ?? ''}}</td>
+                                <td>{{$grade->student['student_code'] ?? ''}}</td>
+                                <td>
+                                    @isset($grade->student)
+                                        <a class="text-teal btn-link"
+                                           href="{{ url('user/'.$grade->student['student_code'])}}">{{$grade->student['name']}}</a>
+                                    @endisset
+                                </td>
+                                <td>{{$grade->marks ?? '' }}</td>
+                                <td>{{$grade->gpa ?? ''}}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
             @else
-                <div class="card mt-5 false-height">
-                    <div class="card-body">
-                        <div class="card-body-body mt-5 text-center">
-                            No Related Data Found.
-                        </div>
-                    </div>
+                <div class="text-center">
+                    No Related Data Found !
                 </div>
             @endif
         </div>
