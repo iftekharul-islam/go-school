@@ -88,7 +88,8 @@ class AttendanceService {
                       COUNT(CASE WHEN present=0 THEN present END) AS total_absent,
                       COUNT(CASE WHEN present=2 THEN present END) AS total_escaped'
             ))
-            ->groupBy('student_id')->where('student_id', $student_id)
+            ->groupBy('student_id')
+            ->where('student_id', $student_id)
             ->where('section_id', $section_id)
             ->get();
 
