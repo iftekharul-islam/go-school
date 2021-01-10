@@ -51,6 +51,7 @@ class StudentHomeController extends Controller
                     ->where('active', 1)
                     ->get();
             });
+//            return $exams;
 
             $student_info = $student->studentInfo;
             $present=0;

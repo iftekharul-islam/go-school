@@ -116,6 +116,8 @@
 <script src="{{ asset('template/js/sweetalert.js') }}"></script>
 
 <script src="{{ asset('template/js/datepicker.min.js') }}"></script>
+{{--<!-- ck editor -->--}}
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
 {{--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>--}}

@@ -36,7 +36,7 @@
                         <h3 class="text-teal fancy4"><i class="mr-2 text-teal"></i> Book Details </h3>
                         <a href="{{ route('edit-book-details', $book->id) }}" class="float-right text-teal"><i class="far fa-edit text-teal"></i> Edit</a>
                     </div>
-                    <div class="col-md-3 library-image"><img src="{{ $book->img_path }}" alt="{{ $book->title }}"/>
+                    <div class="col-md-3 library-image"><img src="{{ asset($book->img_path) }}" alt="{{ $book->title }}"/>
                     </div>
                     <div class="col-md-9">
                         <div class="account-settings-box">
@@ -63,7 +63,7 @@
                                                             <td class="text-nowrap font-medium text-dark-medium">
                                                                 Author
                                                             </td>
-                                                            <td>{{ $book->autdor }}</td>
+                                                            <td>{{ $book->author }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-nowrap font-medium text-dark-medium">Row
@@ -113,13 +113,13 @@
                                                             <td class="text-nowrap font-medium text-dark-medium">Created
                                                                 At
                                                             </td>
-                                                            <td>{{ $book->created_at }}</td>
+                                                            <td>{{ $book->created_at->diffForHumans() }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-nowrap font-medium text-dark-medium">Updated
                                                                 At
                                                             </td>
-                                                            <td>{{ $book->updated_at }}</td>
+                                                            <td>{{ $book->updated_at->diffForHumans() }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-nowrap font-medium text-dark-medium">

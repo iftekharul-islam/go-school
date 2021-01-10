@@ -324,7 +324,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="col-md-12">
-                            <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <div class="false-padding-bottom-form form-group{{ $errors->has('teacher_pic') ? ' has-error' : '' }}">
                                 <label class="control-label">
                                     {{ __('text.upload_picture') }}
                                 </label>

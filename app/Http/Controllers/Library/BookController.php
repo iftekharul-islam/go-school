@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Library\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -35,7 +36,19 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request) {
+        if ($request->hasFile('img_path')) {
+//            $path = Storage::disk('public')->put('book-'.Auth::user()->school_id.'/'.date('Y'), $request->file('img_path'));
+            $image = $request->file('img_path');
 
+            $image_name = time().'.'.$image->getClientOriginalExtension();
+
+            $destinationPath = public_path('storage/book/');
+
+            $image->move($destinationPath, $image_name);
+
+            $path = 'book/' . $image_name;
+
+        }
         $data = [
             'title'     => $request->title,
             'book_code' => $request->book_code,
@@ -46,7 +59,7 @@ class BookController extends Controller
             'type'      => $request->type,
             'about'     => $request->about,
             'price'     => $request->price,
-            'img_path'  => $request->img_path,
+            'img_path'  => $request->img_path ? 'storage/'. $path : '',
             'class_id'  => isset($request->class_id) ? $request->class_id : '',
             'school_id' => auth()->user()->school_id,
             'user_id'   => auth()->user()->id
@@ -79,7 +92,7 @@ class BookController extends Controller
         $book->about = $request->get('about');
         $book->quantity = $request->get('quantity');
         $book->price = $request->get('price');
-        $book->img_path = $request->get('img_path');
+        $book->img_path =$request->hasFile('img_path') ? Storage::disk('public')->put('book-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $book->type = $request->get('type');
         $book->class_id = $request->get('class_id') ? $request->get('class_id') : '';
         if ($book->save())
