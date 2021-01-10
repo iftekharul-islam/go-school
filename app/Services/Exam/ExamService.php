@@ -5,6 +5,8 @@ use App\Exam;
 use App\Course;
 use App\Myclass;
 use App\ExamForClass;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ExamService {
     public $examIds;
@@ -100,6 +102,7 @@ class ExamService {
         $tb->result_published = isset($this->request->result_published) ? 1 : 0;
         $tb->active = (isset($this->request->active))?1:0;
         $tb->save();
+        Cache::flush();
     }
 
     public function updateExamForClass(){

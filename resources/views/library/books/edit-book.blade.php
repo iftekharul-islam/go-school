@@ -31,7 +31,7 @@
                 </div>
                 @elseif(session('error'))
             @endif
-                <form class="new-added-form justify-content-md-center aesteric" action="{{ route('update-book-details', $book->id) }}" method="POST">
+                <form class="new-added-form justify-content-md-center aesteric" action="{{ route('update-book-details', $book->id) }}" enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('patch') }}
                     @include('library.books.edit')

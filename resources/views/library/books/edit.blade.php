@@ -52,14 +52,16 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
-            <div class="">
-                <label for="img_path" class="control-label">Book Image URL<label class="text-danger">*</label></label>
-                <input id="img_path" type="text" class="form-control" name="img_path" value="{{ $book->img_path }}" placeholder="Book Image Url" required>
+        <div class="form-group{{ $errors->has('rowNo') ? ' has-error' : '' }}">
 
-                @if ($errors->has('img_path'))
+
+            <div class="">
+                <label for="rowNo" class="control-label">Book Row Number<label class="text-danger">*</label></label>
+                <input id="rowNo" type="number" class="form-control" name="rowNo" value="{{ $book->rowNo }}" placeholder="Book Row Number" required>
+
+                @if ($errors->has('rowNo'))
                     <span class="help-block">
-                <strong>{{ $errors->first('img_path') }}</strong>
+                <strong>{{ $errors->first('rowNo') }}</strong>
             </span>
                 @endif
             </div>
@@ -146,18 +148,13 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-group{{ $errors->has('rowNo') ? ' has-error' : '' }}">
-
-
-            <div class="">
-                <label for="rowNo" class="control-label">Book Row Number<label class="text-danger">*</label></label>
-                <input id="rowNo" type="number" class="form-control" name="rowNo" value="{{ $book->rowNo }}" placeholder="Book Row Number" required>
-
-                @if ($errors->has('rowNo'))
-                    <span class="help-block">
-                <strong>{{ $errors->first('rowNo') }}</strong>
-            </span>
-                @endif
+        <div class="col-md-12">
+            <div class="false-padding-bottom-form form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
+                <label class="control-label">
+                    {{ __('text.upload_picture') }}<label class="text-danger">*</label>
+                </label>
+                <br>
+                <input type="file" id="picPath" name="img_path">
             </div>
         </div>
     </div>

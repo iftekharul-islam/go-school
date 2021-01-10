@@ -1,5 +1,19 @@
 <div class="row mb-2 mt-5">
     <div class="col-md-12 col-lg-6">
+        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+            <div class="">
+                <label for="title" class="control-label">{{ __('text.book_title') }}<label class="text-danger">*</label></label>
+                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Book Title" required>
+
+                @if ($errors->has('title'))
+                    <span class="help-block">
+                <strong>{{ $errors->first('title') }}</strong>
+            </span>
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
         <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
 
             <div class="">
@@ -9,20 +23,6 @@
                 @if ($errors->has('about'))
                     <span class="help-block">
                 <strong>{{ $errors->first('about') }}</strong>
-            </span>
-                @endif
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 col-lg-6">
-        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-            <div class="">
-                <label for="title" class="control-label">{{ __('text.book_title') }}<label class="text-danger">*</label></label>
-                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Book Title" required>
-
-                @if ($errors->has('title'))
-                    <span class="help-block">
-                <strong>{{ $errors->first('title') }}</strong>
             </span>
                 @endif
             </div>
@@ -136,8 +136,6 @@
 <div class="row mb-4">
     <div class="col-md-6">
         <div class="form-group{{ $errors->has('rowNo') ? ' has-error' : '' }}">
-
-
             <div class="">
                 <label for="rowNo" class="control-label">{{ __('text.book_row_number') }}</label>
                 <input id="rowNo" type="number" class="form-control" name="rowNo" value="{{ old('rowNo') }}" placeholder="Book Row Number">
@@ -151,16 +149,13 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
-            <div class="">
-                <label for="img_path" class="control-label">{{ __('text.book_image_URL') }}</label>
-                <input id="img_path" type="text" class="form-control" name="img_path" value="{{ old('img_path') }}" placeholder="Book Image Url">
-
-                @if ($errors->has('img_path'))
-                    <span class="help-block">
-                <strong>{{ $errors->first('img_path') }}</strong>
-            </span>
-                @endif
+        <div class="col-md-12">
+            <div class="false-padding-bottom-form form-group{{ $errors->has('img_path') ? ' has-error' : '' }}">
+                <label class="control-label">
+                    {{ __('text.upload_picture') }}
+                </label>
+                <br>
+                <input type="file" id="picPath" name="img_path">
             </div>
         </div>
     </div>
@@ -178,8 +173,6 @@
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("select.book-type").change(function(){

@@ -199,7 +199,7 @@ class GradeService {
         $this->field = 'assignment';
         $this->fieldCount = $this->assignmentCount;
         $this->maxFieldNum = 3;
-        $this->assignmentSum = $this->getMarkSum();
+        $this->assignmentSum = $this->getMarkSum($this->maxFieldNum);
         // Class Test
         $this->field = 'ct';
         $this->fieldCount = $this->ctCount;
@@ -216,19 +216,25 @@ class GradeService {
         // Quiz
         $this->full_field_mark = $course->quiz_fullmark;
         $this->field_percentage = $course->quiz_percent;
-        $this->avg_field_sum = $this->quizSum/$this->quizCount;
+        if ($this->quizSum != 0 && $this->quizCount != 0) {
+            $this->avg_field_sum = $this->quizSum / $this->quizCount;
+        }
         $this->final_default_value = $this->quizSum;
         $this->final_quiz_mark = $this->getFieldFinalMark();
         // Assignment
         $this->full_field_mark = $course->a_fullmark;
         $this->field_percentage = $course->assignment_percent;
-        $this->avg_field_sum = $this->assignmentSum/$this->assignmentCount;
+        if ($this->assignmentSum != 0 && $this->assignmentCount != 0) {
+            $this->avg_field_sum = $this->assignmentSum / $this->assignmentCount;
+        }
         $this->final_default_value = $this->assignmentSum;
         $this->final_assignment_mark = $this->getFieldFinalMark();
         // Class Test
         $this->full_field_mark = $course->ct_fullmark;
         $this->field_percentage = $course->ct_percent;
-        $this->avg_field_sum = $this->ctSum/$this->ctCount;
+        if ($this->ctSum != 0 && $this->ctCount != 0) {
+            $this->avg_field_sum = $this->ctSum/$this->ctCount;
+        }
         $this->final_default_value = $this->ctSum;
         $this->final_ct_mark = $this->getFieldFinalMark();
         // Final Exam
@@ -250,7 +256,7 @@ class GradeService {
         return $totalMarks;
     }
 
-    public function getMarkSum(){
+    public function getMarkSum($limit = 5){
         $fieldSum = 0;
         if($this->fieldCount > 0){
             $fieldGradeArray = array();
@@ -264,7 +270,7 @@ class GradeService {
                 $fieldSum += $l;
             }
         } else {
-            for($i=1; $i<=5; ++$i){
+            for($i=1; $i<= $limit; ++$i){
                 $fieldSum += $this->grade["{$this->field}{$i}"];
             }
         }
