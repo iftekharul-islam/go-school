@@ -58,7 +58,7 @@ class BookController extends Controller
             'about' => $request->about,
             'price' => $request->price,
             'img_path' => $request->img_path ? 'storage/' . $path : '',
-            'class_id' => isset($request->class_id) ? $request->class_id : '',
+            'class_id' => $request->class_id ?? $request->class_id,
             'school_id' => auth()->user()->school_id,
             'user_id' => auth()->user()->id
         ];
