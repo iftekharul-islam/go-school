@@ -270,7 +270,7 @@ class GradeService {
                 $fieldSum += $l;
             }
         } else {
-            for($i=1; $i<=$limit; ++$i){
+            for($i=1; $i<= $limit; ++$i){
                 $fieldSum += $this->grade["{$this->field}{$i}"];
             }
         }

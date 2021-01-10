@@ -87,10 +87,6 @@
 
 </body>
 <script src="{{ asset('template/js/jquery-3.3.1.min.js') }}"></script>
-
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
-
-{{--<script src="{{ asset('template/js/plugins.js') }}"></script>--}}
 {{--<!-- Popper js -->--}}
 <script src="{{ asset('template/js/popper.min.js') }}"></script>
 {{--<!-- Bootstrap js -->--}}
@@ -119,8 +115,6 @@
 {{--<!-- ck editor -->--}}
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>--}}
-{{--<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>--}}
 <script>
     $(document).ready(function () {
         $('.table-data-div').DataTable({
