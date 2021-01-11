@@ -14,7 +14,7 @@ class ExamService {
     public $exam;
 
     public function getLatestExamsBySchoolIdWithPagination(){
-        return Exam::with('class', 'class.className')->where('school_id', auth()->user()->school_id)
+        return Exam::with('class', 'class.classDetails')->where('school_id', auth()->user()->school_id)
             ->latest()
             ->paginate(100);
     }

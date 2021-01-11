@@ -99,7 +99,7 @@ class ExamController extends Controller
      */
     public function edit($id)
     {
-        $exam = Exam::with('class', 'class.className')->findOrFail($id);
+        $exam = Exam::with('class', 'class.classDetails')->findOrFail($id);
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();

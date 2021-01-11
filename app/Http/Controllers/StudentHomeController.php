@@ -47,7 +47,7 @@ class StudentHomeController extends Controller
             });
 
             $exams = Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
-                return Exam::with('class', 'class.classes')->where('school_id', $school_id)
+                return Exam::with('class', 'class.classDetails')->where('school_id', $school_id)
                     ->where('active', 1)
                     ->get();
             });

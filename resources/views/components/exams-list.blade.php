@@ -35,7 +35,7 @@
         <td>{{$exam->exam_name}}</td>
         <td>
             @foreach($exam->class as $class)
-                {{ $class->className->class_number }},
+                {{ $class->classDetails->class_number }},
             @endforeach
         </td>
         <td>
