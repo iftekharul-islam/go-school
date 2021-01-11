@@ -44,8 +44,6 @@
 
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
             <label>Start Date</label>
-            {{--            <input data-date-format="yyyy-mm-dd" id="start_date" class="form-control date" name="start_date"--}}
-            {{--                   value="{{ $exam->start_date }}" placeholder="Start Date" autocomplete="off">--}}
             <input id="start_date" type="date" class="form-control" name="start_date"
                    value="{{ \Carbon\Carbon::parse($exam->start_date)->format('Y-m-d') }}" required>
             @if ($errors->has('start_date'))
@@ -59,8 +57,6 @@
             <label>End Date</label>
             <input id="end_date" type="date" class="form-control" name="end_date"
                    value="{{ \Carbon\Carbon::parse($exam->end_date)->format('Y-m-d') }}" required>
-            {{--            <input data-date-format="yyyy-mm-dd" id="end_date" class="form-control date" name="end_date"--}}
-            {{--                   value="{{ $exam->end_date }}" placeholder="End Date" autocomplete="off">--}}
             @if ($errors->has('end_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('end_date') }}</strong>

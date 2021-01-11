@@ -70,15 +70,13 @@ class ExamController extends Controller
      */
     public function store(CreateExamRequest $request)
     {
-//        return $request->all();
         $this->examService->request = $request;
         try{
             $this->examService->storeExam();
         } catch (\Exception $e){
             return 'Error: '. $e->getMessage();
         }
-        
-        //return $this->cindex($course_id, $exam_id, $teacher_id);
+
         return redirect()->route('exams')->with('status', 'New Exam Created');
     }
 
