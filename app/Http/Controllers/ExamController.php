@@ -70,6 +70,7 @@ class ExamController extends Controller
      */
     public function store(CreateExamRequest $request)
     {
+//        return $request->all();
         $this->examService->request = $request;
         try{
             $this->examService->storeExam();
@@ -78,7 +79,7 @@ class ExamController extends Controller
         }
         
         //return $this->cindex($course_id, $exam_id, $teacher_id);
-        return back()->with('status', 'New Exam Created');
+        return redirect()->route('exams')->with('status', 'New Exam Created');
     }
 
     /**
@@ -100,7 +101,7 @@ class ExamController extends Controller
      */
     public function edit($id)
     {
-        $exam = Exam::findOrFail($id);
+        $exam = Exam::with('class', 'class.className')->findOrFail($id);
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
@@ -114,7 +115,22 @@ class ExamController extends Controller
         $exam->start_date = $request->get('start_date');
         $exam->end_date = $request->get('end_date');
         $exam->save();
-        return redirect()->back()->with('status', 'Exam record updated');
+
+        if (isset($request->classes)) {
+            $class = ExamForClass::query();
+            $class->where('exam_id', $id)->get();
+            $class->delete();
+
+            foreach ($request->classes as $item) {
+                $examForClass = new ExamForClass;
+                $examForClass->exam_id = $id;
+                $examForClass->class_id = $item;
+                $examForClass->active = 1;
+                $examForClass->save();
+            }
+
+        }
+        return redirect()->route('exams')->with('status', 'Exam record updated');
     }
 
     /**

@@ -18,6 +18,7 @@
       <th>#</th>
       <th>{{ __('text.term') }}</th>
       <th>{{ __('text.exam_name') }}</th>
+      <th>{{ __('text.for_class') }}</th>
       <th>{{ __('text.notice_published') }}</th>
       <th>{{ __('text.Start Date') }}</th>
       <th>{{ __('text.End Date') }}</th>
@@ -32,6 +33,11 @@
         <th>{{($loop->index + 1)}}</th>
         <td class="text-capitalize">{{ $exam->term }}</td>
         <td>{{$exam->exam_name}}</td>
+        <td>
+            @foreach($exam->class as $class)
+                {{ $class->className->class_number }},
+            @endforeach
+        </td>
         <td>
           @if($exam->notice_published === 1)
             Yes

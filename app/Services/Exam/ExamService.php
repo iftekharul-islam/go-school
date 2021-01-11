@@ -14,7 +14,7 @@ class ExamService {
     public $exam;
 
     public function getLatestExamsBySchoolIdWithPagination(){
-        return Exam::where('school_id', auth()->user()->school_id)
+        return Exam::with('class', 'class.className')->where('school_id', auth()->user()->school_id)
             ->latest()
             ->paginate(100);
     }
@@ -91,8 +91,9 @@ class ExamService {
 
             $efc = $this->assignClassesToExam();
 
-            if(count($efc) > 0)
-                ExamForClass::insert($efc);
+            // Need to check for save
+//            if(count($efc) > 0)
+//                ExamForClass::insert($efc);
         }, 5);
     }
 

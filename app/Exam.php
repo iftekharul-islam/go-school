@@ -10,4 +10,10 @@ class Exam extends Model
     {
         return $this->hasOne(Grade::class);
     }
+
+    public function class()
+    {
+        return $this->hasMany(ExamForClass::class);
+    }
+
 }
