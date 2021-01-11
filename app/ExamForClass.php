@@ -15,7 +15,7 @@ class ExamForClass extends Model
     public $timestamps = false;
 
     public function classDetails(){
-        return $this->hasOne(Myclass::class,'id', 'class_id');
+        return $this->hasOne(Myclass::class , 'id' , 'class_id');
     }
 
     public function exam(){

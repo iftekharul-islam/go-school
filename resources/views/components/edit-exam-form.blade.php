@@ -67,7 +67,7 @@
             <label>{{ __('text.for_class') }}</label>
             <select id="book_code" class="form-control select2 classes-exams" required multiple name="classes[]">
                 @foreach($classes as $class)
-                    @foreach($exam->class as $item)
+                    @foreach($exam->myClasses as $item)
                         @if($class->id == $item->class_id)
                             <option value="{{ $class->id }}" selected><b>Class - {{$class->class_number}}</b></option>
                         @endif

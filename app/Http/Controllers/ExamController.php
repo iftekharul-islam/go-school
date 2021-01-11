@@ -15,6 +15,7 @@ use App\Section;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ExamController extends Controller
@@ -99,7 +100,7 @@ class ExamController extends Controller
      */
     public function edit($id)
     {
-        $exam = Exam::with('class', 'class.classDetails')->findOrFail($id);
+        $exam = Exam::with('myClasses', 'myClasses.classDetails')->findOrFail($id);
         $classes = $this->examService->getClassesBySchoolId();
         $already_assigned_classes = $this->examService->getAlreadyAssignedClasses();
         $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
@@ -120,11 +121,14 @@ class ExamController extends Controller
             $class->delete();
 
             foreach ($request->classes as $item) {
-                $examForClass = new ExamForClass;
-                $examForClass->exam_id = $id;
-                $examForClass->class_id = $item;
-                $examForClass->active = 1;
-                $examForClass->save();
+
+                ExamForClass::where('exam_id', $id)
+                    ->where('class_id', $item)
+                    ->updateOrInsert([
+                        'exam_id' => $id,
+                        'class_id' => $item,
+                        'active' => 1,
+                    ]);
             }
 
         }
