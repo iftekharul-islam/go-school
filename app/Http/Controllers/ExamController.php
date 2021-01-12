@@ -121,29 +121,33 @@ class ExamController extends Controller
 
     public function updateExam(UpdateExamDetailsRequest $request, $id)
     {
-        $exam             = Exam::findOrFail($id);
+        $exam             = Exam::with('myClasses.classDetails')->findOrFail($id);
         $exam->term       = !empty($request->get('other_term')) ? $request->get('other_term') : $request->get('term');
         $exam->exam_name  = $request->get('exam_name');
         $exam->start_date = $request->get('start_date');
         $exam->end_date   = $request->get('end_date');
         $exam->save();
 
+        $exists = [];
+        foreach ($exam->myClasses as $item) {
+            $exists[] = $item->class_id;
+        }
+        $id_deleted = [];
+
         if (isset($request->classes)) {
-            $class = ExamForClass::query();
-            $class->where('exam_id', $id)->get();
-            $class->delete();
-
             foreach ($request->classes as $item) {
-
-                $data = ExamForClass::firstOrCreate([
+                $data         = ExamForClass::firstOrCreate([
                     'exam_id'  => $id,
                     'class_id' => $item,
                 ]);
                 $data->active = 1;
                 $data->save();
-
+                array_push($id_deleted, $item);
             }
-
+        }
+        $uselessData = array_diff($exists, $id_deleted);
+        if ($uselessData) {
+            $examForClass = ExamForClass::whereIn('class_id', $uselessData)->where('exam_id', $id)->delete();
         }
 
         return redirect()->route('exams')->with('status', 'Exam record updated');
