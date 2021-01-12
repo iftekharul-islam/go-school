@@ -90,7 +90,7 @@
                 @if(count($attendances) > 0)
                     @include('layouts.student.attendances-table')
                 @else
-                    No Related Data Found.
+                    <h4 class="text-center">No Attendance Found.</h4>
                 @endif
             </div>
         </div>
