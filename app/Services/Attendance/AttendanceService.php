@@ -113,9 +113,12 @@ class AttendanceService {
     }
 
     public function getAttendanceByStudentAndExam($student_id, $exId){
-        return Attendance::with(['student', 'section'])
+        $section_id = User::find($student_id)->pluck('section_id')->first();
+        $attendance = Attendance::with(['student', 'section'])
             ->where('student_id', $student_id)
+            ->where('section_id', $section_id)
             ->get();
+        return $attendance;
     }
 
     public function updateAttendance(){
