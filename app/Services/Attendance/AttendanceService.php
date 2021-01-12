@@ -118,8 +118,6 @@ class AttendanceService {
             ->where('student_id', $student_id)
             ->where('section_id', $user->section_id)
             ->get();
-        logger('attendance');
-        logger($attendance);
         return $attendance;
     }
 
