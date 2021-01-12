@@ -70,22 +70,20 @@
                 </td>
                 <td>
                     <input type="hidden" name="exam_id" value="{{$exam->id}}" form="form{{$exam->id}}"/>
-                    @if($exam->active == 1)
+                    @if($exam->result_published === 1)
+                        <span class="badge badge-success">Completed</span>
+                    @elseif($exam->active == 1)
                         <label class="checkbox-label">
                             <input type="checkbox" name="active" form="form{{$exam->id}}" checked/>
                             <span class="badge badge-info ml-1">Active</span>
                             <span class="checkmark"></span>
                         </label>
                     @else
-                        @if($exam->result_published === 1)
-                            <span class="badge badge-success">Completed</span>
-                        @else
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="active" form="form{{$exam->id}}"/>
-                                <span class="badge badge-warning ml-1">Not Active</span>
-                                <span class="checkmark"></span>
-                            </label>
-                        @endif
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="active" form="form{{$exam->id}}"/>
+                            <span class="badge badge-warning ml-1">Not Active</span>
+                            <span class="checkmark"></span>
+                        </label>
                     @endif
                     @if($exam->result_published != 1)
                         <span>
