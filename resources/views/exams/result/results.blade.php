@@ -31,6 +31,7 @@
                             <tr>
                                 <th>{{ __('text.term') }}</th>
                                 <th>{{ __('text.exam_name') }}</th>
+                                <th>{{ __('text.for_class') }}</th>
                                 <th>{{ __('text.Start Date') }}</th>
                                 <th>{{ __('text.End Date') }}</th>
                                 <th>{{ __('text.publish') }}</th>
@@ -44,6 +45,13 @@
                             <tr>
                                 <td class="text-capitalize">{{ $exam->term }}</td>
                                 <td>{{ $exam->exam_name }}</td>
+                                <td>
+                                    @php $totalClasses = count($exam->myClasses) @endphp
+                                    @foreach($exam->myClasses as $key => $class)
+                                        {{ $class->classDetails->class_number}}
+                                        @if($key < $totalClasses - 1) ,@endif
+                                    @endforeach
+                                </td>
                                 <td>{{ Carbon\Carbon::parse($exam->start_date)->format('d/m/Y') }}</td>
                                 <td>{{ Carbon\Carbon::parse($exam->end_date)->format('d/m/Y') }}</td>
                                 <td>

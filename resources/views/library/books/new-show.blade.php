@@ -109,18 +109,27 @@
                                                             </td>
                                                             <td>{{ $book->school->name }}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="text-nowrap font-medium text-dark-medium">Created
-                                                                At
-                                                            </td>
-                                                            <td>{{ $book->created_at->diffForHumans() }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-nowrap font-medium text-dark-medium">Updated
-                                                                At
-                                                            </td>
-                                                            <td>{{ $book->updated_at->diffForHumans() }}</td>
-                                                        </tr>
+                                                        @if($book->created_at == $book->updated_at)
+                                                            <tr>
+                                                                <td class="text-nowrap font-medium text-dark-medium">Created
+                                                                    At
+                                                                </td>
+                                                                <td>{{ $book->created_at->diffForHumans() }}</td>
+                                                            </tr>
+                                                        @else
+                                                            <tr>
+                                                                <td class="text-nowrap font-medium text-dark-medium">Created
+                                                                    At
+                                                                </td>
+                                                                <td>{{ $book->created_at->diffForHumans() }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-nowrap font-medium text-dark-medium">Updated
+                                                                    At
+                                                                </td>
+                                                                <td>{{ $book->updated_at->diffForHumans() }}</td>
+                                                            </tr>
+                                                        @endif
                                                         <tr>
                                                             <td class="text-nowrap font-medium text-dark-medium">
                                                                 Registered By
