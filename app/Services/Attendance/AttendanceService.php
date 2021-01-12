@@ -113,11 +113,18 @@ class AttendanceService {
     }
 
     public function getAttendanceByStudentAndExam($student_id, $exId){
+        logger('in the getAttendanceByStudentAndExam');
+        logger('student id');
+        logger($student_id);
         $section_id = User::find($student_id)->pluck('section_id')->first();
+        logger('section id');
+        logger($section_id);
         $attendance = Attendance::with(['student', 'section'])
             ->where('student_id', $student_id)
             ->where('section_id', $section_id)
             ->get();
+        logger('attendance');
+        logger($attendance);
         return $attendance;
     }
 
