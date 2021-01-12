@@ -35,9 +35,8 @@ class SendSmsToStudents implements ShouldQueue
      */
     public function handle()
     {
-        logger('In sms sent job');
-        $base_url_non_masking = 'http://smscp.datasoftbd.com/smsapi/non-masking';
-        $api_key              = '$2y$10$cuaKkjZjiIONG3S.xoTpyukk74M7C/x792eWd7SkJvOQaybwbnCnC';
+        $base_url_non_masking = env('SMS_BASE_URL');
+        $api_key              = env('SMS_API_KEY');
         $message              = strip_tags($this->message);
 
 //        $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
