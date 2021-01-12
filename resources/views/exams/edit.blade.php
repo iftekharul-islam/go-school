@@ -3,14 +3,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Add Exams
+            Edit Exams
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Add Exams</li>
+            <li>Edit Exams</li>
         </ul>
     </div>
     <div class="card height-auto">

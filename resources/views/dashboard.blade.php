@@ -127,6 +127,7 @@
                                             <tr>
                                                 <th>Exam Name</th>
                                                 <th>Term</th>
+                                                <th>Class</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Result Published</th>
@@ -137,6 +138,11 @@
                                                 <tr>
                                                     <td>{{ $exam->exam_name }}</td>
                                                     <td>{{ $exam->term }}</td>
+                                                    <td>
+                                                        @foreach($exam->class->classes as $class)
+                                                            {{ $class->class_number }}
+                                                        @endforeach
+                                                    </td>
                                                     <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
                                                     <td>{{ date('d-m-Y',strtotime($exam->end_date)) }}</td>
                                                     <td>

@@ -7,7 +7,8 @@
             <label>Term</label>
             <select id="term" class="select2" name="term">
                 <option @if($exam->term == 'First Term') selected="selected" @endif value="First Term">1st Term</option>
-                <option @if($exam->term == 'Second Term') selected="selected" @endif value="Second Term">2nd Term</option>
+                <option @if($exam->term == 'Second Term') selected="selected" @endif value="Second Term">2nd Term
+                </option>
                 <option @if($exam->term == 'Third Term') selected="selected" @endif value="Third Term">3rd Term</option>
                 <option value="other">Other</option>
             </select>
@@ -17,9 +18,11 @@
                 </span>
             @endif
         </div>
-        <div id="other-term" class="col-md-8 form-group{{ $errors->has('other-term') ? ' has-error' : '' }}" style="display: none">
+        <div id="other-term" class="col-md-8 form-group{{ $errors->has('other-term') ? ' has-error' : '' }}"
+             style="display: none">
             <label>Term</label>
-            <input id="other-term" type="text" class="form-control" name="other_term" value="{{ old('other-term') }}" placeholder="Term title">
+            <input id="other-term" type="text" class="form-control" name="other_term" value="{{ old('other-term') }}"
+                   placeholder="Term title">
             @if ($errors->has('other-term'))
                 <span class="help-block">
                     <strong>{{ $errors->first('other-term') }}</strong>
@@ -41,9 +44,8 @@
 
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
             <label>Start Date</label>
-            <input data-date-format="yyyy-mm-dd" id="start_date" class="form-control date" name="start_date"
-                   value="{{ $exam->start_date }}" placeholder="Start Date" required autocomplete="off">
-            {{--            <input id="start_date" type="text" class="form-control" name="start_date" value="{{ $exam->start_date }}" required>--}}
+            <input id="start_date" type="date" class="form-control" name="start_date"
+                   value="{{ \Carbon\Carbon::parse($exam->start_date)->format('Y-m-d') }}" required>
             @if ($errors->has('start_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('start_date') }}</strong>
@@ -53,17 +55,39 @@
 
         <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
             <label>End Date</label>
-            {{--            <input id="end_date" type="text" class="form-control" name="end_date" value="{{ $exam->end_date }}" required>--}}
-            <input data-date-format="yyyy-mm-dd" id="end_date" class="form-control date" name="end_date"
-                   value="{{ $exam->end_date }}" placeholder="End Date" required autocomplete="off">
+            <input id="end_date" type="date" class="form-control" name="end_date"
+                   value="{{ \Carbon\Carbon::parse($exam->end_date)->format('Y-m-d') }}" required>
             @if ($errors->has('end_date'))
                 <span class="help-block">
                     <strong>{{ $errors->first('end_date') }}</strong>
                 </span>
             @endif
         </div>
+        <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
+            <label>{{ __('text.for_class') }}</label>
+            <select id="book_code" class="form-control select2 classes-exams" required multiple name="classes[]">
+                @foreach($classes as $class)
+                    @foreach($exam->myClasses as $item)
+                        @if($class->id == $item->class_id)
+                            <option value="{{ $class->id }}" selected><b>Class - {{$class->class_number}}</b></option>
+                        @endif
+                    @endforeach
+                    @if(in_array($class->id, $assigned_classes->pluck('class_id')->toArray()))
+                        <!-- Need to check for assigned class -->
+                        {{--                            <option value="" style="display: none" disabled><b>Class - {{$class->class_number}}</b>&nbsp;&nbsp; <small>(Exam Assigned)</small></option>--}}
+                    @else
+                        <option value="{{ $class->id}}"><b>Class - {{$class->class_number}}</b></option>
+                    @endif
+                @endforeach
+            </select>
 
-               <div class="col-12 form-group mg-t-8">
+            @if ($errors->has('classes'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('classes') }}</strong>
+                </span>
+            @endif
+        </div>
+        <div class="col-12 form-group mg-t-8">
             <button type="submit" class="button button--edit">Save</button>
             <a href="{{ URL::previous() }}" class="button button--cancel"
                style="margin-left: 1%;" role="button">Cancel</a>
@@ -77,8 +101,8 @@
             format: 'yyyy-mm-dd',
         });
     });
-    $(document).ready(function() {
-        $("#term").on("change", function() {
+    $(document).ready(function () {
+        $("#term").on("change", function () {
             if ($(this).val() === "other") {
                 $("#other-term").show();
             } else {
