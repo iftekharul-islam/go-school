@@ -139,8 +139,10 @@
                                                     <td>{{ $exam->exam_name }}</td>
                                                     <td>{{ $exam->term }}</td>
                                                     <td>
-                                                        @foreach($exam->class->classes as $class)
-                                                            {{ $class->class_number }}
+                                                        @php $totalClasses = count($exam->myClasses) @endphp
+                                                        @foreach($exam->myClasses as $key => $class)
+                                                            {{ $class->classDetails->class_number}}
+                                                            @if($key < $totalClasses - 1) ,@endif
                                                         @endforeach
                                                     </td>
                                                     <td>{{ date('d-m-Y', strtotime($exam->start_date)) }}</td>
