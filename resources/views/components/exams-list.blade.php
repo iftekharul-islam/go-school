@@ -34,9 +34,10 @@
                 <td class="text-capitalize">{{ $exam->term }}</td>
                 <td>{{$exam->exam_name}}</td>
                 <td>
+                    @php $totalClasses = count($exam->myClasses) @endphp
                     @foreach($exam->myClasses as $key => $class)
                         {{ $class->classDetails->class_number}}
-                        @if($key < count($exam->myClasses) - 1) ,@endif
+                        @if($key < $totalClasses - 1) ,@endif
                     @endforeach
                 </td>
                 <td>
