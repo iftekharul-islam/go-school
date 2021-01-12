@@ -37,10 +37,10 @@
                 <label for="type" class="control-label">Book Type<label class="text-danger">*</label></label>
                 <select id="type" class="select2 book-type" name="type">
                     <option value="" disabled selected>Select Book Type</option>
-                    <option value="Academic">Academic</option>
-                    <option value="Magazine">Magazine</option>
-                    <option value="Story">Story</option>
-                    <option value="Other">Other</option>
+                    <option value="Academic" {{ $book->type == 'Academic' ? 'selected' : ''}}>Academic</option>
+                    <option value="Magazine" {{ $book->type == 'Magazine' ? 'selected' : ''}}>Magazine</option>
+                    <option value="Story" {{ $book->type == 'Story' ? 'selected' : ''}}>Story</option>
+                    <option value="Other" {{ $book->type == 'Story' ? 'selected' : ''}}>Other</option>
                 </select>
 
                 @if ($errors->has('type'))
