@@ -365,7 +365,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'Accountant created');
+        return redirect('admin/users/' .Auth::user()->school->code. '/accountant')->with('status', 'Accountant created');
     }
 
     /**
@@ -383,7 +383,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'Librarian Created');
+        return redirect('admin/users/' .Auth::user()->school->code. '/librarian')->with('status', 'Librarian Created');
     }
 
     public function storeStaff(UpdateStaffRequest $request)
@@ -420,7 +420,7 @@ class UserController extends Controller
             Log::info('Email failed to send to this address: '.$tb->email);
         }
 
-        return back()->with('status', 'New Staff Created');
+        return redirect()->route('staff.list')->with('status', 'New Staff Created');
     }
 
     /**

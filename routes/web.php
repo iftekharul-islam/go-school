@@ -387,7 +387,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         });
 
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
-        Route::get('Staff-list', 'UserController@staffList');
+        Route::get('Staff-list', 'UserController@staffList')->name('staff.list');
 
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@storeStudent')->name('student.store');

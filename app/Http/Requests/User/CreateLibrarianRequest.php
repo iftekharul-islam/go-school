@@ -29,7 +29,7 @@ class CreateLibrarianRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'sometimes|email|max:255|unique:users',
+            'email' => 'nullable|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
             'gender' => 'required',
             'blood_group' => 'required',
@@ -44,7 +44,7 @@ class CreateLibrarianRequest extends FormRequest
             'pic_path.required' => 'Please provide and image for the profile',
             'pic_path.image' => 'Invalid image type',
             'pic_path.max' => 'Image size cannot be larger than 800KB',
-            'email.email' => 'Please provide a valid email address',
+            'email' => 'Please provide a valid email address',
         ];
     }
 }

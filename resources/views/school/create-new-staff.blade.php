@@ -79,7 +79,7 @@
 
                                         <input id="email" type="email" class="form-control staff-username"
                                                name="email" value="{{ old('email') }}"
-                                               required readonly>
+                                                readonly>
                                         <div class="email-visible"></div>
 
                                         @if ($errors->has('email'))
