@@ -104,7 +104,7 @@ class BookController extends Controller
         $book->type = $request->get('type');
         $book->class_id = $request->get('class_id') ? $request->get('class_id') : '';
         if ($book->save()) {
-            return back()->with('status', 'Book information updated');
+            return redirect()->to(Auth::user()->role . '/all-books')->with('status', 'Book information updated');
         }
         return back()->with('error', 'Something went wrong please try again');
     }

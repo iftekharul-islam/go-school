@@ -154,7 +154,13 @@
                     {{ __('text.upload_picture') }}<label class="text-danger">*</label>
                 </label>
                 <br>
-                <input type="file" id="picPath" name="img_path">
+                <input type="file" id="picPath" value="{{ $class->img_path }}" name="img_path">
+                @if ($errors->has('img_path'))
+                    <br>
+                    <span class="help-block">
+                <strong>{{ $errors->first('img_path') }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
     </div>
