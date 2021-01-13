@@ -87,7 +87,7 @@
             <form id="filter" method='GET' action="">
                 <div class="row border-bottom mb-3">
                     <div class="form-group col-md-5">
-                        <input type="text" name="student_name" value="{{$searchData['student_name']}}"
+                        <input type="text" name="student_name" value="{{ $searchData['student_name'] }}"
                                class="form-control form-control-sm" placeholder="Name"/>
                     </div>
                     <div class="form-group col-md-2">
@@ -202,7 +202,7 @@
                                 @endif
                                 @break($loop->first)
                             @endforeach
-                            @if(Auth::user()->role == 'admin')
+                            @if(Auth()->user()->role == 'admin')
                                 @if (!Session::has('section-attendance'))
                                     @if($user->role != 'student')
                                         <th>{{ __('text.Attendance') }}</th>
