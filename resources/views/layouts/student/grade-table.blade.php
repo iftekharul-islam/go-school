@@ -31,7 +31,7 @@
                                     @endforeach
 
                             </td>
-                            <td><b>{{$grade->marks}}</b></td>
+                            <td><b>{{ round($grade->marks,2 )}}</b></td>
                             <td><a class="button button--save" href="#collapse{{($loop->index + 1)}}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse{{($loop->index + 1)}}">View</a></td>
                         </tr>
                         <tr class="collapse" id="collapse{{($loop->index + 1)}}" aria-labelledby="heading{{($loop->index + 1)}}" aria-expanded="false">
@@ -80,7 +80,7 @@
                                             @if($grade->course->practical_percent > 0)
                                                 <td>{{$grade->practical}}</td>
                                             @endif
-                                            <td>{{$grade->marks}}</td>
+                                            <td>{{ round($grade->marks, 2) }}</td>
                                             <td>{{$grade->gpa}}</td>
                                         </tr>
                                         </tbody>

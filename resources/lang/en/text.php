@@ -320,4 +320,7 @@ return[
     'total_sms' => 'Total sent SMS',
     'last_month' => 'Last Month',
     'designation' => 'Designation',
+    'grade_system' => 'Grade System',
+    'to_mark' => 'To Mark',
+    'from_mark' => 'Mark From',
 ];

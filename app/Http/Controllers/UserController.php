@@ -534,6 +534,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
+//        return $request->all();
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $image_path = 'storage/'.$path;
         DB::transaction(function () use ($request, $image_path) {
@@ -548,6 +549,7 @@ class UserController extends Controller
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
             $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
             $tb->gender = (! empty($request->gender)) ? $request->gender : $tb->gender;
+            $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
             if ('teacher' == $request->user_role) {
                 $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
                 $tb->section_id = $request->class_teacher_section_id;
