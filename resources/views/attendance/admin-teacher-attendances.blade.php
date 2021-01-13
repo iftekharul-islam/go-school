@@ -4,7 +4,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Staff Attendance Report
+            Attendance Report
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
