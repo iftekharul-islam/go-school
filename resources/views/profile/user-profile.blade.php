@@ -64,15 +64,6 @@
                                 <div class="user-profile-print">
                                     <div class="page-header text-center">
                                             <div>
-                                                @if(!empty($school->school->logo))
-                                                    <div class="school-logo">
-                                                        <img class="logo topbar-logo-mg float-left" src="{{ asset($school->logo) }}">
-                                                    </div>
-                                                @else
-                                                    <div class="header-logo">
-                                                        <img class="" src="{{ asset('/logos/header-logo.png') }}" alt="logo">
-                                                    </div>
-                                                @endif
                                                 <h2 class="mb-0">{{ $school->school['name'] ? $school->school['name'] : 'Sample School admit card'}}</h2>
                                                 <small>{{ $school->school['school_address'] ? $school->school['school_address'] : '' }}</small>
                                                 <h3 class="mt-5 ">Student Information</h3>
