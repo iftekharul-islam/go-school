@@ -534,7 +534,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-//        return $request->all();
         $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
         $image_path = 'storage/'.$path;
         DB::transaction(function () use ($request, $image_path) {
