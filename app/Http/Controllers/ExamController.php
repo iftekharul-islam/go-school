@@ -209,13 +209,13 @@ class ExamController extends Controller
             Storage::disk('public')->delete($exam->result_file);
         }
 
-        $date              = Carbon::now();
-        $fileName          = Auth::user()->school_id.'_'.$date->format('Y_m_d').'_'.$date->format('g_i_a');
-        $path              = Storage::disk('public')->put('result', $request->file('result_file'));
+        $file      = $request->file('result_file');
+        $fileName          = $request->exam_name . '-' . time() . '.' . $file->getClientOriginalExtension();
+        $path              = $file->storeAs('public/result', $fileName);
         $exam->result_file = $path;
         $exam->save();
 
-        return back()->with('status', 'Result file uploaded');
+        return redirect()->route('exams.results')->with('status', 'Result file uploaded');
     }
 
     /**edit exam result file*/
@@ -232,14 +232,6 @@ class ExamController extends Controller
         $exams = $exams = $this->examService->getLatestExamsBySchoolIdWithPagination();
 
         return view('exams.result.results', compact('exams'));
-    }
-
-    /**download result */
-    public function downloadResultFile($exam_id)
-    {
-        $exam = Exam::findOrFail($exam_id);
-
-        return Storage::disk('public')->download($exam->result_file);
     }
 
     /**remove exam result file*/

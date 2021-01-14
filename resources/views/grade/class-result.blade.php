@@ -61,7 +61,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Marks and Grades</h3>
+                    <h3>Marks and Grades details</h3>
                 </div>
             </div>
             @if(count($grades) > 10)

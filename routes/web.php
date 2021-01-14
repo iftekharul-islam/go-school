@@ -437,7 +437,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('school-settings/{school_id}', 'SchoolController@updateSchoolSetting')->name('school.update');
 
     });
-    Route::get('/exams/download/result/{exam_id}', 'ExamController@downloadResultFile')->name('exams.download.result');
 
 });
 
