@@ -5,7 +5,7 @@
     <th>Course Name</th>
     <th>Room Number</th>
     <th>Class Time</th>
-    <th>Class Teacher</th>
+    <th>Course Teacher</th>
     @if(Auth::user()->role == 'admin')
         <th>Action</th>
     @endif

@@ -154,22 +154,21 @@
 
                 @if ($role != 'student' && $role != 'master')
                     <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link"><i
-                                class="flaticon-multiple-users-silhouette"></i><span>{{ __('text.Teachers') }}</span></a>
-                        <ul class="nav sub-group-menu {{ $teacher == 1 ? 'sub-group-active' : ''}}">
-                            @if($role == 'admin')
+                        @if($role == 'admin')
+                            <a href="#" class="nav-link"><i
+                                    class="flaticon-multiple-users-silhouette"></i><span>{{ __('text.Teachers') }}</span></a>
+                            <ul class="nav sub-group-menu {{ $teacher == 1 ? 'sub-group-active' : ''}}">
+
                                 <li class="nav-item">
                                     <a href="{{ route('new.teacher') }}"
                                        class="nav-link {{ (request()->routeIs('new.teacher')) ? 'menu-active' : '' }}">
                                         <i class="fas fa-angle-right"></i><span>{{ __('text.Add Teacher') }}</span></a>
                                 </li>
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{url('users/' .Auth::user()->school->code. '/0/1?teacher=1')}}"
-                                   class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
-                                    <i class="fas fa-angle-right"></i><span>{{ __('text.All Teacher') }}</span></a>
-                            </li>
-                            @if($role == 'admin')
+                                <li class="nav-item">
+                                    <a href="{{url('users/' .Auth::user()->school->code. '/0/1?teacher=1')}}"
+                                       class="nav-link {{ Request::get('teacher') == 1 ? 'menu-active' :''}}">
+                                        <i class="fas fa-angle-right"></i><span>{{ __('text.All Teacher') }}</span></a>
+                                </li>
                                 <li class="nav-item sidebar-nav-item second-lbl-menu {{ $sht == 1 ? 'active' : ''}}">
                                     <a href="#" class="nav-link "> <i
                                             class="fas fa-angle-right"></i><span>{{ __('text.Shift') }}</span></a>
@@ -186,8 +185,8 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
-                        </ul>
+                            </ul>
+                        @endif
                     </li>
                     @if(\Auth::user()->role == 'teacher')
                         <li class="nav-item">

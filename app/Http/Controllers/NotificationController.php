@@ -65,7 +65,7 @@ class NotificationController extends Controller
                 $tb = new Notification;
                 $tb->sent_status = 1;
                 $tb->active = 1;
-                $tb->message = $request->msg;
+                $tb->message = nl2br($request->msg);
                 $tb->student_id = $request->recipients[$i];
                 $tb->user_id = $request->teacher_id;
                 $tb->file_path = $path ? 'storage/' . $path : '';

@@ -70,7 +70,6 @@
                                 </td>
                                 <td>
                                     @if ($exam->result_file)
-{{--                                        <a href="{{route('exams.download.result',['exam_id' => $exam->id])}}" title="Download" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>--}}
                                         <a href="{{ \Illuminate\Support\Facades\Storage::url($exam->result_file) }}" title="Download" class="btn btn-info btn-lg"><i class="fas fa-download"></i></a>
                                     @else
                                         N/A

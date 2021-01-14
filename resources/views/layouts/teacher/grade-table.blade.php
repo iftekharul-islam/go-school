@@ -50,7 +50,7 @@
         @if($grade->course->practical_percent > 0)
           <td>{{$grade->practical}}</td>
         @endif
-        <td>{{$grade->marks}}</td>
+        <td>{{ round($grade->marks, 2) }}</td>
         <td>{{$grade->gpa}}</td>
         <td>
           @foreach($gradesystems as $gs)

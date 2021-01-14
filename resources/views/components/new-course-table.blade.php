@@ -32,7 +32,7 @@
         <tbody>
         @foreach ($courses as $course)
             <tr>
-                <th scope="row">{{($loop->index + 1)}}</th>
+                <th >{{($loop->index + 1)}}</th>
                 <td>
                     {{$course->course_name}}
                 </td>
