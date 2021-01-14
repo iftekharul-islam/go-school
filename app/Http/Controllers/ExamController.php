@@ -209,13 +209,13 @@ class ExamController extends Controller
             Storage::disk('public')->delete($exam->result_file);
         }
 
-        $date              = Carbon::now();
-        $fileName          = Auth::user()->school_id.'_'.$date->format('Y_m_d').'_'.$date->format('g_i_a');
-        $path              = Storage::disk('public')->put('result', $request->file('result_file'));
+        $file  = $request->file('result_file');
+        $fileName          = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+        $path              = $file->storeAs('result', $fileName);
         $exam->result_file = $path;
         $exam->save();
 
-        return back()->with('status', 'Result file uploaded');
+        return redirect()->route('exams.results')->with('status', 'Result file uploaded');
     }
 
     /**edit exam result file*/

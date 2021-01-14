@@ -193,7 +193,7 @@
                                                        class="control-label false-padding-bottom">Shift</label>
                                                 <select id="shift" class="form-control" name="shift">
                                                     <option
-                                                        @if(strtolower($user->studentInfo['shift']) == 'N/A') selected="selected" @endif>
+                                                        @if(strtolower($user->studentInfo['shift']) == 'n/a') selected="selected" @endif>
                                                         N/A
                                                     </option>
                                                     <option
