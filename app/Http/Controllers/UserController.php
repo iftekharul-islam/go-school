@@ -504,7 +504,6 @@ class UserController extends Controller
     {
         $user = $this->user->findOrFail($id);
         $user->load('shift');
-        return $user;
         $classes = Myclass::query()
             ->where('school_id', Auth::user()->school_id)
             ->pluck('id')

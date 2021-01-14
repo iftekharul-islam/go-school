@@ -209,8 +209,8 @@ class ExamController extends Controller
             Storage::disk('public')->delete($exam->result_file);
         }
 
-        $file  = $request->file('result_file');
-        $fileName          = $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+        $file              = $request->file('result_file');
+        $fileName          = $file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
         $path              = $file->storeAs('result', $fileName);
         $exam->result_file = $path;
         $exam->save();
