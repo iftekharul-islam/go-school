@@ -25,6 +25,7 @@
                     @endif
                     <h3>Exam Name: {{ $exam->exam_name }}</h3>
                     <form class="new-added-form" action="{{ route('exams.update.result',['exam_id' => $exam->id]) }}" method="POST" enctype='multipart/form-data'>
+                        <input type="hidden" value="{{ $exam->exam_name }}" name="exam_name">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-12 form-group">
