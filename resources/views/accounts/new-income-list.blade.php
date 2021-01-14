@@ -90,7 +90,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{ __('text.sector_name') }}</th>
-                                        <th style="width: 40%">{{ __('text.amount') }}</th>
+                                        <th style="width: 40%">{{ __('text.description') }}</th>
                                         <th>{{ __('text.Date') }}</th>
                                         <th>{{ __('text.amount') }}</th>
                                         <th>{{ __('text.action') }}</th>

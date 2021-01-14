@@ -18,9 +18,9 @@ class BookController extends Controller
     {
         $search = Input::get('search');
         if ($search) {
-            $books = Book::bySchool(auth()->user()->school_id)->where('title', 'LIKE', '%' . $search . '%')->orderBy('created_at', 'DESC')->paginate();
+            $books = Book::bySchool(auth()->user()->school_id)->where('title', 'LIKE', '%' . $search . '%')->orderBy('created_at', 'DESC')->paginate(20);
         } else {
-            $books = Book::bySchool(auth()->user()->school_id)->orderBy('created_at', 'DESC')->paginate();
+            $books = Book::bySchool(auth()->user()->school_id)->orderBy('created_at', 'DESC')->paginate(20);
         }
         return view('library.books.new-index', compact('books'));
     }

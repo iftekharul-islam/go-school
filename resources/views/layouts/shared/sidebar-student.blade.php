@@ -528,31 +528,31 @@
                                 <i class="fas fa-book-open"></i><span>{{ __('text.sms_history') }}</span></a>
                         </li>
                     @endif
-                    <li class="nav-item sidebar-nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="far fa-question-circle">
-                            </i><span>{{ __('text.help') }}</span>
-                        </a>
-                        <ul class="nav sub-group-menu">
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="{{ url('https://www.youtube.com/channel/UCN8SOrFD4WvHftsrpfn1jyw?view_as=subscriber') }}"
-                                   target="_blank">
-                                    <i class="fas fa-angle-right"></i>
-                                    <span>{{ __('text.online_training') }}</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   href="{{ url('https://drive.google.com/drive/folders/1sMq3BY7R5aUhzJ1DfM8-_6if0vTIIC8o') }}"
-                                   target="_blank">
-                                    <i class="fas fa-angle-right"></i>
-                                    <span>{{ __('text.user_manual') }}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                 @endif
+                <li class="nav-item sidebar-nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="far fa-question-circle">
+                        </i><span>{{ __('text.help') }}</span>
+                    </a>
+                    <ul class="nav sub-group-menu">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ url('https://www.youtube.com/channel/UCN8SOrFD4WvHftsrpfn1jyw?view_as=subscriber') }}"
+                               target="_blank">
+                                <i class="fas fa-angle-right"></i>
+                                <span>{{ __('text.online_training') }}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ url('https://drive.google.com/drive/folders/1sMq3BY7R5aUhzJ1DfM8-_6if0vTIIC8o') }}"
+                               target="_blank">
+                                <i class="fas fa-angle-right"></i>
+                                <span>{{ __('text.user_manual') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
