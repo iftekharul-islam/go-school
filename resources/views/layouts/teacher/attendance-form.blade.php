@@ -98,9 +98,7 @@
                                     <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
                                 @else
-                                    <td>0</td>
-                                    <td>0</td>
-                                    @break
+                                    @continue
                                 @endif
                             @endforeach
                         @else
