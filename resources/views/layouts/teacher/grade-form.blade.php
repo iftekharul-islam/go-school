@@ -3,6 +3,9 @@
   #grade-labels > .label{
     margin-right: 1%;
   }
+    .table-width tbody tr td {
+        min-width: 80px;
+    }
 </style>
 <div class="col-md-12 text-center" id="grade-labels">
   <div class="row">
@@ -94,7 +97,7 @@
     <input type="hidden" name="grade_system_name" value="{{$gs->grade_system_name}}">
   @endforeach
   <div class="table-responsive">
-    <table class="table table-condensed table-hover" id="marking-table">
+    <table class="table table-condensed table-hover table-width" id="marking-table">
       <thead>
       <tr>
         <th scope="col">#</th>
@@ -185,7 +188,6 @@
   </div>
   <div style="text-align:center;">
     <button type="submit" class="button button--save float-right mr-2"><b>Submit</b></button>
-    {{--    <input type="submit" name="save" class="button button--save float-right mr-2" value="Submit">--}}
   </div>
 </form>
 
@@ -204,6 +206,7 @@
       } else {
         $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
                 ")").hide();
+        $("#marking-table td:nth-child(" + $(this).val() + ")").find('input').val('0');
       }
     });
   });
