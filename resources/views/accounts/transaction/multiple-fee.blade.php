@@ -94,7 +94,7 @@
                                         <tr>
                                             <th><input type="checkbox" id="checkAll" class="fee_types" title="Select All" /></th>
                                             <th width="65%">{{ __('text.fee_name') }}</th>
-                                            <th width="30%">{{ __('text.Name') }}</th>
+                                            <th width="30%">{{ __('text.amount') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -316,7 +316,7 @@
 
         function calculateTotal() {
             let fine = parseFloat($(".fine").val());
-            let partial = parseFloat($(".partial").val());
+            let partial = parseFloat($(".partial").val()) || 0;
             let discountAmount =  parseFloat($('#discountValue').val());
             let grandTotal = 0;
             let totalFee = 0;
