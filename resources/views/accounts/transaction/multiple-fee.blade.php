@@ -311,7 +311,6 @@
         });
 
         $(document).on('keyup change', '.fee-amount, .fine, .partial', function(){
-            console.log('hello');
             calculateTotal();
         });
 
