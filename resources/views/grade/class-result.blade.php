@@ -64,7 +64,7 @@
                     <h3>Marks and Grades details</h3>
                 </div>
             </div>
-            @if(count($grades) > 10)
+            @if(count($grades) > 0)
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
