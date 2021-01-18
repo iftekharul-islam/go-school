@@ -42,6 +42,9 @@ class ExamService {
             ->toArray();
         return ExamForClass::with('exam')
             ->where('active', 1)
+            ->whereHas('exam', function ($q){
+                $q->where('result_published', 0);
+            })
             ->whereIn('class_id', $classes)
             ->get();
     }
