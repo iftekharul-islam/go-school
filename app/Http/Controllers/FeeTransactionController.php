@@ -210,6 +210,7 @@ class FeeTransactionController extends Controller
     public function feeCollections($id) {
         $student = User::with(['school','studentInfo','section.class'])->findOrFail($id);
         $fees = FeeTransaction::with('transaction_items.fee_type')->where('student_id', $id)->get();
+//        return $fees;
         return view('accounts.transaction.feeCollections', compact('fees', 'student'));
     }
 

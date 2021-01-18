@@ -115,9 +115,9 @@
                         <thead>
                         <tr>
                             <th>Transaction No.</th>
-                            <th>Fine</th>
-                            <th>Discount</th>
-                            <th>Amount</th>
+{{--                            <th>Fine</th>--}}
+{{--                            <th>Discount</th>--}}
+{{--                            <th>Amount</th>--}}
                             <th>Mode</th>
                             <th>Date</th>
                             <th>Action</th>
@@ -133,13 +133,13 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $fee->transaction_serial }}</td>
-                                    <td>{{ $fee->fine }}</td>
-                                    <td>{{ $fee->discount }}</td>
-                                    <td>{{ $fee->amount }}</td>
+{{--                                    <td>{{ $fee->fine }}</td>--}}
+{{--                                    <td>{{ $fee->discount }}</td>--}}
+{{--                                    <td>{{ $fee->amount }}</td>--}}
                                     <td>{{ $fee->mode }}</td>
                                     <td>{{ $fee->created_at->format('Y-m-d') }}</td>
                                     <td>
-                                        <button title="Cancel Transaction" class="btn btn-secondary" onclick="feeTransaction({{ $fee->id }})"><i class="fas fa-history"></i></button>&nbsp;
+                                        <button title="Cancel Transaction" class="btn btn-danger" onclick="feeTransaction({{ $fee->id }})"><i class="fas fa-trash"></i></button>&nbsp;
                                         <a  title="View Transaction Details" class="btn btn-primary" href="{{ url(auth()->user()->role.'/transaction-detail/'.$fee->id) }}"><i class="fas fa-eye"></i></a>
                                         <form id="delete-form-{{ $fee->id }}" action="{{ url(auth()->user()->role.'/fee-transaction', $fee->id) }}" method="POST">
                                             {!! method_field('delete') !!}
@@ -148,15 +148,15 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr style="background-color: #eee">
-                                <td>Total</td>
-                                <td>{{ number_format($totalFine, 2) }}</td>
-                                <td>{{ number_format($totalDiscount, 2) }}</td>
-                                <td>{{ number_format(($totalAmount + $totalFine - $totalDiscount), 2) }}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+{{--                            <tr style="background-color: #eee">--}}
+{{--                                <td>Total</td>--}}
+{{--                                <td>{{ number_format($totalFine, 2) }}</td>--}}
+{{--                                <td>{{ number_format($totalDiscount, 2) }}</td>--}}
+{{--                                <td>{{ number_format(($totalAmount + $totalFine - $totalDiscount), 2) }}</td>--}}
+{{--                                <td></td>--}}
+{{--                                <td></td>--}}
+{{--                                <td></td>--}}
+{{--                            </tr>--}}
                         @endif
                         </tbody>
                     </table>
@@ -184,9 +184,9 @@
                         <thead>
                             <tr>
                                 <th>Transaction No.</th>
-                                <th>Fine</th>
-                                <th>Discount</th>
-                                <th>Amount</th>
+{{--                                <th>Fine</th>--}}
+{{--                                <th>Discount</th>--}}
+{{--                                <th>Amount</th>--}}
                                 <th>Mode</th>
                                 <th>Date</th>
                             </tr>
@@ -196,21 +196,21 @@
                                 @foreach($fees as $fee)
                                     <tr>
                                         <td>{{ $fee->transaction_serial }}</td>
-                                        <td>{{ $fee->fine }}</td>
-                                        <td>{{ $fee->discount }}</td>
-                                        <td>{{ $fee->amount }}</td>
+{{--                                        <td>{{ $fee->fine }}</td>--}}
+{{--                                        <td>{{ $fee->discount }}</td>--}}
+{{--                                        <td>{{ $fee->amount }}</td>--}}
                                         <td>{{ $fee->mode }}</td>
                                         <td>{{ $fee->created_at->format('Y-m-d') }}</td>
                                     </tr>
                                 @endforeach
-                                <tr style="background-color: #eee">
-                                    <td>Total</td>
-                                    <td>{{ number_format($totalFine, 2) }}</td>
-                                    <td>{{ number_format($totalDiscount, 2) }}</td>
-                                    <td>{{ number_format(($totalAmount + $totalFine - $totalDiscount), 2) }}</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+{{--                                <tr style="background-color: #eee">--}}
+{{--                                    <td>Total</td>--}}
+{{--                                    <td>{{ number_format($totalFine, 2) }}</td>--}}
+{{--                                    <td>{{ number_format($totalDiscount, 2) }}</td>--}}
+{{--                                    <td>{{ number_format(($totalAmount + $totalFine - $totalDiscount), 2) }}</td>--}}
+{{--                                    <td></td>--}}
+{{--                                    <td></td>--}}
+{{--                                </tr>--}}
                             @endif
                         </tbody>
                     </table>
