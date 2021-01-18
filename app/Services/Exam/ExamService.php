@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Exam;
 
 use App\Exam;
@@ -8,48 +9,54 @@ use App\ExamForClass;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class ExamService {
+class ExamService
+{
     public $examIds;
     public $request;
     public $exam;
 
-    public function getLatestExamsBySchoolIdWithPagination(){
+    public function getLatestExamsBySchoolIdWithPagination()
+    {
         return Exam::with('myClasses', 'myClasses.classDetails')->where('school_id', auth()->user()->school_id)
             ->latest()
             ->paginate(100);
     }
 
-    public function getActiveExamsBySchoolId(){
+    public function getActiveExamsBySchoolId()
+    {
         return Exam::where('school_id', auth()->user()->school_id)
-            ->where('active',1)
+            ->where('active', 1)
             ->get();
     }
 
-    public function getCoursesByExamIds(){
-        return Course::with('class','teacher')
+    public function getCoursesByExamIds()
+    {
+        return Course::with('class', 'teacher')
             ->whereIn('exam_id', $this->examIds)
             ->orderBy('class_id')
             ->get();
     }
 
-    public function getClassesBySchoolId(){
-        return Myclass::where('school_id',auth()->user()->school->id)->get();
+    public function getClassesBySchoolId()
+    {
+        return Myclass::where('school_id', auth()->user()->school->id)->get();
     }
 
-    public function getAlreadyAssignedClasses(){
+    public function getAlreadyAssignedClasses()
+    {
         $classes = $this->getClassesBySchoolId()
             ->pluck('id')
             ->toArray();
         return ExamForClass::with('exam')
             ->where('active', 1)
-            ->whereHas('exam', function ($q){
+            ->whereHas('exam', function ($q) {
                 $q->where('result_published', 0);
-            })
-            ->whereIn('class_id', $classes)
+            })->whereIn('class_id', $classes)
             ->get();
     }
 
-    public function createExam(){
+    public function createExam()
+    {
         $exam = new Exam;
         $exam->exam_name = $this->request->exam_name;
         $exam->active = 1;
@@ -64,16 +71,18 @@ class ExamService {
         return $exam;
     }
 
-    public function updateCoursesWithExamId(){
-        Course::whereIn('class_id',$this->request->classes)->update([
+    public function updateCoursesWithExamId()
+    {
+        Course::whereIn('class_id', $this->request->classes)->update([
             'exam_id' => $this->exam->id
         ]);
     }
 
-    public function assignClassesToExam(){
+    public function assignClassesToExam()
+    {
         $tc = count($this->request->classes);
         $i = 0;
-        while($i < $tc){
+        while ($i < $tc) {
             $examForClass = new ExamForClass;
             $examForClass->exam_id = $this->exam->id;
             $examForClass->class_id = $this->request->classes[$i];
@@ -85,7 +94,8 @@ class ExamService {
         return $efc;
     }
 
-    public function storeExam(){
+    public function storeExam()
+    {
         \DB::transaction(function () {
             $this->exam = $this->createExam();
 
@@ -100,24 +110,27 @@ class ExamService {
         }, 5);
     }
 
-    public function updateExamFields(){
+    public function updateExamFields()
+    {
         $tb = Exam::findOrFail($this->request->exam_id);
         $tb->notice_published = isset($this->request->notice_published) ? 1 : 0;
         $tb->result_published = isset($this->request->result_published) ? 1 : 0;
-        $tb->active = (isset($this->request->active))?1:0;
+        $tb->active = (isset($this->request->active)) ? 1 : 0;
         $tb->save();
         Cache::flush();
     }
 
-    public function updateExamForClass(){
-        if(isset($this->request->active)){
-            ExamForClass::where('exam_id', $this->request->exam_id)->update(['active'=>1]);
+    public function updateExamForClass()
+    {
+        if (isset($this->request->active)) {
+            ExamForClass::where('exam_id', $this->request->exam_id)->update(['active' => 1]);
         } else {
-            ExamForClass::where('exam_id', $this->request->exam_id)->update(['active'=>0]);
+            ExamForClass::where('exam_id', $this->request->exam_id)->update(['active' => 0]);
         }
     }
 
-    public function updateExam(){
+    public function updateExam()
+    {
         \DB::transaction(function () {
             $this->updateExamFields();
             $this->updateExamForClass();
