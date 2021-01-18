@@ -28,7 +28,7 @@
                                     <i class="flaticon-multiple-users-silhouette text-light"></i>
                                 </div>
                                 <div class="item-content">
-                                    <div class="item-number"><span class="counter" data-num="{{ $teachers->count() }}"></span></div>
+                                    <div class="item-number"><span class="counter" data-num="{{ isset($teachers) ? $teachers->count() : '' }}"></span></div>
                                     <div class="item-title">{{ __('text.total_teacher') }}</div>
                                 </div>
                             </div>
