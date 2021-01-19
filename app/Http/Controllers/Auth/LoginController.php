@@ -77,4 +77,9 @@ class LoginController extends Controller
                 break;
         }
     }
+
+    public function logout () {
+        auth()->logout();
+        return redirect('/login');
+    }
 }

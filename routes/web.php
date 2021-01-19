@@ -18,11 +18,14 @@ Route::get('/locale',function (){
    return view('locale');
 });
 
-
 Route::get('/', function () {
     return view('welcome');
 });
-Auth::routes(['login' => false]);
+
+//Auth::routes(['login' => false]);
+Auth::routes();
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
@@ -165,7 +168,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('edit-expense/{id}', 'AccountController@editExpense');
         Route::post('update-expense', 'AccountController@updateExpense');
         Route::delete('delete-expense/{id}', 'AccountController@deleteExpense');
-        Route::get('courses/{teacher_id}/{section_id}', 'new.staff@index');
+        Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
     });
 
     // Teacher role routes
