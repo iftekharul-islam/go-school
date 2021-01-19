@@ -44,29 +44,33 @@ class SendSmsToStudents implements ShouldQueue
             return;
         }
 
-        if ($student['studentInfo']['is_sms_enabled'] == 1) {
+        if ($student['studentInfo']['is_sms_enabled'] != 1) {
 
-            $phone = $student['studentInfo']['father_phone_number'];
+            logger('Student sms is not enable & id :' . $this->id);
 
-            if (!empty($student['studentInfo']['guardian_phone_number'])) {
-
-                $phone = $student['studentInfo']['guardian_phone_number'];
-            }
-
-            $phone_number = $this->numberCheck($phone);
-
-
-            // datasoftbd sms
-
-            $dataSoftSms = $this->dataSoftConfig($phone_number);
-
-
-            // sslwireless sms
-
-//            $sslWirlessSms = $this->sslWirelessConfig($phone_number, $message);
-
-
+            return;
         }
+
+        $phone = $student['studentInfo']['father_phone_number'];
+
+        if (!empty($student['studentInfo']['guardian_phone_number'])) {
+
+            $phone = $student['studentInfo']['guardian_phone_number'];
+        }
+
+        $phone_number = $this->numberCheck($phone);
+
+
+        // datasoftbd sms
+
+        $dataSoftSms = $this->sentSmsBydataSoft($phone_number);
+
+
+        // sslwireless sms
+
+//            $sslWirlessSms = $this->sentSmsBydataSoft($phone_number, $message);
+
+
     }
 
     /**
@@ -101,7 +105,7 @@ class SendSmsToStudents implements ShouldQueue
      * @param $phone
      * @param $message
      */
-    public function sslWirelessConfig($phone, $message)
+    public function sentSmsBysslWireless($phone, $message)
     {
         $user = config("message.sms_user");
         $pass = config("message.sms_pass");
@@ -133,7 +137,7 @@ class SendSmsToStudents implements ShouldQueue
      * @param $message
      * @param $phone_number
      */
-    public function dataSoftConfig($phone_number)
+    public function sentSmsBydataSoft($phone_number)
     {
         $base_url_non_masking = config("message.sms_base_url");
         $api_key = config("message.sms_api_key");
