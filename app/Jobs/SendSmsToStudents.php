@@ -37,7 +37,7 @@ class SendSmsToStudents implements ShouldQueue
     {
         $base_url_non_masking = env('SMS_BASE_URL');
         $api_key              = env('SMS_API_KEY');
-        $message              = nl2br($this->message);
+        $message              = urlencode($this->message);
 
 //        $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
 //        $base_url_non_masking = 'https://smscp.datasoftbd.com/smsapi/non-masking';
@@ -66,7 +66,6 @@ class SendSmsToStudents implements ShouldQueue
                 $phone = ltrim($phone, '88');
                 $phone = '880'.$phone;
             }
-            logger($message);
 
 //            $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
 
