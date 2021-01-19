@@ -14,7 +14,7 @@ class SendSmsToStudents implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
+    protected $id;
     protected $message;
 
     /**
@@ -22,9 +22,9 @@ class SendSmsToStudents implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($data, $message)
+    public function __construct($id, $message)
     {
-        $this->data    = $data;
+        $this->id = $id;
         $this->message = $message;
     }
 
@@ -35,69 +35,120 @@ class SendSmsToStudents implements ShouldQueue
      */
     public function handle()
     {
-        $base_url_non_masking = env('SMS_BASE_URL');
-        $api_key              = env('SMS_API_KEY');
-        $message              = urlencode($this->message);
+        $student = User::with('studentInfo')->find($this->id);
 
-//        $api_key = '$2y$10$nCixye2JmYu8p65XRv.yFeuMV4mc4BBko4KZ6XpmwEDiaEqfh1h2O';
-//        $base_url_non_masking = 'https://smscp.datasoftbd.com/smsapi/non-masking';
-//        $message = strip_tags($this->message);
+        if (!$student) {
 
-        $student = User::with('studentInfo')->where('id', $this->data)->first();
+            logger('Student not found with id :' . $this->id);
+
+            return;
+        }
 
         if ($student['studentInfo']['is_sms_enabled'] == 1) {
+
             $phone = $student['studentInfo']['father_phone_number'];
+
             if (!empty($student['studentInfo']['guardian_phone_number'])) {
+
                 $phone = $student['studentInfo']['guardian_phone_number'];
             }
 
-            $checked_digit = substr($phone, 0, 3);
-            if ($checked_digit == '+88') {
-                $phone = ltrim($phone, '+');
-            }
-
-            $checked_zero = substr($phone, 0, 1);
-            if ($checked_zero == 0) {
-                $phone = '88'.$phone;
-            }
-
-            $checked_lastest = substr($phone, 0, 3);
-            if ($checked_lastest !== '880') {
-                $phone = ltrim($phone, '88');
-                $phone = '880'.$phone;
-            }
-
-//            $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone . "&smsContent=" . $message;
-
-            // datasoftbd url
-            $url = $base_url_non_masking."?api_key=".$api_key."&smsType=text&mobileNo=".$phone."&smsContent=".$message;
-
-            $client = new Client();
-            try {
-                $request = $client->get($url);
-//                logger($request);
-            } catch (\Exception $exception) {
-                logger($exception);
-            }
+            $phone_number = $this->numberCheck($phone);
 
 
-            // sslwireless sms configuration
+            // datasoftbd sms
 
-//            $user = config("message.sms_user");
-//            $pass = config("message.sms_pass");
-//            $sid = config("message.sms_sid");
-//          $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
-//          $response = $client->request('POST', $url, [
-//                'form_params' => [
-//                    'user' => $user,
-//                    'pass' => $pass,
-//                    'sid'  => $sid,
-//                    'sms'  => [
-//                        [$phone, $message],
-//                    ],
-//                ],
-//            ]);
+            $dataSoftSms = $this->dataSoftConfig($phone_number);
 
+
+            // sslwireless sms
+
+//            $sslWirlessSms = $this->sslWirelessConfig($phone_number, $message);
+
+
+        }
+    }
+
+    /**
+     * @param $phone
+     * @return string
+     */
+    public function numberCheck($phone)
+    {
+        $checked_digit = substr($phone, 0, 3);
+
+        if ($checked_digit == '+88') {
+            $phone = ltrim($phone, '+');
+        }
+
+        $checked_zero = substr($phone, 0, 1);
+
+        if ($checked_zero == 0) {
+            $phone = '88' . $phone;
+        }
+
+        $checked_lastest = substr($phone, 0, 3);
+
+        if ($checked_lastest !== '880') {
+            $phone = ltrim($phone, '88');
+            $phone = '880' . $phone;
+        }
+
+        return $phone;
+    }
+
+    /**
+     * @param $phone
+     * @param $message
+     */
+    public function sslWirelessConfig($phone, $message)
+    {
+        $user = config("message.sms_user");
+        $pass = config("message.sms_pass");
+        $sid = config("message.sms_sid");
+        $url = "http://sms.sslwireless.com/pushapi/dynamic/server.php";
+
+        $client = new Client();
+
+        try {
+            $response = $client->request('POST', $url, [
+                'form_params' => [
+                    'user' => $user,
+                    'pass' => $pass,
+                    'sid' => $sid,
+                    'sms' => [
+                        [$phone, $message],
+                    ],
+                ],
+            ]);
+
+        } catch (\Exception $exception) {
+
+            logger($exception);
+        }
+
+    }
+
+    /**
+     * @param $message
+     * @param $phone_number
+     */
+    public function dataSoftConfig($phone_number)
+    {
+        $base_url_non_masking = config("message.sms_base_url");
+        $api_key = config("message.sms_api_key");
+        $message = urlencode($this->message);
+
+        $url = $base_url_non_masking . "?api_key=" . $api_key . "&smsType=text&mobileNo=" . $phone_number . "&smsContent=" . $message;
+
+        $client = new Client();
+
+        try {
+            $request = $client->get($url);
+
+        } catch (\Exception $exception) {
+
+            logger($exception);
         }
     }
 }
