@@ -60,8 +60,8 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->stuff_id == $attendance->stuff_id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent : 0}}</td>
+                                    <td>{{$at->totalpresent ?? 0}}</td>
+                                    <td>{{$at->totalabsent ?? 0}}</td>
                                 @else
                                     @continue
                                 @endif
@@ -92,10 +92,13 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->stuff_id == $librarian->id)
-                                    <td>{{$at->totalpresent}}</td>
-                                    <td>{{$at->totalabsent }}</td>
+                                    <td>{{ $at->totalpresent ?? 0 }}</td>
+                                    <td>{{ $at->totalabsent ?? 0 }}</td>
+                                    @break
                                 @else
-                                    @continue
+                                    <td>0</td>
+                                    <td>0</td>
+                                    @break
                                 @endif
                             @endforeach
                         @else

@@ -57,7 +57,7 @@
                                         $totalDue = 0;
                                         $totalPaid = 0;
                                     @endphp
-                                @foreach($student->section['class']->feeMasters as $feeMaster)
+                                @foreach($student->section['class']['feeMasters'] as $feeMaster)
                                     @php
                                         $total_paid = 0;
                                         $totalAmount = $totalAmount + $feeMaster->amount;

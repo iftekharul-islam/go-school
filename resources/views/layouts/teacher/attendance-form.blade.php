@@ -95,7 +95,7 @@
                         @if(count($attCount) > 0)
                             @foreach ($attCount as $at)
                                 @if($at->student_id == $student->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
+                                    <td>{{$at->totalpresent ? $at->totalpresent : 0 }}</td>
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
                                 @else
                                     @continue

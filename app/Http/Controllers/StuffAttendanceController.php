@@ -19,12 +19,12 @@ class StuffAttendanceController extends Controller
     {
         $teachers = User::where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
-            ->orderBy('name', 'ASC')
+            ->orderBy('id', 'ASC')
             ->where('active', 1)
             ->get();
         $teachersFilterByAdmin = User::where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
-            ->orderBy('name', 'ASC')
+            ->orderBy('id', 'ASC')
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();

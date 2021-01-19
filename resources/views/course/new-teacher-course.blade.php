@@ -2,6 +2,14 @@
 
 @section('title', 'Course')
 
+@push('customcss')
+    <style>
+        .table tbody tr th {
+            vertical-align: middle;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -12,9 +20,10 @@
                             </a>Teacher All Sections
                         </h3>
                         <ul>
-                            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
                                     Back &nbsp;&nbsp;|</a>
-                                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                                <a style="margin-left: 8px;"
+                                   href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
                             </li>
                             <li>Teacher All Sections</li>
                         </ul>
@@ -30,7 +39,11 @@
                                 @if(count($courses) > 0)
                                     @if(count($courses) > 0)
                                         @foreach ($courses as $course)
-                                            <div style="font-size: 20px;" class="mt-5"><b><i class="far fa-address-card text-teal"></i>  Teacher Code</b> : {{$course->teacher->student_code}} &nbsp<b>  Name</b>: <a href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a></div>
+                                            <div style="font-size: 20px;" class="mt-5"><b><i
+                                                        class="far fa-address-card text-teal"></i> Teacher Code</b>
+                                                : {{$course->teacher->student_code}} &nbsp<b> Name</b>: <a
+                                                    href="{{url('user/'.$course->teacher->student_code)}}">{{$course->teacher->name}}</a>
+                                            </div>
                                             @break($loop->first)
                                         @endforeach
                                     @endif
