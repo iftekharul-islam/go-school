@@ -58,7 +58,7 @@ class SendSmsToStudents implements ShouldQueue
             $phone = $student['studentInfo']['guardian_phone_number'];
         }
 
-        $phone_number = $this->numberCheck($phone);
+        $phone_number = $this->checkNumber($phone);
 
 
         // datasoftbd sms
@@ -77,7 +77,7 @@ class SendSmsToStudents implements ShouldQueue
      * @param $phone
      * @return string
      */
-    public function numberCheck($phone)
+    public function checkNumber($phone)
     {
         $checked_digit = substr($phone, 0, 3);
 
