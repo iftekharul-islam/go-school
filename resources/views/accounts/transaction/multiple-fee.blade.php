@@ -315,9 +315,9 @@
         });
 
         function calculateTotal() {
-            let fine = parseFloat($(".fine").val());
+            let fine = parseFloat($(".fine").val()) || 0;
             let partial = parseFloat($(".partial").val()) || 0;
-            let discountAmount =  parseFloat($('#discountValue').val());
+            let discountAmount =  parseFloat($('#discountValue').val()) || 0;
             let grandTotal = 0;
             let totalFee = 0;
 
