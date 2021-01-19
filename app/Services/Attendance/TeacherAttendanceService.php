@@ -3,6 +3,7 @@ namespace App\Services\Attendance;
 
 use App\StuffAttendance;
 use App\User;
+use function foo\func;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -43,7 +44,7 @@ class TeacherAttendanceService {
     {
         return StuffAttendance::whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
-            ->orderBy('stuff_id', 'desc')
+            ->orderBy('stuff_id', 'ASC')
             ->whereNotIn('role', ['student','teacher','admin','master'])
             ->get()
             ->unique('stuff_id');

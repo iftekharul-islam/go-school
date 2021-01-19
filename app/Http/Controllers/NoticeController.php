@@ -19,20 +19,19 @@ class NoticeController extends Controller
      */
     public function index()
     {
+
         $school_id = Auth::user()->school->id;
-        $minutes = 1440;
-        $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
-            return Notice::where('school_id', $school_id)
-                ->where('active', 1)
-                ->orderBy('created_at', 'DESC')
-                ->get();
-        });
-        $events = Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
-            return Event::where('school_id', $school_id)
-                ->where('active', 1)
-                ->orderBy('created_at', 'DESC')
-                ->get();
-        });
+
+        $notices = Notice::where('school_id', $school_id)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $events = Event::where('school_id', $school_id)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
         return view('notices.index', compact('notices', 'events'));
     }
 
@@ -43,9 +42,10 @@ class NoticeController extends Controller
      */
     public function list()
     {
-        $files = Notice::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at', 'DESC')->get();
-        return view('notices.list',['files'=>$files]);
+        $files = Notice::where('school_id', Auth::user()->school_id)->where('active', 1)->orderBy('created_at', 'DESC')->get();
+        return view('notices.list', ['files' => $files]);
     }
+
     public function create()
     {
         return view('notices.create');
@@ -54,7 +54,7 @@ class NoticeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(NoticeRequest $request)
@@ -76,32 +76,30 @@ class NoticeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $users = Auth::user();
         $notices = Notice::where('school_id', $users->school_id)
-                ->where('active', 1)
-                ->get();
+            ->where('active', 1)
+            ->get();
 
-        $notice ='';
-        foreach ($notices as $ntc)
-        {
-            if ($ntc['id'] == $id )
-            {
+        $notice = '';
+        foreach ($notices as $ntc) {
+            if ($ntc['id'] == $id) {
                 $notice = $ntc;
             }
         }
 
-        return view('notices.show',compact('notices','notice'));
+        return view('notices.show', compact('notices', 'notice'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -112,8 +110,8 @@ class NoticeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update($id)
@@ -121,20 +119,20 @@ class NoticeController extends Controller
         $tb = Notice::findOrFail($id);
         $tb->active == 1 ? $tb->active = 0 : $tb->active = 1;
         $tb->save();
-        return back()->with('status','Notice Updated');
+        return back()->with('status', 'Notice Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return (Notice::destroy($id))?response()->json([
+        return (Notice::destroy($id)) ? response()->json([
             'status' => 'success'
-        ]):response()->json([
+        ]) : response()->json([
             'status' => 'error'
         ]);
     }
@@ -142,7 +140,7 @@ class NoticeController extends Controller
     public function deleteNotice($id)
     {
         $notice = Notice::findOrFail($id);
-       
+
         if ($notice->file_path) {
             Storage::disk('public')->delete($notice->file_path);
         }

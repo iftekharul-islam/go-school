@@ -19,12 +19,12 @@ class StuffAttendanceController extends Controller
     {
         $teachers = User::where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
-            ->orderBy('name', 'ASC')
+            ->orderBy('id', 'ASC')
             ->where('active', 1)
             ->get();
         $teachersFilterByAdmin = User::where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
-            ->orderBy('name', 'ASC')
+            ->orderBy('id', 'ASC')
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
@@ -52,6 +52,7 @@ class StuffAttendanceController extends Controller
         $librarians = User::where('school_id', Auth::user()->school_id)->whereNotIn('role', ['student','teacher','admin','master'])->get();
         $attendances = $this->teacherAttendanceService->getLibrariansTodayAttendance();
         $attCount = $this->teacherAttendanceService->getLibrarianTotalAttendance();
+//        return $attCount;
 
         return view('attendance.librarian-attendance', compact('librarians', 'attCount', 'attendances'));
     }
