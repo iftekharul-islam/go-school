@@ -57,7 +57,8 @@
                                         $totalDue = 0;
                                         $totalPaid = 0;
                                     @endphp
-                                @foreach($student->section['class']['feeMasters'] as $feeMaster)
+                                @isset($student->section->class)
+                                    @foreach($student->section->class->feeMasters as $feeMaster)
                                     @php
                                         $total_paid = 0;
                                         $totalAmount = $totalAmount + $feeMaster->amount;
@@ -120,6 +121,7 @@
                                             <td>{{number_format((float)($feeMaster->amount - $paid_amount), 2, '.', '')}}</td>
                                     </tr>
                                 @endforeach
+                                @endisset
                                 <tr class="grand-total">
                                     <td class="tex text-left"><b>Grand Total</b></td>
                                     <td><b>{{number_format((float)($totalAmount), 2, '.', '')}}</b></td>

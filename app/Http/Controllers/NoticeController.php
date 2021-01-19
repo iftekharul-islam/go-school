@@ -84,6 +84,7 @@ class NoticeController extends Controller
         $users = Auth::user();
         $notices = Notice::where('school_id', $users->school_id)
             ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         $notice = '';
