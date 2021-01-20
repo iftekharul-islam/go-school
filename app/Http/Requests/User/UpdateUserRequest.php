@@ -29,9 +29,12 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $user_id = $this->session()->get('editableUser');
+
         $rules = [
             'user_id' => 'required|numeric',
             'name' => 'required|string|max:255',
+            'email' => 'unique:users,email,'. $user_id,
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
             'father_annual_income' => 'nullable|integer|digits_between:0,10',
             'mother_annual_income' => 'nullable|integer|digits_between:0,10'
