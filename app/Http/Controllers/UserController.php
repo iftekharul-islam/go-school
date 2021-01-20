@@ -519,8 +519,6 @@ class UserController extends Controller
         
         $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
 
-        Session::put('editableUser', $id);
-        
         return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
