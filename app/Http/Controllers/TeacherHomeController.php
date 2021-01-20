@@ -55,6 +55,7 @@ class TeacherHomeController extends Controller
             $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
+                    ->orderBy('created_at', 'DESC')
                     ->get();
             });
 
