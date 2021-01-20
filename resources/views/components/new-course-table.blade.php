@@ -39,7 +39,7 @@
 
                 <td>{{$course->course_time}}</td>
 
-                <td>{{ $course->section->room_number ?? '' }}</td>
+                <td>{{ $course->section['room_number'] }}</td>
 
                 @if($student)
                     <td>
