@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use http\Message;
@@ -27,11 +28,12 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         $rules = [
             'user_id' => 'required|numeric',
             'name' => 'required|string|max:255',
+            'email' => 'unique:users,email,'. $request->user_id,
             'pic_path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:800',
             'father_annual_income' => 'nullable|integer|digits_between:0,10',
             'mother_annual_income' => 'nullable|integer|digits_between:0,10'
