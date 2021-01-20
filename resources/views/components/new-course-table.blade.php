@@ -49,7 +49,7 @@
 
                 @if(!$student)
                     <td>{{ isset($course->section->class) ? $course->section->class->class_number : '' }}</td>
-                    <td>{{$course->section->section_number}}</td>
+                    <td>{{$course->section['section_number']}}</td>
 
                     @if(\Illuminate\Support\Facades\Auth::user()->role == 'teacher')
                         <td>
