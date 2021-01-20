@@ -36,7 +36,7 @@
                 <td>
                     @php $totalClasses = count($exam->myClasses) @endphp
                     @foreach($exam->myClasses as $key => $class)
-                        {{ $class->classDetails->class_number}}
+                        {{ $class->classDetails['class_number']}}
                         @if($key < $totalClasses - 1) ,@endif
                     @endforeach
                 </td>
