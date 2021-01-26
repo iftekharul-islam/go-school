@@ -33,6 +33,7 @@ class OnlineClassScheduleController extends Controller
     public function index()
     {
         $items = OnlineClassSchedule::with('section.class')->get();
+
         return view('online-class.index', compact('items'));
     }
 

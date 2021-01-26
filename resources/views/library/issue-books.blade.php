@@ -27,7 +27,7 @@
                             {{ session('error-status') }}
                         </div>
                     @endif
-                    @component('components.book-issue-form',['books'=>$books])
+                    @component('components.book-issue-form',['books'=>$books, 'classes' => $classes, 'class_number' => $class_number])
                     @endcomponent
                 </div>
             </div>

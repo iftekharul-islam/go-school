@@ -1,0 +1,67 @@
+@extends('layouts.student-app')
+
+@section('title', 'Returned Books history')
+
+@section('content')
+    <div class="breadcrumbs-area">
+        <h3>
+            <i class='fas fa-book'></i>
+            Returned Books history
+        </h3>
+        <ul>
+            <li>
+                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            </li>
+            <li>Returned Books history</li>
+        </ul>
+    </div>
+    <?php $role = \Illuminate\Support\Facades\Auth::user()->role ?>
+    <div class="card height-auto false-height">
+        <div class="card-body">
+            <div class="table-responsive">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                <table class="table display table-bordered table-data-div text-wrap">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{{ __('text.Name') }}</th>
+                        <th>{{ __('text.author') }}</th>
+                        <th>{{ __('text.type') }}</th>
+                        <th>Borrower_Name</th>
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Issue_date</th>
+                        <th>Return_date</th>
+                        <th>Fine</th>
+                    </tr>
+                    </thead>
+                    @foreach($books as $book)
+                        <tr>
+                            <td>{{ ($loop->index + 1) }}</td>
+                            <td><a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book', $book->id) }}" class="text-teal">
+                                    {{ $book->book->title }}
+                                </a></td>
+                            <td>{{ $book->book->author }}</td>
+                            <td>{{ $book->book->type }}</td>
+                            <td>{{ $book->student->name }}</td>
+                            <td>{{ $book->student->section->class->class_number }}</td>
+                            <td>{{ $book->student->section->section_number }}</td>
+                            <td>{{ \Carbon\Carbon::parse($book->issue_date)->format('d-m-Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($book->return_date)->format('d-m-Y') }}</td>
+                            <td>{{ $book->fine }}</td>
+                        </tr>
+                    @endforeach
+                </table>
+                <div class="paginate123 mt-5 float-right">
+                    {{ $books->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

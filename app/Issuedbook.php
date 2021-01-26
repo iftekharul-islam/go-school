@@ -12,4 +12,9 @@ class Issuedbook extends Model
     {
         return $this->belongsTo('App\Book');
     }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_code', 'student_code');
+    }
 }

@@ -31,4 +31,9 @@ class Section extends Model
     {
         return $this->hasMany('App\SectionMeta');
     }
+
+    public function students()
+    {
+        return $this->hasMany('App\User')->where('role', 'student')->where('active', '1');
+    }
 }
