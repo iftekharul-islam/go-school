@@ -212,7 +212,7 @@ class UserService
             ->where('section_id', $section_id)
             ->where('active', 1)
             ->orderBy('name', 'asc')
-            ->get();
+            ->paginate(20);
     }
 
     public function getSectionStudentsWithStudentInfo($section_id)

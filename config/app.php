@@ -188,7 +188,10 @@ return [
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
 
         //zipper
-        Chumper\Zipper\ZipperServiceProvider::class
+        Chumper\Zipper\ZipperServiceProvider::class,
+
+        //shorten url
+        LaraCrafts\UrlShortener\UrlShortenerServiceProvider::class,
 
     ],
 

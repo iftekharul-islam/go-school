@@ -10,6 +10,7 @@ use \Illuminate\Support\Facades\Session;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/locale/{locale}', function ($locale){
     Session::put('locale', $locale);
     return back();
@@ -440,6 +441,13 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('school-settings/{school_id}', 'SchoolController@updateSchoolSetting')->name('school.update');
 
     });
+
+    //Online class schedule
+
+    Route::get('class-schedule', 'OnlineClassScheduleController@index')->name('class.schedule');
+    Route::get('class-schedule/{id}', 'OnlineClassScheduleController@show')->name('class.schedule.show');
+    Route::get('class-schedule/create', 'OnlineClassScheduleController@create')->name('class.schedule.create');
+    Route::post('class-schedule/store', 'OnlineClassScheduleController@store')->name('class.schedule.store');
 
 });
 
