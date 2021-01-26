@@ -33,7 +33,6 @@ class OnlineClassScheduleController extends Controller
     public function index()
     {
         $items = OnlineClassSchedule::with('section.class')->get();
-//        return $items;
         return view('online-class.index', compact('items'));
     }
 
@@ -44,11 +43,11 @@ class OnlineClassScheduleController extends Controller
      */
     public function create(Request $request, UrlShortenerManager $shortener)
     {
-        $url = $request->url ?? '' ;
+        $url = $request->url ?? '';
         $tinyUrl = isset($request->url) ? $shortener->shorten($request->url) : '';
         $data = Section::with('class')->find($request->section_id);
-        $class_number = $data->class->class_number ?? '' ;
-        $section_id = $request->section_id;
+        $class_number = $data->class->class_number ?? '';
+        $section_id = $request->section_id ?? '';
         $section_number = $data->section_number ?? '';
 
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
@@ -81,8 +80,7 @@ class OnlineClassScheduleController extends Controller
         $summary->total_sms = count($students) * $request->sms_count;
         $summary->save();
 
-        foreach ($students as $student_id)
-        {
+        foreach ($students as $student_id) {
             SendSmsToStudents::dispatch($student_id, $request->message)->delay(5);
         }
 
@@ -99,6 +97,7 @@ class OnlineClassScheduleController extends Controller
     {
 
         $data = OnlineClassSchedule::with('classSummary', 'section.class')->findOrFail($id);
+
         return view('online-class.show', compact('data'));
 
     }
