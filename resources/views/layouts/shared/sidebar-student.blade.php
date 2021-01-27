@@ -532,8 +532,8 @@
                     <li class="nav-item sidebar-nav-item">
                         <a class="nav-link"
                            href="{{ route('class.schedule') }}">
-                            <i class="far fa-question-circle">
-                            </i><span>Online Class Schedule</span>
+                            <i class="fas fa-globe"></i>
+                            </i><span>{{ __('text.online_class_schedule') }}</span>
                         </a>
                     </li>
                 @endif

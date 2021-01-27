@@ -4,22 +4,6 @@
 
 @section('content')
     <style>
-        .for-repeatable {
-            display: none;
-        }
-
-        .Week-check {
-            display: block;
-        }
-
-        .everyday_time {
-            display: none;
-        }
-
-        .example {
-            width: 100%;
-        }
-
         .false-padding-bottom-form .sms-area textarea {
             height: initial;
         }
@@ -28,7 +12,7 @@
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
             <h3>
-                Create Schedule
+                {{ __('text.create_schedule') }}
             </h3>
             <ul>
                 <li>
@@ -37,7 +21,7 @@
                     <a style="margin-left: 8px;"
                        href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>Create Schedule</li>
+                <li>{{ __('text.create_schedule') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -77,11 +61,6 @@
                                 <label>{{ __('text.Section') }}</label>
                                 <select class="select2" id="section" name="section"></select>
                             </div>
-                            {{--                            <div class="col-12 form-group mg-t-2">--}}
-                            {{--                                <label class="form-check-label" for="url">Online class URL</label>--}}
-                            {{--                                <input type="url" name="url"--}}
-                            {{--                                       class="form-control" placeholder="Enter url ..." value="{{ $url ?? '' }}">--}}
-                            {{--                            </div>--}}
                             <div class="col-12 form-group mg-t-2 float-right">
                                 <button type="submit"
                                         class="button--save button float-right">{{ __('text.Search') }}</button>
@@ -107,8 +86,8 @@
                                                 <table class="table table-data-div table-bordered">
                                                     <thead>
                                                     <tr>
-                                                        <th>Student Code</th>
-                                                        <th>Student Name</th>
+                                                        <th>{{ __('text.student_code') }}</th>
+                                                        <th>{{ __('text.Name') }}</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
