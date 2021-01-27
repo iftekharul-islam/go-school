@@ -33,12 +33,12 @@
                         <th>{{ __('text.Name') }}</th>
                         <th>{{ __('text.author') }}</th>
                         <th>{{ __('text.type') }}</th>
-                        <th>Borrower_Name</th>
-                        <th>Class</th>
-                        <th>Section</th>
-                        <th>Issue_date</th>
-                        <th>Return_date</th>
-                        <th>Fine</th>
+                        <th>{{ __('text.borrower_name') }}</th>
+                        <th>{{ __('text.Class') }}</th>
+                        <th>{{ __('text.Section') }}</th>
+                        <th>{{ __('text.issued_date') }}</th>
+                        <th>{{ __('text.return_date') }}</th>
+                        <th>{{ __('text.fine') }}</th>
                     </tr>
                     </thead>
                     @foreach($books as $book)

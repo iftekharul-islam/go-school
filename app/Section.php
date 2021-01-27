@@ -34,6 +34,6 @@ class Section extends Model
 
     public function students()
     {
-        return $this->hasMany('App\User')->where('role', 'student')->where('active', '1');
+        return $this->hasMany('App\User')->where('role', 'student');
     }
 }

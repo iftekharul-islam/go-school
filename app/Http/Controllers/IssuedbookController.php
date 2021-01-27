@@ -28,8 +28,9 @@ class IssuedbookController extends Controller
      */
     public function index()
     {
-        $issuedBooks = $this->issuedBookService->getIssuedBooks();
-        return view('library.new-issued-books', ['issued_books' => $issuedBooks]);
+        $issued_books = $this->issuedBookService->getIssuedBooks();
+
+        return view('library.new-issued-books', ['issued_books' => $issued_books]);
     }
 
     /**
@@ -105,8 +106,6 @@ class IssuedbookController extends Controller
     public function returnHistory()
     {
         $books = Issuedbook::with('book', 'student.section.class')->where('school_id', auth()->user()->school_id)->where('borrowed', 0)->where('quantity', 0)->paginate(20);
-
-//        return $books;
 
         return view('library.returned-books', compact('books'));
 

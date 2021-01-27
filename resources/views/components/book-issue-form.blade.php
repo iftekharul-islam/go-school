@@ -93,17 +93,6 @@
 
 <script>
 
-    {{--$(function () {--}}
-    {{--    var path = "{{ url('/librarian/issue-books/autocomplete/{$query}') }}";--}}
-    {{--    $('input.typeahead').typeahead({--}}
-    {{--        source:  function (query, process) {--}}
-    {{--            return $.get(path + $('#show-user').val(), {}, function (data) {--}}
-    {{--                return process(data);--}}
-    {{--            });--}}
-    {{--        }--}}
-    {{--    });--}}
-    {{--});--}}
-
     let classes = {!! json_encode($classes->toArray()) !!};
     let sections = [];
 
