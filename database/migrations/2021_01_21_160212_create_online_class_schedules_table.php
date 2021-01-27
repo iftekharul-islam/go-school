@@ -17,7 +17,7 @@ class CreateOnlineClassSchedulesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('section_id');
-            $table->string('message');
+            $table->text('message');
             $table->boolean('status')->default('true');
             $table->timestamps();
         });

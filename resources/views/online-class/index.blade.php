@@ -5,30 +5,25 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Online class schedules
+            {{ __('text.online_class_schedule') }}
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
-            <li>Online class schedules</li>
+            <li>{{ __('text.online_class_schedule') }}</li>
         </ul>
-        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('class.schedule.create') }}">Create
-            schedule</a>
+        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('class.schedule.create') }}">{{ __('text.create_schedule') }}</a>
     </div>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
     @endif
-    @if ($errors->any())
+    @if (session('failed'))
         <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            {{ session('failed') }}
         </div>
     @endif
     <div class="row">
@@ -38,15 +33,15 @@
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>Online Class notification</h3>
+                            <h3>{{ __('text.online_class_notification') }}</h3>
                         </div>
                     </div>
                     <table class="table table-bordered display text-wrap">
                         <thead>
-                            <th>Class</th>
-                            <th>Section</th>
-                            <th>Sent date</th>
-                            <th>Action</th>
+                            <th>{{ __('text.Class') }}</th>
+                            <th>{{ __('text.Section') }}</th>
+                            <th>{{ __('text.sent_date') }}</th>
+                            <th>{{ __('text.action') }}</th>
                         </thead>
                         <tbody>
                         @foreach($items as $data)

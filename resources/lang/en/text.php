@@ -325,4 +325,9 @@ return[
     'from_mark' => 'Mark From',
     'returned_books' => 'Returned Books',
     'returned_books_history' => 'Returned Books history',
+    'online_class_schedule' => 'Online Class Schedules',
+    'create_schedule' => 'Create Schedule',
+    'online_class_notification' => 'Online Class Notification',
+    'sent_date' => 'Sent date',
+    'online_class_summary' => 'Online class Summary',
 ];

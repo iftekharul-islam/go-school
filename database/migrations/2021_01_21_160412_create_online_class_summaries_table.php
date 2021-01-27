@@ -15,7 +15,7 @@ class CreateOnlineClassSummariesTable extends Migration
     {
         Schema::create('online_class_summaries', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('class_schedules_id');
+            $table->integer('class_schedule_id');
             $table->integer('total_sms')->nullable();
             $table->timestamps();
         });

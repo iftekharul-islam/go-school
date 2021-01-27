@@ -7,9 +7,11 @@ use App\Jobs\SendSmsToStudents;
 use App\Myclass;
 use App\OnlineClassSchedule;
 use App\OnlineClassSummary;
+use App\School;
 use App\Section;
 use App\Services\User\UserService;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use LaraCrafts\UrlShortener\UrlShortenerManager;
@@ -42,19 +44,17 @@ class OnlineClassScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, UrlShortenerManager $shortener)
+    public function create(Request $request)
     {
-        $url = $request->url ?? '';
-        $tinyUrl = isset($request->url) ? $shortener->shorten($request->url) : '';
         $data = Section::with('class')->find($request->section_id);
         $class_number = $data->class->class_number ?? '';
         $section_id = $request->section_id ?? '';
         $section_number = $data->section_number ?? '';
 
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
-        $students = $this->userService->getSectionStudentsWithSchool($request->section);
+        $students = $this->userService->getSectionStudentsWithSchool($request->section_number);
 
-        return view('online-class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id', 'url', 'tinyUrl'));
+        return view('online-class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id'));
     }
 
     /**
@@ -65,23 +65,33 @@ class OnlineClassScheduleController extends Controller
      */
     public function store(CreateOnlineClassScheduleRequest $request)
     {
+        $school = School::find(Auth::user()->school_id);
+
+        if ($school->online_class_sms == false) {
+
+            return redirect()->route('class.schedule')->with('failed', 'Please active online sms system');
+
+        }
+
         $students = User::where('section_id', $request->sec_id)
             ->where('role', 'student')
-            ->where('active', 1)->pluck('id');
+            ->where('active', 1)
+            ->pluck('id');
 
 
         $data = new OnlineClassSchedule();
         $data->user_id = Auth::user()->id;
         $data->section_id = $request->sec_id;
-        $data->message = $request->message;
+        $data->message = urlencode($request->message);
         $data->save();
 
         $summary = new OnlineClassSummary();
-        $summary->class_schedules_id = $data->id;
+        $summary->class_schedule_id = $data->id;
         $summary->total_sms = count($students) * $request->sms_count;
         $summary->save();
 
         foreach ($students as $student_id) {
+
             SendSmsToStudents::dispatch($student_id, $request->message)->delay(5);
         }
 
@@ -104,36 +114,15 @@ class OnlineClassScheduleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\OnlineClassSchedule $onlineClassSchedule
-     * @return \Illuminate\Http\Response
+     * @param UrlShortenerManager $shortener
+     * @param Request $request
+     * @return string
      */
-    public function edit(OnlineClassSchedule $onlineClassSchedule)
+    public function generateTinyUrl(UrlShortenerManager $shortener, Request $request)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\OnlineClassSchedule $onlineClassSchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OnlineClassSchedule $onlineClassSchedule)
-    {
-        //
-    }
+        $response = isset($request->tiny_url) ? $shortener->shorten(urldecode($request->tiny_url))  : '' ;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\OnlineClassSchedule $onlineClassSchedule
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OnlineClassSchedule $onlineClassSchedule)
-    {
-        //
+        return response()->json(['status' => 200, 'url' => urlencode($response)]);
     }
 }

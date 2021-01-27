@@ -28,6 +28,8 @@ Auth::routes();
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+Route::post('generate-tiny-url', 'OnlineClassScheduleController@generateTinyUrl')->name('generate.tiny.url');
+
 
 //Route::get('all-exams-grade/details/{class_id}', 'GradeController@allExamsGradeDetails');
 
