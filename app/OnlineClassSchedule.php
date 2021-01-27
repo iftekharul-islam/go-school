@@ -14,7 +14,7 @@ class OnlineClassSchedule extends Model
 
     public function classSummary()
     {
-        return $this->hasMany(OnlineClassSummary::class, 'class_schedules_id', 'id');
+        return $this->hasMany(OnlineClassSummary::class, 'class_schedule_id', 'id');
     }
 
     public function section()
@@ -24,7 +24,7 @@ class OnlineClassSchedule extends Model
 
     public function students()
     {
-        return $this->hasMany(User::class, 'section_id', 'section_id')->where('role', 'student')->where('active', 1);
+        return $this->hasMany(User::class, 'section_id', 'section_id')->where('role', 'student');
     }
 
 

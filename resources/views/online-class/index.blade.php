@@ -22,13 +22,9 @@
             {{ session('status') }}
         </div>
     @endif
-    @if ($errors->any())
+    @if (session('failed'))
         <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            {{ session('failed') }}
         </div>
     @endif
     <div class="row">

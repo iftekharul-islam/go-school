@@ -24,7 +24,7 @@
                             <div class="card-body" >
                                 <h4>Students of <b>Class:</b> {{ $data->section->class->class_number}}
                                     <b>Section:</b> {{ $data->section->section_number }} <br>
-                                <b>Message: </b> <span>{{ $data->message }}</span>
+                                <b>Message: </b> <span>{{ urldecode($data->message) }}</span>
                                 <table class="table table-bordered mt-3">
                                     <thead>
                                         <th>Date</th>

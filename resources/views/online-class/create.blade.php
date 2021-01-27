@@ -19,6 +19,7 @@
         .example {
             width: 100%;
         }
+
         .false-padding-bottom-form .sms-area textarea {
             height: initial;
         }
@@ -62,7 +63,8 @@
                         <div class="row">
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                 <label>{{ __('text.Class') }}</label>
-                                <select name="class" id="class_number" class="select2" onchange="getSections(this.value)">
+                                <select name="class" id="class_number" class="select2"
+                                        onchange="getSections(this.value)">
                                     <option>Select Class</option>
                                     @foreach($classes as $class)
                                         <option
@@ -75,11 +77,11 @@
                                 <label>{{ __('text.Section') }}</label>
                                 <select class="select2" id="section" name="section"></select>
                             </div>
-                            <div class="col-12 form-group mg-t-2">
-                                <label class="form-check-label" for="url">Online class URL</label>
-                                <input type="url" name="url"
-                                       class="form-control" placeholder="Enter url ..." value="{{ $url ?? '' }}">
-                            </div>
+                            {{--                            <div class="col-12 form-group mg-t-2">--}}
+                            {{--                                <label class="form-check-label" for="url">Online class URL</label>--}}
+                            {{--                                <input type="url" name="url"--}}
+                            {{--                                       class="form-control" placeholder="Enter url ..." value="{{ $url ?? '' }}">--}}
+                            {{--                            </div>--}}
                             <div class="col-12 form-group mg-t-2 float-right">
                                 <button type="submit"
                                         class="button--save button float-right">{{ __('text.Search') }}</button>
@@ -123,96 +125,47 @@
                                             {{ $students->links() }}
                                         </div>
                                         <div class="col-md-12">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary float-right"
+                                                    data-toggle="modal" data-target="#exampleModal">
+                                                Generate online class url
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="url">Online class url</label>
+                                                                <input type="text" id="url" class="form-control"
+                                                                       name="url" placeholder="Enter url ...">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                            <button id="url-submit" type="button"
+                                                                    class="btn btn-primary">Generate
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
                                             <form id="final-form" action="{{ route('class.schedule.store') }}"
                                                   method="post">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="sec_id" value="{{ $section_id }}">
-
-{{--                                                Repeatable functionality--}}
-
-{{--                                                <input type="hidden" id="schedule" name="schedule" value="">--}}
-
-{{--                                                <div class="row mb-3">--}}
-{{--                                                    <div class="offset-9 col-3 text-right">--}}
-{{--                                                        <div class="form-check mr-4">--}}
-{{--                                                            <input type="checkbox" name="is_repeatable"--}}
-{{--                                                                   class="form-check-input Is_repeat"--}}
-{{--                                                                   id="is_repeatable">--}}
-{{--                                                            <label class="form-check-label" for="is_repeatable">Is--}}
-{{--                                                                Repeatable </label>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="for-repeatable">--}}
-{{--                                                    <div class="row">--}}
-{{--                                                        <div class="col-md-12">--}}
-{{--                                                            <div class="form-check">--}}
-{{--                                                                <input type="checkbox" name="is_everyday"--}}
-{{--                                                                       class="form-check-input" id="is_everyday">--}}
-{{--                                                                <label class="form-check-label" for="is_everyday">Is--}}
-{{--                                                                    Everyday</label>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="Week-check">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="col-md-12">--}}
-{{--                                                                <table class="table table-borderless" id="dynamicTable">--}}
-{{--                                                                    <tr>--}}
-{{--                                                                        <th>Week day</th>--}}
-{{--                                                                        <th>Notification time</th>--}}
-{{--                                                                    </tr>--}}
-{{--                                                                    <tr>--}}
-{{--                                                                        <td>--}}
-{{--                                                                            <select id="week_day"--}}
-{{--                                                                                    class="form-control example select2"--}}
-{{--                                                                                    name="week_day[]">--}}
-{{--                                                                                <option value="">Select a weekday--}}
-{{--                                                                                </option>--}}
-{{--                                                                                <option value="0">Sunday</option>--}}
-{{--                                                                                <option value="1">Montday</option>--}}
-{{--                                                                                <option value="2">Tuesday</option>--}}
-{{--                                                                                <option value="3">Wednesday</option>--}}
-{{--                                                                                <option value="4">Thursday</option>--}}
-{{--                                                                                <option value="5">Friday</option>--}}
-{{--                                                                                <option value="6">Saturday</option>--}}
-{{--                                                                            </select>--}}
-{{--                                                                        </td>--}}
-{{--                                                                        <td>--}}
-{{--                                                                            <div class="form-group"><input--}}
-{{--                                                                                    id="notification_time" type="time"--}}
-{{--                                                                                    class="form-control notificationInput"--}}
-{{--                                                                                    name="notification_time[]"--}}
-{{--                                                                                    value="{{ old('notification_time') }}">--}}
-{{--                                                                            </div>--}}
-{{--                                                                        </td>--}}
-{{--                                                                        <td>--}}
-{{--                                                                            <div class="form-group">--}}
-{{--                                                                                <button type="button" name="add"--}}
-{{--                                                                                        id="add"--}}
-{{--                                                                                        class="button button--edit">Add--}}
-{{--                                                                                    More--}}
-{{--                                                                                </button>--}}
-{{--                                                                            </div>--}}
-{{--                                                                        </td>--}}
-{{--                                                                    </tr>--}}
-{{--                                                                </table>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="everyday_time">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="col-md-6">--}}
-{{--                                                                <div class="form-group">--}}
-{{--                                                                    <label>Notification time</label>--}}
-{{--                                                                    <input type="time" class="form-control disabled"--}}
-{{--                                                                           name="everyday_time"--}}
-{{--                                                                           value="{{ old('everyday_time') }}">--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div
@@ -220,32 +173,40 @@
 
                                                             <div class="sms-area">
                                                                 <label for="message"
-                                                                       class="control-label false-padding-bottom"><b>Message :</b></label>
+                                                                       class="control-label false-padding-bottom"><b>Message
+                                                                        :</b></label>
                                                                 <div class="alert alert-info">
                                                                     <ul>
                                                                         <li>
-                                                                            <b>Hints :Please make sure you provide the following details:</b>
+                                                                            <b>Hints :Please make sure you provide the
+                                                                                following details:</b>
                                                                         </li>
                                                                         <li>
-                                                                            <b>Class :</b>  class number [ Example : 4 ]
+                                                                            <b>Class :</b> class number [ Example : 4 ]
                                                                         </li>
                                                                         <li>
-                                                                            <b>Section :</b>  class number [ Example : A ]
+                                                                            <b>Section :</b> class number [ Example : A
+                                                                            ]
                                                                         </li>
                                                                         <li>
-                                                                            <b>Time:</b> Class time [ Example : 1pm to 2pm ]
+                                                                            <b>Time:</b> Class time [ Example : 1pm to
+                                                                            2pm ]
                                                                         </li>
                                                                         <li>
-                                                                            <b>Shorten Url :</b> <b>{{ $tinyUrl ?? '' }}</b>
+                                                                             <b>Shorten Url : </b> <b class="url-assign"></b>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
 
-                                                                <textarea name="message" class="form-control sms-text-area" id="msg" onkeyup="limitCharacter()" onchange="limitCharacter()" cols="30" rows="8" ></textarea>
+                                                                <textarea name="message"
+                                                                          class="form-control sms-text-area" id="msg"
+                                                                          onkeyup="limitCharacter()" cols="30"
+                                                                          rows="8"></textarea>
 
                                                                 <span id="limit"></span>
 
-                                                                <input type="hidden" name="sms_count" id="sms_count" class="sms_count" value="">
+                                                                <input type="hidden" name="sms_count" id="sms_count"
+                                                                       class="sms_count" value="">
                                                                 <br>
                                                                 <span class="help-block invalid-msg d-none"><strong>Insert the url properly</strong></span>
 
@@ -286,12 +247,38 @@
             @push('customjs')
                 <script type="text/javascript">
 
-                    $(document).ready(function() {
+                    var url = '';
+
+                    $('#url-submit').on('click', function () {
+
+                        var tiny_url = $('#url').val();
+
+                        console.log(encodeURIComponent(tiny_url));
+
+                        $.ajax({
+                            url: '{{ url('generate-tiny-url') }}',
+                            method: "post",
+                            data: {_token: '{{ csrf_token() }}', tiny_url: encodeURIComponent(tiny_url)},
+
+                            success: function (response) {
+                                console.log(response.url);
+                                url = decodeURIComponent(response.url);
+                                console.log(url);
+                                $('.sms-area div ul li .url-assign').html(url);
+                                $('#exampleModal').modal('toggle');
+                            },
+                            error: function (response) {
+                                console.log(response);
+                            }
+                        });
+
+                    });
+
+                    $(document).ready(function () {
                         var class_number = $("#class_number").val();
                         getSections(class_number);
                     });
 
-                    var url = "<?php echo $tinyUrl ?>";
 
                     $('#submit-btn').on('click', function (e) {
                         e.preventDefault();
@@ -300,144 +287,39 @@
                         if (str.indexOf(url) >= 0) {
                             $('#final-form').submit();
                             $('.invalid-msg').addClass('d-none');
+
                         } else {
                             $('.invalid-msg').removeClass('d-none');
                         }
 
                     });
 
-                    var week_days = [];
-                    var notification_times = [];
-
-                    function getValues() {
-                        getWeekValues();
-                        getNotificaionTimes();
-
-                        var result = week_days.map(function (el, i) {
-                            return Object.assign({}, notification_times[i], el);
-                        });
-
-                        console.log(result);
-
-                        $('#schedule').val(JSON.stringify(result));
-                    }
-
-
-                    function getWeekValues() {
-
-                        var week_value = document.getElementsByName('week_day[]');
-
-                        for (var i = 0; i < week_value.length; i++) {
-
-                            var input = week_value[i];
-
-                            week_days.push({week_key: input.value});
-
-                        }
-                    }
-
-
-                    function getNotificaionTimes() {
-
-                        var notification_time = document.getElementsByName('notification_time[]');
-
-                        for (var i = 0; i < notification_time.length; i++) {
-
-                            var input = notification_time[i];
-
-                            notification_times.push({notification_key: input.value});
-
-                        }
-                    };
-
-                    var i = 0;
-
-                    $("#add").click(function () {
-
-                        ++i;
-
-                        $("#dynamicTable").append(`<tr><td><select id="week_day" class="form-control example select2" name="week_day[]" required>
-                                                    <option value="">Select a weekday</option>
-                                                    <option value="0">Sunday</option>
-                                                    <option value="1">Montday</option>
-                                                    <option value="2">Tuesday</option>
-                                                    <option value="3">Wednesday</option>
-                                                    <option value="4">Thursday</option>
-                                                    <option value="5">Friday</option>
-                                                    <option value="6">Saturday</option>
-                                            </select>
-                                        </td>
-                                        <td><div class="form-group"><input type="time" class="form-control" name="notification_time[]" value="" required></div></td>
-                                        <td><button type="button" class="button button--cancel remove-tr">Remove</button></td></tr>
-                                        `);
-                        $('.select2').select2().select2({width: '100%'});
-
-                    });
-
-                    $(document).on('click', '.remove-tr', function () {
-                        $(this).parents('tr').remove();
-                    });
-
-                    $('.Is_repeat').on('click', function () {
-                        if ($(this).prop("checked") == true) {
-                            $('.for-repeatable').css('display', 'block');
-                            $('.Week-check select').prop('required', true);
-                            $('.everyday_time input').prop('disabled', true);
-                        } else {
-                            $('.for-repeatable').css('display', 'none');
-                            $('.Week-check input').prop('required', false);
-                        }
-                    });
-
-
-                    $('#is_everyday').on('click', function () {
-                        if ($(this).prop("checked") == true) {
-                            $('.Week-check').css('display', 'none');
-                            $('.Week-check select').prop('required', false);
-                            $('.Week-check input').prop('required', false);
-                            $('.Week-check select').prop('disabled', true);
-                            $('.Week-check input').prop('disabled', true);
-                            $('.everyday_time').css('display', 'block');
-                            $('.everyday_time input').prop('required', true);
-                            $('.everyday_time input').prop('disabled', false);
-                        } else {
-                            $('.Week-check').css('display', 'block');
-                            $('.Week-check select').prop('required', true);
-                            $('.Week-check input').prop('required', true);
-                            $('.Week-check select').prop('disabled', false);
-                            $('.Week-check input').prop('disabled', false);
-                            $('.everyday_time').css('display', 'none');
-                            $('.everyday_time input').prop('required', false);
-                            $('.everyday_time input').prop('disabled', true);
-                        }
-                    });
-
                     function limitCharacter() {
                         var english = /^[A-Za-z0-9-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/#!|±@ \n]*$/;
 
-                            $('#msg').attr('maxlength', 1000);
+                        $('#msg').attr('maxlength', 1000);
 
-                            let msg = $('#msg').val();
+                        let msg = $('#msg').val();
 
-                            if (!english.test(msg)) {
-                                console.log('its not english');
-                                let count = msg.length / 70;
-                                if (msg.length > 70) {
-                                    $('#limit').text(msg.length + '/' + Math.ceil(count) + ' ( 70 Characters for 1 Bangla sms )');
-                                } else {
-                                    $('#limit').text(msg.length + '/' + Math.ceil(count));
-                                }
-                                $('#sms_count').val(Math.ceil(count));
+                        if (!english.test(msg)) {
+                            console.log('its not english');
+                            let count = msg.length / 70;
+                            if (msg.length > 70) {
+                                $('#limit').text(msg.length + '/' + Math.ceil(count) + ' ( 70 Characters for 1 Bangla sms )');
                             } else {
-                                console.log('its english');
-                                let count = msg.length / 160;
-                                if (msg.length > 160) {
-                                    $('#limit').text(msg.length + '/' + Math.ceil(count) + ' ( 160 Characters for 1 English sms )');
-                                } else {
-                                    $('#limit').text(msg.length + '/' + Math.ceil(count));
-                                }
-                                $('#sms_count').val(Math.ceil(count));
+                                $('#limit').text(msg.length + '/' + Math.ceil(count));
                             }
+                            $('#sms_count').val(Math.ceil(count));
+                        } else {
+                            console.log('its english');
+                            let count = msg.length / 160;
+                            if (msg.length > 160) {
+                                $('#limit').text(msg.length + '/' + Math.ceil(count) + ' ( 160 Characters for 1 English sms )');
+                            } else {
+                                $('#limit').text(msg.length + '/' + Math.ceil(count));
+                            }
+                            $('#sms_count').val(Math.ceil(count));
+                        }
                     }
 
                     function getSections(item) {
