@@ -185,6 +185,16 @@ class UserService
         return $teachers;
     }
 
+    public function getGuardians()
+    {
+        return $this->user->with('school')
+            ->where('school_id', auth()->user()->school_id)
+            ->where('role', 'guardian')
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(40);
+    }
+
     public function getAccountants()
     {
         return $this->user->with('school')
@@ -345,12 +355,6 @@ class UserService
         $tb->phone_number = $request->phone_number;
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
-        $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
-        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : null ;
-
-        if ('teacher' == $role) {
-            $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;
-        }
         $tb->save();
 
         // Store default data on attendance table for a new user

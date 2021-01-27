@@ -228,6 +228,13 @@
 
                 @if ($role == 'admin')
                     <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link {{ (request()->routeIs('all.guardian')) || (request()->routeIs('create.guardian')) ? 'menu-active' : '' }}"
+                           href="{{ route('all.guardian') }}">
+                            <i class="far fa-question-circle">
+                            </i><span>{{ __('text.guardians') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i
                                 class="fa fa-building"></i><span>{{__('text.Department')}}</span></a>
                         <ul class="nav sub-group-menu {{ $department == 1 ? 'sub-group-active' : ''}}">

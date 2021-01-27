@@ -204,6 +204,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('routine', 'RoutineController@index')->name('routines');
     });
 
+    Route::group(['prefix' => 'guardian', 'middleware' => 'guardian'], function () {
+        Route::get('/home', 'GuardianHomeController')->name('guardian.home');
+    });
     // Admin role routes
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('/home', 'HomeController@index')->name('admin.home');
@@ -383,6 +386,11 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('new-librarian','UserController@createLibrarian');
         Route::get('new-accountant','UserController@createAccountant')->name('new.accountant');
         Route::get('new-staff','UserController@createStaff')->name('new.staff');
+
+        Route::get('guardians', 'GuardianController@index')->name('all.guardian');
+        Route::get('guardian/create','GuardianController@create')->name('create.guardian');
+        Route::post('guardian/store', 'GuardianController@store')->name('store.guardian');
+        Route::get('guardian/edit/{id}', 'GuardianController@edit')->name('edit.guardian');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');

@@ -325,6 +325,8 @@ return[
     'from_mark' => 'Mark From',
     'returned_books' => 'Returned Books',
     'returned_books_history' => 'Returned Books history',
+    'add_guardian' => 'Add Guardian',
+    'guardians' => 'Guardians',
     'online_class_schedule' => 'Online Class Schedules',
     'create_schedule' => 'Create Schedule',
     'online_class_notification' => 'Online Class Notification',

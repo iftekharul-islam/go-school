@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'librarian' => \App\Http\Middleware\CheckLibrarian::class,
         'student' => \App\Http\Middleware\CheckStudent::class,
         'teacher' => \App\Http\Middleware\CheckTeacher::class,
+        'guardian' => \App\Http\Middleware\CheckGuardian::class,
         'check.account.status' => \App\Http\Middleware\CheckAccountStatus::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
