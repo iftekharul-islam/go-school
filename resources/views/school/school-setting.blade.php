@@ -76,8 +76,8 @@
                                     </option>
                                     <option value="english" @if($school->medium == 'english') selected @endif>English
                                     </option>
-                                    <option value="Bangla & English"
-                                            @if($school->medium == 'Bangla & English') selected @endif>Bangla & English
+                                    <option value="bangla & english"
+                                            @if($school->medium == 'bangla & english') selected @endif>Bangla & English
                                     </option>
                                 </select>
                                 @if ($errors->has('medium'))

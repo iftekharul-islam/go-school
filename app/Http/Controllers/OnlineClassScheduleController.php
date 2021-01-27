@@ -7,6 +7,7 @@ use App\Jobs\SendSmsToStudents;
 use App\Myclass;
 use App\OnlineClassSchedule;
 use App\OnlineClassSummary;
+use App\School;
 use App\Section;
 use App\Services\User\UserService;
 use App\User;
@@ -64,6 +65,14 @@ class OnlineClassScheduleController extends Controller
      */
     public function store(CreateOnlineClassScheduleRequest $request)
     {
+        $school = School::find(Auth::user()->school_id);
+
+        if ($school->online_class_sms == false) {
+
+            return redirect()->route('class.schedule')->with('failed', 'Please active online sms system');
+
+        }
+
         $students = User::where('section_id', $request->sec_id)
             ->where('role', 'student')
             ->where('active', 1)->pluck('id');

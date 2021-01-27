@@ -50,25 +50,21 @@ class OnlineClassNotification extends Command
             $notification_time = Carbon::parse($item->notification_time)->format('H:i');
             $dayOfWeek = $dayOfTheWeek = Carbon::now()->dayOfWeek;
 
-            if ($item->is_everyday == true) {
+            if ($item->is_everyday == true && $time_now == $notification_time) {
+                logger('in the everyday section');
 
-                if ($time_now == $notification_time) {
+                logger($item->id);
+                logger(Carbon::now());
+                logger($time_now);
+                logger($item->notification_time);
+                logger($notification_time);
 
-                    logger('in the everyday section');
+                $summary = new OnlineClassSummary();
+                $summary->class_schedules_id = $item->id;
+                $summary->total_sms = count($item->students);
+                $summary->save();
 
-                    logger($item->id);
-                    logger(Carbon::now());
-                    logger($time_now);
-                    logger($item->notification_time);
-                    logger($notification_time);
-
-                    $summary = new OnlineClassSummary();
-                    $summary->class_schedules_id = $item->id;
-                    $summary->total_sms = count($item->students);
-                    $summary->save();
-
-                    return;
-                }
+                return;
             }
             if ($item->is_repeatable == true && $dayOfWeek === $item->week_day && $time_now == $notification_time) {
 

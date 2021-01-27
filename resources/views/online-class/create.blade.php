@@ -389,6 +389,7 @@
                         }
                     });
 
+
                     $('#is_everyday').on('click', function () {
                         if ($(this).prop("checked") == true) {
                             $('.Week-check').css('display', 'none');
