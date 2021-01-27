@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\Http\Requests\School\CreateSchoolRequest;
+use App\Http\Requests\School\UpdateSchoolRequest;
+use App\Http\Requests\School\UpdateSchoolSettingRequest;
+use App\Http\Requests\SmsSummaryCreateRequest;
 use App\Notification;
 use App\User;
 use App\School;
@@ -31,6 +35,9 @@ class SchoolController extends Controller
         return view('school.create-new-department');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function manageClasses()
     {
         $user = Auth::user();
@@ -54,6 +61,7 @@ class SchoolController extends Controller
                 'departments',
                 'teachers'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -65,46 +73,26 @@ class SchoolController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @param CreateSchoolRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateSchoolRequest $request)
     {
-        $request->validate([
-            'school_name' => 'required|string|max:255',
-            'school_medium' => 'required',
-            'school_about' => 'required',
-            'school_established' => 'required',
-            'school_address' => 'required',
-            'school_address' => 'required',
-            'district' => 'required',
-            'is_sms_enable' => 'required',
-            'logo' => 'required|max:1024|mimes:jpeg,png,jpg,gif,svg',
-            'payment_type' => 'required',
-            'sms_charge' => 'nullable|numeric',
-            'charge'    => 'required|numeric',
-            'invoice_generation_date'  => 'nullable|integer',
-            'due_date'  => 'nullable|integer',
-            'signup_date'  => 'nullable|date_format:Y-m-d',
-            'email'  => 'nullable|email|max:191',
-        ],[
-            'is_sms_enable.required' => 'Select SMS Option'
-        ]);
-
         $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
-        $path = 'storage/'.$path;
+        $path = 'storage/' . $path;
+
         $tb = new School();
         $tb->name = $request->school_name;
         $tb->established = $request->school_established;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
-        $tb->code = date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6);
+        $tb->code = date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6);
         $tb->theme = 'flatly';
         $tb->logo = $path;
         $tb->school_address = $request->school_address;
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
+        $tb->online_class_sms = $request->online_class_sms;
         $tb->sms_charge = $request->sms_charge;
         $tb->payment_type = $request->payment_type;
         $tb->charge = $request->charge;
@@ -114,7 +102,7 @@ class SchoolController extends Controller
         $tb->singup_date = $request->signup_date;
         $tb->save();
 
-        return redirect()->route('school-details', $tb->id)->with('status', $tb->name.' created successfully');
+        return redirect()->route('school-details', $tb->id)->with('status', $tb->name . ' created successfully');
     }
 
     /**
@@ -131,6 +119,10 @@ class SchoolController extends Controller
         return view('school.admin-list', compact('admins'));
     }
 
+    /**
+     * @param $school_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showSchool($school_id)
     {
         $admins = User::where('school_id', $school_id)->where('role', 'admin')->get();
@@ -164,6 +156,10 @@ class SchoolController extends Controller
         return view('school.new-edit-school', compact('school'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeDepartment(Request $request)
     {
         $request->validate([
@@ -177,6 +173,10 @@ class SchoolController extends Controller
         return back()->with('status', 'New Department created');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function departmentEdit($id)
     {
         $department = Department::findOrFail($id);
@@ -184,6 +184,11 @@ class SchoolController extends Controller
         return view('school.edit-department', compact('department'));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function departmentUpdate(Request $request, $id)
     {
         $request->validate([
@@ -196,6 +201,10 @@ class SchoolController extends Controller
         return redirect()->route('admin.department-lists');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function departmentDestroy($id)
     {
         $department = Department::findOrFail($id);
@@ -204,6 +213,9 @@ class SchoolController extends Controller
         return back()->with('status', 'Department info deleted');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function allDepartment()
     {
         $dpts = Department::with(['teachers' => function ($q) {
@@ -222,6 +234,10 @@ class SchoolController extends Controller
         return view('school.departments', compact('dpts', 'adminWithDepartment'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function departmentTeachers($id)
     {
         $users = User::where('role', 'teacher')
@@ -234,6 +250,10 @@ class SchoolController extends Controller
         return view('school.department-teachers', compact('users'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function departmentStudents($id)
     {
         $users = User::where('role', 'student')
@@ -256,43 +276,20 @@ class SchoolController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param UpdateSchoolRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSchoolRequest $request, $id)
     {
-        $request->validate([
-            'school_name' => 'required|string|max:255',
-            'school_medium' => 'required',
-            'school_about' => 'required',
-            'school_established' => 'required',
-            'school_address' => 'required',
-            'school_address' => 'required',
-            'district' => 'required',
-            'is_sms_enable' => 'required',
-            'logo' => 'nullable|max:1024|mimes:jpeg,png,jpg,gif,svg',
-            'payment_type' => 'required',
-            'sms_charge' => 'nullable|numeric',
-            'charge'    => 'required|numeric',
-            'invoice_generation_date'  => 'nullable|integer',
-            'due_date'  => 'nullable|integer',
-            'signup_date'  => 'nullable|date_format:Y-m-d',
-            'email'  => 'nullable|email|max:191',
-        ],[
-            'is_sms_enable.required' => 'Select SMS Option'
-        ]);
-
         $tb = School::findOrFail($id);
         $path = $tb->logo;
-        if ($request->hasFile('logo'))
-        {
+
+        if ($request->hasFile('logo')) {
             $path = Storage::disk('public')->putFile('school-logos', $request->file('logo'));
-            $path = 'storage/'.$path;
+            $path = 'storage/' . $path;
         }
-        
+
         $tb->name = $request->school_name;
         $tb->about = $request->school_about;
         $tb->medium = $request->school_medium;
@@ -300,6 +297,7 @@ class SchoolController extends Controller
         $tb->logo = $path;
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
+        $tb->online_class_sms = $request->online_class_sms;
         $tb->school_address = $request->school_address;
         $tb->sms_charge = $request->sms_charge;
         $tb->payment_type = $request->payment_type;
@@ -310,7 +308,7 @@ class SchoolController extends Controller
         $tb->singup_date = $request->signup_date;
         $tb->save();
 
-        return redirect()->back()->with('status', 'School Information Updated');
+        return redirect()->route('school-details', $id)->with('status', 'School Information Updated');
     }
 
     /**
@@ -327,9 +325,9 @@ class SchoolController extends Controller
         $message = '';
         $name = $school->name;
 
-        if( Hash::check($request->password, $user->password) ) {
+        if (Hash::check($request->password, $user->password)) {
             $school->delete();
-            $message = $name.' deleted successfully';
+            $message = $name . ' deleted successfully';
         } else {
             return back()->with('status', 'Incorrect Password Provided');
         }
@@ -351,24 +349,20 @@ class SchoolController extends Controller
         $school->is_active = $status;
         $school->save();
         $schoolStatus = $status == 0 ? 'deactivated' : 'activated';
-        return back()->with('status', $name.' '.$schoolStatus);
+        return back()->with('status', $name . ' ' . $schoolStatus);
     }
 
-    public function smsSummary(Request $request, $school_id)
+    /**
+     * @param Request $request
+     * @param $school_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function smsSummary(SmsSummaryCreateRequest $request, $school_id)
     {
-        $this->validate($request, [
-            'from_date' => 'nullable|before_or_equal:'.$request->to_date,
-            'to_date' => 'nullable|after_or_equal:'.$request->from_date,
-        ],[
-            'from_date.before_or_equal' => 'From date must be a date before or equal "To date"',
-            'to_date.after_or_equal' => 'To date must be a date after or equal to "From date"',
-
-        ]);
-
         $now = Carbon::now();
         $from = $request->from_date ? $request->from_date : $now->firstOfMonth()->format('Y-m-d');
         $to = $request->to_date ? $request->to_date : $now->today()->format('Y-m-d');
-        
+
         if ($request->last_month == 1) {
             $firstDay = new Carbon('first day of last month');
             $lastDay = new Carbon('last day of last month');
@@ -384,13 +378,12 @@ class SchoolController extends Controller
             ->paginate(30);
 
         $sms_count = 0;
-        foreach ($sms as $key => $item)
-        {
-            $sms_count += ceil(strlen($item->content)/140) ;
+        foreach ($sms as $key => $item) {
+            $sms_count += ceil(strlen($item->content) / 140);
         }
 
         $count = Notification::with('student')
-            ->whereHas('student', function($query) use ($school_id) {
+            ->whereHas('student', function ($query) use ($school_id) {
                 $query->where('school_id', $school_id);
             })
             ->whereDate('created_at', '>=', $from)
@@ -399,39 +392,30 @@ class SchoolController extends Controller
             ->toArray();
 
         $total_count = 0;
-        foreach ($count as $key => $item)
-        {
+        foreach ($count as $key => $item) {
             $total_count += $item;
         }
-        $total_sum = $sms_count + $total_count ;
+        $total_sum = $sms_count + $total_count;
 
-        return view('school.sms-summary', compact('sms', 'from', 'to','school', 'total_sum'));
+        return view('school.sms-summary', compact('sms', 'from', 'to', 'school', 'total_sum'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function schoolSetup()
     {
         $school = School::findOrFail(Auth::user()->school_id);
         return view('school.school-setting', compact('school'));
     }
-    public function updateSchoolSetting(Request $request, $school_id)
-    {
-        $this->validate($request, [
-            'school_address' => 'required|max:200',
-            'about' => 'required|max:500',
-            'medium' => 'required|max:200',
-            'absent_msg' => 'required|max:140',
-            'present_msg' => 'required|max:140',
-        ],[
-            'school_address.required' => 'Enter School Address',
-            'school_address.max' => 'Maximum 200 characters',
-            'about.required' => 'Enter short description',
-            'about.max' => 'Maximum 500 characters',
-            'absent_msg.required' => 'Enter student absent message',
-            'absent_msg.max' => 'Maximum 140 characters',
-            'present_msg.required' => 'Enter student present message',
-            'present_msg.max' => 'Maximum 140 characters',
-        ]);
 
+    /**
+     * @param Request $request
+     * @param $school_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateSchoolSetting(UpdateSchoolSettingRequest $request, $school_id)
+    {
         $school = School::findOrFail($school_id);
         $school->school_address = $request->school_address;
         $school->about = $request->about;

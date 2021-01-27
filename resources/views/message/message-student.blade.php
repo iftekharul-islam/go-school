@@ -111,6 +111,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        {{ $students->links() }}
                                     </div>
                                     <div class="col-md-12">
                                         <form action="{{url('teacher/message/students')}}" method="POST" id="msgForm" enctype="multipart/form-data" class="new-added-form">

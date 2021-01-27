@@ -323,4 +323,9 @@ return[
     'grade_system' => 'Grade System',
     'to_mark' => 'To Mark',
     'from_mark' => 'Mark From',
+    'online_class_schedule' => 'Online Class Schedules',
+    'create_schedule' => 'Create Schedule',
+    'online_class_notification' => 'Online Class Notification',
+    'sent_date' => 'Sent date',
+    'online_class_summary' => 'Online class Summary',
 ];

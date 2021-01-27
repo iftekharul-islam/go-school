@@ -528,6 +528,15 @@
                         </li>
                     @endif
                 @endif
+                @if ($role == 'admin' || $role == 'teacher')
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link"
+                           href="{{ route('class.schedule') }}">
+                            <i class="fas fa-globe"></i>
+                            </i><span>{{ __('text.online_class_schedule') }}</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item sidebar-nav-item">
                     <a class="nav-link" href="#">
                         <i class="far fa-question-circle">

@@ -322,4 +322,9 @@ return [
     'total_sms' => 'মোট প্রেরিত এসএমএস',
     'last_month' => 'সর্বশেষ মাস',
     'designation' => 'পেশা',
+    'online_class_schedule' => 'অনলাইন ক্লাসের বিবরন',
+    'create_schedule' => 'সময়সূচী তৈরী',
+    'online_class_notification' => 'অনলাইন ক্লাস বিজ্ঞপ্তি',
+    'sent_date' => 'প্রেরণের তারিখ',
+    'online_class_summary' => 'অনলাইন ক্লাসের সংক্ষিপ্তসার',
 ];

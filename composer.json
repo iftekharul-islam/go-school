@@ -14,6 +14,7 @@
         "intervention/image": "^2.5",
         "jdavidbakr/laravel-cache-garbage-collector": "^1.0",
         "lab404/laravel-impersonate": "1.2",
+        "laracrafts/laravel-url-shortener": "^0.4.0",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",

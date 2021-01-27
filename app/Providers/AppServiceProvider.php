@@ -8,6 +8,7 @@ use App\Myclass;
 use App\Notice;
 use App\Section;
 use App\User;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Resources\Json\Resource;
