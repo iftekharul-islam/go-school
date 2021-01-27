@@ -193,7 +193,8 @@
                                                                             2pm ]
                                                                         </li>
                                                                         <li>
-                                                                             <b>Shorten Url : </b> <b class="url-assign"></b>
+                                                                            <b>Shorten Url : </b> <b
+                                                                                class="url-assign"></b>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -208,7 +209,8 @@
                                                                 <input type="hidden" name="sms_count" id="sms_count"
                                                                        class="sms_count" value="">
                                                                 <br>
-                                                                <span class="help-block invalid-msg d-none"><strong>Insert the url properly</strong></span>
+                                                                <span class="help-block invalid-msg d-none"><strong>Insert the url properly</strong></span><br>
+                                                                <span class="help-block empty-msg d-none"><strong>Please generate the url first !</strong></span>
 
                                                                 @if ($errors->has('message'))
                                                                     <span
@@ -253,21 +255,20 @@
 
                         var tiny_url = $('#url').val();
 
-                        console.log(encodeURIComponent(tiny_url));
-
                         $.ajax({
                             url: '{{ url('generate-tiny-url') }}',
                             method: "post",
                             data: {_token: '{{ csrf_token() }}', tiny_url: encodeURIComponent(tiny_url)},
 
                             success: function (response) {
-                                console.log(response.url);
+
                                 url = decodeURIComponent(response.url);
-                                console.log(url);
+
                                 $('.sms-area div ul li .url-assign').html(url);
                                 $('#exampleModal').modal('toggle');
                             },
                             error: function (response) {
+
                                 console.log(response);
                             }
                         });
@@ -275,26 +276,44 @@
                     });
 
                     $(document).ready(function () {
+
                         var class_number = $("#class_number").val();
+
                         getSections(class_number);
                     });
 
 
                     $('#submit-btn').on('click', function (e) {
+
                         e.preventDefault();
+
+                        if (url === '') {
+
+                            $('.empty-msg').removeClass('d-none');
+
+                            return;
+
+                        } else {
+
+                            $('.empty-msg').addClass('d-none');
+                        }
+
                         var str = $('#msg').val();
 
                         if (str.indexOf(url) >= 0) {
+
                             $('#final-form').submit();
                             $('.invalid-msg').addClass('d-none');
 
                         } else {
+
                             $('.invalid-msg').removeClass('d-none');
                         }
 
                     });
 
                     function limitCharacter() {
+
                         var english = /^[A-Za-z0-9-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/#!|±@ \n]*$/;
 
                         $('#msg').attr('maxlength', 1000);
