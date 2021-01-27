@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                 <label>{{ __('text.Section') }}</label>
-                                <select class="select2" id="section" name="section"></select>
+                                <select class="select2" id="section" name="section_number"></select>
                             </div>
                             <div class="col-12 form-group mg-t-2 float-right">
                                 <button type="submit"

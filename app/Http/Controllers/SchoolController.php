@@ -6,6 +6,7 @@ use App\Exam;
 use App\Http\Requests\School\CreateSchoolRequest;
 use App\Http\Requests\School\UpdateSchoolRequest;
 use App\Http\Requests\School\UpdateSchoolSettingRequest;
+use App\Http\Requests\SmsSummaryCreateRequest;
 use App\Notification;
 use App\User;
 use App\School;
@@ -356,17 +357,8 @@ class SchoolController extends Controller
      * @param $school_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function smsSummary(Request $request, $school_id)
+    public function smsSummary(SmsSummaryCreateRequest $request, $school_id)
     {
-        $this->validate($request, [
-            'from_date' => 'nullable|before_or_equal:' . $request->to_date,
-            'to_date' => 'nullable|after_or_equal:' . $request->from_date,
-        ], [
-            'from_date.before_or_equal' => 'From date must be a date before or equal "To date"',
-            'to_date.after_or_equal' => 'To date must be a date after or equal to "From date"',
-
-        ]);
-
         $now = Carbon::now();
         $from = $request->from_date ? $request->from_date : $now->firstOfMonth()->format('Y-m-d');
         $to = $request->to_date ? $request->to_date : $now->today()->format('Y-m-d');

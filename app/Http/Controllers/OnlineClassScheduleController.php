@@ -51,7 +51,7 @@ class OnlineClassScheduleController extends Controller
         $section_number = $data->section_number ?? '';
 
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
-        $students = $this->userService->getSectionStudentsWithSchool($request->section);
+        $students = $this->userService->getSectionStudentsWithSchool($request->section_number);
 
         return view('online-class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id'));
     }
