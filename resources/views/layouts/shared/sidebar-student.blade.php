@@ -498,7 +498,7 @@
                             <li class="nav-item">
                                 <a href="{{ url($role.'/returned-books') }}"
                                    class="nav-link {{ (request()->is($role.'/returned-books')) ? 'menu-active' : '' }}"><i
-                                        class="fas fa-angle-right"></i>Returned books</a>
+                                        class="fas fa-angle-right"></i>{{ __('text.returned_books') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url($role.'/create/book') }}"

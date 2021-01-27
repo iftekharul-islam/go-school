@@ -6,7 +6,7 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class='fas fa-book'></i>
-            Returned Books history
+            {{ __('text.returned_books_history') }}
         </h3>
         <ul>
             <li>
@@ -14,7 +14,7 @@
                     {{ __('text.Back') }} &nbsp;&nbsp;|</a>
                 <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Returned Books history</li>
+            <li>{{ __('text.returned_books_history') }}</li>
         </ul>
     </div>
     <?php $role = \Illuminate\Support\Facades\Auth::user()->role ?>
@@ -44,7 +44,8 @@
                     @foreach($books as $book)
                         <tr>
                             <td>{{ ($loop->index + 1) }}</td>
-                            <td><a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book', $book->id) }}" class="text-teal">
+                            <td><a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book', $book->id) }}"
+                                   class="text-teal">
                                     {{ $book->book->title }}
                                 </a></td>
                             <td>{{ $book->book->author }}</td>

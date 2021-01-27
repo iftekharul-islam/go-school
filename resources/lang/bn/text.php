@@ -322,4 +322,6 @@ return [
     'total_sms' => 'মোট প্রেরিত এসএমএস',
     'last_month' => 'সর্বশেষ মাস',
     'designation' => 'পেশা',
+    'returned_books' => 'ফেরতপ্রাপ্ত বই সমূহ',
+    'returned_books_history' => 'ফিরিয়ে দেওয়া বইয়ের বিস্তারিত',
 ];

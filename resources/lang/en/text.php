@@ -323,4 +323,6 @@ return[
     'grade_system' => 'Grade System',
     'to_mark' => 'To Mark',
     'from_mark' => 'Mark From',
+    'returned_books' => 'Returned Books',
+    'returned_books_history' => 'Returned Books history',
 ];
