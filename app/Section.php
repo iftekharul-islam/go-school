@@ -19,7 +19,7 @@ class Section extends Model
     */
     public function class()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Myclass::class);
     }
 
     public function users()
@@ -29,7 +29,7 @@ class Section extends Model
 
     public function attendanceTimes()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(SectionMeta::class);
     }
 
     public function students()
