@@ -101,6 +101,7 @@
         classes.forEach((cls) => {
             if (cls.id == selectedClass) {
                 sections = cls.sections;
+                return false;
             }
         });
 
@@ -117,6 +118,7 @@
         sections.forEach((section) => {
             if (section.id == selectedStudent) {
                 students = section.students;
+                return false;
             }
         });
 
