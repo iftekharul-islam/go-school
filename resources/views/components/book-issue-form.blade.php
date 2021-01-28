@@ -13,15 +13,34 @@
         </ul>
     </div>
 @endif
-<form autocomplete="off" class="new-added-form justify-content-md-center book-issue" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/issue-books')}}" method="post">
+<form autocomplete="off" class="new-added-form justify-content-md-center book-issue" action="{{url(current_user()->role.'/issue-books')}}" method="post">
     {{ csrf_field() }}
-    <div class="form-group{{ $errors->has('student_code') ? ' has-error' : '' }}">
+    <div class="form-group">
         <div class="col-md-12">
-            <label for="name" class=" mt-5">{{ __('text.Name') }}</label>
-            <input id="show-user" type="text" class="typeahead form-control" name="name" value="{{ old('student_code') }}" placeholder="Student Name" required>
-            @if ($errors->has('name'))
+            <label for="class_number" class="mt-5">{{ __('text.Class') }}</label>
+            <select name="class" id="class_number" class="select2 form-control" onchange="getSections(this.value)">
+                <option>Select Class</option>
+                @foreach($classes as $class)
+                    <option
+                        value="{{ $class->id }}" {{ $class->class_number ==  $class_number ? 'selected' : '' }}>
+                        class - {{ $class->class_number }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <label>{{ __('text.Section') }}</label>
+            <select class="form-control select2" id="section" name="section" onchange="getStudents(this.value);"></select>
+        </div>
+    </div>
+    <div class="form-group{{ $errors->has('student_id') ? ' has-error' : '' }}">
+        <div class="col-md-12">
+            <label for="student">{{ __('text.Name') }}</label>
+            <select class="form-control select2" id="student" name="student_id" required></select>
+            @if ($errors->has('student_id'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
+                    <strong>{{ $errors->first('student_id') }}</strong>
                 </span>
             @endif
         </div>
@@ -74,14 +93,40 @@
 
 <script>
 
-    $(function () {
-        var path = "{{ url('/librarian/issue-books/autocomplete/{$query}') }}";
-        $('input.typeahead').typeahead({
-            source:  function (query, process) {
-                return $.get(path + $('#show-user').val(), {}, function (data) {
-                    return process(data);
-                });
+    let classes = {!! json_encode($classes->toArray()) !!};
+    let sections = [];
+
+    function getSections(item) {
+        let selectedClass = item;
+        classes.forEach((cls) => {
+            if (cls.id == selectedClass) {
+                sections = cls.sections;
+                return false;
             }
         });
-    })
+
+        $('#section').empty();
+        $('#section').append($("<option />").val('').text('Select a section'));
+        sections.forEach((sec) => {
+            $('#section').append($("<option />").val(sec.id).text(sec.section_number));
+        });
+    };
+
+    function getStudents(item) {
+        let selectedStudent = item;
+        let students = [];
+        sections.forEach((section) => {
+            if (section.id == selectedStudent) {
+                students = section.students;
+                return false;
+            }
+        });
+
+        $('#student').empty();
+        $('#student').append($("<option />").val('').text('Select a student'));
+        students.forEach((std) => {
+            $('#student').append($("<option />").val(std.id).text(std.name));
+        });
+    };
+
 </script>

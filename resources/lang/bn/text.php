@@ -322,6 +322,8 @@ return [
     'total_sms' => 'মোট প্রেরিত এসএমএস',
     'last_month' => 'সর্বশেষ মাস',
     'designation' => 'পেশা',
+    'returned_books' => 'ফেরতপ্রাপ্ত বই সমূহ',
+    'returned_books_history' => 'ফিরিয়ে দেওয়া বইয়ের বিস্তারিত',
     'online_class_schedule' => 'অনলাইন ক্লাসের বিবরন',
     'create_schedule' => 'সময়সূচী তৈরী',
     'online_class_notification' => 'অনলাইন ক্লাস বিজ্ঞপ্তি',

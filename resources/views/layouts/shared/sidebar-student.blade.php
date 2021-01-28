@@ -496,6 +496,11 @@
                                         class="fas fa-angle-right"></i>{{ __('text.Issue Book') }}</a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ url($role.'/returned-books') }}"
+                                   class="nav-link {{ (request()->is($role.'/returned-books')) ? 'menu-active' : '' }}"><i
+                                        class="fas fa-angle-right"></i>{{ __('text.returned_books') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url($role.'/create/book') }}"
                                    class="nav-link {{ (request()->is($role.'/create/book')) ? 'menu-active' : '' }}"><i
                                         class="fas fa-angle-right"></i>{{ __('text.Add Book') }}</a>
@@ -530,7 +535,7 @@
                 @endif
                 @if ($role == 'admin' || $role == 'teacher')
                     <li class="nav-item sidebar-nav-item">
-                        <a class="nav-link"
+                        <a class="nav-link {{ (request()->routeIs('class.schedule')) || (request()->routeIs('class.schedule.create')) ? 'menu-active' : '' }}"
                            href="{{ route('class.schedule') }}">
                             <i class="fas fa-globe"></i>
                             </i><span>{{ __('text.online_class_schedule') }}</span>

@@ -108,7 +108,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('issue-books', 'IssuedbookController@create');
         Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
         Route::post('issue-books', 'IssuedbookController@store');
-        Route::get('issued-books', 'IssuedbookController@index');
+        Route::get('issued-books', 'IssuedbookController@index')->name('issued-books');
+        Route::get('returned-books', 'IssuedbookController@returnHistory')->name('returned-books');
         Route::post('save_as_returned', 'IssuedbookController@update');
         Route::get('all-books', 'Library\BookController@index');
         Route::delete('/books/{id}', 'Library\BookController@destroy');
@@ -313,11 +314,12 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
         //Accountant Routes End
 
-        //Librarian Route
+        //Books Route
         Route::get('issue-books', 'IssuedbookController@create');
         Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
         Route::post('issue-books', 'IssuedbookController@store');
         Route::get('issued-books', 'IssuedbookController@index');
+        Route::get('returned-books', 'IssuedbookController@returnHistory')->name('returned-books');
         Route::post('save_as_returned', 'IssuedbookController@update');
         Route::get('all-books', 'Library\BookController@index');
         Route::delete('/books/{id}', 'Library\BookController@destroy');
@@ -326,7 +328,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::patch('update-book-details/{id}', 'Library\BookController@update')->name('update-book-details');
         Route::get('create/book', 'Library\BookController@create');
         Route::post('book/store', 'Library\BookController@store');
-        //Librarian Route End
 
         Route::prefix('academic')->group(function () {
             Route::get("create-admit-card","AdmitCardController@create")->name('create.admit');

@@ -335,7 +335,7 @@
                             $('#section').append($("<option />").val(sec.id).text(sec.section_number));
                             $('#section_id').val(sec.id);
                         });
-                    }
+                    };
                 </script>
 
     @endpush

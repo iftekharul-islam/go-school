@@ -323,6 +323,8 @@ return[
     'grade_system' => 'Grade System',
     'to_mark' => 'To Mark',
     'from_mark' => 'Mark From',
+    'returned_books' => 'Returned Books',
+    'returned_books_history' => 'Returned Books history',
     'online_class_schedule' => 'Online Class Schedules',
     'create_schedule' => 'Create Schedule',
     'online_class_notification' => 'Online Class Notification',
