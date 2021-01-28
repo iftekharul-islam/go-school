@@ -3,23 +3,19 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
-
-if (!function_exists('current_user')) {
-
-    function current_user()
-    {
-
-        return Auth::user()->role;
-
-    }
+/**
+ * @return mixed
+ */
+function current_user()
+{
+    return Auth::user();
 }
 
-if (!function_exists('new_date_format')) {
-
-    function new_date_format($date)
-    {
-
-        return Carbon::parse($date)->format('d-m-Y');
-
-    }
+/**
+ * @param $date
+ * @return string
+ */
+function new_date_format($date)
+{
+    return Carbon::parse($date)->format(config('time-format.default'));
 }

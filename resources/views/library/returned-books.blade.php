@@ -12,7 +12,7 @@
             <li>
                 <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url( current_user().'/home' ) }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a style="margin-left: 8px;" href="{{ url( current_user()->role.'/home' ) }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.returned_books_history') }}</li>
         </ul>
@@ -43,7 +43,7 @@
                     @foreach($books as $book)
                         <tr>
                             <td>{{ ($loop->index + 1) }}</td>
-                            <td><a href="{{ url( current_user().'/book', $book->id ) }}"
+                            <td><a href="{{ url( current_user()->role.'/book', $book->id ) }}"
                                    class="text-teal">
                                     {{ $book->book->title }}
                                 </a></td>
