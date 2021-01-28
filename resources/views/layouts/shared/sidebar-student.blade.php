@@ -550,6 +550,15 @@
                         </a>
                     </li>
                 @endif
+                @if ($role == 'guardian')
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link {{ (request()->routeIs('child')) ? 'menu-active' : '' }}"
+                           href="{{ route('child') }}">
+                            <i class="far fa-question-circle">
+                            </i><span>My childs</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item sidebar-nav-item">
                     <a class="nav-link" href="#">
                         <i class="far fa-question-circle">

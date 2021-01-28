@@ -82,7 +82,7 @@ class GuardianController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-//        return $user;
+
         return view('school.guardian.edit', compact('user'));
     }
 
@@ -107,5 +107,10 @@ class GuardianController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function myChild()
+    {
+        return view('school.guardian.my-child');
     }
 }
