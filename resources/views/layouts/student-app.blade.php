@@ -26,7 +26,6 @@
     <!-- Data Table CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/jquery.dataTables.min.css') }}">
     {{--<!-- Select 2 CSS -->--}}
-{{--    <link rel="stylesheet" href="{{ asset('template/css/select2.min.css') }}">--}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
     <!-- Datepicker CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/datepicker.min.css') }}">
@@ -107,7 +106,6 @@
 {{--<!-- Data Table Js -->--}}
 <script src="{{ asset('template/js/jquery.dataTables.min.js') }}"></script>
 {{--<!-- Select 2 Js -->--}}
-{{--<script src="{{ asset('template/js/select2.min.js') }}"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
 {{--<!-- Date Picker Js -->--}}
 <script src=" {{ asset('template/js/main.js') }}"></script>

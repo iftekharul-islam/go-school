@@ -324,4 +324,9 @@ return [
     'designation' => 'পেশা',
     'returned_books' => 'ফেরতপ্রাপ্ত বই সমূহ',
     'returned_books_history' => 'ফিরিয়ে দেওয়া বইয়ের বিস্তারিত',
+    'online_class_schedule' => 'অনলাইন ক্লাসের বিবরন',
+    'create_schedule' => 'সময়সূচী তৈরী',
+    'online_class_notification' => 'অনলাইন ক্লাস বিজ্ঞপ্তি',
+    'sent_date' => 'প্রেরণের তারিখ',
+    'online_class_summary' => 'অনলাইন ক্লাসের সংক্ষিপ্তসার',
 ];
