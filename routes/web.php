@@ -49,6 +49,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::patch('user/update-staff-information/{id}', 'UserController@updateStaffInformation')->name('update-staff-information');
     Route::get('user/config/change_password', 'UserController@changePasswordGet');
     Route::post('user/config/change_password', 'UserController@changePasswordPost');
+    Route::get('notices-and-events', 'NoticeController@index');
 
     Route::post('students/import', 'UserController@importStudents')->name('students.import');
 
@@ -94,7 +95,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
-        Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
         Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');

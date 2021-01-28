@@ -4,14 +4,14 @@
     <div class="container-fluid">
         <div class="breadcrumbs-area">
             <h3>
-                Notice Details
+                {{ __('text.notice_details') }}
             </h3>
             <ul>
                 <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li class="text-capitalize">Notice Details</li>
+                <li class="text-capitalize">{{ __('text.notice_details') }}</li>
             </ul>
         </div>
         <!-- Breadcubs Area End Here -->
@@ -44,7 +44,7 @@
                             <div class="card-body">
                                 <div class="heading-layout1 mg-b-17">
                                     <div class="item-title">
-                                        <h3>Notices</h3>
+                                        <h3>{{ __('text.Notices') }}</h3>
                                     </div>
                                 </div>
                                 <div class="notice-box-wrap">

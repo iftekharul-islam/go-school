@@ -5,14 +5,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Events & Notices
+            {{ __('text.event_notice') }}
         </h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Events & Notices</li>
+            <li>{{ __('text.event_notice') }}</li>
         </ul>
     </div>
 
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>Notice Board</h3>
+                            <h3>{{ __('text.notice_board') }}</h3>
                         </div>
                     </div>
                     <div class="notice-board-wrap">
@@ -50,7 +50,7 @@
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>Events</h3>
+                            <h3>{{ __('text.events') }}</h3>
                         </div>
                     </div>
                     <div class="notice-board-wrap">
@@ -59,7 +59,7 @@
                                 <div class="row">
                                     <div class="col-9">
                                         <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
-                                            <a href="{{ url($event->file_path) }}"> {{$event->title}} </a>
+                                            <a href="{{ url($event->file_path) }}" target="_blank"> {{$event->title}} </a>
                                         </h6>
                                     </div>
                                     <div class="col-3">
