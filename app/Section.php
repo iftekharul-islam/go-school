@@ -19,21 +19,21 @@ class Section extends Model
     */
     public function class()
     {
-        return $this->belongsTo('App\Myclass');
+        return $this->belongsTo(User::class);
     }
 
     public function users()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany(User::class);
     }
 
     public function attendanceTimes()
     {
-        return $this->hasMany('App\SectionMeta');
+        return $this->hasMany(User::class);
     }
 
     public function students()
     {
-        return $this->hasMany('App\User')->where('role', 'student');
+        return $this->hasMany(User::class)->where('role', 'student');
     }
 }
