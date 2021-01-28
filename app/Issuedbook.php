@@ -10,7 +10,7 @@ class Issuedbook extends Model
 
     public function book()
     {
-        return $this->belongsTo('App\Book');
+        return $this->belongsTo(User::class);
     }
 
     public function student()

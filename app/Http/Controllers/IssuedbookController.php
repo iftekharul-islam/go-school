@@ -63,12 +63,14 @@ class IssuedbookController extends Controller
     {
         $studentExists = User::find($request->student_id);
 
+//        return $studentExists;
+
         if ($studentExists) {
             $request->request->add(['student_code' => $studentExists->student_code]);
             $this->issuedBookService->request = $request;
             $this->issuedBookService->storeIssuedBooks();
 
-            return redirect()->route('issued-books')->with('status', 'Book issues for  ' . $studentExists->name . '');
+            return redirect()->route('issued-books')->with('status', 'Book issues for  ' . $studentExists->name );
 
         } else {
 
@@ -105,7 +107,11 @@ class IssuedbookController extends Controller
      */
     public function returnHistory()
     {
-        $books = Issuedbook::with('book', 'student.section.class')->where('school_id', auth()->user()->school_id)->where('borrowed', 0)->where('quantity', 0)->paginate(20);
+        $books = Issuedbook::with('book', 'student.section.class')
+            ->where('school_id', auth()->user()->school_id)
+            ->where('borrowed', 0)
+            ->where('quantity', 0)
+            ->paginate(20);
 
         return view('library.returned-books', compact('books'));
 

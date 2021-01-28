@@ -17,5 +17,5 @@ function current_user()
  */
 function new_date_format($date)
 {
-    return Carbon::parse($date)->format(config('time-format.default'));
+    return Carbon::parse($date)->format(config('format.default_date'));
 }

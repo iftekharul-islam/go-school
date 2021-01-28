@@ -49,9 +49,9 @@
                                 </a></td>
                             <td>{{ $book->book->author }}</td>
                             <td>{{ $book->book->type }}</td>
-                            <td>{{ $book->student->name }}</td>
-                            <td>{{ $book->student->section->class->class_number }}</td>
-                            <td>{{ $book->student->section->section_number }}</td>
+                            <td>{{ $book->student->name ?? '' }}</td>
+                            <td>{{ $book->student->section->class->class_number ?? '' }}</td>
+                            <td>{{ $book->student->section->section_number ?? '' }}</td>
                             <td>{{ new_date_format($book->issue_date) }}</td>
                             <td>{{ new_date_format($book->return_date) }}</td>
                             <td>{{ $book->fine }}</td>

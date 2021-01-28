@@ -24,6 +24,19 @@
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
+            @elseif(session('error-status'))
+                <div class="alert alert-success">
+                    {{ session('error-status') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
             <form class="new-added-form justify-content-md-center aesteric" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book/store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}

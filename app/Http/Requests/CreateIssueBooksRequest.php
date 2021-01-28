@@ -14,12 +14,10 @@ class CreateIssueBooksRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Auth::user()) {
+        $roles = ['librarian', 'admin'];
+        $role = Auth::user()->role;
 
-            return true;
-        }
-
-        return false;
+        return in_array($role, $roles) ?  true :  false ;
     }
 
     /**
@@ -30,7 +28,7 @@ class CreateIssueBooksRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => 'required',
+            'student_id' => 'required|exists:users,id',
             'issue_date' => 'required',
             'return_date' => 'required',
             'book_id' => 'required',
