@@ -10,7 +10,7 @@
         <ul>
             <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
                     Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a style="margin-left: 8px;" href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.online_class_schedule') }}</li>
         </ul>
@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $data->section->class->class_number }}</td>
                                 <td>{{ $data->section->section_number }}</td>
-                                <td>{{ \Illuminate\Support\Carbon::parse($data->created_at)->format('d-m-Y') }}</td>
+                                <td>{{ new_date_format($data->created_at) }}</td>
                                 <td><a href="{{ route('class.schedule.show', $data->id) }}" class="btn btn-success"><i class="fas fa-eye"></i></a></td>
                             </tr>
                         @endforeach

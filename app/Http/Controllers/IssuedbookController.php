@@ -63,8 +63,6 @@ class IssuedbookController extends Controller
     {
         $studentExists = User::find($request->student_id);
 
-//        return $studentExists;
-
         if ($studentExists) {
             $request->request->add(['student_code' => $studentExists->student_code]);
             $this->issuedBookService->request = $request;

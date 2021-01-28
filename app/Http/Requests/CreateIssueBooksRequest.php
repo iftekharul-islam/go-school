@@ -17,7 +17,7 @@ class CreateIssueBooksRequest extends FormRequest
         $roles = ['librarian', 'admin'];
         $role = Auth::user()->role;
 
-        return in_array($role, $roles) ?  true :  false ;
+        return in_array($role, $roles) ;
     }
 
     /**
