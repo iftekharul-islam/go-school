@@ -244,7 +244,7 @@ class UserService
 
     public function getUserByUserCode($user_code)
     {
-        return User::with('section', 'studentInfo')
+        return User::with('section', 'studentInfo', 'studentInfo.guardian')
             ->where('student_code', $user_code)
             ->firstOrFail();
     }
@@ -314,6 +314,7 @@ class UserService
             'group' => (!empty($request->get('group'))) ? $request->get('group') : '',
             'birthday' => $request->get('birthday'),
             'religion' => $request->get('religion'),
+            'guardian_id' => $request->get('guardian_id'),
             'guardian_name' => $request->get('guardian_name'),
             'guardian_phone_number' => $request->get('guardian_phone_number'),
             'father_name' => $request->get('father_name'),

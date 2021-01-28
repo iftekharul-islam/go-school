@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CreateUserRequest
@@ -17,7 +18,11 @@ class CreateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (Auth::user()->role == 'admin') {
+
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -35,6 +40,7 @@ class CreateUserRequest extends FormRequest
             'section' => 'required|numeric',
             'gender' => 'required|string',
             'blood_group' => 'required|string',
+            'guardian_id' => 'required|integer',
             'guardian_name' => 'required|string',
             'guardian_phone_number' => 'required|string',
             'session' => 'required',

@@ -418,6 +418,45 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_id') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="guardian"
+                                               class=" control-label false-padding-bottom">{{ __('text.guardian') }}<label
+                                                class="text-danger">*</label></label>
+
+                                        <select id="guardian" class="form-control select2" name="guardian_id" required>
+                                            @foreach($guardians as $guardian)
+                                                <option value="{{ $guardian->id }}">{{ $guardian->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @if ($errors->has('guardian_id'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('guardian_id') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                    <div class="col-md-12">
+                                        <label for="address"
+                                               class="control-label false-padding-bottom">{{ __('text.address') }}</label>
+
+                                        <input id="address" type="text" class="form-control"
+                                               name="address"
+                                               value="{{ old('address') }}">
+
+                                        @if ($errors->has('address'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('address') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <input type="checkbox" class="f-name ml-4"><span class="f-name ml-2">Is Guardian</span>
                             </div>
@@ -699,24 +738,6 @@
                                         @if ($errors->has('guardian_phone_number'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('guardian_phone_number') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="false-padding-bottom-form form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
-                                        <label for="address"
-                                               class="control-label false-padding-bottom">{{ __('text.address') }}</label>
-
-                                        <input id="address" type="text" class="form-control"
-                                               name="address"
-                                               value="{{ old('address') }}">
-
-                                        @if ($errors->has('address'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('address') }}</strong>
                                             </span>
                                         @endif
                                     </div>

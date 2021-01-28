@@ -325,6 +325,7 @@ return [
     'returned_books' => 'ফেরতপ্রাপ্ত বই সমূহ',
     'returned_books_history' => 'ফিরিয়ে দেওয়া বইয়ের বিস্তারিত',
     'add_guardian' => 'অভিভাবকের সংযোজন',
+    'guardian' => 'অভিভাবক',
     'guardians' => 'অভিভাবক সমূহ',
     'my_attendance' => 'আমার উপস্থিতি',
     'my_course' => 'আমার কোর্স',

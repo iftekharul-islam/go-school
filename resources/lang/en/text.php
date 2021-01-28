@@ -326,6 +326,7 @@ return[
     'returned_books' => 'Returned Books',
     'returned_books_history' => 'Returned Books history',
     'add_guardian' => 'Add Guardian',
+    'guardian' => 'Guardian',
     'guardians' => 'Guardians',
     'my_attendance' => 'My Attendance',
     'my_course' => 'My Courses',

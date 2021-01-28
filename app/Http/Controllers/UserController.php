@@ -84,6 +84,7 @@ class UserController extends Controller
                 $searchData['student_name']= $request->student_name;
             }
             $show = $request->show ? $request->show : 20;
+//            return $this->userService->getStudents($request->section_id, $request->student_name, $show);
             return $this->userService->indexView('list.new-student-list', $this->userService->getStudents($request->section_id, $request->student_name, $show), $classes, $searchData,
              $type = 'Students');
         } elseif ($this->userService->isListOfTeachers($school_code, $teacher_code)) {
@@ -280,11 +281,23 @@ class UserController extends Controller
         $studentSections = Section::with('class')
         ->whereIn('class_id', $studentClasses)
         ->get();
+
+        $guardians = User::where('role', 'guardian')
+        ->where('active', 1)
+        ->get();
+
+        if (!$guardians) {
+
+            return redirect()->route('admin.home')->with('error', 'Please add guardian first !!!');
+        }
+
         $departments = Department::where('school_id', $user->school_id)->get();
 
-        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+        $adminAccessDepartment = Department::where('school_id', $user->school_id)
+            ->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))
+            ->get();
 
-        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections'));
+        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections', 'guardians'));
 
     }
 
