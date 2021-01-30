@@ -554,8 +554,8 @@
                     <li class="nav-item sidebar-nav-item">
                         <a class="nav-link {{ (request()->routeIs('child')) ? 'menu-active' : '' }}"
                            href="{{ route('child') }}">
-                            <i class="far fa-question-circle">
-                            </i><span>My childs</span>
+                            <i class="fas fa-child"></i>
+                            </i><span>{{ __('text.my_child') }}</span>
                         </a>
                     </li>
                 @endif

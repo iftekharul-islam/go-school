@@ -175,6 +175,6 @@ class SyllabusController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(30);
             
-        return view('syllabus.syallabus-for-student-teacher', compact('syllabuses'));
+        return view('syllabus.syllabus-for-student-teacher', compact('syllabuses'));
     }
 }

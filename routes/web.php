@@ -207,6 +207,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::group(['prefix' => 'guardian', 'middleware' => 'guardian'], function () {
         Route::get('/home', 'GuardianHomeController')->name('guardian.home');
         Route::get('my-child', 'GuardianController@myChild')->name('child');
+        Route::get('show/{id}', 'GuardianController@showByChildId')->name('child.show');
     });
     // Admin role routes
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
