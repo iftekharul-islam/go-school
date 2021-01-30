@@ -157,9 +157,10 @@ class GuardianController extends Controller
 
         // syllabus section
         $class_id = null;
+
         if ($child->role == 'student') {
             $child->load('section.class');
-            $class_id = !empty($child['section']['class']) ? $child['section']['class']['id'] : null;
+            $class_id = $child['section']['class'] ?? null;
         }
 
         $syllabuses = Syllabus::with('myClass')
@@ -188,38 +189,23 @@ class GuardianController extends Controller
         $escaped = 0;
         $total = 0;
 
-        if ('student' == $child->role) {
-            $attCount = $this->attendanceService->getAllAttendanceByStudentId($id);
-            foreach ($attCount as $att) {
-                $total = $att->total_present + $att->total_absent + $att->total_escaped;
-                $present = $att->total_present;
-                $absent = $att->total_absent;
-                $escaped = $att->total_escaped;
-            }
-            $exam = ExamForClass::where('class_id', $child->section->class->id)
-                ->where('active', 1)
-                ->first();
-        } else {
-            // From other users view
-            $student = $this->attendanceService->getStudent($id);
-            $attCount = $this->attendanceService->getAllAttendanceByStudentId($id);
-            foreach ($attCount as $att) {
-                $total = $att->total_present + $att->total_absent + $att->total_escaped;
-                $present = $att->total_present;
-                $absent = $att->total_absent;
-                $escaped = $att->total_escaped;
-            }
-            if ($student) {
-                $exam = ExamForClass::where('class_id', $student->section->class->id)
-                    ->where('active', 1)
-                    ->first();
-            }
+        $attCount = $this->attendanceService->getAllAttendanceByStudentId($id);
+        foreach ($attCount as $att) {
+            $total = $att->total_present + $att->total_absent + $att->total_escaped;
+            $present = $att->total_present;
+            $absent = $att->total_absent;
+            $escaped = $att->total_escaped;
         }
+        $exam = ExamForClass::where('class_id', $child->section->class->id)
+            ->where('active', 1)
+            ->first();
+
+        $exId = 0;
+
         if (isset($exam)) {
             $exId = $exam->exam_id;
-        } else {
-            $exId = 0;
         }
+
         $attendances = $this->attendanceService->getAttendanceByStudentAndExam($id, $exId);
         $student_id = $id;
 
