@@ -57,16 +57,7 @@ class AttendanceController extends Controller
 
             $data = $this->attendanceService->attendanceSummary($student_id);
 
-            $all_data = [
-                'calendar' => $data['calendar'],
-                'attendances' => $data['attendances'],
-                'present' => $data['present'],
-                'absent' => $data['absent'],
-                'escaped' => $data['escaped'],
-                'total' => $data['total'],
-
-            ];
-            return view('attendance.admin-student-attendances', ($all_data));
+            return view('attendance.admin-student-attendances', ($data));
         }
     }
 
