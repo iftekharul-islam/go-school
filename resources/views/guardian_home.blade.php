@@ -113,9 +113,12 @@
                 </div>
             </div>
         </div>
-        <script>
-            var male = @json($male);
-            var female = @json($female);
-        </script>
+
     </div>
 @endsection
+@push('customjs')
+    <script>
+        var male = @json($male);
+        var female = @json($female);
+    </script>
+@endpush

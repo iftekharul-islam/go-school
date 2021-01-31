@@ -63,24 +63,6 @@
 </div>
 <div class="card">
     <div class="card-body false-height">
-
-        <?php
-        if(count($attendances) > 0){
-        $events = array();
-        foreach ($attendances as $attendance) {
-            if ($attendance->present == 1) {
-                $events[] = \Calendar::event("Present", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'blue']);
-            } else if ($attendance->present == 3) {
-                $events[] = \Calendar::event("Late Present", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'salmon']);
-            } else if ($attendance->present == 2) {
-                $events[] = \Calendar::event("Escaped", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'orange']);
-            } else {
-                $events[] = \Calendar::event("Absent", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'red']);
-            }
-        }
-        if(sizeof($events) > 0){
-        $calendar = \Calendar::addEvents($events);
-        ?>
         <div class="col-md-12 col-sm-12 col-lg-12  text-capitalize ">
             <h5>{{ __('text.list_of_total_attendance') }}</h5>
             {!! $calendar->calendar() !!}
@@ -88,11 +70,3 @@
     </div>
 </div>
 {!! $calendar->script() !!}
-<?php
-} else {
-    echo  __('text.No Related Data Found') ;
-}
-} else {
-    echo __('text.No Related Data Found');
-}
-?>

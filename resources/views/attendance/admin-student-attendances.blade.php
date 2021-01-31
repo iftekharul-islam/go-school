@@ -38,7 +38,7 @@
                     @endforeach
                 </div>
             </div>
-                @include('layouts.student.attendances-table')
+                @include('layouts.student.attendances_table')
 
         @else
             <div class="card">
@@ -48,5 +48,4 @@
             </div>
         @endif
         <!-- Student Attendence Area End Here -->
-{{--    </div>--}}
 @endsection

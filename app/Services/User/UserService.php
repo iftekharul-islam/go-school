@@ -2,6 +2,7 @@
 
 namespace App\Services\User;
 
+use App\Discount;
 use App\Events\NewUserRegistered;
 use App\User;
 use App\StudentInfo;
@@ -362,5 +363,75 @@ class UserService
         event(new NewUserRegistered($tb));
 
         return $tb;
+    }
+
+    public function feeSummary($id)
+    {
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
+
+        $total_amount = 0;
+        $total_fine = 0;
+        $total_discount = 0;
+        $total_paid = 0;
+
+        if (!empty($student)) {
+
+            foreach ($student->section->class->feeMasters as $fee_master) {
+
+                $total_amount = $total_amount + $fee_master->amount;
+
+                $total_fee_paid = 0;
+
+                $paid_amount = 0;
+
+                foreach ($fee_master->transactions as $transaction) {
+
+                    if ($student->id === $transaction->student_id) {
+
+                        $total_fee_paid = $total_fee_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine'];
+                    }
+
+                    if (count($fee_master->transactions) != 0) {
+
+                        $count = count($transaction->feeMasters);
+
+                        if ($student->id === $transaction->student_id) {
+
+                            if ($count == 1) {
+
+                                $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
+                                $total_fine = $total_fine + $transaction['fine'];
+                                $total_discount = $total_discount + $transaction['discount'];
+                                $total_paid = $total_paid + $transaction['amount'];
+
+                            } else {
+
+                                $paid_amount = $paid_amount + ($transaction['amount'] / $count) + ($transaction['discount'] / $count) - ($transaction['fine'] / $count);
+                                $total_fine = $total_fine + $transaction['fine'] / $count;
+                                $total_discount = $total_discount + $transaction['discount'] / $count;
+                                $total_paid = $total_paid + $transaction['amount'] / $count;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
+
+        return $data = [
+            'totalAmount' => $total_amount,
+            'totalFine' => $total_fine,
+            'totalDiscount' => $total_discount,
+            'totalPaid' => $total_paid,
+            'totalFeePaid' => $total_fee_paid,
+            'student' => $student,
+            'discounts' => $discounts,
+            'paidAmount' => $paid_amount,
+        ];
     }
 }

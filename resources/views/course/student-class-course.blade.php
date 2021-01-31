@@ -4,13 +4,13 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Student Courses</h3>
+        <h3>{{ __('text.student_course') }}</h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a href="{{ URL::previous() }}">
+                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
+                <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>Student Courses</li>
+            <li>{{ __('text.student_course') }}</li>
         </ul>
     </div>
 
@@ -37,14 +37,14 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                @component('components.student-course-table',['courses'=>$courses, 'exams'=>$exams, 'student'=>(Auth::user()->role == 'student')?true:false])
+                                @component('components.student_course_table',['courses'=>$courses, 'exams'=>$exams, 'student'=>(Auth::user()->role == 'student')?true:false])
                                 @endcomponent
                             </div>
                         @else
                             <div class="card mt-5 false-height">
                                 <div class="card-body">
                                     <div class="card-body-body mt-5 text-center">
-                                        No Related Data Found.
+                                        {{ __('text.No Related Data Found') }}
                                     </div>
                                 </div>
                             </div>

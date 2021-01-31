@@ -22,5 +22,5 @@ function new_date_format($date)
 
 function full_year_by_month()
 {
-    return ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
+    return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 }

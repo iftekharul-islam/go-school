@@ -162,7 +162,7 @@ class SyllabusController extends Controller
         $user = Auth::user();
         if ($user->role == 'student') {
             $user->load('section.class');
-            $class_id = $user['section']['class'] ?? null;
+            $class_id = $user['section']['class']['id'] ?? null;
         }
 
         $syllabuses = Syllabus::with('myclass')

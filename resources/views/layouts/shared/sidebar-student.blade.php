@@ -145,7 +145,7 @@
                             <i class="fas fa-cash-register"></i><span>{{ __('text.fees_summary') }}</span></a>
                     </li>
                 @endif
-                @if($role == 'student' || $role == 'guardian')
+                @if(in_array($role, ['student', 'guardian']))
                     <li class="nav-item">
                         <a href="{{ url('notices-and-events') }}"
                            class="nav-link {{ (request()->is('notices-and-events')) ? 'menu-active' : '' }}"><i

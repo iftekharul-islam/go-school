@@ -356,4 +356,5 @@ return[
     'online_class_notification' => 'Online Class Notification',
     'sent_date' => 'Sent date',
     'online_class_summary' => 'Online class Summary',
+    'student_courses' => 'Student Courses',
 ];

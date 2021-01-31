@@ -44,6 +44,6 @@ class Myclass extends Model
 
     public function feeMasters()
     {
-        return $this->hasMany(FeeMaster::class, 'class_id');
+        return $this->hasMany(FeeMaster::class, 'class_id', 'id');
     }
 }

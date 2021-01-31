@@ -35,19 +35,29 @@ class User extends Authenticatable
         return $q->where('role', 'student');
     }
 
+    public function scopeGuardian($q)
+    {
+        return $q->where('role', 'guardian');
+    }
+
+    public function scopeActive($q)
+    {
+        return $q->where('active', 1);
+    }
+
     public function section()
     {
-        return $this->belongsTo('App\Section');
+        return $this->belongsTo(Section::class);
     }
 
     public function school()
     {
-        return $this->belongsTo('App\School');
+        return $this->belongsTo(School::class);
     }
 
     public function department()
     {
-        return $this->belongsTo('App\Department', 'department_id', 'id');
+        return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
     public function studentInfo()
@@ -57,12 +67,12 @@ class User extends Authenticatable
 
     public function studentBoardExam()
     {
-        return $this->hasMany('App\StudentBoardExam', 'student_id');
+        return $this->hasMany(StudentBoardExam::class, 'student_id');
     }
 
     public function notifications()
     {
-        return $this->hasMany('App\Notification', 'student_id');
+        return $this->hasMany(Notification::class, 'student_id');
     }
 
     public function hasRole(string $role): bool
@@ -72,7 +82,7 @@ class User extends Authenticatable
 
     public function adminDepartments()
     {
-        return $this->belongsToMany('App\Department', 'department_user')->withTimestamps();
+        return $this->belongsToMany(Department::class, 'department_user')->withTimestamps();
     }
 
     public function attendances()
@@ -82,10 +92,10 @@ class User extends Authenticatable
 
     public function shift()
     {
-        return $this->belongsTo('App\Shift');
+        return $this->belongsTo(Shift::class);
     }
     public function feeTranscation()
     {
-        return $this->hasMany('App\FeeTransaction','student_id');
+        return $this->hasMany(FeeTransaction::class,'student_id');
     }
 }

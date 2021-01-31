@@ -63,10 +63,10 @@ class GuardianHomeController extends Controller
                     $female++;
                 }
             }
-            $totalClasses = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
+            $total_classes = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
                 return  Myclass::where('school_id', $school_id)->count();
             });
-            $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
+            $total_sections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();
             });
             $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
@@ -78,14 +78,14 @@ class GuardianHomeController extends Controller
 
         }
 
-        $allStudents = $this->userService->getStudents();
+        $all_students = $this->userService->getStudents();
 
-        return view('guardian-home', [
+        return view('guardian_home', [
             'students' => $students,
-            'allStudents' => $allStudents,
+            'allStudents' => $all_students,
             'notices' => $notices,
-            'totalClasses' => $totalClasses,
-            'totalSections' => $totalSections,
+            'totalClasses' => $total_classes,
+            'totalSections' => $total_sections,
             'male' => $male,
             'female' => $female,
             'teachers' => $teachers,

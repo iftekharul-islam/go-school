@@ -281,7 +281,7 @@ class UserController extends Controller
         ->whereIn('class_id', $studentClasses)
         ->get();
 
-        $guardians = User::where('role', 'guardian')
+        $guardians = User::Guardian()
         ->where('active', 1)
         ->get();
 

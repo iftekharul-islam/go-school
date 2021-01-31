@@ -32,7 +32,15 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            @component('components.fee_summary', ['student' => $student, 'discounts' => $discounts]))
+                            @component('components.fee_summary', [  'student' => $student,
+                                                                    'discounts' => $discounts,
+                                                                    'totalAmount' => $totalAmount,
+                                                                    'totalFine' => $totalFine,
+                                                                    'totalDiscount' => $totalDiscount,
+                                                                    'totalFeePaid' => $totalFeePaid,
+                                                                    'totalPaid' => $totalPaid,
+                                                                    'paidAmount' => $paidAmount,
+                                                                ]))
                             @endcomponent
                         </div>
                     </div>

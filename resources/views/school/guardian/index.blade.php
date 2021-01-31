@@ -10,8 +10,8 @@
                             <ul>
                                 <h3>{{ __('text.guardians') }}</h3>
                                 <li>
-                                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">{{ __('text.Back') }} &nbsp;|</a>
-                                    <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                                    <a href="{{ URL::previous() }}">{{ __('text.Back') }} &nbsp;|</a>
+                                    <a href="{{ route( current_user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                                 </li>
                                 <li>{{ __('text.guardians') }}</li>
                                 <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('create.guardian') }}">{{ __('text.add_guardian') }}</a>
