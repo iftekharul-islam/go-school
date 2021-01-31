@@ -84,7 +84,6 @@ class UserController extends Controller
                 $searchData['student_name']= $request->student_name;
             }
             $show = $request->show ? $request->show : 20;
-//            return $this->userService->getStudents($request->section_id, $request->student_name, $show);
             return $this->userService->indexView('list.new-student-list', $this->userService->getStudents($request->section_id, $request->student_name, $show), $classes, $searchData,
              $type = 'Students');
         } elseif ($this->userService->isListOfTeachers($school_code, $teacher_code)) {
