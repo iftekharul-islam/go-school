@@ -287,7 +287,7 @@ class UserController extends Controller
 
         if (!$guardians) {
 
-            return redirect()->route('admin.home')->with('error', 'Please add guardian first !!!');
+            return redirect()->route('admin.home')->with('error', __('text.guardian_add_notification'));
         }
 
         $departments = Department::where('school_id', $user->school_id)->get();
