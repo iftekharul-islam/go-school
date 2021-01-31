@@ -239,7 +239,6 @@
                             </div>
                             <div class="table-responsive">
                                 @component('components.fee_summary', ['student' => $student, 'discounts' => $discounts])
-                                    )
                                 @endcomponent
                             </div>
 

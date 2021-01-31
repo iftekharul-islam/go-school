@@ -19,3 +19,8 @@ function new_date_format($date)
 {
     return Carbon::parse($date)->format(config('format.default_date'));
 }
+
+function full_year_by_month()
+{
+    return ['January', 'February', 'March','April','May','June','July','August','September', 'October', 'November', 'December'];
+}

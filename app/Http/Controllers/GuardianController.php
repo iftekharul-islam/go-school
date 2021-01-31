@@ -126,56 +126,52 @@ class GuardianController extends Controller
         return view('school.guardian.my-child', compact('users'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showByChildId($id)
     {
-        $child = User::find($id);
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])
+            ->where('id', $id)
+            ->first();
 
         // course section
-        if ($this->courseService->isCourseOfASection($child->section_id)) {
+        if ($this->courseService->isCourseOfASection($student->section_id)) {
 
-            $courses = $this->courseService->getCoursesBySection($child->section_id);
+            $courses = $this->courseService->getCoursesBySection($student->section_id);
         }
 
         // grades section
         $grades = $this->gradeService->getStudentGradesWithInfoCourseTeacherExam($id);
+        $gradesystems = [];
+        $exams = [];
 
         if (count($grades) > 0) {
             $exams = $this->gradeService->getExamByIdsFromGrades($grades);
             $gradesystems = $this->gradeService->getGradeSystemInfoBySchoolId();
 
-        } else {
-            $grades = [];
-            $gradesystems = [];
-            $exams = [];
         }
 
-        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])
-            ->where('id', $id)
-            ->first();
-
-        $discounts = Discount::where('school_id', $child->school_id)->get();
+        $discounts = Discount::where('school_id', $student->school_id)->get();
 
         // syllabus section
-        $class_id = null;
+        $class_id = $student->role == 'student' ? $student['section']['class_id'] : '';
 
-        if ($child->role == 'student') {
-            $child->load('section.class');
-            $class_id = $child['section']['class'] ?? null;
-        }
-
-        $syllabuses = Syllabus::with('myClass')
-            ->where('school_id', $child->school_id)
+        $syllabuses = Syllabus::with('myclass')
+            ->where('school_id', $student->school_id)
             ->where('active', 1)
-            ->when($class_id, function ($query) use ($class_id) {
+            ->when($class_id, function($query) use ($class_id) {
                 return $query->where('class_id', $class_id);
             })
             ->orderBy('created_at', 'DESC')
             ->paginate(30);
 
+
         //routine section
-        $section_id = $child->role == 'student' ? $child->section_id : '';
+        $section_id = $student->role == 'student' ? $student->section_id : '';
         $files = Routine::with('section.class')
-            ->where('school_id', $child->school_id)
+            ->where('school_id', $student->school_id)
             ->where('active', 1)
             ->when($section_id, function ($query) use ($section_id) {
                 $query->where('section_id', $section_id);
@@ -196,17 +192,13 @@ class GuardianController extends Controller
             $absent = $att->total_absent;
             $escaped = $att->total_escaped;
         }
-        $exam = ExamForClass::where('class_id', $child->section->class->id)
+        $exam = ExamForClass::where('class_id', $student->section->class->id)
             ->where('active', 1)
             ->first();
 
-        $exId = 0;
+        $ex_id = isset($exam) ? $exam->exam_id : 0;
 
-        if (isset($exam)) {
-            $exId = $exam->exam_id;
-        }
-
-        $attendances = $this->attendanceService->getAttendanceByStudentAndExam($id, $exId);
+        $attendances = $this->attendanceService->getAttendanceByStudentAndExam($id, $ex_id);
         $student_id = $id;
 
         //message section
@@ -225,7 +217,7 @@ class GuardianController extends Controller
 
         }
         return view('school.guardian.show-child', compact('courses', 'grades',
-            'gradesystems', 'exams', 'student', 'discounts', 'syllabuses', 'files', 'section_id',
+            'gradesystems', 'exams', 'student', 'discounts', 'files', 'section_id', 'syllabuses',
             'attendances', 'student_id', 'total', 'present', 'absent', 'escaped', 'messages'));
 
     }
