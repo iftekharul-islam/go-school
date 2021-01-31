@@ -244,10 +244,6 @@ class GuardianController extends Controller
             'discounts' => $data['discounts'],
             'paidAmount' => $data['paidAmount'],
         ];
-//        $all_data []= $data;
-//
-//        return $all_data;
-
 
         return view('school.guardian.show_child', ($all_data) );
 
