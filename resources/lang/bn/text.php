@@ -359,5 +359,6 @@ return [
     'online_class_notification' => 'অনলাইন ক্লাস বিজ্ঞপ্তি',
     'sent_date' => 'প্রেরণের তারিখ',
     'online_class_summary' => 'অনলাইন ক্লাসের সংক্ষিপ্তসার',
-    'student_course' => 'শিক্ষার্থীদের কোর্স'
+    'student_course' => 'শিক্ষার্থীদের কোর্স',
+    'guardian_add_notification' => 'দয়া করে প্রথমে অভিভাবক যুক্ত করুন !!!',
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Services\Attendance;
 
+use App\ExamForClass;
 use App\User;
 use App\Attendance;
 use Carbon\Carbon;
@@ -213,7 +214,11 @@ class AttendanceService
         }
     }
 
-    public function AttendanceCalendar($attendances)
+    /**
+     * @param $attendances
+     * @return string
+     */
+    public function attendanceCalendar($attendances)
     {
         $calendar = '';
 
@@ -240,5 +245,53 @@ class AttendanceService
 
         return $calendar;
 
+    }
+
+    /**
+     * @param $student_id
+     * @return array
+     */
+    public function attendanceSummary($student_id)
+    {
+        $present = 0;
+        $absent = 0;
+        $escaped = 0;
+        $total = 0;
+
+
+        $attendance_count = $this->getAllAttendanceByStudentId($student_id);
+
+        if (count($attendance_count) > 0) {
+            $total = $attendance_count[0]->total_present + $attendance_count[0]->total_absent + $attendance_count[0]->total_escaped;
+            $present = $attendance_count[0]->total_present;
+            $absent = $attendance_count[0]->total_absent;
+            $escaped = $attendance_count[0]->total_escaped;
+        }
+
+
+
+        $student = $this->getStudent($student_id);
+
+        $class_id = isset($student) ? $student->section->class->id : Auth::user()->section->class->id;
+
+        $exam = ExamForClass::where('class_id', $class_id)
+            ->where('active', 1)
+            ->first();
+
+
+        $exam_id = isset($exam) ? $exam->exam_id : 0;
+
+        $attendances = $this->getAttendanceByStudentAndExam($student_id, $exam_id);
+
+        $calendar = $this->AttendanceCalendar($attendances);
+
+        return [
+            'present' => $present,
+            'absent' => $absent,
+            'escaped' => $escaped,
+            'total' => $total,
+            'calendar' => $calendar,
+            'attendances' => $attendances
+        ];
     }
 }

@@ -7,10 +7,9 @@
         <ul>
             <h3>{{ __('text.my_child') }}</h3>
             <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">{{ __('text.Back') }}
+                <a href="{{ URL::previous() }}" >{{ __('text.Back') }}
                     &nbsp;|</a>
-                <a style="margin-left: 8px;"
-                   href="{{ (auth()->user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a href="{{ (auth()->user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.my_child') }}</li>
         </ul>

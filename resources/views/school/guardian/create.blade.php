@@ -73,10 +73,6 @@
                                         class="text-danger">*</label></label>
                                 <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
 
-                                @php
-                                    $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
-                                @endphp
-
                                 <input id="email" type="email" class="form-control teacher-username"
                                        name="email"
                                        value="{{ old('email') }}"
@@ -303,7 +299,7 @@
                     let names = inputName.split(' ');
 
 
-                    let code = {!! $code !!};
+                    let code = {!! student_code_generate() !!};
 
                     let lastName = names[names.length - 1] ? names[names.length - 1] : names[names.length - 2];
 

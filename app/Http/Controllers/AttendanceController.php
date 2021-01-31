@@ -55,39 +55,18 @@ class AttendanceController extends Controller
 
         } else {
 
-            $present = 0;
-            $absent = 0;
-            $escaped = 0;
-            $total = 0;
+            $data = $this->attendanceService->attendanceSummary($student_id);
 
-            // View attendance of a single student by student id//
+            $all_data = [
+                'calendar' => $data['calendar'],
+                'attendances' => $data['attendances'],
+                'present' => $data['present'],
+                'absent' => $data['absent'],
+                'escaped' => $data['escaped'],
+                'total' => $data['total'],
 
-            $attendance_count = $this->attendanceService->getAllAttendanceByStudentId($student_id);
-
-            foreach ($attendance_count as $attendance) {
-
-                $total = $attendance->total_present + $attendance->total_absent + $attendance->total_escaped;
-                $present = $attendance->total_present;
-                $absent = $attendance->total_absent;
-                $escaped = $attendance->total_escaped;
-            }
-
-            $student = $this->attendanceService->getStudent($student_id);
-
-            $class_id = isset($student) ? $student->section->class->id : $user->section->class->id;
-
-            $exam = ExamForClass::where('class_id', $class_id)
-                ->where('active', 1)
-                ->first();
-
-
-            $exam_id = isset($exam) ? $exam->exam_id : 0;
-
-            $attendances = $this->attendanceService->getAttendanceByStudentAndExam($student_id, $exam_id);
-
-            $calendar = $this->attendanceService->AttendanceCalendar($attendances);
-
-            return view('attendance.admin-student-attendances', compact('calendar', 'attendances', 'present', 'absent', 'escaped', 'total'));
+            ];
+            return view('attendance.admin-student-attendances', ($all_data));
         }
     }
 

@@ -365,9 +365,13 @@ class UserService
         return $tb;
     }
 
-    public function feeSummary($id)
+    /**
+     * @param $student_id
+     * @return array
+     */
+    public function feeSummary($student_id)
     {
-        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $student_id)->first();
 
         $total_amount = 0;
         $total_fine = 0;

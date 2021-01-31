@@ -7,8 +7,8 @@
         <h3><i class="fas fa-list"></i> {{ __('text.Syllabus') }} </h3>
         <ul>
             <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <a href="{{ URL::previous() }}">Back &nbsp;|</a>
+                <a href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>Syllabus</li>
         </ul>

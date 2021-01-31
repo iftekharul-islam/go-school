@@ -177,27 +177,28 @@ class GuardianController extends Controller
             ->get();
 
         //attendance section
-        $present = 0;
-        $absent = 0;
-        $escaped = 0;
-        $total = 0;
-
-        $attendance_Count = $this->attendanceService->getAllAttendanceByStudentId($id);
-        foreach ($attendance_Count as $attendance) {
-            $total = $attendance->total_present + $attendance->total_absent + $attendance->total_escaped;
-            $present = $attendance->total_present;
-            $absent = $attendance->total_absent;
-            $escaped = $attendance->total_escaped;
-        }
-        $exam = ExamForClass::where('class_id', $student->section->class->id)
-            ->where('active', 1)
-            ->first();
-
-        $exam_id = isset($exam) ? $exam->exam_id : 0;
-
-        $attendances = $this->attendanceService->getAttendanceByStudentAndExam($id, $exam_id);
-
-        $calendar = $this->attendanceService->AttendanceCalendar($attendances);
+        $attendance_data = $this->attendanceService->attendanceSummary($id);
+//        $present = 0;
+//        $absent = 0;
+//        $escaped = 0;
+//        $total = 0;
+//
+//        $attendance_Count = $this->attendanceService->getAllAttendanceByStudentId($id);
+//        foreach ($attendance_Count as $attendance) {
+//            $total = $attendance->total_present + $attendance->total_absent + $attendance->total_escaped;
+//            $present = $attendance->total_present;
+//            $absent = $attendance->total_absent;
+//            $escaped = $attendance->total_escaped;
+//        }
+//        $exam = ExamForClass::where('class_id', $student->section->class->id)
+//            ->where('active', 1)
+//            ->first();
+//
+//        $exam_id = isset($exam) ? $exam->exam_id : 0;
+//
+//        $attendances = $this->attendanceService->getAttendanceByStudentAndExam($id, $exam_id);
+//
+//        $calendar = $this->attendanceService->AttendanceCalendar($attendances);
 
         //message section
         $messages = Notification::with('teacher.department')->where('student_id', $id)
@@ -227,14 +228,14 @@ class GuardianController extends Controller
             'files' => $files,
             'section_id' =>$section_id,
             'syllabuses' => $syllabuses,
-            'attendances' => $attendances,
             'student_id' => $id,
-            'total' => $total,
-            'present' => $present,
-            'absent' => $absent,
-            'escaped' => $escaped,
+            'attendances' => $attendance_data['attendances'],
+            'total' => $attendance_data['total'],
+            'present' => $attendance_data['present'],
+            'absent' => $attendance_data['absent'],
+            'escaped' => $attendance_data['escaped'],
+            'calendar' => $attendance_data['calendar'],
             'messages' => $messages,
-            'calendar' => $calendar,
             'totalAmount' => $data['totalAmount'],
             'totalFine' => $data['totalFine'],
             'totalDiscount' => $data['totalDiscount'],

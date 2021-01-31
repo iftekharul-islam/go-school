@@ -8,9 +8,9 @@
             {{ __('text.event_notice') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+            <li> <a href="{{ URL::previous() }}">
                     {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.event_notice') }}</li>
         </ul>
