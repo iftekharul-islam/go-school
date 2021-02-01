@@ -18,7 +18,7 @@ function current_user()
  */
 function new_date_format($date)
 {
-    return Carbon::createFromFormat('Y-m-d', $date)->format('d-m-Y');
+    return Carbon::createFromFormat('Y-m-d', $date)->format(config('format.default_date'));
 }
 
 /**

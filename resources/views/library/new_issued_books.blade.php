@@ -23,7 +23,7 @@
                     </div>
                 @endif
 
-                @component('components.issued_books_list',['books'=>$issued_books])
+                @component('components.issued_books_list', ['books'=>$issued_books])
                 @endcomponent
             </div>
         </div>

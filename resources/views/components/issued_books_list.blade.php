@@ -17,16 +17,16 @@
     <tbody>
     @foreach($books as $book)
       <tr>
-        <td>{{($loop->index + 1)}}</td>
-        <td>{{$book->book->title}}</td>
-        <td>{{$book->book->book_code}}</td>
-        <td>{{$book->book->type}}</td>
-        <td>{{isset($book->student) ? $book->student->name : ''}}</td>
-        <td>{{isset($book->student) ? $book->student->student_code : ''}}</td>
-        <td>{{Carbon\Carbon::parse($book->issue_date)->format('d/m/Y')}}</td>
-        <td>{{Carbon\Carbon::parse($book->return_date)->format('d/m/Y')}}</td>
+        <td>{{ ($loop->index + 1) }}</td>
+        <td>{{ $book->book->title }}</td>
+        <td>{{ $book->book->book_code }}</td>
+        <td>{{ $book->book->type }}</td>
+        <td>{{ isset($book->student) ? $book->student->name : ''}}</td>
+        <td>{{ isset($book->student) ? $book->student->student_code : ''}}</td>
+        <td>{{ new_date_format($book->issue_date) }}</td>
+        <td>{{ new_date_format($book->return_date) }}</td>
         <td>
-          <form action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/save_as_returned')}}" method="post">
+          <form action="{{url( current_user()->role.'/save_as_returned')}}" method="post">
             {{csrf_field()}}
             <input type="hidden" name="issue_id" value="{{$book->id}}">
             <input type="hidden" name="book_id" value="{{$book->book_id}}">

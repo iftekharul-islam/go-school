@@ -8,7 +8,6 @@ use App\Attendance;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
-use Calendar;
 
 class AttendanceService
 {
