@@ -357,5 +357,6 @@ return[
     'sent_date' => 'Sent date',
     'online_class_summary' => 'Online class Summary',
     'student_courses' => 'Student Courses',
-    'guardian_add_notification' => 'Please add guardian first !!!'
+    'guardian_add_notification' => 'Please add guardian first !!!',
+    'save_as_returned' => 'Save as Returned',
 ];

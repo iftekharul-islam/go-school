@@ -7,6 +7,7 @@ use App\Http\Requests\CreateIssueBooksRequest;
 use App\Issuedbook;
 use App\Myclass;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\IssueBook\IssuedBookService;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class IssuedbookController extends Controller
     {
         $issued_books = $this->issuedBookService->getIssuedBooks();
 
-        return view('library.new-issued-books', ['issued_books' => $issued_books]);
+        return view('library.new_issued_books', ['issued_books' => $issued_books]);
     }
 
     /**
@@ -105,6 +106,7 @@ class IssuedbookController extends Controller
      */
     public function returnHistory()
     {
+
         $books = Issuedbook::with('book', 'student.section.class')
             ->where('school_id', auth()->user()->school_id)
             ->where('borrowed', 0)

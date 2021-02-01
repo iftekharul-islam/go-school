@@ -9,12 +9,9 @@ class IssuedBookService {
     public $ib;
 
     public function getIssuedBooks(){
-        return Issuedbook::join('books', 'issued_books.book_id', '=', 'books.id')
-            ->select('issued_books.*','books.title','books.type','users.name')
-            ->join('users', 'issued_books.student_code', '=', 'users.student_code')
-            ->where('issued_books.borrowed', '=', 1)
-            ->where('issued_books.school_id', '=', auth()->user()->school->id)
-            ->paginate(50);
+        return Issuedbook::with('book', 'student')
+            ->where('school_id',  auth()->user()->school->id)
+            ->paginate(config('pagination.default_pagination'));
     }
 
     /**

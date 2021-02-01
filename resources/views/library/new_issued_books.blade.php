@@ -8,9 +8,9 @@
             </h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    <a href="{{ URL::previous() }}">
                         {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
                 <li>{{ __('text.issued_books') }}</li>
             </ul>
@@ -23,7 +23,7 @@
                     </div>
                 @endif
 
-                @component('components.issued-books-list',['books'=>$issued_books])
+                @component('components.issued_books_list',['books'=>$issued_books])
                 @endcomponent
             </div>
         </div>

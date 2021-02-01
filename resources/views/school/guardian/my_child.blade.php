@@ -58,7 +58,7 @@
                                             <td>{{ $user->student->student_code }}</td>
                                             <td>{{ $user->student->name }}</td>
                                             <td>{{ $user->student->section->class->class_number }}</td>
-                                            <td>{{ $user->student->section->class->class_number }}</td>
+                                            <td>{{ $user->student->section->section_number }}</td>
                                             <td><a href="{{ route('child.show', $user->student->id) }}" class="btn btn-success"><i class="fas fa-eye"></i></a></td>
                                         </tr>
                                     @endforeach

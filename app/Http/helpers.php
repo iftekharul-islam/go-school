@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
+
 
 /**
  * @return mixed
@@ -17,7 +18,7 @@ function current_user()
  */
 function new_date_format($date)
 {
-    return Carbon::parse($date)->format(config('format.default_date'));
+    return Carbon::createFromFormat('Y-m-d', $date)->format('d-m-Y');
 }
 
 /**

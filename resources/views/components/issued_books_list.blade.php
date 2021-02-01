@@ -18,11 +18,11 @@
     @foreach($books as $book)
       <tr>
         <td>{{($loop->index + 1)}}</td>
-        <td>{{$book->title}}</td>
-        <td>{{isset($book->book) ? $book->book->book_code : '' }}</td>
-        <td>{{$book->type}}</td>
-        <td>{{$book->name}}</td>
-        <td>{{$book->student_code}}</td>
+        <td>{{$book->book->title}}</td>
+        <td>{{$book->book->book_code}}</td>
+        <td>{{$book->book->type}}</td>
+        <td>{{isset($book->student) ? $book->student->name : ''}}</td>
+        <td>{{isset($book->student) ? $book->student->student_code : ''}}</td>
         <td>{{Carbon\Carbon::parse($book->issue_date)->format('d/m/Y')}}</td>
         <td>{{Carbon\Carbon::parse($book->return_date)->format('d/m/Y')}}</td>
         <td>
@@ -30,7 +30,7 @@
             {{csrf_field()}}
             <input type="hidden" name="issue_id" value="{{$book->id}}">
             <input type="hidden" name="book_id" value="{{$book->book_id}}">
-            <button class="button button--text float-left"><b>Save as Returned</b></button>
+            <button class="button button--text float-left"><b>{{ __('text.save_as_returned')}}</b></button>
           </form>
         </td>
       </tr>
