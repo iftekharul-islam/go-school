@@ -31,7 +31,7 @@ class NotificationController extends Controller
             }
 
         }
-        return view('message.all-message',['messages'=>$msg]);
+        return view('message.index',['messages'=>$msg]);
     }
 
     /**

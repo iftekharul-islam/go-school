@@ -8,11 +8,7 @@
                             @if(!empty($message->teacher->pic_path))
                                 <img src="{{url($message->teacher->pic_path)}}" data-src="{{url($message->teacher->pic_path)}}" style="border-radius: 50%;" width="50px" height="50px">
                             @else
-                                @if(strtolower($message->teacher->gender) == 'male')
-                                    <img src="{{asset('template/img/user-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
-                                @else
-                                    <img src="{{asset('template/img/female-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
-                                @endif
+                                <img src="{{asset('template/img/user-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
                             @endif
                         </div>
                     </div>
@@ -25,7 +21,9 @@
                             <span class="label label-default">Seen</span></strong>
                         @endif
 
-                        <a class="btn btn-danger btn-lg float-right text-white ml-2" type="button" onclick="deleteMsg({{ $message->id }})"><i class="fas fa-trash-alt"></i></a>
+                        @if(current_user()->role == 'student')
+                            <a class="btn btn-danger btn-lg float-right text-white ml-2" type="button" onclick="deleteMsg({{ $message->id }})"><i class="fas fa-trash-alt"></i></a>
+                        @endif
                         @if(!empty($message->file_path) && ($message->file_path) !== null)
                             <a class="btn btn-info btn-lg float-right" href="{{asset($message->file_path)}}" target="_blank">Show Attachment</a>
                         @endif

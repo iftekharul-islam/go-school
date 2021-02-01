@@ -7,7 +7,6 @@ use App\Http\Requests\CreateIssueBooksRequest;
 use App\Issuedbook;
 use App\Myclass;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\IssueBook\IssuedBookService;
 use Illuminate\Support\Facades\Auth;
