@@ -39,6 +39,7 @@ class AttendanceController extends Controller
     public function index($section_id, $student_id, $exam_id)
     {
         $user = Auth::user();
+
         if ($section_id > 0 && 'student' != $user->role) {
             $students = $this->attendanceService->getStudentsBySection($section_id);
             $attendances = $this->attendanceService->getTodaysAttendanceBySectionId($section_id);
@@ -51,49 +52,12 @@ class AttendanceController extends Controller
                 'section_id' => $section_id,
                 'exam_id' => $exam_id,
             ]);
+
         } else {
-            $present = 0;
-            $absent = 0;
-            $escaped = 0;
-            $total = 0;
 
-            // View attendance of a single student by student id//
+            $data = $this->attendanceService->attendanceSummary($student_id);
 
-            if ('student' == $user->role) {
-                $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
-                foreach ($attCount as $att) {
-                    $total = $att->total_present + $att->total_absent + $att->total_escaped;
-                    $present = $att->total_present;
-                    $absent = $att->total_absent;
-                    $escaped = $att->total_escaped;
-                }
-                $exam = ExamForClass::where('class_id', $user->section->class->id)
-                    ->where('active', 1)
-                    ->first();
-            } else {
-                // From other users view
-                $student = $this->attendanceService->getStudent($student_id);
-                $attCount = $this->attendanceService->getAllAttendanceByStudentId($student_id);
-                foreach ($attCount as $att) {
-                    $total = $att->total_present + $att->total_absent + $att->total_escaped;
-                    $present = $att->total_present;
-                    $absent = $att->total_absent;
-                    $escaped = $att->total_escaped;
-                }
-                if ($student) {
-                    $exam = ExamForClass::where('class_id', $student->section->class->id)
-                        ->where('active', 1)
-                        ->first();
-                }
-            }
-            if (isset($exam)) {
-                $exId = $exam->exam_id;
-            } else {
-                $exId = 0;
-            }
-            $attendances = $this->attendanceService->getAttendanceByStudentAndExam($student_id, $exId);
-
-            return view('attendance.admin-student-attendances', ['attendances' => $attendances, 'present' => $present, 'absent' => $absent, 'escaped' => $escaped, 'total' => $total]);
+            return view('attendance.admin-student-attendances', ($data));
         }
     }
 
@@ -108,7 +72,7 @@ class AttendanceController extends Controller
         $exam = ExamForClass::where('class_id', $student->section->class->id)
             ->where('active', 1)
             ->first();
-        if (1 == count((array) $exam)) {
+        if (1 == count((array)$exam)) {
             $exId = $exam->exam_id;
         } else {
             $exId = 0;
@@ -171,12 +135,13 @@ class AttendanceController extends Controller
             'per_page' => $users->perPage(),
         ]);
     }
+
     public function attendanceDetails(Request $request, $section_id)
     {
         $course = Course::with('section')->where('section_id', $section_id)->first();
         $class = Myclass::where('school_id', Auth::user()->school_id)->first();
         $examID = 0;
-        if (! empty($course->exam_id)) {
+        if (!empty($course->exam_id)) {
             $examID = $course->exam_id;
         }
         $users = $this->attendanceService->getStudentsWithInfoBySection($section_id);
@@ -199,8 +164,10 @@ class AttendanceController extends Controller
             ]);
         }
     }
+
     public function attendanceDetailsview(Request $request, $section_id)
     {
+        $course = Course::with('section')->where('section_id', $section_id)->first();
         $examID = 0;
         if (! empty($course->exam_id)) {
             $examID = $course->exam_id;
@@ -229,10 +196,9 @@ class AttendanceController extends Controller
      */
     public function store(StoreAttendanceRequest $request)
     {
-        //dd($request->all());
         $this->attendanceService->request = $request;
         if (1 == $request->update) {
-          $at = $this->attendanceService->updateAttendance();
+            $at = $this->attendanceService->updateAttendance();
             if (isset($at)) {
                 if (count($at) > 0) {
                     Attendance::insert($at);
@@ -245,66 +211,66 @@ class AttendanceController extends Controller
         return back()->with('status', 'Attendance record updated');
     }
 
-     public function attendancesSummaryDate(Request $request, $section_id)
-     {
-         $s_date = $request->start_date;
-         $start_display = date("d-m-Y", strtotime($s_date));
-         $date = $request->end_date;
-         $e_date = Carbon::parse($date)->addDays(1)->format('Y-m-d');
-         $request->end_date = $e_date;
-         $end_display =Carbon::parse($date)->format('d-m-Y');
+    public function attendancesSummaryDate(Request $request, $section_id)
+    {
+        $s_date = $request->start_date;
+        $start_display = date("d-m-Y", strtotime($s_date));
+        $date = $request->end_date;
+        $e_date = Carbon::parse($date)->addDays(1)->format('Y-m-d');
+        $request->end_date = $e_date;
+        $end_display = Carbon::parse($date)->format('d-m-Y');
 
-         if (!$request->has('start_date') || !$request->filled('start_date')) {
-             $start_date = Carbon::today()->addDays(-30)->format('Y-m-d');
-             $start_display = date("d-m-Y", strtotime($start_date));;
-             $request->start_date = $start_date;
-         }
-         if (!$request->has('end_date') || !$request->filled('end_date')) {
-             $end_date = Carbon::today()->addDay(1)->format('Y-m-d');
-             $end_display = Carbon::today()->format('d-m-Y');
-             $request->end_date = $end_date;
-         }
-         $students = $this->attendanceService->getAttendanceSummary($request);
+        if (!$request->has('start_date') || !$request->filled('start_date')) {
+            $start_date = Carbon::today()->addDays(-30)->format('Y-m-d');
+            $start_display = date("d-m-Y", strtotime($start_date));;
+            $request->start_date = $start_date;
+        }
+        if (!$request->has('end_date') || !$request->filled('end_date')) {
+            $end_date = Carbon::today()->addDay(1)->format('Y-m-d');
+            $end_display = Carbon::today()->format('d-m-Y');
+            $request->end_date = $end_date;
+        }
+        $students = $this->attendanceService->getAttendanceSummary($request);
 
-         $begin = new DateTime($request->start_date);
-         $end = new DateTime($request->end_date);
-         $interval = DateInterval::createFromDateString('1 day');
-         $period = new DatePeriod($begin, $interval, $end);
-         $final = [];
-         foreach ($students as $student) {
-               $final[$student->id] = [
-                 "name" => $student->name,
-             ];
-               foreach ($period as $dt) {
-                 $attendance = null;
-                 if (isset($student['attendances'])) {
-                     $attendance = $student->attendances->filter(function ($att) use($dt) {
-                         return $att->created_at->format('Y-m-d') == $dt->format('Y-m-d');
-                     })->first();
-                 }
-                 $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
-             }
-         }
+        $begin = new DateTime($request->start_date);
+        $end = new DateTime($request->end_date);
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($begin, $interval, $end);
+        $final = [];
+        foreach ($students as $student) {
+            $final[$student->id] = [
+                "name" => $student->name,
+            ];
+            foreach ($period as $dt) {
+                $attendance = null;
+                if (isset($student['attendances'])) {
+                    $attendance = $student->attendances->filter(function ($att) use ($dt) {
+                        return $att->created_at->format('Y-m-d') == $dt->format('Y-m-d');
+                    })->first();
+                }
+                $final[$student->id]['attendances'][$dt->format('Y-m-d')] = $attendance ? $attendance->present : null;
+            }
+        }
 
         return view('attendance.attandence-summary', compact('final', 'start_display', 'end_display', 'students', 'period'));
-     }
+    }
 
-     public function teacherAttendance(Request $request)
-     {
-         $date = $request->start_date;
+    public function teacherAttendance(Request $request)
+    {
+        $date = $request->start_date;
 
-         $users = StuffAttendance::with('stuff')
-             ->where('role', 'teacher')
-             ->where('school_id', Auth::user()->school_id)
-             ->whereDate('created_at', '=', $date ? $date : Carbon::now())
-             ->get();
+        $users = StuffAttendance::with('stuff')
+            ->where('role', 'teacher')
+            ->where('school_id', Auth::user()->school_id)
+            ->whereDate('created_at', '=', $date ? $date : Carbon::now())
+            ->get();
 
-        return view('attendance.teacher-attendance-summary', compact('users','date'));
-     }
+        return view('attendance.teacher-attendance-summary', compact('users', 'date'));
+    }
 
-     public function absentExport($class_number, $section_name, $section_id)
-     {
-         $date = carbon::today()->format('d_m_y');
-         return Excel::download(new AbsentExport($section_id), 'Absent_Report-' . $date . '-class-' . $class_number . '-section-' . $section_name . '.xls');
-     }
+    public function absentExport($class_number, $section_name, $section_id)
+    {
+        $date = carbon::today()->format('d_m_y');
+        return Excel::download(new AbsentExport($section_id), 'Absent_Report-' . $date . '-class-' . $class_number . '-section-' . $section_name . '.xls');
+    }
 }

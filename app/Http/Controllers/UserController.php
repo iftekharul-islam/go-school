@@ -280,11 +280,23 @@ class UserController extends Controller
         $studentSections = Section::with('class')
         ->whereIn('class_id', $studentClasses)
         ->get();
+
+        $guardians = User::Guardian()
+        ->where('active', 1)
+        ->get();
+
+        if (!$guardians) {
+
+            return redirect()->route('admin.home')->with('error', __('text.guardian_add_notification'));
+        }
+
         $departments = Department::where('school_id', $user->school_id)->get();
 
-        $adminAccessDepartment = Department::where('school_id', $user->school_id)->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))->get();
+        $adminAccessDepartment = Department::where('school_id', $user->school_id)
+            ->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))
+            ->get();
 
-        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections'));
+        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections', 'guardians'));
 
     }
 

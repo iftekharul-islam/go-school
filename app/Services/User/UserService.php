@@ -2,6 +2,7 @@
 
 namespace App\Services\User;
 
+use App\Discount;
 use App\Events\NewUserRegistered;
 use App\User;
 use App\StudentInfo;
@@ -185,6 +186,16 @@ class UserService
         return $teachers;
     }
 
+    public function getGuardians()
+    {
+        return $this->user->with('school')
+            ->where('school_id', auth()->user()->school_id)
+            ->where('role', 'guardian')
+            ->where('active', 1)
+            ->orderBy('name', 'asc')
+            ->paginate(40);
+    }
+
     public function getAccountants()
     {
         return $this->user->with('school')
@@ -234,7 +245,7 @@ class UserService
 
     public function getUserByUserCode($user_code)
     {
-        return User::with('section', 'studentInfo')
+        return User::with('section', 'studentInfo', 'studentInfo.guardian')
             ->where('student_code', $user_code)
             ->firstOrFail();
     }
@@ -304,6 +315,7 @@ class UserService
             'group' => (!empty($request->get('group'))) ? $request->get('group') : '',
             'birthday' => $request->get('birthday'),
             'religion' => $request->get('religion'),
+            'guardian_id' => $request->get('guardian_id'),
             'guardian_name' => $request->get('guardian_name'),
             'guardian_phone_number' => $request->get('guardian_phone_number'),
             'father_name' => $request->get('father_name'),
@@ -345,17 +357,85 @@ class UserService
         $tb->phone_number = $request->phone_number;
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
-        $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
-        $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : null ;
-
-        if ('teacher' == $role) {
-            $tb->section_id = (0 != $request->class_teacher_section_id) ? $request->class_teacher_section_id : 0;
-        }
         $tb->save();
 
         // Store default data on attendance table for a new user
         event(new NewUserRegistered($tb));
 
         return $tb;
+    }
+
+    /**
+     * @param $student_id
+     * @return array
+     */
+    public function feeSummary($student_id)
+    {
+        $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $student_id)->first();
+
+        $total_amount = 0;
+        $total_fine = 0;
+        $total_discount = 0;
+        $total_paid = 0;
+
+        if (!empty($student)) {
+
+            foreach ($student->section->class->feeMasters as $fee_master) {
+
+                $total_amount = $total_amount + $fee_master->amount;
+
+                $total_fee_paid = 0;
+
+                $paid_amount = 0;
+
+                foreach ($fee_master->transactions as $transaction) {
+
+                    if ($student->id === $transaction->student_id) {
+
+                        $total_fee_paid = $total_fee_paid + $transaction['amount'] + $transaction['discount'] - $transaction['fine'];
+                    }
+
+                    if (count($fee_master->transactions) != 0) {
+
+                        $count = count($transaction->feeMasters);
+
+                        if ($student->id === $transaction->student_id) {
+
+                            if ($count == 1) {
+
+                                $paid_amount = $paid_amount + $transaction['amount'] - $transaction['fine'] + $transaction['discount'];
+                                $total_fine = $total_fine + $transaction['fine'];
+                                $total_discount = $total_discount + $transaction['discount'];
+                                $total_paid = $total_paid + $transaction['amount'];
+
+                            } else {
+
+                                $paid_amount = $paid_amount + ($transaction['amount'] / $count) + ($transaction['discount'] / $count) - ($transaction['fine'] / $count);
+                                $total_fine = $total_fine + $transaction['fine'] / $count;
+                                $total_discount = $total_discount + $transaction['discount'] / $count;
+                                $total_paid = $total_paid + $transaction['amount'] / $count;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+        $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
+
+        return $data = [
+            'totalAmount' => $total_amount,
+            'totalFine' => $total_fine,
+            'totalDiscount' => $total_discount,
+            'totalPaid' => $total_paid,
+            'totalFeePaid' => $total_fee_paid,
+            'student' => $student,
+            'discounts' => $discounts,
+            'paidAmount' => $paid_amount,
+        ];
     }
 }

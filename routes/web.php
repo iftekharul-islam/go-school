@@ -41,7 +41,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     }
     //Access for All authentic user
     Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
-    Route::get('syllabus-list', 'SyllabusController@syllabusForStudentTeaher')->name('syllabus');
+    Route::get('syllabus-list', 'SyllabusController@syllabusForStudentTeacher')->name('syllabus');
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
     Route::get('user/{user_code}', 'UserController@show')->name('user.show');
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
@@ -49,6 +49,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::patch('user/update-staff-information/{id}', 'UserController@updateStaffInformation')->name('update-staff-information');
     Route::get('user/config/change_password', 'UserController@changePasswordGet');
     Route::post('user/config/change_password', 'UserController@changePasswordPost');
+    Route::get('notices-and-events', 'NoticeController@index');
 
     Route::post('students/import', 'UserController@importStudents')->name('students.import');
 
@@ -94,7 +95,6 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
-        Route::get('notices-and-events', 'NoticeController@index');
         Route::get('user/notifications/{id}', 'NotificationController@index');
         Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
@@ -204,6 +204,11 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('routine', 'RoutineController@index')->name('routines');
     });
 
+    Route::group(['prefix' => 'guardian', 'middleware' => 'guardian'], function () {
+        Route::get('/home', 'GuardianHomeController')->name('guardian.home');
+        Route::get('my-child', 'GuardianController@myChild')->name('child');
+        Route::get('show/{id}', 'GuardianController@showByChildId')->name('child.show');
+    });
     // Admin role routes
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('/home', 'HomeController@index')->name('admin.home');
@@ -383,6 +388,11 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('new-librarian','UserController@createLibrarian');
         Route::get('new-accountant','UserController@createAccountant')->name('new.accountant');
         Route::get('new-staff','UserController@createStaff')->name('new.staff');
+
+        Route::get('guardians', 'GuardianController@index')->name('all.guardian');
+        Route::get('guardian/create','GuardianController@create')->name('create.guardian');
+        Route::post('guardian/store', 'GuardianController@store')->name('store.guardian');
+        Route::get('guardian/edit/{id}', 'GuardianController@edit')->name('edit.guardian');
 
         Route::prefix('school')->name('school.')->group(function () {
             Route::post('add-class', 'MyClassController@store');

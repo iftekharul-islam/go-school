@@ -156,14 +156,13 @@ class SyllabusController extends Controller
         return back()->with('status', 'Syllabus created successfully');
     }
 
-    public function syllabusForStudentTeaher()
+    public function syllabusForStudentTeacher()
     {
-        $syllabuses  = '';
         $class_id = null;
         $user = Auth::user();
         if ($user->role == 'student') {
             $user->load('section.class');
-            $class_id = !empty($user['section']['class']) ? $user['section']['class']['id'] : null;
+            $class_id = $user['section']['class']['id'] ?? null;
         }
 
         $syllabuses = Syllabus::with('myclass')
@@ -175,6 +174,6 @@ class SyllabusController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(30);
             
-        return view('syllabus.syallabus-for-student-teacher', compact('syllabuses'));
+        return view('syllabus.syllabus_for_student_teacher', compact('syllabuses'));
     }
 }

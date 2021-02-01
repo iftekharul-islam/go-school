@@ -6,11 +6,11 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Course</th>
-                    <th>Course Teacher</th>
-                    <th>Grade</th>
-                    <th>Total Marks</th>
-                    <th>Details</th>
+                    <th>{{ __('text.course') }}</th>
+                    <th>{{ __('text.course_teacher') }}</th>
+                    <th>{{ __('text.Grades') }}</th>
+                    <th>{{ __('text.total_mark') }}</th>
+                    <th>{{ __('text.Details') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -103,9 +103,9 @@
                 printWindow.document.write('<link href="{{url('css/app.css')}}" rel="stylesheet">');
                 printWindow.document.write('</head><body>');
                 printWindow.document.write('<div class="container-fluid"><div class="col-md-12"><h2 style="text-align:center;">{{Auth::user()->school->name}}</h2><h4 style="text-align:center;">Result Card</h4>');
-                printWindow.document.write('<h4>Student Name: {{$studentName}}</h4>');
-                printWindow.document.write('<h4>Class: {{$classNumber}} <span>Section: {{$sectionNumber}}</span></h4>');
-                printWindow.document.write('<h3>Exam Name: {{$exam->exam_name}}</h3>');
+                printWindow.document.write('<h4>Student Name: {{ $studentName ?? ''}}</h4>');
+                printWindow.document.write('<h4>Class: {{ $classNumber ?? ''}} <span>Section: {{ $sectionNumber ?? ''}}</span></h4>');
+                printWindow.document.write('<h3>Exam Name: {{ $exam->exam_name }}</h3>');
                 printWindow.document.write(tableContent);
                 printWindow.document.write('</div></div></body></html>');
                 printWindow.document.close();
@@ -114,5 +114,5 @@
         </script>
     @endforeach
 @else
-    No related data
+    {{ __('text.No Related Data Found') }}
 @endif

@@ -2,12 +2,12 @@
   <thead>
   <tr>
     <th>#</th>
-    <th>Course Name</th>
-    <th>Room Number</th>
-    <th>Class Time</th>
-    <th>Course Teacher</th>
+    <th>{{ __('text.course_name') }}</th>
+    <th>{{ __('text.room_number') }}</th>
+    <th>{{ __('text.class_time') }}</th>
+    <th>{{ __('text.course_teacher') }}</th>
     @if(Auth::user()->role == 'admin')
-        <th>Action</th>
+        <th>{{ __('text.Action') }}</th>
     @endif
   </tr>
   </thead>

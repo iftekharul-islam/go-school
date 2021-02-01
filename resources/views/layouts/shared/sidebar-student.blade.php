@@ -122,33 +122,34 @@
                 @if ($role == 'student')
                     <li class="nav-item">
                         <a href="{{ url('student/attendances/0/' . Auth::user()->id . '/0') }}" class="nav-link">
-                            <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
+                            <i class="far fa-calendar-check"></i><span>{{ __('text.my_attendance') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('student/courses/0/'.Auth::user()->section_id) }}"
                            class="nav-link {{ (request()->is('student/courses/0/'.Auth::user()->section_id)) ? 'menu-active' : '' }}">
-                            <i class="fas fa-book-open"></i><span>My Courses</span></a>
+                            <i class="fas fa-book-open"></i><span>{{ __('text.my_course') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('student/grades/'.Auth::user()->id) }}"
                            class="nav-link {{ (request()->is('student/grades/'.Auth::user()->id)) ? 'menu-active' : '' }}">
-                            <i class="fas fa-poll"></i><span>My Grade</span></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="{{ url('student/notices-and-events') }}"
-                           class="nav-link {{ (request()->is('student/notices-and-events')) ? 'menu-active' : '' }}"><i
-                                class="fas fa-exclamation-circle"></i><span>Events & Notices</span></a>
+                            <i class="fas fa-poll"></i><span>{{ __('text.my_grade') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ url('student/user/notifications/'.\Auth::user()->id) }}"
                            class="nav-link {{ (request()->is('student/user/notifications/'.\Auth::user()->id)) ? 'menu-active' : '' }}">
-                            <i class="fas fa-envelope-open"></i><span>Messages</span></a>
+                            <i class="fas fa-envelope-open"></i><span>{{ __('text.message') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ $ac == 1 ? 'menu-active' : '' }}"
                            href="{{ route('fees.summary') }}">
-                            <i class="fas fa-cash-register"></i><span>Fees Summary</span></a>
+                            <i class="fas fa-cash-register"></i><span>{{ __('text.fees_summary') }}</span></a>
+                    </li>
+                @endif
+                @if(in_array($role, ['student', 'guardian']))
+                    <li class="nav-item">
+                        <a href="{{ url('notices-and-events') }}"
+                           class="nav-link {{ (request()->is('notices-and-events')) ? 'menu-active' : '' }}"><i
+                                class="fas fa-exclamation-circle"></i><span>{{ __('text.event_notice') }}</span></a>
                     </li>
                 @endif
 
@@ -227,6 +228,13 @@
                 @endif
 
                 @if ($role == 'admin')
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link {{ (request()->routeIs('all.guardian')) || (request()->routeIs('create.guardian')) ? 'menu-active' : '' }}"
+                           href="{{ route('all.guardian') }}">
+                            <i class="far fa-question-circle">
+                            </i><span>{{ __('text.guardians') }}</span>
+                        </a>
+                    </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="#" class="nav-link"><i
                                 class="fa fa-building"></i><span>{{__('text.Department')}}</span></a>
@@ -539,6 +547,15 @@
                            href="{{ route('class.schedule') }}">
                             <i class="fas fa-globe"></i>
                             </i><span>{{ __('text.online_class_schedule') }}</span>
+                        </a>
+                    </li>
+                @endif
+                @if ($role == 'guardian')
+                    <li class="nav-item sidebar-nav-item">
+                        <a class="nav-link {{ (request()->routeIs('child')) ? 'menu-active' : '' }}"
+                           href="{{ route('child') }}">
+                            <i class="fas fa-child"></i>
+                            </i><span>{{ __('text.my_child') }}</span>
                         </a>
                     </li>
                 @endif

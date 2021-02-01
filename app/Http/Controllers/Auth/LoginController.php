@@ -72,6 +72,9 @@ class LoginController extends Controller
             case 'librarian':
                 return 'librarian/home';
                 break;
+            case 'guardian':
+                return 'guardian/home';
+                break;
             default:
                 return '/login';
                 break;

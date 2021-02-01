@@ -14,6 +14,7 @@ class StudentInfo extends Model
         'group',
         'birthday',
         'religion',
+        'guardian_id',
         'father_name',
         'father_phone_number',
         'father_national_id',
@@ -39,6 +40,11 @@ class StudentInfo extends Model
      */
     public function student()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function guardian()
+    {
+        return $this->belongsTo(User::class, 'guardian_id', 'id');
     }
 }

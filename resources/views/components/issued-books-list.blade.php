@@ -19,7 +19,7 @@
       <tr>
         <td>{{($loop->index + 1)}}</td>
         <td>{{$book->title}}</td>
-        <td>{{$book->book->book_code}}</td>
+        <td>{{isset($book->book) ? $book->book->book_code : '' }}</td>
         <td>{{$book->type}}</td>
         <td>{{$book->name}}</td>
         <td>{{$book->student_code}}</td>
