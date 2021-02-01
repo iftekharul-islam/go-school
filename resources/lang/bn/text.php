@@ -361,4 +361,5 @@ return [
     'online_class_summary' => 'অনলাইন ক্লাসের সংক্ষিপ্তসার',
     'student_course' => 'শিক্ষার্থীদের কোর্স',
     'guardian_add_notification' => 'দয়া করে প্রথমে অভিভাবক যুক্ত করুন !!!',
+    'save_as_returned' => 'ফেরত হিসাবে সংরক্ষণ',
 ];

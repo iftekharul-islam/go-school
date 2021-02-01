@@ -10,11 +10,11 @@ class Issuedbook extends Model
 
     public function book()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Book::class, 'book_id', 'id');
     }
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'student_code', 'student_code');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

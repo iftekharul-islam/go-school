@@ -228,7 +228,7 @@ class AttendanceService
 
             foreach ($attendances as $attendance) {
                 if ($attendance->present == 1) {
-                    $events[] = \Calender::event("Present", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'blue']);
+                    $events[] = \Calendar::event("Present", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'blue']);
                 } else if ($attendance->present == 3) {
                     $events[] = \Calendar::event("Late Present", false, $attendance->created_at, $attendance->updated_at, 0, ['color' => 'salmon']);
                 } else if ($attendance->present == 2) {
