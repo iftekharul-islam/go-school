@@ -377,16 +377,14 @@ class UserService
         $total_fine = 0;
         $total_discount = 0;
         $total_paid = 0;
+        $total_fee_paid = 0;
+        $paid_amount = 0;
 
         if (!empty($student)) {
 
             foreach ($student->section->class->feeMasters as $fee_master) {
 
                 $total_amount = $total_amount + $fee_master->amount;
-
-                $total_fee_paid = 0;
-
-                $paid_amount = 0;
 
                 foreach ($fee_master->transactions as $transaction) {
 
