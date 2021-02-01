@@ -8,7 +8,7 @@
                             @if(!empty($message->teacher->pic_path))
                                 <img src="{{url($message->teacher->pic_path)}}" data-src="{{url($message->teacher->pic_path)}}" style="border-radius: 50%;" width="50px" height="50px">
                             @else
-                                @if(strtolower($message->teacher->gender) == 'male')
+                                @if(isset($message->teacher->gender) && strtolower($message->teacher->gender) == 'male')
                                     <img src="{{asset('template/img/user-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
                                 @else
                                     <img src="{{asset('template/img/female-default.png')}}" style="border-radius: 50%;" width="50px" height="50px">
