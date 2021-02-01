@@ -15,6 +15,6 @@ class Issuedbook extends Model
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'student_code', 'student_code');
     }
 }
