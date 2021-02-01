@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $data->section->class->class_number }}</td>
                                 <td>{{ $data->section->section_number }}</td>
-                                <td>{{ new_date_format($data->created_at) }}</td>
+                                <td>{{ new_time_date_format($data->created_at) }}</td>
                                 <td><a href="{{ route('class.schedule.show', $data->id) }}" class="btn btn-success"><i class="fas fa-eye"></i></a></td>
                             </tr>
                         @endforeach

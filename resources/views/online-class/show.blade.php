@@ -7,9 +7,9 @@
                 {{ __('text.online_class_summary') }}
             </h3>
             <ul>
-                <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                <li> <a href="{{ URL::previous() }}">
                         Back &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
                 </li>
                 <li class="text-capitalize">{{ __('text.online_class_summary') }}</li>
             </ul>
@@ -19,12 +19,13 @@
         <div>
             @if (!empty($data))
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="card dashboard-card-three equal-size-body">
-                            <div class="card-body" >
+                            <div class="card-body msg-text">
                                 <h4>Students of <b>Class:</b> {{ $data->section->class->class_number}}
                                     <b>Section:</b> {{ $data->section->section_number }} <br>
-                                <b>Message: </b> <span>{{ urldecode($data->message) }}</span>
+                                <b>Message: </b> <p></p>
+                                <a href="" target="_blank">Class link</a>
                                 <table class="table table-bordered mt-3">
                                     <thead>
                                         <th>{{ __('text.Date') }}</th>
@@ -33,7 +34,7 @@
                                     <tbody>
                                     @foreach($data->classSummary as $item)
                                         <tr>
-                                            <td>{{ \Illuminate\Support\Carbon::parse($item->created_at)->format('d-m-Y h:i A') }}</td>
+                                            <td>{{ new_time_date_format($item->created_at) }}</td>
                                             <td>{{ $item->total_sms }}</td>
                                         </tr>
                                     @endforeach
@@ -57,3 +58,15 @@
     </div>
 
 @endsection
+@push('customjs')
+    <script>
+
+        var data = decodeURIComponent('<?php echo $data->message; ?>');
+        var message = data.replace(/([+])/g, ' ');
+        var urls = message.match(/\b(http|https)?(:\/\/)?(\S*)\.(\w{2,4})(.*)/g);
+
+        $('.msg-text p').html(message);
+        $('.msg-text a').attr('href', urls);
+
+    </script>
+@endpush

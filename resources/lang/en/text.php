@@ -313,7 +313,7 @@ return[
     'help' => 'Help',
     'online_training' => 'Online Traning',
     'user_manual' => 'User Manual',
-    'total_sms' => 'Total sent SMS',
+    'total_sms' => 'Total SMS sent',
     'last_month' => 'Last Month',
     'designation' => 'Designation',
     'grade_system' => 'Grade System',
