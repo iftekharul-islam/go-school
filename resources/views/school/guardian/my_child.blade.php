@@ -5,13 +5,13 @@
 @section('content')
     <div class="breadcrumbs-area">
         <ul>
-            <h3>{{ __('text.guardians') }}</h3>
+            <h3>{{ __('text.my_child') }}</h3>
             <li>
                 <a href="{{ URL::previous() }}">{{ __('text.Back') }}
                     &nbsp;|</a>
                 <a href="{{ (auth()->user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>{{ __('text.guardians') }}</li>
+            <li>{{ __('text.my_child') }}</li>
         </ul>
     </div>
     @if (session('status'))

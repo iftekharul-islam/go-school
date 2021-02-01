@@ -36,7 +36,7 @@ class OnlineClassScheduleController extends Controller
     {
         $items = OnlineClassSchedule::with('section.class')->get();
 
-        return view('online-class.index', compact('items'));
+        return view('online_class.index', compact('items'));
     }
 
     /**
@@ -54,7 +54,7 @@ class OnlineClassScheduleController extends Controller
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         $students = $this->userService->getSectionStudentsWithSchool($request->section_number);
 
-        return view('online-class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id'));
+        return view('online_class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id'));
     }
 
     /**
@@ -109,7 +109,7 @@ class OnlineClassScheduleController extends Controller
 
         $data = OnlineClassSchedule::with('classSummary', 'section.class')->findOrFail($id);
 
-        return view('online-class.show', compact('data'));
+        return view('online_class.show', compact('data'));
 
     }
 
