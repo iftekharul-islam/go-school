@@ -30,7 +30,6 @@ class NotificationController extends Controller
             {
                 $message_data = Notification::findOrFail($message->id);
                 $message_data->active = 0;
-                $message_data->updated_at = now();
                 $message_data->save();
             }
 

@@ -20,6 +20,7 @@ class OnlineClassScheduleController extends Controller
 {
 
     protected $userService;
+
     /**
      * OnlineClassScheduleController constructor.
      * @param UserService $userService
@@ -47,18 +48,15 @@ class OnlineClassScheduleController extends Controller
      */
     public function create(Request $request)
     {
-        if (empty($request->section_id)) {
-
-            return back()->with('failed', __('text.section_name_notification'));
-        }
+        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
 
         $data = Section::with('class')->find($request->section_id);
-        $class_number = $data->class->class_number ?? '';
-        $section_id = $data->id ?? '';
-        $section_number = $data->section_number ?? '';
 
-        $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
-        $students = $this->userService->getSectionStudentsWithSchool($section_id);
+        $class_number = isset($data) ? $data->class->class_number : '';
+        $section_id = isset($data) ? $data->id : '';
+        $section_number = isset($data) ? $data->section_number : '';
+        $students = isset($data) ? $this->userService->getSectionStudentsWithSchool($section_id) : [];
+
 
         return view('online_class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id'));
     }
@@ -75,7 +73,7 @@ class OnlineClassScheduleController extends Controller
 
         if ($school->online_class_sms == false) {
 
-            return redirect()->route('class.schedule')->with('failed', __('text.online_sms_notification'));
+            return redirect()->route('class.schedule')->withErrors(__('text.online_sms_notification'));
 
         }
 
@@ -127,7 +125,7 @@ class OnlineClassScheduleController extends Controller
     public function generateTinyUrl(UrlShortenerManager $shortener, Request $request)
     {
 
-        $response = isset($request->tiny_url) ? $shortener->shorten(urldecode($request->tiny_url))  : '' ;
+        $response = isset($request->tiny_url) ? $shortener->shorten(urldecode($request->tiny_url)) : '';
 
         return response()->json(['status' => 200, 'url' => urlencode($response)]);
     }

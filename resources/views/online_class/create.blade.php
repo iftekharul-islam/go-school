@@ -27,10 +27,6 @@
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
-        @elseif (session('failed'))
-            <div class="alert alert-danger">
-                {{ session('failed') }}
-            </div>
         @endif
         @if ($errors->any())
             <div class="alert alert-danger">
