@@ -16,10 +16,9 @@
             </h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    <a href="{{ URL::previous() }}">
                         {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;"
-                       href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
                 <li>{{ __('text.create_schedule') }}</li>
             </ul>
@@ -59,7 +58,7 @@
                             </div>
                             <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                 <label>{{ __('text.Section') }}</label>
-                                <select class="select2" id="section" name="section_number"></select>
+                                <select class="select2" id="section" name="section_number" onchange="getSectionValue(this.value)"></select>
                             </div>
                             <div class="col-12 form-group mg-t-2 float-right">
                                 <button type="submit"
@@ -320,8 +319,8 @@
                         }
                     }
 
-                    function getSections(item) {
-                        let selectedClass = item;
+                    function getSections(class_id) {
+                        let selectedClass = class_id;
                         let classes = {!! json_encode($classes->toArray()) !!};
                         let sections = [];
                         classes.forEach((cls) => {
@@ -331,11 +330,15 @@
                         });
 
                         $('#section').empty();
+                        $('#section').append($("<option />").val('').text("Select a section"));
                         sections.forEach((sec) => {
                             $('#section').append($("<option />").val(sec.id).text(sec.section_number));
-                            $('#section_id').val(sec.id);
                         });
-                    };
+                    }
+
+                    function getSectionValue(section_id) {
+                        $('#section_id').val(section_id);
+                    }
                 </script>
 
     @endpush

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendSmsToStudents;
-use App\Notification as Notification;
 use App\Http\Resources\NotificationResource;
+use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -14,24 +14,27 @@ use Illuminate\Support\Facades\Auth;
 class NotificationController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param $student_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($id)
+    public function index($student_id)
     {
-        $msg = Notification::with('teacher.department')->where('student_id',$id)->orderBy('created_at','desc')->paginate(10);
-        foreach($msg as $m){
-            if ($m->active == 1)
+        $messages = Notification::with('teacher.department')
+            ->where('student_id', $student_id)
+            ->orderBy('created_at','desc')
+            ->paginate(config('pagination.default_pagination'));
+
+        foreach($messages as $message){
+
+            if ($message->active == 1)
             {
-                $message = Notification::findOrFail($m->id);
-                $message->active = 0;
-                $message->updated_at = now();
-                $message->save();
+                $message_data = Notification::findOrFail($message->id);
+                $message_data->active = 0;
+                $message_data->save();
             }
 
         }
-        return view('message.index',['messages'=>$msg]);
+        return view('message.index', ['messages'=>$messages]);
     }
 
     /**

@@ -360,6 +360,9 @@ return [
     'sent_date' => 'প্রেরণের তারিখ',
     'online_class_summary' => 'অনলাইন ক্লাসের সংক্ষিপ্তসার',
     'student_course' => 'শিক্ষার্থীদের কোর্স',
-    'guardian_add_notification' => 'দয়া করে প্রথমে অভিভাবক যুক্ত করুন !!!',
+    'guardian_add_notification' => 'দয়া করে প্রথমে অভিভাবক যুক্ত করুন',
     'save_as_returned' => 'ফেরত হিসাবে সংরক্ষণ',
+    'section_name_notification' => 'একটি বিভাগের নাম নির্বাচন করুন',
+    'online_sms_notification' => 'অনলাইন এসএমএস সিস্টেম সক্ষম করুন',
+    'online_sms_success_notification' => 'অনলাইন ক্লাস এসএমএস সফলভাবে প্রেরণ করা হয়েছে',
 ];
