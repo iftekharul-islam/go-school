@@ -18,6 +18,8 @@ use LaraCrafts\UrlShortener\UrlShortenerManager;
 
 class OnlineClassScheduleController extends Controller
 {
+
+    protected $userService;
     /**
      * OnlineClassScheduleController constructor.
      * @param UserService $userService
@@ -40,19 +42,23 @@ class OnlineClassScheduleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Request $request)
     {
+        if (empty($request->section_id)) {
+
+            return back()->with('failed', __('text.section_name_notification'));
+        }
+
         $data = Section::with('class')->find($request->section_id);
         $class_number = $data->class->class_number ?? '';
-        $section_id = $request->section_id ?? '';
+        $section_id = $data->id ?? '';
         $section_number = $data->section_number ?? '';
 
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
-        $students = $this->userService->getSectionStudentsWithSchool($request->section_number);
+        $students = $this->userService->getSectionStudentsWithSchool($section_id);
 
         return view('online_class.create', compact('students', 'classes', 'class_number', 'section_number', 'section_id'));
     }
@@ -69,7 +75,7 @@ class OnlineClassScheduleController extends Controller
 
         if ($school->online_class_sms == false) {
 
-            return redirect()->route('class.schedule')->with('failed', 'Please active online sms system');
+            return redirect()->route('class.schedule')->with('failed', __('text.online_sms_notification'));
 
         }
 
@@ -95,7 +101,7 @@ class OnlineClassScheduleController extends Controller
             SendSmsToStudents::dispatch($student_id, $request->message)->delay(5);
         }
 
-        return redirect()->route('class.schedule')->with('status', 'Online class sms sent successfully');
+        return redirect()->route('class.schedule')->with('status', __('text.online_sms_success_notification'));
     }
 
     /**

@@ -359,4 +359,7 @@ return[
     'student_courses' => 'Student Courses',
     'guardian_add_notification' => 'Please add guardian first !!!',
     'save_as_returned' => 'Save as Returned',
+    'section_name_notification' => 'Please select a section name first !!!',
+    'online_sms_notification' => 'Please active online sms system !!!',
+    'online_sms_success_notification' => 'Online class sms sent successfully',
 ];
