@@ -362,4 +362,5 @@ return[
     'section_name_notification' => 'Please select a section name first',
     'online_sms_notification' => 'Please active online sms system',
     'online_sms_success_notification' => 'Online class sms sent successfully',
+
 ];

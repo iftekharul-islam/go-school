@@ -3,7 +3,6 @@ namespace App\Services\Attendance;
 
 use App\StuffAttendance;
 use App\User;
-use function foo\func;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +31,9 @@ class TeacherAttendanceService {
 
     public function getTeacherTodayAttendance()
     {
-        return StuffAttendance::whereDate('created_at', \DB::raw('CURRENT_DATE'))
+        return StuffAttendance::whereHas('stuff', function ($q){
+                $q->active();
+            })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
             ->orderBy('stuff_id', 'ASC')
@@ -42,18 +43,21 @@ class TeacherAttendanceService {
 
     public function getLibrariansTodayAttendance()
     {
-        return StuffAttendance::whereDate('created_at', \DB::raw('CURRENT_DATE'))
+        return StuffAttendance::whereHas('stuff', function ($q){
+                $q->active();
+            })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
             ->orderBy('stuff_id', 'ASC')
-            ->whereNotIn('role', ['student','teacher','admin','master'])
+            ->whereNotIn('role', ['student','teacher','admin','master','guardian'])
             ->get()
             ->unique('stuff_id');
     }
 
     public function getTeacherTotalAttendance()
     {
-        return DB::table('stuff_attendances')
-            ->select('stuff_id', DB::raw('
+        return StuffAttendance::whereHas('stuff', function ($q){
+                $q->active();
+            })->select('stuff_id', DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
             ))
@@ -65,13 +69,15 @@ class TeacherAttendanceService {
 
     public function getLibrarianTotalAttendance()
     {
-        return DB::table('stuff_attendances')
+        return StuffAttendance::whereHas('stuff', function ($q){
+                $q->active();
+            })
             ->select('stuff_id', DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
             ))
             ->where('school_id', Auth::user()->school_id)
-            ->whereNotIn('role', ['student','teacher','admin','master'])
+            ->whereNotIn('role', ['student', 'teacher', 'admin', 'master', 'guardian'])
             ->groupBy('stuff_id')
             ->get();
     }

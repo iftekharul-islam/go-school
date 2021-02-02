@@ -540,9 +540,8 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @param UpdateUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateUserRequest $request)
     {
@@ -567,7 +566,14 @@ class UserController extends Controller
                 $tb->shift_id = $request->shift_id;
             }
             if ($tb->save()) {
+
                 if ($request->user_role == 'student') {
+
+                    if (isset($request->section)) {
+                        // Update data on attendance table for a student
+                        event(new NewUserRegistered($tb));
+                    }
+
                     if (!empty($tb['id'])) {
                         $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
                         $info->student_id = $tb->student_code;

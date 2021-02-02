@@ -71,7 +71,9 @@
                             <td>0</td>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
-                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
+                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}"
+                                   role="button"
+                                   class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
                         @endif
                     </tr>
                 @endforeach
@@ -83,11 +85,13 @@
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$teacher->student_code}}</td>
-                        <td><span class="badge badge-primary attdState">{{ trans_choice('text.Present',2) }}</span>&nbsp;&nbsp;{{ $teacher->name }}</td>
+                        <td><span class="badge badge-primary attdState">{{ trans_choice('text.Present',2) }}</span>&nbsp;&nbsp;{{ $teacher->name }}
+                        </td>
                         <td>{{ ucfirst($teacher->role) }}</td>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" checked>
+                                <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}"
+                                       aria-label="Present" checked>
                                 <label for="">&nbsp;</label>
                             </div>
                         </td>
@@ -96,8 +100,11 @@
                                 @if($at->stuff_id == $teacher->id)
                                     <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
                                     <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
+                                    @break
                                 @else
-                                    @continue
+                                    <td>0</td>
+                                    <td>0</td>
+                                    @break
                                 @endif
                             @endforeach
                         @else
@@ -105,7 +112,8 @@
                             <td>0</td>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
-                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$teacher->id)}}" role="button" class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
+                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$teacher->id)}}" role="button"
+                                   class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
                         @endif
                     </tr>
                 @endforeach
@@ -114,18 +122,21 @@
         </table>
     </div>
     <div class="float-right mb-4">
-        <a href="{{ URL::previous() }}" class="button button--cancel mr-3" role="button"><i class="fas fa-window-close mr-2"></i>{{ __('text.Cancel') }}</a>
+        <a href="{{ URL::previous() }}" class="button button--cancel mr-3" role="button"><i
+                class="fas fa-window-close mr-2"></i>{{ __('text.Cancel') }}</a>
         @if (count($attendances) > 0)
-            <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Update') }}</button>
+            <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Update') }}
+            </button>
         @else
-            <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Submit') }}</button>
+            <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Submit') }}
+            </button>
         @endif
     </div>
 </form>
 <script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
 <script>
     $('input[type="checkbox"]').change(function () {
         var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
