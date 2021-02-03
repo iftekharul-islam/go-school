@@ -361,7 +361,7 @@ return[
     'section_name_notification' => 'Please select a section name first',
     'online_sms_notification' => 'Please active online sms system',
     'online_sms_success_notification' => 'Online class sms sent successfully',
-    'students_under_classes' => 'All Students Under My Classes',
-    'my_students' => 'My Students',
+    'students_under_classes' => 'All students under my classes',
+    'my_students' => 'My students',
 
 ];

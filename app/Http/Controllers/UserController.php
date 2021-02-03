@@ -273,6 +273,9 @@ class UserController extends Controller
     public function createStudent()
     {
         $user = Auth::user();
+
+        event(new UserRegistered($user));
+
         $studentClasses = Myclass::query()
         ->where('school_id', $user->school->id)
         ->pluck('id');
@@ -577,9 +580,7 @@ class UserController extends Controller
             }
 
             if ($request->user_role != 'student') {
-
                 return back()->with('status', $request->name . ' User Updated');
-
             }
 
             if (isset($request->section)) {

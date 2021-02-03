@@ -43,12 +43,12 @@ class TeacherAttendanceService {
 
     public function getLibrariansTodayAttendance()
     {
-        return StuffAttendance::whereHas('stuff', function ($q){
-                $q->active();
-            })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
+        return StuffAttendance::whereHas('stuff', function ($q) {
+            $q->active();
+        })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->where('school_id', Auth::user()->school_id)
             ->orderBy('stuff_id', 'ASC')
-            ->whereNotIn('role', ['student','teacher','admin','master','guardian'])
+            ->whereNotIn('role', ['student', 'teacher', 'admin', 'master', 'guardian'])
             ->get()
             ->unique('stuff_id');
     }
