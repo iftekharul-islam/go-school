@@ -82,7 +82,7 @@ class UsersImport implements ToCollection, WithHeadingRow
                 'student_indentification' => isset($row['student_indentification']) ? $row['student_indentification'] : '',
                 'roll_number' => isset($row['roll_number']) ? $row['roll_number'] : null,
                 'version' => $row['version'],
-                'shift' => isset($row['shift']) ? $row['shift'] : '',
+                'shift' => $row['shift'] ?? 'n/a',
                 'group' => isset($row['group']) ? $row['group'] : '',
                 'birthday' => is_string($row['birthday']) ? Carbon::createFromFormat('d/m/Y', $row['birthday']) : Date::excelToDateTimeObject($row['birthday']),
                 'guardian_name' => $row['guardian_name'],

@@ -218,9 +218,9 @@
 
                                         <select id="shift" class="form-control"
                                                 name="shift">
-                                            <option selected="selected">N/A</option>
-                                            <option>Morning</option>
-                                            <option>Day</option>
+                                            <option value="n/a" selected>N/A</option>
+                                            <option value="morning" >Morning</option>
+                                            <option value="day">Day</option>
                                         </select>
 
                                         @if ($errors->has('shift'))
@@ -240,8 +240,8 @@
 
                                         <select id="version" class="form-control"
                                                 name="version">
-                                            <option selected="selected">Bangla</option>
-                                            <option>English</option>
+                                            <option value="bangla" selected>Bangla</option>
+                                            <option value="english">English</option>
                                         </select>
 
                                         @if ($errors->has('version'))
@@ -276,7 +276,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('group') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="group"
-                                               class=" control-label false-padding-bottom">{{ __('text.group') }} (Optional)</label>
+                                               class=" control-label false-padding-bottom">{{ __('text.group') }}</label>
 
                                         <input id="group" type="text" class="form-control"
                                                name="group"
@@ -335,15 +335,9 @@
 
                                         <select id="blood_group" class="form-control"
                                                 name="blood_group">
-                                            <option selected="selected">N/A</option>
-                                            <option>A+</option>
-                                            <option>A-</option>
-                                            <option>B+</option>
-                                            <option>B-</option>
-                                            <option>AB+</option>
-                                            <option>AB-</option>
-                                            <option>O+</option>
-                                            <option>O-</option>
+                                            @foreach($blood_groups as $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
                                         </select>
 
                                         @if ($errors->has('blood_group'))
@@ -709,7 +703,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="guardian_name"
-                                               class=" control-label false-padding-bottom">Guardian's Name<label class="text-danger">*</label></label>
+                                               class=" control-label false-padding-bottom">{{ __('text.guardian_name') }}<label class="text-danger">*</label></label>
 
                                         <input id="guardian_name" type="text"
                                                class="form-control guardian-name" name="guardian_name"
@@ -728,7 +722,7 @@
                                 <div class="false-padding-bottom-form form-group{{ $errors->has('guardian_phone_number') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <label for="guardian_phone_number"
-                                               class="control-label false-padding-bottom">Guardian's Phone Number<label
+                                               class="control-label false-padding-bottom">{{ __('text.guardian_phone_number') }}<label
                                                 class="text-danger">*</label></label>
                                         <input id="guardian_phone_number"  type="text"
                                                class="form-control g-phone-number"

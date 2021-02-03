@@ -55,7 +55,9 @@ class AttendanceService
 
     public function getTodaysAttendanceBySectionId($section_id)
     {
-        return Attendance::where('section_id', $section_id)
+        return Attendance::whereHas('student', function ($q){
+                $q->active();
+            })->where('section_id', $section_id)
             ->whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->orderBy('created_at', 'desc')
             ->get()
@@ -76,13 +78,13 @@ class AttendanceService
 
     public function getAllAttendanceBySecAndExam($section_id)
     {
-        return \DB::table('attendances')
-            ->select('student_id', \DB::raw('
+        return Attendance::whereHas('student', function ($q){
+                $q->active();
+            })->select('student_id', \DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent,
                       COUNT(CASE WHEN present=2 THEN present END) AS totalEscaped'
-            ))
-            ->where('section_id', $section_id)
+            ))->where('section_id', $section_id)
             ->groupBy('student_id')
             ->get();
     }
@@ -90,13 +92,13 @@ class AttendanceService
     public function getAllAttendanceByStudentId($student_id)
     {
         $user = User::find($student_id);
-        $data = \DB::table('attendances')
-            ->select('student_id', \DB::raw('
+        $data = Attendance::whereHas('student', function ($q){
+                $q->active();
+            })->select('student_id', \DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS total_present,
                       COUNT(CASE WHEN present=0 THEN present END) AS total_absent,
                       COUNT(CASE WHEN present=2 THEN present END) AS total_escaped'
-            ))
-            ->groupBy('student_id')
+            ))->groupBy('student_id')
             ->where('student_id', $student_id)
             ->where('section_id', $user->section_id)
             ->get();

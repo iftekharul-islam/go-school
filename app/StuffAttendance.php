@@ -8,6 +8,6 @@ class StuffAttendance extends Model
 {
     public function stuff()
     {
-        return $this->belongsTo('App\User', 'stuff_id');
+        return $this->belongsTo(User::class, 'stuff_id');
     }
 }

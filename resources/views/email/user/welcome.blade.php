@@ -1,4 +1,4 @@
-@component('mail::message')
+@component('vendor.mail.markdown.message')
 
     # Welcome to {{ config('app.name') }}
 
@@ -18,10 +18,10 @@
         Please ask site administrator to know your login access.
     @endif
 
-    @component('mail::button', ['url' => url('login')])
+    @component('vendor.mail.markdown.button', ['url' => url('login')])
         Visit site
     @endcomponent
 
-    Thanks,<br>
+    Thanks,
     {{ config('app.name') }}
 @endcomponent

@@ -41,3 +41,8 @@ function student_code_generate()
 {
     return auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
 }
+
+function blood_groups()
+{
+    return ['N/A', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+}
