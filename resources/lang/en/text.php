@@ -350,7 +350,6 @@ return[
     'quiz' => 'Quiz',
     'class_time' => 'Class Time',
     'basic_details' => 'Basic Details',
-
     'online_class_schedule' => 'Online Class Schedules',
     'create_schedule' => 'Create Schedule',
     'online_class_notification' => 'Online Class Notification',
@@ -362,5 +361,7 @@ return[
     'section_name_notification' => 'Please select a section name first',
     'online_sms_notification' => 'Please active online sms system',
     'online_sms_success_notification' => 'Online class sms sent successfully',
+    'students_under_classes' => 'All Students Under My Classes',
+    'my_students' => 'My Students',
 
 ];

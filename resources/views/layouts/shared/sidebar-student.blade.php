@@ -193,7 +193,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('teacher/my-students')) == 1 ? 'menu-active' : '' }}"
                                href="{{ route('student.list') }}">
-                                <i class="flaticon-classmates"></i> <span>My Students</span></a>
+                                <i class="flaticon-classmates"></i> <span>{{ __('text.my_students') }}</span></a>
                         </li>
                     @endif
                     @if($role == 'admin')
@@ -352,12 +352,12 @@
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('teacher/courses/'.Auth::user()->id.'/0')) ? 'menu-active' : '' }}"
                            href="{{ url('teacher/courses/'.Auth::user()->id.'/0') }}">
-                            <i class="fas fa-book-medical"></i><span>My Courses</span></a>
+                            <i class="fas fa-book-medical"></i><span>{{ __('text.my_course') }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('teacher/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}"
                            href="{{ url('teacher/attendance/'.Auth::user()->id) }}">
-                            <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
+                            <i class="far fa-calendar-check"></i><span>{{ __('text.my_attendance') }}</span></a>
                     </li>
                 @endif
 

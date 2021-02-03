@@ -365,4 +365,6 @@ return [
     'section_name_notification' => 'একটি বিভাগের নাম নির্বাচন করুন',
     'online_sms_notification' => 'অনলাইন এসএমএস সিস্টেম সক্ষম করুন',
     'online_sms_success_notification' => 'অনলাইন ক্লাস এসএমএস সফলভাবে প্রেরণ করা হয়েছে',
+    'students_under_classes' => 'আমার ক্লাসের আওতাধীন শিক্ষার্থী',
+    'my_students' => 'আমার শিক্ষার্থী',
 ];

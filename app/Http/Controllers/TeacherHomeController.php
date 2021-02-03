@@ -78,8 +78,8 @@ class TeacherHomeController extends Controller
     public function myStudent()
     {
         $teacher = Auth::user();
-        $courses_student = $this->courseService->getCoursesByTeacher($teacher->id);
+        $student_courses = $this->courseService->getCoursesByTeacher($teacher->id);
 
-        return view('school.teachers_student_list', compact('courses_student'));
+        return view('school.teachers_student_list', compact('student_courses'));
     }
 }

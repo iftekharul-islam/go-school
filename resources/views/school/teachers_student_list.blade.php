@@ -4,14 +4,14 @@
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
             <h3>
-                All Students Under My Classes
+                {{ __('text.students_under_classes') }}
             </h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">Back &nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                    <a href="{{ URL::previous() }}">{{ __('text.Back') }} &nbsp;|</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
-                <li>My Students</li>
+                <li>{{ __('text.student_list') }}</li>
             </ul>
         </div>
         <div class="row">
@@ -23,26 +23,26 @@
                                 <table class="table data-table-paginate table-bordered display text-wrap" id="myStudent">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Version</th>
-                                        <th>Course Name</th>
-                                        <th>Section</th>
-                                        <th>Class</th>
-                                        <th>Phone</th>
-                                        <th>Attendance</th>
+                                        <th>{{ __('text.Name') }}</th>
+                                        <th>{{ __('text.course_name') }}</th>
+                                        <th>{{ __('text.version') }}</th>
+                                        <th>{{ __('text.Section') }}</th>
+                                        <th>{{ __('text.Class') }}</th>
+                                        <th>{{ __('text.phone_number') }}</th>
+                                        <th>{{ __('text.attendance') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($courses_student as $course)
+                                    @foreach($student_courses as $course)
                                         @if($course['section']['users'] !== null)
                                             @foreach($course['section']['users'] as $user)
                                                 <tr>
                                                     <td> <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a></td>
-                                                    <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ $course['course_name'] }}</td>
+                                                    <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
                                                     <td>{{ ucfirst($user['section']['class']['class_number']) }} </td>
-                                                    <td>{{ ucfirst($user['phone_number']) }}</td>
+                                                    <td>{{ ucfirst($user['phone_number'] ?? 'N/A') }}</td>
                                                     <td><b><a class="btn-link text-teal" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View</a></b></td>
                                                 </tr>
                                             @endforeach
