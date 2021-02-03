@@ -102,7 +102,7 @@
                                             @foreach($feeTypes as $ft)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types" />
+                                                    <input type="checkbox" name="selected_fees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selected_fees'))) checked @endif class="fee_types" />
                                                 </td>
                                                 <td>
                                                     {{ $ft->name }}
@@ -237,7 +237,7 @@
             $('.fee-amount').removeClass('warning');
             $("[id$='_from'], [id$='_to']").removeClass('warning');
 
-            $("input[name='selectedFees[]']").each(function () {
+            $("input[name='selected_fees[]']").each(function () {
                 if($(this).is(":checked")){
                     selectedFees.push($(this).val());
                 }

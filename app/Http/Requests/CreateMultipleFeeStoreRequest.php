@@ -27,7 +27,7 @@ class CreateMultipleFeeStoreRequest extends FormRequest
         return [
             'amount' => 'required',
             'discount_amount' => 'required',
-            'selectedFees.*' => 'required|distinct|integer'
+            'selected_fees.*' => 'required|distinct|integer'
         ];
     }
 }

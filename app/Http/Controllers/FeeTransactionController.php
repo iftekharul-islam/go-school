@@ -264,9 +264,9 @@ class FeeTransactionController extends Controller
         $ft->save();
 
         #save fee types & amount
-        $selectedFees = $request->get('selectedFees');
-        for ($i = 0; $i < count($selectedFees); $i++) {
-            $fee_id = $selectedFees[$i];
+        $selected_fees = $request->get('selected_fees');
+        for ($i = 0; $i < count($selected_fees); $i++) {
+            $fee_id = $selected_fees[$i];
             $from = $request->get($fee_id . '_from') != null ? $request->get($fee_id . '_from') : '';
             $to = $request->get($fee_id . '_to') != null ? $request->get($fee_id . '_to') : '';
             $transactionItem = new TransactionItem();
