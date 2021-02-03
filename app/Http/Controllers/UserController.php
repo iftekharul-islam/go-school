@@ -273,9 +273,6 @@ class UserController extends Controller
     public function createStudent()
     {
         $user = Auth::user();
-
-        event(new UserRegistered($user));
-
         $studentClasses = Myclass::query()
         ->where('school_id', $user->school->id)
         ->pluck('id');
