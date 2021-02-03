@@ -102,7 +102,7 @@
                                             @foreach($feeTypes as $ft)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="selectedFees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selectedFees'))) checked @endif class="fee_types" />
+                                                    <input type="checkbox" name="selected_fees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selected_fees'))) checked @endif class="fee_types" />
                                                 </td>
                                                 <td>
                                                     {{ $ft->name }}
@@ -137,8 +137,8 @@
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
-                                    <label>{{ __('text.fine') }} <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control fineInput fine" name="fine" value="0" required>
+                                    <label>{{ __('text.fine') }}</label>
+                                    <input type="number" class="form-control fineInput fine" name="fine" value="0">
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
@@ -153,7 +153,7 @@
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
                                     <label>{{ __('text.discount_group') }} <span class="text-danger">*</span></label>
-                                    <input type="number" step="0.01" placeholder="" class="form-control discountInput discount" name="discountAmount" value="0" id="discountValue" style="pointer-events: none; touch-action: none;">
+                                    <input type="number" step="0.01" placeholder="" class="form-control discountInput discount" name="discount_amount" value="0" id="discountValue" style="pointer-events: none; touch-action: none;">
                                 </div>
 
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">
@@ -237,7 +237,7 @@
             $('.fee-amount').removeClass('warning');
             $("[id$='_from'], [id$='_to']").removeClass('warning');
 
-            $("input[name='selectedFees[]']").each(function () {
+            $("input[name='selected_fees[]']").each(function () {
                 if($(this).is(":checked")){
                     selectedFees.push($(this).val());
                 }
