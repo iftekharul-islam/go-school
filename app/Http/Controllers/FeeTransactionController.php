@@ -6,7 +6,6 @@ use App\Discount;
 use App\FeeMaster;
 use App\FeeTransaction;
 use App\Myclass;
-use App\Section;
 use App\StudentInfo;
 use App\Configuration;
 use App\Services\User\UserService;
@@ -19,9 +18,7 @@ use App;
 use App\Events\ReceiptGenerate;
 use App\TransactionItem;
 use PDF;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CreateMultipleFeeStoreRequest;
 
 class FeeTransactionController extends Controller
 {
@@ -214,15 +211,8 @@ class FeeTransactionController extends Controller
         return view('accounts.transaction.feeCollections', compact('fees', 'student'));
     }
 
-    public function multipleFeeStore(Request $request)
+    public function multipleFeeStore(CreateMultipleFeeStoreRequest $request)
     {
-        $request->validate([
-            'amount' => 'required',
-            'discountAmount' => 'required',
-            'fine' => 'required',
-            'selectedFees.*' => 'required|distinct|integer'
-        ]);
-
         $serial = '';
         $school_id = Auth::user()->school_id;
         $amount = $request->amount;
@@ -265,8 +255,8 @@ class FeeTransactionController extends Controller
         $ft->school_id = \auth()->user()->school_id;
         $ft->amount = $amount;
         $ft->discount_id = $request->discount;
-        $ft->discount = $request->discountAmount;
-        $ft->fine = $request->fine;
+        $ft->discount = $request->discount_amount;
+        $ft->fine = $request->fine ?? 0;
         $ft->mode = $request->mode;
         $ft->accountant_id = \auth()->id();
         $ft->status = 'paid';
