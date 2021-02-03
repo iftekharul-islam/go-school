@@ -42,7 +42,7 @@
                                                     <td>{{ ucfirst($user['school']['medium']) }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
                                                     <td>{{ ucfirst($user['section']['class']['class_number']) }} </td>
-                                                    <td>{{ ucfirst($user['phone_number'] ?? 'N/A') }}</td>
+                                                    <td>{{ $user['phone_number'] ?? 'N/A' }}</td>
                                                     <td><b><a class="btn-link text-teal" role="button" href="{{url('teacher/attendances/0/'.$user->id.'/0')}}">View</a></b></td>
                                                 </tr>
                                             @endforeach
