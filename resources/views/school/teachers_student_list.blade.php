@@ -25,6 +25,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Version</th>
+                                        <th>Course Name</th>
                                         <th>Section</th>
                                         <th>Class</th>
                                         <th>Phone</th>
@@ -32,12 +33,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($courses_student as $c)
-                                        @if($c['section']['users'] !== null)
-                                            @foreach($c['section']['users'] as $user)
+                                    @foreach($courses_student as $course)
+                                        @if($course['section']['users'] !== null)
+                                            @foreach($course['section']['users'] as $user)
                                                 <tr>
                                                     <td> <a class="text-teal" href="{{url('user/'.$user->student_code)}}">{{$user->name}}</a></td>
                                                     <td>{{ ucfirst($user['school']['medium']) }}</td>
+                                                    <td>{{ $course['course_name'] }}</td>
                                                     <td>{{ ucfirst($user['section']['section_number']) }} </td>
                                                     <td>{{ ucfirst($user['section']['class']['class_number']) }} </td>
                                                     <td>{{ ucfirst($user['phone_number']) }}</td>

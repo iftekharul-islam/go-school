@@ -545,66 +545,70 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-'.\Auth::user()->school_id.'/'.date('Y'), $request->file('pic_path')) : null;
-        $image_path = 'storage/'.$path;
+        $path = $request->hasFile('pic_path') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date('Y'), $request->file('pic_path')) : null;
+        $image_path = 'storage/' . $path;
         DB::transaction(function () use ($request, $image_path) {
             $tb = $this->user->findOrFail($request->user_id);
             $tb->name = $request->name;
-            $tb->email = (! empty($request->email)) ? $request->email : $tb->email;
-            $tb->nationality = (! empty($request->nationality)) ? $request->nationality : $tb->nationality;
+            $tb->email = (!empty($request->email)) ? $request->email : $tb->email;
+            $tb->nationality = (!empty($request->nationality)) ? $request->nationality : $tb->nationality;
             $tb->section_id = $request->section;
             $tb->phone_number = $request->phone_number;
-            $tb->address = (! empty($request->address)) ? $request->address : $tb->address;
-            $tb->about = (! empty($request->about)) ? $request->about : $tb->about;
+            $tb->address = (!empty($request->address)) ? $request->address : $tb->address;
+            $tb->about = (!empty($request->about)) ? $request->about : $tb->about;
             $tb->pic_path = (empty($request->pic_path)) ? $tb->pic_path : $image_path;
-            $tb->blood_group = (! empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
-            $tb->gender = (! empty($request->gender)) ? $request->gender : $tb->gender;
-            $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
-            if ('teacher' == $request->user_role) {
-                $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0 ;
+            $tb->blood_group = (!empty($request->blood_group)) ? $request->blood_group : $tb->blood_group;
+            $tb->gender = (!empty($request->gender)) ? $request->gender : $tb->gender;
+            $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
+
+            if ($request->user_role == 'teacher') {
+                $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
                 $tb->section_id = $request->class_teacher_section_id;
                 $tb->shift_id = $request->shift_id;
             }
-            if ($tb->save()) {
 
-                if ($request->user_role == 'student') {
-
-                    if (isset($request->section)) {
-                        // Update data on attendance table for a student
-                        event(new NewUserRegistered($tb));
-                    }
-
-                    if (!empty($tb['id'])) {
-                        $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
-                        $info->student_id = $tb->student_code;
-                        $info->session = $request->get('session');
-                        $info->version =$request->get('version');
-                        $info->shift =$request->get('shift');
-                        $info->student_indentification =$request->get('student_indentification');
-                        $info->roll_number =$request->get('roll_number');
-                        $info->group = $request->get('group');
-                        $info->birthday = $request->get('birthday');
-                        $info->religion = $request->get('religion');
-                        $info->guardian_name = $request->get('guardian_name');
-                        $info->guardian_phone_number = $request->get('guardian_phone_number');
-                        $info->father_name = $request->get('father_name');
-                        $info->father_phone_number = $request->get('father_phone_number');
-                        $info->father_national_id = $request->get('father_national_id');
-                        $info->father_occupation = $request->get('father_occupation');
-                        $info->father_designation = $request->get('father_designation');
-                        $info->father_annual_income = $request->get('father_annual_income');
-                        $info->mother_phone_number = $request->get('mother_phone_number');
-                        $info->mother_national_id =$request->get('mother_national_id');
-                        $info->mother_occupation = $request->get('mother_occupation');
-                        $info->mother_designation = $request->get('mother_designation');
-                        $info->mother_annual_income = $request->get('mother_annual_income');
-                        $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
-                        $info->user_id = $tb->id;
-                        $info->save();
-                    }
-                }
+            if (!$tb->save()) {
+                return back()->with('error', 'Something went wrong please try again!');
             }
-            return back()->with('error', 'Something went wrong please try again!');
+
+            if ($request->user_role != 'student') {
+
+                return back()->with('status', $request->name . ' User Updated');
+
+            }
+
+            if (isset($request->section)) {
+                // Update data on attendance table for a student
+                event(new NewUserRegistered($tb));
+            }
+
+            $info = StudentInfo::firstOrCreate(['user_id' => $tb->id]);
+            $info->student_id = $tb->student_code;
+            $info->session = $request->get('session');
+            $info->version = $request->get('version');
+            $info->shift = $request->get('shift');
+            $info->student_indentification = $request->get('student_indentification');
+            $info->roll_number = $request->get('roll_number');
+            $info->group = $request->get('group');
+            $info->birthday = $request->get('birthday');
+            $info->religion = $request->get('religion');
+            $info->guardian_name = $request->get('guardian_name');
+            $info->guardian_phone_number = $request->get('guardian_phone_number');
+            $info->father_name = $request->get('father_name');
+            $info->father_phone_number = $request->get('father_phone_number');
+            $info->father_national_id = $request->get('father_national_id');
+            $info->father_occupation = $request->get('father_occupation');
+            $info->father_designation = $request->get('father_designation');
+            $info->father_annual_income = $request->get('father_annual_income');
+            $info->mother_phone_number = $request->get('mother_phone_number');
+            $info->mother_national_id = $request->get('mother_national_id');
+            $info->mother_occupation = $request->get('mother_occupation');
+            $info->mother_designation = $request->get('mother_designation');
+            $info->mother_annual_income = $request->get('mother_annual_income');
+            $info->is_sms_enabled = $request->sms_enabled == 'true' ? true : false;
+            $info->user_id = $tb->id;
+            $info->save();
+
         });
 
         return back()->with('status', $request->name.' User Updated');

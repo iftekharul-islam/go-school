@@ -70,10 +70,12 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
-                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}"
+                        @if(current_user()->role === 'admin')
+                            <td>
+                                <a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}"
                                    role="button"
-                                   class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
+                                   class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a>
+                            </td>
                         @endif
                     </tr>
                 @endforeach
@@ -111,7 +113,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
+                        @if(current_user()->role === 'admin')
                             <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$teacher->id)}}" role="button"
                                    class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
                         @endif
@@ -133,10 +135,6 @@
         @endif
     </div>
 </form>
-<script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
 <script>
     $('input[type="checkbox"]').change(function () {
         var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');
