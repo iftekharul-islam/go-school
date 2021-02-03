@@ -332,9 +332,6 @@
                                         <label for="blood_group"
                                                class=" control-label false-padding-bottom">{{ __('text.blood_group') }}<label
                                                 class="text-danger">*</label></label>
-                                        @php
-                                            $blood_groups = blood_groups();
-                                        @endphp
 
                                         <select id="blood_group" class="form-control"
                                                 name="blood_group">

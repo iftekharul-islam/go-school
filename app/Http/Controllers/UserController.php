@@ -285,6 +285,8 @@ class UserController extends Controller
         ->where('active', 1)
         ->get();
 
+        $blood_groups = blood_groups();
+
         if (!$guardians) {
 
             return redirect()->route('admin.home')->with('error', __('text.guardian_add_notification'));
@@ -296,7 +298,7 @@ class UserController extends Controller
             ->whereIn('id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
 
-        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections', 'guardians'));
+        return view('school.create-new-student', compact( 'departments','adminAccessDepartment','studentClasses', 'studentSections', 'guardians', 'blood_groups'));
 
     }
 
@@ -531,11 +533,14 @@ class UserController extends Controller
         
         $shifts = Shift::where('school_id', Auth::user()->school_id)->get();
 
+        $blood_groups = blood_groups();
+
         return view('profile.new-edit', [
             'user' => $user,
             'sections' => $sections,
             'departments' => $departments,
-            'shifts' => $shifts
+            'shifts' => $shifts,
+            'blood_groups' => $blood_groups
         ]);
     }
 

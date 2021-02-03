@@ -376,9 +376,6 @@
 
                                         <div class="col-md-12">
                                             <label for="blood_group" class="control-label false-padding-bottom">{{ __('text.blood_group') }}</label>
-                                            @php
-                                                $blood_groups = blood_groups();
-                                            @endphp
                                             <select id="blood_group" class="form-control" name="blood_group">
                                                 @foreach($blood_groups as $item)
                                                     <option value="{{ $item }}" {{ $item == $user->blood_group ? 'selected' : '' }}>{{ $item }}</option>
