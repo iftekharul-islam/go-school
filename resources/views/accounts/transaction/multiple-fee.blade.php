@@ -85,7 +85,7 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="card height-auto false-height">
+                    <div class="card">
                         <div class="card-body">
                             <p>{{ __('text.Name') }}: <b>{{ $student['name'] }}</b>, {{ __('text.Class') }}: <b>{{ $student->section['class']['class_number'].' ('. $student['section']['section_number'] .')' }}</b> </p>
                             <div class="table-responsive ">
@@ -105,7 +105,7 @@
                                                     <input type="checkbox" name="selected_fees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selected_fees'))) checked @endif class="fee_types" />
                                                 </td>
                                                 <td>
-                                                    {{ $ft->name }}
+                                                    <p>{{ $ft->name }}</p>
                                                     @if($ft->type == 'monthly')
                                                         <select name="{{$ft->id}}_from" id="{{$ft->id}}_from"  class="form-control d-inline-block w-auto " >
                                                             <option value="">From Month</option>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card height-auto false-height">
+                    <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6-xxxl col-lg-6 col-6 form-group">

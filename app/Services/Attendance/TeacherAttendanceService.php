@@ -29,24 +29,22 @@ class TeacherAttendanceService {
         StuffAttendance::insert($at);
     }
 
-    public function getTeacherTodayAttendance()
+    public function getTeacherAttendance()
     {
         return StuffAttendance::whereHas('stuff', function ($q){
                 $q->active();
-            })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
-            ->where('school_id', Auth::user()->school_id)
+            })->where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
             ->orderBy('stuff_id', 'ASC')
             ->get()
             ->unique('stuff_id');
     }
 
-    public function getLibrariansTodayAttendance()
+    public function getLibrariansAttendance()
     {
         return StuffAttendance::whereHas('stuff', function ($q) {
             $q->active();
-        })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
-            ->where('school_id', Auth::user()->school_id)
+        })->where('school_id', Auth::user()->school_id)
             ->orderBy('stuff_id', 'ASC')
             ->whereNotIn('role', ['student', 'teacher', 'admin', 'master', 'guardian'])
             ->get()
@@ -71,8 +69,7 @@ class TeacherAttendanceService {
     {
         return StuffAttendance::whereHas('stuff', function ($q){
                 $q->active();
-            })
-            ->select('stuff_id', DB::raw('
+            })->select('stuff_id', DB::raw('
                       COUNT(CASE WHEN present=1 THEN present END) AS totalPresent,
                       COUNT(CASE WHEN present=0 THEN present END) AS totalAbsent'
             ))

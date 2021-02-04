@@ -23,7 +23,11 @@
             </div>
             <div class="item-content">
                 <div class="item-number"><span class="counter" data-num="{{ $total }}"></span></div>
-                <div class="item-title">{{ __('text.Total Classes') }}</div>
+                @isset($user_type)
+                    <div class="item-title">{{ __('text.total_work_day') }}</div>
+                @else
+                    <div class="item-title">{{ __('text.Total Classes') }}</div>
+                @endisset
             </div>
         </div>
     </div>
@@ -49,17 +53,19 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-6 col-6">
-        <div class="dashboard-summery-two">
-            <div class="item-icon bg-light-yellow-transparent">
-                <i class="fas fa-sign-out-alt text-light"></i>
-            </div>
-            <div class="item-content">
-                <div class="item-number"><span class="counter" data-num="{{ $escaped }}"></span></div>
-                <div class="item-title">{{ __('text.Total Attended') }}</div>
+    @isset($escaped)
+        <div class="col-lg-3 col-sm-6 col-6">
+            <div class="dashboard-summery-two">
+                <div class="item-icon bg-light-yellow-transparent">
+                    <i class="fas fa-sign-out-alt text-light"></i>
+                </div>
+                <div class="item-content">
+                    <div class="item-number"><span class="counter" data-num="{{ $escaped }}"></span></div>
+                    <div class="item-title">{{ __('text.Total Attended') }}</div>
+                </div>
             </div>
         </div>
-    </div>
+    @endisset
 </div>
 <div class="card">
     <div class="card-body false-height">

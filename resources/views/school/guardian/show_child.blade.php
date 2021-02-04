@@ -261,6 +261,11 @@
                         </div>
                         <div class="tab-pane fade" id="class-routine" role="tabpanel"
                              aria-labelledby="class-routine-tab">
+                            <div class="heading-layout1">
+                                <div class="item-title mt-5">
+                                    <h3>{{ __('text.Class Routine') }}</h3>
+                                </div>
+                            </div>
                             @component('components.uploaded-files-list',['files'=>$files,'parent'=>($section_id !== 0)?'section':'','upload_type'=>'routine'])
                             @endcomponent
                         </div>

@@ -1,5 +1,12 @@
 @extends('layouts.student-app')
 @section('title', 'Account Sectors')
+@push('customcss')
+    <style>
+        .button-alignment {
+            display: flex;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
@@ -8,9 +15,9 @@
         </h3>
         <ul>
             <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                <a href="{{ URL::previous() }}">
                     {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.add_account_sector') }}</li>
         </ul>
@@ -19,7 +26,7 @@
     <!-- Admit Form Area Start Here -->
     <div class="card height-auto">
         <div class="card-body">
-            <form class="new-added-form mb-5" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-sector')}}" method="post">
+            <form class="new-added-form mb-5" action="{{url(current_user()->role.'/create-sector')}}" method="post">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
@@ -74,7 +81,7 @@
                                     <h3>{{ __('text.account_sector') }}</h3>
                                 </div>
                             </div>
-                            <table class="table table-bordered table-striped table-data-div">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -90,9 +97,11 @@
                                         <td>{{$sector->name}}</td>
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <a href="{{url('accountant/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b>Edit</b></a>
-                                            <button class="button button--cancel" onclick="book({{ $sector->id }})">Delete</button>
-                                            <form id="delete-form-{{ $sector->id }}" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/delete-sector/'.$sector->id)}}" method="POST">
+                                            <div class="button-alignment">
+                                                <a href="{{url('accountant/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b><i class="far fa-edit"></i></b></a>
+                                                <button class="button button--cancel" onclick="sector({{ $sector->id }})"><i class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                            <form id="delete-form-{{ $sector->id }}" action="{{url(current_user()->role.'/delete-sector/'.$sector->id)}}" method="POST">
                                                 {!! method_field('delete') !!}
                                                 {!! csrf_field() !!}
                                             </form>
@@ -107,94 +116,10 @@
             </div>
         </div>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-	<style>
-		canvas {
-			-moz-user-select: none;
-			-webkit-user-select: none;
-			-ms-user-select: none;
-		}
-    </style>
-    <script>
-        'use strict';
-
-        window.chartColors = {
-            red: 'rgb(255, 99, 132)',
-            orange: 'rgb(255, 159, 64)',
-            yellow: 'rgb(255, 205, 86)',
-            green: 'rgb(75, 192, 192)',
-            blue: 'rgb(54, 162, 235)',
-            purple: 'rgb(153, 102, 255)',
-            grey: 'rgb(201, 203, 207)'
-        };
-
-        var color = Chart.helpers.color;
-        var config = {
-            type: 'bar',
-            data: {
-                datasets: [{
-                    label: 'Income',
-                    backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
-                    borderColor: window.chartColors.green,
-                    fill: false,
-                    data: [@foreach($incomes as $s)
-                        {
-                            t:"{{Carbon\Carbon::parse($s->created_at)->format('Y-d-m')}}",
-                            y:{{$s->amount}}
-                        },
-                        @endforeach]
-                },{
-                    label: 'Expense',
-                    backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-                    borderColor: window.chartColors.red,
-                    fill: false,
-                    data: [@foreach($expenses as $s)
-                        {
-                            t:"{{Carbon\Carbon::parse($s->created_at)->format('Y-d-m')}}",
-                            y:{{$s->amount}}
-                        },
-                        @endforeach]
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Income and Expense (In Dollar) in Time Scale'
-                },
-                scales: {
-                    xAxes: [{
-                        type: 'time',
-                        time: {
-                            parser: 'YYYY-DD-MM',
-                            tooltipFormat: 'll HH:mm'
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Date'
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Money'
-                        }
-                    }]
-                },
-            }
-        };
-
-        window.onload = function() {
-            var ctx = document.getElementById('canvas').getContext('2d');
-            window.myLine = new Chart(ctx, config);
-
-        };
-        </script>
 @endsection
 @push('customjs')
     <script type="text/javascript">
-        function book(id) {
-            console.log(id);
+        function sector(id) {
             swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this file!",

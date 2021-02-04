@@ -11,6 +11,7 @@
 
     {{--    <link rel="stylesheet" href="css/icon-font.css">--}}
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 
 </head>
 

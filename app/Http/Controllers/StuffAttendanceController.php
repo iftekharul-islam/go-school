@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Attendance\AttendanceService;
 use App\User;
 use App\StuffAttendance;
 use Illuminate\Http\Request;
@@ -10,9 +11,13 @@ use App\Services\Attendance\TeacherAttendanceService;
 
 class StuffAttendanceController extends Controller
 {
-    public function __construct(TeacherAttendanceService $teacherAttendanceService)
+    protected $attendanceService;
+    protected $teacherAttendanceService;
+
+    public function __construct(TeacherAttendanceService $teacherAttendanceService, AttendanceService $attendanceService)
     {
         $this->teacherAttendanceService = $teacherAttendanceService;
+        $this->attendanceService = $attendanceService;
     }
 
     public function index()
@@ -50,7 +55,7 @@ class StuffAttendanceController extends Controller
     public function stuffAttendance()
     {
         $librarians = User::where('school_id', Auth::user()->school_id)->whereNotIn('role', ['student','teacher','admin','master'])->get();
-        $attendances = $this->teacherAttendanceService->getLibrariansTodayAttendance();
+        $attendances = $this->teacherAttendanceService->getLibrariansAttendance();
         $attCount = $this->teacherAttendanceService->getLibrarianTotalAttendance();
 
         return view('attendance.librarian-attendance', compact('librarians', 'attCount', 'attendances'));
@@ -103,6 +108,7 @@ class StuffAttendanceController extends Controller
         $present = 0;
         $absent = 0;
         $total = 0;
+        $user_type = 'staff';
         $attCount = $this->teacherAttendanceService->getAllAttendanceByStuffId($stuff_id);
         if ($attCount) {
             foreach ($attCount as $att) {
@@ -113,7 +119,9 @@ class StuffAttendanceController extends Controller
         }
         $attendances = StuffAttendance::with('stuff')->where('stuff_id', $stuff_id)->get();
 
-        return view('attendance.admin-teacher-attendances', compact('attendances', 'total', 'present', 'absent'));
+        $calendar =$this->attendanceService->AttendanceCalendar($attendances);
+
+        return view('attendance.staff_attendances', compact('attendances', 'total', 'present', 'absent', 'calendar', 'user_type'));
     }
 
     public function adjustStaffMissingAttendance($staff_id)
