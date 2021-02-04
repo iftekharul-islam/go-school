@@ -72,7 +72,7 @@ return[
     //Attendance section
     'Back' => 'Back',
     'Home' => 'Home',
-    'No Related Data Found' => 'No related data found.',
+    'No_related_data_notification' => 'No related data found.',
     'Staff ID' => 'Staff ID',
     'Name' => 'Name',
     'Role' => 'Role',

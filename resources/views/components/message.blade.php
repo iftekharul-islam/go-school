@@ -44,6 +44,6 @@
     {{$messages->links()}}
 @else
     <div class="no-message" style="text-align: center; margin-top: 200px;">
-        <h2>{{ __('text.No Related Data Found') }}</h2>
+        <h2>{{{ __('text.No_related_data_notification') }}</h2>
     </div>
 @endif

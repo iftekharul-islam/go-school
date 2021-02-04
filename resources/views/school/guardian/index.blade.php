@@ -79,7 +79,7 @@
                                     </div>
                                 </form>
                             @else
-                                <p class="text-center">No Related Data Found.</p>
+                                <p class="text-center">{{ __('text.No_related_data_notification') }}</p>
                             @endif
                         </div>
                     </div>

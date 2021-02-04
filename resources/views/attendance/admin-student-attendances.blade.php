@@ -43,7 +43,7 @@
         @else
             <div class="card">
                 <div class="card-body false-height">
-                    <h4 class="text-center">{{ __('text.No Related Data Found') }}</h4>
+                    <h4 class="text-center">{{ __('text.No_related_data_notification') }}</h4>
                 </div>
             </div>
         @endif

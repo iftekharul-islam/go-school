@@ -98,7 +98,7 @@
             <div class="card mb-3">
                 <div class="card-body ">
                     <div class="card-body-body pb-5 text-center">
-                        {{ __('text.No Related Data Found') }}
+                        {{ __('text.No_related_data_notification') }}
                     </div>
                 </div>
             </div>

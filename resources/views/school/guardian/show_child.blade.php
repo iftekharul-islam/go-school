@@ -205,7 +205,7 @@
                                 <div class="card mt-5 false-height">
                                     <div class="card-body">
                                         <div class="card-body-body mt-5 text-center">
-                                            {{ __('text.No Related Data Found') }}
+                                            {{ __('text.No_related_data_notification') }}
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@
                             @else
                                 <div class="mt-5 false-height">
                                     <div class="card-body mt-5 text-center">
-                                        {{ __('text.No Related Data Found') }}
+                                        {{ __('text.No_related_data_notification') }}
                                     </div>
                                 </div>
                             @endif
@@ -275,7 +275,7 @@
                                 @if(count($attendances) > 0)
                                     @include('layouts.student.attendances_table')
                                 @else
-                                    <h4 class="text-center">{{ __('text.No Related Data Found') }}</h4>
+                                    <h4 class="text-center">{{ __('text.No_related_data_notification') }}</h4>
                                 @endif
                             </div>
                         </div>

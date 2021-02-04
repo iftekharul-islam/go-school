@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
 
-    {{--    <link rel="stylesheet" href="css/icon-font.css">--}}
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('template/css/responsive.css') }}">
 

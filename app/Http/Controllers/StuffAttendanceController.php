@@ -36,7 +36,7 @@ class StuffAttendanceController extends Controller
         if ($teachersFilterByAdmin->count() > 0) {
             $teachers = $teachersFilterByAdmin;
         }
-        $attendances = $this->teacherAttendanceService->getTeacherTodayAttendance();
+        $attendances = $this->teacherAttendanceService->getTeacherAttendance();
         $attCount = $this->teacherAttendanceService->getTeacherTotalAttendance();
 
         return view('attendance.teacher-attendance', compact('teachers', 'attendances', 'attCount'));

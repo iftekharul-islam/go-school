@@ -290,7 +290,7 @@
                         @endforeach
                         @else
                         <div class="card-body mt-5 text-center">
-                            <h5>No related data found</h5>
+                            <h5>{{ __('text.No_related_data_notification') }}</h5>
                         </div>
                     @endif
                 @endif

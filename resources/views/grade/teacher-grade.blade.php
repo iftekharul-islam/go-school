@@ -38,7 +38,7 @@
                           @break($loop->first)
                         @endforeach
                       @else
-                        No Related Data Found.
+                            {{ __('text.No_related_data_notification') }}
                       @endif
                     </h4>
                     <br>
@@ -85,7 +85,7 @@
                 <div class="card mt-5 false-height">
                   <div class="card-body">
                     <div class="card-body-body mt-5 text-center">
-                      No Related Data Found.
+                        {{ __('text.No_related_data_notification') }}
                     </div>
                   </div>
                 </div>
@@ -94,7 +94,7 @@
             @if(count($grades) > 0)
               @include('layouts.teacher.grade-table')
             @else
-              {{--            <span style="text-align: center">No Related Data Found.</span>--}}
+                          <span style="text-align: center"{{ __('text.No_related_data_notification') }}</span>
             @endif
           </div>
         </div>

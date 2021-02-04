@@ -306,7 +306,7 @@
             </div>
         @else
             <div class="text-center mt-5">
-                {{ __('text.No Related Data Found') }}
+                {{ __('text.No_related_data_notification') }}
             </div>
         @endif
     </div>

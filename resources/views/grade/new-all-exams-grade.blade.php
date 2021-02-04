@@ -101,7 +101,7 @@
             </div>
         @else
             <div class="card-body text-center mt-5">
-                No Related Data Found.
+                {{ __('text.No_related_data_notification') }}
             </div>
         @endif
     </div>
