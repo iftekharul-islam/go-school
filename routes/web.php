@@ -98,6 +98,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('user/notifications/{id}', 'NotificationController@index');
         Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('/fees-summary', 'FeeTransactionController@studentFeeDetails')->name('fees.summary');
+        Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail');
         Route::get('class-routine', 'RoutineController@index')->name('class.routines');
     });
 
@@ -208,6 +209,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('/home', 'GuardianHomeController')->name('guardian.home');
         Route::get('my-child', 'GuardianController@myChild')->name('child');
         Route::get('show/{id}', 'GuardianController@showByChildId')->name('child.show');
+        Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail');
     });
     // Admin role routes
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {

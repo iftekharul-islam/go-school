@@ -1,7 +1,7 @@
 @extends('layouts.student-app')
 @section('title', 'Collect Fee')
-@section('content')
-    <style type="text/css">
+@push('customcss')
+    <style>
         .example-print {
             display: none;
         }
@@ -38,14 +38,16 @@
             }
         }
     </style>
+@endpush
+@section('content')
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
             <h3>{{ __('text.Collect Fee') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    <a href="{{ URL::previous() }}">
                         {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
                 <li>{{ __('text.Collect Fee') }}</li>
             </ul>
@@ -58,30 +60,25 @@
         <div class="false-height">
             <div class="card mb-3">
                 <div class="card-body">
-                    <form class="new-added-form" action="{{ url(auth()->user()->role.'/fee-collection/section/student') }}" method="get">
+                    <form class="new-added-form" action="{{ url(current_user()->role.'/fee-collection/section/student') }}" method="get">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                            <div class="col-6-xxxl col-lg-6 col-6 col-md-6 form-group">
                                 <label>{{ __('text.Class') }}</label>
-                                <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                <select name="class_id" id="class_number" class="select2" onchange="getSections(this)">
                                     <option>Select Class</option>
-                                    @foreach($classes as $class)
-                                        <option value="{{ $class->id }}" @if(request('class') == $class->id) selected @endif>class - {{ $class->class_number }}</option>
+                                    @foreach($classes as $item)
+                                        <option value="{{ $item->id }}" @if($class_id == $item->id) selected @endif>class-{{ $item->class_number }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-6-xxxl col-lg-6 col-6 form-group">
+                            <div class="col-6-xxxl col-lg-6 col-6 col-md-6 form-group">
                                 <label>{{ __('text.Section') }}</label>
-                                <select class="form-control" id="section" name="section" >
-                                    @if(!empty(request('class')))
-                                        @php
-                                          $selectedClass = $classes->first( function( $item ) { return $item->id == request('class'); } );
-                                        @endphp
-                                        @if(!empty($selectedClass['sections']))
-                                            @foreach($selectedClass['sections'] as $section)
-                                                <option value="{{ $section->id }}" @if(request('section') == $section->id) selected @endif>{{ $section->section_number }}</option>
-                                            @endforeach
-                                        @endif
+                                <select class="form-control select2" id="section" name="section" >
+                                    @if(!empty($selected_class['sections']))
+                                        @foreach($selected_class['sections'] as $section)
+                                            <option value="{{ $section->id }}" @if(request('section') == $section->id) selected @endif>{{ $section->section_number }}</option>
+                                        @endforeach
                                     @endif
                                 </select>
                             </div>
@@ -96,10 +93,10 @@
                 <div class="card height-auto">
                     <div class="card-body text-center">
                         <div class="table-responsive">
-                            <table class="table-data-div table-bordered display text-wrap">
+                            <table class="table table-bordered display text-wrap">
                                 <thead>
                                 <tr>
-                                    <th>SL</th>
+                                    <th>#</th>
                                     <th>{{ __('text.Code') }}</th>
                                     <th>{{ __('text.Name') }}</th>
                                     <th>{{ __('text.Class') }}</th>
@@ -118,8 +115,10 @@
                                         <td>{{ $student->section->section_number }}</td>
                                         <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
-                                            <a href="{{ url(Auth::user()->role.'/fee-collection/multiple-fee/'.$student->id) }}" class="button--edit button" target="_blank" title="Collect Fee"><i class="fas fa-plus"></i></a>&nbsp;
-                                            <a class="button--save button" href="{{ route('student.fee.collections',['id' => $student->id]) }}" title="Fee history"><i class="fas fa-clipboard-list"></i></a>
+                                            <div class="d-flex">
+                                                <a href="{{ url(current_user()->role.'/fee-collection/multiple-fee/'.$student->id) }}" class="button--edit button" target="_blank" title="Collect Fee"><i class="fas fa-plus"></i></a>&nbsp;
+                                                <a class="button--save button" href="{{ route('student.fee.collections',['id' => $student->id]) }}" title="Fee history"><i class="fas fa-clipboard-list"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

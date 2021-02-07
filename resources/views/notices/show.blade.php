@@ -68,7 +68,7 @@
             <div class="card mt-5 false-height">
                 <div class="card-body">
                     <div class="card-body-body mt-5 text-center">
-                        No Related Data Found.
+                        {{ __('text.No_related_data_notification') }}
                     </div>
                 </div>
             </div>

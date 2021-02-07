@@ -85,7 +85,7 @@
             @else
         </div>
             <div class="card-body mt-5 text-center">
-                No Related Data Found.
+                {{ __('text.No_related_data_notification') }}
             </div>
         @endif
     </div>

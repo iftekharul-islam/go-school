@@ -73,7 +73,7 @@ return [
     //Attendance section
     'Back' => 'পিছনে',
     'Home' => 'প্রচ্ছদ',
-    'No Related Data Found' => 'সম্পর্কিত কোনও তথ্য নেই !',
+    'No_related_data_notification' => 'সংশ্লিষ্ট কোনো তথ্য নেই',
     'Staff ID' => 'স্টাফ আইডি',
     'Name' => 'নাম',
     'Role' => 'পদবী',
@@ -367,4 +367,14 @@ return [
     'online_sms_success_notification' => 'অনলাইন ক্লাস এসএমএস সফলভাবে প্রেরণ করা হয়েছে',
     'students_under_classes' => 'আমার ক্লাসের আওতাধীন শিক্ষার্থী',
     'my_students' => 'আমার শিক্ষার্থী',
+    'user_type' => 'ব্যবহারকারীর ধরন',
+    'parents_info' => 'পিতামাতার তথ্য',
+    'guardians_info' => 'অভিভাবকদের তথ্য',
+    'fathers_info' => 'বাবার তথ্য',
+    'national_id' => 'জাতীয়তা আইডি',
+    'print' => 'সংস্করণ',
+    'Attendance report' => 'উপস্থিতি সারসংক্ষেপ',
+    'total_work_day' => 'মোট কর্মদিবস',
+    'transaction_no' => 'লেনদেনের নম্বর',
+    'accountant_signature' => 'হিসাবরক্ষকের স্বাক্ষর',
 ];

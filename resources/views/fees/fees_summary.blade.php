@@ -3,17 +3,15 @@
 @section('title', 'Fees Summary')
 
 @section('content')
-
-    {{--    <div class="dashboard-content-one">--}}
     <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
         <h3>
             {{ __('text.fees_summary') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
+            <li><a href="{{ URL::previous() }}">
                     Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                <a href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
             </li>
             <li>{{ __('text.fees_summary') }}</li>
         </ul>
@@ -23,25 +21,40 @@
     <!-- All Subjects Area Start Here -->
     <div class="row">
         <div class="col-12-xxxl col-12">
-            <div class="card height-auto false-height">
+            <div class="card false-height">
                 <div class="card-body">
                     <div class="card-body-body mb-5 text-center">
-                        <div class="heading-layout1">
-                            <div class="item-title">
-                                <h3>{{ __('text.payment_summary') }}</h3>
-                            </div>
-                        </div>
+
                         <div class="table-responsive">
-                            @component('components.fee_summary', [  'student' => $student,
-                                                                    'discounts' => $discounts,
-                                                                    'totalAmount' => $totalAmount,
-                                                                    'totalFine' => $totalFine,
-                                                                    'totalDiscount' => $totalDiscount,
-                                                                    'totalFeePaid' => $totalFeePaid,
-                                                                    'totalPaid' => $totalPaid,
-                                                                    'paidAmount' => $paidAmount,
-                                                                ]))
-                            @endcomponent
+                            <table class="table display table-bordered table-hover  text-wrap table-sm">
+                                <thead>
+                                <tr>
+                                    <th>{{ __('text.transaction_no') }}.</th>
+                                    <th>{{ __('text.type') }}</th>
+                                    <th>{{ __('text.Date') }}</th>
+                                    <th>{{ __('text.action') }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if(!$fees->isEmpty())
+                                    @foreach($fees as $fee)
+                                        <tr>
+                                            <td>{{ $fee->transaction_serial }}</td>
+                                            <td>{{ $fee->mode }}</td>
+                                            <td>{{ $fee->created_at->format('Y-m-d') }}</td>
+                                            <td>
+                                                <button title="Cancel Transaction" class="btn btn-danger" onclick="feeTransaction({{ $fee->id }})"><i class="fas fa-trash"></i></button>&nbsp;
+                                                <a  title="View Transaction Details" class="btn btn-primary" href="{{ url(auth()->user()->role.'/transaction-detail/'.$fee->id) }}"><i class="fas fa-eye"></i></a>
+                                                <form id="delete-form-{{ $fee->id }}" action="{{ url(auth()->user()->role.'/fee-transaction', $fee->id) }}" method="POST">
+                                                    {!! method_field('delete') !!}
+                                                    {!! csrf_field() !!}
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

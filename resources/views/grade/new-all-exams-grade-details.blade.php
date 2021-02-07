@@ -44,7 +44,7 @@
                     </tbody>
                 </table>
             @else
-                No Related Data Found
+                {{ __('text.No_related_data_notification') }}
             @endif
         </div>
     </div>

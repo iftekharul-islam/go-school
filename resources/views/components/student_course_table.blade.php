@@ -1,4 +1,4 @@
-<table class="table table-data-div table-bordered display text-nowrap">
+<table class="table table-bordered display text-nowrap">
   <thead>
   <tr>
     <th>#</th>

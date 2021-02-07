@@ -119,7 +119,7 @@
                 </tbody>
             </table>
             @if($count === 0)
-                <h3 class="text-center mt-5 ">No Related Data Found</h3>
+                <h3 class="text-center mt-5 ">{{ __('text.No_related_data_notification') }}d</h3>
             @endif
         </div>
     </div>

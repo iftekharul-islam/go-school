@@ -205,7 +205,7 @@
                                 <div class="card mt-5 false-height">
                                     <div class="card-body">
                                         <div class="card-body-body mt-5 text-center">
-                                            {{ __('text.No Related Data Found') }}
+                                            {{ __('text.No_related_data_notification') }}
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@
                             @else
                                 <div class="mt-5 false-height">
                                     <div class="card-body mt-5 text-center">
-                                        {{ __('text.No Related Data Found') }}
+                                        {{ __('text.No_related_data_notification') }}
                                     </div>
                                 </div>
                             @endif
@@ -237,15 +237,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                @component('components.fee_summary', [  'student' => $student,
-                                                                    'discounts' => $discounts,
-                                                                    'totalAmount' => $totalAmount,
-                                                                    'totalFine' => $totalFine,
-                                                                    'totalDiscount' => $totalDiscount,
-                                                                    'totalFeePaid' => $totalFeePaid,
-                                                                    'totalPaid' => $totalPaid,
-                                                                    'paidAmount' => $paidAmount,
-                                                                ]))
+                                @component('components.fee_summary', ['fees' => $fees ]))
                                 @endcomponent
                             </div>
 
@@ -261,6 +253,11 @@
                         </div>
                         <div class="tab-pane fade" id="class-routine" role="tabpanel"
                              aria-labelledby="class-routine-tab">
+                            <div class="heading-layout1">
+                                <div class="item-title mt-5">
+                                    <h3>{{ __('text.Class Routine') }}</h3>
+                                </div>
+                            </div>
                             @component('components.uploaded-files-list',['files'=>$files,'parent'=>($section_id !== 0)?'section':'','upload_type'=>'routine'])
                             @endcomponent
                         </div>
@@ -270,7 +267,7 @@
                                 @if(count($attendances) > 0)
                                     @include('layouts.student.attendances_table')
                                 @else
-                                    <h4 class="text-center">{{ __('text.No Related Data Found') }}</h4>
+                                    <h4 class="text-center">{{ __('text.No_related_data_notification') }}</h4>
                                 @endif
                             </div>
                         </div>

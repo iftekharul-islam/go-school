@@ -175,17 +175,14 @@ class FeeTransactionController extends Controller
 
     public function sectionsStudent(Request $request)
     {
+        $class_id = $request->class_id ?? '';
         $classes = Myclass::with('sections')->where('school_id', Auth::user()->school_id)->get();
         $students = $this->userService->getSectionStudents($request->section);
+        $selected_class = isset($class_id) ? $classes->first(function ($item) use ($class_id) {
+            return $item->id == $class_id;
+        }) : '';
 
-        $studentIds = array_map(function ($std) {
-            return $std['id'];
-        }, $students->toArray());
-
-        $studentWithFees = User::whereIn('id', $studentIds)->with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->orderBy('name', 'asc')->get();
-        $dis = Discount::where('school_id', Auth::user()->school_id)->get();
-
-        return view('accounts.transaction.sectionStudents', compact('students', 'classes', 'studentWithFees', 'dis'));
+        return view('accounts.transaction.section_students', compact('students', 'classes', 'class_id', 'selected_class'));
     }
 
     public function collectFee($id)
@@ -201,14 +198,17 @@ class FeeTransactionController extends Controller
         $student = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $discounts = Discount::where('school_id', Auth::user()->school_id)->get();
         $feeTypes = FeeType::where('school_id', Auth::user()->school_id)->orWhere('is_default', 1)->orderBy('name', 'asc')->get();
-        return view('accounts.transaction.multiple-fee', compact('student', 'discounts', 'feeTypes'));
+        $months = full_year_by_month();
+
+        return view('accounts.transaction.multiple_fee', compact('student', 'discounts', 'feeTypes', 'months'));
     }
 
     public function feeCollections($id)
     {
         $student = User::with(['school', 'studentInfo', 'section.class'])->findOrFail($id);
         $fees = FeeTransaction::with('transaction_items.fee_type')->where('student_id', $id)->get();
-        return view('accounts.transaction.feeCollections', compact('fees', 'student'));
+
+        return view('accounts.transaction.fee_collections', compact('fees', 'student'));
     }
 
     public function multipleFeeStore(CreateMultipleFeeStoreRequest $request)
@@ -288,9 +288,9 @@ class FeeTransactionController extends Controller
 
     public function studentFeeDetails()
     {
-        $data =$this->userService->feeSummary(Auth::user()->id);
+        $fees = FeeTransaction::with('transaction_items')->where('student_id', Auth::user()->id)->get();
 
-        return view('fees.fees_summary', ($data) );
+        return view('fees.fees_summary', compact('fees') );
     }
 
     public function transactionDetail(Request $request, $id)

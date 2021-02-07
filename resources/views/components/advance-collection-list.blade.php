@@ -2,8 +2,8 @@
     <h3><i class="fas fa-hand-holding-usd "></i> {{ __('text.advance_collection') }}</h3>
     <ul>
         <li>
-            <a href="{{ URL::previous() }}" style="color: #32998f!important;">{{ __('text.Back') }} &nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <a href="{{ URL::previous() }}">{{ __('text.Back') }} &nbsp;|</a>
+            <a href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
         </li>
         <li> {{ __('text.advance_collection') }} </li>
     </ul>
@@ -66,36 +66,39 @@
          @if(count($students) > 0)
             <div class="mb-5">
                 @php $totalAmount = 0; @endphp
-                <table class="table table-bordered display text-wrap">
-                    <thead>
-                    <tr>
-                        <th>{{ __('text.Code') }}</th>
-                        <th>{{ __('text.Name') }}</th>
-                        <th>{{ __('text.roll_number') }}</th>
-                        <th>{{ __('text.Class') }}</th>
-                        <th>{{ __('text.Section') }}</th>
-                        <th>{{ __('text.adv_amount') }}</th>
-                        <th>{{ __('text.action') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($students as $key => $student)
+                <div class="table-responsive">
+                    <table class="table table-bordered text-wrap">
+                        <thead>
                         <tr>
-                            <td>{{$student->student_code}}</td>
-                            <td>
-                                <a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{ $student->name }}</a>
-                            </td>
-                            <td>{{ $student->studentInfo['roll_number'] }}</td>
-                            <td>{{ $student->section['class']['class_number'] }} {{ !empty($student->group)? '- '.$student->group:' '}}</td>
-                            <td style="white-space: nowrap;">{{ $student->section['section_number'] }}</td>
-                            <td> {{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
-                           <td>
-                                <a class="btn btn-lg btn-primary mr-3 open-modal" data-id="{{$student->student_code}}" data-current-amount="{{$student['studentInfo']['advance_amount']}}" data-name="{{$student->name}}" href="#" data-toggle="modal" data-target="#updateAmount" title="Update Advance Amount"><i class="fas fa-plus "></i></a>
-                            </td>
+                            <th>{{ __('text.Code') }}</th>
+                            <th>{{ __('text.Name') }}</th>
+                            <th>{{ __('text.roll_number') }}</th>
+                            <th>{{ __('text.Class') }}</th>
+                            <th>{{ __('text.Section') }}</th>
+                            <th>{{ __('text.adv_amount') }}</th>
+                            <th>{{ __('text.action') }}</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach ($students as $key => $student)
+                            <tr>
+                                <td>{{$student->student_code}}</td>
+                                <td>
+                                    <a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{ $student->name }}</a>
+                                </td>
+                                <td>{{ $student->studentInfo['roll_number'] }}</td>
+                                <td>{{ $student->section['class']['class_number'] }} {{ !empty($student->group)? '- '.$student->group:' '}}</td>
+                                <td style="white-space: nowrap;">{{ $student->section['section_number'] }}</td>
+                                <td> {{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
+                                <td>
+                                    <a class="btn btn-lg btn-primary mr-3 open-modal" data-id="{{$student->student_code}}" data-current-amount="{{$student['studentInfo']['advance_amount']}}" data-name="{{$student->name}}" href="#" data-toggle="modal" data-target="#updateAmount" title="Update Advance Amount"><i class="fas fa-plus "></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
                 <div class="row mt-5">
                     <div class="col-md-3 col-sm-12">
                         Showing {{ $students->firstItem() }} to {{ $students->lastItem() }} of {{ $students->total() }}

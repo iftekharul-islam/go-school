@@ -9,9 +9,9 @@
         Assign Grade
       </h3>
       <ul>
-        <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+        <li> <a href="{{ URL::previous() }}">
             Back &nbsp;&nbsp;|</a>
-          <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+          <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
         </li>
         <li>Assign Grade</li>
       </ul>
@@ -164,7 +164,7 @@
                     <div class="card mt-5 false-height">
                       <div class="card-body">
                         <div class="card-body-body mt-5 text-center">
-                          No Related Data Found.
+                            {{ __('text.No_related_data_notification') }}
                         </div>
                       </div>
                     </div>
@@ -198,7 +198,7 @@
                   <div class="card mt-5 false-height">
                     <div class="card-body">
                       <div class="card-body-body mt-5 text-center">
-                        No Related Data Found.
+                          {{ __('text.No_related_data_notification') }}
                       </div>
                     </div>
                   </div>

@@ -72,7 +72,7 @@ return[
     //Attendance section
     'Back' => 'Back',
     'Home' => 'Home',
-    'No Related Data Found' => 'No Related Data Found.',
+    'No_related_data_notification' => 'No related data found',
     'Staff ID' => 'Staff ID',
     'Name' => 'Name',
     'Role' => 'Role',
@@ -177,7 +177,7 @@ return[
     'all_shift' => 'All Shift',
 
     //student
-    'class_section' => 'Class and Section',
+    'class_section' => 'Class & Section',
     'student_id' => 'Student ID',
     'roll_number' => 'Roll Number',
     'version' => 'Version',
@@ -363,5 +363,15 @@ return[
     'online_sms_success_notification' => 'Online class sms sent successfully',
     'students_under_classes' => 'All students under my classes',
     'my_students' => 'My students',
+    'user_type' => 'User type',
+    'parents_info' => 'Parent\'s Information',
+    'guardians_info' => 'Guardian\'s Information',
+    'fathers_info' => 'Father\'s Information',
+    'national_id' => 'National ID',
+    'print' => 'Print',
+    'attendance_report' => 'Attendance report',
+    'total_work_day' => 'Total work day',
+    'transaction_no' => 'Transaction No',
+    'accountant_signature' => 'Signature of accountant',
 
 ];
