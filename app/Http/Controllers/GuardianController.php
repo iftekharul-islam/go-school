@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Discount;
 use App\Events\UserRegistered;
 use App\ExamForClass;
+use App\FeeTransaction;
 use App\Http\Requests\CreateGuardianRequest;
 use App\Http\Requests\UpdateGuardianRequest;
 use App\Notification;
@@ -150,7 +151,9 @@ class GuardianController extends Controller
         }
 
         //fee summary
-        $data = $this->userService->feeSummary($id);
+        $fees = FeeTransaction::with('transaction_items')
+            ->where('student_id', $id)
+            ->get();
 
         // syllabus section
         $class_id = $student->role == 'student' ? $student['section']['class_id'] : '';
@@ -215,14 +218,7 @@ class GuardianController extends Controller
             'escaped' => $attendance_data['escaped'],
             'calendar' => $attendance_data['calendar'],
             'messages' => $messages,
-            'totalAmount' => $data['totalAmount'],
-            'totalFine' => $data['totalFine'],
-            'totalDiscount' => $data['totalDiscount'],
-            'totalPaid' => $data['totalPaid'],
-            'totalFeePaid' => $data['totalFeePaid'],
-            'student' => $data['student'],
-            'discounts' => $data['discounts'],
-            'paidAmount' => $data['paidAmount'],
+            'fees' => $fees,
         ];
 
         return view('school.guardian.show_child', ($all_data) );

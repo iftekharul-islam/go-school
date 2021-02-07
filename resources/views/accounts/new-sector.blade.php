@@ -1,12 +1,5 @@
 @extends('layouts.student-app')
 @section('title', 'Account Sectors')
-@push('customcss')
-    <style>
-        .button-alignment {
-            display: flex;
-        }
-    </style>
-@endpush
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
@@ -97,7 +90,7 @@
                                         <td>{{$sector->name}}</td>
                                         <td>{{ucfirst($sector->type)}}</td>
                                         <td>
-                                            <div class="button-alignment">
+                                            <div class="d-flex">
                                                 <a href="{{url('accountant/edit-sector/'.$sector->id)}}" class="button button--edit mr-3" role="button"><b><i class="far fa-edit"></i></b></a>
                                                 <button class="button button--cancel" onclick="sector({{ $sector->id }})"><i class="fas fa-trash-alt"></i></button>
                                             </div>

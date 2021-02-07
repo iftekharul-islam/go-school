@@ -2,9 +2,6 @@
 @section('title', 'Collect Fee')
 @push('customcss')
     <style>
-        .button-alignment {
-            display: flex;
-        }
         .example-print {
             display: none;
         }
@@ -118,7 +115,7 @@
                                         <td>{{ $student->section->section_number }}</td>
                                         <td class="text-capitalize">{{ $student->gender }}</td>
                                         <td>
-                                            <div class="button-alignment">
+                                            <div class="d-flex">
                                                 <a href="{{ url(current_user()->role.'/fee-collection/multiple-fee/'.$student->id) }}" class="button--edit button" target="_blank" title="Collect Fee"><i class="fas fa-plus"></i></a>&nbsp;
                                                 <a class="button--save button" href="{{ route('student.fee.collections',['id' => $student->id]) }}" title="Fee history"><i class="fas fa-clipboard-list"></i></a>
                                             </div>

@@ -288,9 +288,9 @@ class FeeTransactionController extends Controller
 
     public function studentFeeDetails()
     {
-        $data =$this->userService->feeSummary(Auth::user()->id);
+        $fees = FeeTransaction::with('transaction_items')->where('student_id', Auth::user()->id)->get();
 
-        return view('fees.fees_summary', ($data) );
+        return view('fees.fees_summary', compact('fees') );
     }
 
     public function transactionDetail(Request $request, $id)
