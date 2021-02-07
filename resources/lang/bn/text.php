@@ -73,7 +73,7 @@ return [
     //Attendance section
     'Back' => 'পিছনে',
     'Home' => 'প্রচ্ছদ',
-    'No_related_data_notification' => 'সংশ্লিষ্ট কোনো তথ্য নেই !',
+    'No_related_data_notification' => 'সংশ্লিষ্ট কোনো তথ্য নেই',
     'Staff ID' => 'স্টাফ আইডি',
     'Name' => 'নাম',
     'Role' => 'পদবী',

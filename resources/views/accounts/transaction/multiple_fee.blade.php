@@ -9,9 +9,9 @@
             <h3>{{ __('text.Fee Collection') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    <a href="{{ URL::previous() }}">
                         {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
                 <li>
                     <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> {{ __('text.Collect Fee') }}</a>
@@ -19,18 +19,6 @@
                 <li>{{ __('text.Fee Collection') }}</li>
             </ul>
         </div>
-        @php  $options = '<option value="January">January</option>'
-                        .'<option value="February">February</option>'
-                        .'<option value="March">March</option>'
-                        .'<option value="April">April</option>'
-                        .'<option value="May">May</option>'
-                        .'<option value="June">June</option>'
-                        .'<option value="July">July</option>'
-                        .'<option value="August">August</option>'
-                        .'<option value="September">September</option>'
-                        .'<option value="October">October</option>'
-                        .'<option value="November">November</option>'
-                        .'<option value="December">December</option>'; @endphp
 
         <div class="card height-auto mb-3 example-screen">
             <div class="card-body">
@@ -98,29 +86,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(count($feeTypes) > 0)
-                                            @foreach($feeTypes as $ft)
+                                    @if(count($feeTypes) > 0)
+                                        @foreach($feeTypes as $item)
                                             <tr>
                                                 <td>
-                                                    <input type="checkbox" name="selected_fees[]" id="ft_{{$ft->id}}" value="{{$ft->id}}" @if(@in_array($ft->id, old('selected_fees'))) checked @endif class="fee_types" />
+                                                    <input type="checkbox" name="selected_fees[]" id="ft_{{$item->id}}"
+                                                           value="{{$item->id}}"
+                                                           @if(@in_array($item->id, old('selected_fees'))) checked
+                                                           @endif class="fee_types"/>
                                                 </td>
                                                 <td>
-                                                    <p>{{ $ft->name }}</p>
-                                                    @if($ft->type == 'monthly')
-                                                        <select name="{{$ft->id}}_from" id="{{$ft->id}}_from"  class="form-control d-inline-block w-auto " >
+                                                    <p>{{ $item->name }}</p>
+                                                    @if($item->type == 'monthly')
+                                                        <select name="{{$item->id}}_from" id="{{$item->id}}_from"
+                                                                class="form-control d-inline-block w-auto ">
                                                             <option value="">From Month</option>
-                                                            {!!  $options !!}
+                                                            @foreach($months as $month)
+                                                                <option value="{{ $month }}">{{ $month }}</option>
+                                                            @endforeach
                                                         </select> -
-                                                        <select name="{{$ft->id}}_to" id="{{$ft->id}}_to" class="form-control month_dropdown d-inline-block w-auto" >
+                                                        <select name="{{$item->id}}_to" id="{{$item->id}}_to"
+                                                                class="form-control month_dropdown d-inline-block w-auto">
                                                             <option value="">To Month</option>
-                                                            {!!  $options !!}
+                                                            @foreach($months as $month)
+                                                                <option value="{{ $month }}">{{ $month }}</option>
+                                                            @endforeach
                                                         </select>
                                                     @endif
                                                 </td>
-                                                <td><input type="number" name="{{$ft->id}}_amount" value="{{old($ft->id.'_amount')}}" class="form-control fee-amount tbody"></td>
+                                                <td><input type="number" name="{{$item->id}}_amount"
+                                                           value="{{old($item->id.'_amount')}}"
+                                                           class="form-control fee-amount tbody"></td>
                                             </tr>
-                                            @endforeach
-                                        @endif
+                                        @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

@@ -48,9 +48,9 @@
             <h3>{{ __('text.Collect Fee') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
+                    <a href="{{ URL::previous() }}">
                         {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
                 </li>
                 <li>{{ __('text.Collect Fee') }}</li>
             </ul>
@@ -68,10 +68,10 @@
                         <div class="row">
                             <div class="col-6-xxxl col-lg-6 col-6 col-md-6 form-group">
                                 <label>{{ __('text.Class') }}</label>
-                                <select name="class" id="class_number" class="select2" onchange="getSections(this)">
+                                <select name="class_id" id="class_number" class="select2" onchange="getSections(this)">
                                     <option>Select Class</option>
                                     @foreach($classes as $item)
-                                        <option value="{{ $item->id }}" @if($class == $item->id) selected @endif>class-{{ $item->class_number }}</option>
+                                        <option value="{{ $item->id }}" @if($class_id == $item->id) selected @endif>class-{{ $item->class_number }}</option>
                                     @endforeach
                                 </select>
                             </div>
