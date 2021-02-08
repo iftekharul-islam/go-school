@@ -54,7 +54,8 @@ class AccountController extends Controller
      */
     public function editSector($id){
         $sector = AccountSector::findOrFail($id);
-        return view('accounts.new-edit_sector',compact('sector'));
+
+        return view('accounts.new_edit_sector',compact('sector'));
     }
 
 

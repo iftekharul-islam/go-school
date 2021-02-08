@@ -9,9 +9,9 @@
             <h3>{{ __('text.Fee Collection') }}</h3>
             <ul>
                 <li>
-                    <a href="{{ URL::previous() }}">
-                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                    <a href="{{ URL::previous() }}" class="mr-2">
+                        {{ __('text.Back') }}|</a>
+                    <a href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
                 <li>
                     <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> {{ __('text.Collect Fee') }}</a>
@@ -31,26 +31,14 @@
                             <table class="table">
                                 <tr>
                                     <th>{{ __('text.Name') }}</th>
-                                    <td>{{ $student->name }}</td>
+                                    <td><a class="text-teal" href="{{url('user/'.$student->student_code)}}">{{$student->name}}</a></td>
+                                </tr>
+                                <tr>
                                     <th>{{ __('text.class_section') }}</th>
                                     <td> Class {{ $student->section->class['class_number'] }} ({{ $student->section['section_number'] }})</td>
                                 </tr>
-                                @if($student['studentInfo'])
-                                    <tr>
-                                        <th>{{ __('text.father_name') }}</th>
-                                        <td>{{ $student->studentInfo['father_name'] }}</td>
-                                        <th>{{ __('text.phone_number') }}</th>
-                                        <td>{{ $student->studentInfo['father_phone_number'] }}</td>
-                                    </tr>
-                                @endif
                                 <tr>
-                                    <th>{{ __('text.version') }}</th>
-                                    <td>@if($student->studentInfo){{ $student->studentInfo['version'] }}@endif </td>
-                                    <th>{{ __('text.student_code') }}</th>
-                                    <td>{{ $student->student_code }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ __('text.adv_balance') }}</th>
+                                    <th>{{ __('text.balance') }}</th>
                                     <td colspan="3">{{ number_format($student->studentInfo['advance_amount'], 2) }}</td>
                                 </tr>
                             </table>

@@ -1,4 +1,3 @@
-{{--<div class="well" style="font-size: 15px;">Choose Field to Display</div>--}}
 <style>
     #grade-labels > .label {
         margin-right: 1%;
@@ -7,82 +6,115 @@
     .table-width tbody tr td {
         min-width: 80px;
     }
+    .min-area {
+        min-width: 175px;
+    }
 </style>
-<div class="col-md-12 text-center" id="grade-labels">
+<div class="col-md-12 mt-5" id="grade-labels">
     <div class="row">
-        <div class="col-12 font-size-20">
-            <input type="checkbox" class="form-group mx-5 mr-3" name="attendance" value="4" checked>
-            <span class="badge  badge-light checkbox-inline mr-1">
-        Attendance
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="quiz[]" value="5" checked>
-            <span class="badge badge-primary checkbox-inline mr-1">
-        Quiz 1
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="quiz[]" value="6">
-            <span class="badge badge-primary checkbox-inline mr-1">
-      Quiz 2
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="quiz[]" value="7">
-            <span class="badge badge-primary mr-1 checkbox-inline">
-      Quiz 3
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="quiz[]" value="8">
-            <span class="badge badge-primary mr-1 checkbox-inline">
-      Quiz 4
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="quiz[]" value="9">
-            <span class="badge badge-primary mr-1 checkbox-inline">
-      Quiz 5
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="assignment[]" value="10" checked>
-            <span class="badge badge-success mr-1 checkbox-inline">
-      Assignment 1
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="assignment[]" value="11">
-            <span class="badge badge-success mr-1 checkbox-inline">
-      Assignment 2
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="assignment[]" value="12">
-            <span class="badge badge-success mr-1 checkbox-inline">
-      Assignment 3
-      </span>
+        <div class="form-check form-check-inline">
+            <input id="checkbox1" type="checkbox" name="attendance" value="4" checked>
+            <label for="checkbox1">
+                <span class="badge badge-primary">Attendance</span>
+            </label>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 font-size-20">
-            <input type="checkbox" class="form-group mx-5 mr-3" name="ct[]" value="13" checked>
-            <span class="badge badge-info mr-1 checkbox-inline">
-        Class Test 1
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="ct[]" value="14">
-            <span class="badge badge-info mr-1 checkbox-inline">
-        Class Test 2
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="ct[]" value="15">
-            <span class="badge badge-info mr-1 checkbox-inline">
-        Class Test 3
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="ct[]" value="16">
-            <span class="badge badge-info mr-1 checkbox-inline">
-        Class Test 4
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="ct[]" value="17">
-            <span class="badge badge-info mr-1 checkbox-inline">
-        Class Test 5
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="few" value="18">
-            <span class="badge badge-secondary mr-1 checkbox-inline">
-        Final Exam Written
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="fem" value="19">
-            <span class="badge badge-secondary mr-1 checkbox-inline">
-        Final Exam MCQ
-      </span>
-            <input type="checkbox" class="form-group mx-5 mr-3" name="practical" value="20">
-            <span class="badge badge-warning mr-1 checkbox-inline">
-        Practical
-      </span>
+
+        <div class="form-check form-check-inline">
+            <input id="checkbox2" type="checkbox" name="quiz[]" value="5" checked>
+            <label for="checkbox2">
+                <span class="badge badge-primary"> Quiz 1</span>
+            </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input id="checkbox3" type="checkbox" name="quiz[]" value="6">
+            <label for="checkbox3">
+                <span class="badge badge-primary">Quiz 2</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox4" type="checkbox" name="quiz[]" value="7">
+            <label for="checkbox4">
+                <span class="badge badge-primary">Quiz 3</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox5" type="checkbox" name="quiz[]" name="quiz[]" value="8">
+            <label for-="checkbox5">
+                <span class="badge badge-primary">Quiz 4</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox6" type="checkbox" name="quiz[]" value="9">
+            <label for-="checkbox6">
+                <span class="badge badge-primary">Quiz 5</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox7" type="checkbox" name="assignment[]" value="10" checked>
+            <label for="checkbox7" class="min-area">
+                <span class="badge badge-success">Assignment 1</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox8" type="checkbox" name="assignment[]" value="11">
+            <label for="checkbox8" class="min-area">
+                <span class="badge badge-success">Assignment 2</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox9" type="checkbox" name="assignment[]" value="12">
+            <label for="checkbox9" class="min-area">
+                <span class="badge badge-success">Assignment 3</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox10" type="checkbox" name="ct[]" value="13" checked>
+            <label for="checkbox10" class="min-area">
+                <span class="badge badge-info">Class Test 1</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox11" type="checkbox" name="ct[]" value="14">
+            <label for="checkbox11" class="min-area">
+                <span class="badge badge-info">Class Test 2</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox12" type="checkbox" name="ct[]" value="15">
+            <label for="checkbox12" class="min-area">
+                <span class="badge badge-info">Class Test 3</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox13" type="checkbox" name="ct[]" value="16">
+            <label for="checkbox13" class="min-area">
+                <span class="badge badge-info">Class Test 4</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox14" type="checkbox" name="ct[]" value="17">
+            <label for="checkbox14" class="min-area">
+                <span class="badge badge-info">Class Test 5</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox16" type="checkbox" name="few" value="18">
+            <label for="checkbox16" class="min-area">
+                <span class="badge badge-secondary">Final Exam Written</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox17" type="checkbox" name="fem" value="19">
+            <label for="checkbox17" class="min-area">
+                <span class="badge badge-secondary">Final Exam MCQ</span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input id="checkbox18" type="checkbox" name="fem" value="20">
+            <label for="checkbox18" class="min-area">
+                <span class="badge badge-warning">Practical</span>
+            </label>
         </div>
     </div>
 </div>

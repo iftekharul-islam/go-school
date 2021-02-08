@@ -377,4 +377,5 @@ return [
     'total_work_day' => 'মোট কর্মদিবস',
     'transaction_no' => 'লেনদেনের নম্বর',
     'accountant_signature' => 'হিসাবরক্ষকের স্বাক্ষর',
+    'edit_sector' => 'হিসাব বিভাগ পুনঃসংস্কার',
 ];

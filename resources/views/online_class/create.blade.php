@@ -156,22 +156,22 @@
                                                                 <div class="alert alert-info">
                                                                     <ul>
                                                                         <li>
-                                                                            <b>Hints :Please make sure you provide the
+                                                                            <b>Hints: Please make sure you provide the
                                                                                 following details:</b>
                                                                         </li>
                                                                         <li>
-                                                                            <b>Class :</b> class number [ Example : 4 ]
+                                                                            <b>Class: </b> class number [ Example : 4 ]
                                                                         </li>
                                                                         <li>
-                                                                            <b>Section :</b> class number [ Example : A
+                                                                            <b>Section: </b> class number [ Example : A
                                                                             ]
                                                                         </li>
                                                                         <li>
-                                                                            <b>Time:</b> Class time [ Example : 1pm to
+                                                                            <b>Time: </b> Class time [ Example : 1pm to
                                                                             2pm ]
                                                                         </li>
                                                                         <li>
-                                                                            <b>Shorten Url : </b> <b
+                                                                            <b>Shorten Url: </b> <b
                                                                                 class="url-assign"></b>
                                                                         </li>
                                                                     </ul>
