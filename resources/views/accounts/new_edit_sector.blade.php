@@ -31,7 +31,7 @@
                               method="post">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{$sector->id}}">
-                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label for="name" class="control-label mt-5">{{ __('text.Name') }}<label
                                         class="text-danger">*</label></label>
 
@@ -44,7 +44,7 @@
                                   </span>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label for="type" class="col-md-4 control-label">{{ __('text.type') }}<label
                                         class="text-danger">*</label></label>
                                 <select class="form-control" name="type">

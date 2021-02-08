@@ -12,110 +12,14 @@
 </style>
 <div class="col-md-12 mt-5" id="grade-labels">
     <div class="row">
-        <div class="form-check form-check-inline">
-            <input id="checkbox1" type="checkbox" name="attendance" value="4" checked>
-            <label for="checkbox1">
-                <span class="badge badge-primary">Attendance</span>
-            </label>
-        </div>
-
-        <div class="form-check form-check-inline">
-            <input id="checkbox2" type="checkbox" name="quiz[]" value="5" checked>
-            <label for="checkbox2">
-                <span class="badge badge-primary"> Quiz 1</span>
-            </label>
-        </div>
-
-        <div class="form-check form-check-inline">
-            <input id="checkbox3" type="checkbox" name="quiz[]" value="6">
-            <label for="checkbox3">
-                <span class="badge badge-primary">Quiz 2</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox4" type="checkbox" name="quiz[]" value="7">
-            <label for="checkbox4">
-                <span class="badge badge-primary">Quiz 3</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox5" type="checkbox" name="quiz[]" name="quiz[]" value="8">
-            <label for-="checkbox5">
-                <span class="badge badge-primary">Quiz 4</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox6" type="checkbox" name="quiz[]" value="9">
-            <label for-="checkbox6">
-                <span class="badge badge-primary">Quiz 5</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox7" type="checkbox" name="assignment[]" value="10" checked>
-            <label for="checkbox7" class="min-area">
-                <span class="badge badge-success">Assignment 1</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox8" type="checkbox" name="assignment[]" value="11">
-            <label for="checkbox8" class="min-area">
-                <span class="badge badge-success">Assignment 2</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox9" type="checkbox" name="assignment[]" value="12">
-            <label for="checkbox9" class="min-area">
-                <span class="badge badge-success">Assignment 3</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox10" type="checkbox" name="ct[]" value="13" checked>
-            <label for="checkbox10" class="min-area">
-                <span class="badge badge-info">Class Test 1</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox11" type="checkbox" name="ct[]" value="14">
-            <label for="checkbox11" class="min-area">
-                <span class="badge badge-info">Class Test 2</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox12" type="checkbox" name="ct[]" value="15">
-            <label for="checkbox12" class="min-area">
-                <span class="badge badge-info">Class Test 3</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox13" type="checkbox" name="ct[]" value="16">
-            <label for="checkbox13" class="min-area">
-                <span class="badge badge-info">Class Test 4</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox14" type="checkbox" name="ct[]" value="17">
-            <label for="checkbox14" class="min-area">
-                <span class="badge badge-info">Class Test 5</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox16" type="checkbox" name="few" value="18">
-            <label for="checkbox16" class="min-area">
-                <span class="badge badge-secondary">Final Exam Written</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox17" type="checkbox" name="fem" value="19">
-            <label for="checkbox17" class="min-area">
-                <span class="badge badge-secondary">Final Exam MCQ</span>
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input id="checkbox18" type="checkbox" name="fem" value="20">
-            <label for="checkbox18" class="min-area">
-                <span class="badge badge-warning">Practical</span>
-            </label>
-        </div>
+        @foreach(marking_subjects() as $item)
+            <div class="form-check form-check-inline">
+                <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] == true ? 'checked' : '' }}>
+                <label for="{{ $item['id'] }}">
+                    <span class="{{ $item['class'] }}">{{ $item['text'] }}</span>
+                </label>
+            </div>
+        @endforeach
     </div>
 </div>
 <br/>
