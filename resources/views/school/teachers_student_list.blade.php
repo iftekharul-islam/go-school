@@ -1,12 +1,5 @@
 @extends('layouts.student-app')
 @section('title','Dashboard')
-@push('customcss')
-    <style>
-        .min-area {
-            min-width: 110px;
-        }
-    </style>
-@endpush
 @section('content')
     <div class="dashboard-content-one">
         <div class="breadcrumbs-area">
