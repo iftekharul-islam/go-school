@@ -376,5 +376,6 @@ return[
     'edit_sector' => 'Edit sector',
     'hints' => 'Hints',
     'information_notice' => 'Please make sure you provide the following details',
+    'inactive_staffs' => 'Inactive staffs',
 
 ];

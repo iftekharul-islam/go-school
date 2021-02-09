@@ -528,7 +528,7 @@
                                             class="fas fa-angle-right"></i>{{ __('text.add_staff') }}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/Staff-list') }}"
+                                    <a href="{{ route('staff.list') }}"
                                        class="nav-link {{ (request()->is('admin/Staff-list')) ? 'menu-active' : '' }}"><i
                                             class="fas fa-angle-right"></i>{{ __('text.staff_list') }}</a>
                                 </li>
