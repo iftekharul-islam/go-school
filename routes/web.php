@@ -238,8 +238,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details')->name('staff.attendance');
 
             Route::get('attendance', 'StuffAttendanceController@stuffAttendance');
-            Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore');
-            Route::get('attendance/adjust/{staff_id}', 'StuffAttendanceController@adjustStaffMissingAttendance');
+            Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore')->name('staff.store');
+            Route::get('attendance/adjust/{staff_id}', 'StuffAttendanceController@adjustStaffMissingAttendance')->name('adjust.attendance');
             Route::post('attendance/adjust/post', 'StuffAttendanceController@adjustStaffMissingAttendancePost');
         });
 

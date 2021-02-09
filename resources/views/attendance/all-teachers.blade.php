@@ -9,7 +9,7 @@
         <ul>
             <li> <a href="{{ URL::previous() }}" class="mr-2">
                     {{ __('text.Back') }}</a>
-                <a href="{{ route(current_user()->role.'.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a href="{{ route(current_user()->role.'.home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.Teachers Attendance') }}</li>
         </ul>
@@ -33,43 +33,47 @@
                 @endif
                 <div class="panel panel-default">
                 </div>
-                    <div class="card">
+                <div class="card">
                     <div class="card-body">
-                        <div class="title mb-5" style="overflow: hidden" >
-                            <div class="float-left">
-                                <a class="button button--save mr-2 float-left"
-                                   href="{{ route('teacher.summary') }}">
-                                    {{ __('text.View Summary') }}</a>
-                                <a class="button button--save mr-2 float-left"
-                                   href={{ route('teacher.attendance') }}>
-                                    {{ __('text.Take Attendance') }}
-                                </a>
+                        @if(count($teachers) > 0)
+                            <div class="title mb-5" style="overflow: hidden" >
+                                <div class="float-left">
+                                    <a class="button button--save mr-2 float-left"
+                                       href="{{ route('teacher.summary') }}">
+                                        {{ __('text.View Summary') }}</a>
+                                    <a class="button button--save mr-2 float-left"
+                                       href={{ route('teacher.attendance') }}>
+                                        {{ __('text.Take Attendance') }}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-data-div table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>{{ __('text.Code') }}</th>
-                                    <th>{{ __('text.Name') }}</th>
-                                    <th>{{ __('text.Attendance') }}</th>
-                                </tr>
-                                </thead>
-                                @foreach($teachers as $key=>$teacher)
-                                <tbody>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $teacher->student_code }}</td>
-                                    <td>{{ $teacher->name }}</td>
-                                    <td>
-                                        <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $teacher->id)}}">
-                                            <b>{{ __('text.View Attendance') }}</b>
-                                        </a>
-                                    </td>
-                                </tbody>
-                                @endforeach
-                            </table>
-                        </div>
+                            <div class="table-responsive">
+                                <table class="table table-data-div table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{ __('text.Code') }}</th>
+                                        <th>{{ __('text.Name') }}</th>
+                                        <th>{{ __('text.Attendance') }}</th>
+                                    </tr>
+                                    </thead>
+                                    @foreach($teachers as $key=>$teacher)
+                                    <tbody>
+                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $teacher->student_code }}</td>
+                                        <td>{{ $teacher->name }}</td>
+                                        <td>
+                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $teacher->id)}}">
+                                                <b>{{ __('text.View Attendance') }}</b>
+                                            </a>
+                                        </td>
+                                    </tbody>
+                                    @endforeach
+                                </table>
+                            </div>
+                        @else
+                            <p class="text-center">{{ __('text.No_related_data_notification') }}</p>
+                        @endif
                     </div>
                 </div>
             </div>
