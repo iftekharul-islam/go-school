@@ -36,7 +36,7 @@
                 <div class="card">
                     <div class="card-body">
                         @if(count($teachers) > 0)
-                            <div class="title mb-5" style="overflow: hidden" >
+                            <div class="title mb-5">
                                 <div class="float-left">
                                     <a class="button button--save mr-2 float-left"
                                        href="{{ route('teacher.summary') }}">

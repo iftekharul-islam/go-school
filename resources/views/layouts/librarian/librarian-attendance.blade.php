@@ -71,7 +71,7 @@
                             <td>0</td>
                             <td>0</td>
                         @endif
-                        <td><a href="{{route('adjust.attendance', $attendance->stuff->id)}}" role="button" class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
+                        <td><a href="{{ route('adjust.attendance', $attendance->stuff->id)}}" role="button" class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
                         <td>
                             <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $attendance->stuff->id)}}">
                                 <b>{{ __('text.View Attendance') }}</b>
