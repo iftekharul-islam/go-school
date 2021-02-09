@@ -27,7 +27,7 @@
                 <div class="card-body">
                     @isset($sector)
                         <form class="new-added-form justify-content-md-center"
-                              action="{{url(current_user()->role.'/update-sector')}}"
+                              action="{{route(('update.sector'))}}"
                               method="post">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{$sector->id}}">
