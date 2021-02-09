@@ -75,7 +75,7 @@
         @yield('content')
         <!-- Footer Area Start Here -->
             <footer class="ml-4 footer-wrap-layout1 example-screen">
-                <div class="copyright">Copyrights © 2019 <a class="text-teal" href="https://augnitive.com/" target="_blank">Augnitive</a>
+                <div class="copyright">Copyrights © {{ \Carbon\Carbon::now()->format('Y') }} <a class="text-teal" href="https://augnitive.com/" target="_blank">Augnitive</a>
                     All rights reserved.
                 </div>
             </footer>

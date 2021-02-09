@@ -287,7 +287,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('sectors', 'AccountController@sectors');
         Route::post('create-sector', 'AccountController@storeSector');
         Route::get('edit-sector/{id}', 'AccountController@editSector');
-        Route::post('update-sector', 'AccountController@updateSector');
+        Route::post('update-sector', 'AccountController@updateSector')->name('update.sector');
         Route::delete('delete-sector/{id}', 'AccountController@deleteSector');
 
         Route::get('income', 'AccountController@income');
