@@ -7,9 +7,9 @@
     <div class="breadcrumbs-area">
         <h3>{{ __('text.All Teacher') }}</h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a href="{{ URL::previous() }}" class="mr-2">
+                    {{ __('text.Back') }}</a>
+                <a href="{{ route(current_user()->role.'.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.Teachers Attendance') }}</li>
         </ul>
@@ -17,6 +17,11 @@
     <div class="section-students">
         <div class="card height-auto mt-5 false-height">
             <div class="card-body">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -27,20 +32,9 @@
                     </div>
                 @endif
                 <div class="panel panel-default">
-{{--                    @if(count($users) > 0)--}}
                 </div>
                     <div class="card">
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-
-                        @elseif (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
                         <div class="title mb-5" style="overflow: hidden" >
                             <div class="float-left">
                                 <a class="button button--save mr-2 float-left"
@@ -57,9 +51,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Attendance</th>
+                                    <th>{{ __('text.Code') }}</th>
+                                    <th>{{ __('text.Name') }}</th>
+                                    <th>{{ __('text.Attendance') }}</th>
                                 </tr>
                                 </thead>
                                 @foreach($teachers as $key=>$teacher)

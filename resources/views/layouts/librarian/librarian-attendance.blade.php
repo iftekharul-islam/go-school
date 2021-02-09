@@ -20,7 +20,8 @@
                 <th>{{ trans_choice('text.Present',1) }}</th>
                 <th>{{ __('text.Total Attended') }}</th>
                 <th>{{ __('text.Total Missed') }}</th>
-                <th>{{ __('text.Adjust Attendance') }}</th>
+                <th>{{ __('text.Adjust Attendance') }}
+                <th>{{ __('text.Attendance') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -71,6 +72,11 @@
                             <td>0</td>
                         @endif
                         <td><a href="{{url('admin/staff/attendance/adjust/'.$attendance->stuff->id)}}" role="button" class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
+                        <td>
+                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $attendance->stuff->id)}}">
+                                <b>{{ __('text.View Attendance') }}</b>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             @else
@@ -107,6 +113,11 @@
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
                             <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$librarian->id)}}" role="button" class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
+                            <td>
+                                <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $librarian->id)}}">
+                                    <b>{{ __('text.View Attendance') }}</b>
+                                </a>
+                            </td>
                         @endif
                     </tr>
                 @endforeach
