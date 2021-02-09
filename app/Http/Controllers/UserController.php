@@ -337,16 +337,17 @@ class UserController extends Controller
     {
         return view('school.create-new-staff');
     }
+
     public function staffList(Request $request)
     {
         $users = User::with('school')
             ->where('school_id', auth()->user()->school_id)
-            ->whereNotIn('role', ['teacher', 'student', 'admin', 'master', 'librarian', 'accountant'])
+            ->whereNotIn('role', ['teacher', 'student', 'admin', 'master', 'librarian', 'accountant', 'guardian'])
             ->where('active', 1)
             ->orderBy('name', 'asc')
             ->paginate(40);
 
-        return view('list.new-staff-list',compact('users'));
+        return view('list.staff_list', compact('users'));
     }
 
     /**

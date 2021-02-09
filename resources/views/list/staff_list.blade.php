@@ -6,13 +6,13 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-users mr-2 "></i>   {{ __('text.staff_list') }}
-            <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.staffs') }}">Inactive Staffs</a>
+            <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.staffs') }}">{{ __('text.inactive_staffs') }}</a>
         </h3>
         <ul>
             <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a href="{{ URL::previous() }}" class="mr-2">
+                    {{ __('text.Back') }}</a>
+                <a href="{{ route(current_user()->role . '.home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>
                 {{ __('text.staff_list') }}
@@ -22,10 +22,6 @@
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
-        </div>
-    @elseif(session('error-status'))
-        <div class="alert alert-success">
-            {{ session('error-status') }}
         </div>
     @endif
     @if ($errors->any())
