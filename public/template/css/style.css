@@ -5712,3 +5712,11 @@ Attendance result table customisation
 .min-area {
   min-width: 110px;
 }
+
+#grade-labels > .label {
+  margin-right: 1%;
+}
+
+.table-width tbody tr td {
+  min-width: 80px;
+}

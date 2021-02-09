@@ -374,5 +374,7 @@ return[
     'transaction_no' => 'Transaction No',
     'accountant_signature' => 'Signature of accountant',
     'edit_sector' => 'Edit sector',
+    'hints' => 'Hints',
+    'information_notice' => 'Please make sure you provide the following details',
 
 ];

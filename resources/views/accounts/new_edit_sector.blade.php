@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
+                <a href="{{ route(current_user()->role . '.home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.edit_sector') }}r</li>
         </ul>

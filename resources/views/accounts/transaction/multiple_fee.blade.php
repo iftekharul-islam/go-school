@@ -11,7 +11,7 @@
                 <li>
                     <a href="{{ URL::previous() }}" class="mr-2">
                         {{ __('text.Back') }}|</a>
-                    <a href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
+                    <a href="{{ route(current_user()->role . '.home') }}">{{ __('text.Home') }}</a>
                 </li>
                 <li>
                     <a href="{{ route('accountant.all-student',['class' =>  $student->section->class['id'],'section' => $student['section']['id']]) }}"> {{ __('text.Collect Fee') }}</a>

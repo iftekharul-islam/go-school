@@ -1,20 +1,8 @@
-<style>
-    #grade-labels > .label {
-        margin-right: 1%;
-    }
-
-    .table-width tbody tr td {
-        min-width: 80px;
-    }
-    .min-area {
-        min-width: 175px;
-    }
-</style>
 <div class="col-md-12 mt-5" id="grade-labels">
     <div class="row">
         @foreach(marking_subjects() as $item)
             <div class="form-check form-check-inline">
-                <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] == true ? 'checked' : '' }}>
+                <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
                 <label for="{{ $item['id'] }}">
                     <span class="{{ $item['class'] }}">{{ $item['text'] }}</span>
                 </label>

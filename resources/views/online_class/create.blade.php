@@ -156,8 +156,7 @@
                                                                 <div class="alert alert-info">
                                                                     <ul>
                                                                         <li>
-                                                                            <b>Hints: Please make sure you provide the
-                                                                                following details:</b>
+                                                                            <b>{{ __('text.hints') }}: {{ __('text.information_notice') }}:</b>
                                                                         </li>
                                                                         <li>
                                                                             <b>Class: </b> class number [ Example : 4 ]

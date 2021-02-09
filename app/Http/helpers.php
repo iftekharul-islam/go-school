@@ -71,7 +71,7 @@ function subject_list($name, $value_starts, $text, $total_field, $badge)
             'value' => $initial_value + $i ,
             'text' => $text . ' ' . $i,
             'class' => $badge,
-            'checked' => $i == 1 ? true : false,
+            'checked' => $i == 1 ? 'checked' : '',
         ];
     }
 
@@ -90,7 +90,7 @@ function subjects()
             'value' => 4,
             'text' => 'Attendance',
             'class' => 'badge badge-primary',
-            'checked' => true,
+            'checked' => 'checked',
         ],
         [
             'id' => 'checkbox16',
@@ -98,7 +98,7 @@ function subjects()
             'value' => 19,
             'text' => 'Final Exam Written',
             'class' => 'badge badge-secondary',
-            'checked' => false,
+            'checked' => '',
         ],
         [
             'id' => 'checkbox17',
@@ -106,7 +106,7 @@ function subjects()
             'value' => 20,
             'text' => 'Final Exam MCQ',
             'class' => 'badge badge-secondary',
-            'checked' => false,
+            'checked' => '',
         ],
         [
             'id' => 'checkbox18',
@@ -114,7 +114,7 @@ function subjects()
             'value' => 21,
             'text' => 'Practical',
             'class' => 'badge badge-warning',
-            'checked' => false,
+            'checked' => '',
         ],
 
     ];
