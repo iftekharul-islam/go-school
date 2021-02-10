@@ -147,21 +147,13 @@ class StuffAttendanceController extends Controller
      */
     public function absents($id)
     {
-        $user = User::find($id);
-        $attendance_table = 'staffAttendances';
+        $attendance_type = 'absent';
+        $value = $this->checkAttendance($id, $attendance_type);
 
-        if ($user->role == 'student') {
-            $attendance_table = 'attendances';
-        }
-
-        $data = User::with([$attendance_table => function ($q) {
-            $q->absent();
-        }])->where('id', $id)
-            ->first();
-
-        $attendance = $data->{$attendance_table};
-
-        return view('attendance.absents', compact('data', 'attendance'));
+        return view('attendance.absents', ([
+            'data' => $value['data'],
+            'attendance' => $value['attendance'],
+        ]));
     }
 
     /**
@@ -170,6 +162,17 @@ class StuffAttendanceController extends Controller
      */
     public function attendees($id)
     {
+        $attendance_type = 'present';
+        $value = $this->checkAttendance($id, $attendance_type);
+
+        return view('attendance.attendees', ([
+            'data' => $value['data'],
+            'attendance' => $value['attendance'],
+        ]));
+    }
+
+    public function checkAttendance($id, $attendance_type)
+    {
         $user = User::find($id);
         $attendance_table = 'staffAttendances';
 
@@ -177,13 +180,16 @@ class StuffAttendanceController extends Controller
             $attendance_table = 'attendances';
         }
 
-        $data = User::with([$attendance_table => function ($q) {
-            $q->present();
+        $data = User::with([$attendance_table => function ($q) use ($attendance_type) {
+            $q->absent();
         }])->where('id', $id)
             ->first();
 
         $attendance = $data->{$attendance_table};
 
-        return view('attendance.attendees', compact('data', 'attendance'));
+        return [
+          'data' => $data,
+          'attendance' => $attendance,
+        ];
     }
 }

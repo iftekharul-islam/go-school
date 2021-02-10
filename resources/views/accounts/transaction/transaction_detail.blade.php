@@ -90,12 +90,14 @@
                                     <b>{{ number_format(($total_amount + $transaction->fine - $transaction->discount), 2) }}</b>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="text-right"><b>{{ __('text.partial_payment') }}</b></td>
-                                <td class="text-right">
-                                    <b>{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</b>
-                                </td>
-                            </tr>
+                            @if(!empty($partial))
+                                <tr>
+                                    <td class="text-right"><b>{{ __('text.partial_payment') }}</b></td>
+                                    <td class="text-right">
+                                        <b>{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</b>
+                                    </td>
+                                </tr>
+                            @endif
                             @if(!empty($transaction->deducted_advance_amount))
                                 <tr>
                                     <td class="text-right"><b>{{ __('text.adv_amount') }}</b></td>

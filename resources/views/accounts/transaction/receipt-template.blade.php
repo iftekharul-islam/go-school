@@ -235,13 +235,13 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td style="text-align:right">Partial</td>
-                        <td style="text-align:right">{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</td>
+                        <td style="text-align:right">{{ $partial_amount }}</td>
                     </tr>
                     <tr>
                             <td>&nbsp;</td>
                         @if( $grand_total > ($partial + $transaction->deducted_advance_amount))
                             <td><b>Due Amount</b></td>
-                            <td><b>{{ number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2) }}</b></td>
+                            <td><b>{{ $due_amount }}</b></td>
                         @else
                             <td style="text-align:right"><b>Paid Amount</b></td>
                             <td style="text-align:right"><b>{{ number_format(($grand_total), 2) }}</b></td>

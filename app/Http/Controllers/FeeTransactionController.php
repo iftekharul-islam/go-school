@@ -303,16 +303,14 @@ class FeeTransactionController extends Controller
         $transaction = FeeTransaction::with('transaction_items.fee_type')->findOrFail($id);
         $student = User::with(['school', 'section.class', 'studentInfo'])->findOrFail($transaction->student_id);
         $total_amount = 0;
-        $grand_total = 0;
-        $partial = 0;
 
-        if (isset($transaction->transaction_items)) {
-            foreach ($transaction->transaction_items as $item) {
-                $total_amount += $item->fee_amount;
-            }
-            $grand_total = $total_amount + $transaction->fine - $transaction->discount;
-            $partial = $total_amount - ($transaction->amount + $transaction->deducted_advance_amount);
+        foreach ($transaction->transaction_items as $item) {
+            $total_amount += $item->fee_amount;
         }
+
+        $grand_total = $total_amount + $transaction->fine - $transaction->discount;
+        $partial = $total_amount - ($transaction->amount + $transaction->deducted_advance_amount);
+
 
         if ($request->print == 1) {
             $this->generateReceipt($student, $transaction, $total_amount, $partial, $grand_total);
@@ -359,6 +357,8 @@ class FeeTransactionController extends Controller
 
     public function generateReceipt($student, $transaction, $total_amount, $partial, $grand_total)
     {
+        $partial_amount = number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2);
+        $due_amount = number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2);
 
         $data = ['student_name' => $student['name'],
             'roll_number' => $student['studentInfo']['roll_number'],
@@ -369,6 +369,8 @@ class FeeTransactionController extends Controller
             'school_address' => $student['school']['school_address'],
             'total_amount' => $total_amount,
             'partial' => $partial,
+            'partial_amount' => $partial_amount,
+            'due_amount' => $due_amount,
             'grand_total' => $grand_total,
 
         ];
