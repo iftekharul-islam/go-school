@@ -69,8 +69,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(!$transaction_items->isEmpty())
-                            @foreach($transaction_items as $key => $item)
+                        @if(!empty($transaction))
+                            @foreach($transaction->transaction_items as $key => $item)
                                 <tr>
                                     <td>{{ $item['fee_type']['name'] }} {{ $item['note'] ?? '' }}</td>
                                     <td class="text-right">{{ number_format($item->fee_amount, 2) }}</td>
@@ -78,38 +78,36 @@
                             @endforeach
                             <tr>
                                 <td>{{ __('text.fine') }}</td>
-                                <td class="text-right">{{ number_format($fee_transaction->fine, 2) }}</td>
+                                <td class="text-right">{{ number_format($transaction->fine, 2) }}</td>
                             </tr>
                             <tr>
                                 <td>{{ __('text.discounts') }}</td>
-                                <td class="text-right">{{ number_format($fee_transaction->discount, 2) }}</td>
+                                <td class="text-right">{{ number_format($transaction->discount, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-right"><b>{{ __('text.grand_total') }}</b></td>
                                 <td class="text-right">
-                                    <b>{{ number_format(($total_amount + $fee_transaction->fine - $fee_transaction->discount), 2) }}</b>
+                                    <b>{{ number_format(($total_amount + $transaction->fine - $transaction->discount), 2) }}</b>
                                 </td>
                             </tr>
-                            @if($partial != '0' || $partial != null)
-                                <tr>
-                                    <td class="text-right"><b>{{ __('text.partial_payment') }}</b></td>
-                                    <td class="text-right">
-                                        <b>{{ number_format(( $grand_total - ($fee_transaction->amount + $fee_transaction->deducted_advance_amount) ), 2) }}</b>
-                                    </td>
-                                </tr>
-                            @endif
-                            @if($fee_transaction->deducted_advance_amount != '0')
+                            <tr>
+                                <td class="text-right"><b>{{ __('text.partial_payment') }}</b></td>
+                                <td class="text-right">
+                                    <b>{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</b>
+                                </td>
+                            </tr>
+                            @if(!empty($transaction->deducted_advance_amount))
                                 <tr>
                                     <td class="text-right"><b>{{ __('text.adv_amount') }}</b></td>
                                     <td class="text-right">
-                                        <b>{{ number_format(($fee_transaction->deducted_advance_amount), 2) }}</b></td>
+                                        <b>{{ number_format(($transaction->deducted_advance_amount), 2) }}</b></td>
                                 </tr>
                             @endif
-                            @if( $grand_total > ($partial + $fee_transaction->deducted_advance_amount))
+                            @if( $grand_total > ($partial + $transaction->deducted_advance_amount))
                                 <tr>
                                     <td class="text-right"><b>{{ __('text.due_amount') }}</b></td>
                                     <td class="text-right">
-                                        <b>{{ number_format(($grand_total - ($partial + $fee_transaction->deducted_advance_amount) ), 2) }}</b>
+                                        <b>{{ number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2) }}</b>
                                     </td>
                             @else
                                 <tr>

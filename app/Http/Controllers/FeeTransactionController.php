@@ -300,24 +300,25 @@ class FeeTransactionController extends Controller
      */
     public function transactionDetail(Request $request, $id)
     {
-        if ($request->print == 1) {
-            $this->generateReceipt($id);
-        }
-        $fee_transaction = FeeTransaction::findOrFail($id);
-        $advance_amount = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
-        $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
-        $transaction_items = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
+        $transaction = FeeTransaction::with('transaction_items.fee_type')->findOrFail($id);
+        $student = User::with(['school', 'section.class', 'studentInfo'])->findOrFail($transaction->student_id);
         $total_amount = 0;
+        $grand_total = 0;
+        $partial = 0;
 
-        if ($transaction_items) {
-            foreach ($transaction_items as $item) {
+        if (isset($transaction->transaction_items)) {
+            foreach ($transaction->transaction_items as $item) {
                 $total_amount += $item->fee_amount;
             }
-            $grand_total = $total_amount + $fee_transaction->fine - $fee_transaction->discount;
-            $partial = $total_amount - ($fee_transaction->amount + $fee_transaction->deducted_advance_amount);
+            $grand_total = $total_amount + $transaction->fine - $transaction->discount;
+            $partial = $total_amount - ($transaction->amount + $transaction->deducted_advance_amount);
         }
 
-        return view('accounts.transaction.transaction_detail', compact('transaction_items', 'student', 'fee_transaction', 'advance_amount', 'total_amount', 'partial', 'grand_total'));
+        if ($request->print == 1) {
+            $this->generateReceipt($student, $transaction, $total_amount, $partial, $grand_total);
+        }
+
+        return view('accounts.transaction.transaction_detail', compact('transaction', 'student', 'total_amount', 'partial', 'grand_total'));
     }
 
     public function advanceCollection(Request $request)
@@ -356,17 +357,20 @@ class FeeTransactionController extends Controller
         return back()->with('status', 'Advance Amount Updated');
     }
 
-    public function generateReceipt($transaction_id)
+    public function generateReceipt($student, $transaction, $total_amount, $partial, $grand_total)
     {
-        $transaction = FeeTransaction::with('transaction_items.fee_type')->findOrFail($transaction_id);
-        $student = User::with('school', 'section.class', 'studentInfo')->findOrFail($transaction['student_id']);
+
         $data = ['student_name' => $student['name'],
             'roll_number' => $student['studentInfo']['roll_number'],
             'section' => $student['section']['section_number'],
             'class' => $student['section']['class']['class_number'],
             'transaction' => $transaction,
             'school_name' => $student['school']['name'],
-            'school_address' => $student['school']['school_address']
+            'school_address' => $student['school']['school_address'],
+            'total_amount' => $total_amount,
+            'partial' => $partial,
+            'grand_total' => $grand_total,
+
         ];
         $pdf = PDF::loadView('accounts.transaction.receipt-template', $data, [], ['format' => 'A4-L', 'orientation' => 'L']);
         $date = Carbon::now();
