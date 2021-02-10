@@ -50,6 +50,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::get('user/config/change_password', 'UserController@changePasswordGet');
     Route::post('user/config/change_password', 'UserController@changePasswordPost');
     Route::get('notices-and-events', 'NoticeController@index');
+    Route::get('absents/{id}', 'StuffAttendanceController@absents')->name('absents');
+    Route::get('attendees/{id}', 'StuffAttendanceController@attendees')->name('attendees');
 
     Route::post('students/import', 'UserController@importStudents')->name('students.import');
 
@@ -92,7 +94,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     //Student role routes
     Route::group(['prefix' => 'student', 'middleware' => 'student'], function () {
         Route::get('/home', 'StudentHomeController@index')->name('student.home');
-        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
+        Route::get('attendances/{section_id}/{user_id}/{exam_id}', 'AttendanceController@index');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('grades/{student_id}', 'GradeController@index')->name('student.grades');
         Route::get('user/notifications/{id}', 'NotificationController@index');
@@ -235,7 +237,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::post('teacher-attendance/store', 'StuffAttendanceController@store');
             Route::get('teacher-attendance/adjust/{teacher_id}', 'StuffAttendanceController@adjustMissingAttendance');
             Route::post('teacher-attendance/adjust/post', 'StuffAttendanceController@adjustMissingAttendancePost');
-            Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details')->name('staff.attendance');
+            Route::get('attendance/{user_id}', 'StuffAttendanceController@details')->name('staff.attendance');
 
             Route::get('attendance', 'StuffAttendanceController@stuffAttendance');
             Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore')->name('staff.store');
@@ -370,7 +372,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('students/export/{class_number}/{section_name}/{section_id}', 'AttendanceController@absentExport')->name('export.AbsentStudent');
         Route::get('attendance/adjust/{student_id}', 'AttendanceController@adjust');
         Route::post('attendance/adjust', 'AttendanceController@adjustPost');
-        Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
+        Route::get('attendances/{section_id}/{user_id}/{exam_id}', 'AttendanceController@index');
         Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary');
         Route::get('teacher-attendance-summary', 'AttendanceController@teacherAttendance')->name('teacher.summary');
         Route::get('grades/classes', 'GradeController@allExamsGrade')->name('grades.classes');

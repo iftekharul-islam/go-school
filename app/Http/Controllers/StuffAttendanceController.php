@@ -140,4 +140,50 @@ class StuffAttendanceController extends Controller
 
         return $this->teacherAttendanceService->adjustStaffPreviousAttendance($request);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function absents($id)
+    {
+        $user = User::find($id);
+        $attendance_table = 'staffAttendances';
+
+        if ($user->role == 'student') {
+            $attendance_table = 'attendances';
+        }
+
+        $data = User::with([$attendance_table => function ($q) {
+            $q->absent();
+        }])->where('id', $id)
+            ->first();
+
+        $attendance = $data->{$attendance_table};
+
+        return view('attendance.absents', compact('data', 'attendance'));
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function attendees($id)
+    {
+        $user = User::find($id);
+        $attendance_table = 'staffAttendances';
+
+        if ($user->role == 'student') {
+            $attendance_table = 'attendances';
+        }
+
+        $data = User::with([$attendance_table => function ($q) {
+            $q->present();
+        }])->where('id', $id)
+            ->first();
+
+        $attendance = $data->{$attendance_table};
+
+        return view('attendance.attendees', compact('data', 'attendance'));
+    }
 }

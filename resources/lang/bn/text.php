@@ -379,4 +379,7 @@ return [
     'accountant_signature' => 'হিসাবরক্ষকের স্বাক্ষর',
     'edit_sector' => 'হিসাব বিভাগ পুনঃসংস্কার',
     'inactive_staffs' => 'নিষ্ক্রিয় কর্মীরা',
+    'absents' => 'অনুপস্থিতির তালিকা',
+    'attendees' => 'উপস্থিতি',
+    'transaction_details' => 'লেনদেনের বিবরন',
 ];

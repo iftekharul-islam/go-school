@@ -32,11 +32,12 @@ class AttendanceController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param $section_id
+     * @param $user_id
+     * @param $exam_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($section_id, $student_id, $exam_id)
+    public function index($section_id, $user_id, $exam_id)
     {
         $user = Auth::user();
 
@@ -55,7 +56,7 @@ class AttendanceController extends Controller
 
         } else {
 
-            $data = $this->attendanceService->attendanceSummary($student_id);
+            $data = $this->attendanceService->attendanceSummary($user_id);
 
             return view('attendance.admin-student-attendances', ($data));
         }

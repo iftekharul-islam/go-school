@@ -293,6 +293,11 @@ class FeeTransactionController extends Controller
         return view('fees.fees_summary', compact('fees') );
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function transactionDetail(Request $request, $id)
     {
         if ($request->print == 1) {
@@ -301,9 +306,18 @@ class FeeTransactionController extends Controller
         $fee_transaction = FeeTransaction::findOrFail($id);
         $advance_amount = User::with(['studentInfo', 'section', 'section.class.feeMasters', 'section.class.feeMasters.feeType'])->where('id', $id)->first();
         $student = User::with(['school', 'section.class'])->findOrFail($fee_transaction->student_id);
-        $transactionItems = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
+        $transaction_items = TransactionItem::with('fee_type')->where('fee_transaction_id', $fee_transaction->id)->get();
+        $total_amount = 0;
 
-        return view('accounts.transaction.transaction-detail', compact('transactionItems', 'student', 'fee_transaction', 'advance_amount'));
+        if ($transaction_items) {
+            foreach ($transaction_items as $item) {
+                $total_amount += $item->fee_amount;
+            }
+            $grand_total = $total_amount + $fee_transaction->fine - $fee_transaction->discount;
+            $partial = $total_amount - ($fee_transaction->amount + $fee_transaction->deducted_advance_amount);
+        }
+
+        return view('accounts.transaction.transaction_detail', compact('transaction_items', 'student', 'fee_transaction', 'advance_amount', 'total_amount', 'partial', 'grand_total'));
     }
 
     public function advanceCollection(Request $request)
