@@ -5756,3 +5756,7 @@ Attendance result table customisation
     background-color: #DC3C45 !important;
   }
 }
+
+.img-min-height {
+  height: 130px;
+}

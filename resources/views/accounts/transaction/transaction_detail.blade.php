@@ -24,7 +24,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="{{url($student->pic_path)}}" style="height: 130px;" alt="">
+                        <img src="{{url($student->pic_path)}}" class="img-min-height" alt="">
                     </div>
                     <div class="col-md-10">
                         <div class="row">
