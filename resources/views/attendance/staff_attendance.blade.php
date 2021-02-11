@@ -38,7 +38,7 @@
                         <b>{{ __('text.Date') }}</b> - {{ Carbon\Carbon::now()->format('d/m/Y')}}
                     </div>
                 </div>
-                @include('layouts.teacher.teacher-attendance-form')
+                @include('layouts.teacher.teacher_attendance_form')
             @else
                 <div class="card mt-5 false-height">
                     <div class="card-body">
