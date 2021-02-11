@@ -15,14 +15,28 @@
         </ul>
     </div>
 
-    <div class="card height-auto false-height">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <div class="card height-auto">
         <div class="card-body">
                 <div class="heading-layout1">
                     <div class="item-title">
                         <h2 class="text-teal"><i class="far fa-chart-bar mr-2"></i>{{ __('text.Attendance') }}</h2>
                     </div>
                 </div>
-
             @if(count($students) > 0)
                 @foreach ($students as $student)
                     <div class="card-header-title mt-5 ml-2">
@@ -30,18 +44,14 @@
                     </div>
                     @break($loop->first)
                 @endforeach
-                <div>
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                @include('layouts.teacher.attendance-form')
+            @else
+                <div class="card mt-5 false-height">
+                    <div class="card-body">
+                        <div class="card-body-body mt-5 text-center">
+                            {{ __('text.No_related_data_notification') }}
                         </div>
-
-                    @elseif (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                    @endif
-                    @include('layouts.teacher.attendance-form')
+                    </div>
                 </div>
             @endif
         </div>

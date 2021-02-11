@@ -22,7 +22,7 @@ class StuffAttendanceController extends Controller
 
     public function index()
     {
-        $teachers = User::where('school_id', Auth::user()->school_id)
+        $staffs = User::where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
             ->orderBy('id', 'ASC')
             ->where('active', 1)
@@ -33,13 +33,13 @@ class StuffAttendanceController extends Controller
             ->where('active', 1)
             ->whereIn('department_id', Auth::user()->adminDepartments()->pluck('departments.id'))
             ->get();
-        if ($teachersFilterByAdmin->count() > 0) {
-            $teachers = $teachersFilterByAdmin;
+        if (count($teachersFilterByAdmin) > 0) {
+            $staffs = $teachersFilterByAdmin;
         }
-        $attendances = $this->teacherAttendanceService->getTeacherAttendance();
+        $attendances = $this->teacherAttendanceService->getTeacherTodayAttendance();
         $attCount = $this->teacherAttendanceService->getTeacherTotalAttendance();
 
-        return view('attendance.teacher-attendance', compact('teachers', 'attendances', 'attCount'));
+        return view('attendance.staff_attendance', compact('staffs', 'attendances', 'attCount'));
     }
 
     public function allTeacher()
@@ -54,11 +54,11 @@ class StuffAttendanceController extends Controller
 
     public function stuffAttendance()
     {
-        $librarians = User::where('school_id', Auth::user()->school_id)->whereNotIn('role', ['student','teacher','admin','master'])->get();
-        $attendances = $this->teacherAttendanceService->getLibrariansAttendance();
+        $staffs = User::where('school_id', Auth::user()->school_id)->whereNotIn('role', ['student','teacher','admin','master'])->get();
+        $attendances = $this->teacherAttendanceService->getLibrariansTodayAttendance();
         $attCount = $this->teacherAttendanceService->getLibrarianTotalAttendance();
 
-        return view('attendance.librarian-attendance', compact('librarians', 'attCount', 'attendances'));
+        return view('attendance.staff_attendance', compact('staffs', 'attCount', 'attendances'));
     }
 
     public function store(Request $request)

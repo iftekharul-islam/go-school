@@ -380,4 +380,5 @@ return[
     'absents' => 'Absents',
     'attendees' => 'Attendees',
     'transaction_details' => 'Transaction details',
+    'attendance_notification' => 'Today attendance already taken',
 ];

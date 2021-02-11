@@ -29,26 +29,26 @@ class TeacherAttendanceService {
         StuffAttendance::insert($at);
     }
 
-    public function getTeacherAttendance()
+    public function getTeacherTodayAttendance()
     {
         return StuffAttendance::whereHas('stuff', function ($q){
                 $q->active();
-            })->where('school_id', Auth::user()->school_id)
+            })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
+            ->where('school_id', Auth::user()->school_id)
             ->where('role', 'teacher')
             ->orderBy('stuff_id', 'ASC')
-            ->get()
-            ->unique('stuff_id');
+            ->count();
     }
 
-    public function getLibrariansAttendance()
+    public function getLibrariansTodayAttendance()
     {
         return StuffAttendance::whereHas('stuff', function ($q) {
             $q->active();
-        })->where('school_id', Auth::user()->school_id)
+        })->whereDate('created_at', \DB::raw('CURRENT_DATE'))
+            ->where('school_id', Auth::user()->school_id)
             ->orderBy('stuff_id', 'ASC')
             ->whereNotIn('role', ['student', 'teacher', 'admin', 'master', 'guardian'])
-            ->get()
-            ->unique('stuff_id');
+            ->count();
     }
 
     public function getTeacherTotalAttendance()

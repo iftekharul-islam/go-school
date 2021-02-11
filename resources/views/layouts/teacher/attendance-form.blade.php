@@ -1,16 +1,14 @@
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+@if ($attendances > 0)
+    <div class="text-center mt-5">
+        <p>{{ __('text.attendance_notification') }}</p>
     </div>
-@endif
+@else
 <form id="attendance-form" action="{{url('teacher/attendance/take-attendance')}}" method="post">
     {{ csrf_field() }}
     <input type="text" name="section_id" value="{{$section_id}}" style="display: none;">
     <input type="hidden" name="exam_id" value="{{$exam_id}}">
+    <input type="hidden" name="update" value="0">
+    <input type="hidden" name="attendances[]" value="0">
     <div class="table-responsive">
         <table class="table display table-bordered table-data-div text-nowrap">
             <thead>
@@ -26,59 +24,8 @@
             </tr>
             </thead>
             <tbody>
-            @if (count($attendances) > 0)
-                <input type="text" name="update" value="1" style="display: none;">
-
                 @foreach ($students as $student)
-                    <input type="text" name="students[]" value="{{$student->id}}" style="display: none;">
-                @endforeach
-                @foreach ($attendances as $attendance)
-                    <tr>
-                        <th scope="row">{{($loop->index + 1)}}</th>
-                        <td>{{$attendance->student->student_code}}</td>
-                        <td>
-                            @if($attendance->present === 1)
-                                <span class="badge-primary attdState badge">{{ trans_choice('text.Present',2) }}</span>
-                            @else
-                                <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
-                            @endif
-                            &nbsp;&nbsp
-                                <a href="{{route('user.show', $attendance->student->student_code)}}">{{$attendance->student->name}}</a>
-                        </td>
-                        <td class="attendance-bar">
-                            <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
-                            @if($attendance->present === 1)
-                                <div class="form-check">
-                                    <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Present" disabled="disabled" checked>
-                                    <label for="">&nbsp;</label>
-                                </div>
-                            @else
-                                <div class="form-check">
-                                    <input class="form-check-input formCheck" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent" disabled="disabled" >
-                                    <label for="">&nbsp;</label>
-                                </div>
-                            @endif
-                        </td>
-                        @if(count($attCount) > 0)
-                            @foreach ($attCount as $at)
-                                @if($at->student_id == $attendance->student->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent : 0}}</td>
-                                @else
-                                    @continue
-                                @endif
-                            @endforeach
-                        @else
-                            <td>0</td>
-                            <td>0</td>
-                        @endif
-                    </tr>
-                @endforeach
-            @else
-                <input type="number" name="update" value="0" style="display: none;">
-                <input type="text" name="attendances[]" value="0" style="display: none;">
-                @foreach ($students as $student)
-                    <input type="text" name="students[]" value="{{$student->id}}" style="display: none;">
+                    <input type="text" class="d-none" name="students[]" value="{{$student->id}}">
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
                         <td>{{$student->student_code}}</td>
@@ -93,14 +40,19 @@
                             </div>
                         </td>
                         @if(count($attCount) > 0)
+                            @php $is_available = false; @endphp
                             @foreach ($attCount as $at)
-                                @if($at->student_id == $student->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0 }}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
-                                @else
-                                    @continue
+                                @if($at->student_id === $student->id)
+                                    @php $is_available = true; @endphp
+                                    <td>{{$at->totalpresent ?? 0 }}</td>
+                                    <td>{{$at->totalabsent ?? 0 }}</td>
+                                    @break
                                 @endif
                             @endforeach
+                            @if (!$is_available)
+                                <td>0</td>
+                                <td>0</td>
+                            @endif
                         @else
                             <td>0</td>
                             <td>0</td>
@@ -108,16 +60,12 @@
 
                     </tr>
                 @endforeach
-            @endif
             </tbody>
         </table>
-    </div>
-    <div class="attendance mt-5">
-        @if (count($attendances) > 0)
-            <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i>{{ __('text.Update') }}</button>
-        @else
+        <div class="attendance mt-5">
             <button type="submit" class="button button--save float-right mb-5 updatebtn" disabled="disabled"><i class="far fa-save mr-2"></i>{{ __('text.Submit') }}</button>
-        @endif
+        </div>
     </div>
 </form>
+@endif
 
