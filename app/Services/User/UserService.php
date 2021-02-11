@@ -297,9 +297,6 @@ class UserService
         $tb->department_id = (!empty($request->department_id)) ? $request->department_id : 0;
         $tb->save();
 
-        // Store default data on attendance table for a new user
-        event(new NewUserRegistered($tb));
-
         return $tb;
     }
 
@@ -358,9 +355,6 @@ class UserService
         $tb->pic_path = $path ? 'storage/' . $path : '';
         $tb->verified = 1;
         $tb->save();
-
-        // Store default data on attendance table for a new user
-        event(new NewUserRegistered($tb));
 
         return $tb;
     }

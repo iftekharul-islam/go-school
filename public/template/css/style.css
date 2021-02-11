@@ -5720,3 +5720,43 @@ Attendance result table customisation
 .table-width tbody tr td {
   min-width: 80px;
 }
+
+.example-print {
+  display: none;
+}
+@media print {
+  .example-screen {
+    display: none;
+  }
+  .example-print {
+    margin: 10mm 0 0 0;
+    display: block;
+  }
+  .report {
+    margin-bottom: 20px;
+  }
+  table tbody .grand-total td {
+    background-color: #DCDCDC !important;
+  }
+  tbody td .month {
+    background-color: #42A746 !important;
+  }
+  tbody td .month b {
+    color: white !important;
+  }
+  tbody td .paid {
+    color: white !important;
+    background-color: #287C71 !important;
+  }
+  tbody td .partial {
+    background-color: #FEC23E !important;
+  }
+  tbody td .unpaid {
+    color: white !important;
+    background-color: #DC3C45 !important;
+  }
+}
+
+.img-min-height {
+  height: 130px;
+}

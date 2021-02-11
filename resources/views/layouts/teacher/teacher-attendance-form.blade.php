@@ -1,14 +1,12 @@
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+@if ($attendances > 0)
+    <div class="text-center mt-5">
+        <p>{{ __('text.attendance_notification') }}</p>
     </div>
-@endif
+@else
 <form action="{{url('admin/staff/attendance/store')}}" method="post">
     {{ csrf_field() }}
+    <input type="hidden" name="update" value="0">
+    <input type="hidden" name="attendances[]" value="0">
     <div class="table-responsive">
         <table class="table display table-bordered table-data-div text-nowrap">
             <thead>
@@ -24,72 +22,14 @@
             </tr>
             </thead>
             <tbody>
-            @if (count($attendances) > 0)
-                <input type="text" name="update" value="1" style="display: none;">
-
-                @foreach ($teachers as $teacher)
-                    <input type="text" name="staffs[]" value="{{$teacher->id}}" style="display: none;">
-                @endforeach
-                @foreach ($attendances as $attendance)
+                @foreach ($staffs as $staff)
+                    <input type="text" class="d-none" name="staffs[]" value="{{$staff->id}}">
                     <tr>
                         <th scope="row">{{($loop->index + 1)}}</th>
-                        <td>{{$attendance->stuff->student_code}}</td>
-                        <td>
-                            @if($attendance->present === 1 || $attendance->present === 3)
-                                <span class= "badge-primary attdState badge">{{ trans_choice('text.Present',2) }}</span>
-                            @else
-                                <span class="badge-danger attdState badge">{{ __('text.Absent') }}</span>
-                            @endif
-                            &nbsp;&nbsp;<a href="{{url('user/'.$attendance->stuff->student_code)}}">{{$attendance->stuff->name}}</a>
+                        <td>{{$staff->student_code}}</td>
+                        <td><span class="badge badge-primary attdState">{{ trans_choice('text.Present',2) }}</span>&nbsp;&nbsp;{{ $staff->name }}
                         </td>
-                        <td>{{ ucfirst($attendance->role) }}</td>
-                        <td>
-                            <input type="text" name="attendances[]" value="{{$attendance->id}}" style="display: none;">
-                            @if($attendance->present === 1 || $attendance->present === 3)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" aria-label="Present" name="isPresent{{$loop->index}}" checked>
-                                    <label for="">&nbsp;</label>
-                                </div>
-                            @else
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}" aria-label="Absent">
-                                    <label for="">&nbsp;</label>
-                                </div>
-                            @endif
-                        </td>
-                        @if(count($attCount) > 0)
-                            @foreach ($attCount as $at)
-                                @if($at->stuff_id == $attendance->stuff_id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent : 0}}</td>
-                                @else
-                                    @continue
-                                @endif
-                            @endforeach
-                        @else
-                            <td>0</td>
-                            <td>0</td>
-                        @endif
-                        @if(current_user()->role === 'admin')
-                            <td>
-                                <a href="{{url('admin/staff/teacher-attendance/adjust/'.$attendance->stuff->id)}}"
-                                   role="button"
-                                   class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a>
-                            </td>
-                        @endif
-                    </tr>
-                @endforeach
-            @else
-                <input type="number" name="update" value="0" style="display: none;">
-                <input type="text" name="attendances[]" value="0" style="display: none;">
-                @foreach ($teachers as $teacher)
-                    <input type="text" name="staffs[]" value="{{$teacher->id}}" style="display: none;">
-                    <tr>
-                        <th scope="row">{{($loop->index + 1)}}</th>
-                        <td>{{$teacher->student_code}}</td>
-                        <td><span class="badge badge-primary attdState">{{ trans_choice('text.Present',2) }}</span>&nbsp;&nbsp;{{ $teacher->name }}
-                        </td>
-                        <td>{{ ucfirst($teacher->role) }}</td>
+                        <td>{{ ucfirst($staff->role) }}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="isPresent{{$loop->index}}"
@@ -98,43 +38,37 @@
                             </div>
                         </td>
                         @if(count($attCount) > 0)
+                            @php $is_available = false; @endphp
                             @foreach ($attCount as $at)
-                                @if($at->stuff_id == $teacher->id)
-                                    <td>{{$at->totalpresent ? $at->totalpresent : 0}}</td>
-                                    <td>{{$at->totalabsent ? $at->totalabsent: 0 }}</td>
-                                    @break
-                                @else
-                                    <td>0</td>
-                                    <td>0</td>
+                                @if($at->stuff_id == $staff->id)
+                                    @php $is_available = true; @endphp
+                                    <td>{{$at->totalpresent ?? 0}}</td>
+                                    <td>{{$at->totalabsent ?? 0 }}</td>
                                     @break
                                 @endif
                             @endforeach
+                            @if (!$is_available)
+                                <td>0</td>
+                                <td>0</td>
+                            @endif
                         @else
                             <td>0</td>
                             <td>0</td>
                         @endif
                         @if(current_user()->role === 'admin')
-                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$teacher->id)}}" role="button"
+                            <td><a href="{{url('admin/staff/teacher-attendance/adjust/'.$staff->id)}}" role="button"
                                    class="btn-link text-teal">{{ __('text.Adjust Missed Attendance') }}</a></td>
                         @endif
                     </tr>
                 @endforeach
-            @endif
             </tbody>
         </table>
     </div>
     <div class="float-right mb-4">
-        <a href="{{ URL::previous() }}" class="button button--cancel mr-3" role="button"><i
-                class="fas fa-window-close mr-2"></i>{{ __('text.Cancel') }}</a>
-        @if (count($attendances) > 0)
-            <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Update') }}
-            </button>
-        @else
-            <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Submit') }}
-            </button>
-        @endif
+        <button type="submit" class="button button--save"><i class="far fa-save mr-2"></i>{{ __('text.Submit') }}</button>
     </div>
 </form>
+@endif
 <script>
     $('input[type="checkbox"]').change(function () {
         var attdState = $(this).parent().parent().parent().find('.attdState').removeClass('badge-danger badge-primary');

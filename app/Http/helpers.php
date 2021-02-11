@@ -63,12 +63,12 @@ function subject_list($name, $value_starts, $text, $total_field, $badge)
     $items = [];
     $initial_value = $value_starts - 1;
 
-    for ($i = 1 ; $i <= $total_field; $i++) {
-
-        $items []= [
-            'id' => 'checkbox' . $i,
+    for ($i = 1; $i <= $total_field; $i++) {
+        $value = $initial_value + $i;
+        $items [] = [
+            'id' => 'checkbox' . $value,
             'name' => $name,
-            'value' => $initial_value + $i ,
+            'value' => $value,
             'text' => $text . ' ' . $i,
             'class' => $badge,
             'checked' => $i == 1 ? 'checked' : '',
@@ -130,6 +130,6 @@ function marking_subjects()
     $class_tests = subject_list('ct[]', 13, 'Class Test', 5, 'badge badge-info');
     $subjects = subjects();
 
-    return array_merge($subjects, $quizzes, $assignments, $class_tests);
+    return array_merge($quizzes, $assignments, $class_tests, $subjects);
 
 }

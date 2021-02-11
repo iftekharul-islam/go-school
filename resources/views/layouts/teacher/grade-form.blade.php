@@ -4,7 +4,7 @@
             <div class="form-check form-check-inline">
                 <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
                 <label for="{{ $item['id'] }}">
-                    <span class="{{ $item['class'] }}">{{ $item['text'] }}</span>
+                    <span class="{{ $item['class'] }} mr-4">{{ $item['text'] }}</span>
                 </label>
             </div>
         @endforeach

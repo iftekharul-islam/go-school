@@ -161,13 +161,13 @@
                                     </label>
                                 </div>
 
-                                <div class="col-lg-12 col-md-12 form-group">
+                                <div class="col-lg-12 col-md-12">
                                     <label>{{ __('text.pay_method') }}</label>
-                                    <label for="cash" class="mr-2">
+                                    <label for="cash" class="mr-5">
                                         <input class="ml-5" type="radio" name="mode" value="cash" id="cash" checked> {{ __('text.cash') }}
                                     </label>
                                     <label for="cheque">
-                                        <input class="" type="radio" name="mode" id="cheque" value="cheque">{{ __('text.cheque') }}
+                                        <input class="" type="radio" name="mode" id="cheque" value="cheque"> {{ __('text.cheque') }}
                                     </label>
                                 </div>
                                 <div class="col-12-xxxl col-lg-12 col-12 form-group">

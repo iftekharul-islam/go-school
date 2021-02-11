@@ -38,7 +38,7 @@
             </div>
             <div class="item-content">
                 <div class="item-number"><span class="counter" data-num="{{ $present }}"></span></div>
-                <div class="item-title">{{ __('text.Total Attended') }}</div>
+                <div class="item-title"><a href="{{ route('attendees', request('user_id')) }}">{{ __('text.Total Attended') }}</a></div>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="item-content">
                 <div class="item-number"><span class="counter" data-num="{{ $absent }}"></span></div>
-                <div class="item-title">{{ __('text.Total Missed') }}</div>
+                <div class="item-title"><a href="{{ route('absents', request('user_id')) }}">{{ __('text.Total Missed') }}</a></div>
             </div>
         </div>
     </div>

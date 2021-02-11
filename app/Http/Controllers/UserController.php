@@ -426,8 +426,6 @@ class UserController extends Controller
         $tb->shift_id = (!empty($request->shift_id)) ? $request->shift_id : null ;
         $tb->save();
 
-        // Store default data on attendance table for a new user
-        event(new NewUserRegistered($tb));
         try {
             // Fire event to send welcome email
             event(new UserRegistered($tb));

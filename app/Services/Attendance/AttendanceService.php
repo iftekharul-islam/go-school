@@ -60,8 +60,7 @@ class AttendanceService
             })->where('section_id', $section_id)
             ->whereDate('created_at', \DB::raw('CURRENT_DATE'))
             ->orderBy('created_at', 'desc')
-            ->get()
-            ->unique('student_id');
+            ->count();
     }
 
     public function getAttendanceSummary($request)

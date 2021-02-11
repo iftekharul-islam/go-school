@@ -377,5 +377,8 @@ return[
     'hints' => 'Hints',
     'information_notice' => 'Please make sure you provide the following details',
     'inactive_staffs' => 'Inactive staffs',
-
+    'absents' => 'Absents',
+    'attendees' => 'Attendees',
+    'transaction_details' => 'Transaction details',
+    'attendance_notification' => 'Today attendance already taken',
 ];
