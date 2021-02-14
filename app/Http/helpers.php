@@ -21,9 +21,22 @@ function new_date_format($date)
     return Carbon::createFromFormat('Y-m-d', $date)->format(config('format.default_date'));
 }
 
+/**
+ * @param $date
+ * @return string
+ */
 function new_time_date_format($date)
 {
     return Carbon::parse($date)->format(config('format.default_date'));
+}
+
+/**
+ * @param $date
+ * @return string
+ */
+function date_with_month_name($date)
+{
+    return Carbon::parse($date)->format(config('format.date_with_month_name'));
 }
 
 /**
