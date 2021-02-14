@@ -181,7 +181,7 @@ class StuffAttendanceController extends Controller
         }
 
         $data = User::with([$attendance_table => function ($q) use ($attendance_type) {
-            $q->absent();
+            $q->{$attendance_type}();
         }])->where('id', $id)
             ->first();
 

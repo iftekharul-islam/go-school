@@ -120,39 +120,39 @@
                         @foreach ( $transaction['transaction_items'] as $index => $item )
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $item['fee_type']['name'] }}</td>
-                                <td style="text-align:right">{{ number_format($item['fee_amount'], 2) }}</td>
+                                <td style="text-align:left">{{ $item['fee_type']['name'] }}</td>
+                                <td style="text-align:left">{{ number_format($item['fee_amount'], 2) }}</td>
                             </tr>
                         @endforeach
                     @endif
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Fine</td>
-                        <td style="text-align:right">{{ number_format($transaction['fine'], 2) }}</td>
+                        <td style="text-align:left">Fine</td>
+                        <td style="text-align:left">{{ number_format($transaction['fine'], 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Sub Total</td>
-                        <td style="text-align:right">{{ number_format(($total_amount + $transaction['fine']), 2) }}</td>
+                        <td style="text-align:left">Sub Total</td>
+                        <td style="text-align:left">{{ number_format(($total_amount + $transaction['fine']), 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Discount</td>
-                        <td style="text-align:right">{{ number_format($transaction['discount'], 2) }}</td>
+                        <td style="text-align:left">Discount</td>
+                        <td style="text-align:left">{{ number_format($transaction['discount'], 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Partial</td>
-                        <td style="text-align:right">{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</td>
+                        <td style="text-align:left">Partial</td>
+                        <td style="text-align:left">{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         @if( $grand_total > ($partial + $transaction->deducted_advance_amount))
-                            <td><b>Due Amount</b></td>
-                            <td><b>{{ number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2) }}</b></td>
+                            <td style="text-align:left"><b>Due Amount</b></td>
+                            <td style="text-align:left"><b>{{ number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2) }}</b></td>
                         @else
-                            <td style="text-align:right"><b>Paid Amount</b></td>
-                            <td style="text-align:right"><b>{{ number_format(($grand_total), 2) }}</b></td>
+                            <td style="text-align:left"><b>Paid Amount</b></td>
+                            <td style="text-align:left"><b>{{ number_format(($grand_total), 2) }}</b></td>
                         @endif
                     </tr>
                 </tbody>
@@ -211,40 +211,40 @@
                         @foreach ( $transaction['transaction_items'] as $index => $item )
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $item['fee_type']['name'] }}</td>
-                                <td style="text-align:right">{{ number_format($item['fee_amount'], 2) }}</td>
+                                <td style="text-align:left">{{ $item['fee_type']['name'] }}</td>
+                                <td style="text-align:left">{{ number_format($item['fee_amount'], 2) }}</td>
                             </tr>
                         @endforeach
                     @endif
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Fine</td>
-                        <td style="text-align:right">{{ number_format($transaction['fine'], 2) }}</td>
+                        <td style="text-align:left">Fine</td>
+                        <td style="text-align:left">{{ number_format($transaction['fine'], 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Sub Total</td>
-                        <td style="text-align:right">{{ number_format(($total_amount + $transaction['fine']), 2) }}</td>
+                        <td style="text-align:left">Sub Total</td>
+                        <td style="text-align:left">{{ number_format(($total_amount + $transaction['fine']), 2) }}</td>
                     </tr>
 
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Discount</td>
-                        <td style="text-align:right">{{ number_format($transaction['discount'], 2) }}</td>
+                        <td style="text-align:left">Discount</td>
+                        <td style="text-align:left">{{ number_format($transaction['discount'], 2) }}</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td style="text-align:right">Partial</td>
-                        <td style="text-align:right">{{ $partial_amount }}</td>
+                        <td style="text-align:left">Partial</td>
+                        <td style="text-align:left">{{ $partial_amount }}</td>
                     </tr>
                     <tr>
                             <td>&nbsp;</td>
                         @if( $grand_total > ($partial + $transaction->deducted_advance_amount))
-                            <td><b>Due Amount</b></td>
-                            <td><b>{{ $due_amount }}</b></td>
+                            <td style="text-align:left"><b>Due Amount</b></td>
+                            <td style="text-align:left"><b>{{ $due_amount }}</b></td>
                         @else
-                            <td style="text-align:right"><b>Paid Amount</b></td>
-                            <td style="text-align:right"><b>{{ number_format(($grand_total), 2) }}</b></td>
+                            <td style="text-align:left"><b>Paid Amount</b></td>
+                            <td style="text-align:left"><b>{{ number_format(($grand_total), 2) }}</b></td>
                         @endif
                     </tr>
                 </tbody>

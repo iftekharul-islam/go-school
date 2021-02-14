@@ -61,7 +61,7 @@
                 </div>
                 <div class="item-content">
                     <div class="item-number"><span class="counter" data-num="{{ $escaped }}"></span></div>
-                    <div class="item-title">{{ __('text.Total Attended') }}</div>
+                    <div class="item-title">{{ __('text.total_escaped') }}</div>
                 </div>
             </div>
         </div>
