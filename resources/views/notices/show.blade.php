@@ -7,9 +7,9 @@
                 {{ __('text.notice_details') }}
             </h3>
             <ul>
-                <li> <a href="{{ URL::previous() }}">
-                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a href="{{ url( current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <li> <a href="{{ URL::previous() }}" class="mr-2">
+                        {{ __('text.Back') }}|</a>
+                    <a href="{{ url( current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
                 <li class="text-capitalize">{{ __('text.notice_details') }}</li>
             </ul>
@@ -24,6 +24,11 @@
                             <div class="card-body" >
                                 <div class="heading-sub fancy4">{{ $notice->title }}</div>
                                 <small>{{  $notice->created_at->format('d M Y') }}</small>
+                                @if($roles != null)
+                                    @foreach($roles as $role)
+                                        <small class="badge badge-primary mx-2">{{ $role }}</small>
+                                    @endforeach
+                                @endif
                                 <h3 class="text-center">
                                     {{ $notice->title }}
                                 </h3>

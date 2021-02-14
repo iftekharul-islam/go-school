@@ -69,10 +69,12 @@ class GuardianHomeController extends Controller
             $total_sections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();
             });
-            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id, $guardian) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->orderBy('created_at', 'DESC')
+                    ->where('roles', 'like', "%\"{$guardian->role}\"%")
+                    ->orWhere('roles', null)
                     ->get();
             });
 

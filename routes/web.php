@@ -348,7 +348,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('notice', 'NoticeController@list')->name('academic.notice');
             Route::get('create-notice', 'NoticeController@create')->name('create.notice');
             Route::post('store-notice', 'NoticeController@store')->name('store.notice');
-            Route::get('event', 'EventController@create')->name('academic.event');
+            Route::get('events', 'EventController@eventList')->name('academic.event');
+            Route::get('event/create', 'EventController@create')->name('create.event');
+            Route::post('event/store', 'EventController@store')->name('store.event');
             Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');
             Route::post('notice/delete/{id}', 'NoticeController@deleteNotice')->name('notice.delete');

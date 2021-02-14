@@ -30,10 +30,12 @@ class StudentHomeController extends Controller
         $minutes = 1440;// 24 hours = 1440 minutes
         if (isset($student->school_id)) {
             $school_id = $student->school_id;
-            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id, $student) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->orderBy('created_at', 'DESC')
+                    ->where('roles', 'like', "%\"{$student->role}\"%")
+                    ->orWhere('roles', null)
                     ->get();
             });
             $events = Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {

@@ -383,4 +383,7 @@ return [
     'attendees' => 'উপস্থিতি',
     'transaction_details' => 'লেনদেনের বিবরন',
     'attendance_notification' => 'আজ উপস্থিতি ইতিমধ্যে নেওয়া হয়েছে',
+    'create_event' => 'ইভেন্টস তৈরি',
+    'upload' => 'আপলোড',
+    'create_notice' => 'নোটিশ তৈরি',
 ];

@@ -40,9 +40,9 @@ class AccountantHomeController extends Controller
                     ->pluck('id')
                     ->toArray();
             });
-            $totalStudents = Cache::remember('totalStudents-'.$school_id, $minutes, function () use($school_id) {
-                return User::where('school_id',$school_id)
-                    ->where('role','student')
+            $totalStudents = Cache::remember('totalStudents-' . $school_id, $minutes, function () use ($school_id) {
+                return User::where('school_id', $school_id)
+                    ->where('role', 'student')
                     ->where('active', 1)
                     ->count();
             });
@@ -53,9 +53,12 @@ class AccountantHomeController extends Controller
             $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();
             });
-            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id, $student) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
+                    ->orderBy('created_at', 'DESC')
+                    ->where('roles', 'like', "%\"{$student->role}\"%")
+                    ->orWhere('roles', null)
                     ->get();
             });
 
@@ -89,13 +92,13 @@ class AccountantHomeController extends Controller
         $total_income = $total_income + $student_total;
 
         $fees = Fee::where('school_id', Auth::user()->school_id)->get();
-        return view('accountant-home', [
+        return view('accountant_home', [
             'totalStudents' => $totalStudents,
             'notices' => $notices,
             'exams' => $exams,
             'totalClasses' => $totalClasses,
             'totalSections' => $totalSections,
-            'fees'   => $fees,
+            'fees' => $fees,
             'total_income' => $total_income,
             'total_expense' => $total_expense,
         ]);
