@@ -309,14 +309,14 @@ class FeeTransactionController extends Controller
         }
 
         $grand_total = $total_amount + $transaction->fine - $transaction->discount;
-        $partial = $total_amount - ($transaction->amount + $transaction->deducted_advance_amount);
-
+        $partial = $grand_total - ($transaction->amount + $transaction->deducted_advance_amount);
+        $due_amount = number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2);
 
         if ($request->print == 1) {
             $this->generateReceipt($student, $transaction, $total_amount, $partial, $grand_total);
         }
 
-        return view('accounts.transaction.transaction_detail', compact('transaction', 'student', 'total_amount', 'partial', 'grand_total'));
+        return view('accounts.transaction.transaction_detail', compact('transaction', 'student', 'total_amount', 'partial', 'grand_total', 'due_amount'));
     }
 
     public function advanceCollection(Request $request)

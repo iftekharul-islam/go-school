@@ -94,7 +94,7 @@
                                 <tr>
                                     <td class="text-right"><b>{{ __('text.partial_payment') }}</b></td>
                                     <td class="text-right">
-                                        <b>{{ number_format(( $grand_total - ($transaction->amount + $transaction->deducted_advance_amount) ), 2) }}</b>
+                                        <b>{{ number_format(($partial), 2) }}</b>
                                     </td>
                                 </tr>
                             @endif
@@ -109,7 +109,7 @@
                                 <tr>
                                     <td class="text-right"><b>{{ __('text.due_amount') }}</b></td>
                                     <td class="text-right">
-                                        <b>{{ number_format(($grand_total - ($partial + $transaction->deducted_advance_amount) ), 2) }}</b>
+                                        <b>{{ $due_amount }}</b>
                                     </td>
                             @else
                                 <tr>

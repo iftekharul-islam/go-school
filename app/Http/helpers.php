@@ -85,7 +85,7 @@ function subjects()
 {
     return [
         [
-            'id' => 'checkbox1',
+            'id' => 'checkbox4',
             'name' => 'attendance',
             'value' => 4,
             'text' => 'Attendance',
@@ -93,25 +93,25 @@ function subjects()
             'checked' => 'checked',
         ],
         [
-            'id' => 'checkbox16',
+            'id' => 'checkbox18',
             'name' => 'few',
-            'value' => 19,
+            'value' => 18,
             'text' => 'Final Exam Written',
             'class' => 'badge badge-secondary',
             'checked' => '',
         ],
         [
-            'id' => 'checkbox17',
+            'id' => 'checkbox19',
             'name' => 'fem',
-            'value' => 20,
+            'value' => 19,
             'text' => 'Final Exam MCQ',
             'class' => 'badge badge-secondary',
             'checked' => '',
         ],
         [
-            'id' => 'checkbox18',
+            'id' => 'checkbox20',
             'name' => 'practical',
-            'value' => 21,
+            'value' => 20,
             'text' => 'Practical',
             'class' => 'badge badge-warning',
             'checked' => '',
