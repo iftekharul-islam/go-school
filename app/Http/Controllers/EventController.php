@@ -66,7 +66,7 @@ class EventController extends Controller
         $tb->roles = isset($request->roles) ? serialize($request->roles) : null;
         $tb->save();
 
-        return redirect()->route('academic.event')->with('status', 'New event upload complete');
+        return redirect()->route('academic.event')->with('status', __('text.notice_upload_notification'));
     }
 
     /**

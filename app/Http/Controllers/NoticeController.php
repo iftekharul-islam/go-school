@@ -79,7 +79,7 @@ class NoticeController extends Controller
         $tb->roles = isset($request->roles) ? serialize($request->roles) : null;
         $tb->save();
 
-        return redirect()->route('academic.notice')->with('status', 'New notice upload complete');
+        return redirect()->route('academic.notice')->with('status', __('text.event_upload_notification'));
     }
 
     /**
