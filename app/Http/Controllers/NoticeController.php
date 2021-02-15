@@ -92,7 +92,6 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-//        return roles_value(3);
         $data = Notice::query();
         $user = Auth::user();
 

@@ -13,11 +13,4 @@ class Notice extends Model
     {
         return $this->belongsTo('App\School');
     }
-
-    public static function Roles()
-    {
-        return [
-
-        ];
-    }
 }
