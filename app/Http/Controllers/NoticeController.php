@@ -96,9 +96,7 @@ class NoticeController extends Controller
         $user = Auth::user();
 
         if ($user->role != 'admin') {
-            $user_role = user_role($user->role);
-
-            $data->where('roles', 'like', '%' . "\"{$user_role}\"" . '%')
+            $data->selectedRole()
                 ->orWhere('roles', null);
         }
 
@@ -182,8 +180,7 @@ class NoticeController extends Controller
     public function selectedData($data, $user)
     {
         if ($user->role != 'admin') {
-            $user_role = user_role($user->role);
-            $data->where('roles', 'like', '%' . "\"{$user_role}\"" . '%')
+            $data->selectedRole()
                 ->orWhere('roles', null);
         }
 

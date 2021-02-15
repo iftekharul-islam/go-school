@@ -57,7 +57,7 @@ class AccountantHomeController extends Controller
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->orderBy('created_at', 'DESC')
-                    ->where('roles', 'like', "%\"{$student->role}\"%")
+                    ->selectedRole()
                     ->orWhere('roles', null)
                     ->get();
             });
