@@ -186,16 +186,22 @@ function roles()
  */
 function user_role($role)
 {
-    $data = [
+    return user_roles()[$role];
+}
+
+/**
+ * @return array
+ */
+function user_roles(){
+
+    return [
         'admin' => 1,
         'student' => 2,
         'teacher' => 3,
         'accountant' => 4,
         'librarian' => 5,
-        'guardian' =>6
+        'guardian' => 6
     ];
-
-    return $data[$role];
 }
 
 /**
@@ -204,14 +210,5 @@ function user_role($role)
  */
 function roles_value($value)
 {
-    $data = [
-        1 => 'admin',
-        2 => 'student',
-        3 => 'teacher',
-        4 => 'accountant',
-        5 => 'librarian',
-        6 => 'guardian'
-    ];
-
-    return $data[$value];
+    return array_flip(user_roles())[$value];
 }
