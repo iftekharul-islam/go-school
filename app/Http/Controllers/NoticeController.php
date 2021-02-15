@@ -41,7 +41,9 @@ class NoticeController extends Controller
         $role = Auth::user()->role;
 
         if ($role != 'admin') {
-            $data->where('roles', 'like', "%\"{$role}\"%")
+            $user_role = user_role($role);
+
+            $data->where('roles', 'like', '%' . "\"{$user_role}\"" . '%')
                 ->orWhere('roles', null);
         }
 
@@ -90,12 +92,14 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
+//        return roles_value(3);
         $data = Notice::query();
         $user = Auth::user();
 
         if ($user->role != 'admin') {
+            $user_role = user_role($user->role);
 
-            $data->where('roles', 'like', "%\"{$user->role}\"%")
+            $data->where('roles', 'like', '%' . "\"{$user_role}\"" . '%')
                 ->orWhere('roles', null);
         }
 
@@ -103,7 +107,6 @@ class NoticeController extends Controller
             ->where('active', 1)
             ->orderBy('created_at', 'DESC')
             ->get();
-
 
         $notice = '';
         $roles = '';
@@ -180,7 +183,8 @@ class NoticeController extends Controller
     public function selectedData($data, $user)
     {
         if ($user->role != 'admin') {
-            $data->where('roles', 'like', "%\"{$user->role}\"%")
+            $user_role = user_role($user->role);
+            $data->where('roles', 'like', '%' . "\"{$user_role}\"" . '%')
                 ->orWhere('roles', null);
         }
 

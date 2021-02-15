@@ -26,7 +26,7 @@
                                 <small>{{ date_with_month_name($notice->created_at) }}</small>
                                 @if($roles != null)
                                     @foreach($roles as $role)
-                                        <small class="badge badge-primary mx-2">{{ $role }}</small>
+                                        <small class="badge badge-primary mx-2">{{ ucfirst(roles_value($role)) }}</small>
                                     @endforeach
                                 @endif
                                 <h3 class="text-center">

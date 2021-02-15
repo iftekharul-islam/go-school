@@ -45,6 +45,11 @@ class User extends Authenticatable
         return $q->where('active', 1);
     }
 
+    public function scopeStaffs($q)
+    {
+        return $q->whereNotIn('role', ['student', 'teacher', 'admin', 'master', 'guardian']);
+    }
+
     public function section()
     {
         return $this->belongsTo(Section::class);

@@ -41,13 +41,12 @@ class EventController extends Controller
      */
     public function create()
     {
-
         return view('events.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     *x
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */

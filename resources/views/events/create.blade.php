@@ -53,11 +53,9 @@
                     <div class="form-group">
                         <select class="form-control select2" multiple
                                 name="roles[]">
-                            <option value="teacher">Teacher</option>
-                            <option value="student">Student</option>
-                            <option value="accountant">Accountant</option>
-                            <option value="librarian">Librarian</option>
-                            <option value="guardian">Guardian</option>
+                            @foreach(roles() as $role)
+                                <option value="{{ $role['id'] }}">{{ $role['name'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group mg-t-10">

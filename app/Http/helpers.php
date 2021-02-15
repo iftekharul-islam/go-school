@@ -146,3 +146,72 @@ function marking_subjects()
     return array_merge($quizzes, $assignments, $class_tests, $subjects);
 
 }
+
+/**
+ * @return array
+ */
+function roles()
+{
+    return [
+        [
+            'id' => 1,
+            'name' => 'admin',
+        ],
+        [
+            'id' => 2,
+            'name' => 'student',
+        ],
+        [
+            'id' => 3,
+            'name' => 'teacher',
+        ],
+        [
+            'id' => 4,
+            'name' => 'accountant',
+        ],
+        [
+            'id' => 5,
+            'name' => 'librarian',
+        ],
+        [
+            'id' => 6,
+            'name' => 'guardian',
+        ]
+    ];
+}
+
+/**
+ * @param $role
+ * @return mixed
+ */
+function user_role($role)
+{
+    $data = [
+        'admin' => 1,
+        'student' => 2,
+        'teacher' => 3,
+        'accountant' => 4,
+        'librarian' => 5,
+        'guardian' =>6
+    ];
+
+    return $data[$role];
+}
+
+/**
+ * @param $value
+ * @return mixed
+ */
+function roles_value($value)
+{
+    $data = [
+        1 => 'admin',
+        2 => 'student',
+        3 => 'teacher',
+        4 => 'accountant',
+        5 => 'librarian',
+        6 => 'guardian'
+    ];
+
+    return $data[$value];
+}
