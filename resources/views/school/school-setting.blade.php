@@ -6,14 +6,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-cogs"></i>
-            School Setting
+            {{ __('text.school_setting') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>School Setting</li>
+            <li>{{ __('text.school_setting') }}</li>
         </ul>
     </div>
     @if (session('status'))
@@ -36,7 +36,7 @@
                         <div
                             class="false-padding-bottom-form form-group{{ $errors->has('school_address') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="class_id" class="control-label false-padding-bottom">Address <label
+                                <label for="class_id" class="control-label false-padding-bottom">{{ __('text.address') }} <label
                                         class="text-danger">*</label> </label>
                                 <textarea class="form-control" name="school_address"
                                           required>{{$school->school_address}}</textarea>
@@ -52,7 +52,7 @@
                         <div
                             class="false-padding-bottom-form form-group{{ $errors->has('about') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="section_id" class="control-label false-padding-bottom">About <label
+                                <label for="section_id" class="control-label false-padding-bottom">{{ __('text.about') }} <label
                                         class="text-danger">*</label></label>
                                 <textarea class="form-control" name="about" required>{{$school->about}}</textarea>
                                 @if ($errors->has('about'))
@@ -68,7 +68,7 @@
                             class="false-padding-bottom-form form-group{{ $errors->has('medium') ? ' has-error' : '' }}">
 
                             <div class="col-md-12">
-                                <label for="shift" class="control-label false-padding-bottom">Medium <label
+                                <label for="shift" class="control-label false-padding-bottom">{{ __('text.medium') }} <label
                                         class="text-danger">*</label></label>
                                 <select class="form-control" name="medium" required>
                                     <option value="" selected disabled>Select Medium</option>
@@ -92,11 +92,10 @@
                         <div
                             class="false-padding-bottom-form form-group{{ $errors->has('absent_msg') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="last_attendance_time" class="control-label false-padding-bottom">Absent
-                                    Message<label class="text-danger">*</label></label>
+                                <label for="last_attendance_time" class="control-label false-padding-bottom">{{ __('text.Absent') }} {{ __('text.message') }}<label class="text-danger">*</label></label>
                                 <textarea class="form-control" name="absent_msg" maxlength="140"
                                           required>{{$school->absent_msg}}</textarea>
-                                <small class="font-italic text-muted">Maximum 140 characters</small>
+                                <small class="font-italic text-muted">{{ __('text.max_character') }}</small>
                                 @if ($errors->has('absent_msg'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('absent_msg') }}</strong>
@@ -109,11 +108,11 @@
                         <div
                             class="false-padding-bottom-form form-group{{ $errors->has('present_msg') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="exit_time" class="control-label false-padding-bottom">Present Message<label
+                                <label for="exit_time" class="control-label false-padding-bottom">{{ trans_choice('text.Present', 2) }} {{ __('text.message') }}<label
                                         class="text-danger">*</label> </label>
                                 <textarea class="form-control" name="present_msg" maxlength="140"
                                           required>{{$school->present_msg}}</textarea>
-                                <small class="font-italic text-muted">Maximum 140 characters</small>
+                                <small class="font-italic text-muted">{{ __('text.max_character') }}</small>
                                 @if ($errors->has('present_msg'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('present_msg') }}</strong>
@@ -126,7 +125,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12 col-md-offset-4">
-                        <button type="submit" id="registerBtn" class="button button--save float-right">Update Setting
+                        <button type="submit" id="registerBtn" class="button button--save float-right">{{ __('text.Update') }}
                         </button>
                     </div>
                 </div>
@@ -135,9 +134,3 @@
     </div>
 
 @endsection
-
-@push('customjs')
-    <script>
-
-    </script>
-@endpush

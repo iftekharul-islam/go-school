@@ -7,10 +7,9 @@
             {{ __('text.result') }}
         </h3>
         <ul>
-            <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.result') }}</li>
         </ul>
@@ -97,20 +96,20 @@
     </div>
 @endsection
 @push('customjs')
-  <script type="text/javascript">
-    function removeExam(id) {
-      swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this data!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-              .then((willDelete) => {
-                if (willDelete) {
-                  document.getElementById('delete-form-'+id).submit();
-                }
-              });
-    }
-  </script>
+    <script type="text/javascript">
+        function removeExam(id) {
+            swal({
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        document.getElementById('delete-form-' + id).submit();
+                    }
+                });
+        }
+    </script>
 @endpush

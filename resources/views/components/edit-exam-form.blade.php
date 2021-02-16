@@ -4,7 +4,7 @@
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-            <label>Term</label>
+            <label>{{ __('text.term') }}</label>
             <select id="term" class="select2" name="term">
                 <option @if($exam->term == 'First Term') selected="selected" @endif value="First Term">1st Term</option>
                 <option @if($exam->term == 'Second Term') selected="selected" @endif value="Second Term">2nd Term
@@ -20,7 +20,7 @@
         </div>
         <div id="other-term" class="col-md-8 form-group{{ $errors->has('other-term') ? ' has-error' : '' }}"
              style="display: none">
-            <label>Term</label>
+            <label>{{ __('text.term') }}</label>
             <input id="other-term" type="text" class="form-control" name="other_term" value="{{ old('other-term') }}"
                    placeholder="Term title">
             @if ($errors->has('other-term'))
@@ -30,7 +30,7 @@
             @endif
         </div>
         <div class="col-md-8 form-group{{ $errors->has('exam_name') ? ' has-error' : '' }}">
-            <label>Examination Name</label>
+            <label>{{ __('text.exam_name') }}</label>
             <input id="exam_name" type="text" class="form-control" name="exam_name" value="{{ $exam->exam_name }}"
                    required>
 
@@ -43,7 +43,7 @@
 
 
         <div class="col-md-8 form-group{{ $errors->has('term') ? ' has-error' : '' }}">
-            <label>Start Date</label>
+            <label>{{ __('text.Start Date') }}</label>
             <input id="start_date" type="date" class="form-control" name="start_date"
                    value="{{ \Carbon\Carbon::parse($exam->start_date)->format('Y-m-d') }}" required>
             @if ($errors->has('start_date'))
@@ -54,7 +54,7 @@
         </div>
 
         <div class="col-md-8 form-group{{ $errors->has('end_date') ? ' has-error' : '' }}">
-            <label>End Date</label>
+            <label>{{ __('text.End Date') }}</label>
             <input id="end_date" type="date" class="form-control" name="end_date"
                    value="{{ \Carbon\Carbon::parse($exam->end_date)->format('Y-m-d') }}" required>
             @if ($errors->has('end_date'))
@@ -88,9 +88,9 @@
             @endif
         </div>
         <div class="col-12 form-group mg-t-8">
-            <button type="submit" class="button button--edit">Save</button>
+            <button type="submit" class="button button--edit">{{ __('text.save') }}</button>
             <a href="{{ URL::previous() }}" class="button button--cancel"
-               style="margin-left: 1%;" role="button">Cancel</a>
+               style="margin-left: 1%;" role="button">{{ __('text.Cancel') }}</a>
         </div>
     </div>
 </form>

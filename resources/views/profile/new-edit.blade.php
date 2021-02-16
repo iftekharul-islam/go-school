@@ -5,14 +5,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Edit {{ ucfirst($user->role) }}
+            {{ __('text.edit') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}">
-                    Back &nbsp;&nbsp;|</a>
-                <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li><a href="{{ URL::previous() }}" class="text-color mr-2">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>Edit {{ ucfirst($user->role) }}</li>
+            <li>{{ __('text.edit') }}</li>
         </ul>
     </div>
     @if ($errors->any())
@@ -790,8 +790,8 @@
                                 <div class="col-md-12 text-right form">
                                     <a href="{{ URL::previous() }}" class="button button--cancel"
                                        style="margin-right: 2%;"
-                                       role="button">Cancel</a>
-                                    <input type="submit" role="button" class="button button--save" value="Save">
+                                       role="button">{{ __('text.Cancel') }}</a>
+                                    <button type="submit" class="button button--save">{{ __('text.save') }}</button>
                                 </div>
                             </div>
                         </form>

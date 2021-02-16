@@ -4,15 +4,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-users"></i>
-            Attendees 
+            {{ __('text.attendees') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li><a href="{{ route('exams') }}">Manage Exams</a></li>
-            <li>Attendees</li>
+            <li>{{ __('text.attendees') }}</li>
         </ul>
     </div>
       @if (session('status'))
@@ -25,17 +24,17 @@
             <div class="row mb-3">
                
                 <div class="form-group offset-md-10 col-md-2">
-                    <a href="{{ route('exams.add.attendee', [ 'exam_id' => $exam->id ]) }}" class="button button--save font-weight-bold ml-md-3 float-right"><i class="fas fa-plus-circle"></i> Add Attendee</a>
+                    <a href="{{ route('exams.add.attendee', [ 'exam_id' => $exam->id ]) }}" class="button button--save font-weight-bold ml-md-3 float-right"><i class="fas fa-plus-circle"></i> {{ __('text.add_attendees') }}</a>
                 </div>
             </div>
             @if(!empty($students))
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Student Code</th>
-                            <th>Name</th>
-                            <th>Class</th>
-                            <th>Section</th>
+                            <th>{{ __('text.student_code') }}</th>
+                            <th>{{ __('text.Name') }}</th>
+                            <th>{{ __('text.Class') }}</th>
+                            <th>{{ __('text.Section') }}</th>
                         </tr>
                     </thead>
                     <tbody>

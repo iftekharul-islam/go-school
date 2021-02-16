@@ -5,39 +5,39 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Edit Information
+            {{ __('text.edit') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>Edit Information</li>
+            <li>{{ __('text.edit') }}</li>
         </ul>
     </div>
-    <div class="card height-auto false-height">
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <div class="card">
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form class="new-added-form" method="POST" enctype="multipart/form-data" action="{{ route('update-staff-information', $user->id) }}">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
                 <div class="row mb-5">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name">Full Name</label>
+                            <label for="name">{{ __('text.Name') }}</label>
                             <input class="form-control" name="name" value="{{ $user->name }}">
                             @if ($errors->has('name'))
                                 <span class="help-block">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('gender') ? ' has-error' : '' }}">
-                            <label for="gender" class="control-label false-padding-bottom">Gender</label>
+                            <label for="gender" class="control-label false-padding-bottom">{{ __('text.gender') }}</label>
                             <select id="gender" class="form-control" name="gender">
                                 <option class="text-capitalize" value="male" selected="selected">Male</option>
                                 <option class="text-capitalize" value="female">Female</option>
@@ -59,7 +59,7 @@
                 <div class="row mb-5">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('blood_group') ? ' has-error' : '' }}">
-                            <label for="blood_group">Blood Group</label>
+                            <label for="blood_group">{{ __('text.blood_group') }}</label>
                             <select id="blood_group" class="form-control" name="blood_group">
                                 <option selected="selected">{{ $user->blood_group }}</option>
                                 <option>A+</option>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('religion') ? ' has-error' : '' }}">
-                            <label for="religion">Religion</label>
+                            <label for="religion">{{ __('text.religion') }}</label>
                             <select id="religion" class="form-control" name="religion">
                                 <option selected="selected">Islam</option>
                                 <option>Hinduism</option>
@@ -90,13 +90,13 @@
                 <div class="row mb-5">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label for="name">Address</label>
+                            <label for="name">{{ __('text.address') }}</label>
                             <textarea class="form-control" name="address" value="{{ $user->address }}">{{ $user->address }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group {{ $errors->has('about') ? ' has-error' : '' }}">
-                            <label for="name">About</label>
+                            <label for="name">{{ __('text.about') }}</label>
                             <textarea class="form-control" name="about" value="{{ $user->about }}">{{ $user->about }}</textarea>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                 <div class="row mb-5">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label class="control-label mr-2">Upload Profile Picture</label>
+                            <label for="picPath" class="control-label mr-2">{{ __('text.upload_picture') }}</label>
                             <input type="file" id="picPath" name="pic_path">
                         </div>
                     </div>

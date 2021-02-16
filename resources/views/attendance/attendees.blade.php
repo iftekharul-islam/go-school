@@ -5,7 +5,7 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            <i class="fas fa-users"></i>   {{ __('text.attendees') }}
+            <i class="fas fa-users"></i>{{ __('text.attendees') }}
         </h3>
         <ul>
             <li>

@@ -7,10 +7,9 @@
             {{ __("text.grade_system") }}
         </h3>
         <ul>
-            <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __("text.grade_system") }}</li>
         </ul>
@@ -48,10 +47,10 @@
                                 <td>
                                     <div class="row text-center">
                                         <div class="col-6">
-                                            <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpainfo->id ) }}"><i class="far fa-edit"></i>&nbsp;Edit</a>
+                                            <a class="button button--edit" href="{{ url('admin/gpa/edit',$gpainfo->id ) }}"><i class="far fa-edit"></i></a>
                                         </div>
                                         <div class="col-6">
-                                            <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i> Delete</button>
+                                            <button  onclick="removeGrade({{ $gpainfo->id}})" class="button button--cancel" ><i class="far fa-trash-alt"></i></button>
                                             <form id="delete-form-{{ $gpainfo->id }}" class="form-group" action="{{ url('admin/gpa/delete', $gpainfo->id) }}" method="post">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
@@ -78,8 +77,8 @@
     <script type="text/javascript">
         function removeGrade(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

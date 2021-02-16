@@ -9,15 +9,14 @@
             {{ __('text.All Books') }}
         </h3>
         <ul>
-            <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.All Books') }}</li>
         </ul>
     </div>
-    <?php $role = \Illuminate\Support\Facades\Auth::user()->role ?>
+    <?php $role = current_user()->role ?>
     <div class="card height-auto false-height">
         <div class="card-body">
             <div class="table-responsive">
@@ -50,13 +49,13 @@
                             <td>
                                 <div class="">
                                     <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/book', $book->id) }}" class="button button--save float-left">
-                                        Details
+                                        <i class="far fa-eye"></i>
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <button class="button button--cancel" type="button" onclick="book({{ $book->id }})">
-                                    Delete
+                                    <i class="far fa-trash-alt"></i>
                                 </button>
                                 <form id="delete-form-{{ $book->id }}" action="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/books', $book->id) }}" method="POST">
                                     {!! method_field('delete') !!}
@@ -78,8 +77,8 @@
     <script type="text/javascript">
         function book(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

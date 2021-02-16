@@ -10,9 +10,9 @@
             {{ __('text.All Classes') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li><a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.All Classes') }}</li>
         </ul>
@@ -77,7 +77,7 @@
                                                                 type="button" id="dropdownMenuButton"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
-                                                            Details
+                                                            {{ __('text.Details') }}
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
 
@@ -113,7 +113,7 @@
                                                                 type="button" id="dropdownMenuButton"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
-                                                            Details
+                                                            {{ __('text.Details') }}
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
                                                         <div class="dropdown-content"
@@ -132,7 +132,7 @@
                                                                 type="button" id="dropdownMenuButton"
                                                                 data-toggle="dropdown"
                                                                 aria-haspopup="true" aria-expanded="false">
-                                                            Details
+                                                            {{ __('text.Details') }}
                                                             <i class="fa fa-caret-down"></i>
                                                         </button>
 
@@ -190,7 +190,7 @@
                                                                     type="button" id="dropdownMenuButton"
                                                                     data-toggle="dropdown"
                                                                     aria-haspopup="true" aria-expanded="false">
-                                                                Details
+                                                                {{ __('text.Details') }}
                                                                 <i class="fa fa-caret-down"></i>
                                                             </button>
                                                             <div class="dropdown-content"
@@ -234,8 +234,7 @@
                                                 <div class="float-right">
                                                     <a role="button"
                                                        class="button button--primary mr-3 font-weight-bold"
-                                                       href="{{url('admin/academic/syllabus/'.$class->id)}}">View
-                                                        Syllabus</a>
+                                                       href="{{url('admin/academic/syllabus/'.$class->id)}}">{{ __('text.view_syllabus') }}</a>
                                                 </div>
 
                                             @else

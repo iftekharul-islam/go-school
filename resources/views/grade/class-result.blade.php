@@ -5,17 +5,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Marks and Grades
+           {{ __('text.marks_and_grade') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ route(\Illuminate\Support\Facades\Auth::user()->role.'.home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li><a href="{{url('/grades/classes')}}">Classes</a></li>
-            @if(Auth::user()->role != 'student')
-                <li class="active">Section</li>
-            @endif
+            <li>{{ __('text.marks_and_grade') }}</li>
         </ul>
     </div>
     @if(count($students) > 0)
@@ -31,11 +28,11 @@
                     <table class="table display table-bordered table-data-div text-wrap">
                         <thead>
                         <tr>
-                            <th>Sl.</th>
-                            <th>Student Code</th>
-                            <th>Student Name</th>
-                            <th>Student Email</th>
-                            <th>Grade History</th>
+                            <th>#</th>
+                            <th>{{ __('text.Code') }}</th>
+                            <th>{{ __('text.Name') }}</th>
+                            <th>{{ __('text.Email') }}</th>
+                            <th>{{ __('text.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,7 +58,7 @@
         <div class="card-body">
             <div class="heading-layout1">
                 <div class="item-title">
-                    <h3>Marks and Grades details</h3>
+                    <h3>{{ __('text.marks_and_grade_details') }}</h3>
                 </div>
             </div>
             @if(count($grades) > 0)
@@ -81,12 +78,12 @@
                     <table class="table display table-data-div text-wrap">
                         <thead>
                         <tr>
-                            <th>Exam Name</th>
-                            <th>Course Name</th>
-                            <th>Student Code</th>
-                            <th>Student Name</th>
-                            <th>Total Mark</th>
-                            <th>GPA</th>
+                            <th>{{ __('text.Exams') }} {{ __('text.Name') }}</th>
+                            <th>{{ __('text.course') }} {{ __('text.Name') }}</th>
+                            <th>{{ __('text.students_code') }}</th>
+                            <th>{{ __('text.students_name') }}</th>
+                            <th>{{ __('text.total_mark') }}</th>
+                            <th>{{ __('text.Grades') }}</th>
                         </tr>
                         </thead>
                         <tbody>

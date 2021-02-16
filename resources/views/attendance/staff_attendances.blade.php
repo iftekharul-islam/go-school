@@ -17,6 +17,10 @@
     @if(count($attendances) > 0)
         @include('layouts.student.attendances_table')
     @else
-        <h4 class="text-center">{{ __('text.No_related_data_notification') }}</h4>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4 class="text-center">{{ __('text.No_related_data_notification') }}</h4>
+            </div>
+        </div>
     @endif
 @endsection

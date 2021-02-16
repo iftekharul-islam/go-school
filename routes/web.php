@@ -48,8 +48,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::get('user/edit-information/{id}', 'UserController@editUserInfo')->name('edit-information');
     Route::patch('user/edit-information/{id}', 'UserController@updateUserInfo')->name('update-user-info');
     Route::patch('user/update-staff-information/{id}', 'UserController@updateStaffInformation')->name('update-staff-information');
-    Route::get('user/config/change_password', 'UserController@changePasswordGet');
-    Route::post('user/config/change_password', 'UserController@changePasswordPost');
+    Route::get('user/config/change-password', 'UserController@changePasswordGet')->name('change.password');
+    Route::post('user/config/change-password', 'UserController@changePasswordPost')->name('update.password');
     Route::get('notices-and-events', 'NoticeController@index');
     Route::get('absents/{id}', 'StuffAttendanceController@absents')->name('absents');
     Route::get('attendees/{id}', 'StuffAttendanceController@attendees')->name('attendees');
@@ -441,7 +441,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::delete('user/{id}', 'UserController@destroy')->name('delete-user');
 
         Route::get('department/{id}/edit', 'SchoolController@departmentEdit');
-        Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('admin.department.update');
+        Route::patch('department/{id}', 'SchoolController@departmentUpdate')->name('department.update');
         Route::delete('department/{id}', 'SchoolController@departmentDestroy')->name('delete-department');
 
         Route::get('student-message','MessageController@adminSendMessage');
