@@ -5,13 +5,13 @@
 @section('content')
 
     <div class="breadcrumbs-area">
-        <h3>{{ __('text.All Teacher') }}</h3>
+        <h3>{{ __('text.all_staff') }}</h3>
         <ul>
             <li> <a href="{{ URL::previous() }}" class="text-color mr-2">
                     {{ __('text.Back') }}</a>|
                 <a href="{{ route(current_user()->role.'.home') }}" class="text-color">{{ __('text.Home') }}</a>
             </li>
-            <li>{{ __('text.Teachers Attendance') }}</li>
+            <li>{{ __('text.all_staff') }}</li>
         </ul>
     </div>
     <div class="section-students">
@@ -62,7 +62,7 @@
                                         <td>{{ $staff->name }}</td>
                                         <td>{{ $staff->role }}</td>
                                         <td>
-                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $staff->id)}}">
+                                            <a class="btn-link text-teal" role="button" href="{{ route('user.attendance' , $staff->id ) }}">
                                                 <b>{{ __('text.View Attendance') }}</b>
                                             </a>
                                         </td>
