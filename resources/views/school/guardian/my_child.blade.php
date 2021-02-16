@@ -7,9 +7,8 @@
         <ul>
             <h3>{{ __('text.my_child') }}</h3>
             <li>
-                <a href="{{ URL::previous() }}">{{ __('text.Back') }}
-                    &nbsp;|</a>
-                <a href="{{ (auth()->user()->role. '.home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <a href="{{ URL::previous() }}" class="text-color mr-2">{{ __('text.Back') }}</a>|
+                <a href="{{ route(auth()->user()->role. '.home') }}" class="text-color">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.my_child') }}</li>
         </ul>

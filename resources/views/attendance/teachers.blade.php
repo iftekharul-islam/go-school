@@ -63,7 +63,7 @@
                                         <td>{{ $teacher->student_code }}</td>
                                         <td>{{ $teacher->name }}</td>
                                         <td>
-                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $teacher->id)}}">
+                                            <a class="btn-link text-teal" role="button" href="{{ route('user.attendance' , $teacher->id)}}">
                                                 <b>{{ __('text.View Attendance') }}</b>
                                             </a>
                                         </td>

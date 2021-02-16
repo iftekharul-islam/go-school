@@ -41,6 +41,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     }
     //Access for All authentic user
     Route::get('show-notice/{id}', 'NoticeController@show')->name('show.notice');
+    Route::get('show-event/{id}', 'EventController@showListById')->name('show.event');
     Route::get('syllabus-list', 'SyllabusController@syllabusForStudentTeacher')->name('syllabus');
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index')->name('all.student');
     Route::get('user/{user_code}', 'UserController@show')->name('user.show');
@@ -52,6 +53,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::get('notices-and-events', 'NoticeController@index');
     Route::get('absents/{id}', 'StuffAttendanceController@absents')->name('absents');
     Route::get('attendees/{id}', 'StuffAttendanceController@attendees')->name('attendees');
+    Route::get('attendance/{user_id}', 'StuffAttendanceController@details')->name('user.attendance');
 
     Route::post('students/import', 'UserController@importStudents')->name('students.import');
 
@@ -107,7 +109,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     //Librarian role routes
     Route::group(['prefix' => 'librarian', 'middleware' => 'librarian'], function () {
         Route::get('/home', 'LibrarianHomeController@index')->name('librarian.home');
-        Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+        Route::get('attendance/{user_id}', 'StuffAttendanceController@details');
         Route::get('issue-books', 'IssuedbookController@create');
         Route::get('issue-books/autocomplete/{query}', 'IssuedbookController@autocomplete');
         Route::post('issue-books', 'IssuedbookController@store');
@@ -151,7 +153,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('/advance-collection','FeeTransactionController@advanceCollection');
         Route::post('/update-advance-collection','FeeTransactionController@updateAdvanceAmount');
 
-        Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+        Route::get('attendance/{user_id}', 'StuffAttendanceController@details');
         Route::get('grades/{student_id}', 'GradeController@index');
         Route::get('users/{school_code}/{role}', 'UserController@indexOther');
         Route::get('sectors', 'AccountController@sectors');
@@ -183,7 +185,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('/home', 'TeacherHomeController@index')->name('teacher.home');
         Route::get('/my-students', 'TeacherHomeController@myStudent')->name('student.list');
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
-        Route::get('attendance/{teacher_id}', 'StuffAttendanceController@details');
+        Route::get('attendance/{user_id}', 'StuffAttendanceController@details');
         Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary.teacher');
 
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

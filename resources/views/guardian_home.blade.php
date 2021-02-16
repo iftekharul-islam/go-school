@@ -49,7 +49,7 @@
                                     <div class="row">
                                         <div class="col-9">
                                             <h6 class="notice-title" style="display: inline-block; padding-left: 20px;">
-                                                <a href="{{ url($event->file_path) }}" target="_blank"> {{$event->title}} </a>
+                                                <a href="{{ route('show.event', $event->id) }}"> {{$event->title}} </a>
                                             </h6>
                                         </div>
                                         <div class="col-3">

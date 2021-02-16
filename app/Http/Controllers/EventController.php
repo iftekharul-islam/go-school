@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Event as Event;
+use App\Event;
 use App\Http\Requests\CreateEventRequest;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
@@ -77,6 +77,39 @@ class EventController extends Controller
     public function show($id)
     {
         return new EventResource(Event::find($id));
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showListById($id)
+    {
+        $data = Event::query();
+        $user = Auth::user();
+
+        if ($user->role != 'admin') {
+            $data->selectedRole()
+                ->orWhere('roles', null);
+        }
+
+        $events = $data->where('school_id', Auth::user()->school_id)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $event = '';
+        $roles = '';
+        if ($events->isNotEmpty()) {
+            foreach ($events as $item) {
+                if ($item['id'] == $id) {
+                    $event = $item;
+                    $roles = unserialize($item->roles);
+                }
+            }
+        }
+
+        return view('events.show', compact('events', 'event', 'roles'));
     }
 
     /**

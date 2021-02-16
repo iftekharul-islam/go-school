@@ -62,7 +62,7 @@
                                         <td>{{ $staff->name }}</td>
                                         <td>{{ $staff->role }}</td>
                                         <td>
-                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $staff->id)}}">
+                                            <a class="btn-link text-teal" role="button" href="{{ route('user.attendance' , $staff->id ) }}">
                                                 <b>{{ __('text.View Attendance') }}</b>
                                             </a>
                                         </td>
