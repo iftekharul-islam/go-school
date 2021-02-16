@@ -1,5 +1,4 @@
 @extends('layouts.student-app')
-
 @section('title', 'Messages')
 @section('content')
     <!-- Breadcubs Area Start Here -->
@@ -15,7 +14,20 @@
             <li>{{ __('text.message') }}</li>
         </ul>
     </div>
-
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card false-height">
         <div class="card-body">
             <div class="heading-layout1">
@@ -23,20 +35,6 @@
                 </div>
             </div>
             <div class="panel-body">
-                @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 @component('components.message', ['messages' => $messages])@endcomponent
             </div>
         </div>

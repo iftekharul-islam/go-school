@@ -45,7 +45,7 @@
                 $department = 1;
             if (strpos($add,'routine')  || Request::get('course') == 1 || strpos($add,'manage-class'))
                 $class = 1;
-            if (strpos($add, 'classes')  || (strpos($add, 'syllabus')) || strpos($add, 'notice') || (strpos($add, 'event')) || (strpos($add, 'create-admit-card')))
+            if (strpos($add, 'classes')  || (strpos($add, 'syllabus')) || strpos($add, 'notice') || (strpos($add, 'event')) || (strpos($add, 'create-admit-card')) || (strpos($add, 'messages')))
                 $academic = 1;
             if (strpos($add, 'shift')  || (strpos($add, 'shifts')) )
                 $sht = 1;
@@ -298,6 +298,11 @@
                                    class="nav-link {{ (request()->routeIs('academic.event')) ? 'menu-active' : '' }}">
                                     <i class="fas fa-angle-right"></i><span>{{ __('text.Events') }}</span></a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('all.messages') }}"
+                                   class="nav-link {{ (request()->routeIs('all.messages')) ? 'menu-active' : '' }}">
+                                    <i class="fas fa-angle-right"></i><span>{{ __('text.message') }}</span></a>
+                            </li>
                             {{-- <li class="nav-item">
                                 <a href="{{ route('create.admit') }}"
                                    class="nav-link {{ (request()->routeIs('create.admit')) ? 'menu-active' : '' }}">
@@ -349,6 +354,11 @@
                 @endif
 
                 @if ($role == 'teacher')
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->routeIs('my.messages' , Auth::user()->id)) ? 'menu-active' : '' }}"
+                           href="{{ route('my.messages' , Auth::user()->id) }}">
+                            <i class="fas fa-envelope"></i><span>{{ __('text.my_messages') }}</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('teacher/courses/'.Auth::user()->id.'/0')) ? 'menu-active' : '' }}"
                            href="{{ url('teacher/courses/'.Auth::user()->id.'/0') }}">
