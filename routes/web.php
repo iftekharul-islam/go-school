@@ -210,7 +210,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::group(['prefix' => 'guardian', 'middleware' => 'guardian'], function () {
         Route::get('/home', 'GuardianHomeController')->name('guardian.home');
         Route::get('my-child', 'GuardianController@myChild')->name('child');
-        Route::get('show/{id}', 'GuardianController@showByChildId')->name('child.show');
+        Route::get('show/{user_id}', 'GuardianController@showByChildId')->name('child.show');
         Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail');
     });
     // Admin role routes

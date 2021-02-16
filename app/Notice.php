@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Dingo\Api\Auth\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Notice extends Model

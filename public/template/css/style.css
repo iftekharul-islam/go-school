@@ -5760,3 +5760,8 @@ Attendance result table customisation
 .img-min-height {
   height: 130px;
 }
+
+.dashboard-notice {
+  max-height: 358px !important;
+  overflow-y: scroll !important;
+}

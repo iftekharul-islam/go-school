@@ -180,8 +180,7 @@ class NoticeController extends Controller
     public function selectedData($data, $user)
     {
         if ($user->role != 'admin') {
-            $data->selectedRole()
-                ->orWhere('roles', null);
+            $data->selectedRole()->orWhere('roles', null);
         }
 
         return $data->where('school_id', $user->school_id)
