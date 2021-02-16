@@ -38,6 +38,29 @@ class NotificationController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function myMessages($id)
+    {
+        $messages = Notification::with('teacher.department')
+            ->where('user_id', $id)
+            ->orderBy('created_at','desc')
+            ->paginate(config('pagination.default_pagination'));
+
+        return view('message.index', compact('messages'));
+    }
+
+    public function allMessages()
+    {
+        $messages = Notification::with('teacher.department')
+            ->orderBy('created_at','desc')
+            ->paginate(config('pagination.default_pagination'));
+
+        return view('message.index', compact('messages'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -187,7 +187,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('courses/{teacher_id}/{section_id}', 'CourseController@index');
         Route::get('attendance/{user_id}', 'StuffAttendanceController@details');
         Route::get('attendances-summary/{section_id}', 'AttendanceController@attendancesSummaryDate')->name('attendance.summary.teacher');
-
+        Route::get('messages/{id}', 'NotificationController@myMessages')->name('my.messages');
+        Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');
         Route::get('attendances/{section_id}/{student_id}/{exam_id}', 'AttendanceController@index');
@@ -222,7 +223,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('search-user/', 'AdminController@index')->name('admin.search-user');
         Route::get('search-result/{id}', 'AdminController@search')->name('admin.search.result');
         Route::get('/sms-history/{school_id}', 'SchoolController@smsSummary')->name('admin.sms.summary');
-
+        Route::get('messages', 'NotificationController@allMessages')->name('all.messages');
+        Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
         Route::get('gpa/create-gpa', 'GradesystemController@create');
         Route::post('store-grade-system', 'GradesystemController@store');
         Route::post('store-gpa-info', 'GradesystemController@storeGradeInfo');
