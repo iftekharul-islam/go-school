@@ -83,7 +83,7 @@ class HomeController extends Controller
         }
 
         $allStudents = $this->userService->getStudents();
-        return view('teacher-home', [
+        return view('teacher_home', [
             'students' => $students,
             'allStudents' => $allStudents,
             'notices' => $notices,

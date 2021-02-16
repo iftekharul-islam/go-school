@@ -19,18 +19,13 @@ class NoticeController extends Controller
      */
     public function index()
     {
+        $notice_data = Notice::query();
+        $event_data = Event::query();
+        $user = Auth::user();
 
-        $school_id = Auth::user()->school->id;
+        $notices = $this->selectedData($notice_data, $user);
 
-        $notices = Notice::where('school_id', $school_id)
-            ->where('active', 1)
-            ->orderBy('created_at', 'DESC')
-            ->get();
-
-        $events = Event::where('school_id', $school_id)
-            ->where('active', 1)
-            ->orderBy('created_at', 'DESC')
-            ->get();
+        $events = $this->selectedData($event_data, $user);
 
         return view('notices.index', compact('notices', 'events'));
     }
@@ -42,7 +37,21 @@ class NoticeController extends Controller
      */
     public function list()
     {
-        $files = Notice::where('school_id', Auth::user()->school_id)->where('active', 1)->orderBy('created_at', 'DESC')->get();
+        $data = Notice::query();
+        $role = Auth::user()->role;
+
+        if ($role != 'admin') {
+            $user_role = user_role($role);
+
+            $data->where('roles', 'like', '%' . "\"{$user_role}\"" . '%')
+                ->orWhere('roles', null);
+        }
+
+        $files = $data->where('school_id', Auth::user()->school_id)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
         return view('notices.list', ['files' => $files]);
     }
 
@@ -69,8 +78,10 @@ class NoticeController extends Controller
         $tb->active = 1;
         $tb->school_id = $user->school_id;
         $tb->user_id = $user->id;
+        $tb->roles = isset($request->roles) ? serialize($request->roles) : null;
         $tb->save();
-        return back()->with('status', 'New notice upload complete');
+
+        return redirect()->route('academic.notice')->with('status', __('text.event_upload_notification'));
     }
 
     /**
@@ -81,20 +92,31 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        $users = Auth::user();
-        $notices = Notice::where('school_id', $users->school_id)
+        $data = Notice::query();
+        $user = Auth::user();
+
+        if ($user->role != 'admin') {
+            $data->selectedRole()
+                ->orWhere('roles', null);
+        }
+
+        $notices = $data->where('school_id', Auth::user()->school_id)
             ->where('active', 1)
             ->orderBy('created_at', 'DESC')
             ->get();
 
         $notice = '';
-        foreach ($notices as $ntc) {
-            if ($ntc['id'] == $id) {
-                $notice = $ntc;
+        $roles = '';
+        if ($notices->isNotEmpty()) {
+            foreach ($notices as $item) {
+                if ($item['id'] == $id) {
+                    $notice = $item;
+                    $roles = unserialize($item->roles);
+                }
             }
         }
 
-        return view('notices.show', compact('notices', 'notice'));
+        return view('notices.show', compact('notices', 'notice', 'roles'));
     }
 
     /**
@@ -148,6 +170,23 @@ class NoticeController extends Controller
         $notice->delete();
 
         return back()->with('status', 'Notice Deleted');
+    }
+
+    /**
+     * @param $data
+     * @param $user
+     * @return mixed
+     */
+    public function selectedData($data, $user)
+    {
+        if ($user->role != 'admin') {
+            $data->selectedRole()->orWhere('roles', null);
+        }
+
+        return $data->where('school_id', $user->school_id)
+            ->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
     }
 
 }

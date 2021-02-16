@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Event as Event;
+use App\Http\Requests\CreateEventRequest;
 use App\Http\Resources\EventResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 class EventController extends Controller
 {
     /**
@@ -19,36 +22,50 @@ class EventController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function eventList()
+    {
+        $files = Event::where('school_id', Auth::user()
+            ->school_id)->where('active', 1)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return view('events.index', ['files' => $files]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $files = Event::where('school_id',Auth::user()->school_id)->where('active',1)->orderBy('created_at','DESC')->get();
-        return view('events.create',['files'=>$files]);
+        return view('events.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     *x
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEventRequest $request)
     {
-        $request->validate([
-            'file_path' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
-        ]);
+        $user = Auth::user();
+        $path = $request->hasFile('file_path') ? Storage::disk('public')->put('school-' . $user->school_id . '/' . date('Y'), $request->file('file_path')) : null;
+
         $tb = new Event;
-        $tb->file_path = $request->file_path;
+        $tb->file_path = $path ? 'storage/' . $path : '';
         $tb->title = $request->title;
+        $tb->description = $request->description;
         $tb->active = 1;
-        $tb->school_id = Auth::user()->school_id;
-        $tb->user_id = Auth::user()->id;
+        $tb->school_id = $user->school_id;
+        $tb->user_id = $user->id;
+        $tb->roles = isset($request->roles) ? serialize($request->roles) : null;
         $tb->save();
-        return back()->with('status', 'Uploaded');
+
+        return redirect()->route('academic.event')->with('status', __('text.notice_upload_notification'));
     }
 
     /**

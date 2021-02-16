@@ -34,125 +34,7 @@
     @endif
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="item-img-round mt-5">
-                                @if(!empty($child->pic_path))
-                                    <img src="{{ url($child->pic_path)}}" data-src="{{url($child->pic_path) }}"
-                                         class="" id="my-profile"
-                                         alt="Profile Picture" width="100%">
-                                @else
-                                    @if(strtolower($child->gender) == 'male')
-                                        <img src="{{ asset('template/img/user-default.png') }}"
-                                             class="img-thumbnail" width="100%">
-                                    @else
-                                        <img src="{{ asset('template/img/female-default.png') }}"
-                                             width="100%">
-                                    @endif
-                                @endif
-                            </div>
-                            <div class="item-content">
-                                <div class="profile-name">
-                                    <h3 class="mt-3">{{ $child->name }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="heading-sub fancy4 ">{{ __('text.basic_details') }}</div>
-                            <div class="item-content">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class=" table-responsive border-right">
-                                            <table class="text-wrap table-borderless table ">
-                                                <tr>
-                                                    <td class="text-nowrap font-medium text-dark-medium">{{ __('text.student_code') }}:
-                                                    </td>
-                                                    <td class="text-capitalize">{{ $child->student_code }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-nowrap font-medium text-dark-medium">{{ __('text.student_id') }}:
-                                                    </td>
-                                                    <td class="text-capitalize">{{ $child->studentInfo['student_indentification'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.version') }}:</td>
-                                                    <td class="text-capitalize">{{ $child->studentInfo['version'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.gender') }}:</td>
-                                                    <td class="text-capitalize">{{ $child->gender }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.religion') }}:</td>
-                                                    <td class="text-capitalize">{{ $child->studentInfo['religion'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium">{{ __('text.birthday') }} :</td>
-                                                    <td class="text-left">
-                                                        {{ Carbon\Carbon::parse($child->studentInfo['birthday'])->format('d/m/Y') }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium">{{ __('text.email_username') }}:</td>
-                                                    <td class="text-left">{{ $child->email }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.address') }}:</td>
-                                                    <td class="text-capitalize">{{ $child->address }}</td>
-                                                </tr>
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class=" table-responsive">
-                                            <table class="text-wrap table-borderless table ">
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.Class') }}:</td>
-                                                    <td>{{$child->section['class']['class_number']}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.Section') }}:</td>
-                                                    <td class="text-capitalize">{{$child->section['section_number']}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.roll_number') }}:</td>
-                                                    <td class="text-capitalize">{{ $child->studentInfo['roll_number'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.Shift') }}:</td>
-                                                    <td class="text-capitalize">{{ $child->studentInfo['shift'] }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.session') }}:</td>
-                                                    <td class="text-capitalize">{{$child->studentInfo['session']}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.group') }}:</td>
-                                                    <td class="text-capitalize">{{$child->studentInfo['group']}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.nationality') }}:
-                                                    </td>
-                                                    <td class="text-capitalize">{{$child->nationality}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.blood_group') }}:
-                                                    </td>
-                                                    <td class="text-capitalize">{{$child->blood_group}}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card height-auto false-height">
+            <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -278,6 +160,123 @@
 
                         </div>
 
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="item-img-round mt-5">
+                                @if(!empty($child->pic_path))
+                                    <img src="{{ url($child->pic_path)}}" data-src="{{url($child->pic_path) }}"
+                                         class="" id="my-profile"
+                                         alt="Profile Picture" width="100%">
+                                @else
+                                    @if(strtolower($child->gender) == 'male')
+                                        <img src="{{ asset('template/img/user-default.png') }}"
+                                             class="img-thumbnail" width="100%">
+                                    @else
+                                        <img src="{{ asset('template/img/female-default.png') }}"
+                                             width="100%">
+                                    @endif
+                                @endif
+                            </div>
+                            <div class="item-content">
+                                <div class="profile-name">
+                                    <h3 class="mt-3">{{ $child->name }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="heading-sub fancy4 ">{{ __('text.basic_details') }}</div>
+                            <div class="item-content">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class=" table-responsive border-right">
+                                            <table class="text-wrap table-borderless table ">
+                                                <tr>
+                                                    <td class="text-nowrap font-medium text-dark-medium">{{ __('text.student_code') }}:
+                                                    </td>
+                                                    <td class="text-capitalize">{{ $child->student_code }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap font-medium text-dark-medium">{{ __('text.student_id') }}:
+                                                    </td>
+                                                    <td class="text-capitalize">{{ $child->studentInfo['student_indentification'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.version') }}:</td>
+                                                    <td class="text-capitalize">{{ $child->studentInfo['version'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.gender') }}:</td>
+                                                    <td class="text-capitalize">{{ $child->gender }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.religion') }}:</td>
+                                                    <td class="text-capitalize">{{ $child->studentInfo['religion'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium">{{ __('text.birthday') }} :</td>
+                                                    <td class="text-left">
+                                                        {{ Carbon\Carbon::parse($child->studentInfo['birthday'])->format('d/m/Y') }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium">{{ __('text.email_username') }}:</td>
+                                                    <td class="text-left">{{ $child->email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.address') }}:</td>
+                                                    <td class="text-capitalize">{{ $child->address }}</td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class=" table-responsive">
+                                            <table class="text-wrap table-borderless table ">
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.Class') }}:</td>
+                                                    <td>{{$child->section['class']['class_number']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.Section') }}:</td>
+                                                    <td class="text-capitalize">{{$child->section['section_number']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.roll_number') }}:</td>
+                                                    <td class="text-capitalize">{{ $child->studentInfo['roll_number'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.Shift') }}:</td>
+                                                    <td class="text-capitalize">{{ $child->studentInfo['shift'] }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.session') }}:</td>
+                                                    <td class="text-capitalize">{{$child->studentInfo['session']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.group') }}:</td>
+                                                    <td class="text-capitalize">{{$child->studentInfo['group']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.nationality') }}:
+                                                    </td>
+                                                    <td class="text-capitalize">{{$child->nationality}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-medium text-dark-medium text-nowrap">{{ __('text.blood_group') }}:
+                                                    </td>
+                                                    <td class="text-capitalize">{{$child->blood_group}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

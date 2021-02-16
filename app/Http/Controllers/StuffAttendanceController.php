@@ -49,7 +49,21 @@ class StuffAttendanceController extends Controller
             ->orderBy('name', 'ASC')
             ->where('active', 1)
             ->get();
-        return view('attendance.all-teachers', compact('teachers'));
+        return view('attendance.teachers', compact('teachers'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function allStaff()
+    {
+        $staffs = User::where('school_id', Auth::user()->school_id)
+            ->staffs()
+            ->orderBy('name', 'ASC')
+            ->where('active', 1)
+            ->get();
+
+        return view('attendance.staffs', compact('staffs'));
     }
 
     public function stuffAttendance()

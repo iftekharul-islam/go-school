@@ -8,6 +8,7 @@ use App\Section;
 use App\Services\Attendance\AttendanceService;
 use App\Services\Course\CourseService;
 use App\Services\User\UserService;
+use App\StudentInfo;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -45,50 +46,33 @@ class GuardianHomeController extends Controller
 
         if (isset($guardian->school->id)) {
             $school_id = $guardian->school->id;
-            $classes = Cache::remember('classes-' . $school_id, $minutes, function () use ($school_id) {
-                return Myclass::where('school_id', $school_id)
-                    ->pluck('id')
-                    ->toArray();
-            });
-
-            $students = User::where('role', 'student')->where('school_id', $guardian->school_id)->where('active',1)->get();
-            $teachers = User::where('role', 'teacher')->where('school_id', $guardian->school_id)->where('active',1)->get();
-            $male = 0;
-            $female = 0;
-            foreach($students as $std)
-            {
-                if (strtolower($std['gender']) == 'male') {
-                    $male++;
-                } else {
-                    $female++;
-                }
-            }
-            $total_classes = Cache::remember('totalClasses-' . $school_id, $minutes, function () use ($school_id) {
-                return  Myclass::where('school_id', $school_id)->count();
-            });
-            $total_sections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
-                return Section::whereIn('class_id', $classes)->count();
-            });
             $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->orderBy('created_at', 'DESC')
+                    ->selectedRole()
+                    ->orWhere('roles', null)
+                    ->get();
+            });
+            $events = Cache::remember('events-' . $school_id, $minutes, function () use ($school_id) {
+                return Notice::where('school_id', $school_id)
+                    ->where('active', 1)
+                    ->orderBy('created_at', 'DESC')
+                    ->selectedRole()
+                    ->orWhere('roles', null)
                     ->get();
             });
 
+            $users = StudentInfo::with('student.section.class')
+                ->where('guardian_id', $guardian->id)
+                ->paginate(20);
+
         }
 
-        $all_students = $this->userService->getStudents();
-
         return view('guardian_home', [
-            'students' => $students,
-            'allStudents' => $all_students,
             'notices' => $notices,
-            'totalClasses' => $total_classes,
-            'totalSections' => $total_sections,
-            'male' => $male,
-            'female' => $female,
-            'teachers' => $teachers,
+            'events' => $events,
+            'users' => $users
         ]);
 
     }

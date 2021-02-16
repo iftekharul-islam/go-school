@@ -23,7 +23,7 @@
             $att = 0;
             $staff = 0;
             $fee_collection = 0;
-            if (strpos($add, 'teacher-attendance') || strpos($add, 'attendance') || Request::get('course') == 2 || strpos($add, 'attendance-time') || strpos($add, 'all-teachers'))
+            if (strpos($add, 'teacher-attendance') || strpos($add, 'all-staff') || strpos($add, 'attendance') || Request::get('course') == 2 || strpos($add, 'attendance-time') || strpos($add, 'all-teachers'))
                 $att = 1;
             if (strpos($add, 'book') || strpos($add, 'librarian') || strpos($add, 'new-librarian'))
                 $lib = 1;
@@ -101,8 +101,8 @@
                                         class="fas fa-angle-right"></i>{{ __('text.Teachers Attendance') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin/staff/attendance') }}"
-                                   class="nav-link {{ (request()->is('admin/staff/attendance')) ? 'menu-active' : '' }}"><i
+                                <a href="{{ route('all.staff') }}"
+                                   class="nav-link {{ (request()->routeIs('staff.attendance')) || (request()->routeIs('all.staff')) ? 'menu-active' : '' }}"><i
                                         class="fas fa-angle-right"></i>{{ __('text.Staff Attendance') }}</a>
                             </li>
                             <li class="nav-item">
@@ -145,7 +145,7 @@
                             <i class="fas fa-cash-register"></i><span>{{ __('text.fees_summary') }}</span></a>
                     </li>
                 @endif
-                @if(in_array($role, ['student', 'guardian']))
+                @if(in_array($role, ['student', 'teacher', 'accountant', 'librarian']))
                     <li class="nav-item">
                         <a href="{{ url('notices-and-events') }}"
                            class="nav-link {{ (request()->is('notices-and-events')) ? 'menu-active' : '' }}"><i

@@ -21,9 +21,22 @@ function new_date_format($date)
     return Carbon::createFromFormat('Y-m-d', $date)->format(config('format.default_date'));
 }
 
+/**
+ * @param $date
+ * @return string
+ */
 function new_time_date_format($date)
 {
     return Carbon::parse($date)->format(config('format.default_date'));
+}
+
+/**
+ * @param $date
+ * @return string
+ */
+function date_with_month_name($date)
+{
+    return Carbon::parse($date)->format(config('format.date_with_month_name'));
 }
 
 /**
@@ -132,4 +145,70 @@ function marking_subjects()
 
     return array_merge($quizzes, $assignments, $class_tests, $subjects);
 
+}
+
+/**
+ * @return array
+ */
+function roles()
+{
+    return [
+        [
+            'id' => 1,
+            'name' => 'admin',
+        ],
+        [
+            'id' => 2,
+            'name' => 'student',
+        ],
+        [
+            'id' => 3,
+            'name' => 'teacher',
+        ],
+        [
+            'id' => 4,
+            'name' => 'accountant',
+        ],
+        [
+            'id' => 5,
+            'name' => 'librarian',
+        ],
+        [
+            'id' => 6,
+            'name' => 'guardian',
+        ]
+    ];
+}
+
+/**
+ * @param $role
+ * @return mixed
+ */
+function user_role($role)
+{
+    return user_roles()[$role];
+}
+
+/**
+ * @return array
+ */
+function user_roles(){
+
+    return [
+        'admin' => 1,
+        'student' => 2,
+        'teacher' => 3,
+        'accountant' => 4,
+        'librarian' => 5,
+        'guardian' => 6
+    ];
+}
+
+/**
+ * @param $value
+ * @return mixed
+ */
+function roles_value($value)
+{
+    return array_flip(user_roles())[$value];
 }

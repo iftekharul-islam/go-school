@@ -7,9 +7,9 @@
     <div class="breadcrumbs-area">
         <h3>{{ __('text.All Teacher') }}</h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" class="mr-2">
-                    {{ __('text.Back') }}</a>
-                <a href="{{ route(current_user()->role.'.home') }}">{{ __('text.Home') }}</a>
+            <li> <a href="{{ URL::previous() }}" class="text-color mr-2">
+                    {{ __('text.Back') }}</a>|
+                <a href="{{ route(current_user()->role.'.home') }}" class="text-color">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.Teachers Attendance') }}</li>
         </ul>
@@ -35,14 +35,11 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        @if(count($teachers) > 0)
+                        @if(count($staffs) > 0)
                             <div class="title mb-5">
                                 <div class="float-left">
-                                    <a class="button button--save mr-2 float-left"
-                                       href="{{ route('teacher.summary') }}">
-                                        {{ __('text.View Summary') }}</a>
-                                    <a class="button button--save mr-2 float-left"
-                                       href={{ route('teacher.attendance') }}>
+                                    <a class="button button--save float-left"
+                                       href={{ route('staff.attendance') }}>
                                         {{ __('text.Take Attendance') }}
                                     </a>
                                 </div>
@@ -54,16 +51,18 @@
                                         <th>#</th>
                                         <th>{{ __('text.Code') }}</th>
                                         <th>{{ __('text.Name') }}</th>
+                                        <th>{{ __('text.Role') }}</th>
                                         <th>{{ __('text.Attendance') }}</th>
                                     </tr>
                                     </thead>
-                                    @foreach($teachers as $key=>$teacher)
+                                    @foreach($staffs as $key=>$staff)
                                     <tbody>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $teacher->student_code }}</td>
-                                        <td>{{ $teacher->name }}</td>
+                                        <td>{{ $staff->student_code }}</td>
+                                        <td>{{ $staff->name }}</td>
+                                        <td>{{ $staff->role }}</td>
                                         <td>
-                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $teacher->id)}}">
+                                            <a class="btn-link text-teal" role="button" href="{{ route('staff.attendance', $staff->id)}}">
                                                 <b>{{ __('text.View Attendance') }}</b>
                                             </a>
                                         </td>

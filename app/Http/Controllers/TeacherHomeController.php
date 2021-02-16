@@ -52,10 +52,12 @@ class TeacherHomeController extends Controller
             $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();
             });
-            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id, $teacher) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
                     ->orderBy('created_at', 'DESC')
+                    ->selectedRole()
+                    ->orWhere('roles', null)
                     ->get();
             });
 
@@ -65,7 +67,7 @@ class TeacherHomeController extends Controller
                     ->get();
             });
         }
-        return view('teacher-home', [
+        return view('teacher_home', [
             'students' => $students,
             'notices' => $notices,
             'exams' => $exams,

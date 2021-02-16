@@ -210,7 +210,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
     Route::group(['prefix' => 'guardian', 'middleware' => 'guardian'], function () {
         Route::get('/home', 'GuardianHomeController')->name('guardian.home');
         Route::get('my-child', 'GuardianController@myChild')->name('child');
-        Route::get('show/{id}', 'GuardianController@showByChildId')->name('child.show');
+        Route::get('show/{user_id}', 'GuardianController@showByChildId')->name('child.show');
         Route::get('transaction-detail/{id}', 'FeeTransactionController@transactionDetail');
     });
     // Admin role routes
@@ -239,7 +239,8 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::post('teacher-attendance/adjust/post', 'StuffAttendanceController@adjustMissingAttendancePost');
             Route::get('attendance/{user_id}', 'StuffAttendanceController@details')->name('staff.attendance');
 
-            Route::get('attendance', 'StuffAttendanceController@stuffAttendance');
+            Route::get('all-staff', 'StuffAttendanceController@allStaff')->name('all.staff');
+            Route::get('attendance', 'StuffAttendanceController@stuffAttendance')->name('staff.attendance');
             Route::post('attendance/store', 'StuffAttendanceController@stuffAttendanceStore')->name('staff.store');
             Route::get('attendance/adjust/{staff_id}', 'StuffAttendanceController@adjustStaffMissingAttendance')->name('adjust.attendance');
             Route::post('attendance/adjust/post', 'StuffAttendanceController@adjustStaffMissingAttendancePost');
@@ -348,7 +349,9 @@ Route::middleware(['auth','check.account.status'])->group(function () {
             Route::get('notice', 'NoticeController@list')->name('academic.notice');
             Route::get('create-notice', 'NoticeController@create')->name('create.notice');
             Route::post('store-notice', 'NoticeController@store')->name('store.notice');
-            Route::get('event', 'EventController@create')->name('academic.event');
+            Route::get('events', 'EventController@eventList')->name('academic.event');
+            Route::get('event/create', 'EventController@create')->name('create.event');
+            Route::post('event/store', 'EventController@store')->name('store.event');
             Route::get('routine', 'RoutineController@index')->name('academic.routines');
             Route::get('notice/update/{id}', 'NoticeController@update');
             Route::post('notice/delete/{id}', 'NoticeController@deleteNotice')->name('notice.delete');

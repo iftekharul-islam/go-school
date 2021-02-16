@@ -381,4 +381,9 @@ return[
     'attendees' => 'Attendees',
     'transaction_details' => 'Transaction details',
     'attendance_notification' => 'Today attendance already taken',
+    'create_event' => 'Create event',
+    'upload' => 'Upload',
+    'create_notice' => 'Create notice',
+    'notice_upload_notification' => 'New notice upload complete',
+    'event_upload_notification' => 'New event upload complete',
 ];

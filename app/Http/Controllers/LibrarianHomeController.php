@@ -13,6 +13,7 @@ use App\Services\User\UserService;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+
 class LibrarianHomeController extends Controller
 {
     public function __construct(UserService $userService, User $user, CourseService $courseService, AttendanceService $attendanceService)
@@ -36,11 +37,10 @@ class LibrarianHomeController extends Controller
                     ->toArray();
             });
 
-            $students = User::where('role', 'student')->where('school_id', $librarian->school_id)->where('active',1)->get();
+            $students = User::where('role', 'student')->where('school_id', $librarian->school_id)->where('active', 1)->get();
             $male = 0;
             $female = 0;
-            foreach($students as $std)
-            {
+            foreach ($students as $std) {
                 if (strtolower($std['gender']) == 'male') {
                     $male++;
                 } else {
@@ -53,9 +53,12 @@ class LibrarianHomeController extends Controller
             $totalSections = Cache::remember('totalSections-' . $school_id, $minutes, function () use ($classes) {
                 return Section::whereIn('class_id', $classes)->count();
             });
-            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id) {
+            $notices = Cache::remember('notices-' . $school_id, $minutes, function () use ($school_id, $librarian) {
                 return Notice::where('school_id', $school_id)
                     ->where('active', 1)
+                    ->orderBy('created_at', 'DESC')
+                    ->selectedRole()
+                    ->orWhere('roles', null)
                     ->get();
             });
             $exams = Cache::remember('exams-' . $school_id, $minutes, function () use ($school_id) {
@@ -65,7 +68,7 @@ class LibrarianHomeController extends Controller
             });
         }
         $books = Book::bySchool(auth()->user()->school_id)->paginate();
-        return view('teacher-home', [
+        return view('teacher_home', [
             'students' => $students,
             'notices' => $notices,
             'exams' => $exams,

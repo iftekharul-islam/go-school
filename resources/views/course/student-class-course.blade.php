@@ -4,13 +4,13 @@
 
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>{{ __('text.student_course') }}</h3>
+        <h3>{{ __('text.student_courses') }}</h3>
         <ul>
             <li> <a href="{{ URL::previous() }}">
                     {{ __('text.Back') }} &nbsp;&nbsp;|</a>
                 <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
             </li>
-            <li>{{ __('text.student_course') }}</li>
+            <li>{{ __('text.student_courses') }}</li>
         </ul>
     </div>
 
