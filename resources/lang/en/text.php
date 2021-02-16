@@ -386,4 +386,5 @@ return[
     'create_notice' => 'Create notice',
     'notice_upload_notification' => 'New notice upload complete',
     'event_upload_notification' => 'New event upload complete',
+    'all_staff' => 'All staff'
 ];
