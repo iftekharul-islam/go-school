@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            @component('components.uploaded-files-list',['files'=>$files,'parent'=>($section_id !== 0)?'section':'','upload_type'=>'routine'])
+            @component('components.uploaded_routine_list',['files'=>$files,'parent'=>($section_id !== 0)?'section':'','upload_type'=>'routine'])
             @endcomponent
         </div>
     </div>
