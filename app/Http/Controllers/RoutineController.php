@@ -42,7 +42,6 @@ class RoutineController extends Controller
      */
     public function create(int $section_id)
     {
-//      return Syllabus::all();
         try {
             if (Schema::hasColumn('routines', 'section_id')) {
                 $files = Routine::with('section')

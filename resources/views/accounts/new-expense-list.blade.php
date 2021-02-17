@@ -1,7 +1,6 @@
 @extends('layouts.student-app')
 @section('title', 'Expense List')
 @section('content')
-{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">--}}
 <style>
     .example-print {
         display: none;
@@ -26,10 +25,9 @@
         {{ __('text.expense_list') }}
     </h3>
     <ul>
-        <li>
-            <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+        <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                {{ __('text.Back') }}</a>|
+            <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
         </li>
         <li>{{ __('text.expense_list') }}</li>
     </ul>
@@ -217,8 +215,8 @@
 
         function deleteMsg(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Expense!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

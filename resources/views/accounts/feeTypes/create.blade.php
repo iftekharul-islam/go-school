@@ -4,19 +4,13 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Create Fee Type</h3>
+            <h3>{{ __('text.create_fee_type') }}</h3>
             <ul>
-                <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                        {{ __('text.Back') }}</a>|
+                    <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
-                @if(Auth::user()->role != 'master')
-                <li>Manage Accounts</li>
-                <li>Fee Collection</li>
-                <li> <a href="{{ route('fee-types.index') }}">Fee Types</a></li>
-                @else 
-                <li>Default Fee Types</li>
-                @endif
-                <li>Create Fee Type</li>
+                <li>{{ __('text.create_fee_type') }}</li>
             </ul>
         </div>
 
@@ -40,43 +34,43 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Create Fee Types</h3>
+                                <h3>{{ __('text.create_fee_type') }}</h3>
                             </div>
                         </div>
                         <form class="mg-b-20" action="@if(auth()->user()->role == 'master') {{ route('store.fee.type')}} @else {{ url(auth()->user()->role.'/fee-types')  }} @endif" method="post">
                             {{ csrf_field() }}
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="name">Name</label>
+                                    <label for="name">{{ __('text.Name') }}</label>
                                     <input type="text" placeholder="Name" class="form-control" name="name" value="{{ old('name') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="code">Order No</label>
+                                    <label for="code">{{ __('text.order_no') }}</label>
                                     <input type="number" class="form-control" name="order" value="{{ old('order') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="type"> <input type="checkbox" value="1" name="type" id="type" @if( old('type') == 1) checked @endif> Enable Date Selection</label>
-                                    <small class="form-text text-muted">If checked, this will enable <i>Month Selection Dropdown</i> in Fee Collection Form</small>
+                                    <label for="type"> <input type="checkbox" value="1" name="type" id="type" @if( old('type') == 1) checked @endif> {{ __('text.enable_date_section') }}</label>
+                                    <small class="form-text text-muted">{{ __('text.enable_date_notice') }}</small>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="code">Code</label>
+                                    <label for="code">{{ __('text.Code') }}</label>
                                     <input type="text" placeholder="Code" class="form-control" name="code" value="{{ old('code') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="desc">Description</label>
+                                    <label for="desc">{{ __('text.description') }}</label>
                                     <textarea class="form-control" placeholder="Description" name="desc"></textarea>
                                 </div>
                             </div>
                             <div class="form-group mr-4 float-right mt-3">
-                                <button type="submit" class="button button--save">Add Fee Type</button>
+                                <button type="submit" class="button button--save">{{ __('text.save') }}</button>
                             </div>
                         </form>
                     </div>

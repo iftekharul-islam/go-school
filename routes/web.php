@@ -449,7 +449,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::post('edit/section/{id}', 'SectionController@updateSection')->name('edit.section');
         
         Route::get('attendance-time', 'SectionMetaController@index')->name('configure.attendance.time');
-        Route::get('attendance-time/add', 'SectionMetaController@create')->name('attendance.time.add');
+        Route::get('attendance-time/create', 'SectionMetaController@create')->name('attendance.time.add');
         Route::post('attendance-time/store', 'SectionMetaController@store')->name('attendance.time.store');
         Route::get('attendance-time/edit/{id}', 'SectionMetaController@edit')->name('attendance.time.edit');
         Route::put('attendance-time/update/{id}', 'SectionMetaController@update')->name('attendance.time.update');

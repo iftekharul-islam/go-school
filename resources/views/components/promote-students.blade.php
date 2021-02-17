@@ -7,13 +7,13 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Left School</th>
-                <th>From Session</th>
-                <th>To Session</th>
-                <th>From Section</th>
-                <th>To Section</th>
+                <th>{{ __('text.Code') }}</th>
+                <th>{{ __('text.Name') }}</th>
+                <th>{{ __('text.left_school') }}</th>
+                <th>{{ __('text.from_session') }}</th>
+                <th>{{ __('text.to_session') }}</th>
+                <th>{{ __('text.from_session') }}</th>
+                <th>{{ __('text.Section') }}</th>
             </tr>
             </thead>
             <tbody>

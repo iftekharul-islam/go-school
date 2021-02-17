@@ -10,24 +10,19 @@
                     @endif
                 @elseif($user->role == 'student')
                     <i class="fas fa-users mr-2 "></i>   {{ __('text.All Students') }}
-                    <a class="btn btn-lg btn-secondary float-right font-bold ml-2"
-                       href="{{ route('student.export',['keys' => serialize(\Request::query())]) }}">Export Students</a>
                     @if (auth()->user()->role == 'admin')
-                        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">Inactive
-                            Students</a>
+                        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.students') }}">{{ __('text.inactive_students') }}</a>
                     @endif
 
                 @elseif($user->role == 'accountant')
                     <i class="fas fa-users mr-2 "></i>  {{ __('text.accountant') }}
                     @if (auth()->user()->role == 'admin')
-                        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.accountants') }}">Inactive
-                            Accountants</a>
+                        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.accountants') }}">{{ __('text.inactive_accountant') }}</a>
                     @endif
                 @elseif($user->role == 'librarian')
                     <i class="fas fa-users mr-2 "></i>   {{ __('text.librarian') }}
                     @if (auth()->user()->role == 'admin')
-                        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.librarians') }}">Inactive
-                            Librarians</a>
+                        <a class="btn btn-lg btn-info float-right font-bold" href="{{ route('inactive.librarians') }}">{{ __('text.inactive_librarian') }}</a>
                     @endif
                 @else
                     <i class="fas fa-users mr-2 "></i>    All Users
@@ -43,9 +38,9 @@
         @endif
     </h3>
     <ul>
-        <li>
-            <a href="{{ URL::previous() }}" style="color: #32998f!important;">{{ __('text.Back') }} &nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+        <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                {{ __('text.Back') }}</a>|
+            <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
         </li>
         <li>   @foreach($users as $user)
                 @if($user->role == 'teacher')
@@ -438,8 +433,8 @@
 
         function submitForm(formId) {
             swal({
-                title: "Are you sure?",
-                text: " You want to perform this action!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.perform_notification') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -453,8 +448,8 @@
 
         function showAlert() {
             swal({
-                title: "No Student Selected",
-                text: "Please select at least one student",
+                title: "{{ __('text.no_student_selected') }}",
+                text: "{{ __('text.select_one_student_notification') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

@@ -7,9 +7,9 @@
             {{ __('text.attendance_report') }}
         </h3>
         <ul>
-            <li><a href="{{ URL::previous() }}" class="mr-2">
-                    {{ __('text.Back') }}|</a>
-                <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.attendance_report') }}</li>
         </ul>

@@ -7,7 +7,7 @@
     <th>{{ __('text.class_time') }}</th>
     <th>{{ __('text.course_teacher') }}</th>
     @if(Auth::user()->role == 'admin')
-        <th>{{ __('text.Action') }}</th>
+        <th>{{ __('text.action') }}</th>
     @endif
   </tr>
   </thead>

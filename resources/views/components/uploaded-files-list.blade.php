@@ -32,7 +32,7 @@
                     @if($file->active ===1)
                         <td>
                             <button class="button button--cancel" type="button" onclick="removeFile({{ $file->id }})">
-                                Deactivate
+                                {{ __('text.deactivate') }}
                             </button>
                             <form id="delete-form-{{ $file->id }}"
                                   action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}"
@@ -44,7 +44,7 @@
                     @else
                         <td>
                             <button class="button button--save" type="button" onclick="activeFile({{ $file->id }})">
-                                Activate
+                                {{ __('text.active') }}
                             </button>
                             <form id="active-file-form-{{ $file->id }}"
                                   action="{{ url('admin/academic/'.$upload_type.'/'.'update/'.$file->id) }}"
@@ -65,8 +65,8 @@
     <script type="text/javascript">
         function removeFile(id) {
             swal({
-                title: "Are you sure?",
-                text: "Are you sure, you want deactivate this!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.inactive_notification') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

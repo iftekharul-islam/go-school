@@ -6,14 +6,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fa fa-calendar"></i>
-            All Inactive Routines
+            {{ __('text.inactive_routine') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>All Routine</li>
+            <li>{{ __('text.inactive_routine') }}</li>
         </ul>
     </div>
     <div class="card height-auto false-height">

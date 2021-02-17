@@ -6,30 +6,28 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-user-friends"></i>
-            All Inactive {{ $type }}
+            {{ __('text.all_inactive_members') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>All Inactive {{ $type }}</li>
+            <li>{{ __('text.all_inactive_members') }}</li>
         </ul>
     </div>
-
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @elseif(session('error-status'))
+        <div class="alert alert-success">
+            {{ session('error-status') }}
+        </div>
+    @endif
     <div class="card false-height">
          @if (count($users) > 0)
         <div class="card-body">
-
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @elseif(session('error-status'))
-                <div class="alert alert-success">
-                    {{ session('error-status') }}
-                </div>
-            @endif
             <form id="userBulkAction" action="{{ route('user.bulk.action') }}" method="post"> {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-2 col-sm-12">
@@ -48,9 +46,9 @@
                     <thead>
                     <tr>
                         <th scope="col"><input type="checkbox" id="checkAll" title="Select All"/></th>
-                        <th>Code</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
+                        <th>{{ __('text.Code') }}</th>
+                        <th>{{ __('text.Name') }}</th>
+                        <th>{{ __('text.Email') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -74,7 +72,7 @@
        @else 
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <p class="text-center pt-3">No Data Found</p>
+                <p class="text-center pt-3">{{ __('text.No_related_data_notification') }}</p>
             </div>
         </div>
         @endif
@@ -107,8 +105,8 @@
 
             function submitForm(formId) {
                 swal({
-                    title: "Are you sure?",
-                    text: " You want to perform this action!",
+                    title: "{{ __('text.conform_msg') }}",
+                    text: "{{ __('text.perform_notification') }}",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -122,8 +120,8 @@
 
             function showAlert() {
                 swal({
-                    title: "No Student Selected",
-                    text: "Please select at least one student",
+                    title: "{{ __('text.no_student_selected') }}",
+                    text: "{{ __('text.select_one_student_notification') }}",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

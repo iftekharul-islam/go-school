@@ -2,35 +2,36 @@
 @section('title', 'Edit Income')
 @section('content')
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
+        <h3>{{ __('text.edit') }}</h3>
         <ul>
-            <li>
-                <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>Edit Expense Section</li>
+            <li>{{ __('text.edit') }}</li>
         </ul>
     </div>
     <!-- Breadcubs Area End Here -->
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <!-- Add Expense Area Start Here -->
     <div class="row">
         <div class="col-md-8">
-            <div class="card height-auto false-height">
+            <div class="card height-auto">
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>Edit Expense</h3>
+                            <h3>{{ __('text.income') }} {{ __('text.edit') }}</h3>
                         </div>
                     </div>
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/update-income')}}" method="post">
+                    <form class="new-added-form" action="{{url(current_user()->role.'/update-income')}}" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$income->id}}">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Sector Name</label>
+                            <label for="name" class="col-md-4 control-label">{{ __('text.Name') }}</label>
 
                             <div class="col-md-12">
                                 <input id="name" type="text" class="form-control" name="name" value="{{$income->name}}" placeholder="Sector Name" required>
@@ -43,7 +44,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                            <label for="amount" class="col-md-4 control-label">Amount</label>
+                            <label for="amount" class="col-md-4 control-label">{{ __('text.amount') }}</label>
 
                             <div class="col-md-12">
                                 <input id="amount" type="text" class="form-control" name="amount" value="{{$income->amount}}" placeholder="Amount" required>
@@ -56,7 +57,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">Description</label>
+                            <label for="description" class="col-md-4 control-label">{{ __('text.description') }}</label>
 
                             <div class="col-md-12">
                               <textarea id="description" class="form-control"
@@ -71,25 +72,11 @@
                             </div>
                         </div>
                         <div class="col-12 form-group mg-t-8">
-                            <button type="submit" class="button button--save">Save</button>
+                            <button type="submit" class="button button--save float-right">{{ __('text.save') }}</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script>
-  $(function(){
-    // In your Javascript (external .js resource or <script> tag)
-    $('#book_title').chosen({
-      max_selected_options:10, //Max select limit
-      display_selected_options:true,
-    });
-    $('.datepicker').datepicker({
-      format: 'yyyy-mm-dd'
-    });
-  })
-</script>
 @endsection
