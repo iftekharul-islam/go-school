@@ -6,9 +6,9 @@
     <div class="breadcrumbs-area">
         <h3>{{ __('text.student_courses') }}</h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a href="{{ url(current_user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.student_courses') }}</li>
         </ul>
@@ -20,10 +20,10 @@
                 <div class="card-body">
                     <div class="heading-layout1">
                         <div class="item-title">
-                            <h3>My Courses</h3>
+                            <h3>{{ __('text.my_course') }}</h3>
                             @if(count($courses) > 0)
                                 @foreach ($courses as $course)
-                                    <div class="page-panel-title" style="text-align: center"><b>Section</b> -   {{$course->section->section_number}} &nbsp;<b>Class</b> -  {{$course->section->class->class_number}}</div>
+                                    <div class="page-panel-title text-center"><b>Section</b> -   {{$course->section->section_number}} &nbsp;<b>Class</b> -  {{$course->section->class->class_number}}</div>
                                     @break($loop->first)
                                 @endforeach
                             @endif

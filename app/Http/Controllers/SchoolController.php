@@ -198,7 +198,7 @@ class SchoolController extends Controller
         $department->department_name = $request->department_name;
         $department->save();
 
-        return redirect()->route('admin.department-lists');
+        return redirect()->route('all.department')->with('status', 'Department successfully Updated');
     }
 
     /**

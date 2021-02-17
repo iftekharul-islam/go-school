@@ -4,14 +4,14 @@
     <div class="breadcrumbs-area">
         <h3>
             <i class="fas fa-file-alt"></i>
-           Upload Result
+           {{ __('text.upload_result') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>Upload Result</li>
+            <li>{{ __('text.upload_result') }}</li>
         </ul>
     </div>
     <div class="row">
@@ -23,13 +23,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h3>Exam Name: {{ $exam->exam_name }}</h3>
+                    <h3>{{ __('text.Exams') }} {{ __('text.Name') }}: {{ $exam->exam_name }}</h3>
                     <form class="new-added-form" action="{{ route('exams.update.result',['exam_id' => $exam->id]) }}" method="POST" enctype='multipart/form-data'>
                         <input type="hidden" value="{{ $exam->exam_name }}" name="exam_name">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <label for="result_file" class="control-label false-padding-bottom">Select File (pdf,excel)<label class="text-danger">*</label></label>
+                                <label for="result_file" class="control-label false-padding-bottom">{{ __('text.select_file') }} (pdf,excel)<label class="text-danger">*</label></label>
                                 <input type="file" class="form-control" id="result_file" name="result_file" value="" >
                                  @if ($errors->has('result_file'))
                                     <span class="help-block">
@@ -37,8 +37,8 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-12 form-group"">
-                                <button type="submit"  class="button button--save"> Upload </button>
+                            <div class="col-md-12 form-group">
+                                <button type="submit"  class="button button--save">{{ __('text.upload') }}</button>
                             </div>
                         </div>
                     </form>

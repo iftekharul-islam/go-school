@@ -6,10 +6,9 @@
         <div class="breadcrumbs-area">
             <h3>{{ __('text.Fee Types') }}</h3>
             <ul>
-                <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                        {{ __('text.Back') }}</a>|
+                    <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
                 <li>{{ __('text.Manage Accounts') }}</li>
                 <li>{{ __('text.Fee Collection') }}</li>
@@ -48,7 +47,7 @@
                                 <td>{{ $feeType->name }}</td>
                                 <td>{{ $feeType->year }}</td>
                                 <td>{{ $feeType->code }}</td>
-                                <td>{{ $feeType->description }}</td>
+                                <td>{{ $feeType->description ?? 'N/A' }}</td>
                                 <td>
                                     @if($feeType->is_default == 0)
                                     <a href="{{ url(auth()->user()->role.'/fee-types/'.$feeType->id.'/edit') }}" class="button button--save mr-3"><i class="far fa-edit"></i></a>
@@ -73,8 +72,8 @@
     <script type="text/javascript">
         function feeTypes(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

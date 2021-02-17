@@ -97,7 +97,7 @@ class IssuedbookController extends Controller
             $book->save();
         }, 5);
 
-        return back()->with('status', 'Book Returned successfully !');
+        return back()->with('status', 'Book Returned successfully');
     }
 
     /**

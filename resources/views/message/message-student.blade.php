@@ -119,12 +119,12 @@
                                             <input type="hidden" name="teacher_id" value="{{Auth::user()->id}}">
                                             <input type="hidden" name="section_id" value="{{0}}">
                                             <div class="mt-3 mb-3">
-                                                <label for="msg">Write Message: </label>
+                                                <label for="msg">{{ __('text.write_message') }}: </label>
                                                 <textarea name="msg" class="form-control" id="msg" onkeyup="limitCharacter()" cols="30" rows="8" style="font-size:1.5rem"></textarea>
                                                 <span id="limit"></span>
                                                 <input type="text" name="sms_count" id="sms_count" class="sms_count d-none" value="">
                                                 <br>
-                                                <label for="">Attach file here :</label>
+                                                <label for="">{{ __('text.add_attachment') }} :</label>
                                                 <br><input type="file" name="file_path">
                                             </div>
                                             <div class="checkbox">
@@ -132,7 +132,7 @@
                                                 <label style="font-weight:bold; margin-left:10px">
                                                     Also Send as SMS
                                                 </label>
-                                                <button type="submit" class="button button--save float-right">Message</button>
+                                                <button type="submit" class="button button--save float-right">{{ __('text.Submit') }}</button>
                                             </div>
 
                                         </form>

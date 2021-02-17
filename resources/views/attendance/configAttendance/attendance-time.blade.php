@@ -13,28 +13,25 @@
                                 <i class='fas fa-clock'></i> {{ __('text.Attendance Time') }}
                             </h3>
                             <ul>
-                                <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                                <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                                        {{ __('text.Back') }}</a>|
+                                    <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                                 </li>
                                 <li>{{ __('text.Attendance') }}</li>
                                 <li>{{ __('text.Configuration') }}</li>
                             </ul>
                         </div>
-
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @elseif(session('error-status'))
+                            <div class="alert alert-success">
+                                {{ session('error-status') }}
+                            </div>
+                        @endif
                         <div class="card height-auto attendance-timings">
                             <div class="card-body">
-
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @elseif(session('error-status'))
-                                    <div class="alert alert-success">
-                                        {{ session('error-status') }}
-                                    </div>
-                                @endif
-
                                 <a href="{{ route('attendance.time.add') }}" class="btn btn-secondary float-right btn-lg mb-3"><b>{{ __('text.Create New Timing') }}</b></a>
                                 <div class="clearfix"></div>
                                 <div id="accordion">
@@ -101,8 +98,8 @@
                             <script type="text/javascript">
                                 function removeTiming(id) {
                                     swal({
-                                        title: "Are you sure?",
-                                        text: "Once deleted, you will not be able to recover!",
+                                        title: "{{ __('text.conform_msg') }}",
+                                        text: "{{ __('text.conform_info') }}",
                                         icon: "warning",
                                         buttons: true,
                                         dangerMode: true,

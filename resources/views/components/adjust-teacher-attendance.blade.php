@@ -4,9 +4,9 @@
             {{ csrf_field() }}
             <table class="table display table-bordered data-table text-nowrap mb-5">
                 <tr>
-                    <th>Present</th>
-                    <th>Status</th>
-                    <th>Date</th>
+                    <th>{{ trans_choice('text.Present', 2) }}</th>
+                    <th>{{ __('text.status') }}</th>
+                    <th>{{ __('text.Date') }}</th>
                 </tr>
                 @foreach ($attendances as $att)
                     <input type="hidden" name="att_id[]" value="{{$att->id}}">
@@ -28,8 +28,8 @@
                     </tr>
                 @endforeach
             </table>
-            <a href="{{ URL::previous() }}" class="button button--cancel" style="margin-right: 2%;" role="button">Cancel</a>
-            <input type="submit" class="button button--save" value="Submit"/>
+            <a href="{{ URL::previous() }}" class="button button--cancel" style="margin-right: 2%;" role="button">{{ __('text.Cancel') }}</a>
+            <button type="submit" class="button button--save">{{ __('text.Submit') }}</button>
         </form>
     </div>
     <script>

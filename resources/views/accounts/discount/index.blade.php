@@ -5,10 +5,9 @@
         <div class="breadcrumbs-area">
             <h3>{{ __('text.discounts') }}</h3>
             <ul>
-                <li>
-                    <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                        {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                    <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+                <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                        {{ __('text.Back') }}</a>|
+                    <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
                 <li>{{ __('text.discounts') }}</li>
             </ul>
@@ -70,8 +69,8 @@
     <script type="text/javascript">
         function feeDiscount(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this file!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

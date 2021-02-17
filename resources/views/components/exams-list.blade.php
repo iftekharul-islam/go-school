@@ -116,8 +116,8 @@
     <script type="text/javascript">
         function removeExam(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this data!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

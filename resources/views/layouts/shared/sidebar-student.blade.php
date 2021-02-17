@@ -396,7 +396,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('accountant/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}"
                                href="{{ url('accountant/attendance/'.Auth::user()->id) }}">
-                                <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
+                                <i class="far fa-calendar-check"></i><span>{{ __('text.my_attendance') }}</span></a>
                         </li>
                     @endif
 
@@ -478,7 +478,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ (request()->is('librarian/attendance/'.Auth::user()->id)) ? 'menu-active' : '' }}"
                                href="{{ url('librarian/attendance/'.Auth::user()->id) }}">
-                                <i class="far fa-calendar-check"></i><span>My Attendance</span></a>
+                                <i class="far fa-calendar-check"></i><span>{{ __('text.my_attendance') }}</span></a>
                         </li>
                     @endif
                     <li class="nav-item sidebar-nav-item">

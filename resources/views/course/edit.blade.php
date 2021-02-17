@@ -5,14 +5,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            </a>Edit Course
+            </a>{{ __('text.course') }} {{ __('text.edit') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>Edit Course</li>
+            <li>{{ __('text.course') }} {{ __('text.edit') }}</li>
         </ul>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
             <form class="new-added-form" action="{{route('course.update', $course->id)}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('course_name') ? ' has-error' : '' }}">
-                    <label for="course_name" class="col-md-4 control-label">Course Name</label>
+                    <label for="course_name" class="col-md-4 control-label">{{ __('text.Name') }}</label>
 
                     <div class="col-md-12">
                         <input id="course_name" type="text" class="form-control" name="course_name" value="{{ $course->course_name }}" required>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="form-group false-padding-bottom-form">
-                    <label class="col-sm-12 control-label false-padding-bottom">Assign Course Teacher</label>
+                    <label class="col-sm-12 control-label false-padding-bottom">{{ __('text.course_teacher') }}</label>
                     <div class="col-sm-12">
                         <select class="form-control" name="teacher_id">
                             <option value="0">N/A</option>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-group{{ $errors->has('course_time') ? ' has-error' : '' }}">
-                    <label class="col-sm-12 control-label false-padding-bottom">Course Time</label>
+                    <label class="col-sm-12 control-label false-padding-bottom">{{ __('text.course_time') }}</label>
 
                     <div class="col-md-12">
                         <input id="course_time" type="text" class="form-control" name="course_time" value="{{ $course->course_time }}">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-12">
-                        <button type="submit" class="button button--save">Save</button>
+                        <button type="submit" class="button button--save">{{ __('text.save') }}</button>
                     </div>
                 </div>
             </form>

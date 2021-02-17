@@ -1,15 +1,5 @@
-
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet">
-<!-- CSS -->
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
-<!-- JS -->
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-
-
 @extends('layouts.student-app')
-@section('title', 'Edit Sector')
+@section('title', 'Add Expense')
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
@@ -17,10 +7,9 @@
             {{ __('text.add_expense') }}
         </h3>
         <ul>
-            <li>
-                <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
             <li>{{ __('text.add_expense') }}</li>
         </ul>
@@ -34,7 +23,7 @@
         <div class="col-md-8">
             <div class="card height-auto false-height">
                 <div class="card-body">
-                    <form class="new-added-form justify-content-md-center" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/create-expense')}}" method="post">
+                    <form class="new-added-form justify-content-md-center" action="{{url(current_user()->role.'/create-expense')}}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-12">
@@ -55,7 +44,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
                             <div class="col-md-12">
-                                <label for="amount">{{ __('amount') }} <label class="text-danger">*</label></label>
+                                <label for="amount">{{ __('text.amount') }} <label class="text-danger">*</label></label>
                                 <input id="amount" type="number" class="form-control" name="amount" value="{{ old('amount') }}" placeholder="Amount" required>
 
                                 @if ($errors->has('amount'))
@@ -69,9 +58,9 @@
                         <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
 
                             <div class="col-md-12">
-                                <label for="date">{{ __('text.expense_date') }}<label class="text-danger">*</label></label>
+                                <label for="date">{{ __('text.Date') }}<label class="text-danger">*</label></label>
 
-                                <input data-date-format="yyyy-mm-dd" id="date" class="form-control date" name="date" value="{{ old('month') }}" placeholder="Expense Date" required autocomplete="off">
+                                <input type="date" id="date" class="form-control date" name="date" value="{{ old('month') }}" placeholder="Expense Date" required>
                                 @if ($errors->has('date'))
                                     <span class="help-block">
                                       <strong>{{ $errors->first('date') }}</strong>
@@ -99,12 +88,4 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function () {
-            $('.date').datepicker({
-                format: 'yyyy-mm-dd',
-            });
-        })
-    </script>
 @endsection

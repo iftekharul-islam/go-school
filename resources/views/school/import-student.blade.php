@@ -97,8 +97,8 @@
             e.preventDefault();
             let section_details = $("#section").find('option:selected').text();
             swal({
-                title: "Are you sure?",
-                text: "You have selected to import students for: " + section_details ,
+                title:  '{{ __('text.conform_msg') }}' ,
+                text: "{{ __('text.import_notice') }} " + section_details ,
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

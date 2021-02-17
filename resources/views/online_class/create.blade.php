@@ -151,7 +151,7 @@
 
                                                             <div class="sms-area">
                                                                 <label for="message"
-                                                                       class="control-label false-padding-bottom"><b>Message
+                                                                       class="control-label false-padding-bottom"><b>{{ __('text.message') }}
                                                                         :</b></label>
                                                                 <div class="alert alert-info">
                                                                     <ul>
@@ -202,7 +202,7 @@
                                                 <div class="col-md-12">
                                                     <button type="button" id="submit-btn"
                                                             class="button button--save float-right">
-                                                        Sent
+                                                        {{ __('text.Submit') }}
                                                     </button>
                                                 </div>
                                             </div>

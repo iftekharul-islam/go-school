@@ -115,7 +115,7 @@
                                     <li><a href="{{url('user/'.Auth::user()->student_code)}}"><i
                                                     class="flaticon-user"></i>{{ __('text.my_profile') }}</a></li>
                                 @endif
-                                <li><a href="{{ url('user/config/change_password') }}"><i class="flaticon-list"></i>{{ __('text.change_password') }}</a></li>
+                                <li><a href="{{ route('change.password') }}"><i class="flaticon-list"></i>{{ __('text.change_password') }}</a></li>
                                 @if(Auth::user()->role == 'admin')
                                     <li>
                                         <a href="{{ route('school.setting') }}"><i class="fas fa-cogs"></i>

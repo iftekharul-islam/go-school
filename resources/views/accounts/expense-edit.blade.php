@@ -4,14 +4,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="breadcrumbs-area">
-            <h3>Edit Expense</h3>
+            <h3>{{ __('text.edit') }}</h3>
             <ul>
-                <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                        {{ __('text.Back') }}</a>|
+                    <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
-                <li>Manage Accounts</li>
-                <li><a href="{{ route('expenseList') }}"> Expense List</a></li>
-                <li>Edit Expense</li>
+                <li>{{ __('text.edit') }}</li>
             </ul>
         </div>
 
@@ -27,14 +26,14 @@
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Edit Expense</h3>
+                                        <h3>{{ __('text.expense') }} {{ __('text.edit') }}</h3>
                                     </div>
                                 </div>
-                                <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/update-expense')}}" method="post">
+                                <form class="new-added-form" action="{{url(current_user()->role.'/update-expense')}}" method="post">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="id" value="{{$expense->id}}">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label for="name" class="col-md-4 control-label">Sector Name <label class="text-danger">*</label></label>
+                                        <label for="name" class="col-md-4 control-label">{{ __('text.Name') }}<label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="name" type="text" class="form-control" name="name" value="{{$expense->name}}" placeholder="Sector Name" required>
@@ -47,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
-                                        <label for="amount" class="col-md-4 control-label">Amount <label class="text-danger">*</label></label>
+                                        <label for="amount" class="col-md-4 control-label">{{ __('text.amount') }} <label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                                             <input id="amount" type="text" class="form-control" name="amount" value="{{$expense->amount}}" placeholder="Amount" required>
@@ -60,7 +59,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                        <label for="description" class="col-md-4 control-label">Description <label class="text-danger">*</label></label>
+                                        <label for="description" class="col-md-4 control-label">{{ __('text.description') }}<label class="text-danger">*</label></label>
 
                                         <div class="col-md-12">
                               <textarea id="description" class="form-control"
@@ -76,7 +75,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-4 col-sm-8">
-                                            <button type="submit" class="button button--save">Update</button>
+                                            <button type="submit" class="button button--save">{{ __('text.Update') }}</button>
                                         </div>
                                     </div>
                                 </form>

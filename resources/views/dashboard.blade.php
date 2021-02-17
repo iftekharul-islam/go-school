@@ -3,13 +3,7 @@
 @section('content')
     <!-- Breadcubs Area Start Here -->
     <div class="breadcrumbs-area">
-        <h3>Dashboard</h3>
-        <ul>
-            <li>
-                <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
-            </li>
-            <li>Student Dashboard</li>
-        </ul>
+        <h3>{{ __('text.Dashboard') }}</h3>
     </div>
     <!-- Breadcubs Area End Here -->
 

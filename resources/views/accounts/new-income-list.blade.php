@@ -25,10 +25,9 @@
         {{ __('text.Income List') }}
     </h3>
     <ul>
-        <li>
-            <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                {{ __('text.Back') }} &nbsp;&nbsp;|</a>
-            <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;{{ __('text.Home') }}</a>
+        <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                {{ __('text.Back') }}</a>|
+            <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
         </li>
         <li>{{ __('text.Income List') }}</li>
     </ul>
@@ -44,7 +43,7 @@
             @endif
             <div class="row mb-5">
                 <div class="col-md-12 ">
-                    <form class="new-added-form" action="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/list-income')}}" method="post">
+                    <form class="new-added-form" action="{{url(current_user()->role.'/list-income')}}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
@@ -241,8 +240,8 @@
 
         function deleteMsg(id) {
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Income!",
+                title: "{{ __('text.conform_msg') }}",
+                text: "{{ __('text.conform_info') }}",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,

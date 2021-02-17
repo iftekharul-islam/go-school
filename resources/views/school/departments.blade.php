@@ -86,11 +86,11 @@
                                             <td>{{ $dp->students->count() }}</td>
                                             <td>
                                                 <a href="{{ url('admin/department-teachers', $dp->id) }}"
-                                                   class="button btn-link text-teal">View Department Teachers</a>
+                                                   class="button btn-link text-teal">{{ __('text.department_teacher') }}</a>
                                             </td>
                                             <td>
                                                 <a href="{{ url('admin/department-students', $dp->id) }}"
-                                                   class="button btn-link text-teal">View Department Students</a>
+                                                   class="button btn-link text-teal">{{ __('text.department_student') }}</a>
                                             </td>
                                             <td>
                                                 <a class="btn btn-lg btn-primary mr-3"
@@ -115,8 +115,8 @@
                                 <script type="text/javascript">
                                     function removeDepartment(id) {
                                         swal({
-                                            title: "Are you sure?",
-                                            text: "Once deleted, you will not be able to recover this user!",
+                                            title: "{{ __('text.conform_msg') }}",
+                                            text: " {{ __('text.conform_info') }} ",
                                             icon: "warning",
                                             buttons: true,
                                             dangerMode: true,

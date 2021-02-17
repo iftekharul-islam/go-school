@@ -4,19 +4,13 @@
     <div class="dashboard-content-one">
         <!-- Breadcubs Area Start Here -->
         <div class="breadcrumbs-area">
-            <h3>Edit Fee Type</h3>
+            <h3>{{ __('text.Fee Types') }} {{ __('text.edit') }}</h3>
             <ul>
-                <li>
-                    <a href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">Home</a>
+                <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                        {{ __('text.Back') }}</a>|
+                    <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                 </li>
-                @if(Auth::user()->role != 'master')
-                <li>Manage Accounts</li>
-                <li>Fee Collection</li>
-                <li> <a href="{{ route('fee-types.index') }}">Fee Types</a></li>
-                @else 
-                <li>Default Fee Types</li>
-                @endif
-                <li>Edit Fee Type</li>
+                <li>{{ __('text.Fee Types') }} {{ __('text.edit') }}</li>
             </ul>
         </div>
         @if (session('status'))
@@ -39,7 +33,7 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3>Edit Fee Types</h3>
+                                <h3>{{ __('text.Fee Types') }} {{ __('text.edit') }}</h3>
                             </div>
                         </div>
                         <form class="mg-b-20" action="@if(auth()->user()->role == 'master') {{ route('update.fee.type',['id' => $feeType->id])}} @else {{ url(auth()->user()->role.'/fee-types', $feeType->id) }} @endif" method="POST">
@@ -47,30 +41,30 @@
                             {!! method_field('patch') !!}
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="name">Name</label>
+                                    <label for="name">{{ __('text.Name') }}</label>
                                     <input type="text" placeholder="Name" class="form-control" name="name" value="{{ $feeType->name }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="code">Order no</label>
+                                    <label for="code">{{ __('text.order_no') }}</label>
                                     <input type="number" class="form-control" name="order" value="{{ $feeType->order }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="code">Code</label>
+                                    <label for="code">{{ __('text.Code') }}</label>
                                     <input type="text" placeholder="Code" class="form-control" name="code" value="{{ $feeType->code }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group mb-4">
-                                    <label for="desc">Description</label>
+                                    <label for="desc">{{ __('text.description') }}</label>
                                     <textarea class="form-control" placeholder="Description" name="desc">{{ $feeType->description }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group mr-4 float-right mt-3">
-                                <button type="submit" class="button button--save">Update</button>
+                                <button type="submit" class="button button--save">{{ __('text.Update') }}</button>
                             </div>
                         </form>
                     </div>

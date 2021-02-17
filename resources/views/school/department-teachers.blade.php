@@ -11,14 +11,14 @@
 
                             <div class="breadcrumbs-area">
                                 <h3>
-                                    <i class='fas fa-chalkboard-teacher'></i>  All Teachers
+                                    <i class='fas fa-chalkboard-teacher'></i> {{ __('text.All Teacher') }}
                                 </h3>
                                 <ul>
-                                    <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                                            Back &nbsp;&nbsp;|</a>
-                                        <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+                                    <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                                            {{ __('text.Back') }}</a>|
+                                        <a style="margin-left: 8px;" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
                                     </li>
-                                    <li>All Teachers</li>
+                                    <li>{{ __('text.All Teacher') }}</li>
                                 </ul>
                             </div>
 
@@ -39,21 +39,21 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th>Code</th>
-                                                <th>Full Name</th>
-                                                <th>Email</th>
+                                                <th>{{ __('text.Code') }}</th>
+                                                <th>{{ __('text.Name') }}</th>
+                                                <th>{{ __('text.Email') }}</th>
                                                 @foreach ($users as $user)
 
                                                     @if(Auth::user()->role == 'librarian' || Auth::user()->role == 'teacher' || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant')
                                                         @if (!Session::has('section-attendance'))
                                                             @if($user->role == 'teacher')
-                                                                <th>Courses</th>
+                                                                <th>{{ __('text.courses') }}</th>
                                                             @endif
                                                         @endif
                                                     @elseif($user->role == 'accountant' || $user->role == 'librarian')
                                                         @if (!Session::has('section-attendance'))
-                                                            <th>Phone Number</th>
-                                                            <th>Email</th>
+                                                            <th>{{ __('text.phone_number') }}</th>
+                                                            <th>{{ __('text.Email') }}</th>
                                                         @endif
                                                     @endif
                                                     @break($loop->first)
@@ -66,7 +66,7 @@
                                                 @endforeach
                                                 @if(Auth::user()->role == 'admin')
                                                     @if (!Session::has('section-attendance'))
-                                                        <th>Action</th>
+                                                        <th>{{ __('text.action') }}</th>
                                                     @endif
                                                 @endif
                                             </tr>
@@ -88,7 +88,7 @@
                                                             @if($user->role == 'teacher')
                                                                 <td style="white-space: nowrap;">
 
-                                                                    <a class="text-teal" href="{{url(\Illuminate\Support\Facades\Auth::user()->role.'/courses/'.$user->id.'/0')}}">All Courses</a>
+                                                                    <a class="text-teal" href="{{url(current_user()->role.'/courses/'.$user->id.'/0')}}">All Courses</a>
 
                                                                 </td>
                                                             @endif

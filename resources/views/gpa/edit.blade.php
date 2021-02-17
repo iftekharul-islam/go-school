@@ -3,14 +3,14 @@
 @section('content')
     <div class="breadcrumbs-area">
         <h3>
-            Edit Grade System
+            {{ __('text.edit') }}
         </h3>
         <ul>
-            <li> <a href="{{ URL::previous() }}" style="color: #32998f!important;">
-                    Back &nbsp;&nbsp;|</a>
-                <a style="margin-left: 8px;" href="{{ url(\Illuminate\Support\Facades\Auth::user()->role.'/home') }}">&nbsp;&nbsp;Home</a>
+            <li> <a class="text-color mr-2" href="{{ URL::previous() }}">
+                    {{ __('text.Back') }}</a>|
+                <a class="text-color" href="{{ url(current_user()->role.'/home') }}">{{ __('text.Home') }}</a>
             </li>
-            <li>Edit Grade System</li>
+            <li>{{ __('text.edit') }}</li>
         </ul>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('grade') ? ' has-error' : '' }}">
-                                <label>Grade</label>
+                                <label>{{ __('text.Grades') }}</label>
                                 <input id="grade" type="text" class="form-control" name="grade" value="{{ $grade->grade }}" required>
 
                                 @if ($errors->has('grade'))
@@ -37,7 +37,7 @@
                                 @endif
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('point') ? ' has-error' : '' }}">
-                                <label>Grade Point</label>
+                                <label>{{ __('text.grade_point') }}</label>
                                 <input id="point" type="text" class="form-control" name="point" value="{{ $grade->grade_points }}" placeholder="5.00, 4.50, ..." required>
 
                                 @if ($errors->has('point'))
@@ -47,7 +47,7 @@
                                 @endif
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('from_mark') ? ' has-error' : '' }}">
-                                <label>From Mark</label>
+                                <label>{{ __('text.from_mark') }}</label>
                                 <input id="from_mark" type="text" class="form-control" name="from_mark" value="{{ $grade->marks_from }}" placeholder="Example: 80" required>
 
                                 @if ($errors->has('from_mark'))
@@ -57,7 +57,7 @@
                                 @endif
                             </div>
                             <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('to_mark') ? ' has-error' : '' }}">
-                                <label>To Mark</label>
+                                <label>{{ __('text.to_mark') }}</label>
                                 <input id="to_mark" type="text" class="form-control" name="to_mark" value="{{ $grade->marks_to }}" placeholder="Example: 90" required>
 
                                 @if ($errors->has('to_mark'))
@@ -68,8 +68,8 @@
                             </div>
 
                             <div class="col-12 form-group mg-t-8">
-                                <button type="submit" class="button button--save float-right"><b>Update</b></button>
-                                <a href="{{ URL::previous() }}" class="button button--cancel float-right mr-3"  role="button"><b>Cancel</b></a>
+                                <button type="submit" class="button button--save float-right"><b>{{ __('text.Update') }}</b></button>
+                                <a href="{{ URL::previous() }}" class="button button--cancel float-right mr-3"  role="button"><b>{{ __('text.Cancel') }}</b></a>
                             </div>
                         </div>
                     </form>

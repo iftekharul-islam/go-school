@@ -36,7 +36,14 @@
                             </div>
                             <div class="item-content">
                                 <div class="item-number"><span class="counter" data-num="{{ $students->count() }}"></span></div>
-                                <div class="item-title">{{ __('text.Total Students') }}</div>
+                                <div class="item-title">
+                                    @if (current_user()->role == 'admin')
+                                        <a href="{{ url('users/' .Auth::user()->school->code. '/1/0?student=1') }}">{{ __('text.Total Students') }}</a>
+                                    @else
+                                        {{ __('text.Total Students') }}
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,7 +55,13 @@
                                 </div>
                                 <div class="item-content">
                                     <div class="item-number"><span class="counter" data-num="{{ isset($teachers) ? $teachers->count() : '' }}"></span></div>
-                                    <div class="item-title">{{ __('text.total_teacher') }}</div>
+                                    <div class="item-title">
+                                        @if (current_user()->role == 'admin')
+                                            <a href="{{ url('users/' .Auth::user()->school->code. '/0/1?teacher=1') }}">{{ __('text.total_teacher') }}</a>
+                                        @else
+                                            {{ __('text.total_teacher') }}
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +85,13 @@
                             </div>
                             <div class="item-content">
                                 <div class="item-number"><span class="counter" data-num="{{ $totalClasses }}"></span></div>
-                                <div class="item-title">{{ __('text.Total Classes') }}</div>
+                                <div class="item-title">
+                                    @if (current_user()->role == 'admin')
+                                        <a href="{{ route('school.section','course=1') }} }}">{{ __('text.Total Classes') }}</a>
+                                    @else
+                                        {{ __('text.Total Classes') }}
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
