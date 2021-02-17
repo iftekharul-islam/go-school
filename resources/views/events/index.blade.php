@@ -26,7 +26,7 @@
     <div class="card height-auto false-height">
         <div class="card-body">
             <a href="{{ route('create.event') }}" class="button button--save mr-2">{{ __('text.create_event') }}</a>
-            @component('components.uploaded-files-list',['files'=>$files,'upload_type'=>'event'])
+            @component('components.uploaded_event_list',['files'=>$files,'upload_type'=>'event'])
             @endcomponent
         </div>
     </div>
