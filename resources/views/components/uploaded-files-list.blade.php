@@ -20,7 +20,7 @@
         @foreach($files as $file)
             <tr>
                 <td>{{($loop->index + 1)}}</td>
-                <td><a class="text-teal" href="{{ route('show.event', $file->id) }}">{{ $file->title }}</a></td>
+                <td><a class="text-teal" href="{{ route('show.event', $file->id) }}"  target="_blank">{{ $file->title }}</a></td>
                 @if($upload_type == 'syllabus' && $parent == 'class')
                     <td>{{ $file->myclass['class_number'] }}</td>
                 @elseif( $upload_type == 'routine' && $parent == 'section')
