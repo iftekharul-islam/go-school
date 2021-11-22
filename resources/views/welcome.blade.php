@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School Management System</title>
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('/shoroborno-favicon.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
 
@@ -18,7 +18,7 @@
 <body>
 <header class="header">
     <div class="header__logo-box">
-        <a href="{{ url('/') }}">
+        <a href="https://shoroborno.com/">
             <img src="{{ asset('logos/Logo-Icon-Only.png') }}" class="header__logo">
         </a>
     </div>

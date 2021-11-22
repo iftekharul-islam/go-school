@@ -8,9 +8,10 @@
     <meta name="title" content="Shoroborno: Best school management system software Dhaka Bangladesh">
     <meta name="description" content="School management software, School management system, School management system software Dhaka Bangladesh, Best school management system software">
     <meta name="keywords" content="School management software, School management system, Free School Website Development, Best school management Software in Bangladesh, best academic management system, Library management Software">
-    <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
+    <title>@yield('title') -  {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin' || Auth::user()->role == 'accountant' || Auth::user()->role ==
         'librarian'))?Auth::user()->school->name: 'School management system software Dhaka Bangladesh' }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('/shoroborno-favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('template/css/login.css') }}">
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="{{ asset('template/css/normalize.css') }}">
