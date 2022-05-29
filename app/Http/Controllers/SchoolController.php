@@ -92,7 +92,7 @@ class SchoolController extends Controller
         $tb->school_address = $request->school_address;
         $tb->district = $request->district;
         $tb->is_sms_enable = $request->is_sms_enable;
-        $tb->online_class_sms = $request->online_class_sms;
+        $tb->online_class_sms = $request->online_class_sms ?? false;
         $tb->sms_charge = $request->sms_charge;
         $tb->payment_type = $request->payment_type;
         $tb->charge = $request->charge;
