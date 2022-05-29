@@ -220,13 +220,13 @@
                                 </td>
                                 @if($user->role == 'student')
                                     @if (!Session::has('section-attendance'))
-                                        <td>{{ $user->studentInfo['roll_number'] }}</td>
-                                        <td>{{ $user->studentInfo['session'] }}</td>
-                                        <td>{{ ucfirst($user->studentInfo['version']) }}</td>
-                                        <td>{{ $user->section['class']['class_number'] }} {{!empty($user->group)? '- '.$user->group:''}}</td>
-                                        <td style="white-space: nowrap;">{{$user->section['section_number'] }}</td>
+                                        <td>{{ $user->studentInfo['roll_number'] ?? 'N/A' }}</td>
+                                        <td>{{ $user->studentInfo['session'] ?? 'N/A' }}</td>
+                                        <td>{{ isset($user->studentInfo['version']) ? ucfirst($user->studentInfo['version']) : 'N/A' }}</td>
+                                        <td>{{ $user->section['class']['class_number'] ?? 'N/A' }} {{!empty($user->group) ? '- '.$user->group:''}}</td>
+                                        <td style="white-space: nowrap;">{{$user->section['section_number'] ?? 'N/A' }}</td>
                                         <td>
-                                            @if($user->studentInfo['is_sms_enabled'] && $user->studentInfo['is_sms_enabled'] == true)
+                                            @if(isset($user->studentInfo) && $user->studentInfo['is_sms_enabled'] && $user->studentInfo['is_sms_enabled'] == true)
                                                 <span class="badge badge-info">Yes</span>
                                             @else
                                                 <span class="badge badge-warning">No</span>
