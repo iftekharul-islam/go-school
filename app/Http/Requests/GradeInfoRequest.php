@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\GreaterThan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GradeInfoRequest extends FormRequest
@@ -26,8 +27,8 @@ class GradeInfoRequest extends FormRequest
         return [
             'grade' => 'required|string',
             'point' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'from_mark' => 'required|numeric',
-            'to_mark' => 'required|numeric',
+            'from_mark' => 'required|numeric|max:95',
+            'to_mark' => ['required', 'max:100', 'numeric',new GreaterThan($this->request->get('from_mark'))]
         ];
     }
 }

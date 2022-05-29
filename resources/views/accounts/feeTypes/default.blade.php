@@ -22,7 +22,7 @@
                 <div class="heading-layout1">
                     <div class="item-title">
                         {{-- <h3 class="float-left mb-5">Default Fee Types</h3> --}}
-                        <a href="{{ route('create.fee.type') }}" class="button btn-sm button--save float-right mb-2"><i class="fas fa-plus-circle"></i> Create Fee Type</a>
+                        <a href="{{ route('create.fee.type') }}" class="button button--save float-right mb-2"><i class="fas fa-plus-circle"></i> Create Fee Type</a>
                     </div>
                 </div>
                 <div class="table-responsive">

@@ -225,12 +225,14 @@ Route::middleware(['auth','check.account.status'])->group(function () {
         Route::get('/sms-history/{school_id}', 'SchoolController@smsSummary')->name('admin.sms.summary');
         Route::get('messages', 'NotificationController@allMessages')->name('all.messages');
         Route::delete('user/notifications/delete/{id}', 'NotificationController@destroy')->name('message.delete');
-        Route::get('gpa/create-gpa', 'GradesystemController@create');
+        Route::get('gpa/create-gpa', 'GradesystemController@create')->name('gpa.system.create');
+        Route::get('gpa/system-edit/{id}', 'GradesystemController@editGradeSystem')->name('gpa.system.edit');
+        Route::Post('gpa/update/{id}', 'GradesystemController@updateGradeSystem')->name('gpa.system.update');
         Route::post('store-grade-system', 'GradesystemController@store');
         Route::post('store-gpa-info', 'GradesystemController@storeGradeInfo');
         Route::post('update-gpa/{id}', 'GradesystemController@update');
         Route::get('gpa/edit/{id}', 'GradesystemController@edit');
-        Route::get('gpa/all-gpa', 'GradesystemController@index');
+        Route::get('gpa/all-gpa', 'GradesystemController@index')->name('all.gpa');
         Route::DELETE('gpa/delete/{id}', 'GradesystemController@delete');
         Route::get('all-department', 'SchoolController@allDepartment')->name('all.department');
         Route::get('attendances/students/{teacher_id}/{course_id}/{exam_id}/{section_id}', 'AttendanceController@addStudentsToCourseBeforeAtt');

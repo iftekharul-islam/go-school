@@ -12,39 +12,60 @@ use Illuminate\Support\Facades\Auth;
 class GradesystemController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory
+     * |\Illuminate\Foundation\Application|
+     * \Illuminate\View\View
      */
     public function index(){
 
-        $gpa = Gradesystem::with('gradeSystemInfo')->where('school_id', \Auth::user()->school_id)->first();
+        $gpa = Gradesystem::with('gradeSystemInfo')
+            ->where('school_id', \Auth::user()->school_id)
+            ->first();
 
         return view('gpa.all',compact('gpa'));
     }
+
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|
+     * \Illuminate\Foundation\Application|
+     * \Illuminate\View\View
      */
     public function create(){
 
         $grade_systems = Gradesystem::where('school_id', Auth::user()->school_id)->first();
+
         return view('gpa.new-create', compact('grade_systems'));
     }
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param GradeSystemRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(GradeSystemRequest $request){
         $data = [
             'grade_system_name' => $request->get('grade_system_name'),
             'school_id' => Auth::user()->school_id
         ];
+
         Gradesystem::create($data);
         return back()->with('status', 'New Grade System Added');
+    }
+
+    public function editGradeSystem($id){
+
+        $grade_system = Gradesystem::findorFail($id);
+
+        return view('gpa.system_edit', compact('grade_system'));
+    }
+
+    public function updateGradeSystem(Request $request, $id){
+
+
+        $grade_system = Gradesystem::findorFail($id);
+        $grade_system->grade_system_name = $request->grade_system_name;
+        $grade_system->save();
+
+        return redirect()->route('all.gpa')->with('status', 'Grade system name Updated!');;
     }
 
     public function storeGradeInfo(GradeInfoRequest $request)
@@ -76,27 +97,28 @@ class GradesystemController extends Controller
         $grade = GradeSystemInfo::findOrFail($id);
         return view('gpa.edit', compact('grade'));
     }
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id){
+    public function update(GradeInfoRequest $request, $id){
+
         $gpa = GradeSystemInfo::findOrFail($id);
         $gpa->grade_points = $request->point;
         $gpa->grade = $request->grade;
         $gpa->marks_from = $request->from_mark;
         $gpa->marks_to = $request->to_mark;
         $gpa->save();
+
         return redirect()->back()->with('status', 'Grade Point info Updated !!');
     }
+
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id){
         $gpa = Gradesystem::findOrFail($id);
