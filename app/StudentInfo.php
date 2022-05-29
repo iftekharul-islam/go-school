@@ -45,6 +45,6 @@ class StudentInfo extends Model
 
     public function guardian()
     {
-        return $this->belongsTo(User::class, 'guardian_id', 'id');
+        return $this->hasOne(User::class, 'guardian_id', 'id');
     }
 }

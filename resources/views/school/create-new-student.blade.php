@@ -137,10 +137,10 @@
 
                                         <select id="department" class="form-control"
                                                 name="department_id">
-                                            <option value="{{ old('department_id') }}" selected> --Select Option-- </option>
+                                            <option value="{{ old('department_id') }}" disabled> --Select Option-- </option>
                                             @if (count($departments) > 0)
                                                 @foreach ($departments as $department)
-                                                    <option value="{{$department->id}}">{{$department->department_name}}</option>
+                                                    <option value="{{$department->id}}" {{ old('department_id') }}>{{$department->department_name}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -807,7 +807,7 @@
 
                 $('.student-username').remove();
                 $('.email-visible').html(`<input id="email" type="email" class="form-control student-email"
-                           name="email" value="" placeholder="Enter email address"
+                           name="email" value="{{ old('email') }}" placeholder="Enter email address"
                            required>`);
                 $('.email-enable-button').remove();
                 $('.student-password').val('').removeAttr('readonly');

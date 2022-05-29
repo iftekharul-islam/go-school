@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('from_mark') ? ' has-error' : '' }}">
                                             <label>{{ __('text.from_mark') }}</label>
-                                            <input id="from_mark" type="text" class="form-control" name="from_mark" value="{{ old('from_mark') }}" placeholder="Example: 80" required>
+                                            <input id="from_mark" type="text" class="form-control" name="from_mark" value="{{ old('from_mark') }}" placeholder="Example: 80">
 
                                             @if ($errors->has('from_mark'))
                                                 <span class="help-block">
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="col-12-xxxl col-lg-6 col-12 form-group{{ $errors->has('to_mark') ? ' has-error' : '' }}">
                                             <label>{{ __('text.to_mark') }}</label>
-                                            <input id="to_mark" type="text" class="form-control" name="to_mark" value="{{ old('to_mark') }}" placeholder="Example: 90" required>
+                                            <input id="to_mark" type="text" class="form-control" name="to_mark" value="{{ old('to_mark') }}" placeholder="Example: 90">
 
                                             @if ($errors->has('to_mark'))
                                                 <span class="help-block">

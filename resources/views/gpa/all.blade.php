@@ -23,7 +23,14 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <h4><i class="fas fa-poll text-teal"></i> {{ __('text.grade_title') }}: <strong>{{$gpa->grade_system_name   }}</strong></h4>
+                <h4>
+                    <i class="fas fa-poll text-teal"></i>
+                    {{ __('text.grade_title') }}:
+                    <strong>{{ $gpa->grade_system_name  }}</strong>
+                    <a href="{{ route('gpa.system.edit', $gpa->id) }}" class="btn btn-primary ml-3">
+                        <i class="far fa-edit"></i>
+                    </a>
+                </h4>
                 <div class="table-responsive">
                     <table class="table display table-bordered  text-nowraps">
                         <thead>
