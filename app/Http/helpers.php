@@ -146,6 +146,23 @@ function marking_subjects()
     return array_merge($quizzes, $assignments, $class_tests, $subjects);
 
 }
+function marking_subjects_quiz()
+{
+    return subject_list('quiz[]', 5, 'Quiz', 5, 'badge badge-primary');
+}
+function marking_subjects_assignment()
+{
+    return subject_list('assignment[]', 10, 'Assignment', 3, 'badge badge-success');
+}
+function marking_subjects_ct()
+{
+    return subject_list('ct[]', 13, 'Class Test', 5, 'badge badge-info');
+}
+function marking_subjects_subject()
+{
+    return subjects();
+}
+
 
 /**
  * @return array

@@ -43,9 +43,6 @@
                     @foreach ($grades as $grade)
                       <div class="card-title" style="font-size: 15px;"><b>Course</b> - {{$grade->course->course_name}} &nbsp; <b>Class</b> - {{$grade->course->section->class->class_number}} &nbsp;<b>Section</b> - {{$grade->course->section->section_number}}
                         <b>Examination</b> -  {{ $exam->exam_name }}     <b>Term</b>   -   {{ $exam->term }}
-                        <button type="submit" class="button button--save text-center float-right">
-                          <i class="far fa-save mr-2"></i><b>Save Mark Distribution</b>
-                        </button>
                       </div>
                       @break($loop->first)
                     @endforeach
@@ -72,13 +69,9 @@
                           <thead>
                           <tr>
                             <th>Select Grade System</th>
-                            <th>Quiz Count</th>
-                            <th>Assignment Count</th>
+                              <th>Assignment Count</th>
+                              <th>Quiz Count</th>
                             <th>Class Test Count</th>
-                            <th>Attendance %</th>
-                            <th>Assignment %</th>
-                            <th>Quiz %</th>
-                            <th>Class Test %</th>
                           </tr>
                           </thead>
                           <?php
@@ -95,14 +88,24 @@
                                 </select>
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="quiz-count" name="quiz_count" placeholder="Quiz Count" max="5" value="{{$grade->course->quiz_count}}">
-                              </td>
-                              <td>
                                 <input type="number" class="form-control input-sm" id="assignment-count" name="assignment_count" placeholder="Assignment Count" max="3" value="{{$grade->course->assignment_count}}">
                               </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="quiz-count" name="quiz_count" placeholder="Quiz Count" max="5" value="{{$grade->course->quiz_count}}">
+                                </td>
                               <td>
                                 <input type="number" class="form-control input-sm" id="ct-count" name="ct_count" placeholder="CT Count" max="5" value="{{$grade->course->ct_count}}">
                               </td>
+                            </tr>
+                            <tr>
+                                <th>Attendance %</th>
+                                <th>Assignment %</th>
+                                <th>Quiz %</th>
+                                <th>Class Test %</th>
+                                <th>Final Exam %</th>
+                                <th>Practical %</th>
+                            </tr>
+                            <tr>
                               <td>
                                 <input type="number" class="form-control input-sm" id="attendance" name="attendance_percent" placeholder="Percentage" max="50" value="{{$grade->course->attendance_percent}}">
                               </td>
@@ -116,29 +119,30 @@
                               <td>
                                 <input type="number" class="form-control input-sm" id="class-test" name="ct_percent" placeholder="Percentage" max="50" value="{{$grade->course->ct_percent}}">
                               </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="final" name="final_exam_percent" placeholder="Percentage" max="100" value="{{$grade->course->final_exam_percent}}">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="practical_percent" name="practical_percent" placeholder="Percentage" max="100" value="{{$grade->course->practical_percent}}">
+                                </td>
                             </tr>
                             <tr>
-                              <th>Final Exam %</th>
-                              <th>Practical %</th>
-                              <th>Quiz Full Marks</th>
+                              <th>Attendance Full Marks</th>
                               <th>Assignment Full Marks</th>
+                              <th>Quiz Full Marks</th>
                               <th>CT Full Marks</th>
                               <th>Final Exam Full Marks</th>
                               <th>Practical Full Marks</th>
-                              <th>Attendance Full Marks</th>
                             </tr>
                             <tr>
-                              <td>
-                                <input type="number" class="form-control input-sm" id="final" name="final_exam_percent" placeholder="Percentage" max="100" value="{{$grade->course->final_exam_percent}}">
-                              </td>
-                              <td>
-                                <input type="number" class="form-control input-sm" id="practical_percent" name="practical_percent" placeholder="Percentage" max="100" value="{{$grade->course->practical_percent}}">
-                              </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="att_full" name="att_fullmark" placeholder="Attendance Full Marks" max="100" value="{{$grade->course->att_fullmark}}">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="a_full" name="a_fullmark" placeholder="Assignment Full Marks" max="20" value="{{$grade->course->a_fullmark}}">
+                                </td>
                               <td>
                                 <input type="number" class="form-control input-sm" id="q_full" name="quiz_fullmark" placeholder="Quiz Full Marks" max="20" value="{{$grade->course->quiz_fullmark}}">
-                              </td>
-                              <td>
-                                <input type="number" class="form-control input-sm" id="a_full" name="a_fullmark" placeholder="Assignment Full Marks" max="20" value="{{$grade->course->a_fullmark}}">
                               </td>
                               <td>
                                 <input type="number" class="form-control input-sm" id="ct_full" name="ct_fullmark" placeholder="CT Full Marks" max="20" value="{{$grade->course->ct_fullmark}}">
@@ -149,9 +153,6 @@
                               <td>
                                 <input type="number" class="form-control input-sm" id="practical_full" name="practical_fullmark" placeholder="Practical Full Marks" max="100" value="{{$grade->course->practical_fullmark}}">
                               </td>
-                              <td>
-                                <input type="number" class="form-control input-sm" id="att_full" name="att_fullmark" placeholder="Attendance Full Marks" max="100" value="{{$grade->course->att_fullmark}}">
-                              </td>
                             </tr>
                             </tbody>
                             <?php $section_id = $grade->course->section->id; ?>
@@ -159,6 +160,9 @@
                           @endforeach
                         </table>
                       </div>
+                        <button type="submit" class="button button--save text-center float-right mt-3">
+                            <i class="far fa-save mr-2"></i><b>Save Mark Distribution</b>
+                        </button>
                     </div>
                   @else
                     <div class="card mt-5 false-height">

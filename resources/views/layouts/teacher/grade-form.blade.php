@@ -1,11 +1,49 @@
 <div class="col-md-12 mt-5" id="grade-labels">
     <div class="row">
-        @foreach(marking_subjects() as $item)
-            <div class="form-check form-check-inline">
-                <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
-                <label for="{{ $item['id'] }}">
-                    <span class="{{ $item['class'] }} mr-4">{{ $item['text'] }}</span>
-                </label>
+        @foreach(marking_subjects_quiz() as $item)
+                <div class="col-md-2">
+                    <div class="form-check form-check-inline">
+                        <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
+                        <label for="{{ $item['id'] }}">
+                            <span class="{{ $item['class'] }} mr-4">{{ $item['text'] }}</span>
+                        </label>
+                    </div>
+                </div>
+        @endforeach
+    </div>
+    <div class="row">
+        @foreach(marking_subjects_assignment() as $item)
+            <div class="col-md-2">
+                <div class="form-check form-check-inline">
+                    <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
+                    <label for="{{ $item['id'] }}">
+                        <span class="{{ $item['class'] }} mr-4">{{ $item['text'] }}</span>
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    <div class="row">
+        @foreach(marking_subjects_ct() as $item)
+            <div class="col-md-2">
+                <div class="form-check form-check-inline">
+                    <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
+                    <label for="{{ $item['id'] }}">
+                        <span class="{{ $item['class'] }} mr-4">{{ $item['text'] }}</span>
+                    </label>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    <div class="row">
+        @foreach(marking_subjects_subject() as $item)
+            <div class="col-md-2">
+                <div class="form-check form-check-inline">
+                    <input id="{{ $item['id'] }}" type="checkbox" name="{{ $item['name'] }}" value="{{ $item['value'] }}" {{ $item['checked'] }}>
+                    <label for="{{ $item['id'] }}">
+                        <span class="{{ $item['class'] }} mr-4">{{ $item['text'] }}</span>
+                    </label>
+                </div>
             </div>
         @endforeach
     </div>
@@ -59,8 +97,7 @@
                                value="{{$grade->attendance}}">
                     </td>
                     <td>
-                        <input type="number" name="quiz1[]" class="form-control input-sm input-sm"
-                               value="{{$grade->quiz1}}"
+                        <input type="number" name="quiz1[]" class="form-control input-sm input-sm" value="{{$grade->quiz1}}"
                                placeholder="Qz 1" max="20">
                     </td>
                     <td>
