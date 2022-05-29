@@ -234,7 +234,6 @@ class UserController extends Controller
      */
     public function storeStudent(CreateUserRequest $request)
     {
-//        return $request->all();
         $path = $request->hasFile('student_pic') ? Storage::disk('public')->put('school-' . \Auth::user()->school_id . '/' . date('Y'), $request->file('student_pic')) : null;
         $password = $request->password;
         $tb = $this->userService->storeStudent($request, $path);
