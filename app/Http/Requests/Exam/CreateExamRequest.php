@@ -27,7 +27,7 @@ class CreateExamRequest extends FormRequest
             'exam_name' => 'required|string',
             'term' => 'required|string',
             'start_date' => 'required|string',
-            'end_date' => 'required|string',
+            'end_date' => 'required|string|after_or_equal:start_date',
             'classes' =>'required'
         ];
     }

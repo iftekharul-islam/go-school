@@ -117,7 +117,7 @@
                                         class="mb-4 col-md-6 form-group{{ $errors->has('charge') ? ' has-error' : '' }}">
                                         <label for="charge" class="control-label false-padding-bottom">Charge <label
                                                 class="text-danger">*</label></label>
-                                        <input id="charge" type="text" class="form-control" name="charge"
+                                        <input id="charge" type="number" class="form-control" name="charge"
                                                value="{{old('charge')}}" required>
                                         @if ($errors->has('charge'))
                                             <span class="help-block">
@@ -193,7 +193,7 @@
                                             class="mb-4 col-md-6 form-group { $errors->has('sms_charge') ? ' has-error' : '' }}">
                                             <label for="sms_charge" class="control-label false-padding-bottom">SMS
                                                 Charge(Per SMS) <label class="text-danger">*</label></label>
-                                            <input id="sms_charge" type="text" class="form-control" name="sms_charge"
+                                            <input id="sms_charge" type="number" class="form-control" name="sms_charge"
                                                    value="{{old('sms_charge')}}" placeholder="0.35">
                                             @if ($errors->has('sms_charge'))
                                                 <span class="help-block">
