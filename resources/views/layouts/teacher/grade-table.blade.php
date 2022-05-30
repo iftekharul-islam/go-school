@@ -9,12 +9,15 @@
       @for($i=1;$i<=5;$i++)
         <th>Quiz {{$i}}</th>
       @endfor
+        <th>Final Quiz Mark</th>
       @for($i=1;$i<=3;$i++)
         <th>Assignment {{$i}}</th>
       @endfor
+        <th>Final Assignment Mark</th>
       @for($i=1;$i<=5;$i++)
         <th>CT {{$i}}</th>
       @endfor
+        <th>Final CT Mark</th>
       @if($grade->course->final_exam_percent > 0)
         <th>Written</th>
         <th>Mcq</th>
@@ -37,12 +40,15 @@
         @for($i=1;$i<=5;$i++)
           <td>{{$grade['quiz'.$i]}}</td>
         @endfor
+          <td>{{ $grade['final_quiz_mark'] }}</td>
         @for($i=1;$i<=3;$i++)
           <td>{{$grade['assignment'.$i]}}</td>
         @endfor
+          <td>{{ $grade['final_assignment_mark'] }}</td>
         @for($i=1;$i<=5;$i++)
           <td>{{$grade['ct'.$i]}}</td>
         @endfor
+          <td>{{ $grade['final_ct_mark'] }}</td>
         @if($grade->course->final_exam_percent > 0)
           <td>{{$grade->written}}</td>
           <td>{{$grade->mcq}}</td>
