@@ -170,23 +170,4 @@
     </div>
 </form>
 
-<script>
-    $(function () {
-        var i;
-        for (i = 6; i < 21; i++) {
-            if (i == 10 || i == 13)
-                continue;
-            $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").hide();
-        }
-        $(":checkbox").change(function () {
-            if ($(this).is(':checked')) {
-                $("#marking-table td:nth-child(" + $(this).val() + "), #marking-table th:nth-child(" + $(this).val() +
-                    ")").show();
-            } else {
-                $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
-                    ")").hide();
-                $("#marking-table td:nth-child(" + $(this).val() + ")").find('input').val('0');
-            }
-        });
-    });
-</script>
+
