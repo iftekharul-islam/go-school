@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\GreaterThan;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GradeInfoRequest extends FormRequest
 {

@@ -29,7 +29,7 @@
                   {{ session('error') }}
               </div>
             @endif
-            @if ($errors->any())
+            @if ($errors->any())115, 116
               <div class="alert alert-danger">
                 <ul>
                   @foreach ($errors->all() as $error)
@@ -66,6 +66,9 @@
                           <li>
                             <b>Full Mark Example:</b> If you take a Class Test where full mark is 15, then Full mark for Class Test is 15.
                           </li>
+                            <li>
+                                <b>Average Marking formula (CT, Quiz, Assignment):</b> Field percentage * Field marks sum average(Best marks field count) / Field full mark.
+                            </li>
                         </ul>
                       </div>
                       <div class="table-responsive">
