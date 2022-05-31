@@ -113,5 +113,7 @@ class CourseService {
         $tb->final_fullmark = $request->final_fullmark;
         $tb->practical_fullmark = $request->practical_fullmark;
         $tb->save();
+
+        return true;
     }
 }
