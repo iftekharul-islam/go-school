@@ -24,6 +24,10 @@
               <div class="alert alert-success">
                 {{ session('status') }}
               </div>
+            @elseif(session('error'))
+              <div class="alert alert-danger">
+                  {{ session('error') }}
+              </div>
             @endif
             @if ($errors->any())
               <div class="alert alert-danger">
@@ -104,26 +108,30 @@
                                 <th>Class Test %</th>
                                 <th>Final Exam %</th>
                                 <th>Practical %</th>
+                                <th>Total %</th>
                             </tr>
                             <tr>
                               <td>
-                                <input type="number" class="form-control input-sm" id="attendance" name="attendance_percent" placeholder="Percentage" max="50" value="{{$grade->course->attendance_percent}}">
+                                <input type="number" onchange="updatePercentage()" class="form-control input-sm" id="attendance" name="attendance_percent" placeholder="Percentage" max="50" value="{{$grade->course->attendance_percent}}">
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="assignment" name="assignment_percent"
+                                <input type="number" onchange="updatePercentage()" class="form-control input-sm" id="assignment" name="assignment_percent"
                                        placeholder="Percentage" max="50" value="{{$grade->course->assignment_percent}}">
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="quiz" name="quiz_percent" placeholder="Percentage" max="50" value="{{$grade->course->quiz_percent}}">
+                                <input type="number" onchange="updatePercentage()" class="form-control input-sm" id="quiz" name="quiz_percent" placeholder="Percentage" max="50" value="{{$grade->course->quiz_percent}}">
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="class-test" name="ct_percent" placeholder="Percentage" max="50" value="{{$grade->course->ct_percent}}">
+                                <input type="number" onchange="updatePercentage()" class="form-control input-sm" id="class-test" name="ct_percent" placeholder="Percentage" max="50" value="{{$grade->course->ct_percent}}">
                               </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" id="final" name="final_exam_percent" placeholder="Percentage" max="100" value="{{$grade->course->final_exam_percent}}">
+                                    <input type="number" onchange="updatePercentage()" class="form-control input-sm" id="final" name="final_exam_percent" placeholder="Percentage" max="100" value="{{$grade->course->final_exam_percent}}">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" id="practical_percent" name="practical_percent" placeholder="Percentage" max="100" value="{{$grade->course->practical_percent}}">
+                                    <input type="number" onchange="updatePercentage()" class="form-control input-sm" id="practical_percent" name="practical_percent" placeholder="Percentage" max="100" value="{{$grade->course->practical_percent}}">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="final_percentage" name="f_percent" placeholder="Percentage"  value="0" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -133,26 +141,30 @@
                               <th>CT Full Marks</th>
                               <th>Final Exam Full Marks</th>
                               <th>Practical Full Marks</th>
+                              <th>Grand Total</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="number" class="form-control input-sm" id="att_full" name="att_fullmark" placeholder="Attendance Full Marks" max="100" value="{{$grade->course->att_fullmark}}">
+                                    <input type="number" onchange="updateFinalMark()" class="form-control input-sm" id="att_full" name="att_fullmark" placeholder="Attendance Full Marks" max="100" value="{{$grade->course->att_fullmark}}">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-sm" id="a_full" name="a_fullmark" placeholder="Assignment Full Marks" max="20" value="{{$grade->course->a_fullmark}}">
+                                    <input type="number" onchange="updateFinalMark()" class="form-control input-sm" id="a_full" name="a_fullmark" placeholder="Assignment Full Marks" max="20" value="{{$grade->course->a_fullmark}}">
                                 </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="q_full" name="quiz_fullmark" placeholder="Quiz Full Marks" max="20" value="{{$grade->course->quiz_fullmark}}">
+                                <input type="number" onchange="updateFinalMark()" class="form-control input-sm" id="q_full" name="quiz_fullmark" placeholder="Quiz Full Marks" max="20" value="{{$grade->course->quiz_fullmark}}">
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="ct_full" name="ct_fullmark" placeholder="CT Full Marks" max="20" value="{{$grade->course->ct_fullmark}}">
+                                <input type="number" onchange="updateFinalMark()" class="form-control input-sm" id="ct_full" name="ct_fullmark" placeholder="CT Full Marks" max="20" value="{{$grade->course->ct_fullmark}}">
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="final_full" name="final_fullmark" placeholder="Final Full Marks" max="100" value="{{$grade->course->final_fullmark}}">
+                                <input type="number" onchange="updateFinalMark()" class="form-control input-sm" id="final_full" name="final_fullmark" placeholder="Final Full Marks" max="100" value="{{$grade->course->final_fullmark}}">
                               </td>
                               <td>
-                                <input type="number" class="form-control input-sm" id="practical_full" name="practical_fullmark" placeholder="Practical Full Marks" max="100" value="{{$grade->course->practical_fullmark}}">
+                                <input type="number" onchange="updateFinalMark()" class="form-control input-sm" id="practical_full" name="practical_fullmark" placeholder="Practical Full Marks" max="100" value="{{$grade->course->practical_fullmark}}">
                               </td>
+                                <td>
+                                    <input type="number" class="form-control input-sm" id="final_mark" name="f_mark" placeholder="Percentage"  value="0" readonly>
+                                </td>
                             </tr>
                             </tbody>
                             <?php $section_id = $grade->course->section->id; ?>
@@ -221,23 +233,61 @@
 @endsection
 @push('customjs')
     <script>
-    $(function () {
-        var i;
-        for (i = 6; i < 18; i++) {
-            if (i == 10 || i == 13)
-                continue;
-            $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").show();
-        }
-        $(":checkbox").change(function () {
-            if ($(this).is(':checked')) {
-                $("#marking-table td:nth-child(" + $(this).val() + "), #marking-table th:nth-child(" + $(this).val() +
-                    ")").show();
-            } else {
-                $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
-                    ")").hide();
-                $("#marking-table td:nth-child(" + $(this).val() + ")").find('input').val('0');
+        function updatePercentage() {
+            let attendance = parseInt($("#attendance").val());
+            let assignment = parseInt($("#assignment").val());
+            let quiz = parseInt($("#quiz").val());
+            let ct = parseInt($("#class-test").val());
+            let final = parseInt($("#final").val());
+            let practical = parseInt($("#practical_percent").val());
+            let total = attendance + assignment + quiz + ct + final + practical;
+            $("#final_percentage").val(total);
+
+            if($("#final_percentage").hasClass('text-danger')){
+                $("#final_percentage").removeClass('text-danger')
             }
+            if(total > 100){
+                $("#final_percentage").addClass('text-danger')
+            }
+        }
+
+        function updateFinalMark() {
+            let attendance = parseInt($("#att_full").val());
+            let assignment = parseInt($("#a_full").val());
+            let quiz = parseInt($("#q_full").val());
+            let ct = parseInt($("#ct_full").val());
+            let final = parseInt($("#final_full").val());
+            let practical = parseInt($("#practical_full").val());
+            let total = attendance + assignment + quiz + ct + final + practical;
+            $("#final_mark").val(total);
+
+            if($("#final_mark").hasClass('text-danger')){
+                $("#final_mark").removeClass('text-danger')
+            }
+            if(total > 100){
+                $("#final_mark").addClass('text-danger')
+            }
+        }
+
+        $(function () {
+            var i;
+            for (i = 6; i < 18; i++) {
+                if (i == 10 || i == 13)
+                    continue;
+                $("#marking-table td:nth-child(" + i + "),#marking-table th:nth-child(" + i + ")").show();
+            }
+            $(":checkbox").change(function () {
+                if ($(this).is(':checked')) {
+                    $("#marking-table td:nth-child(" + $(this).val() + "), #marking-table th:nth-child(" + $(this).val() +
+                        ")").show();
+                } else {
+                    $("#marking-table td:nth-child(" + $(this).val() + "),#marking-table th:nth-child(" + $(this).val() +
+                        ")").hide();
+                    $("#marking-table td:nth-child(" + $(this).val() + ")").find('input').val('0');
+                }
+            });
+            updatePercentage();
+            updateFinalMark();
         });
-    });
     </script>
 @endpush

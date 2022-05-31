@@ -211,8 +211,6 @@ class GradeService
 
     public function calculateMarks($course, $grade)
     {
-        logger('course');
-        logger($course);
         $this->grade = $grade;
 
         $this->quizCount = $course->quiz_count;
@@ -254,19 +252,9 @@ class GradeService
         // Assignment
         $this->full_field_mark = $course->a_fullmark;
         $this->field_percentage = $course->assignment_percent;
-        logger('$course->assignment_percent');
-        logger($course->assignment_percent);
-        logger('----');
-        logger($course->assignment_percent);
         if ($this->assignmentSum != 0 && $this->assignmentCount != 0) {
             $this->avg_field_sum = $this->assignmentSum / $this->assignmentCount;
         }
-        logger('Assignment');
-        logger('full_field_mark');
-        logger($course->quiz_fullmark);
-        logger('$course->field_percentage');
-        logger($this->field_percentage);
-        logger('------');
         $this->final_default_value = $this->assignmentSum;
         $this->final_assignment_mark = $this->getFieldFinalMark();
         // Class Test
@@ -320,10 +308,6 @@ class GradeService
 
     public function getFieldFinalMark()
     {
-        logger($this->field_percentage);
-        logger($this->avg_field_sum);
-        logger($this->full_field_mark);
-        logger('-------');
         return ($this->full_field_mark > 0) ? (($this->field_percentage * $this->avg_field_sum) / $this->full_field_mark) : $this->final_default_value;
     }
 

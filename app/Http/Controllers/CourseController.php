@@ -100,12 +100,35 @@ class CourseController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function saveConfiguration(SaveConfigurationRequest $request){
-        try{
-            $this->courseService->saveConfiguration($request);
-        } catch (\Exception $ex){
-            return 'Could not save configuration.';
+       $totalPercentage =
+           $request->attendance_percent +
+           $request->quiz_percent +
+           $request->assignment_percent +
+           $request->ct_percent +
+           $request->final_exam_percent +
+           $request->practical_percent ;
+
+        if ($totalPercentage > 100) {
+            return back()->with('error', 'Total percentage should not be more than 100%');
         }
-        return back()->with('status', 'Configuration Saved');
+
+       $totalMarks =
+           $request->att_fullmark +
+           $request->quiz_fullmark +
+           $request->a_fullmark +
+           $request->ct_fullmark +
+           $request->final_fullmark +
+           $request->practical_fullmark;
+
+        if ($totalMarks > 100) {
+            return back()->with('error', 'Final marks should not be more than 100%');
+        }
+
+        $data = $this->courseService->saveConfiguration($request);
+        if ($data) {
+            return back()->with('status', 'Configuration Saved');
+        }
+        return back()->with('error', 'Unable to update Configuration');
     }
 
     /**
