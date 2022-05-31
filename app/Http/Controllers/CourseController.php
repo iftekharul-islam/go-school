@@ -107,9 +107,11 @@ class CourseController extends Controller
            $request->ct_percent +
            $request->final_exam_percent +
            $request->practical_percent ;
-        if($totalPercentage > 100){
+
+        if ($totalPercentage > 100) {
             return back()->with('error', 'Total percentage should not be more than 100%');
         }
+
        $totalMarks =
            $request->att_fullmark +
            $request->quiz_fullmark +
@@ -118,12 +120,12 @@ class CourseController extends Controller
            $request->final_fullmark +
            $request->practical_fullmark;
 
-        if($totalMarks > 100){
+        if ($totalMarks > 100) {
             return back()->with('error', 'Final marks should not be more than 100%');
         }
 
         $data = $this->courseService->saveConfiguration($request);
-        if($data){
+        if ($data) {
             return back()->with('status', 'Configuration Saved');
         }
         return back()->with('error', 'Unable to update Configuration');
