@@ -21,6 +21,10 @@
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
+                    @elseif(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
                     @endif
 
                     <form class="new-added-form" action="{{url('admin/update-gpa', $grade->id)}}" method="post">

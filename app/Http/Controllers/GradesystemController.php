@@ -70,6 +70,13 @@ class GradesystemController extends Controller
 
     public function storeGradeInfo(GradeInfoRequest $request)
     {
+        $gradeExist = GradeSystemInfo::where('grade', $request->get('grade'))
+            ->where('gradesystem_id', $request->get('grade_system_id'))
+            ->count();
+
+        if($gradeExist){
+            return back()->with('error', 'Cannot create same grade');
+        }
         $data = [
             'grade' => $request->get('grade'),
             'grade_points' => $request->get('point'),
@@ -104,8 +111,17 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(GradeInfoRequest $request, $id){
-
         $gpa = GradeSystemInfo::findOrFail($id);
+
+        $gradeExist = GradeSystemInfo::where('id', '!=', $gpa->id)
+            ->where('grade', $request->get('grade'))
+            ->where('gradesystem_id', $gpa->gradesystem_id)
+            ->count();
+
+        if($gradeExist){
+            return back()->with('error', 'Cannot create same grade');
+        }
+
         $gpa->grade_points = $request->point;
         $gpa->grade = $request->grade;
         $gpa->marks_from = $request->from_mark;
