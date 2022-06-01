@@ -71,7 +71,7 @@
                                        class="control-label false-padding-bottom">{{ __('text.Email') }}
                                     <label
                                         class="text-danger">*</label></label>
-                                <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
+                                <a href="" class="btn btn-primary email-enable-button float-right">Enable email</a>
 
                                 @php
                                     $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
