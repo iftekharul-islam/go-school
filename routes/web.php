@@ -422,7 +422,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
         Route::prefix('register')->name('register.')->group(function () {
             Route::post('student', 'UserController@storeStudent')->name('student.store');
-            Route::post('teacher', 'UserController@storeTeacher')->name('teacher.store');
+            Route::post('teacher', 'f@storeTeacher')->name('teacher.store');
             Route::post('accountant', 'UserController@storeAccountant')->name('accountant.store');
             Route::post('staff', 'UserController@storeStaff')->name('staff.store');
             Route::post('librarian', 'UserController@storeLibrarian');

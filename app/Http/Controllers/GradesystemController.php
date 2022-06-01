@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GradeSystemInfo;
 use App\Http\Requests\GradeInfoRequest;
 use App\Http\Requests\GradeSystemRequest;
+use App\Http\Requests\UpdateGradeInfoRequest;
 use Illuminate\Http\Request;
 use App\Gradesystem as Gradesystem;
 use Illuminate\Support\Facades\Auth;
@@ -110,8 +111,17 @@ class GradesystemController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(GradeInfoRequest $request, $id){
+    public function update(UpdateGradeInfoRequest $request, $id){
         $gpa = GradeSystemInfo::findOrFail($id);
+
+        $sameValueExist = GradeSystemInfo::where('id', '!=', $gpa->id)
+            ->where('marks_to', '>=',  $request->get('from_mark'))
+            ->where('gradesystem_id', $gpa->gradesystem_id)
+            ->count();
+
+        if($sameValueExist){
+            return back()->with('error', 'Cannot update same marks of other maximum marks');
+        }
 
         $gradeExist = GradeSystemInfo::where('id', '!=', $gpa->id)
             ->where('grade', $request->get('grade'))
