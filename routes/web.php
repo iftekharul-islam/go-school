@@ -64,6 +64,7 @@ Route::middleware(['auth','check.account.status'])->group(function () {
 
     // Master role routes
     Route::group(['prefix' => 'master', 'middleware' => 'master'], function () {
+        Route::get('/super-user-list', 'MasterHomeController@staffList')->name('super.user.list');
         Route::get('/home', 'MasterHomeController@index')->name('master.home');
         Route::get('register/admin/{id}', 'AdminController@create');
         Route::post('register/admin', 'AdminController@store');

@@ -52,7 +52,6 @@
                     @endforeach
                     <div class="card-body" style="padding-top: 0px;">
                       <div class="alert alert-info alert-dismissible mt-5" style="font-size:13px; margin-top: 10px;">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <ul>
                           <li>
                             Select which Grade System you want to use.

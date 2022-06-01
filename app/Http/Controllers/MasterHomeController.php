@@ -53,4 +53,11 @@ class MasterHomeController extends Controller
             'searchData' => $searchData
         ]);
     }
+
+    public function staffList()
+    {
+        $users = User::with('school')->whereIn('role', ['master', 'admin'])->paginate(20);
+
+        return view('list.super_user_list', compact('users'));
+    }
 }
