@@ -297,7 +297,7 @@
                                         <label for="phone_number"
                                                class="control-label false-padding-bottom">{{ __('text.phone_number') }}</label>
 
-                                        <input id="phone_number" type="text"
+                                        <input id="phone_number" type="number"
                                                class="form-control"  name="phone_number"
                                                value="{{ old('phone_number') }}">
 
@@ -484,7 +484,7 @@
                                             <label class="father-n"></label>
                                         </label>
 
-                                        <input id="father_phone_number"  type="text"
+                                        <input id="father_phone_number"  type="number"
                                                class="form-control f-phone-number"
                                                name="father_phone_number"
                                                value="{{ old('father_phone_number') }}">
@@ -502,7 +502,7 @@
                                     <div class="col-md-12">
                                         <label for="father_national_id"
                                                class="control-label false-padding-bottom">{{ __('text.father_nid') }}</label>
-                                        <input id="father_national_id" type="text"
+                                        <input id="father_national_id" type="number"
                                                class="form-control"
                                                name="father_national_id"
                                                value="{{ old('father_national_id') }}">
@@ -607,7 +607,7 @@
                                         </label>
 
 
-                                        <input id="mother_phone_number" type="text"
+                                        <input id="mother_phone_number" type="number"
                                                class="form-control m-phone-number"
                                                name="mother_phone_number"
                                                value="{{ old('mother_phone_number') }}">
@@ -646,7 +646,7 @@
                                         <label for="mother_national_id"
                                                class=" control-label false-padding-bottom">{{ __('text.mother_nid') }}</label>
 
-                                        <input id="mother_national_id"  type="text"
+                                        <input id="mother_national_id"  type="number"
                                                class="form-control"
                                                name="mother_national_id"
                                                value="{{ old('mother_national_id') }}"
@@ -724,7 +724,7 @@
                                         <label for="guardian_phone_number"
                                                class="control-label false-padding-bottom">{{ __('text.guardian_phone_number') }}<label
                                                 class="text-danger">*</label></label>
-                                        <input id="guardian_phone_number"  type="text"
+                                        <input id="guardian_phone_number"  type="number"
                                                class="form-control g-phone-number"
                                                name="guardian_phone_number"
                                                value="{{ old('guardian_phone_number') }}"required>
