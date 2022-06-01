@@ -5,9 +5,8 @@ namespace App\Http\Requests;
 use App\Rules\GreaterThan;
 use App\Rules\GreaterThanAll;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class GradeInfoRequest extends FormRequest
+class UpdateGradeInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +28,7 @@ class GradeInfoRequest extends FormRequest
         return [
             'grade' => 'required|string',
             'point' => 'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
-            'from_mark' => ['required', 'numeric', 'max:95', new GreaterThanAll($this->request->get('grade_system_id'))] ,
+            'from_mark' => 'required|numeric|max:95',
             'to_mark' => ['required', 'max:100', 'numeric', new GreaterThan($this->request->get('from_mark'))]
         ];
     }
