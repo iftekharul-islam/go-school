@@ -134,6 +134,7 @@ return[
     'action' => 'Action',
 
     //Master sidebar
+    'school' => 'Schools',
     'schools' => 'Schools',
     'create_school' => 'Create School',
     'all_school' => 'All Schools',

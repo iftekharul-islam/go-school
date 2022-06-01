@@ -77,7 +77,7 @@
                                         <label for="email"
                                                class="control-label false-padding-bottom">{{ __('text.Email') }}<label
                                                 class="text-danger">*</label></label>
-                                        <a href="" class="btn btn-primary btn-sm email-enable-button float-right">Enable email</a>
+                                        <a href="" class="btn btn-primary email-enable-button float-right">Enable email</a>
 
                                         @php
                                             $code = auth()->user()->school_id . date('y') . substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5)
@@ -104,7 +104,7 @@
                                         <label for="password"
                                                class="control-label false-padding-bottom">{{ __('text.Password') }}<label
                                                 class="text-danger">*</label></label>
-                                        <button class="btn btn-primary btn-sm password-btn float-right">Create Password</button>
+                                        <button class="btn btn-primary password-btn float-right">Create Password</button>
                                         <input id="password" type="password"
                                                class="form-control student-password" name="password"
                                                required readonly>

@@ -108,8 +108,8 @@ class CourseController extends Controller
            $request->final_exam_percent +
            $request->practical_percent ;
 
-        if ($totalPercentage > 100) {
-            return back()->with('error', 'Total percentage should not be more than 100%');
+        if ($totalPercentage != 100) {
+            return back()->with('error', 'Total percentage should be equal to 100%');
         }
 
        $totalMarks =
@@ -120,8 +120,8 @@ class CourseController extends Controller
            $request->final_fullmark +
            $request->practical_fullmark;
 
-        if ($totalMarks > 100) {
-            return back()->with('error', 'Final marks should not be more than 100%');
+        if ($totalMarks != 100) {
+            return back()->with('error', 'Final marks should be equal to 100%');
         }
 
         $data = $this->courseService->saveConfiguration($request);
