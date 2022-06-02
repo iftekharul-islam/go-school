@@ -228,9 +228,8 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
+     * @param CreateUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function storeStudent(CreateUserRequest $request)
     {
@@ -238,10 +237,12 @@ class UserController extends Controller
         $password = $request->password;
         $tb = $this->userService->storeStudent($request, $path);
         $this->userService->storeStudentInfo($request, $tb);
-        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL))
-        {
-            event(new UserRegistered($tb, $password));
-        }
+
+        // TODO NEED TO CHECK SYMPHONY CSS SELECTOR WITH PHP VERSION
+//        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL))
+//        {
+//            event(new UserRegistered($tb, $password));
+//        }
         return back()->with('status', 'New Student Added!');
     }
 
@@ -359,10 +360,12 @@ class UserController extends Controller
 //
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
-        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) 
-        {
-            event(new UserRegistered($tb, $password));
-        }
+
+        // TODO NEED TO CHECK SYMPHONY CSS SELECTOR WITH PHP VERSION
+//        if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL))
+//        {
+//            event(new UserRegistered($tb, $password));
+//        }
 
         return back()->with('status', 'Teacher Created');
     }
