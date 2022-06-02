@@ -361,7 +361,6 @@ class UserController extends Controller
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
         if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) 
         {
-            return $request->all();
             event(new UserRegistered($tb, $password));
         }
 
