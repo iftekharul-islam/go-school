@@ -356,9 +356,10 @@ class UserController extends Controller
     public function storeTeacher(CreateTeacherRequest $request)
     {
         $path = $request->hasFile('teacher_pic') ? Storage::disk('public')->put('school-'.Auth::user()->school_id.'/'.date('Y'), $request->file('teacher_pic')) : null;
-//        return $request->all();
+//
         $password = $request->password;
         $tb = $this->userService->storeStaff($request, 'teacher', $path);
+        return $request->all();
         if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) 
         {
             event(new UserRegistered($tb, $password));
