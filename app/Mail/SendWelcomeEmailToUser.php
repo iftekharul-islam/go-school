@@ -38,11 +38,7 @@ class SendWelcomeEmailToUser extends Mailable
         logger($this->user->name);
         logger($this->user->email);
         logger($this->password);
-        return $this->subject('Welcome to ' . config('app.name'))->markdown('email.user.welcome')
-                ->with([
-                    'name' => $this->user->name,
-                    'email' => $this->user->email,
-                    'password' => $this->password,
-                ]);
+        return $this->subject('Welcome to ' . config('app.name'))->markdown('email.user.welcome');
+
     }
 }
