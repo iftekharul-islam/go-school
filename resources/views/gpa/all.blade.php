@@ -37,15 +37,15 @@
                 </h4>
                 <div class="card-body" style="padding-top: 0px;">
                     <div class="alert alert-info alert-dismissible mt-5" style="font-size:13px; margin-top: 10px;">
-                            <ul>
-                                <li>
-                                    How to Create New Grade:
-                                </li>
-                                <li>
-                                    <b>Grade added from bottom to top .Eg : F, D, C, B, A, A+ (Ascending Order)</b>.
-                                </li>
-                            </ul>
-                        </div>
+                        <ul>
+                            <li>
+                                How to Create New Grade:
+                            </li>
+                            <li>
+                                <b>Grade added from bottom to top .Eg : F, D, C, B, A, A+ (Ascending Order)</b>.
+                            </li>
+                        </ul>
+                    </div>
                     <div class="table-responsive">
                         <table class="table display table-bordered  text-nowraps">
                             <thead>

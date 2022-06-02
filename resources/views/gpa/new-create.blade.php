@@ -56,6 +56,16 @@
                     @else
                         <div class="row">
                             <div class="col-12">
+                                <div class="alert alert-info alert-dismissible mt-5" style="font-size:13px; margin-top: 10px;">
+                                    <ul>
+                                        <li>
+                                            How to Create New Grade:
+                                        </li>
+                                        <li>
+                                            <b>Grade added from bottom to top .Eg : F, D, C, B, A, A+ (Ascending Order)</b>.
+                                        </li>
+                                    </ul>
+                                </div>
                                 <form class="new-added-form" action="{{url('admin/store-gpa-info')}}" method="post">
                                     {{ csrf_field() }}
                                     <div class="row">
