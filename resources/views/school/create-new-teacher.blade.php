@@ -193,7 +193,7 @@
                                 <label for="phone_number"
                                        class="control-label false-padding-bottom">{{ __('text.phone_number') }}<label class="text-danger">*</label></label>
 
-                                <input id="phone_number" type="text"
+                                <input id="phone_number" type="number"
                                        class="form-control" name="phone_number"
                                        value="{{ old('phone_number') }}" required>
 

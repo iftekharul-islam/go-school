@@ -35,8 +35,8 @@ class SendWelcomeEmailToUser extends Mailable
     {
         return $this->subject('Welcome to ' . config('app.name'))->markdown('email.user.welcome')
                 ->with([
-                    'name' => $this->user->name,
-                    'email' => $this->user->email,
+                    'name' => $this->user['name'],
+                    'email' => $this->user['email'],
                     'password' => $this->password,
                 ]);
     }

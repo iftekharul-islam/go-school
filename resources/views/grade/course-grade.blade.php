@@ -57,16 +57,19 @@
                             Select which Grade System you want to use.
                           </li>
                           <li>
-                            <b>Count Example:</b> If you take 3 Quizes and want to count best 2, then Quiz Count is 2.
+                            <b>How to count:</b> If you want to count the best 2 quizzes out of 3, then quiz count is 2.
                           </li>
                           <li>
-                            <b>Percentage Example:</b> Total percentage must be 100%. You can put 100% to a field or distribute it according to your need. Full mark is also needed for Percentage to work.
+                            <b>Percentage Count:</b> Total number of percentage should be 100. You can put 100% to a field or distribute it according to the marks obtained by a student. Please input the full mark of the test for making the Percentage Count work.
                           </li>
                           <li>
-                            <b>Full Mark Example:</b> If you take a Class Test where full mark is 15, then Full mark for Class Test is 15.
+                            <b>Full Mark Count:</b> If you take a Class Test where full mark is 15, then Full mark for Class Test is 15.
                           </li>
                             <li>
                                 <b>Average Marking formula (CT, Quiz, Assignment):</b> Field percentage * Field marks sum average(Best marks field count) / Field full mark.
+                            </li>
+                            <li>
+                                <b>Upgrading Marks:</b>  If you make any changes to the marks obtained by the students, please click the “Submit” button again to generate the new mark sheet.
                             </li>
                         </ul>
                       </div>
