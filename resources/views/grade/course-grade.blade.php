@@ -68,6 +68,9 @@
                             <li>
                                 <b>Average Marking formula (CT, Quiz, Assignment):</b> Field percentage * Field marks sum average(Best marks field count) / Field full mark.
                             </li>
+                            <li>
+                                <b>Upgrading Marks:</b>  If you make any changes to the marks obtained by the students, please click the “Submit” button again to generate the new mark sheet.
+                            </li>
                         </ul>
                       </div>
                       <div class="table-responsive">
