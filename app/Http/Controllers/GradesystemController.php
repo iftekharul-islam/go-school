@@ -95,15 +95,17 @@ class GradesystemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){}
+
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory
+     * |\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function edit($id){
         $grade = GradeSystemInfo::findOrFail($id);
-        return view('gpa.edit', compact('grade'));
+        $grades = GradeSystemInfo::all();
+
+        return view('gpa.edit', compact('grade', 'grades'));
     }
 
     /**
@@ -114,22 +116,23 @@ class GradesystemController extends Controller
     public function update(UpdateGradeInfoRequest $request, $id){
         $gpa = GradeSystemInfo::findOrFail($id);
 
-        $sameValueExist = GradeSystemInfo::where('id', '!=', $gpa->id)
-            ->where('marks_to', '>=',  $request->get('from_mark'))
-            ->where('gradesystem_id', $gpa->gradesystem_id)
-            ->count();
-
-        if($sameValueExist){
-            return back()->with('error', 'Cannot update same marks of other maximum marks');
-        }
+//        $sameValueExist = GradeSystemInfo::where('id', '!=', $gpa->id)
+//            ->where('marks_to', '>=',  $request->get('from_mark'))
+//            ->where('gradesystem_id', $gpa->gradesystem_id)
+//            ->count();
+//
+//        if($sameValueExist){
+//            return back()->with('error', 'Cannot update same marks of other maximum marks');
+//        }
 
         $gradeExist = GradeSystemInfo::where('id', '!=', $gpa->id)
             ->where('grade', $request->get('grade'))
+            ->orWhere('grade', $request->get('point'))
             ->where('gradesystem_id', $gpa->gradesystem_id)
             ->count();
 
         if($gradeExist){
-            return back()->with('error', 'Cannot create same grade');
+            return back()->with('error', 'Cannot create same grade/point');
         }
 
         $gpa->grade_points = $request->point;

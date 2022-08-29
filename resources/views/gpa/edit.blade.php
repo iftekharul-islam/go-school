@@ -14,8 +14,8 @@
         </ul>
     </div>
     <div class="row">
-        <div class="col-md-8">
-            <div class="card height-auto false-height">
+        <div class="col-md-6">
+            <div class="card">
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -77,6 +77,36 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table display table-bordered  text-nowraps">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ __('text.Grades') }}</th>
+                                <th>{{ __('text.grade_point') }}</th>
+                                <th>{{ __('text.from_mark') }}</th>
+                                <th>{{ __('text.to_mark') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($grades as $gpainfo)
+                                <tr class="{{ $gpainfo->id == $grade->id ? 'bg-light-green' : '' }}">
+                                    <td>{{($loop->index + 1)}}</td>
+                                    <td>{{$gpainfo->grade}}</td>
+                                    <td>{{$gpainfo->grade_points}}</td>
+                                    <td>{{$gpainfo->marks_from}}</td>
+                                    <td>{{$gpainfo->marks_to}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

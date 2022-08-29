@@ -20,7 +20,7 @@ class CreateFeeMastersTable extends Migration
             $table->string('format');
             $table->double('amount');
             $table->string('due');
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+//            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();
         });
     }
