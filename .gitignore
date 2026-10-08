@@ -10,8 +10,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .DS_Store
-.env
 .php_cs.cache
 composer.lock
 package-lock.json
 .editorconfig
+config.bat
